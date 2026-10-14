@@ -21,10 +21,31 @@ function vanphuccare_enqueue_assets() {
 	$css_version   = file_exists( $css_path ) ? (string) filemtime( $css_path ) : $theme_version;
 	$js_version    = file_exists( $js_path ) ? (string) filemtime( $js_path ) : $theme_version;
 
+	$tailwind_path = get_template_directory() . '/assets/css/theme.css';
+	$tailwind_ver  = file_exists( $tailwind_path ) ? (string) filemtime( $tailwind_path ) : $theme_version;
+
+	// Enqueue Google Fonts: Fraunces (Heading) & Manrope (Body)
+	wp_enqueue_style(
+		'vanphuccare-fonts',
+		'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Manrope:wght@400;500;600;700;800&display=swap',
+		array(),
+		null
+	);
+
+	// Enqueue Tailwind CSS v4 Theme
+	if ( file_exists( $tailwind_path ) ) {
+		wp_enqueue_style(
+			'vanphuccare-tailwind',
+			get_template_directory_uri() . '/assets/css/theme.css',
+			array( 'vanphuccare-fonts' ),
+			$tailwind_ver
+		);
+	}
+
 	wp_enqueue_style(
 		'vanphuccare-main',
 		get_template_directory_uri() . '/assets/css/main.css',
-		array(),
+		array( 'vanphuccare-fonts', 'vanphuccare-tailwind' ),
 		$css_version
 	);
 
