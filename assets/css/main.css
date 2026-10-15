@@ -359,6 +359,81 @@ img {
 	color: var(--vpc-primary-pink);
 }
 
+/* Policy Step Process Styling */
+.policy-step-item {
+	margin-bottom: 28px;
+}
+
+.policy-step-header {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 8px;
+	flex-wrap: wrap;
+}
+
+.policy-step-badge {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--vpc-bg-light-blue);
+	color: var(--vpc-primary-blue);
+	font-weight: 800;
+	font-size: 14px;
+	line-height: 1;
+	padding: 6px 14px;
+	border-radius: 20px;
+	border: 1px solid rgba(26, 117, 187, 0.35);
+	white-space: nowrap;
+}
+
+.policy-step-header .policy-subsection-title {
+	margin-bottom: 0;
+}
+
+.policy-subcase-list {
+	list-style: none;
+	margin: 14px 0 18px 0;
+	padding-left: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.policy-subcase-item {
+	position: relative;
+	padding: 12px 18px 12px 36px;
+	background: #F9FBFC;
+	border-left: 3px solid var(--vpc-primary-blue);
+	border-radius: 0 6px 6px 0;
+	font-size: 16px;
+	line-height: 1.65;
+	color: var(--vpc-text-main);
+	text-align: justify;
+}
+
+.policy-subcase-item::before {
+	content: "•";
+	position: absolute;
+	left: 16px;
+	top: 8px;
+	font-size: 22px;
+	color: var(--vpc-primary-blue);
+	line-height: 1;
+}
+
+.policy-contact-highlight {
+	color: var(--vpc-primary-blue) !important;
+	text-decoration: none !important;
+	border-bottom: 1px dashed var(--vpc-primary-blue);
+	transition: all 0.2s ease;
+}
+
+.policy-contact-highlight:hover {
+	color: var(--vpc-primary-pink) !important;
+	border-bottom-color: var(--vpc-primary-pink);
+}
+
 /* ==========================================================================
    5. RELATED POLICIES CALLOUT BOX (Group 1000005850)
    ========================================================================== */

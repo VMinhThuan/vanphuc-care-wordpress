@@ -111,9 +111,10 @@ if ( have_posts() ) :
 						<h3 class="related-box-title">Điều khoản & Chính sách liên quan</h3>
 						<div class="related-box-line"></div>
 						<ul class="related-box-links">
-							<li><a href="<?php echo esc_url( home_url( '/dieu-khoan-su-dung' ) ); ?>">• Điều khoản sử dụng</a></li>
-							<li><a href="#">• Chính sách bảo mật</a></li>
-							<li><a href="#">• Quy trình tiếp nhận & giải quyết khiếu nại</a></li>
+							<li><a href="<?php echo esc_url( home_url( '/dieu-khoan-su-dung' ) ); ?>">&bull; Điều khoản sử dụng</a></li>
+							<li><a href="<?php echo esc_url( home_url( '/chinh-sach-bao-mat' ) ); ?>">&bull; Chính sách bảo mật</a></li>
+							<li><a href="<?php echo esc_url( home_url( '/chinh-sach-bien-tap' ) ); ?>">&bull; Chính sách biên tập &amp; chỉnh sửa</a></li>
+							<li><a href="<?php echo esc_url( home_url( '/quy-trinh-khieu-nai' ) ); ?>">&bull; Quy trình tiếp nhận &amp; giải quyết khiếu nại</a></li>
 						</ul>
 					</div>
 

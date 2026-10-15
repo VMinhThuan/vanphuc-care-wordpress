@@ -107,7 +107,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="flex flex-wrap items-center justify-center gap-3 font-medium">
 				<a href="<?php echo esc_url( home_url( '/dieu-khoan-su-dung' ) ); ?>" class="hover:text-primary-600 transition-colors">Điều khoản sử dụng</a>
 				<span class="text-neutral-400">|</span>
-				<a href="#" class="hover:text-primary-600 transition-colors">Chính sách bảo mật</a>
+				<a href="<?php echo esc_url( home_url( '/chinh-sach-bao-mat' ) ); ?>" class="hover:text-primary-600 transition-colors">Chính sách bảo mật</a>
+				<span class="text-neutral-400">|</span>
+				<a href="<?php echo esc_url( home_url( '/chinh-sach-bien-tap' ) ); ?>" class="hover:text-primary-600 transition-colors">Chính sách biên tập</a>
+				<span class="text-neutral-400">|</span>
+				<a href="<?php echo esc_url( home_url( '/quy-trinh-khieu-nai' ) ); ?>" class="hover:text-primary-600 transition-colors">Quy trình khiếu nại</a>
 				<span class="text-neutral-400">|</span>
 				<a href="#" class="hover:text-primary-600 transition-colors">Tuyển dụng</a>
 			</div>
