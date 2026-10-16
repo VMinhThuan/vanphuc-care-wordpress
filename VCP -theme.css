@@ -42,7 +42,8 @@
   --color-secondary-800: #623434;
   --color-secondary-900: #311A1A;
 
-  --color-neutral-100: #FAFAFA;
+  --color-neutral-white: #FFFFFF;
+  --color-neutral-100: #F8F8F8;
   --color-neutral-200: #EBEBEB;
   --color-neutral-300: #E1E1E1;
   --color-neutral-400: #D8D8D8;
@@ -51,6 +52,8 @@
   --color-neutral-700: #7B7B7B;
   --color-neutral-800: #525252;
   --color-neutral-900: #292929;
+  --color-neutral-black: #000000;
+  --color-neutral-white-30: rgb(255 255 255 / 0.3); /* white, opacity 30% */
 
   --color-success-100: #D1F6CC;
   --color-success-200: #A4EC99;
@@ -97,10 +100,10 @@
   --font-body: "Manrope", sans-serif;
 
   /* Cỡ chữ heading, Desktop (px / line-height) */
-  --text-h1: 4rem;       /* 64 / 80 */
-  --text-h1--line-height: 5rem;
-  --text-h2: 3rem;       /* 48 / 64 */
-  --text-h2--line-height: 4rem;
+  --text-h1: 3rem;       /* 48 / 64 */
+  --text-h1--line-height: 4rem;
+  --text-h2: 2.5rem;     /* 40 / 52 */
+  --text-h2--line-height: 3.25rem;
   --text-h3: 2.25rem;    /* 36 / 48 */
   --text-h3--line-height: 3rem;
   --text-h4: 2rem;       /* 32 / 40 */
@@ -110,19 +113,15 @@
   --text-h6: 1.5rem;     /* 24 / 32 */
   --text-h6--line-height: 2rem;
 
-  /* Cỡ chữ heading, Mobile */
-  --text-h1-mobile: 2.5rem;     /* 40 / 48 */
-  --text-h1-mobile--line-height: 3rem;
-  --text-h2-mobile: 2.25rem;    /* 36 / 48 */
-  --text-h2-mobile--line-height: 3rem;
-  --text-h3-mobile: 2rem;       /* 32 / 40 */
-  --text-h3-mobile--line-height: 2.5rem;
-  --text-h4-mobile: 1.75rem;    /* 28 / 36 */
-  --text-h4-mobile--line-height: 2.25rem;
-  --text-h5-mobile: 1.5rem;     /* 24 / 32 */
-  --text-h5-mobile--line-height: 2rem;
-  --text-h6-mobile: 1.25rem;    /* 20 / 28 */
-  --text-h6-mobile--line-height: 1.75rem;
+  /* Cỡ chữ heading, Mobile (Figma chỉ có H1 đến H4) */
+  --text-h1-mobile: 2rem;       /* 32 / 36 */
+  --text-h1-mobile--line-height: 2.25rem;
+  --text-h2-mobile: 1.75rem;    /* 28 / 32 */
+  --text-h2-mobile--line-height: 2rem;
+  --text-h3-mobile: 1.5rem;     /* 24 / 28 */
+  --text-h3-mobile--line-height: 1.75rem;
+  --text-h4-mobile: 1.25rem;    /* 20 / 24 */
+  --text-h4-mobile--line-height: 1.5rem;
 
   /* Giá tiền */
   --text-price: 2rem;           /* 32 / 40 */
@@ -135,8 +134,8 @@
 /* ---------- 2. Semantic (tên giữ 1:1 với Figma) ---------- */
 @theme inline {
   /* Text */
-  --color-text-heading-primary-default: var(--color-primary-600);
-  --color-text-heading-secondary-default: var(--color-secondary-600);
+  --color-text-heading-primary-default: var(--color-primary-500);
+  --color-text-heading-secondary-default: var(--color-secondary-500);
   --color-text-body-default: var(--color-neutral-900);
   --color-text-body-muted: var(--color-neutral-800);
   --color-text-inverse-default: var(--color-neutral-100);
@@ -144,6 +143,7 @@
   --color-text-caption-default: var(--color-secondary-500);
   --color-text-caption-dark: var(--color-secondary-600);
   --color-text-caption-light: var(--color-secondary-200);
+  --color-text-accent-default: var(--color-primary-500);
 
   --color-text-link-default: var(--color-primary-500);
   --color-text-link-hover: var(--color-primary-600);
@@ -184,12 +184,29 @@
 
   /* Surface */
   --color-surface-background-default: var(--color-neutral-100);
-  --color-surface-background-primary: var(--color-primary-200);
-  --color-surface-background-secondary: var(--color-secondary-200);
+  --color-surface-background-primary: var(--color-primary-100);
+  --color-surface-background-secondary: var(--color-secondary-100);
 
-  --color-surface-card-default: var(--color-neutral-100);
+  --color-surface-card-default: var(--color-neutral-white);
   --color-surface-card-primary: var(--color-primary-200);
   --color-surface-card-secondary: var(--color-secondary-200);
+
+  /* Field (input, select, textarea) */
+  --color-surface-field-default: var(--color-neutral-white);
+  --color-surface-field-hover: var(--color-neutral-200);
+  --color-surface-field-selected: var(--color-primary-200);
+  --color-surface-field-disabled: var(--color-neutral-500);
+
+  /* Nền trạng thái (Alert, Toast) */
+  --color-surface-success-default: var(--color-success-100);
+  --color-surface-warning-default: var(--color-warning-100);
+  --color-surface-error-default: var(--color-error-100);
+  --color-surface-info-default: var(--color-info-100);
+
+  --color-surface-badge-secondary: var(--color-secondary-100);
+
+  /* Lớp phủ nền pop-up: neutral-900, 60% */
+  --color-surface-overlay: color-mix(in srgb, var(--color-neutral-900) 60%, transparent);
 
   --color-surface-button-primary-default: var(--color-primary-500);
   --color-surface-button-primary-hover: var(--color-primary-600);
@@ -223,13 +240,15 @@
   --color-icon-disabled-default: var(--color-neutral-800);
   --color-icon-disabled-light: var(--color-neutral-400);
   --color-icon-disabled-dark: var(--color-neutral-600);
-  --color-icon-inverse-white: var(--color-neutral-100);
+  --color-icon-inverse-default: var(--color-neutral-white);
+  --color-icon-inverse-white: var(--color-neutral-white-30);
   --color-icon-inverse-dark: var(--color-neutral-900);
 
   /* Border */
   --color-border-primary-default: var(--color-primary-500);
   --color-border-primary-light: var(--color-primary-400);
   --color-border-primary-dark: var(--color-primary-600);
+  --color-border-primary-lighter: var(--color-primary-200);
   --color-border-secondary-default: var(--color-secondary-500);
   --color-border-secondary-light: var(--color-secondary-400);
   --color-border-secondary-dark: var(--color-secondary-600);
@@ -237,6 +256,9 @@
   --color-border-disabled-light: var(--color-neutral-400);
   --color-border-disabled-dark: var(--color-neutral-600);
   --color-border-inverse-default: var(--color-neutral-100);
+
+  /* Đường kẻ phân cách (menu-drawer, danh sách) */
+  --color-border-divider-default: var(--color-neutral-300);
   --color-border-success-default: var(--color-success-500);
   --color-border-success-light: var(--color-success-300);
   --color-border-success-dark: var(--color-success-600);
@@ -266,8 +288,8 @@
 
 /*
   Độ đậm trong Text style (Figma):
-    Heading Desktop: H1 font-bold (700), H2 font-semibold (600), H3 đến H6 font-medium (500)
-    Heading Mobile: H1 font-semibold (600), H2 đến H6 font-medium (500)
+    Heading Desktop: H1 font-semibold (600), H2 đến H5 font-normal (400), H6 font-medium (500)
+    Heading Mobile: H1 font-semibold (600), H2 đến H4 font-normal (400)
     (Heading luôn dùng font-heading. Token --text-h* chỉ chứa cỡ chữ và line-height,
     độ đậm dev thêm bằng class font-*.)
     Body xs / xl / 2xl: font-medium (500), font-body
@@ -282,7 +304,7 @@
     Nút primary : bg-surface-button-primary-default hover:bg-surface-button-primary-hover
                   active:bg-surface-button-primary-pressed text-text-inverse-default
     Card        : bg-surface-card-default rounded-xl shadow-card p-6
-    Heading H1  : font-heading text-h1-mobile font-semibold xl:text-h1 xl:font-bold text-text-heading-primary-default
-    Heading H2  : font-heading text-h2-mobile font-medium xl:text-h2 xl:font-semibold text-text-heading-primary-default
+    Heading H1  : font-heading text-h1-mobile xl:text-h1 font-semibold text-text-heading-primary-default
+    Heading H2  : font-heading text-h2-mobile xl:text-h2 font-normal text-text-heading-primary-default
     Giá tiền    : text-price font-bold text-text-display-price-default
 */
