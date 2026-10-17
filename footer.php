@@ -22,11 +22,8 @@ $theme_uri = get_template_directory_uri();
 
 <footer class="site-footer relative w-full overflow-hidden bg-linear-to-b from-white via-[#EBF5FB]/70 to-[#D5EBF9]/80 pt-14 sm:pt-16 pb-10 text-neutral-800">
 	<!-- Decorative faint watermark logo on bottom-right -->
-	<div class="pointer-events-none absolute right-0 bottom-0 z-0 opacity-15 overflow-hidden translate-x-12 translate-y-12" aria-hidden="true">
-		<svg width="420" height="420" viewBox="0 0 606 277" fill="none" class="text-primary-500 fill-current">
-			<path d="M72 128C72 116.402 81.402 107 93 107H138C149.598 107 159 116.402 159 128C159 139.598 149.598 149 138 149H93C81.402 149 72 139.598 72 128Z"/>
-			<circle cx="115.5" cy="128" r="80" stroke="currentColor" stroke-width="20"/>
-		</svg>
+	<div class="pointer-events-none absolute right-0 bottom-0 z-0 opacity-10 overflow-hidden translate-x-10 translate-y-10" aria-hidden="true">
+		<img src="<?php echo esc_url( $theme_uri . '/assets/images/logo.svg' ); ?>" alt="" class="w-[420px] h-auto object-contain select-none">
 	</div>
 
 	<div class="relative z-10 vpc-container">
@@ -125,9 +122,9 @@ $theme_uri = get_template_directory_uri();
 			<div class="flex items-center gap-3">
 				<!-- Facebook -->
 				<a href="https://facebook.com/vanphuccare" target="_blank" rel="noopener noreferrer" 
-				   class="w-10 h-10 rounded-full bg-[#1877F2] text-white flex items-center justify-center hover:scale-110 shadow-sm transition-transform" 
+				   class="w-10 h-10 rounded-full overflow-hidden hover:scale-110 shadow-sm transition-transform" 
 				   aria-label="Facebook">
-					<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/facebook.svg' ); ?>" alt="Facebook" class="w-full h-full object-contain">
 				</a>
 
 				<!-- Instagram -->
@@ -139,9 +136,9 @@ $theme_uri = get_template_directory_uri();
 
 				<!-- TikTok -->
 				<a href="https://tiktok.com/@vanphuccare" target="_blank" rel="noopener noreferrer" 
-				   class="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center hover:scale-110 shadow-sm transition-transform" 
+				   class="w-10 h-10 rounded-full overflow-hidden hover:scale-110 shadow-sm transition-transform" 
 				   aria-label="TikTok">
-					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/tiktok.svg' ); ?>" alt="TikTok" class="w-5 h-5 object-contain invert">
+					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/tiktok.svg' ); ?>" alt="TikTok" class="w-full h-full object-contain">
 				</a>
 			</div>
 

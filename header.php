@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <?php wp_body_open(); ?>
 
 <!-- Main Header Bar (Sticky, Desktop 1440px / Mobile Drawer) -->
-<header id="site-header" class="sticky top-0 z-50 w-full bg-white/98 backdrop-blur-md border-b border-neutral-200/70 shadow-xs transition-all duration-300">
+<header id="site-header" class="sticky top-0 z-50 w-full bg-white border-b border-neutral-100 shadow-xs transition-all duration-300">
 	<div class="vpc-container flex h-20 xl:h-24 items-center justify-between">
 		
 		<!-- Site Logo (Left) -->
@@ -42,39 +42,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</a>
 		</div>
 
-		<!-- Navigation Menu (Center) - Matches Figma 7 Items -->
-		<nav class="hidden xl:flex items-center" aria-label="<?php esc_attr_e( 'Primary navigation', 'vanphuccare' ); ?>">
-			<?php
-			if ( has_nav_menu( 'primary' ) ) {
-				wp_nav_menu(
-					array(
-						'theme_location' => 'primary',
-						'container'      => false,
-						'menu_class'     => 'vpc-nav-menu flex items-center gap-7 2xl:gap-8 text-[15px] font-medium text-neutral-800',
-						'fallback_cb'    => false,
-					)
-				);
-			} else {
-				?>
-				<ul class="vpc-nav-menu flex items-center gap-6 2xl:gap-8 text-[15px] font-medium text-neutral-800">
-					<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="py-2 text-primary-600 font-semibold hover:text-primary-600 transition-colors">Trang chủ</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/gioi-thieu' ) ); ?>" class="py-2 hover:text-primary-600 transition-colors">Giới thiệu</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/#trung-tam-o-cu' ) ); ?>" class="py-2 hover:text-primary-600 transition-colors">Ở cữ</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/#dich-vu-tai-nha' ) ); ?>" class="py-2 hover:text-primary-600 transition-colors">Bảo mẫu</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/#dich-vu-noi-bat' ) ); ?>" class="py-2 hover:text-primary-600 transition-colors">Dịch vụ</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/#dao-tao-easy' ) ); ?>" class="py-2 hover:text-primary-600 transition-colors">Lớp học tiền sản</a></li>
-					<li><a href="<?php echo esc_url( home_url( '/#tin-tuc' ) ); ?>" class="py-2 hover:text-primary-600 transition-colors">Kiến thức</a></li>
-				</ul>
-				<?php
-			}
-			?>
+		<!-- Navigation Menu (Center) - Matches Figma 7 Items Exactly -->
+		<nav class="hidden xl:flex items-center justify-center flex-1 mx-6 2xl:mx-10" aria-label="<?php esc_attr_e( 'Primary navigation', 'vanphuccare' ); ?>">
+			<ul class="vpc-nav-menu flex items-center justify-center gap-7 2xl:gap-8 text-base font-medium text-neutral-800">
+				<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="py-2 hover:text-primary-600 transition-colors">Trang chủ</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/gioi-thieu' ) ); ?>" class="py-2 hover:text-primary-600 transition-colors">Giới thiệu</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/#trung-tam-o-cu' ) ); ?>" class="py-2 hover:text-primary-600 transition-colors">Ở cữ</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/#dich-vu-tai-nha' ) ); ?>" class="py-2 hover:text-primary-600 transition-colors">Bảo mẫu</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/#dich-vu-noi-bat' ) ); ?>" class="py-2 hover:text-primary-600 transition-colors">Dịch vụ</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/#dao-tao-easy' ) ); ?>" class="py-2 hover:text-primary-600 transition-colors">Lớp học tiền sản</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/#tin-tuc' ) ); ?>" class="py-2 hover:text-primary-600 transition-colors">Kiến thức</a></li>
+			</ul>
 		</nav>
 
 		<!-- Right Action: CTA Button (Đăng Ký Tư Vấn) & Mobile Menu Toggle -->
-		<div class="flex items-center gap-3 sm:gap-4">
+		<div class="flex items-center gap-3 sm:gap-4 shrink-0">
 			<button data-open-modal="vpc-consultation-modal" 
 			        type="button"
-			        class="hidden sm:inline-flex items-center justify-center px-6 py-2.5 sm:py-3 rounded-full bg-[#1A77BA] hover:bg-[#155F95] text-white font-semibold text-sm sm:text-base shadow-sm hover:shadow-md transition-all duration-200">
+			        class="hidden sm:inline-flex items-center justify-center px-7 py-3 rounded-full bg-[#1A77BA] hover:bg-[#155F95] text-white font-medium text-base shadow-sm hover:shadow-md transition-all duration-200">
 				<span>Đăng Ký Tư Vấn</span>
 			</button>
 

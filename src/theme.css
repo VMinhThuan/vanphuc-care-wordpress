@@ -343,6 +343,36 @@
     }
   }
 
+  /* Navigation Menu (Primary Desktop Menu) */
+  .vpc-nav-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .vpc-nav-menu > li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .vpc-nav-menu > li > a {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #292929;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .vpc-nav-menu > li > a:hover,
+  .vpc-nav-menu > li.current-menu-item > a,
+  .vpc-nav-menu > li.current_page_item > a {
+    color: #1A77BA;
+  }
+
   /* Policy Styles (Chính sách, Điều khoản, Quy trình khiếu nại) */
   .policy-hero-banner {
     position: relative;
