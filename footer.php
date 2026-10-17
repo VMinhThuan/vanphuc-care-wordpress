@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="absolute right-40 -bottom-40 h-[450px] w-[450px] rounded-full bg-secondary-300/15 blur-3xl"></div>
 	</div>
 
-	<div class="relative z-10 mx-auto max-w-[1240px] px-4 sm:px-6 xl:px-8">
+	<div class="relative z-10 vpc-container">
 		<!-- Main Footer Grid (3 Columns Desktop, 2 Tablet, 1 Mobile) -->
 		<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 gap-10 xl:gap-12 pb-12">
 			
@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="xl:col-span-5 flex flex-col space-y-4">
 				<div class="footer-logo mb-2">
 					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="inline-block transition-transform duration-200 hover:scale-102">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.png' ); ?>" alt="Vạn Phúc Care Logo" class="h-12 sm:h-14 w-auto object-contain">
+						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.svg' ); ?>" alt="Vạn Phúc Care Logo" class="h-12 sm:h-14 w-auto object-contain">
 					</a>
 				</div>
 				
@@ -51,13 +51,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<svg class="w-5 h-5 text-primary-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 							<path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
 						</svg>
-						<span><strong class="font-semibold text-neutral-800">Hotline:</strong> (024) 6329 6698</span>
+						<span><strong class="font-semibold text-neutral-800">Hotline và CSKH:</strong> (024) 6329 6698</span>
 					</li>
 					<li class="flex items-center gap-2.5">
 						<svg class="w-5 h-5 text-primary-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
 							<path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
 						</svg>
-						<span><strong class="font-semibold text-neutral-800">Số điện thoại:</strong> 037 624 6673</span>
+						<span><strong class="font-semibold text-neutral-800">Hotline hỗ trợ:</strong> 037 624 6673</span>
 					</li>
 					<li class="flex items-center gap-2.5">
 						<svg class="w-5 h-5 text-primary-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -65,7 +65,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 						</svg>
 						<span><strong class="font-semibold text-neutral-800">Email:</strong> cskh@vanphuccare.vn</span>
 					</li>
+					<li class="flex items-center gap-2.5">
+						<svg class="w-5 h-5 text-primary-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+						</svg>
+						<span><strong class="font-semibold text-neutral-800">Website:</strong> vanphuccare.vn</span>
+					</li>
 				</ul>
+
+				<!-- Social Channels -->
+				<div class="pt-2">
+					<span class="block text-xs font-bold text-neutral-600 uppercase tracking-wider mb-2.5">Kênh mạng xã hội</span>
+					<?php get_template_part( 'template-parts/components/social-icons', null, array( 'size' => 'md' ) ); ?>
+				</div>
 			</div>
 
 			<!-- Column 2: Services (4 cols on desktop) -->
@@ -122,6 +134,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 	</div>
 </footer>
+
+<!-- Floating Quick Contact Speed Dial (Hotline, Zalo, Messenger) -->
+<?php get_template_part( 'template-parts/components/floating-contact' ); ?>
+
+<!-- Consultation Modal Popup (Figma Board 9) -->
+<?php get_template_part( 'template-parts/components/consultation-modal' ); ?>
 
 <?php wp_footer(); ?>
 </body>

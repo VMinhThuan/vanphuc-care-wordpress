@@ -276,7 +276,7 @@
   --color-border-focus-default: var(--color-primary-500);
 }
 
-/* ---------- 3. Font mặc định ---------- */
+/* ---------- 3. Font mặc định & Base ---------- */
 @layer base {
   html {
     font-family: var(--font-body);
@@ -285,3 +285,47 @@
     font-family: var(--font-heading);
   }
 }
+
+/* ---------- 4. Layout Grid System (Figma Board 10) ----------
+   - Desktop 1440: 12 cột, width ~84.7px, gutter 24px, margin 80px (Content max-width 1280px)
+   - Mobile 390: 4 cột, width 75.5px, gutter 16px, margin 20px (Content max-width 350px)
+------------------------------------------------------------ */
+@layer components {
+  /* Container toàn trang chuẩn theo tỉ lệ 1440px */
+  .vpc-container {
+    width: 100%;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.25rem; /* 20px mobile margin */
+    padding-right: 1.25rem;
+  }
+  @media (min-width: 1280px) {
+    .vpc-container {
+      padding-left: 5rem; /* 80px desktop margin */
+      padding-right: 5rem;
+    }
+  }
+
+  /* Container giới hạn nội dung 12 cột (1280px) */
+  .vpc-content {
+    width: 100%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Grid layout chuẩn: 4 cột trên mobile, 12 cột trên desktop */
+  .vpc-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem; /* 16px mobile gutter */
+  }
+  @media (min-width: 1280px) {
+    .vpc-grid {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 1.5rem; /* 24px desktop gutter */
+    }
+  }
+}
+
