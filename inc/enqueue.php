@@ -42,13 +42,6 @@ function vanphuccare_enqueue_assets() {
 		);
 	}
 
-	wp_enqueue_style(
-		'vanphuccare-main',
-		get_template_directory_uri() . '/assets/css/main.css',
-		array( 'vanphuccare-fonts', 'vanphuccare-tailwind' ),
-		$css_version
-	);
-
 	wp_enqueue_script(
 		'vanphuccare-main',
 		get_template_directory_uri() . '/assets/js/main.js',

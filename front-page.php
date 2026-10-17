@@ -14,8 +14,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 ?>
 
-<main id="primary" class="site-main w-full overflow-hidden">
-
 	<!-- =========================================================
 	     SECTION 1: HERO SECTION (12 Columns Desktop, 4 Columns Mobile)
 	     ========================================================= -->
@@ -490,8 +488,6 @@ get_header();
 
 		</div>
 	</section>
-
-</main>
 
 <?php
 get_footer();

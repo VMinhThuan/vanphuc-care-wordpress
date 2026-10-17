@@ -66,10 +66,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 <!-- Main Navigation Header (Sticky, Desktop 1280px+ & Mobile Drawer) -->
 <header id="site-header" class="sticky top-0 z-50 w-full bg-[#FAFAFA]/98 backdrop-blur-md border-b border-neutral-200/80 shadow-xs transition-all duration-300">
 	<div class="vpc-container flex h-20 xl:h-28 items-center justify-between">
-		<!-- Site Logo (SVG vector scale by CSS) -->
+		<!-- Site Logo (SVG vector scale by CSS with inline protection) -->
 		<div class="site-logo flex shrink-0 items-center">
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="inline-block transition-transform duration-200 hover:scale-102">
-				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.svg' ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="h-9 sm:h-11 xl:h-12 w-auto object-contain">
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="inline-flex items-center shrink-0 max-w-[170px] transition-transform duration-200 hover:scale-102">
+				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.svg' ); ?>" 
+				     alt="<?php bloginfo( 'name' ); ?>" 
+				     width="156" 
+				     height="49" 
+				     class="h-9 sm:h-11 xl:h-12 w-auto object-contain block" 
+				     style="max-height: 48px; width: auto; height: auto;">
 			</a>
 		</div>
 
@@ -81,19 +86,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 					array(
 						'theme_location' => 'primary',
 						'container'      => false,
-						'menu_class'     => 'flex items-center gap-7 2xl:gap-9 text-base font-medium text-neutral-800',
+						'menu_class'     => 'vpc-nav-menu flex items-center gap-7 2xl:gap-9 text-base font-medium text-neutral-800',
 						'fallback_cb'    => false,
 					)
 				);
 			} else {
 				?>
-				<ul class="flex items-center gap-7 2xl:gap-9 text-base font-medium text-neutral-800">
+				<ul class="vpc-nav-menu flex items-center gap-7 2xl:gap-9 text-base font-medium text-neutral-800">
 					<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="relative py-2 transition-colors duration-200 hover:text-primary-600 active:text-primary-500 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-linear-to-r after:from-secondary-400 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Trang chủ</a></li>
-					<li><a href="#" class="relative py-2 transition-colors duration-200 hover:text-primary-600 active:text-primary-500 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-linear-to-r after:from-secondary-400 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Giới thiệu</a></li>
-					<li><a href="#" class="relative py-2 transition-colors duration-200 hover:text-primary-600 active:text-primary-500 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-linear-to-r after:from-secondary-400 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Tin tức</a></li>
-					<li><a href="#" class="relative py-2 transition-colors duration-200 hover:text-primary-600 active:text-primary-500 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-linear-to-r after:from-secondary-400 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Dịch vụ</a></li>
-					<li><a href="#" class="relative py-2 transition-colors duration-200 hover:text-primary-600 active:text-primary-500 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-linear-to-r after:from-secondary-400 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Ở cữ</a></li>
-					<li><a href="#" class="relative py-2 transition-colors duration-200 hover:text-primary-600 active:text-primary-500 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-linear-to-r after:from-secondary-400 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Khóa học</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/gioi-thieu' ) ); ?>" class="relative py-2 transition-colors duration-200 hover:text-primary-600 active:text-primary-500 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-linear-to-r after:from-secondary-400 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Giới thiệu</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/tin-tuc' ) ); ?>" class="relative py-2 transition-colors duration-200 hover:text-primary-600 active:text-primary-500 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-linear-to-r after:from-secondary-400 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Tin tức</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/dich-vu' ) ); ?>" class="relative py-2 transition-colors duration-200 hover:text-primary-600 active:text-primary-500 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-linear-to-r after:from-secondary-400 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Dịch vụ</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/o-cu' ) ); ?>" class="relative py-2 transition-colors duration-200 hover:text-primary-600 active:text-primary-500 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-linear-to-r after:from-secondary-400 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Ở cữ</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/khoa-hoc' ) ); ?>" class="relative py-2 transition-colors duration-200 hover:text-primary-600 active:text-primary-500 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-linear-to-r after:from-secondary-400 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Khóa học</a></li>
 				</ul>
 				<?php
 			}

@@ -26,8 +26,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<!-- Column 1: Company Info (5 cols on desktop) -->
 			<div class="xl:col-span-5 flex flex-col space-y-4">
 				<div class="footer-logo mb-2">
-					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="inline-block transition-transform duration-200 hover:scale-102">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.svg' ); ?>" alt="Vạn Phúc Care Logo" class="h-12 sm:h-14 w-auto object-contain">
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="inline-flex items-center shrink-0 max-w-[190px] transition-transform duration-200 hover:scale-102">
+						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.svg' ); ?>" 
+						     alt="Vạn Phúc Care Logo" 
+						     width="168" 
+						     height="52" 
+						     class="h-11 sm:h-13 w-auto object-contain block" 
+						     style="max-height: 52px; width: auto; height: auto;">
 					</a>
 				</div>
 				

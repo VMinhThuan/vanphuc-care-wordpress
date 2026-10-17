@@ -86,15 +86,22 @@ if ( $is_disabled ) {
 	}
 }
 
-if ( $is_loading ) {
-	$state_classes .= ' pointer-events-none cursor-wait relative';
+$raw_attrs = '';
+if ( ! empty( $args['data_attrs'] ) ) {
+	if ( is_array( $args['data_attrs'] ) ) {
+		foreach ( $args['data_attrs'] as $k => $v ) {
+			$raw_attrs .= ' ' . esc_attr( $k ) . '="' . esc_attr( $v ) . '"';
+		}
+	} else {
+		$raw_attrs .= ' ' . $args['data_attrs'];
+	}
 }
 
 $final_classes = trim( "{$base_classes} {$current_size} {$current_variant} {$state_classes} {$extra_class}" );
 ?>
 
 <?php if ( ! empty( $url ) && ! $is_disabled ) : ?>
-	<a href="<?php echo esc_url( $url ); ?>" class="<?php echo esc_attr( $final_classes ); ?>" <?php echo $is_loading ? 'aria-busy="true"' : ''; ?>>
+	<a href="<?php echo esc_url( $url ); ?>" class="<?php echo esc_attr( $final_classes ); ?>" <?php echo $is_loading ? 'aria-busy="true"' : ''; ?><?php echo $raw_attrs; // phpcs:ignore ?>>
 		<?php if ( $is_loading ) : ?>
 			<svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
 				<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -111,7 +118,7 @@ $final_classes = trim( "{$base_classes} {$current_size} {$current_variant} {$sta
 		<?php endif; ?>
 	</a>
 <?php else : ?>
-	<button type="<?php echo esc_attr( $type ); ?>" class="<?php echo esc_attr( $final_classes ); ?>" <?php echo $is_disabled ? 'disabled' : ''; ?> <?php echo $is_loading ? 'aria-busy="true"' : ''; ?>>
+	<button type="<?php echo esc_attr( $type ); ?>" class="<?php echo esc_attr( $final_classes ); ?>" <?php echo $is_disabled ? 'disabled' : ''; ?> <?php echo $is_loading ? 'aria-busy="true"' : ''; ?><?php echo $raw_attrs; // phpcs:ignore ?>>
 		<?php if ( $is_loading ) : ?>
 			<svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
 				<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
