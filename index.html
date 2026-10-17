@@ -17,64 +17,15 @@
 <body class="font-body bg-white text-text-body-default antialiased selection:bg-primary-100 selection:text-primary-800">
 
 <!-- =========================================================================
-     SITE TOPBAR (Hotline, Email, Language, Social Icons)
+     SITE HEADER & NAVIGATION (Matches Image 1)
+     - Logo (Left)
+     - 7 Menu items (Center): Trang chủ, Giới thiệu, Ở cữ, Bảo mẫu, Dịch vụ, Lớp học tiền sản, Kiến thức
+     - Button (Right): Đăng Ký Tư Vấn
      ========================================================================= -->
-<div class="site-topbar w-full border-b border-neutral-200 bg-white py-2.5 text-sm">
-	<div class="vpc-container flex items-center justify-between">
-		<!-- Contact Items -->
-		<div class="flex flex-wrap items-center gap-4 sm:gap-6 text-text-body-muted font-medium">
-			<a href="tel:0908093198" class="inline-flex items-center gap-2 hover:text-primary-500 transition-colors duration-200">
-				<svg class="w-4 h-4 text-primary-500 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-					<path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-				</svg>
-				<span class="tracking-wide">090 809 31 98</span>
-			</a>
-			<a href="mailto:cskh@vanphuccare.vn" class="hidden sm:inline-flex items-center gap-2 hover:text-primary-500 transition-colors duration-200">
-				<svg class="w-4 h-4 text-primary-500 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-					<path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-				</svg>
-				<span class="tracking-wide">cskh@vanphuccare.vn</span>
-			</a>
-		</div>
-
-		<!-- Meta: Language & Social Icons -->
-		<div class="flex items-center gap-3 sm:gap-4">
-			<!-- Language -->
-			<div class="flex items-center gap-1.5 cursor-pointer text-text-body-muted hover:text-primary-600 transition-colors">
-				<span class="inline-flex rounded-sm overflow-hidden shadow-xs">
-					<svg class="w-5 h-3.5 object-cover" viewBox="0 0 512 512">
-						<rect width="512" height="512" fill="#d80027"/>
-						<polygon points="256,128 293,242 413,242 316,313 353,427 256,356 159,427 196,313 99,242 219,242" fill="#ffda44"/>
-					</svg>
-				</span>
-				<span class="text-xs font-semibold uppercase tracking-wider">VIE</span>
-			</div>
-
-			<span class="h-4 w-px bg-neutral-300"></span>
-
-			<!-- Social Icons -->
-			<div class="flex items-center gap-2 sm:gap-2.5">
-				<a href="https://facebook.com/vanphuccare" target="_blank" rel="noopener noreferrer" class="text-neutral-500 hover:text-[#1877F2] transition-colors">
-					<img src="./assets/icons/facebook.svg" alt="Facebook" class="w-5 h-5 object-contain">
-				</a>
-				<a href="https://youtube.com/@vanphuccare" target="_blank" rel="noopener noreferrer" class="text-neutral-500 hover:text-[#FF0000] transition-colors">
-					<img src="./assets/icons/youtube.svg" alt="YouTube" class="w-5 h-5 object-contain">
-				</a>
-				<a href="https://tiktok.com/@vanphuccare" target="_blank" rel="noopener noreferrer" class="text-neutral-500 hover:text-black transition-colors">
-					<img src="./assets/icons/tiktok.svg" alt="TikTok" class="w-5 h-5 object-contain">
-				</a>
-			</div>
-		</div>
-	</div>
-</div>
-
-<!-- =========================================================================
-     SITE HEADER & NAVIGATION
-     ========================================================================= -->
-<header id="site-header" class="sticky top-0 z-50 w-full bg-[#FAFAFA]/98 backdrop-blur-md border-b border-neutral-200/80 shadow-xs transition-all duration-300">
+<header id="site-header" class="sticky top-0 z-50 w-full bg-white/98 backdrop-blur-md border-b border-neutral-200/70 shadow-xs transition-all duration-300">
 	<div class="vpc-container flex h-20 xl:h-24 items-center justify-between">
 		
-		<!-- Site Logo -->
+		<!-- Site Logo (Left) -->
 		<div class="site-logo flex shrink-0 items-center">
 			<a href="#" class="inline-flex items-center shrink-0 max-w-[170px] transition-transform duration-200 hover:scale-102">
 				<img src="./assets/images/logo.svg" 
@@ -86,28 +37,28 @@
 			</a>
 		</div>
 
-		<!-- Desktop Navigation Menu (xl:flex) -->
+		<!-- Navigation Menu (Center) - Matches Image 1 (7 Items) -->
 		<nav class="hidden xl:flex items-center" aria-label="Primary navigation">
-			<ul class="vpc-nav-menu flex items-center gap-7 2xl:gap-9 text-base font-medium text-neutral-800">
-				<li><a href="#" class="relative py-2 text-primary-600 font-semibold transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-full after:bg-linear-to-r after:from-secondary-400 after:to-primary-500">Trang chủ</a></li>
-				<li><a href="#dich-vu-noi-bat" class="relative py-2 transition-colors duration-200 hover:text-primary-600 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-linear-to-r after:from-secondary-400 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Giới thiệu</a></li>
-				<li><a href="#dich-vu-tai-nha" class="relative py-2 transition-colors duration-200 hover:text-primary-600 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-linear-to-r after:from-secondary-400 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Dịch vụ</a></li>
-				<li><a href="#trung-tam-o-cu" class="relative py-2 transition-colors duration-200 hover:text-primary-600 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-linear-to-r after:from-secondary-400 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Ở cữ</a></li>
-				<li><a href="#dao-tao-easy" class="relative py-2 transition-colors duration-200 hover:text-primary-600 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-linear-to-r after:from-secondary-400 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Khóa học</a></li>
-				<li><a href="#tin-tuc" class="relative py-2 transition-colors duration-200 hover:text-primary-600 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-linear-to-r after:from-secondary-400 after:to-primary-500 after:transition-all after:duration-300 hover:after:w-full">Tin tức</a></li>
+			<ul class="vpc-nav-menu flex items-center gap-6 2xl:gap-8 text-[15px] font-medium text-neutral-800">
+				<li><a href="#" class="py-2 text-primary-600 font-semibold hover:text-primary-600 transition-colors">Trang chủ</a></li>
+				<li><a href="#gioi-thieu" class="py-2 hover:text-primary-600 transition-colors">Giới thiệu</a></li>
+				<li><a href="#trung-tam-o-cu" class="py-2 hover:text-primary-600 transition-colors">Ở cữ</a></li>
+				<li><a href="#dich-vu-tai-nha" class="py-2 hover:text-primary-600 transition-colors">Bảo mẫu</a></li>
+				<li><a href="#dich-vu-noi-bat" class="py-2 hover:text-primary-600 transition-colors">Dịch vụ</a></li>
+				<li><a href="#dao-tao-easy" class="py-2 hover:text-primary-600 transition-colors">Lớp học tiền sản</a></li>
+				<li><a href="#tin-tuc" class="py-2 hover:text-primary-600 transition-colors">Kiến thức</a></li>
 			</ul>
 		</nav>
 
-		<!-- Right Actions: CTA Button & Mobile Toggle Button -->
+		<!-- Right Action: CTA Button (Đăng Ký Tư Vấn) & Mobile Menu Toggle -->
 		<div class="flex items-center gap-3 sm:gap-4">
-			<button data-open-modal="vpc-consultation-modal" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-linear-to-r from-primary-500 to-primary-600 text-white font-bold text-sm shadow-md shadow-primary-500/20 hover:shadow-lg hover:shadow-primary-500/35 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200">
-				<span>Đăng ký tư vấn</span>
-				<svg class="w-4 h-4 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-				</svg>
+			<button data-open-modal="vpc-consultation-modal" 
+			        type="button"
+			        class="hidden sm:inline-flex items-center justify-center px-6 py-2.5 sm:py-3 rounded-full bg-[#1A77BA] hover:bg-[#155F95] text-white font-semibold text-sm sm:text-base shadow-sm hover:shadow-md transition-all duration-200">
+				<span>Đăng Ký Tư Vấn</span>
 			</button>
 
-			<!-- Mobile Hamburger Toggle -->
+			<!-- Mobile Hamburger Toggle (< 1280px) -->
 			<button id="mobile-menu-toggle" type="button" class="xl:hidden inline-flex items-center justify-center p-2 rounded-xl border border-neutral-300 text-neutral-800 hover:bg-neutral-100 hover:text-primary-600 transition-colors focus:outline-hidden" aria-controls="mobile-menu-drawer" aria-expanded="false" aria-label="Toggle navigation menu">
 				<svg class="w-6 h-6 open-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -121,20 +72,21 @@
 
 	<!-- Mobile / Tablet Drawer Menu (< 1280px) -->
 	<div id="mobile-menu-drawer" class="xl:hidden hidden border-t border-neutral-200 bg-white/98 px-5 py-6 shadow-xl backdrop-blur-lg">
-		<nav class="flex flex-col space-y-3 text-base font-semibold text-text-body-default">
+		<nav class="flex flex-col space-y-3 text-base font-semibold text-neutral-800">
 			<a href="#" class="py-2 px-3 rounded-lg bg-primary-50 text-primary-600">Trang chủ</a>
-			<a href="#dich-vu-noi-bat" class="py-2 px-3 rounded-lg hover:bg-primary-50 hover:text-primary-600 transition-colors">Giới thiệu</a>
-			<a href="#dich-vu-tai-nha" class="py-2 px-3 rounded-lg hover:bg-primary-50 hover:text-primary-600 transition-colors">Dịch vụ</a>
-			<a href="#trung-tam-o-cu" class="py-2 px-3 rounded-lg hover:bg-primary-50 hover:text-primary-600 transition-colors">Ở cữ</a>
-			<a href="#dao-tao-easy" class="py-2 px-3 rounded-lg hover:bg-primary-50 hover:text-primary-600 transition-colors">Khóa học</a>
-			<a href="#tin-tuc" class="py-2 px-3 rounded-lg hover:bg-primary-50 hover:text-primary-600 transition-colors">Tin tức</a>
+			<a href="#gioi-thieu" class="py-2 px-3 rounded-lg hover:bg-neutral-100 hover:text-primary-600 transition-colors">Giới thiệu</a>
+			<a href="#trung-tam-o-cu" class="py-2 px-3 rounded-lg hover:bg-neutral-100 hover:text-primary-600 transition-colors">Ở cữ</a>
+			<a href="#dich-vu-tai-nha" class="py-2 px-3 rounded-lg hover:bg-neutral-100 hover:text-primary-600 transition-colors">Bảo mẫu</a>
+			<a href="#dich-vu-noi-bat" class="py-2 px-3 rounded-lg hover:bg-neutral-100 hover:text-primary-600 transition-colors">Dịch vụ</a>
+			<a href="#dao-tao-easy" class="py-2 px-3 rounded-lg hover:bg-neutral-100 hover:text-primary-600 transition-colors">Lớp học tiền sản</a>
+			<a href="#tin-tuc" class="py-2 px-3 rounded-lg hover:bg-neutral-100 hover:text-primary-600 transition-colors">Kiến thức</a>
 		</nav>
-		<div class="mt-5 pt-4 border-t border-neutral-200 flex flex-col gap-3">
-			<button data-open-modal="vpc-consultation-modal" class="w-full text-center py-3 rounded-full bg-primary-500 text-white font-bold text-sm shadow-md">
-				Đăng ký tư vấn
+		<div class="mt-5 pt-4 border-t border-neutral-200">
+			<button data-open-modal="vpc-consultation-modal" class="w-full text-center py-3 rounded-full bg-[#1A77BA] text-white font-bold text-sm shadow-md">
+				Đăng Ký Tư Vấn
 			</button>
-			<div class="flex items-center justify-between text-xs text-text-body-muted pt-2">
-				<span>Hotline: 090 809 31 98</span>
+			<div class="flex items-center justify-between text-xs text-text-body-muted pt-3">
+				<span>Hotline: (024) 6329 6698</span>
 				<span>cskh@vanphuccare.vn</span>
 			</div>
 		</div>
@@ -1150,145 +1102,165 @@
 </main><!-- #primary -->
 
 <!-- =========================================================================
-     SITE FOOTER (4 Columns + Legal + Social)
+     SITE FOOTER (Matches Image 2)
+     - 4 Columns: Thông tin công ty, Dịch vụ của chúng tôi, Kiến thức, Tin tức & sự kiện
+     - Middle: 3 Social Icons (Facebook, Instagram, TikTok) + 2 Badges (DMCA, Bộ Công Thương)
+     - Bottom: Điều khoản sử dụng | Chính sách bảo mật | Tuyển dụng | Liên hệ
      ========================================================================= -->
-<footer class="site-footer relative w-full overflow-hidden bg-linear-to-b from-white via-primary-100/50 to-primary-200/70 pt-16 sm:pt-20 pb-8 text-neutral-900">
-	<!-- Decorative soft gradient waterdrop / orb vectors -->
-	<div class="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
-		<div class="absolute -right-20 -bottom-20 h-96 w-96 rounded-full bg-primary-300/20 blur-3xl"></div>
-		<div class="absolute right-40 -bottom-40 h-[450px] w-[450px] rounded-full bg-secondary-300/15 blur-3xl"></div>
+<footer class="site-footer relative w-full overflow-hidden bg-linear-to-b from-white via-[#EBF5FB]/70 to-[#D5EBF9]/80 pt-14 sm:pt-16 pb-10 text-neutral-800">
+	<!-- Decorative faint watermark logo on bottom-right -->
+	<div class="pointer-events-none absolute right-0 bottom-0 z-0 opacity-15 overflow-hidden translate-x-12 translate-y-12" aria-hidden="true">
+		<svg width="420" height="420" viewBox="0 0 606 277" fill="none" class="text-primary-500 fill-current">
+			<path d="M72 128C72 116.402 81.402 107 93 107H138C149.598 107 159 116.402 159 128C159 139.598 149.598 149 138 149H93C81.402 149 72 139.598 72 128Z"/>
+			<circle cx="115.5" cy="128" r="80" stroke="currentColor" stroke-width="20"/>
+		</svg>
 	</div>
 
 	<div class="relative z-10 vpc-container">
-		<!-- Main Footer Grid (4 Columns Desktop) -->
-		<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 gap-10 xl:gap-12 pb-12">
+		
+		<!-- 4 Columns Grid -->
+		<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 gap-8 xl:gap-10 pb-10">
 			
-			<!-- Column 1: Company Info (5 cols on desktop) -->
-			<div class="xl:col-span-5 flex flex-col space-y-4">
-				<div class="footer-logo mb-2">
-					<a href="#" class="inline-flex items-center shrink-0 max-w-[190px] transition-transform duration-200 hover:scale-102">
+			<!-- Column 1: Company Info (4 cols) -->
+			<div class="xl:col-span-4 flex flex-col space-y-3">
+				<div class="footer-logo mb-1">
+					<a href="#" class="inline-flex items-center shrink-0 max-w-[175px]">
 						<img src="./assets/images/logo.svg" 
 						     alt="Vạn Phúc Care Logo" 
 						     width="168" 
 						     height="52" 
-						     class="h-11 sm:h-13 w-auto object-contain block" 
-						     style="max-height: 52px; width: auto; height: auto;">
+						     class="h-10 sm:h-11 w-auto object-contain block" 
+						     style="max-height: 48px; width: auto; height: auto;">
 					</a>
 				</div>
 				
-				<p class="font-heading text-lg sm:text-xl font-semibold text-primary-600 italic tracking-wide">
-					"Hành Trình Cùng Mẹ, Trải Đầy Yêu Thương"
+				<p class="text-sm font-medium text-neutral-700">
+					Hành Trình Cùng Mẹ, Trải Đầy Yêu Thương
 				</p>
 				
-				<h3 class="font-heading text-base sm:text-lg font-bold text-neutral-900 uppercase tracking-wider pt-2">
+				<h3 class="font-heading text-base font-bold text-neutral-900 uppercase tracking-wide pt-1">
 					CÔNG TY TNHH VẠN PHÚC CARE
 				</h3>
 				
-				<ul class="space-y-3 text-sm sm:text-base text-text-body-muted">
-					<li class="flex items-start gap-2.5">
-						<svg class="w-5 h-5 text-primary-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-							<path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-						</svg>
-						<span><strong class="font-semibold text-neutral-800">Trung tâm ở cữ:</strong> 35B/399 Âu Cơ, phường Tây Hồ, TP. Hà Nội</span>
+				<ul class="space-y-2 text-xs sm:text-sm text-neutral-700 leading-relaxed">
+					<li>
+						<span>Trung tâm ở cữ: 35B/399 Âu Cơ, phường Tây Hồ, TP. Hà Nội</span>
 					</li>
-					<li class="flex items-center gap-2.5">
-						<svg class="w-5 h-5 text-primary-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-						</svg>
-						<span><strong class="font-semibold text-neutral-800">Hotline và CSKH:</strong> (024) 6329 6698</span>
+					<li>
+						<span>Hotline tư vấn: <a href="tel:02463296698" class="hover:text-primary-600 font-medium">(024) 6329 6698</a></span>
 					</li>
-					<li class="flex items-center gap-2.5">
-						<svg class="w-5 h-5 text-primary-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-						</svg>
-						<span><strong class="font-semibold text-neutral-800">Hotline hỗ trợ:</strong> 037 624 6673</span>
+					<li>
+						<span>Hotline hỗ trợ: <a href="tel:0376246673" class="hover:text-primary-600 font-medium">037 624 6673</a></span>
 					</li>
-					<li class="flex items-center gap-2.5">
-						<svg class="w-5 h-5 text-primary-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-						</svg>
-						<span><strong class="font-semibold text-neutral-800">Email:</strong> cskh@vanphuccare.vn</span>
+					<li>
+						<span>Email CSKH: <a href="mailto:cskh@vanphuccare.vn" class="hover:text-primary-600 font-medium">cskh@vanphuccare.vn</a></span>
 					</li>
-					<li class="flex items-center gap-2.5">
-						<svg class="w-5 h-5 text-primary-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-						</svg>
-						<span><strong class="font-semibold text-neutral-800">Website:</strong> vanphuccare.vn</span>
+					<li>
+						<span>Email liên hệ: <a href="mailto:info@vanphuccare.vn" class="hover:text-primary-600 font-medium">info@vanphuccare.vn</a></span>
 					</li>
 				</ul>
-
-				<!-- Social Channels -->
-				<div class="pt-2">
-					<span class="block text-xs font-bold text-neutral-600 uppercase tracking-wider mb-2.5">Kênh mạng xã hội</span>
-					<div class="flex items-center gap-2.5">
-						<a href="https://facebook.com/vanphuccare" target="_blank" class="w-9 h-9 rounded-xl bg-white border border-neutral-200 flex items-center justify-center hover:scale-110 transition-transform">
-							<img src="./assets/icons/facebook.svg" alt="Facebook" class="w-5 h-5">
-						</a>
-						<a href="https://youtube.com/@vanphuccare" target="_blank" class="w-9 h-9 rounded-xl bg-white border border-neutral-200 flex items-center justify-center hover:scale-110 transition-transform">
-							<img src="./assets/icons/youtube.svg" alt="YouTube" class="w-5 h-5">
-						</a>
-						<a href="https://tiktok.com/@vanphuccare" target="_blank" class="w-9 h-9 rounded-xl bg-white border border-neutral-200 flex items-center justify-center hover:scale-110 transition-transform">
-							<img src="./assets/icons/tiktok.svg" alt="TikTok" class="w-5 h-5">
-						</a>
-						<a href="https://zalo.me/0908093198" target="_blank" class="w-9 h-9 rounded-xl bg-white border border-neutral-200 flex items-center justify-center hover:scale-110 transition-transform">
-							<img src="./assets/icons/zalo.svg" alt="Zalo" class="w-5 h-5">
-						</a>
-					</div>
-				</div>
 			</div>
 
-			<!-- Column 2: Services (4 cols on desktop) -->
-			<div class="xl:col-span-4 flex flex-col space-y-4">
-				<h3 class="font-heading text-base sm:text-lg font-bold text-neutral-900 uppercase tracking-wider pb-2 border-b-2 border-primary-500/30 inline-block w-fit">
+			<!-- Column 2: DỊCH VỤ CỦA CHÚNG TÔI (3 cols) -->
+			<div class="xl:col-span-3 flex flex-col space-y-3">
+				<h3 class="font-heading text-xs sm:text-sm font-bold text-neutral-900 uppercase tracking-wider pb-1">
 					DỊCH VỤ CỦA CHÚNG TÔI
 				</h3>
-				<ul class="space-y-2.5 text-sm sm:text-base">
-					<li><a href="#trung-tam-o-cu" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Trung tâm ở cữ</a></li>
-					<li><a href="#dao-tao-easy" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Khóa học chăm bé</a></li>
-					<li><a href="#dich-vu-tai-nha" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Bảo mẫu tại nhà</a></li>
-					<li><a href="#dao-tao-easy" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Hướng dẫn nuôi con EASY trực tuyến 1:1</a></li>
-					<li><a href="#dich-vu-tai-nha" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Tắm trẻ sơ sinh</a></li>
-					<li><a href="#dich-vu-tai-nha" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Thông tắc tia sữa</a></li>
-					<li><a href="#dich-vu-tai-nha" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Chăm sóc mẹ sau sinh</a></li>
+				<ul class="space-y-2 text-xs sm:text-sm text-neutral-700">
+					<li><a href="#trung-tam-o-cu" class="hover:text-primary-600 transition-colors">Trung tâm ở cữ</a></li>
+					<li><a href="#dao-tao-easy" class="hover:text-primary-600 transition-colors">Khóa học trực tuyến</a></li>
+					<li><a href="#dich-vu-tai-nha" class="hover:text-primary-600 transition-colors">Bảo mẫu tại nhà</a></li>
+					<li><a href="#dao-tao-easy" class="hover:text-primary-600 transition-colors">Lớp học tiền sản</a></li>
+					<li><a href="#dao-tao-easy" class="hover:text-primary-600 transition-colors">Tư vấn nuôi con EASY</a></li>
+					<li><a href="#dich-vu-tai-nha" class="hover:text-primary-600 transition-colors">Tắm trẻ sơ sinh</a></li>
+					<li><a href="#dich-vu-tai-nha" class="hover:text-primary-600 transition-colors">Thông tắc tia sữa</a></li>
+					<li><a href="#dich-vu-tai-nha" class="hover:text-primary-600 transition-colors">Chăm sóc bé tại nhà</a></li>
+					<li><a href="#dich-vu-tai-nha" class="hover:text-primary-600 transition-colors">Chăm sóc mẹ sau sinh</a></li>
 				</ul>
 			</div>
 
-			<!-- Column 3: News & Knowledge (3 cols on desktop) -->
-			<div class="xl:col-span-3 flex flex-col space-y-4">
-				<h3 class="font-heading text-base sm:text-lg font-bold text-neutral-900 uppercase tracking-wider pb-2 border-b-2 border-secondary-400/50 inline-block w-fit">
-					KIẾN THỨC & TIN TỨC
+			<!-- Column 3: KIẾN THỨC (3 cols) -->
+			<div class="xl:col-span-3 flex flex-col space-y-3">
+				<h3 class="font-heading text-xs sm:text-sm font-bold text-neutral-900 uppercase tracking-wider pb-1">
+					KIẾN THỨC
 				</h3>
-				<ul class="space-y-2.5 text-sm sm:text-base">
-					<li><a href="#tin-tuc" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Phương pháp EASY</a></li>
-					<li><a href="#tin-tuc" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Cẩm nang làm mẹ</a></li>
-					<li><a href="#tin-tuc" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Hội chứng biếng ăn</a></li>
-					<li><a href="#tin-tuc" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Ăn dặm toàn tập</a></li>
-					<li><a href="#tin-tuc" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Mang thai</a></li>
-					<li><a href="#tin-tuc" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Mẹ và bé</a></li>
-					<li><a href="#tin-tuc" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Tin tức & sự kiện</a></li>
+				<ul class="space-y-2 text-xs sm:text-sm text-neutral-700">
+					<li><a href="#dao-tao-easy" class="hover:text-primary-600 transition-colors">Phương pháp EASY</a></li>
+					<li><a href="#tin-tuc" class="hover:text-primary-600 transition-colors">Cẩm nang làm mẹ</a></li>
+					<li><a href="#tin-tuc" class="hover:text-primary-600 transition-colors">Hội chứng biếng ăn</a></li>
+					<li><a href="#tin-tuc" class="hover:text-primary-600 transition-colors">Ăn dặm toàn tập</a></li>
+					<li><a href="#tin-tuc" class="hover:text-primary-600 transition-colors">Mang thai</a></li>
 				</ul>
+			</div>
+
+			<!-- Column 4: TIN TỨC & SỰ KIỆN (2 cols) -->
+			<div class="xl:col-span-2 flex flex-col space-y-3">
+				<h3 class="font-heading text-xs sm:text-sm font-bold text-neutral-900 uppercase tracking-wider pb-1">
+					TIN TỨC & SỰ KIỆN
+				</h3>
+				<ul class="space-y-2 text-xs sm:text-sm text-neutral-700">
+					<li><a href="#tin-tuc" class="hover:text-primary-600 transition-colors">Mẹ và bé</a></li>
+					<li><a href="#tin-tuc" class="hover:text-primary-600 transition-colors">Tin tức & sự kiện</a></li>
+				</ul>
+			</div>
+
+		</div>
+
+		<!-- Middle Row: 3 Social Icons (Left) + 2 Badges (Right) -->
+		<div class="py-6 border-y border-neutral-300/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+			<!-- Social Icons (Facebook, Instagram, TikTok) -->
+			<div class="flex items-center gap-3">
+				<!-- Facebook -->
+				<a href="https://facebook.com/vanphuccare" target="_blank" rel="noopener noreferrer" 
+				   class="w-10 h-10 rounded-full bg-[#1877F2] text-white flex items-center justify-center hover:scale-110 shadow-sm transition-transform" 
+				   aria-label="Facebook">
+					<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+				</a>
+
+				<!-- Instagram -->
+				<a href="https://instagram.com/vanphuccare" target="_blank" rel="noopener noreferrer" 
+				   class="w-10 h-10 rounded-xl overflow-hidden hover:scale-110 shadow-sm transition-transform" 
+				   aria-label="Instagram">
+					<img src="./assets/icons/instagram.svg" alt="Instagram" class="w-full h-full object-cover">
+				</a>
+
+				<!-- TikTok -->
+				<a href="https://tiktok.com/@vanphuccare" target="_blank" rel="noopener noreferrer" 
+				   class="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center hover:scale-110 shadow-sm transition-transform" 
+				   aria-label="TikTok">
+					<img src="./assets/icons/tiktok.svg" alt="TikTok" class="w-5 h-5 object-contain invert">
+				</a>
+			</div>
+
+			<!-- Badges (DMCA + Bộ Công Thương) -->
+			<div class="flex items-center gap-3">
+				<!-- DMCA Protected -->
+				<a href="#" target="_blank" rel="nofollow noopener" class="hover:opacity-90 transition-opacity">
+					<img src="./assets/icons/dmca.svg" 
+					     alt="DMCA Protected" 
+					     class="h-9 w-auto object-contain block">
+				</a>
+
+				<!-- Bộ Công Thương -->
+				<a href="#" target="_blank" rel="nofollow noopener" class="hover:opacity-90 transition-opacity">
+					<img src="./assets/icons/bo-cong-thuong.svg" 
+					     alt="Đã Thông Báo Bộ Công Thương" 
+					     class="h-9 w-auto object-contain block">
+				</a>
 			</div>
 		</div>
 
-		<!-- Footer Bottom: Legal Links & Copyright -->
-		<div class="mt-8 border-t border-neutral-300/80 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-text-body-muted">
-			<div class="flex flex-wrap items-center justify-center gap-3 font-medium">
-				<a href="#" class="hover:text-primary-600 transition-colors">Điều khoản sử dụng</a>
-				<span class="text-neutral-400">|</span>
-				<a href="#" class="hover:text-primary-600 transition-colors">Chính sách bảo mật</a>
-				<span class="text-neutral-400">|</span>
-				<a href="#" class="hover:text-primary-600 transition-colors">Chính sách biên tập</a>
-				<span class="text-neutral-400">|</span>
-				<a href="#" class="hover:text-primary-600 transition-colors">Quy trình khiếu nại</a>
-				<span class="text-neutral-400">|</span>
-				<a href="#" class="hover:text-primary-600 transition-colors">Tuyển dụng</a>
-			</div>
-			
-			<div class="text-neutral-600 text-center sm:text-right">
-				&copy; 2026 Vạn Phúc Care. Toàn bộ bản quyền được bảo lưu.
-			</div>
+		<!-- Bottom Row: Navigation Links -->
+		<div class="pt-5 flex flex-wrap items-center justify-start gap-2 sm:gap-3 text-xs sm:text-sm text-neutral-700">
+			<a href="#" class="hover:text-primary-600 transition-colors">Điều khoản sử dụng</a>
+			<span class="text-neutral-400">|</span>
+			<a href="#" class="hover:text-primary-600 transition-colors">Chính sách bảo mật</a>
+			<span class="text-neutral-400">|</span>
+			<a href="#" class="hover:text-primary-600 transition-colors">Tuyển dụng</a>
+			<span class="text-neutral-400">|</span>
+			<a href="#" class="hover:text-primary-600 transition-colors">Liên hệ</a>
 		</div>
+
 	</div>
 </footer>
 

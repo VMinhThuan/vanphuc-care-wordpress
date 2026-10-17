@@ -1,7 +1,13 @@
 <?php
 /**
  * Site footer template for Vạn Phúc Care.
- * Fully built with Tailwind CSS v4 design system tokens.
+ * Matches exact Figma Footer specification:
+ * - Column 1: Logo + Slogan + Company Name + Address + 2 Hotlines + 2 Emails
+ * - Column 2: DỊCH VỤ CỦA CHÚNG TÔI (9 items)
+ * - Column 3: KIẾN THỨC (5 items)
+ * - Column 4: TIN TỨC & SỰ KIỆN (2 items)
+ * - Middle Row: 3 Social Icons (Facebook, Instagram, TikTok) + 2 Certifications (DMCA, Bộ Công Thương)
+ * - Bottom Row: Điều khoản sử dụng | Chính sách bảo mật | Tuyển dụng | Liên hệ
  *
  * @package VanPhucCare
  */
@@ -9,141 +15,172 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+$theme_uri = get_template_directory_uri();
 ?>
 </main><!-- #primary -->
 
-<footer class="site-footer relative w-full overflow-hidden bg-linear-to-b from-white via-primary-100/50 to-primary-200/70 pt-16 sm:pt-20 pb-8 text-neutral-900">
-	<!-- Decorative soft gradient waterdrop / orb vectors matching Figma aesthetic -->
-	<div class="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
-		<div class="absolute -right-20 -bottom-20 h-96 w-96 rounded-full bg-primary-300/20 blur-3xl"></div>
-		<div class="absolute right-40 -bottom-40 h-[450px] w-[450px] rounded-full bg-secondary-300/15 blur-3xl"></div>
+<footer class="site-footer relative w-full overflow-hidden bg-linear-to-b from-white via-[#EBF5FB]/70 to-[#D5EBF9]/80 pt-14 sm:pt-16 pb-10 text-neutral-800">
+	<!-- Decorative faint watermark logo on bottom-right -->
+	<div class="pointer-events-none absolute right-0 bottom-0 z-0 opacity-15 overflow-hidden translate-x-12 translate-y-12" aria-hidden="true">
+		<svg width="420" height="420" viewBox="0 0 606 277" fill="none" class="text-primary-500 fill-current">
+			<path d="M72 128C72 116.402 81.402 107 93 107H138C149.598 107 159 116.402 159 128C159 139.598 149.598 149 138 149H93C81.402 149 72 139.598 72 128Z"/>
+			<circle cx="115.5" cy="128" r="80" stroke="currentColor" stroke-width="20"/>
+		</svg>
 	</div>
 
 	<div class="relative z-10 vpc-container">
-		<!-- Main Footer Grid (3 Columns Desktop, 2 Tablet, 1 Mobile) -->
-		<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 gap-10 xl:gap-12 pb-12">
+		
+		<!-- 4 Columns Grid -->
+		<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 gap-8 xl:gap-10 pb-10">
 			
-			<!-- Column 1: Company Info (5 cols on desktop) -->
-			<div class="xl:col-span-5 flex flex-col space-y-4">
-				<div class="footer-logo mb-2">
-					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="inline-flex items-center shrink-0 max-w-[190px] transition-transform duration-200 hover:scale-102">
-						<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.svg' ); ?>" 
+			<!-- Column 1: Company Info (4 cols) -->
+			<div class="xl:col-span-4 flex flex-col space-y-3">
+				<div class="footer-logo mb-1">
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="inline-flex items-center shrink-0 max-w-[175px]">
+						<img src="<?php echo esc_url( $theme_uri . '/assets/images/logo.svg' ); ?>" 
 						     alt="Vạn Phúc Care Logo" 
 						     width="168" 
 						     height="52" 
-						     class="h-11 sm:h-13 w-auto object-contain block" 
-						     style="max-height: 52px; width: auto; height: auto;">
+						     class="h-10 sm:h-11 w-auto object-contain block" 
+						     style="max-height: 48px; width: auto; height: auto;">
 					</a>
 				</div>
 				
-				<p class="font-heading text-lg sm:text-xl font-semibold text-primary-600 italic tracking-wide">
-					"Hành Trình Cùng Mẹ, Trải Đầy Yêu Thương"
+				<p class="text-sm font-medium text-neutral-700">
+					Hành Trình Cùng Mẹ, Trải Đầy Yêu Thương
 				</p>
 				
-				<h3 class="font-heading text-base sm:text-lg font-bold text-neutral-900 uppercase tracking-wider pt-2">
+				<h3 class="font-heading text-base font-bold text-neutral-900 uppercase tracking-wide pt-1">
 					CÔNG TY TNHH VẠN PHÚC CARE
 				</h3>
 				
-				<ul class="space-y-3 text-sm sm:text-base text-text-body-muted">
-					<li class="flex items-start gap-2.5">
-						<svg class="w-5 h-5 text-primary-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-							<path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-						</svg>
-						<span><strong class="font-semibold text-neutral-800">Trung tâm ở cữ:</strong> 35B/399 Âu Cơ, phường Tây Hồ, TP. Hà Nội</span>
+				<ul class="space-y-2 text-xs sm:text-sm text-neutral-700 leading-relaxed">
+					<li>
+						<span>Trung tâm ở cữ: 35B/399 Âu Cơ, phường Tây Hồ, TP. Hà Nội</span>
 					</li>
-					<li class="flex items-center gap-2.5">
-						<svg class="w-5 h-5 text-primary-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-						</svg>
-						<span><strong class="font-semibold text-neutral-800">Hotline và CSKH:</strong> (024) 6329 6698</span>
+					<li>
+						<span>Hotline tư vấn: <a href="tel:02463296698" class="hover:text-primary-600 font-medium">(024) 6329 6698</a></span>
 					</li>
-					<li class="flex items-center gap-2.5">
-						<svg class="w-5 h-5 text-primary-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-						</svg>
-						<span><strong class="font-semibold text-neutral-800">Hotline hỗ trợ:</strong> 037 624 6673</span>
+					<li>
+						<span>Hotline hỗ trợ: <a href="tel:0376246673" class="hover:text-primary-600 font-medium">037 624 6673</a></span>
 					</li>
-					<li class="flex items-center gap-2.5">
-						<svg class="w-5 h-5 text-primary-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-						</svg>
-						<span><strong class="font-semibold text-neutral-800">Email:</strong> cskh@vanphuccare.vn</span>
+					<li>
+						<span>Email CSKH: <a href="mailto:cskh@vanphuccare.vn" class="hover:text-primary-600 font-medium">cskh@vanphuccare.vn</a></span>
 					</li>
-					<li class="flex items-center gap-2.5">
-						<svg class="w-5 h-5 text-primary-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-						</svg>
-						<span><strong class="font-semibold text-neutral-800">Website:</strong> vanphuccare.vn</span>
+					<li>
+						<span>Email liên hệ: <a href="mailto:info@vanphuccare.vn" class="hover:text-primary-600 font-medium">info@vanphuccare.vn</a></span>
 					</li>
 				</ul>
-
-				<!-- Social Channels -->
-				<div class="pt-2">
-					<span class="block text-xs font-bold text-neutral-600 uppercase tracking-wider mb-2.5">Kênh mạng xã hội</span>
-					<?php get_template_part( 'template-parts/components/social-icons', null, array( 'size' => 'md' ) ); ?>
-				</div>
 			</div>
 
-			<!-- Column 2: Services (4 cols on desktop) -->
-			<div class="xl:col-span-4 flex flex-col space-y-4">
-				<h3 class="font-heading text-base sm:text-lg font-bold text-neutral-900 uppercase tracking-wider pb-2 border-b-2 border-primary-500/30 inline-block w-fit">
+			<!-- Column 2: DỊCH VỤ CỦA CHÚNG TÔI (3 cols) -->
+			<div class="xl:col-span-3 flex flex-col space-y-3">
+				<h3 class="font-heading text-xs sm:text-sm font-bold text-neutral-900 uppercase tracking-wider pb-1">
 					DỊCH VỤ CỦA CHÚNG TÔI
 				</h3>
-				<ul class="space-y-2.5 text-sm sm:text-base">
-					<li><a href="#" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Trung tâm ở cữ</a></li>
-					<li><a href="#" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Khóa học chăm bé</a></li>
-					<li><a href="#" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Bảo mẫu tại nhà</a></li>
-					<li><a href="#" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Hướng dẫn nuôi con EASY trực tuyến 1:1</a></li>
-					<li><a href="#" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Hướng dẫn nuôi con EASY</a></li>
-					<li><a href="#" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Tắm trẻ sơ sinh</a></li>
-					<li><a href="#" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Thông tắc tia sữa</a></li>
-					<li><a href="#" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Chăm sóc mẹ sau sinh</a></li>
+				<ul class="space-y-2 text-xs sm:text-sm text-neutral-700">
+					<li><a href="<?php echo esc_url( home_url( '/#trung-tam-o-cu' ) ); ?>" class="hover:text-primary-600 transition-colors">Trung tâm ở cữ</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/#dao-tao-easy' ) ); ?>" class="hover:text-primary-600 transition-colors">Khóa học trực tuyến</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/#dich-vu-tai-nha' ) ); ?>" class="hover:text-primary-600 transition-colors">Bảo mẫu tại nhà</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/#dao-tao-easy' ) ); ?>" class="hover:text-primary-600 transition-colors">Lớp học tiền sản</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/#dao-tao-easy' ) ); ?>" class="hover:text-primary-600 transition-colors">Tư vấn nuôi con EASY</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/#dich-vu-tai-nha' ) ); ?>" class="hover:text-primary-600 transition-colors">Tắm trẻ sơ sinh</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/#dich-vu-tai-nha' ) ); ?>" class="hover:text-primary-600 transition-colors">Thông tắc tia sữa</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/#dich-vu-tai-nha' ) ); ?>" class="hover:text-primary-600 transition-colors">Chăm sóc bé tại nhà</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/#dich-vu-tai-nha' ) ); ?>" class="hover:text-primary-600 transition-colors">Chăm sóc mẹ sau sinh</a></li>
 				</ul>
 			</div>
 
-			<!-- Column 3: News & Knowledge (3 cols on desktop) -->
-			<div class="xl:col-span-3 flex flex-col space-y-4">
-				<h3 class="font-heading text-base sm:text-lg font-bold text-neutral-900 uppercase tracking-wider pb-2 border-b-2 border-secondary-400/50 inline-block w-fit">
-					KIẾN THỨC & TIN TÚC
+			<!-- Column 3: KIẾN THỨC (3 cols) -->
+			<div class="xl:col-span-3 flex flex-col space-y-3">
+				<h3 class="font-heading text-xs sm:text-sm font-bold text-neutral-900 uppercase tracking-wider pb-1">
+					KIẾN THỨC
 				</h3>
-				<ul class="space-y-2.5 text-sm sm:text-base">
-					<li><a href="#" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Phương pháp EASY</a></li>
-					<li><a href="#" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Cẩm nang làm mẹ</a></li>
-					<li><a href="#" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Hội chứng biếng ăn</a></li>
-					<li><a href="#" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Ăn dặm toàn tập</a></li>
-					<li><a href="#" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Mang thai</a></li>
-					<li><a href="#" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Mẹ và bé</a></li>
-					<li><a href="#" class="inline-block text-text-body-muted transition-all duration-200 hover:text-primary-600 hover:translate-x-1">Tin tức & sự kiện</a></li>
+				<ul class="space-y-2 text-xs sm:text-sm text-neutral-700">
+					<li><a href="<?php echo esc_url( home_url( '/#dao-tao-easy' ) ); ?>" class="hover:text-primary-600 transition-colors">Phương pháp EASY</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/#tin-tuc' ) ); ?>" class="hover:text-primary-600 transition-colors">Cẩm nang làm mẹ</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/#tin-tuc' ) ); ?>" class="hover:text-primary-600 transition-colors">Hội chứng biếng ăn</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/#tin-tuc' ) ); ?>" class="hover:text-primary-600 transition-colors">Ăn dặm toàn tập</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/#tin-tuc' ) ); ?>" class="hover:text-primary-600 transition-colors">Mang thai</a></li>
 				</ul>
+			</div>
+
+			<!-- Column 4: TIN TỨC & SỰ KIỆN (2 cols) -->
+			<div class="xl:col-span-2 flex flex-col space-y-3">
+				<h3 class="font-heading text-xs sm:text-sm font-bold text-neutral-900 uppercase tracking-wider pb-1">
+					TIN TỨC & SỰ KIỆN
+				</h3>
+				<ul class="space-y-2 text-xs sm:text-sm text-neutral-700">
+					<li><a href="<?php echo esc_url( home_url( '/#tin-tuc' ) ); ?>" class="hover:text-primary-600 transition-colors">Mẹ và bé</a></li>
+					<li><a href="<?php echo esc_url( home_url( '/#tin-tuc' ) ); ?>" class="hover:text-primary-600 transition-colors">Tin tức & sự kiện</a></li>
+				</ul>
+			</div>
+
+		</div>
+
+		<!-- Middle Row: 3 Social Icons (Left) + 2 Badges (Right) -->
+		<div class="py-6 border-y border-neutral-300/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+			<!-- Social Icons (Facebook, Instagram, TikTok) -->
+			<div class="flex items-center gap-3">
+				<!-- Facebook -->
+				<a href="https://facebook.com/vanphuccare" target="_blank" rel="noopener noreferrer" 
+				   class="w-10 h-10 rounded-full bg-[#1877F2] text-white flex items-center justify-center hover:scale-110 shadow-sm transition-transform" 
+				   aria-label="Facebook">
+					<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+				</a>
+
+				<!-- Instagram -->
+				<a href="https://instagram.com/vanphuccare" target="_blank" rel="noopener noreferrer" 
+				   class="w-10 h-10 rounded-xl overflow-hidden hover:scale-110 shadow-sm transition-transform" 
+				   aria-label="Instagram">
+					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/instagram.svg' ); ?>" alt="Instagram" class="w-full h-full object-cover">
+				</a>
+
+				<!-- TikTok -->
+				<a href="https://tiktok.com/@vanphuccare" target="_blank" rel="noopener noreferrer" 
+				   class="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center hover:scale-110 shadow-sm transition-transform" 
+				   aria-label="TikTok">
+					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/tiktok.svg' ); ?>" alt="TikTok" class="w-5 h-5 object-contain invert">
+				</a>
+			</div>
+
+			<!-- Badges (DMCA + Bộ Công Thương) -->
+			<div class="flex items-center gap-3">
+				<!-- DMCA Protected -->
+				<a href="#" target="_blank" rel="nofollow noopener" class="hover:opacity-90 transition-opacity">
+					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/dmca.svg' ); ?>" 
+					     alt="DMCA Protected" 
+					     class="h-9 w-auto object-contain block">
+				</a>
+
+				<!-- Bộ Công Thương -->
+				<a href="#" target="_blank" rel="nofollow noopener" class="hover:opacity-90 transition-opacity">
+					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/bo-cong-thuong.svg' ); ?>" 
+					     alt="Đã Thông Báo Bộ Công Thương" 
+					     class="h-9 w-auto object-contain block">
+				</a>
 			</div>
 		</div>
 
-		<!-- Footer Bottom: Legal Links & Copyright -->
-		<div class="mt-8 border-t border-neutral-300/80 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-text-body-muted">
-			<div class="flex flex-wrap items-center justify-center gap-3 font-medium">
-				<a href="<?php echo esc_url( home_url( '/dieu-khoan-su-dung' ) ); ?>" class="hover:text-primary-600 transition-colors">Điều khoản sử dụng</a>
-				<span class="text-neutral-400">|</span>
-				<a href="<?php echo esc_url( home_url( '/chinh-sach-bao-mat' ) ); ?>" class="hover:text-primary-600 transition-colors">Chính sách bảo mật</a>
-				<span class="text-neutral-400">|</span>
-				<a href="<?php echo esc_url( home_url( '/chinh-sach-bien-tap' ) ); ?>" class="hover:text-primary-600 transition-colors">Chính sách biên tập</a>
-				<span class="text-neutral-400">|</span>
-				<a href="<?php echo esc_url( home_url( '/quy-trinh-khieu-nai' ) ); ?>" class="hover:text-primary-600 transition-colors">Quy trình khiếu nại</a>
-				<span class="text-neutral-400">|</span>
-				<a href="#" class="hover:text-primary-600 transition-colors">Tuyển dụng</a>
-			</div>
-			
-			<div class="text-neutral-600 text-center sm:text-right">
-				&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> Vạn Phúc Care. Toàn bộ bản quyền được bảo lưu.
-			</div>
+		<!-- Bottom Row: Navigation Links -->
+		<div class="pt-5 flex flex-wrap items-center justify-start gap-2 sm:gap-3 text-xs sm:text-sm text-neutral-700">
+			<a href="<?php echo esc_url( home_url( '/dieu-khoan-su-dung' ) ); ?>" class="hover:text-primary-600 transition-colors">Điều khoản sử dụng</a>
+			<span class="text-neutral-400">|</span>
+			<a href="<?php echo esc_url( home_url( '/chinh-sach-bao-mat' ) ); ?>" class="hover:text-primary-600 transition-colors">Chính sách bảo mật</a>
+			<span class="text-neutral-400">|</span>
+			<a href="<?php echo esc_url( home_url( '/tuyen-dung' ) ); ?>" class="hover:text-primary-600 transition-colors">Tuyển dụng</a>
+			<span class="text-neutral-400">|</span>
+			<a href="<?php echo esc_url( home_url( '/lien-he' ) ); ?>" class="hover:text-primary-600 transition-colors">Liên hệ</a>
 		</div>
+
 	</div>
 </footer>
 
 <!-- Floating Quick Contact Speed Dial (Hotline, Zalo, Messenger) -->
 <?php get_template_part( 'template-parts/components/floating-contact' ); ?>
 
-<!-- Consultation Modal Popup (Figma Board 9) -->
+<!-- Consultation Modal Popup -->
 <?php get_template_part( 'template-parts/components/consultation-modal' ); ?>
 
 <?php wp_footer(); ?>
