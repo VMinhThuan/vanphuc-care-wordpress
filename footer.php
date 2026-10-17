@@ -147,14 +147,14 @@ $theme_uri = get_template_directory_uri();
 				<a href="#" target="_blank" rel="nofollow noopener" class="hover:opacity-90 transition-opacity">
 					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/dmca.svg' ); ?>" 
 					     alt="DMCA Protected" 
-					     class="h-9 w-auto object-contain block">
+					     class="h-[38px] sm:h-[44px] w-auto object-contain block">
 				</a>
 
 				<!-- Bộ Công Thương -->
 				<a href="#" target="_blank" rel="nofollow noopener" class="hover:opacity-90 transition-opacity">
 					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/bo-cong-thuong.svg' ); ?>" 
 					     alt="Đã Thông Báo Bộ Công Thương" 
-					     class="h-9 w-auto object-contain block">
+					     class="h-[38px] sm:h-[44px] w-auto object-contain block">
 				</a>
 			</div>
 		</div>
