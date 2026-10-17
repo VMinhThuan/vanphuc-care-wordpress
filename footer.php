@@ -20,27 +20,26 @@ $theme_uri = get_template_directory_uri();
 ?>
 </main><!-- #primary -->
 
-<footer class="site-footer relative w-full overflow-hidden bg-linear-to-b from-white via-[#EBF5FB]/70 to-[#D5EBF9]/80 pt-14 sm:pt-16 pb-10 text-neutral-800">
-	<!-- Decorative faint watermark logo on bottom-right -->
-	<div class="pointer-events-none absolute right-0 bottom-0 z-0 opacity-10 overflow-hidden translate-x-10 translate-y-10" aria-hidden="true">
-		<img src="<?php echo esc_url( $theme_uri . '/assets/images/logo.svg' ); ?>" alt="" class="w-[420px] h-auto object-contain select-none">
+<footer class="site-footer relative w-full overflow-hidden pt-16 xl:pt-24 pb-12 text-neutral-800" style="background: linear-gradient(180.91deg, #FAFAFA 22.32%, #A3C9E3 146.38%);">
+	<!-- Decorative faint watermark logo on bottom-right (Exact Figma: 464x359px) -->
+	<div class="pointer-events-none absolute right-0 bottom-0 z-0 opacity-15 overflow-hidden translate-x-8 translate-y-8" aria-hidden="true">
+		<img src="<?php echo esc_url( $theme_uri . '/assets/images/logo.svg' ); ?>" alt="" class="w-[464px] h-[359px] object-contain select-none">
 	</div>
 
 	<div class="relative z-10 vpc-container">
 		
-		<!-- 4 Columns Grid -->
-		<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 gap-8 xl:gap-10 pb-10">
+		<!-- 4 Columns Grid (Head footer: 1280px, gap 10px / responsive) -->
+		<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 gap-8 xl:gap-10 pb-12">
 			
-			<!-- Column 1: Company Info (4 cols) -->
-			<div class="xl:col-span-4 flex flex-col space-y-3">
+			<!-- Column 1: Company Info (Exact Figma: 381px width, 20px gap) -->
+			<div class="xl:col-span-4 flex flex-col space-y-3 max-w-[381px]">
 				<div class="footer-logo mb-1">
-					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="inline-flex items-center shrink-0 max-w-[175px]">
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="inline-flex items-center shrink-0">
 						<img src="<?php echo esc_url( $theme_uri . '/assets/images/logo.svg' ); ?>" 
 						     alt="Vạn Phúc Care Logo" 
-						     width="168" 
-						     height="52" 
-						     class="h-10 sm:h-11 w-auto object-contain block" 
-						     style="max-height: 48px; width: auto; height: auto;">
+						     width="155" 
+						     height="48" 
+						     class="h-[48px] w-[155px] object-contain block">
 					</a>
 				</div>
 				

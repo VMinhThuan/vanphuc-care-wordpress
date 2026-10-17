@@ -26,40 +26,39 @@ if ( ! defined( 'ABSPATH' ) ) {
 <body <?php body_class( 'font-body bg-white text-text-body-default antialiased selection:bg-primary-100 selection:text-primary-800' ); ?>>
 <?php wp_body_open(); ?>
 
-<!-- Main Header Bar (Sticky, Desktop 1440px / Mobile Drawer) -->
-<header id="site-header" class="sticky top-0 z-50 w-full bg-white border-b border-neutral-100 shadow-xs transition-all duration-300">
-	<div class="vpc-container flex h-20 xl:h-24 items-center justify-between">
+<!-- Main Header Bar (Sticky, Desktop 1440px / Mobile Drawer) - Exact Figma 112px, #FAFAFA -->
+<header id="site-header" class="sticky top-0 z-50 w-full bg-[#FAFAFA] border-b border-neutral-200/60 shadow-xs transition-all duration-300">
+	<div class="vpc-container flex h-20 xl:h-[112px] items-center justify-between">
 		
-		<!-- Site Logo (Left) -->
+		<!-- Site Logo (Left) - Exact Figma 116x36px -->
 		<div class="site-logo flex shrink-0 items-center">
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="inline-flex items-center shrink-0 max-w-[170px] transition-transform duration-200 hover:scale-102">
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="inline-flex items-center shrink-0 transition-transform duration-200 hover:scale-102">
 				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.svg' ); ?>" 
 				     alt="<?php bloginfo( 'name' ); ?>" 
-				     width="156" 
-				     height="49" 
-				     class="h-9 sm:h-11 xl:h-12 w-auto object-contain block" 
-				     style="max-height: 48px; width: auto; height: auto;">
+				     width="116" 
+				     height="36" 
+				     class="h-[36px] w-[116px] object-contain block">
 			</a>
 		</div>
 
-		<!-- Navigation Menu (Center) - Matches Figma 7 Items Exactly -->
-		<nav class="hidden xl:flex items-center justify-center flex-1 mx-6 2xl:mx-10" aria-label="<?php esc_attr_e( 'Primary navigation', 'vanphuccare' ); ?>">
-			<ul class="vpc-nav-menu flex items-center justify-center gap-7 2xl:gap-8 text-base font-medium text-neutral-800">
-				<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="py-2 hover:text-primary-600 transition-colors">Trang chủ</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/gioi-thieu' ) ); ?>" class="py-2 hover:text-primary-600 transition-colors">Giới thiệu</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/#trung-tam-o-cu' ) ); ?>" class="py-2 hover:text-primary-600 transition-colors">Ở cữ</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/#dich-vu-tai-nha' ) ); ?>" class="py-2 hover:text-primary-600 transition-colors">Bảo mẫu</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/#dich-vu-noi-bat' ) ); ?>" class="py-2 hover:text-primary-600 transition-colors">Dịch vụ</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/#dao-tao-easy' ) ); ?>" class="py-2 hover:text-primary-600 transition-colors">Lớp học tiền sản</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/#tin-tuc' ) ); ?>" class="py-2 hover:text-primary-600 transition-colors">Kiến thức</a></li>
+		<!-- Navigation Menu (Center) - Matches Figma: 760px width, 32px gap, Manrope 600 16/24 -->
+		<nav class="hidden xl:flex items-center justify-center flex-1 max-w-[760px] mx-auto" aria-label="<?php esc_attr_e( 'Primary navigation', 'vanphuccare' ); ?>">
+			<ul class="vpc-nav-menu flex items-center justify-center gap-8 text-base font-semibold">
+				<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="py-2 text-[#1A77BA] font-semibold transition-colors">Trang chủ</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/gioi-thieu' ) ); ?>" class="py-2 text-[#292929] hover:text-[#1A77BA] transition-colors">Giới thiệu</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/#trung-tam-o-cu' ) ); ?>" class="py-2 text-[#292929] hover:text-[#1A77BA] transition-colors">Ở cữ</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/#dich-vu-tai-nha' ) ); ?>" class="py-2 text-[#292929] hover:text-[#1A77BA] transition-colors">Bảo mẫu</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/#dich-vu-noi-bat' ) ); ?>" class="py-2 text-[#292929] hover:text-[#1A77BA] transition-colors">Dịch vụ</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/#dao-tao-easy' ) ); ?>" class="py-2 text-[#292929] hover:text-[#1A77BA] transition-colors">Lớp học tiền sản</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/#tin-tuc' ) ); ?>" class="py-2 text-[#292929] hover:text-[#1A77BA] transition-colors">Kiến thức</a></li>
 			</ul>
 		</nav>
 
-		<!-- Right Action: CTA Button (Đăng Ký Tư Vấn) & Mobile Menu Toggle -->
+		<!-- Right Action: CTA Button (Đăng Ký Tư Vấn: 164x48px, #1A77BA, rounded-full) & Mobile Toggle -->
 		<div class="flex items-center gap-3 sm:gap-4 shrink-0">
 			<button data-open-modal="vpc-consultation-modal" 
 			        type="button"
-			        class="hidden sm:inline-flex items-center justify-center px-7 py-3 rounded-full bg-[#1A77BA] hover:bg-[#155F95] text-white font-medium text-base shadow-sm hover:shadow-md transition-all duration-200">
+			        class="hidden sm:inline-flex items-center justify-center w-[164px] h-[48px] px-6 py-3 rounded-full bg-[#1A77BA] hover:bg-[#155F95] text-[#FAFAFA] font-medium text-base shadow-sm hover:shadow-md transition-all duration-200">
 				<span>Đăng Ký Tư Vấn</span>
 			</button>
 

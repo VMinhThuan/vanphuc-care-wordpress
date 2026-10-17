@@ -22,39 +22,38 @@
      - 7 Menu items (Center): Trang chủ, Giới thiệu, Ở cữ, Bảo mẫu, Dịch vụ, Lớp học tiền sản, Kiến thức
      - Button (Right): Đăng Ký Tư Vấn
      ========================================================================= -->
-<header id="site-header" class="sticky top-0 z-50 w-full bg-white/98 backdrop-blur-md border-b border-neutral-200/70 shadow-xs transition-all duration-300">
-	<div class="vpc-container flex h-20 xl:h-24 items-center justify-between">
+<header id="site-header" class="sticky top-0 z-50 w-full bg-[#FAFAFA] border-b border-neutral-200/60 shadow-xs transition-all duration-300">
+	<div class="vpc-container flex h-20 xl:h-[112px] items-center justify-between">
 		
-		<!-- Site Logo (Left) -->
+		<!-- Site Logo (Left) - Exact Figma 116x36px -->
 		<div class="site-logo flex shrink-0 items-center">
-			<a href="#" class="inline-flex items-center shrink-0 max-w-[170px] transition-transform duration-200 hover:scale-102">
+			<a href="#" class="inline-flex items-center shrink-0 transition-transform duration-200 hover:scale-102">
 				<img src="./assets/images/logo.svg" 
 				     alt="Vạn Phúc Care" 
-				     width="156" 
-				     height="49" 
-				     class="h-9 sm:h-11 xl:h-12 w-auto object-contain block" 
-				     style="max-height: 48px; width: auto; height: auto;">
+				     width="116" 
+				     height="36" 
+				     class="h-[36px] w-[116px] object-contain block">
 			</a>
 		</div>
 
-		<!-- Navigation Menu (Center) - Matches Image 1 (7 Items) -->
-		<nav class="hidden xl:flex items-center" aria-label="Primary navigation">
-			<ul class="vpc-nav-menu flex items-center gap-6 2xl:gap-8 text-[15px] font-medium text-neutral-800">
-				<li><a href="#" class="py-2 text-primary-600 font-semibold hover:text-primary-600 transition-colors">Trang chủ</a></li>
-				<li><a href="#gioi-thieu" class="py-2 hover:text-primary-600 transition-colors">Giới thiệu</a></li>
-				<li><a href="#trung-tam-o-cu" class="py-2 hover:text-primary-600 transition-colors">Ở cữ</a></li>
-				<li><a href="#dich-vu-tai-nha" class="py-2 hover:text-primary-600 transition-colors">Bảo mẫu</a></li>
-				<li><a href="#dich-vu-noi-bat" class="py-2 hover:text-primary-600 transition-colors">Dịch vụ</a></li>
-				<li><a href="#dao-tao-easy" class="py-2 hover:text-primary-600 transition-colors">Lớp học tiền sản</a></li>
-				<li><a href="#tin-tuc" class="py-2 hover:text-primary-600 transition-colors">Kiến thức</a></li>
+		<!-- Navigation Menu (Center) - Matches Figma: 760px width, 32px gap, Manrope 600 16/24 -->
+		<nav class="hidden xl:flex items-center justify-center flex-1 max-w-[760px] mx-auto" aria-label="Primary navigation">
+			<ul class="vpc-nav-menu flex items-center justify-center gap-8 text-base font-semibold">
+				<li><a href="#" class="py-2 text-[#1A77BA] font-semibold transition-colors">Trang chủ</a></li>
+				<li><a href="#gioi-thieu" class="py-2 text-[#292929] hover:text-[#1A77BA] transition-colors">Giới thiệu</a></li>
+				<li><a href="#trung-tam-o-cu" class="py-2 text-[#292929] hover:text-[#1A77BA] transition-colors">Ở cữ</a></li>
+				<li><a href="#dich-vu-tai-nha" class="py-2 text-[#292929] hover:text-[#1A77BA] transition-colors">Bảo mẫu</a></li>
+				<li><a href="#dich-vu-noi-bat" class="py-2 text-[#292929] hover:text-[#1A77BA] transition-colors">Dịch vụ</a></li>
+				<li><a href="#dao-tao-easy" class="py-2 text-[#292929] hover:text-[#1A77BA] transition-colors">Lớp học tiền sản</a></li>
+				<li><a href="#tin-tuc" class="py-2 text-[#292929] hover:text-[#1A77BA] transition-colors">Kiến thức</a></li>
 			</ul>
 		</nav>
 
-		<!-- Right Action: CTA Button (Đăng Ký Tư Vấn) & Mobile Menu Toggle -->
-		<div class="flex items-center gap-3 sm:gap-4">
+		<!-- Right Action: CTA Button (Đăng Ký Tư Vấn: 164x48px, #1A77BA, rounded-full) -->
+		<div class="flex items-center gap-3 sm:gap-4 shrink-0">
 			<button data-open-modal="vpc-consultation-modal" 
 			        type="button"
-			        class="hidden sm:inline-flex items-center justify-center px-6 py-2.5 sm:py-3 rounded-full bg-[#1A77BA] hover:bg-[#155F95] text-white font-semibold text-sm sm:text-base shadow-sm hover:shadow-md transition-all duration-200">
+			        class="hidden sm:inline-flex items-center justify-center w-[164px] h-[48px] px-6 py-3 rounded-full bg-[#1A77BA] hover:bg-[#155F95] text-[#FAFAFA] font-medium text-base shadow-sm hover:shadow-md transition-all duration-200">
 				<span>Đăng Ký Tư Vấn</span>
 			</button>
 
@@ -1107,30 +1106,26 @@
      - Middle: 3 Social Icons (Facebook, Instagram, TikTok) + 2 Badges (DMCA, Bộ Công Thương)
      - Bottom: Điều khoản sử dụng | Chính sách bảo mật | Tuyển dụng | Liên hệ
      ========================================================================= -->
-<footer class="site-footer relative w-full overflow-hidden bg-linear-to-b from-white via-[#EBF5FB]/70 to-[#D5EBF9]/80 pt-14 sm:pt-16 pb-10 text-neutral-800">
-	<!-- Decorative faint watermark logo on bottom-right -->
-	<div class="pointer-events-none absolute right-0 bottom-0 z-0 opacity-15 overflow-hidden translate-x-12 translate-y-12" aria-hidden="true">
-		<svg width="420" height="420" viewBox="0 0 606 277" fill="none" class="text-primary-500 fill-current">
-			<path d="M72 128C72 116.402 81.402 107 93 107H138C149.598 107 159 116.402 159 128C159 139.598 149.598 149 138 149H93C81.402 149 72 139.598 72 128Z"/>
-			<circle cx="115.5" cy="128" r="80" stroke="currentColor" stroke-width="20"/>
-		</svg>
+<footer class="site-footer relative w-full overflow-hidden pt-16 xl:pt-24 pb-12 text-neutral-800" style="background: linear-gradient(180.91deg, #FAFAFA 22.32%, #A3C9E3 146.38%);">
+	<!-- Decorative faint watermark logo on bottom-right (Exact Figma: 464x359px) -->
+	<div class="pointer-events-none absolute right-0 bottom-0 z-0 opacity-15 overflow-hidden translate-x-8 translate-y-8" aria-hidden="true">
+		<img src="./assets/images/logo.svg" alt="" class="w-[464px] h-[359px] object-contain select-none">
 	</div>
 
 	<div class="relative z-10 vpc-container">
 		
-		<!-- 4 Columns Grid -->
-		<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 gap-8 xl:gap-10 pb-10">
+		<!-- 4 Columns Grid (Head footer: 1280px, gap 10px / responsive) -->
+		<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 gap-8 xl:gap-10 pb-12">
 			
-			<!-- Column 1: Company Info (4 cols) -->
-			<div class="xl:col-span-4 flex flex-col space-y-3">
+			<!-- Column 1: Company Info (Exact Figma: 381px width, 20px gap) -->
+			<div class="xl:col-span-4 flex flex-col space-y-3 max-w-[381px]">
 				<div class="footer-logo mb-1">
-					<a href="#" class="inline-flex items-center shrink-0 max-w-[175px]">
+					<a href="#" class="inline-flex items-center shrink-0">
 						<img src="./assets/images/logo.svg" 
 						     alt="Vạn Phúc Care Logo" 
-						     width="168" 
-						     height="52" 
-						     class="h-10 sm:h-11 w-auto object-contain block" 
-						     style="max-height: 48px; width: auto; height: auto;">
+						     width="155" 
+						     height="48" 
+						     class="h-[48px] w-[155px] object-contain block">
 					</a>
 				</div>
 				
@@ -1212,9 +1207,9 @@
 			<div class="flex items-center gap-3">
 				<!-- Facebook -->
 				<a href="https://facebook.com/vanphuccare" target="_blank" rel="noopener noreferrer" 
-				   class="w-10 h-10 rounded-full bg-[#1877F2] text-white flex items-center justify-center hover:scale-110 shadow-sm transition-transform" 
+				   class="w-10 h-10 rounded-full overflow-hidden hover:scale-110 shadow-sm transition-transform" 
 				   aria-label="Facebook">
-					<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+					<img src="./assets/icons/facebook.svg" alt="Facebook" class="w-full h-full object-contain">
 				</a>
 
 				<!-- Instagram -->
@@ -1226,9 +1221,9 @@
 
 				<!-- TikTok -->
 				<a href="https://tiktok.com/@vanphuccare" target="_blank" rel="noopener noreferrer" 
-				   class="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center hover:scale-110 shadow-sm transition-transform" 
+				   class="w-10 h-10 rounded-full overflow-hidden hover:scale-110 shadow-sm transition-transform" 
 				   aria-label="TikTok">
-					<img src="./assets/icons/tiktok.svg" alt="TikTok" class="w-5 h-5 object-contain invert">
+					<img src="./assets/icons/tiktok.svg" alt="TikTok" class="w-full h-full object-contain">
 				</a>
 			</div>
 
