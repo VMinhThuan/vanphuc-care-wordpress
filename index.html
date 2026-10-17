@@ -1107,18 +1107,22 @@
      - Bottom: Điều khoản sử dụng | Chính sách bảo mật | Tuyển dụng | Liên hệ
      ========================================================================= -->
 <footer class="site-footer relative w-full overflow-hidden pt-16 xl:pt-24 pb-12 text-neutral-800" style="background: linear-gradient(180.91deg, #FAFAFA 22.32%, #A3C9E3 146.38%);">
-	<!-- Decorative faint watermark logo on bottom-right (Exact Figma: 464x359px) -->
-	<div class="pointer-events-none absolute right-0 bottom-0 z-0 opacity-15 overflow-hidden translate-x-8 translate-y-8" aria-hidden="true">
-		<img src="./assets/images/logo.svg" alt="" class="w-[464px] h-[359px] object-contain select-none">
+	<!-- Decorative faint watermark emblem on bottom-right (Exact Figma: 471x360px, fill white, opacity 0.3) -->
+	<div class="pointer-events-none absolute right-0 bottom-0 z-0 select-none overflow-hidden" aria-hidden="true">
+		<img src="./assets/images/footer-watermark.svg" 
+		     alt="" 
+		     width="471" 
+		     height="360" 
+		     class="w-[280px] sm:w-[380px] xl:w-[471px] h-auto block select-none">
 	</div>
 
 	<div class="relative z-10 vpc-container">
 		
-		<!-- 4 Columns Grid (Head footer: 1280px, gap 10px / responsive) -->
-		<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 gap-8 xl:gap-10 pb-12">
+		<!-- Head footer: 1280px, auto layout flex space-between -->
+		<div class="flex flex-col md:flex-row md:flex-wrap xl:flex-nowrap justify-between items-start gap-8 xl:gap-6 pb-10">
 			
-			<!-- Column 1: Company Info (Exact Figma: 381px width, 20px gap) -->
-			<div class="xl:col-span-4 flex flex-col space-y-3 max-w-[381px]">
+			<!-- Column 1: Thông tin cty (Exact Figma: 381px width, 20px gap) -->
+			<div class="w-full md:w-[381px] shrink-0 flex flex-col space-y-4">
 				<div class="footer-logo mb-1">
 					<a href="#" class="inline-flex items-center shrink-0">
 						<img src="./assets/images/logo.svg" 
@@ -1129,39 +1133,39 @@
 					</a>
 				</div>
 				
-				<p class="text-sm font-medium text-neutral-700">
+				<p class="text-sm sm:text-base font-medium text-[#292929]">
 					Hành Trình Cùng Mẹ, Trải Đầy Yêu Thương
 				</p>
 				
-				<h3 class="font-heading text-base font-bold text-neutral-900 uppercase tracking-wide pt-1">
+				<h3 class="font-heading text-lg sm:text-xl font-bold text-[#292929] uppercase tracking-wide">
 					CÔNG TY TNHH VẠN PHÚC CARE
 				</h3>
 				
-				<ul class="space-y-2 text-xs sm:text-sm text-neutral-700 leading-relaxed">
+				<ul class="space-y-2.5 text-xs sm:text-sm text-[#292929] leading-relaxed">
 					<li>
 						<span>Trung tâm ở cữ: 35B/399 Âu Cơ, phường Tây Hồ, TP. Hà Nội</span>
 					</li>
 					<li>
-						<span>Hotline tư vấn: <a href="tel:02463296698" class="hover:text-primary-600 font-medium">(024) 6329 6698</a></span>
+						<span>Hotline tư vấn: <a href="tel:02463296698" class="hover:text-primary-600 font-medium transition-colors">(024) 6329 6698</a></span>
 					</li>
 					<li>
-						<span>Hotline hỗ trợ: <a href="tel:0376246673" class="hover:text-primary-600 font-medium">037 624 6673</a></span>
+						<span>Hotline hỗ trợ: <a href="tel:0376246673" class="hover:text-primary-600 font-medium transition-colors">037 624 6673</a></span>
 					</li>
 					<li>
-						<span>Email CSKH: <a href="mailto:cskh@vanphuccare.vn" class="hover:text-primary-600 font-medium">cskh@vanphuccare.vn</a></span>
+						<span>Email CSKH: <a href="mailto:cskh@vanphuccare.vn" class="hover:text-primary-600 font-medium transition-colors">cskh@vanphuccare.vn</a></span>
 					</li>
 					<li>
-						<span>Email liên hệ: <a href="mailto:info@vanphuccare.vn" class="hover:text-primary-600 font-medium">info@vanphuccare.vn</a></span>
+						<span>Email liên hệ: <a href="mailto:info@vanphuccare.vn" class="hover:text-primary-600 font-medium transition-colors">info@vanphuccare.vn</a></span>
 					</li>
 				</ul>
 			</div>
 
-			<!-- Column 2: DỊCH VỤ CỦA CHÚNG TÔI (3 cols) -->
-			<div class="xl:col-span-3 flex flex-col space-y-3">
-				<h3 class="font-heading text-xs sm:text-sm font-bold text-neutral-900 uppercase tracking-wider pb-1">
+			<!-- Column 2: DỊCH VỤ CỦA CHÚNG TÔI -->
+			<div class="w-full sm:w-auto flex flex-col space-y-3">
+				<h3 class="font-heading text-sm sm:text-base font-bold text-[#292929] uppercase tracking-wider pb-1">
 					DỊCH VỤ CỦA CHÚNG TÔI
 				</h3>
-				<ul class="space-y-2 text-xs sm:text-sm text-neutral-700">
+				<ul class="space-y-2.5 text-xs sm:text-sm text-[#292929]">
 					<li><a href="#trung-tam-o-cu" class="hover:text-primary-600 transition-colors">Trung tâm ở cữ</a></li>
 					<li><a href="#dao-tao-easy" class="hover:text-primary-600 transition-colors">Khóa học trực tuyến</a></li>
 					<li><a href="#dich-vu-tai-nha" class="hover:text-primary-600 transition-colors">Bảo mẫu tại nhà</a></li>
@@ -1174,12 +1178,12 @@
 				</ul>
 			</div>
 
-			<!-- Column 3: KIẾN THỨC (3 cols) -->
-			<div class="xl:col-span-3 flex flex-col space-y-3">
-				<h3 class="font-heading text-xs sm:text-sm font-bold text-neutral-900 uppercase tracking-wider pb-1">
+			<!-- Column 3: KIẾN THỨC -->
+			<div class="w-full sm:w-auto flex flex-col space-y-3">
+				<h3 class="font-heading text-sm sm:text-base font-bold text-[#292929] uppercase tracking-wider pb-1">
 					KIẾN THỨC
 				</h3>
-				<ul class="space-y-2 text-xs sm:text-sm text-neutral-700">
+				<ul class="space-y-2.5 text-xs sm:text-sm text-[#292929]">
 					<li><a href="#dao-tao-easy" class="hover:text-primary-600 transition-colors">Phương pháp EASY</a></li>
 					<li><a href="#tin-tuc" class="hover:text-primary-600 transition-colors">Cẩm nang làm mẹ</a></li>
 					<li><a href="#tin-tuc" class="hover:text-primary-600 transition-colors">Hội chứng biếng ăn</a></li>
@@ -1188,12 +1192,12 @@
 				</ul>
 			</div>
 
-			<!-- Column 4: TIN TỨC & SỰ KIỆN (2 cols) -->
-			<div class="xl:col-span-2 flex flex-col space-y-3">
-				<h3 class="font-heading text-xs sm:text-sm font-bold text-neutral-900 uppercase tracking-wider pb-1">
+			<!-- Column 4: TIN TỨC & SỰ KIỆN -->
+			<div class="w-full sm:w-auto flex flex-col space-y-3">
+				<h3 class="font-heading text-sm sm:text-base font-bold text-[#292929] uppercase tracking-wider pb-1">
 					TIN TỨC & SỰ KIỆN
 				</h3>
-				<ul class="space-y-2 text-xs sm:text-sm text-neutral-700">
+				<ul class="space-y-2.5 text-xs sm:text-sm text-[#292929]">
 					<li><a href="#tin-tuc" class="hover:text-primary-600 transition-colors">Mẹ và bé</a></li>
 					<li><a href="#tin-tuc" class="hover:text-primary-600 transition-colors">Tin tức & sự kiện</a></li>
 				</ul>
@@ -1228,25 +1232,29 @@
 			</div>
 
 			<!-- Badges (DMCA + Bộ Công Thương) -->
-			<div class="flex items-center gap-3">
+			<div class="flex items-center gap-3.5">
 				<!-- DMCA Protected -->
 				<a href="#" target="_blank" rel="nofollow noopener" class="hover:opacity-90 transition-opacity">
 					<img src="./assets/icons/dmca.svg" 
 					     alt="DMCA Protected" 
-					     class="h-[38px] sm:h-[44px] w-auto object-contain block">
+					     width="120"
+					     height="55"
+					     class="h-[42px] sm:h-[48px] md:h-[55px] w-auto object-contain block">
 				</a>
 
 				<!-- Bộ Công Thương -->
 				<a href="#" target="_blank" rel="nofollow noopener" class="hover:opacity-90 transition-opacity">
 					<img src="./assets/icons/bo-cong-thuong.svg" 
 					     alt="Đã Thông Báo Bộ Công Thương" 
-					     class="h-[38px] sm:h-[44px] w-auto object-contain block">
+					     width="145"
+					     height="55"
+					     class="h-[42px] sm:h-[48px] md:h-[55px] w-auto object-contain block">
 				</a>
 			</div>
 		</div>
 
 		<!-- Bottom Row: Navigation Links -->
-		<div class="pt-5 flex flex-wrap items-center justify-start gap-2 sm:gap-3 text-xs sm:text-sm text-neutral-700">
+		<div class="pt-5 flex flex-wrap items-center justify-start gap-2 sm:gap-3 text-xs sm:text-sm text-[#292929]">
 			<a href="#" class="hover:text-primary-600 transition-colors">Điều khoản sử dụng</a>
 			<span class="text-neutral-400">|</span>
 			<a href="#" class="hover:text-primary-600 transition-colors">Chính sách bảo mật</a>
