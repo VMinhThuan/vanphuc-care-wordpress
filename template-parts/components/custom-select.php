@@ -108,7 +108,7 @@ if ( $is_disabled ) {
 
 <div class="vpc-custom-select-component flex flex-col <?php echo esc_attr( $extra_class ); ?>" data-custom-select>
 	<?php if ( ! empty( $label ) ) : ?>
-		<label for="<?php echo esc_attr( $id ); ?>-trigger" class="block text-sm sm:text-base font-medium text-text-body-default mb-2 select-none">
+		<label for="<?php echo esc_attr( $id ); ?>-trigger" class="block text-base font-medium text-text-body-default mb-2 select-none">
 			<?php if ( $required ) : ?>
 				<span class="text-error-500 font-bold mr-0.5">*</span>
 			<?php endif; ?>
@@ -132,13 +132,13 @@ if ( $is_disabled ) {
 		<button
 			type="button"
 			id="<?php echo esc_attr( $id ); ?>-trigger"
-			class="vpc-select-trigger group w-full h-[50px] px-4.5 rounded-xl border flex items-center justify-between text-left transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-border-focus-default select-none <?php echo esc_attr( $trigger_state_classes ); ?>"
+			class="vpc-select-trigger group w-full h-[50px] px-4.5 rounded-xl border flex items-center justify-between text-left transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-border-focus-default select-none <?php echo esc_attr( $trigger_state_classes ); ?>"
 			aria-haspopup="listbox"
 			aria-expanded="false"
 			<?php echo $is_disabled ? 'disabled' : ''; ?>
 			<?php echo $has_error ? 'aria-invalid="true"' : ''; ?>
 		>
-			<span class="truncate text-sm sm:text-base font-body <?php echo empty( $selected_label ) ? 'text-neutral-500' : 'text-text-body-default'; ?>" data-select-label>
+			<span class="truncate text-base font-medium font-body <?php echo empty( $selected_label ) ? 'text-neutral-500' : 'text-text-body-default'; ?>" data-select-label>
 				<?php echo esc_html( ! empty( $selected_label ) ? $selected_label : $placeholder ); ?>
 			</span>
 
@@ -162,7 +162,7 @@ if ( $is_disabled ) {
 						role="option"
 						aria-selected="<?php echo $option['selected'] ? 'true' : 'false'; ?>"
 						data-value="<?php echo esc_attr( $option['value'] ); ?>"
-						class="vpc-select-option flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm sm:text-base transition-colors duration-150
+						class="vpc-select-option flex items-center justify-between px-3.5 py-2.5 rounded-lg text-base font-medium transition-colors duration-150
 						<?php if ( $option['disabled'] ) : ?>
 							text-neutral-600 cursor-not-allowed
 						<?php elseif ( $option['selected'] ) : ?>

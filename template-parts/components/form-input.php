@@ -57,7 +57,7 @@ $rows        = $args['rows'] ?? 3;
 $has_error = ! empty( $error );
 
 // Base input styling
-$base_input_classes = 'w-full transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-border-focus-default font-body text-text-body-default select-none';
+$base_input_classes = 'w-full transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-border-focus-default font-body text-base font-medium text-text-body-default select-none';
 
 // Dimension & shape styling (height 50px, radius 12px)
 $box_shape_classes = 'px-4.5 rounded-xl';
@@ -76,7 +76,7 @@ $input_classes = trim( "{$base_input_classes} {$box_shape_classes} {$state_input
 
 <div class="vpc-form-field flex flex-col <?php echo esc_attr( $extra_class ); ?>">
 	<?php if ( ! empty( $label ) ) : ?>
-		<label for="<?php echo esc_attr( $id ); ?>" class="block text-sm sm:text-base font-medium text-text-body-default mb-2 select-none">
+		<label for="<?php echo esc_attr( $id ); ?>" class="block text-base font-medium text-text-body-default mb-2 select-none">
 			<?php if ( $required ) : ?>
 				<span class="text-error-500 font-bold mr-0.5">*</span>
 			<?php endif; ?>

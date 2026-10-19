@@ -49,8 +49,8 @@ if ( empty( $items ) ) {
 		$item_id    = 'accordion-item-' . wp_unique_id();
 		$content_id = 'accordion-content-' . wp_unique_id();
 		?>
-		<details class="group vpc-accordion-item rounded-xl bg-[#FAFAFA] transition-all duration-200 border border-neutral-300 open:border-2 open:border-secondary-300 open:shadow-xs" <?php echo $is_open ? 'open' : ''; ?>>
-			<summary class="flex w-full cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 sm:px-8 sm:py-6 select-none focus:outline-none" id="<?php echo esc_attr( $item_id ); ?>" aria-controls="<?php echo esc_attr( $content_id ); ?>">
+		<details class="group vpc-accordion-item rounded-xl bg-surface-background-default transition-all duration-200 border border-neutral-300 open:border-2 open:border-secondary-300 open:shadow-xs" <?php echo $is_open ? 'open' : ''; ?>>
+			<summary class="flex w-full cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 sm:px-8 sm:py-6 select-none focus-visible:ring-2 focus-visible:ring-border-focus-default" id="<?php echo esc_attr( $item_id ); ?>" aria-controls="<?php echo esc_attr( $content_id ); ?>">
 				<!-- Question Title -->
 				<span class="font-heading text-base sm:text-lg font-semibold text-primary-700 transition-colors group-hover:text-primary-800">
 					<?php echo esc_html( $question ); ?>
@@ -65,7 +65,7 @@ if ( empty( $items ) ) {
 			</summary>
 
 			<!-- Answer Content -->
-			<div id="<?php echo esc_attr( $content_id ); ?>" role="region" aria-labelledby="<?php echo esc_attr( $item_id ); ?>" class="border-t border-neutral-200/60 px-6 pt-4 pb-6 sm:px-8 sm:pt-5 sm:pb-7 text-sm sm:text-base leading-relaxed text-[#292929]">
+			<div id="<?php echo esc_attr( $content_id ); ?>" role="region" aria-labelledby="<?php echo esc_attr( $item_id ); ?>" class="border-t border-neutral-200/60 px-6 pt-4 pb-6 sm:px-8 sm:pt-5 sm:pb-7 text-base font-medium leading-relaxed text-text-body-default">
 				<?php echo wp_kses_post( $answer ); ?>
 			</div>
 		</details>

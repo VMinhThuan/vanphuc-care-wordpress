@@ -86,7 +86,7 @@ $theme_uri = get_template_directory_uri();
 
 				<!-- Right Visual: Illustrated Banner Art -->
 				<div class="lg:col-span-5 relative flex justify-center">
-					<div class="relative w-full max-w-[420px] rounded-2xl overflow-hidden border-2 border-white/80 shadow-md">
+					<div class="relative w-full max-w-[420px] rounded-2xl overflow-hidden border-2 border-neutral-white/80 shadow-md">
 						<img src="<?php echo esc_url( $theme_uri . '/assets/images/banner_khoahoc.png' ); ?>" 
 						     alt="Khóa học chăm bé Vạn Phúc Care" 
 						     class="w-full h-auto object-cover block" />
@@ -108,14 +108,14 @@ $theme_uri = get_template_directory_uri();
 			<!-- Left: Layered Photo Collage -->
 			<div class="lg:col-span-5 relative">
 				<div class="relative mx-auto max-w-[440px]">
-					<div class="overflow-hidden rounded-3xl border-4 border-white shadow-xl bg-primary-100">
+					<div class="overflow-hidden rounded-3xl border-4 border-neutral-white shadow-xl bg-primary-100">
 						<img src="<?php echo esc_url( $theme_uri . '/assets/images/sec2_photo.png' ); ?>" 
 						     alt="Chăm sóc mẹ và bé chuẩn y khoa" 
 						     class="w-full h-auto object-cover block" />
 					</div>
 					
 					<!-- Floating Badge: 100% Điều dưỡng Y khoa -->
-					<div class="absolute -top-4 -left-4 sm:top-4 sm:-left-6 bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-2xl shadow-lg border border-neutral-200 flex items-center gap-2.5 animate-bounce-subtle">
+					<div class="absolute -top-4 -left-4 sm:top-4 sm:-left-6 bg-neutral-white/95 backdrop-blur-md px-4 py-2.5 rounded-2xl shadow-lg border border-neutral-200 flex items-center gap-2.5 animate-bounce-subtle">
 						<span class="w-3 h-3 rounded-full bg-success-500 animate-pulse"></span>
 						<div class="flex flex-col">
 							<span class="text-xs font-bold text-text-body-default">100% Điều dưỡng</span>
@@ -291,7 +291,7 @@ $theme_uri = get_template_directory_uri();
 			
 			<!-- Left Photo Collage -->
 			<div class="lg:col-span-5 relative">
-				<div class="relative mx-auto max-w-[440px] rounded-3xl overflow-hidden border-4 border-white shadow-xl bg-primary-100">
+				<div class="relative mx-auto max-w-[440px] rounded-3xl overflow-hidden border-4 border-neutral-white shadow-xl bg-primary-100">
 					<img src="<?php echo esc_url( $theme_uri . '/assets/images/home_care.png' ); ?>" 
 					     alt="Dịch vụ chăm sóc mẹ và bé tại nhà" 
 					     class="w-full h-auto object-cover block" />
@@ -367,7 +367,7 @@ $theme_uri = get_template_directory_uri();
 			
 			<!-- Left Photo Collage -->
 			<div class="lg:col-span-5 relative">
-				<div class="relative mx-auto max-w-[440px] rounded-3xl overflow-hidden border-4 border-white shadow-xl bg-primary-100">
+				<div class="relative mx-auto max-w-[440px] rounded-3xl overflow-hidden border-4 border-neutral-white shadow-xl bg-primary-100">
 					<img src="<?php echo esc_url( $theme_uri . '/assets/images/easy_class.png' ); ?>" 
 					     alt="Khóa học nuôi con EASY Vạn Phúc Care" 
 					     class="w-full h-auto object-cover block" />
@@ -554,7 +554,7 @@ $theme_uri = get_template_directory_uri();
 
 			<!-- Center Photo -->
 			<div class="lg:col-span-4 flex justify-center">
-				<div class="relative w-full max-w-[340px] rounded-3xl overflow-hidden border-4 border-white shadow-xl bg-white">
+				<div class="relative w-full max-w-[340px] rounded-3xl overflow-hidden border-4 border-neutral-white shadow-xl bg-neutral-white">
 					<img src="<?php echo esc_url( $theme_uri . '/assets/images/family_center.png' ); ?>" 
 					     alt="Gia đình hạnh phúc cùng Vạn Phúc Care" 
 					     class="w-full h-auto object-cover block" />
@@ -874,7 +874,7 @@ $theme_uri = get_template_directory_uri();
 <!-- =========================================================================
      10. ĐĂNG KÝ TƯ VẤN (Consultation Form)
      ========================================================================= -->
-<section id="dang-ky-tu-van" class="py-14 sm:py-20 bg-linear-to-b from-white via-primary-100/50 to-white">
+<section id="dang-ky-tu-van" class="py-14 sm:py-20 bg-linear-to-b from-neutral-white via-primary-100/50 to-neutral-white">
 	<div class="vpc-container max-w-3xl">
 		<div class="rounded-3xl sm:rounded-4xl bg-neutral-white border border-neutral-200/90 p-8 sm:p-12 shadow-xl">
 			
@@ -885,27 +885,27 @@ $theme_uri = get_template_directory_uri();
 				<p class="text-text-heading-secondary-default font-semibold text-base sm:text-lg mt-1">
 					Nhận Ngay Ưu Đãi & Phác Đồ Chăm Sóc Riêng Biệt
 				</p>
-				<p class="text-xs sm:text-sm text-text-body-muted mt-2">
+				<p class="text-sm text-text-body-muted mt-2">
 					Đội ngũ chuyên gia y tế của Vạn Phúc Care sẽ liên hệ tư vấn chi tiết trong vòng 15 phút.
 				</p>
 			</div>
 
 			<form class="space-y-4 sm:space-y-5" onsubmit="event.preventDefault(); alert('Cảm ơn bạn! Chuyên viên Vạn Phúc Care sẽ liên hệ hỗ trợ bạn ngay.');">
 				<div>
-					<label class="block text-xs sm:text-sm font-semibold text-text-body-default mb-1.5">Họ và tên của ba/mẹ *</label>
+					<label class="block text-sm font-medium text-text-body-default mb-1.5">Họ và tên của ba/mẹ *</label>
 					<input type="text" required placeholder="Ví dụ: Nguyễn Thị Lan Hương" 
-					       class="w-full px-4 py-3 rounded-xl border border-neutral-400 focus:border-primary-500 focus-visible:ring-2 focus-visible:ring-border-focus-default text-base outline-none transition-all text-text-body-default bg-surface-background-default">
+					       class="w-full px-4 py-3 rounded-xl border border-neutral-400 focus:border-primary-500 focus-visible:ring-2 focus-visible:ring-border-focus-default text-base font-medium transition-all text-text-body-default bg-surface-background-default">
 				</div>
 
 				<div>
-					<label class="block text-xs sm:text-sm font-semibold text-text-body-default mb-1.5">Số điện thoại liên hệ *</label>
+					<label class="block text-sm font-medium text-text-body-default mb-1.5">Số điện thoại liên hệ *</label>
 					<input type="tel" required placeholder="Ví dụ: 090 859 31 99" 
-					       class="w-full px-4 py-3 rounded-xl border border-neutral-400 focus:border-primary-500 focus-visible:ring-2 focus-visible:ring-border-focus-default text-base outline-none transition-all text-text-body-default bg-surface-background-default">
+					       class="w-full px-4 py-3 rounded-xl border border-neutral-400 focus:border-primary-500 focus-visible:ring-2 focus-visible:ring-border-focus-default text-base font-medium transition-all text-text-body-default bg-surface-background-default">
 				</div>
 
 				<div>
-					<label class="block text-xs sm:text-sm font-semibold text-text-body-default mb-1.5">Dịch vụ quan tâm</label>
-					<select class="w-full px-4 py-3 rounded-xl border border-neutral-400 focus:border-primary-500 focus-visible:ring-2 focus-visible:ring-border-focus-default text-base outline-none transition-all bg-surface-background-default text-text-body-default">
+					<label class="block text-sm font-medium text-text-body-default mb-1.5">Dịch vụ quan tâm</label>
+					<select class="w-full px-4 py-3 rounded-xl border border-neutral-400 focus:border-primary-500 focus-visible:ring-2 focus-visible:ring-border-focus-default text-base font-medium transition-all bg-surface-background-default text-text-body-default">
 						<option value="o-cu">Trung tâm ở cữ 35B/399 Âu Cơ</option>
 						<option value="tam-be">Tắm bé sơ sinh & Massage tại nhà</option>
 						<option value="cham-soc-me">Chăm sóc mẹ sau sinh toàn diện</option>
@@ -916,9 +916,9 @@ $theme_uri = get_template_directory_uri();
 				</div>
 
 				<div>
-					<label class="block text-xs sm:text-sm font-semibold text-text-body-default mb-1.5">Ghi chú hoặc tình trạng hiện tại</label>
+					<label class="block text-sm font-medium text-text-body-default mb-1.5">Ghi chú hoặc tình trạng hiện tại</label>
 					<textarea rows="3" placeholder="Ví dụ: Dự sinh tháng 11, cần tư vấn gói tắm bé 30 buổi..." 
-					          class="w-full px-4 py-3 rounded-xl border border-neutral-400 focus:border-primary-500 focus-visible:ring-2 focus-visible:ring-border-focus-default text-base outline-none transition-all text-text-body-default bg-surface-background-default"></textarea>
+					          class="w-full px-4 py-3 rounded-xl border border-neutral-400 focus:border-primary-500 focus-visible:ring-2 focus-visible:ring-border-focus-default text-base font-medium transition-all text-text-body-default bg-surface-background-default"></textarea>
 				</div>
 
 				<div class="pt-2">

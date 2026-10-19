@@ -43,12 +43,12 @@ $extra_class = $args['class'] ?? '';
 $type        = $args['type'] ?? 'button';
 
 // Base: Focus ring when tabbing
-$base_classes = 'inline-flex items-center justify-center font-medium transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-border-focus-default select-none';
+$base_classes = 'inline-flex items-center justify-center font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-border-focus-default select-none';
 
 // Size styles (SM = 32px, MD = 48px, LG = 64px matching Figma)
 $size_classes = [
 	'sm' => 'h-8 px-4 text-sm gap-1.5 rounded-full',
-	'md' => 'h-10 sm:h-12 px-5 sm:px-6 text-sm sm:text-base gap-2 rounded-full',
+	'md' => 'h-10 sm:h-12 px-5 sm:px-6 text-base gap-2 rounded-full',
 	'lg' => 'h-14 sm:h-16 px-7 sm:px-8 text-base sm:text-lg gap-2.5 rounded-full',
 ];
 $current_size = $size_classes[ $size ] ?? $size_classes['md'];
@@ -66,7 +66,7 @@ $variant_classes = [
 ];
 
 if ( 'text-link' === $variant ) {
-	$current_size = 'text-sm sm:text-base gap-1.5';
+	$current_size = 'text-base gap-1.5';
 }
 
 $current_variant = $variant_classes[ $variant ] ?? $variant_classes['primary'];
@@ -76,9 +76,9 @@ $state_classes = '';
 if ( $is_disabled ) {
 	$state_classes = 'cursor-not-allowed pointer-events-none';
 	if ( 'primary' === $variant ) {
-		$current_variant = 'bg-surface-button-primary-disabled text-white cursor-not-allowed';
+		$current_variant = 'bg-surface-button-primary-disabled text-text-inverse-default cursor-not-allowed';
 	} elseif ( 'secondary' === $variant ) {
-		$current_variant = 'bg-surface-button-secondary-disabled text-white cursor-not-allowed';
+		$current_variant = 'bg-surface-button-secondary-disabled text-text-inverse-default cursor-not-allowed';
 	} elseif ( 'outline-primary' === $variant || 'outline-secondary' === $variant ) {
 		$current_variant = 'bg-transparent border border-neutral-600 text-neutral-700 cursor-not-allowed';
 	} elseif ( 'text-link' === $variant ) {

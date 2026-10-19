@@ -24,7 +24,7 @@ $action_url  = $args['action_url'] ?? '';
 $extra_class = $args['class'] ?? '';
 ?>
 
-<div class="vpc-consultation-card bg-[#FAFAFA] rounded-[24px] p-6 sm:p-8 md:p-9 border border-neutral-300 shadow-sm max-w-2xl mx-auto <?php echo esc_attr( $extra_class ); ?>">
+<div class="vpc-consultation-card bg-surface-background-default rounded-[24px] p-6 sm:p-8 md:p-9 border border-neutral-300 shadow-sm max-w-2xl mx-auto <?php echo esc_attr( $extra_class ); ?>">
 	<?php if ( ! empty( $title ) ) : ?>
 		<div class="mb-6 text-center">
 			<h3 class="font-heading text-xl sm:text-2xl text-neutral-900 font-bold mb-2">

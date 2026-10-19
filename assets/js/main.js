@@ -104,13 +104,13 @@ document.addEventListener('DOMContentLoaded', function () {
 				// Update active styles
 				options.forEach(function (opt) {
 					opt.setAttribute('aria-selected', 'false');
-					opt.className = 'vpc-select-option flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm sm:text-base transition-colors duration-150 text-text-body-default hover:bg-surface-field-hover cursor-pointer';
+					opt.className = 'vpc-select-option flex items-center justify-between px-3.5 py-2.5 rounded-lg text-base font-medium transition-colors duration-150 text-text-body-default hover:bg-surface-field-hover cursor-pointer';
 					const check = opt.querySelector('svg');
 					if (check) check.remove();
 				});
 
 				option.setAttribute('aria-selected', 'true');
-				option.className = 'vpc-select-option flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm sm:text-base transition-colors duration-150 bg-primary-200 text-text-body-default font-medium cursor-pointer';
+				option.className = 'vpc-select-option flex items-center justify-between px-3.5 py-2.5 rounded-lg text-base font-medium transition-colors duration-150 bg-primary-200 text-text-body-default cursor-pointer';
 
 				const checkSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 				checkSvg.setAttribute('class', 'w-4 h-4 text-primary-500 shrink-0 ml-2 stroke-current fill-none');
@@ -212,5 +212,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	console.log('Vạn Phúc Care Theme initialized successfully.');
 });
-
 

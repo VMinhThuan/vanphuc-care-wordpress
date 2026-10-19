@@ -41,7 +41,7 @@ $extra_class = $args['class'] ?? '';
 $name        = $args['name'] ?? '';
 
 // Base classes: Full pill rounded, no focus ring
-$base_classes = 'inline-flex items-center justify-center font-medium rounded-full cursor-pointer transition-colors duration-200 outline-none focus:outline-none focus:ring-0 select-none whitespace-nowrap';
+$base_classes = 'inline-flex items-center justify-center font-medium rounded-full cursor-pointer transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-border-focus-default select-none whitespace-nowrap';
 
 // Size specifications:
 // SM: height 42px (Figma row 1: 42px h, 21px radius, ~18px px)

@@ -66,7 +66,7 @@ $extra_class = $args['class'] ?? '';
 		<!-- Close Button (X icon 1:1 Figma) -->
 		<button
 			type="button"
-			class="vpc-modal-close absolute top-6 right-6 p-2 rounded-full text-text-body-default hover:text-primary-500 hover:bg-neutral-300 transition-colors duration-150 outline-none"
+			class="vpc-modal-close absolute top-6 right-6 p-2 rounded-full text-text-body-default hover:text-primary-500 hover:bg-neutral-300 transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-border-focus-default"
 			aria-label="Đóng cửa sổ"
 			data-modal-close
 		>
