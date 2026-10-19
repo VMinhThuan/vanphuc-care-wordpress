@@ -95,20 +95,20 @@ foreach ( $raw_options as $key => $opt ) {
 
 // Trigger state classes
 if ( $is_disabled ) {
-	$trigger_state_classes = 'bg-[#CECECE] border-[#D8D8D8] text-[#A5A5A5] cursor-not-allowed';
-	$chevron_color = 'text-[#A5A5A5]';
+	$trigger_state_classes = 'bg-neutral-500 border-neutral-400 text-neutral-600 cursor-not-allowed';
+	$chevron_color = 'text-neutral-600';
 } elseif ( $has_error ) {
-	$trigger_state_classes = 'bg-[#FAFAFA] border-error-500 text-neutral-900 cursor-pointer';
-	$chevron_color = 'text-neutral-900';
+	$trigger_state_classes = 'bg-surface-background-default border-error-500 text-text-body-default cursor-pointer';
+	$chevron_color = 'text-text-body-default';
 } else {
-	$trigger_state_classes = 'bg-[#FAFAFA] border-[#CECECE] hover:border-primary-500 text-neutral-900 cursor-pointer group-aria-expanded:border-primary-400';
-	$chevron_color = 'text-neutral-900';
+	$trigger_state_classes = 'bg-surface-background-default border-neutral-500 hover:border-primary-500 text-text-body-default cursor-pointer group-aria-expanded:border-primary-400';
+	$chevron_color = 'text-text-body-default';
 }
 ?>
 
 <div class="vpc-custom-select-component flex flex-col <?php echo esc_attr( $extra_class ); ?>" data-custom-select>
 	<?php if ( ! empty( $label ) ) : ?>
-		<label for="<?php echo esc_attr( $id ); ?>-trigger" class="block text-sm sm:text-base font-medium text-neutral-900 mb-2 select-none">
+		<label for="<?php echo esc_attr( $id ); ?>-trigger" class="block text-sm sm:text-base font-medium text-text-body-default mb-2 select-none">
 			<?php if ( $required ) : ?>
 				<span class="text-error-500 font-bold mr-0.5">*</span>
 			<?php endif; ?>
@@ -132,27 +132,27 @@ if ( $is_disabled ) {
 		<button
 			type="button"
 			id="<?php echo esc_attr( $id ); ?>-trigger"
-			class="vpc-select-trigger group w-full h-[50px] px-4.5 rounded-xl border flex items-center justify-between text-left transition-colors duration-200 outline-none select-none <?php echo esc_attr( $trigger_state_classes ); ?>"
+			class="vpc-select-trigger group w-full h-[50px] px-4.5 rounded-xl border flex items-center justify-between text-left transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-border-focus-default select-none <?php echo esc_attr( $trigger_state_classes ); ?>"
 			aria-haspopup="listbox"
 			aria-expanded="false"
 			<?php echo $is_disabled ? 'disabled' : ''; ?>
 			<?php echo $has_error ? 'aria-invalid="true"' : ''; ?>
 		>
-			<span class="truncate text-sm sm:text-base font-body <?php echo empty( $selected_label ) ? 'text-[#CECECE]' : 'text-neutral-900'; ?>" data-select-label>
+			<span class="truncate text-sm sm:text-base font-body <?php echo empty( $selected_label ) ? 'text-neutral-500' : 'text-text-body-default'; ?>" data-select-label>
 				<?php echo esc_html( ! empty( $selected_label ) ? $selected_label : $placeholder ); ?>
 			</span>
 
 			<!-- Chevron icon matching Figma Board 8 exactly -->
 			<span class="shrink-0 ml-2 transition-transform duration-200 ease-out group-aria-expanded:rotate-180 <?php echo esc_attr( $chevron_color ); ?>">
-				<svg class="w-4 h-4 shrink-0" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+				<svg class="w-4 h-4 shrink-0 stroke-current fill-none" viewBox="0 0 20 20">
+					<path d="M5 7.5L10 12.5L15 7.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 				</svg>
 			</span>
 		</button>
 
 		<!-- Dropdown Menu Popover (Figma 1:1) -->
 		<div
-			class="vpc-select-dropdown absolute left-0 right-0 top-[calc(100%+6px)] z-50 hidden bg-[#FAFAFA] border border-[#D8D8D8] rounded-xl shadow-lg p-2 transition-all duration-150 origin-top select-none"
+			class="vpc-select-dropdown absolute left-0 right-0 top-[calc(100%+6px)] z-50 hidden bg-surface-background-default border border-neutral-400 rounded-xl shadow-lg p-2 transition-all duration-150 origin-top select-none"
 			role="listbox"
 			tabindex="-1"
 		>
@@ -164,11 +164,11 @@ if ( $is_disabled ) {
 						data-value="<?php echo esc_attr( $option['value'] ); ?>"
 						class="vpc-select-option flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm sm:text-base transition-colors duration-150
 						<?php if ( $option['disabled'] ) : ?>
-							text-[#A5A5A5] cursor-not-allowed
+							text-neutral-600 cursor-not-allowed
 						<?php elseif ( $option['selected'] ) : ?>
-							bg-[#A3C9E3] text-[#292929] font-medium cursor-pointer
+							bg-primary-200 text-text-body-default font-medium cursor-pointer
 						<?php else : ?>
-							text-[#292929] hover:bg-[#EBEBEB] cursor-pointer
+							text-text-body-default hover:bg-surface-field-hover cursor-pointer
 						<?php endif; ?>"
 						<?php echo $option['disabled'] ? 'aria-disabled="true"' : ''; ?>
 					>

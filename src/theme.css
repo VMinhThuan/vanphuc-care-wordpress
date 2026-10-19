@@ -5,9 +5,10 @@
 
 @import "tailwindcss";
 
-/* Quét các file template PHP của WordPress Theme */
+/* Quét các file template PHP của WordPress Theme và file HTML test */
 @source "../**/*.php";
 @source "../*.php";
+@source "../index.html";
 
 /* ---------- 1. Primitives (Base) ---------- */
 @theme {
@@ -129,6 +130,18 @@
 
   /* Đổ bóng: Figma effect style `shadow/card` */
   --shadow-card: 0 1px 5px 0 rgb(0 0 0 / 0.15);
+
+  /* Animation */
+  --animate-bounce-subtle: bounce-subtle 2s ease-in-out infinite;
+
+  @keyframes bounce-subtle {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
 }
 
 /* ---------- 2. Semantic (tên giữ 1:1 với Figma) ---------- */

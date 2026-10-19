@@ -42,8 +42,8 @@ $is_disabled = ! empty( $args['is_disabled'] );
 $extra_class = $args['class'] ?? '';
 $type        = $args['type'] ?? 'button';
 
-// Base: No focus ring per design convention
-$base_classes = 'inline-flex items-center justify-center font-semibold transition-all duration-200 outline-none focus:outline-none focus:ring-0 select-none';
+// Base: Focus ring when tabbing
+$base_classes = 'inline-flex items-center justify-center font-medium transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-border-focus-default select-none';
 
 // Size styles (SM = 32px, MD = 48px, LG = 64px matching Figma)
 $size_classes = [
@@ -55,12 +55,12 @@ $current_size = $size_classes[ $size ] ?? $size_classes['md'];
 
 // Variant styles (Matching Figma 1:1)
 $variant_classes = [
-	'primary'           => 'bg-surface-button-primary-default text-white hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed shadow-xs',
-	'secondary'         => 'bg-surface-button-secondary-default text-white hover:bg-surface-button-secondary-hover active:bg-surface-button-secondary-pressed shadow-xs',
+	'primary'           => 'bg-surface-button-primary-default text-text-inverse-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed',
+	'secondary'         => 'bg-surface-button-secondary-default text-text-inverse-default hover:bg-surface-button-secondary-hover active:bg-surface-button-secondary-pressed',
 	'outline-primary'   => 'bg-transparent border border-primary-500 text-primary-500 hover:border-primary-600 hover:text-primary-600 hover:bg-primary-100/40 active:border-primary-700 active:text-primary-700',
 	'outline-secondary' => 'bg-transparent border border-secondary-500 text-secondary-500 hover:border-secondary-600 hover:text-secondary-600 hover:bg-secondary-100/40 active:border-secondary-700 active:text-secondary-700',
 	'filter-pill'        => 'bg-transparent border border-primary-500 text-neutral-900 hover:border-primary-600 hover:text-neutral-900',
-	'filter-pill-active' => 'bg-primary-500 border border-primary-500 text-neutral-white shadow-xs',
+	'filter-pill-active' => 'bg-primary-500 border border-primary-500 text-neutral-white',
 	'ghost'             => 'bg-transparent text-neutral-900 hover:bg-neutral-200 active:bg-neutral-300',
 	'text-link'         => 'p-0 text-text-link-default hover:text-text-link-hover active:text-text-link-pressed underline underline-offset-4',
 ];

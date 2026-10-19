@@ -20,80 +20,137 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/png" sizes="300x300" href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Logo-van-phuc-care-300x300.png' ); ?>">
+	<link rel="icon" type="image/png" sizes="180x180" href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Logo-van-phuc-care-180x180.png' ); ?>">
+	<link rel="apple-touch-icon" sizes="180x180" href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Logo-van-phuc-care-180x180.png' ); ?>">
 	<?php wp_head(); ?>
 </head>
-<body <?php body_class( 'font-body bg-white text-text-body-default antialiased selection:bg-primary-100 selection:text-primary-800' ); ?>>
+<body <?php body_class( 'font-body bg-neutral-white text-text-body-default antialiased selection:bg-primary-100 selection:text-primary-800' ); ?>>
 <?php wp_body_open(); ?>
 
-<!-- Main Header Bar (Sticky, Desktop 1440px / Mobile Drawer) - Exact Figma 112px, #FAFAFA -->
-<header id="site-header" class="sticky top-0 z-50 w-full bg-[#FAFAFA] border-b border-neutral-200/60 shadow-xs transition-all duration-300">
-	<div class="vpc-container flex h-20 xl:h-[112px] items-center justify-between">
+<!-- Main Header Bar (Desktop >= 1280px: 96px, Mobile: 80px) -->
+<header id="site-header" class="sticky top-0 z-50 w-full bg-surface-background-default transition-all duration-300">
+	<div class="vpc-container flex h-20 xl:h-24 items-center justify-between">
 		
-		<!-- Site Logo (Left) - Exact Figma 116x36px -->
+		<!-- Site Logo (Left) - Mobile: 103x32px, Desktop: 116x36px -->
 		<div class="site-logo flex shrink-0 items-center">
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="inline-flex items-center shrink-0 transition-transform duration-200 hover:scale-102">
 				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.svg' ); ?>" 
 				     alt="<?php bloginfo( 'name' ); ?>" 
 				     width="116" 
 				     height="36" 
-				     class="h-[36px] w-[116px] object-contain block">
+				     class="h-8 w-[103px] xl:h-9 xl:w-[116px] object-contain block">
 			</a>
 		</div>
 
-		<!-- Navigation Menu (Center) - Matches Figma: 760px width, 32px gap, Manrope 600 16/24 -->
+		<!-- Navigation Menu (Center) - Matches Figma: 760px width, font-medium 500, py-0 px-1 -->
 		<nav class="hidden xl:flex items-center justify-center flex-1 max-w-[760px] mx-auto" aria-label="<?php esc_attr_e( 'Primary navigation', 'vanphuccare' ); ?>">
-			<ul class="vpc-nav-menu flex items-center justify-center gap-8 text-base font-semibold">
-				<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="py-2 text-[#1A77BA] font-semibold transition-colors">Trang chủ</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/gioi-thieu' ) ); ?>" class="py-2 text-[#292929] hover:text-[#1A77BA] transition-colors">Giới thiệu</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/#trung-tam-o-cu' ) ); ?>" class="py-2 text-[#292929] hover:text-[#1A77BA] transition-colors">Ở cữ</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/#dich-vu-tai-nha' ) ); ?>" class="py-2 text-[#292929] hover:text-[#1A77BA] transition-colors">Bảo mẫu</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/#dich-vu-noi-bat' ) ); ?>" class="py-2 text-[#292929] hover:text-[#1A77BA] transition-colors">Dịch vụ</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/#dao-tao-easy' ) ); ?>" class="py-2 text-[#292929] hover:text-[#1A77BA] transition-colors">Lớp học tiền sản</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/#tin-tuc' ) ); ?>" class="py-2 text-[#292929] hover:text-[#1A77BA] transition-colors">Kiến thức</a></li>
+			<ul class="vpc-nav-menu flex items-center justify-center gap-8 text-base font-medium">
+				<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="py-0 px-1 text-text-nav-active transition-colors">Trang chủ</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/gioi-thieu' ) ); ?>" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Giới thiệu</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/#trung-tam-o-cu' ) ); ?>" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Ở cữ</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/#dich-vu-tai-nha' ) ); ?>" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Bảo mẫu</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/#dich-vu-noi-bat' ) ); ?>" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Dịch vụ</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/#dao-tao-easy' ) ); ?>" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Lớp học tiền sản</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/#tin-tuc' ) ); ?>" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Kiến thức</a></li>
 			</ul>
 		</nav>
 
-		<!-- Right Action: CTA Button (Đăng Ký Tư Vấn: 164x48px, #1A77BA, rounded-full) & Mobile Toggle -->
+		<!-- Right Action: Desktop CTA Button & Mobile Hamburger Toggle -->
 		<div class="flex items-center gap-3 sm:gap-4 shrink-0">
+			<!-- CTA Header: hidden on mobile, display on desktop >= 1280px -->
 			<button data-open-modal="vpc-consultation-modal" 
 			        type="button"
-			        class="hidden sm:inline-flex items-center justify-center w-[164px] h-[48px] px-6 py-3 rounded-full bg-[#1A77BA] hover:bg-[#155F95] text-[#FAFAFA] font-medium text-base shadow-sm hover:shadow-md transition-all duration-200">
+			        class="hidden xl:inline-flex items-center justify-center h-12 px-6 py-3 rounded-full bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default font-medium text-base transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-border-focus-default">
 				<span>Đăng Ký Tư Vấn</span>
 			</button>
 
-			<!-- Mobile Hamburger Toggle (< 1280px) -->
-			<button id="mobile-menu-toggle" type="button" class="xl:hidden inline-flex items-center justify-center p-2 rounded-xl border border-neutral-300 text-neutral-800 hover:bg-neutral-100 hover:text-primary-600 transition-colors focus:outline-hidden" aria-controls="mobile-menu-drawer" aria-expanded="false" aria-label="Toggle navigation menu">
-				<svg class="w-6 h-6 open-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+			<!-- Mobile Hamburger Toggle (< 1280px) - Chỉ icon menu 24px, bỏ viền, bo góc, nền hover -->
+			<button id="mobile-menu-toggle" type="button" class="xl:hidden inline-flex items-center justify-center w-6 h-6 text-text-body-default focus:outline-hidden" aria-controls="mobile-menu-drawer" aria-expanded="false" aria-label="Toggle navigation menu">
+				<svg class="w-6 h-6 open-icon stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-				</svg>
-				<svg class="w-6 h-6 close-icon hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
 				</svg>
 			</button>
 		</div>
 	</div>
 
-	<!-- Mobile / Tablet Drawer Menu (< 1280px) -->
-	<div id="mobile-menu-drawer" class="xl:hidden hidden border-t border-neutral-200 bg-white/98 px-5 py-6 shadow-xl backdrop-blur-lg">
-		<nav class="flex flex-col space-y-3 text-base font-semibold text-neutral-800">
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="py-2 px-3 rounded-lg bg-primary-50 text-primary-600">Trang chủ</a>
-			<a href="<?php echo esc_url( home_url( '/gioi-thieu' ) ); ?>" class="py-2 px-3 rounded-lg hover:bg-neutral-100 hover:text-primary-600 transition-colors">Giới thiệu</a>
-			<a href="<?php echo esc_url( home_url( '/#trung-tam-o-cu' ) ); ?>" class="py-2 px-3 rounded-lg hover:bg-neutral-100 hover:text-primary-600 transition-colors">Ở cữ</a>
-			<a href="<?php echo esc_url( home_url( '/#dich-vu-tai-nha' ) ); ?>" class="py-2 px-3 rounded-lg hover:bg-neutral-100 hover:text-primary-600 transition-colors">Bảo mẫu</a>
-			<a href="<?php echo esc_url( home_url( '/#dich-vu-noi-bat' ) ); ?>" class="py-2 px-3 rounded-lg hover:bg-neutral-100 hover:text-primary-600 transition-colors">Dịch vụ</a>
-			<a href="<?php echo esc_url( home_url( '/#dao-tao-easy' ) ); ?>" class="py-2 px-3 rounded-lg hover:bg-neutral-100 hover:text-primary-600 transition-colors">Lớp học tiền sản</a>
-			<a href="<?php echo esc_url( home_url( '/#tin-tuc' ) ); ?>" class="py-2 px-3 rounded-lg hover:bg-neutral-100 hover:text-primary-600 transition-colors">Kiến thức</a>
-		</nav>
-		<div class="mt-5 pt-4 border-t border-neutral-200">
-			<button data-open-modal="vpc-consultation-modal" class="w-full text-center py-3 rounded-full bg-[#1A77BA] text-white font-bold text-sm shadow-md">
-				Đăng Ký Tư Vấn
-			</button>
-			<div class="flex items-center justify-between text-xs text-text-body-muted pt-3">
-				<span>Hotline: (024) 6329 6698</span>
-				<span>cskh@vanphuccare.vn</span>
+	<!-- Mobile Drawer Menu (< 1280px) - Full màn hình 390x844 (fixed inset-0, ẩn từ xl) -->
+	<div id="mobile-menu-drawer" class="fixed inset-0 z-50 xl:hidden hidden bg-surface-background-default flex flex-col justify-between overflow-y-auto">
+		<div>
+			<!-- Top Bar: Cao 72px (h-[72px] px-5 py-3): logo 116x36 bên trái, nút đóng 48x48 bên phải -->
+			<div class="h-[72px] px-5 py-3 flex items-center justify-between border-b border-border-divider-default/40">
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="inline-flex items-center shrink-0">
+					<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.svg' ); ?>" 
+					     alt="<?php bloginfo( 'name' ); ?>" 
+					     width="116" 
+					     height="36" 
+					     class="h-9 w-[116px] object-contain block">
+				</a>
+				<button id="mobile-menu-close" type="button" class="w-12 h-12 flex items-center justify-center text-text-body-default focus:outline-hidden cursor-pointer" aria-label="Close navigation menu">
+					<svg class="w-6 h-6 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				</button>
 			</div>
+
+			<!-- Danh sách mục: pt-2 px-5 pb-0, mỗi mục cao 64px (h-16 py-4), text-xl font-medium text-text-nav-default có border-b và chevron phải 24px -->
+			<nav class="pt-2 px-5 pb-0 flex flex-col" aria-label="<?php esc_attr_e( 'Mobile navigation', 'vanphuccare' ); ?>">
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="h-16 py-4 flex items-center justify-between border-b border-border-divider-default text-xl font-medium text-text-nav-active">
+					<span>Trang chủ</span>
+					<svg class="w-6 h-6 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+				</a>
+				<a href="<?php echo esc_url( home_url( '/gioi-thieu' ) ); ?>" class="h-16 py-4 flex items-center justify-between border-b border-border-divider-default text-xl font-medium text-text-nav-default hover:text-text-nav-hover">
+					<span>Giới thiệu</span>
+					<svg class="w-6 h-6 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+				</a>
+				<a href="<?php echo esc_url( home_url( '/#trung-tam-o-cu' ) ); ?>" class="h-16 py-4 flex items-center justify-between border-b border-border-divider-default text-xl font-medium text-text-nav-default hover:text-text-nav-hover">
+					<span>Ở cữ</span>
+					<svg class="w-6 h-6 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+				</a>
+				<a href="<?php echo esc_url( home_url( '/#dich-vu-tai-nha' ) ); ?>" class="h-16 py-4 flex items-center justify-between border-b border-border-divider-default text-xl font-medium text-text-nav-default hover:text-text-nav-hover">
+					<span>Bảo mẫu</span>
+					<svg class="w-6 h-6 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+				</a>
+				<a href="<?php echo esc_url( home_url( '/#dich-vu-noi-bat' ) ); ?>" class="h-16 py-4 flex items-center justify-between border-b border-border-divider-default text-xl font-medium text-text-nav-default hover:text-text-nav-hover">
+					<span>Dịch vụ</span>
+					<svg class="w-6 h-6 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+				</a>
+				<a href="<?php echo esc_url( home_url( '/#dao-tao-easy' ) ); ?>" class="h-16 py-4 flex items-center justify-between border-b border-border-divider-default text-xl font-medium text-text-nav-default hover:text-text-nav-hover">
+					<span>Lớp học tiền sản</span>
+					<svg class="w-6 h-6 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+				</a>
+				<a href="<?php echo esc_url( home_url( '/#tin-tuc' ) ); ?>" class="h-16 py-4 flex items-center justify-between border-b border-border-divider-default text-xl font-medium text-text-nav-default hover:text-text-nav-hover">
+					<span>Kiến thức</span>
+					<svg class="w-6 h-6 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+				</a>
+			</nav>
 		</div>
+
+		<!-- Vùng nút: pt-4 px-5 pb-8, gap-3 -->
+		<div class="pt-4 px-5 pb-8 flex flex-col gap-3">
+			<button data-open-modal="vpc-consultation-modal" type="button" class="w-full h-12 rounded-full bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default font-medium text-base flex items-center justify-center transition-colors">
+				<span>Đăng Ký Tư Vấn</span>
+			</button>
+			<a href="tel:02463296698" class="w-full h-[50px] border border-border-primary-default rounded-full flex items-center justify-center gap-2 px-6 py-3 text-base font-semibold text-text-link-default hover:bg-primary-100/50 transition-colors">
+				<svg class="w-6 h-6 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+				</svg>
+				<span>(024) 6329 6698</span>
+			</a>
+		</div>
+	</div>
+
+	<!-- Sticky CTA bar Mobile (< 1280px) - Cao 84px, bóng 0 -4px 16px rgb(0 0 0 / 0.12), gồm nút gọi và nút Đăng Ký Tư Vấn -->
+	<div id="mobile-sticky-cta" class="fixed bottom-0 left-0 right-0 z-40 h-[84px] bg-surface-background-default shadow-[0_-4px_16px_rgba(0,0,0,0.12)] flex items-center justify-between px-5 py-3 gap-3 xl:hidden">
+		<a href="tel:02463296698" class="flex-1 h-12 flex items-center justify-center gap-2 rounded-full border border-border-primary-default text-text-link-default font-semibold text-base px-4 transition-colors">
+			<svg class="w-6 h-6 stroke-current fill-none shrink-0" viewBox="0 0 24 24" stroke-width="2">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+			</svg>
+			<span>Gọi ngay</span>
+		</a>
+		<button data-open-modal="vpc-consultation-modal" type="button" class="flex-1 h-12 flex items-center justify-center rounded-full bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default font-medium text-base px-4 transition-colors">
+			<span>Đăng Ký Tư Vấn</span>
+		</button>
 	</div>
 </header>
 

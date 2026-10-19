@@ -52,21 +52,21 @@ $extra_class = $args['class'] ?? '';
 <!-- Consultation Modal Backdrop & Container -->
 <div
 	id="<?php echo esc_attr( $modal_id ); ?>"
-	class="vpc-consultation-modal fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-[#292929]/60 backdrop-blur-sm transition-opacity duration-300 opacity-0 select-none <?php echo esc_attr( $extra_class ); ?>"
+	class="vpc-consultation-modal fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-surface-overlay backdrop-blur-sm transition-opacity duration-300 opacity-0 select-none <?php echo esc_attr( $extra_class ); ?>"
 	role="dialog"
 	aria-modal="true"
 	aria-labelledby="<?php echo esc_attr( $modal_id ); ?>-title"
 	data-modal
 >
-	<!-- Modal Card (Max-width 560px, Radius 24px, BG #FAFAFA, Figma 1:1) -->
+	<!-- Modal Card (Max-width 560px, Radius 24px, BG bg-surface-background-default, Figma 1:1) -->
 	<div
-		class="vpc-modal-card relative w-full max-w-[560px] bg-[#FAFAFA] rounded-[24px] shadow-2xl p-6 sm:p-8 md:p-9 transition-transform duration-300 transform scale-95 select-text"
+		class="vpc-modal-card relative w-full max-w-[560px] bg-surface-background-default rounded-[24px] shadow-2xl p-6 sm:p-8 md:p-9 transition-transform duration-300 transform scale-95 select-text"
 		data-modal-card
 	>
 		<!-- Close Button (X icon 1:1 Figma) -->
 		<button
 			type="button"
-			class="vpc-modal-close absolute top-6 right-6 p-2 rounded-full text-neutral-900 hover:text-primary-500 hover:bg-neutral-300 transition-colors duration-150 outline-none"
+			class="vpc-modal-close absolute top-6 right-6 p-2 rounded-full text-text-body-default hover:text-primary-500 hover:bg-neutral-300 transition-colors duration-150 outline-none"
 			aria-label="Đóng cửa sổ"
 			data-modal-close
 		>
@@ -79,12 +79,12 @@ $extra_class = $args['class'] ?? '';
 		<div class="mb-6 pr-8">
 			<h3
 				id="<?php echo esc_attr( $modal_id ); ?>-title"
-				class="font-heading text-2xl sm:text-[28px] leading-tight font-bold text-primary-700 mb-2"
+				class="font-heading text-2xl sm:text-[28px] leading-tight font-bold text-text-heading-primary-default mb-2"
 			>
 				<?php echo esc_html( $title ); ?>
 			</h3>
 			<?php if ( ! empty( $subtitle ) ) : ?>
-				<p class="font-body text-sm text-neutral-700 leading-relaxed">
+				<p class="font-body text-sm text-text-body-muted leading-relaxed">
 					<?php echo esc_html( $subtitle ); ?>
 				</p>
 			<?php endif; ?>

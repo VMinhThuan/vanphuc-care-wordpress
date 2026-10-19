@@ -57,7 +57,7 @@ $rows        = $args['rows'] ?? 3;
 $has_error = ! empty( $error );
 
 // Base input styling
-$base_input_classes = 'w-full transition-colors duration-200 outline-none focus:outline-none focus:ring-0 font-body text-neutral-900 select-none';
+$base_input_classes = 'w-full transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-border-focus-default font-body text-text-body-default select-none';
 
 // Dimension & shape styling (height 50px, radius 12px)
 $box_shape_classes = 'px-4.5 rounded-xl';
@@ -66,9 +66,9 @@ $box_shape_classes = 'px-4.5 rounded-xl';
 if ( $is_disabled ) {
 	$state_input_classes = 'bg-neutral-500 border border-neutral-400 text-neutral-600 placeholder-neutral-600 cursor-not-allowed';
 } elseif ( $has_error ) {
-	$state_input_classes = 'bg-[#FAFAFA] border border-error-500 text-neutral-900 placeholder-neutral-500 focus:border-error-500 caret-primary-500';
+	$state_input_classes = 'bg-surface-background-default border border-error-500 text-text-body-default placeholder-neutral-500 focus:border-error-500 caret-primary-500';
 } else {
-	$state_input_classes = 'bg-[#FAFAFA] border border-neutral-500 text-neutral-900 placeholder-neutral-500 hover:border-primary-500 focus:border-primary-400 caret-primary-500';
+	$state_input_classes = 'bg-surface-background-default border border-neutral-500 text-text-body-default placeholder-neutral-500 hover:border-primary-500 focus:border-primary-400 caret-primary-500';
 }
 
 $input_classes = trim( "{$base_input_classes} {$box_shape_classes} {$state_input_classes}" );
@@ -76,7 +76,7 @@ $input_classes = trim( "{$base_input_classes} {$box_shape_classes} {$state_input
 
 <div class="vpc-form-field flex flex-col <?php echo esc_attr( $extra_class ); ?>">
 	<?php if ( ! empty( $label ) ) : ?>
-		<label for="<?php echo esc_attr( $id ); ?>" class="block text-sm sm:text-base font-medium text-neutral-900 mb-2 select-none">
+		<label for="<?php echo esc_attr( $id ); ?>" class="block text-sm sm:text-base font-medium text-text-body-default mb-2 select-none">
 			<?php if ( $required ) : ?>
 				<span class="text-error-500 font-bold mr-0.5">*</span>
 			<?php endif; ?>

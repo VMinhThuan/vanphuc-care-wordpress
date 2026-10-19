@@ -24,10 +24,10 @@ function vanphuccare_enqueue_assets() {
 	$tailwind_path = get_template_directory() . '/assets/css/theme.css';
 	$tailwind_ver  = file_exists( $tailwind_path ) ? (string) filemtime( $tailwind_path ) : $theme_version;
 
-	// Enqueue Google Fonts: Fraunces (Heading) & Manrope (Body)
+	// Enqueue Google Fonts: Fraunces (Heading) & Manrope (Body) - optimized weights, no italic
 	wp_enqueue_style(
 		'vanphuccare-fonts',
-		'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Manrope:wght@400;500;600;700;800&display=swap',
+		'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Manrope:wght@400;500;600;700&display=swap',
 		array(),
 		null
 	);

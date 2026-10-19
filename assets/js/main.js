@@ -4,21 +4,43 @@
 document.addEventListener('DOMContentLoaded', function () {
 	// Mobile menu drawer toggle
 	const menuToggle = document.getElementById('mobile-menu-toggle');
+	const menuClose = document.getElementById('mobile-menu-close');
 	const menuDrawer = document.getElementById('mobile-menu-drawer');
 
-	if (menuToggle && menuDrawer) {
+	function toggleMenu(show) {
+		if (!menuDrawer) return;
+		const isCurrentlyHidden = menuDrawer.classList.contains('hidden');
+		const shouldShow = typeof show === 'boolean' ? show : isCurrentlyHidden;
+
+		if (shouldShow) {
+			menuDrawer.classList.remove('hidden');
+			document.body.classList.add('overflow-hidden');
+			if (menuToggle) menuToggle.setAttribute('aria-expanded', 'true');
+		} else {
+			menuDrawer.classList.add('hidden');
+			document.body.classList.remove('overflow-hidden');
+			if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+		}
+	}
+
+	if (menuToggle) {
 		menuToggle.addEventListener('click', function () {
-			const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-			menuToggle.setAttribute('aria-expanded', String(!isExpanded));
-			menuDrawer.classList.toggle('hidden');
+			toggleMenu();
+		});
+	}
 
-			const openIcon = menuToggle.querySelector('.open-icon');
-			const closeIcon = menuToggle.querySelector('.close-icon');
+	if (menuClose) {
+		menuClose.addEventListener('click', function () {
+			toggleMenu(false);
+		});
+	}
 
-			if (openIcon && closeIcon) {
-				openIcon.classList.toggle('hidden');
-				closeIcon.classList.toggle('hidden');
-			}
+	// Close drawer when clicking any link inside it
+	if (menuDrawer) {
+		menuDrawer.querySelectorAll('a').forEach(function (link) {
+			link.addEventListener('click', function () {
+				toggleMenu(false);
+			});
 		});
 	}
 
@@ -75,20 +97,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				if (labelSpan) {
 					labelSpan.textContent = text;
-					labelSpan.classList.remove('text-[#CECECE]');
-					labelSpan.classList.add('text-neutral-900');
+					labelSpan.classList.remove('text-neutral-500');
+					labelSpan.classList.add('text-text-body-default');
 				}
 
 				// Update active styles
 				options.forEach(function (opt) {
 					opt.setAttribute('aria-selected', 'false');
-					opt.className = 'vpc-select-option flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm sm:text-base transition-colors duration-150 text-[#292929] hover:bg-[#EBEBEB] cursor-pointer';
+					opt.className = 'vpc-select-option flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm sm:text-base transition-colors duration-150 text-text-body-default hover:bg-surface-field-hover cursor-pointer';
 					const check = opt.querySelector('svg');
 					if (check) check.remove();
 				});
 
 				option.setAttribute('aria-selected', 'true');
-				option.className = 'vpc-select-option flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm sm:text-base transition-colors duration-150 bg-[#A3C9E3] text-[#292929] font-medium cursor-pointer';
+				option.className = 'vpc-select-option flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm sm:text-base transition-colors duration-150 bg-primary-200 text-text-body-default font-medium cursor-pointer';
 
 				const checkSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 				checkSvg.setAttribute('class', 'w-4 h-4 text-primary-500 shrink-0 ml-2 stroke-current fill-none');
