@@ -67,7 +67,7 @@
 		</div>
 	</div>
 
-	<!-- Mobile Drawer Menu (< 1280px) - Full màn hình 390x844 (fixed inset-0, ẩn từ xl) -->
+	<!-- Mobile Drawer Menu: full mobile canvas matching the Figma artwork -->
 	<div id="mobile-menu-drawer" class="fixed inset-0 z-50 xl:hidden hidden bg-surface-background-default flex flex-col justify-between overflow-y-auto">
 		<div>
 			<!-- Top Bar: Cao 72px (h-[72px] px-5 py-3): logo 116x36 bên trái, nút đóng 48x48 bên phải -->
@@ -119,8 +119,8 @@
 			</nav>
 		</div>
 
-		<!-- Vùng nút: pt-4 px-5 pb-8, gap-3 -->
-		<div class="pt-4 px-5 pb-8 flex flex-col gap-3">
+		<!-- Vùng nút đúng Figma: CTA y=702, hotline y=762 trên artboard 390×844 -->
+		<div class="pt-0 px-5 pb-8 flex flex-col gap-3">
 			<button data-open-modal="vpc-consultation-modal" type="button" class="w-full h-12 rounded-full bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default font-medium text-base flex items-center justify-center transition-colors">
 				<span>Đăng Ký Tư Vấn</span>
 			</button>
@@ -128,13 +128,13 @@
 				<svg class="w-6 h-6 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
 				</svg>
-				<span>(024) 6329 6698</span>
+				<span>Hotline</span>
 			</a>
 		</div>
 	</div>
 
 	<!-- Sticky CTA bar Mobile (< 1280px) - Cao 84px, bóng 0 -4px 16px rgb(0 0 0 / 0.12), gồm nút gọi và nút Đăng Ký Tư Vấn -->
-	<div id="mobile-sticky-cta" class="fixed bottom-0 left-0 right-0 z-40 h-[84px] bg-surface-background-default shadow-[0_-4px_16px_rgba(0,0,0,0.12)] flex items-center justify-between px-5 py-3 gap-3 xl:hidden">
+	<div id="mobile-sticky-cta" class="fixed bottom-0 left-0 right-0 z-40 h-[84px] bg-surface-background-default shadow-[0_-4px_16px_rgba(0,0,0,0.12)] flex items-center justify-between px-5 py-3 gap-3 xl:hidden transition-[transform,opacity] duration-300 ease-out">
 		<a href="tel:02463296698" class="flex-1 h-12 flex items-center justify-center gap-2 rounded-full border border-border-primary-default text-text-link-default font-semibold text-base px-4 transition-colors">
 			<svg class="w-6 h-6 stroke-current fill-none shrink-0" viewBox="0 0 24 24" stroke-width="2">
 				<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
@@ -1254,27 +1254,27 @@
 
 		</div>
 
-		<!-- Row: 3 Social Icons (Facebook, YouTube, TikTok w-20 h-20 gap-6) + 2 Badges, Một đường kẻ dưới hàng social (border-b) -->
-		<div class="py-6 border-b border-border-divider-default flex flex-col sm:flex-row items-center justify-between gap-6">
-			<!-- Social Icons (Facebook, YouTube, TikTok: w-20 h-20 (80px), gap-6) -->
-			<div class="flex items-center gap-6">
+		<!-- Row: 3 social icons sized to the footer design + 2 certification badges -->
+		<div class="py-6 border-b-0 sm:border-b sm:border-border-divider-default flex flex-col sm:flex-row items-start sm:items-center justify-between gap-10 sm:gap-6">
+			<!-- Social icons: 36px mobile, matching the supplied mobile artwork -->
+			<div class="flex items-center gap-8">
 				<!-- Facebook -->
 				<a href="https://facebook.com/vanphuccare" target="_blank" rel="noopener noreferrer" 
-				   class="w-20 h-20 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center" 
+				   class="w-9 h-9 xl:w-14 xl:h-14 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center"
 				   aria-label="Facebook">
 					<img src="./assets/icons/facebook.svg" alt="Facebook" class="w-full h-full object-contain">
 				</a>
 
 				<!-- YouTube -->
 				<a href="https://youtube.com/@vanphuccare" target="_blank" rel="noopener noreferrer" 
-				   class="w-20 h-20 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center" 
+				   class="w-9 h-9 xl:w-14 xl:h-14 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center"
 				   aria-label="YouTube">
 					<img src="./assets/icons/youtube.svg" alt="YouTube" class="w-full h-full object-contain">
 				</a>
 
 				<!-- TikTok -->
 				<a href="https://tiktok.com/@vanphuccare" target="_blank" rel="noopener noreferrer" 
-				   class="w-20 h-20 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center" 
+				   class="w-9 h-9 xl:w-14 xl:h-14 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center"
 				   aria-label="TikTok">
 					<img src="./assets/icons/tiktok.svg" alt="TikTok" class="w-full h-full object-contain">
 				</a>
@@ -1288,7 +1288,7 @@
 					     alt="DMCA Protected" 
 					     width="120"
 					     height="55" 
-					     class="h-[42px] sm:h-[48px] md:h-[55px] w-auto object-contain block">
+					     class="h-12 sm:h-[48px] md:h-[55px] w-auto object-contain block">
 				</a>
 
 				<!-- Bộ Công Thương -->
@@ -1297,20 +1297,20 @@
 					     alt="Đã Thông Báo Bộ Công Thương" 
 					     width="145"
 					     height="55" 
-					     class="h-[42px] sm:h-[48px] md:h-[55px] w-auto object-contain block">
+					     class="h-12 sm:h-[48px] md:h-[55px] w-auto object-contain block">
 				</a>
 			</div>
 		</div>
 
 		<!-- Bottom Row: Navigation Links (Mobile flex-col gap-2 no divider, Desktop flex-row with text-neutral-600 divider) -->
 		<div class="pt-6 flex flex-col xl:flex-row items-start xl:items-center justify-start gap-2 xl:gap-3 text-base font-medium text-text-body-default">
-			<a href="#dieu-khoan-su-dung" class="hover:text-text-body-muted transition-colors">Điều khoản sử dụng</a>
-			<span class="hidden xl:inline text-neutral-600">|</span>
-			<a href="#chinh-sach-bao-mat" class="hover:text-text-body-muted transition-colors">Chính sách bảo mật</a>
-			<span class="hidden xl:inline text-neutral-600">|</span>
-			<a href="#tuyen-dung" class="hover:text-text-body-muted transition-colors">Tuyển dụng</a>
-			<span class="hidden xl:inline text-neutral-600">|</span>
-			<a href="#lien-he" class="hover:text-text-body-muted transition-colors">Liên hệ</a>
+			<a href="#dieu-khoan-su-dung" class="order-3 xl:order-1 hover:text-text-body-muted transition-colors">Điều khoản sử dụng</a>
+			<span class="order-4 hidden xl:inline text-neutral-600">|</span>
+			<a href="#chinh-sach-bao-mat" class="order-4 xl:order-3 hover:text-text-body-muted transition-colors">Chính sách bảo mật</a>
+			<span class="order-5 hidden xl:inline text-neutral-600">|</span>
+			<a href="#tuyen-dung" class="order-2 xl:order-5 hover:text-text-body-muted transition-colors">Tuyển dụng</a>
+			<span class="order-6 hidden xl:inline text-neutral-600">|</span>
+			<a href="#lien-he" class="order-1 xl:order-7 hover:text-text-body-muted transition-colors">Liên hệ</a>
 		</div>
 
 	</div>
@@ -1451,32 +1451,6 @@
 <!-- Embedded Modal & Drawer Interaction Support for Standalone Testing -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-	// Mobile menu toggle & drawer
-	const menuToggle = document.getElementById('mobile-menu-toggle');
-	const menuClose = document.getElementById('mobile-menu-close');
-	const menuDrawer = document.getElementById('mobile-menu-drawer');
-	
-	if (menuToggle && menuDrawer) {
-		menuToggle.addEventListener('click', function () {
-			menuDrawer.classList.toggle('hidden');
-			document.body.classList.toggle('overflow-hidden');
-		});
-	}
-	if (menuClose && menuDrawer) {
-		menuClose.addEventListener('click', function () {
-			menuDrawer.classList.add('hidden');
-			document.body.classList.remove('overflow-hidden');
-		});
-	}
-	if (menuDrawer) {
-		menuDrawer.querySelectorAll('a').forEach(link => {
-			link.addEventListener('click', function () {
-				menuDrawer.classList.add('hidden');
-				document.body.classList.remove('overflow-hidden');
-			});
-		});
-	}
-
 	// Consultation Modal handlers
 	const modal = document.getElementById('vpc-consultation-modal');
 	const modalTriggers = document.querySelectorAll('[data-open-modal="vpc-consultation-modal"]');

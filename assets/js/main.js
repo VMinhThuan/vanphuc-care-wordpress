@@ -35,6 +35,25 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 	}
 
+	// Hide the mobile sticky CTA as soon as the footer reaches its fixed area.
+	const mobileStickyCta = document.getElementById('mobile-sticky-cta');
+	const siteFooter = document.querySelector('.site-footer');
+	if (mobileStickyCta && siteFooter) {
+		function updateMobileStickyCta() {
+			const footerBounds = siteFooter.getBoundingClientRect();
+			const ctaHeight = mobileStickyCta.offsetHeight;
+			const footerOverlapsCta = footerBounds.top <= window.innerHeight - ctaHeight && footerBounds.bottom > 0;
+
+			mobileStickyCta.classList.toggle('translate-y-full', footerOverlapsCta);
+			mobileStickyCta.classList.toggle('opacity-0', footerOverlapsCta);
+			mobileStickyCta.classList.toggle('pointer-events-none', footerOverlapsCta);
+		}
+
+		updateMobileStickyCta();
+		window.addEventListener('scroll', updateMobileStickyCta, { passive: true });
+		window.addEventListener('resize', updateMobileStickyCta);
+	}
+
 	// Close drawer when clicking any link inside it
 	if (menuDrawer) {
 		menuDrawer.querySelectorAll('a').forEach(function (link) {
@@ -212,4 +231,3 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	console.log('Vạn Phúc Care Theme initialized successfully.');
 });
-

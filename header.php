@@ -74,7 +74,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 	</div>
 
-	<!-- Mobile Drawer Menu (< 1280px) - Full màn hình 390x844 (fixed inset-0, ẩn từ xl) -->
+	<!-- Mobile Drawer Menu: full mobile canvas matching the Figma artwork -->
 	<div id="mobile-menu-drawer" class="fixed inset-0 z-50 xl:hidden hidden bg-surface-background-default flex flex-col justify-between overflow-y-auto">
 		<div>
 			<!-- Top Bar: Cao 72px (h-[72px] px-5 py-3): logo 116x36 bên trái, nút đóng 48x48 bên phải -->
@@ -126,8 +126,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</nav>
 		</div>
 
-		<!-- Vùng nút: pt-4 px-5 pb-8, gap-3 -->
-		<div class="pt-4 px-5 pb-8 flex flex-col gap-3">
+		<!-- Vùng nút đúng Figma: CTA y=702, hotline y=762 trên artboard 390×844 -->
+		<div class="pt-0 px-5 pb-8 flex flex-col gap-3">
 			<button data-open-modal="vpc-consultation-modal" type="button" class="w-full h-12 rounded-full bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default font-medium text-base flex items-center justify-center transition-colors">
 				<span>Đăng Ký Tư Vấn</span>
 			</button>
@@ -135,13 +135,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<svg class="w-6 h-6 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
 				</svg>
-				<span>(024) 6329 6698</span>
+				<span>Hotline</span>
 			</a>
 		</div>
 	</div>
 
 	<!-- Sticky CTA bar Mobile (< 1280px) - Cao 84px, bóng 0 -4px 16px rgb(0 0 0 / 0.12), gồm nút gọi và nút Đăng Ký Tư Vấn -->
-	<div id="mobile-sticky-cta" class="fixed bottom-0 left-0 right-0 z-40 h-[84px] bg-surface-background-default shadow-[0_-4px_16px_rgba(0,0,0,0.12)] flex items-center justify-between px-5 py-3 gap-3 xl:hidden">
+	<div id="mobile-sticky-cta" class="fixed bottom-0 left-0 right-0 z-40 h-[84px] bg-surface-background-default shadow-[0_-4px_16px_rgba(0,0,0,0.12)] flex items-center justify-between px-5 py-3 gap-3 xl:hidden transition-[transform,opacity] duration-300 ease-out">
 		<a href="tel:02463296698" class="flex-1 h-12 flex items-center justify-center gap-2 rounded-full border border-border-primary-default text-text-link-default font-semibold text-base px-4 transition-colors">
 			<svg class="w-6 h-6 stroke-current fill-none shrink-0" viewBox="0 0 24 24" stroke-width="2">
 				<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />

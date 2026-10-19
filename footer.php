@@ -121,27 +121,27 @@ $theme_uri = get_template_directory_uri();
 
 		</div>
 
-		<!-- Row: 3 Social Icons (Facebook, YouTube, TikTok w-20 h-20 gap-6) + 2 Badges, Một đường kẻ dưới hàng social (border-b) -->
-		<div class="py-6 border-b border-border-divider-default flex flex-col sm:flex-row items-center justify-between gap-6">
-			<!-- Social Icons (Facebook, YouTube, TikTok: w-20 h-20 (80px), gap-6) -->
-			<div class="flex items-center gap-6">
+		<!-- Row: 3 social icons sized to the footer design + 2 certification badges -->
+		<div class="py-6 border-b-0 sm:border-b sm:border-border-divider-default flex flex-col sm:flex-row items-start sm:items-center justify-between gap-10 sm:gap-6">
+			<!-- Social icons: 36px mobile, matching the supplied mobile artwork -->
+			<div class="flex items-center gap-8">
 				<!-- Facebook -->
 				<a href="https://facebook.com/vanphuccare" target="_blank" rel="noopener noreferrer" 
-				   class="w-20 h-20 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center" 
+				   class="w-9 h-9 xl:w-14 xl:h-14 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center"
 				   aria-label="Facebook">
 					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/facebook.svg' ); ?>" alt="Facebook" class="w-full h-full object-contain">
 				</a>
 
 				<!-- YouTube -->
 				<a href="https://youtube.com/@vanphuccare" target="_blank" rel="noopener noreferrer" 
-				   class="w-20 h-20 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center" 
+				   class="w-9 h-9 xl:w-14 xl:h-14 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center"
 				   aria-label="YouTube">
 					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/youtube.svg' ); ?>" alt="YouTube" class="w-full h-full object-contain">
 				</a>
 
 				<!-- TikTok -->
 				<a href="https://tiktok.com/@vanphuccare" target="_blank" rel="noopener noreferrer" 
-				   class="w-20 h-20 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center" 
+				   class="w-9 h-9 xl:w-14 xl:h-14 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center"
 				   aria-label="TikTok">
 					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/tiktok.svg' ); ?>" alt="TikTok" class="w-full h-full object-contain">
 				</a>
@@ -155,7 +155,7 @@ $theme_uri = get_template_directory_uri();
 					     alt="DMCA Protected" 
 					     width="120"
 					     height="55" 
-					     class="h-[42px] sm:h-[48px] md:h-[55px] w-auto object-contain block">
+					     class="h-12 sm:h-[48px] md:h-[55px] w-auto object-contain block">
 				</a>
 
 				<!-- Bộ Công Thương -->
@@ -164,20 +164,20 @@ $theme_uri = get_template_directory_uri();
 					     alt="Đã Thông Báo Bộ Công Thương" 
 					     width="145"
 					     height="55" 
-					     class="h-[42px] sm:h-[48px] md:h-[55px] w-auto object-contain block">
+					     class="h-12 sm:h-[48px] md:h-[55px] w-auto object-contain block">
 				</a>
 			</div>
 		</div>
 
 		<!-- Bottom Row: Navigation Links (Mobile flex-col gap-2 no divider, Desktop flex-row with text-neutral-600 divider) -->
 		<div class="pt-6 flex flex-col xl:flex-row items-start xl:items-center justify-start gap-2 xl:gap-3 text-base font-medium text-text-body-default">
-			<a href="<?php echo esc_url( home_url( '/dieu-khoan-su-dung' ) ); ?>" class="hover:text-text-body-muted transition-colors">Điều khoản sử dụng</a>
-			<span class="hidden xl:inline text-neutral-600">|</span>
-			<a href="<?php echo esc_url( home_url( '/chinh-sach-bao-mat' ) ); ?>" class="hover:text-text-body-muted transition-colors">Chính sách bảo mật</a>
-			<span class="hidden xl:inline text-neutral-600">|</span>
-			<a href="<?php echo esc_url( home_url( '/tuyen-dung' ) ); ?>" class="hover:text-text-body-muted transition-colors">Tuyển dụng</a>
-			<span class="hidden xl:inline text-neutral-600">|</span>
-			<a href="<?php echo esc_url( home_url( '/lien-he' ) ); ?>" class="hover:text-text-body-muted transition-colors">Liên hệ</a>
+			<a href="<?php echo esc_url( home_url( '/dieu-khoan-su-dung' ) ); ?>" class="order-3 xl:order-1 hover:text-text-body-muted transition-colors">Điều khoản sử dụng</a>
+			<span class="order-4 hidden xl:inline text-neutral-600">|</span>
+			<a href="<?php echo esc_url( home_url( '/chinh-sach-bao-mat' ) ); ?>" class="order-4 xl:order-3 hover:text-text-body-muted transition-colors">Chính sách bảo mật</a>
+			<span class="order-5 hidden xl:inline text-neutral-600">|</span>
+			<a href="<?php echo esc_url( home_url( '/tuyen-dung' ) ); ?>" class="order-2 xl:order-5 hover:text-text-body-muted transition-colors">Tuyển dụng</a>
+			<span class="order-6 hidden xl:inline text-neutral-600">|</span>
+			<a href="<?php echo esc_url( home_url( '/lien-he' ) ); ?>" class="order-1 xl:order-7 hover:text-text-body-muted transition-colors">Liên hệ</a>
 		</div>
 
 	</div>
