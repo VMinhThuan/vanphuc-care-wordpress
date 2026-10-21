@@ -51,7 +51,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<li><a href="<?php echo esc_url( home_url( '/#trung-tam-o-cu' ) ); ?>" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Ở cữ</a></li>
 				<li><a href="<?php echo esc_url( home_url( '/#dich-vu-tai-nha' ) ); ?>" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Bảo mẫu</a></li>
 				<li><a href="<?php echo esc_url( home_url( '/#dich-vu-noi-bat' ) ); ?>" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Dịch vụ</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/#dao-tao-easy' ) ); ?>" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Lớp học tiền sản</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/#lop-hoc-tien-san' ) ); ?>" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Lớp học tiền sản</a></li>
 				<li><a href="<?php echo esc_url( home_url( '/#tin-tuc' ) ); ?>" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Kiến thức</a></li>
 			</ul>
 		</nav>
@@ -115,7 +115,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<span>Dịch vụ</span>
 					<svg class="w-6 h-6 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
 				</a>
-				<a href="<?php echo esc_url( home_url( '/#dao-tao-easy' ) ); ?>" class="h-16 py-4 flex items-center justify-between border-b border-border-divider-default text-xl font-medium text-text-nav-default hover:text-text-nav-hover">
+				<a href="<?php echo esc_url( home_url( '/#lop-hoc-tien-san' ) ); ?>" class="h-16 py-4 flex items-center justify-between border-b border-border-divider-default text-xl font-medium text-text-nav-default hover:text-text-nav-hover">
 					<span>Lớp học tiền sản</span>
 					<svg class="w-6 h-6 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
 				</a>

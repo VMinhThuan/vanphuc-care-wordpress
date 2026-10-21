@@ -548,5 +548,43 @@
     color: #F48283;
     padding-left: 4px;
   }
+
+  /* Infinite Marquee for Feedback / Testimonials */
+  @keyframes marquee-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: marquee-scroll 45s linear infinite;
+  }
+
+  .animate-marquee-slow {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: marquee-scroll 55s linear infinite;
+  }
+
+  .animate-marquee:hover,
+  .animate-marquee-slow:hover {
+    animation-play-state: paused;
+  }
+
+  /* Utility to hide scrollbars on touch / mobile carousels */
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 

@@ -20,7 +20,7 @@ $theme_uri = get_template_directory_uri();
 ?>
 </main><!-- #primary -->
 
-<footer class="site-footer relative w-full overflow-hidden py-8 xl:py-6 px-5 xl:px-20 text-text-body-default" style="background: linear-gradient(180.91deg, var(--color-neutral-100) 22.32%, var(--color-primary-200) 146.38%);">
+<footer class="site-footer relative w-full overflow-hidden pt-8 pb-28 xl:py-6 px-5 xl:px-20 text-text-body-default" style="background: linear-gradient(180.91deg, var(--color-neutral-100) 22.32%, var(--color-primary-200) 146.38%);">
 	<!-- Decorative faint watermark emblem on bottom-right (Exact Figma: 471x360px, fill white, opacity 0.3) -->
 	<div class="pointer-events-none absolute right-0 bottom-0 z-0 select-none overflow-hidden" aria-hidden="true">
 		<img src="<?php echo esc_url( $theme_uri . '/assets/images/footer-watermark.svg' ); ?>" 
@@ -83,9 +83,9 @@ $theme_uri = get_template_directory_uri();
 				</h3>
 				<ul class="space-y-2 text-base font-medium text-text-body-default">
 					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#trung-tam-o-cu' ) ); ?>" class="hover:text-text-body-muted transition-colors">Trung tâm ở cữ</a></li>
-					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#dao-tao-easy' ) ); ?>" class="hover:text-text-body-muted transition-colors">Khóa học trực tuyến</a></li>
+					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#khoa-hoc-truc-tuyen' ) ); ?>" class="hover:text-text-body-muted transition-colors">Khóa học trực tuyến</a></li>
 					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#dich-vu-tai-nha' ) ); ?>" class="hover:text-text-body-muted transition-colors">Bảo mẫu tại nhà</a></li>
-					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#dao-tao-easy' ) ); ?>" class="hover:text-text-body-muted transition-colors">Lớp học tiền sản</a></li>
+					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#lop-hoc-tien-san' ) ); ?>" class="hover:text-text-body-muted transition-colors">Lớp học tiền sản</a></li>
 					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#dao-tao-easy' ) ); ?>" class="hover:text-text-body-muted transition-colors">Tư vấn nuôi con EASY</a></li>
 					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#dich-vu-tai-nha' ) ); ?>" class="hover:text-text-body-muted transition-colors">Tắm trẻ sơ sinh</a></li>
 					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#dich-vu-tai-nha' ) ); ?>" class="hover:text-text-body-muted transition-colors">Thông tắc tia sữa</a></li>
