@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 get_header();
- = get_template_directory_uri();
+$theme_uri = get_template_directory_uri();
 ?>
 
 <!-- =========================================================================
