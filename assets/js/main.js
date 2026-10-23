@@ -229,5 +229,104 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	});
 
+	// Hero Banner Slider
+	const heroSlider = document.getElementById('vpc-hero-slider');
+	if (heroSlider) {
+		const slidesContainer = document.getElementById('vpc-hero-slides');
+		const slides = heroSlider.querySelectorAll('.vpc-hero-slide');
+		const dots = heroSlider.querySelectorAll('[data-hero-dot]');
+		const prevBtn = document.getElementById('vpc-hero-prev');
+		const nextBtn = document.getElementById('vpc-hero-next');
+		let currentIndex = 0;
+		let autoplayTimer = null;
+		const totalSlides = slides.length;
+
+		function goToSlide(index) {
+			if (index < 0) {
+				currentIndex = totalSlides - 1;
+			} else if (index >= totalSlides) {
+				currentIndex = 0;
+			} else {
+				currentIndex = index;
+			}
+
+			if (slidesContainer) {
+				slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+			}
+
+			dots.forEach((dot, i) => {
+				if (i === currentIndex) {
+					dot.classList.remove('w-2.5', 'bg-white/70');
+					dot.classList.add('w-8', 'bg-[#1A77BA]');
+				} else {
+					dot.classList.remove('w-8', 'bg-[#1A77BA]');
+					dot.classList.add('w-2.5', 'bg-white/70');
+				}
+			});
+		}
+
+		function startAutoplay() {
+			stopAutoplay();
+			autoplayTimer = setInterval(() => {
+				goToSlide(currentIndex + 1);
+			}, 5000);
+		}
+
+		function stopAutoplay() {
+			if (autoplayTimer) {
+				clearInterval(autoplayTimer);
+				autoplayTimer = null;
+			}
+		}
+
+		if (prevBtn) {
+			prevBtn.addEventListener('click', (e) => {
+				e.preventDefault();
+				goToSlide(currentIndex - 1);
+				startAutoplay();
+			});
+		}
+
+		if (nextBtn) {
+			nextBtn.addEventListener('click', (e) => {
+				e.preventDefault();
+				goToSlide(currentIndex + 1);
+				startAutoplay();
+			});
+		}
+
+		dots.forEach((dot) => {
+			dot.addEventListener('click', (e) => {
+				e.preventDefault();
+				const idx = parseInt(dot.getAttribute('data-hero-dot'), 10);
+				goToSlide(idx);
+				startAutoplay();
+			});
+		});
+
+		heroSlider.addEventListener('mouseenter', stopAutoplay);
+		heroSlider.addEventListener('mouseleave', startAutoplay);
+
+		// Touch swipe support
+		let touchStartX = 0;
+		let touchEndX = 0;
+		heroSlider.addEventListener('touchstart', (e) => {
+			touchStartX = e.changedTouches[0].screenX;
+			stopAutoplay();
+		}, { passive: true });
+
+		heroSlider.addEventListener('touchend', (e) => {
+			touchEndX = e.changedTouches[0].screenX;
+			if (touchStartX - touchEndX > 50) {
+				goToSlide(currentIndex + 1);
+			} else if (touchEndX - touchStartX > 50) {
+				goToSlide(currentIndex - 1);
+			}
+			startAutoplay();
+		}, { passive: true });
+
+		startAutoplay();
+	}
+
 	console.log('Vạn Phúc Care Theme initialized successfully.');
 });
