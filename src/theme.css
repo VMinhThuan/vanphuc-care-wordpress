@@ -99,6 +99,7 @@
   /* Font */
   --font-heading: "Fraunces", serif;
   --font-body: "Manrope", sans-serif;
+  --font-sans: "Manrope", sans-serif;
 
   /* Cỡ chữ heading, Desktop (px / line-height) */
   --text-h1: 3rem;       /* 48 / 64 */
@@ -304,6 +305,51 @@
    - Mobile 390: 4 cột, width 75.5px, gutter 16px, margin 20px (Content max-width 350px)
 ------------------------------------------------------------ */
 @layer components {
+  /* Shared homepage primitives. Keep visual values named rather than repeated
+     as arbitrary utilities in individual sections. */
+  .vpc-section {
+    padding: 3rem 1.25rem;
+  }
+  @media (min-width: 64rem) {
+    .vpc-section {
+      padding: 6rem 5rem;
+    }
+  }
+  .vpc-gradient-blue {
+    background: linear-gradient(100.79deg, var(--color-surface-background-default) 41.11%, var(--color-surface-background-primary) 152.08%);
+  }
+  .vpc-gradient-pink {
+    background: linear-gradient(248.77deg, var(--color-surface-background-default) 48.06%, var(--color-surface-background-secondary) 129.02%);
+  }
+  .vpc-gradient-blue-reverse {
+    background: linear-gradient(244.09deg, var(--color-surface-background-default) 58.32%, var(--color-surface-background-primary) 145.78%);
+  }
+  .vpc-gradient-consultation {
+    background: linear-gradient(359.7deg, var(--color-surface-background-primary) -14.05%, var(--color-surface-background-default) 63.47%);
+  }
+  .vpc-gradient-neutral-primary {
+    background: linear-gradient(59.1deg, var(--color-neutral-100) 66.82%, var(--color-primary-100) 146.55%);
+  }
+  .vpc-gradient-press {
+    /* Figma press section gradient – màu chưa có trong token sheet.
+       Designer cần bổ sung token cho round tiếp theo.
+       Hex gốc: #FFF8F8 → #FDF1F1 → #FAF0F0 (secondary-100 pha cực nhạt). */
+    background: linear-gradient(180deg, #FFF8F8 0%, #FDF1F1 50%, #FAF0F0 100%);
+  }
+  .vpc-button {
+    box-sizing: border-box;
+    height: 2.5rem;
+    min-height: 2.5rem;
+    padding: 0.5rem 1rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   /* Container toàn trang chuẩn theo tỉ lệ 1440px */
   .vpc-container {
     width: 100%;
@@ -375,15 +421,15 @@
     align-items: center;
     padding: 0.5rem 0;
     font-size: 1rem;
-    font-weight: 500;
-    color: #292929;
+    font-weight: 600;
+    color: var(--color-text-body-default);
     text-decoration: none;
     transition: color 0.2s ease;
   }
   .vpc-nav-menu > li > a:hover,
   .vpc-nav-menu > li.current-menu-item > a,
   .vpc-nav-menu > li.current_page_item > a {
-    color: #1A77BA;
+    color: var(--color-text-link-default);
   }
 
   /* Policy Styles (Chính sách, Điều khoản, Quy trình khiếu nại) */
@@ -396,14 +442,14 @@
     display: flex;
     align-items: center;
     padding: 40px 0;
-    color: #FFFFFF;
+    color: var(--color-neutral-white);
   }
   .policy-hero-title {
     font-family: var(--font-heading);
     font-weight: 700;
     font-size: 2.25rem;
     line-height: 1.3;
-    color: #FFFFFF;
+    color: var(--color-neutral-white);
     margin-bottom: 12px;
   }
   .policy-hero-desc {
@@ -411,12 +457,12 @@
     font-weight: 500;
     font-size: 1rem;
     line-height: 1.6;
-    color: #FFFFFF;
+    color: var(--color-neutral-white);
     opacity: 0.95;
   }
   .policy-content-section {
     padding: 50px 0 80px;
-    background: #FFFFFF;
+    background: var(--color-surface-card-default);
   }
   .policy-main-content {
     max-width: 1240px;
@@ -475,13 +521,13 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #D1E4F1;
-    color: #1A77BA;
+    background: var(--color-primary-100);
+    color: var(--color-primary-500);
     font-weight: 800;
     font-size: 14px;
     padding: 6px 14px;
     border-radius: 20px;
-    border: 1px solid rgba(26, 119, 186, 0.35);
+    border: 1px solid var(--color-primary-300);
   }
   .policy-subcase-list {
     list-style: none;
@@ -493,8 +539,8 @@
   .policy-subcase-item {
     position: relative;
     padding: 12px 18px 12px 36px;
-    background: #F9FBFC;
-    border-left: 3px solid #1A77BA;
+    background: var(--color-surface-background-default);
+    border-left: 3px solid var(--color-primary-500);
     border-radius: 0 6px 6px 0;
     font-size: 16px;
     line-height: 1.65;
@@ -506,29 +552,29 @@
     left: 16px;
     top: 8px;
     font-size: 22px;
-    color: #1A77BA;
+    color: var(--color-primary-500);
   }
   .related-policies-box {
     width: 100%;
     max-width: 535px;
-    background: #F3F9FF;
-    border: 1px solid #1A77BA;
+    background: var(--color-primary-100);
+    border: 1px solid var(--color-primary-500);
     border-radius: 12px;
     padding: 24px 28px;
     margin-top: 48px;
-    box-shadow: 0 4px 15px rgba(26, 119, 186, 0.08);
+    box-shadow: 0 4px 15px color-mix(in srgb, var(--color-primary-500) 8%, transparent);
   }
   .related-box-title {
     font-family: var(--font-heading);
     font-weight: 700;
     font-size: 1.25rem;
-    color: #1A77BA;
+    color: var(--color-primary-500);
     margin-bottom: 12px;
   }
   .related-box-line {
     width: 100%;
     height: 1px;
-    background-color: #1A77BA;
+    background-color: var(--color-primary-500);
     margin-bottom: 16px;
     opacity: 0.5;
   }
@@ -541,11 +587,11 @@
   .related-box-links li a {
     font-weight: 500;
     font-size: 1rem;
-    color: #1A77BA;
+    color: var(--color-primary-500);
     transition: all 0.2s ease;
   }
   .related-box-links li a:hover {
-    color: #F48283;
+    color: var(--color-secondary-500);
     padding-left: 4px;
   }
 
@@ -556,6 +602,15 @@
     }
     100% {
       transform: translateX(-50%);
+    }
+  }
+
+  @keyframes marquee-scroll-reverse {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
     }
   }
 
@@ -573,9 +628,26 @@
     animation: marquee-scroll 55s linear infinite;
   }
 
+  .animate-marquee-reverse {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: marquee-scroll-reverse 50s linear infinite;
+  }
+
   .animate-marquee:hover,
-  .animate-marquee-slow:hover {
+  .animate-marquee-slow:hover,
+  .animate-marquee-reverse:hover {
     animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee,
+    .animate-marquee-slow,
+    .animate-marquee-reverse {
+      animation: none;
+      transform: none;
+    }
   }
 
   /* Utility to hide scrollbars on touch / mobile carousels */
@@ -587,4 +659,3 @@
     scrollbar-width: none;
   }
 }
-

@@ -47,6 +47,7 @@ $title       = $args['title'] ?? 'Đăng ký tư vấn';
 $subtitle    = $args['subtitle'] ?? 'Để lại thông tin, Vạn Phúc Care sẽ liên hệ tư vấn cho Ba/Mẹ trong thời gian sớm nhất.';
 $action_url  = $args['action_url'] ?? '';
 $extra_class = $args['class'] ?? '';
+$services    = vpc_get_consultation_services();
 ?>
 
 <!-- Consultation Modal Backdrop & Container -->
@@ -92,7 +93,8 @@ $extra_class = $args['class'] ?? '';
 
 		<!-- Form Content -->
 		<form method="post" action="<?php echo esc_url( $action_url ); ?>" class="space-y-4">
-			<?php wp_nonce_field( 'vpc_consultation_modal_submit', 'vpc_consultation_modal_nonce' ); ?>
+			<?php wp_nonce_field( 'vpc_consultation_nonce', 'vpc_consultation_nonce' ); ?>
+			<input type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
 
 			<!-- Row 1: Họ tên + Số điện thoại (2 columns) -->
 			<div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
@@ -128,13 +130,7 @@ $extra_class = $args['class'] ?? '';
 					'label'       => 'Dịch vụ quan tâm',
 					'placeholder' => 'Chọn dịch vụ',
 					'required'    => true,
-					'options'     => [
-						[ 'value' => 'trung-tam-o-cu', 'label' => 'Trung tâm ở cữ' ],
-						[ 'value' => 'cham-soc-me-sau-sinh', 'label' => 'Chăm sóc mẹ sau sinh tại nhà' ],
-						[ 'value' => 'tam-be-so-sinh', 'label' => 'Tắm bé & massage sơ sinh' ],
-						[ 'value' => 'thong-tac-tia-sua', 'label' => 'Thông tắc tia sữa chuyên sâu' ],
-						[ 'value' => 'dieu-duong-tai-nha', 'label' => 'Điều dưỡng y tế tại nhà' ],
-					],
+					'options'     => $services,
 				] );
 				?>
 			</div>
@@ -161,7 +157,7 @@ $extra_class = $args['class'] ?? '';
 					'variant' => 'primary',
 					'size'    => 'md',
 					'type'    => 'submit',
-					'class'   => 'w-full justify-center rounded-2xl h-[48px]',
+					'class'   => 'w-full justify-center h-10',
 				] );
 				?>
 			</div>

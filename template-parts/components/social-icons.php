@@ -1,7 +1,7 @@
 <?php
 /**
  * Social Icons Component for Van Phuc Care.
- * Renders verified SVG icons (Facebook, TikTok, YouTube, Zalo, Messenger, Hotline).
+ * Renders verified SVG icons (Facebook, TikTok, Instagram, Zalo, Messenger, Hotline).
  *
  * @package VanPhucCare
  */
@@ -50,16 +50,21 @@ $channels = array(
 		'color' => '#000000',
 	),
 	array(
-		'name'  => 'YouTube',
-		'url'   => 'https://youtube.com/@vanphuccare',
-		'file'  => 'youtube.svg',
-		'color' => '#FF0000',
+		'name'  => 'Instagram',
+		'url'   => get_theme_mod( 'vpc_instagram_url', '' ),
+		'file'  => 'instagram.svg',
+		'color' => '#000000',
 	),
 );
 ?>
 
 <div class="flex items-center gap-2 sm:gap-2.5 <?php echo esc_attr( $class ); ?>">
 	<?php foreach ( $channels as $ch ) : ?>
+		<?php if ( empty( $ch['url'] ) ) : ?>
+			<span class="group relative inline-flex items-center justify-center rounded-full <?php echo esc_attr( $dim ); ?>" aria-label="<?php echo esc_attr( $ch['name'] ); ?>">
+				<img src="<?php echo esc_url( "{$icons_dir}/{$ch['file']}" ); ?>" alt="<?php echo esc_attr( $ch['name'] ); ?>" class="w-full h-full object-contain rounded-full">
+			</span>
+		<?php else : ?>
 		<a href="<?php echo esc_url( $ch['url'] ); ?>" 
 		   target="_blank" 
 		   rel="noopener noreferrer" 
@@ -70,5 +75,6 @@ $channels = array(
 			     alt="<?php echo esc_attr( $ch['name'] ); ?>" 
 			     class="w-full h-full object-contain rounded-full">
 		</a>
+		<?php endif; ?>
 	<?php endforeach; ?>
 </div>

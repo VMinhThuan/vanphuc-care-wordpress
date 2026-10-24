@@ -49,5 +49,14 @@ function vanphuccare_enqueue_assets() {
 		$js_version,
 		true
 	);
+
+	wp_localize_script(
+		'vanphuccare-main',
+		'vpcData',
+		array(
+			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+			'nonce'   => wp_create_nonce( 'vpc_consultation_nonce' ),
+		)
+	);
 }
 add_action( 'wp_enqueue_scripts', 'vanphuccare_enqueue_assets' );

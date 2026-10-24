@@ -43,12 +43,12 @@ $extra_class = $args['class'] ?? '';
 $type        = $args['type'] ?? 'button';
 
 // Base: Focus ring when tabbing
-$base_classes = 'inline-flex items-center justify-center font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-border-focus-default select-none';
+$base_classes = 'vpc-button inline-flex items-center justify-center font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-border-focus-default select-none';
 
-// Size styles (SM = 32px, MD = 48px, LG = 64px matching Figma)
+// Size styles. Matches Figma variable handoff: CTA size md is 40px (h-10).
 $size_classes = [
 	'sm' => 'h-8 px-4 text-sm gap-1.5 rounded-full',
-	'md' => 'h-10 sm:h-12 px-5 sm:px-6 text-base gap-2 rounded-full',
+	'md' => 'h-10 px-4 text-base gap-2 rounded-full',
 	'lg' => 'h-14 sm:h-16 px-7 sm:px-8 text-base sm:text-lg gap-2.5 rounded-full',
 ];
 $current_size = $size_classes[ $size ] ?? $size_classes['md'];

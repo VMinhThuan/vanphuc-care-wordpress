@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "dev": "tailwindcss -i ./src/theme.css -o ./assets/css/theme.css --watch",
-    "build": "tailwindcss -i ./src/theme.css -o ./assets/css/theme.css --minify"
+    "build": "tailwindcss -i ./src/theme.css -o ./assets/css/theme.css --minify",
+    "test:static-qa": "node ./tests/static-qa.mjs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",
+    "playwright": "^1.57.0",
     "tailwindcss": "^4.3.3"
   }
 }

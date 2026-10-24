@@ -22,6 +22,7 @@ $title       = $args['title'] ?? '';
 $subtitle    = $args['subtitle'] ?? '';
 $action_url  = $args['action_url'] ?? '';
 $extra_class = $args['class'] ?? '';
+$services    = vpc_get_consultation_services();
 ?>
 
 <div class="vpc-consultation-card bg-surface-background-default rounded-[24px] p-6 sm:p-8 md:p-9 border border-neutral-300 shadow-sm max-w-2xl mx-auto <?php echo esc_attr( $extra_class ); ?>">
@@ -39,7 +40,8 @@ $extra_class = $args['class'] ?? '';
 	<?php endif; ?>
 
 	<form method="post" action="<?php echo esc_url( $action_url ); ?>" class="space-y-4 sm:space-y-5">
-		<?php wp_nonce_field( 'vpc_consultation_form_submit', 'vpc_consultation_nonce' ); ?>
+		<?php wp_nonce_field( 'vpc_consultation_nonce', 'vpc_consultation_nonce' ); ?>
+		<input type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
 
 		<!-- Row 1: Họ tên + Số điện thoại -->
 		<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
@@ -76,13 +78,7 @@ $extra_class = $args['class'] ?? '';
 				'type'        => 'select',
 				'placeholder' => 'Chọn dịch vụ bạn quan tâm',
 				'required'    => true,
-				'options'     => [
-					'trung-tam-o-cu'      => 'Trung tâm ở cữ',
-					'cham-soc-me-sau-sinh' => 'Chăm sóc mẹ sau sinh tại nhà',
-					'tam-be-so-sinh'       => 'Tắm bé & massage sơ sinh',
-					'thong-tac-tia-sua'   => 'Thông tắc tia sữa chuyên sâu',
-					'dieu-duong-tai-nha'   => 'Điều dưỡng y tế tại nhà',
-				],
+				'options'     => $services,
 			] );
 			?>
 		</div>
@@ -140,7 +136,7 @@ $extra_class = $args['class'] ?? '';
 		<div class="pt-2">
 			<?php
 			get_template_part( 'template-parts/components/button', null, [
-				'text'    => 'Đăng ký tư vấn ngay',
+				'text'    => 'Gửi tư vấn ngay',
 				'variant' => 'primary',
 				'size'    => 'md',
 				'type'    => 'submit',
