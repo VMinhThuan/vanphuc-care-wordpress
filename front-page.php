@@ -1448,7 +1448,7 @@ $consultation_services = vpc_get_consultation_services();
 					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-text-heading-secondary-default shrink-0">
 						<path d="M12 2L13.8 8.6L20.4 10.4L13.8 12.2L12 18.8L10.2 12.2L3.6 10.4L10.2 8.6L12 2Z" fill="currentColor"/>
 					</svg>
-					<span class="font-body font-medium text-xs sm:text-sm tracking-wider uppercase text-text-link-hover">VẠN PHÚC CARE</span>
+					<span class="font-body font-medium text-xs sm:text-sm tracking-wider uppercase text-text-link-hover">BÀI BÁO NỔI BẬT</span>
 				</div>
 
 				<!-- Title (Figma Bold 48) -->
