@@ -1,5 +1,5 @@
 /*
-  VPC – Tailwind v4 theme (tạo từ Figma variables, bản nháp)
+  VPC – Tailwind v4 theme (tạo từ Figma variables, cập nhật 24/10/2026)
   Dán vào file CSS chính, sau dòng @import "tailwindcss".
 
   Quy ước tên: Figma `color/primary/500` -> CSS `--color-primary-500` -> class `bg-primary-500`
@@ -129,6 +129,9 @@
 
   /* Đổ bóng: Figma effect style `shadow/card` */
   --shadow-card: 0 1px 5px 0 rgb(0 0 0 / 0.15);
+
+  /* Đổ bóng thanh CTA dính đáy trang (Figma: shadow đen 12%, đổ lên trên) */
+  --shadow-cta: 0 -4px 16px 0 color-mix(in srgb, var(--color-neutral-black) 12%, transparent);
 }
 
 /* ---------- 2. Semantic (tên giữ 1:1 với Figma) ---------- */
@@ -288,23 +291,15 @@
 
 /*
   Độ đậm trong Text style (Figma):
-    Heading Desktop: H1 font-semibold (600), H2 đến H5 font-normal (400), H6 font-medium (500)
+    Heading Desktop: H1 font-semibold (600), H2 đến H6 font-normal (400)
     Heading Mobile: H1 font-semibold (600), H2 đến H4 font-normal (400)
     (Heading luôn dùng font-heading. Token --text-h* chỉ chứa cỡ chữ và line-height,
     độ đậm dev thêm bằng class font-*.)
-    Body xs / xl / 2xl: font-medium (500), font-body
-    Body base: font-semibold (600), font-body
-    Link xs / base / xl / 2xl: font-medium (500), có gạch chân, màu text-link
+    Body xs: font-normal (400), font-body
+    Body base / xl / 2xl: font-medium (500), font-body
+    Link xs: font-normal (400), có gạch chân, màu text-link
+    Link base / xl / 2xl: font-medium (500), có gạch chân, màu text-link
+    Nav base (16/24) / xl (20/28): font-medium (500), font-body, màu text-nav
     Price: font-bold (700), font-body
   Cỡ chữ body: xs 12/16, base 16/24, xl 20/28, 2xl 24/32 (trùng mặc định Tailwind v4).
-*/
-
-/*
-  Ví dụ dùng:
-    Nút primary : bg-surface-button-primary-default hover:bg-surface-button-primary-hover
-                  active:bg-surface-button-primary-pressed text-text-inverse-default
-    Card        : bg-surface-card-default rounded-xl shadow-card p-6
-    Heading H1  : font-heading text-h1-mobile xl:text-h1 font-semibold text-text-heading-primary-default
-    Heading H2  : font-heading text-h2-mobile xl:text-h2 font-normal text-text-heading-primary-default
-    Giá tiền    : text-price font-bold text-text-display-price-default
 */

@@ -132,6 +132,9 @@
   /* Đổ bóng: Figma effect style `shadow/card` */
   --shadow-card: 0 1px 5px 0 rgb(0 0 0 / 0.15);
 
+  /* Đổ bóng thanh CTA dính đáy trang (Figma: shadow đen 12%, đổ lên trên) */
+  --shadow-cta: 0 -4px 16px 0 color-mix(in srgb, var(--color-neutral-black) 12%, transparent);
+
   /* Animation */
   --animate-bounce-subtle: bounce-subtle 2s ease-in-out infinite;
 
