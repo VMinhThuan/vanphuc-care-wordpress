@@ -6,6 +6,24 @@ Thumbs.db
 
 node_modules/
 
+# Local test configuration (may contain machine-specific credentials)
+tests/wp-config.php
+
+# Generated visual QA artifacts — retain test scripts in tests/, not their captures
+scratch/
+screenshots/
+test-results/
+playwright-report/
+coverage/
+.nyc_output/
+
+# One-off image comparisons/crops created while tuning the homepage
+assets/images/compare_*.png
+assets/images/crop_*.png
+assets/images/preview_*_composite.png
+assets/images/sec3_comparison_*.png
+assets/images/test_*_preview.png
+
 *.log
 
 .env
