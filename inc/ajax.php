@@ -43,6 +43,7 @@ function vpc_handle_consultation_submission() {
 	$full_name = isset( $_POST['full_name'] ) ? sanitize_text_field( wp_unslash( $_POST['full_name'] ) ) : ( isset( $_POST['customer_name'] ) ? sanitize_text_field( wp_unslash( $_POST['customer_name'] ) ) : '' );
 	$phone     = isset( $_POST['phone'] ) ? sanitize_text_field( wp_unslash( $_POST['phone'] ) ) : ( isset( $_POST['customer_phone'] ) ? sanitize_text_field( wp_unslash( $_POST['customer_phone'] ) ) : '' );
 	$service   = isset( $_POST['service'] ) ? sanitize_text_field( wp_unslash( $_POST['service'] ) ) : '';
+	$gestational_age = isset( $_POST['gestational_age'] ) ? sanitize_text_field( wp_unslash( $_POST['gestational_age'] ) ) : '';
 	$question  = isset( $_POST['question'] ) ? sanitize_textarea_field( wp_unslash( $_POST['question'] ) ) : ( isset( $_POST['customer_note'] ) ? sanitize_textarea_field( wp_unslash( $_POST['customer_note'] ) ) : '' );
 
 	if ( empty( $full_name ) || empty( $phone ) ) {
@@ -52,6 +53,14 @@ function vpc_handle_consultation_submission() {
 	}
 
 	$services = vpc_get_consultation_services();
+	$gestational_age_options = array(
+		'chua-mang-thai' => 'Chưa mang thai / Đang chuẩn bị',
+		'1-12-tuan'      => 'Mang thai 1 - 12 tuần',
+		'13-27-tuan'     => 'Mang thai 13 - 27 tuần',
+		'28-40-tuan'     => 'Mang thai 28 - 40 tuần',
+		'da-sinh-be'     => 'Đã sinh bé',
+	);
+	$gestational_age_label = $gestational_age_options[ $gestational_age ] ?? 'Chưa cung cấp';
 	if ( empty( $service ) || ! isset( $services[ $service ] ) ) {
 		wp_send_json_error( array(
 			'message' => 'Vui lòng chọn dịch vụ bạn quan tâm.',
@@ -81,6 +90,7 @@ function vpc_handle_consultation_submission() {
 		           "Họ và tên: " . $full_name . "\n" .
 		           "Số điện thoại: " . $phone . "\n" .
 		           "Dịch vụ quan tâm: " . $services[ $service ] . "\n" .
+		           "Tuần thai: " . $gestational_age_label . "\n" .
 		           "Nội dung/Câu hỏi: " . ( $question ? $question : 'Không có' ) . "\n" .
 		           "Thời gian gửi: " . current_time( 'd/m/Y H:i:s' ) . "\n";
 		$sent = wp_mail( $recipient, $subject, $body );

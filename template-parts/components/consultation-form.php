@@ -28,7 +28,7 @@ $services    = vpc_get_consultation_services();
 <div class="vpc-consultation-card bg-surface-background-default rounded-[24px] p-6 sm:p-8 md:p-9 border border-neutral-300 shadow-sm max-w-2xl mx-auto <?php echo esc_attr( $extra_class ); ?>">
 	<?php if ( ! empty( $title ) ) : ?>
 		<div class="mb-6 text-center">
-			<h3 class="font-heading text-xl sm:text-2xl text-neutral-900 font-bold mb-2">
+			<h3 class="font-heading text-xl sm:text-2xl text-neutral-900 font-semibold mb-2">
 				<?php echo esc_html( $title ); ?>
 			</h3>
 			<?php if ( ! empty( $subtitle ) ) : ?>
@@ -91,7 +91,7 @@ $services    = vpc_get_consultation_services();
 				'name'        => 'gestational_age',
 				'label'       => 'Tuần thai',
 				'type'        => 'select',
-				'placeholder' => 'Chọn tuần thai hiện tại',
+				'placeholder' => 'Tuần 35',
 				'required'    => true,
 				'options'     => [
 					'chua-mang-thai' => 'Chưa mang thai / Đang chuẩn bị',
@@ -104,15 +104,15 @@ $services    = vpc_get_consultation_services();
 			?>
 		</div>
 
-		<!-- Row 4: Câu hỏi -->
+		<!-- Row 4: Ghi chú -->
 		<div>
 			<?php
 			get_template_part( 'template-parts/components/form-input', null, [
 				'id'          => 'vpc_question',
 				'name'        => 'question',
-				'label'       => 'Câu hỏi',
+				'label'       => 'Ghi chú',
 				'type'        => 'textarea',
-				'placeholder' => 'Nhập câu hỏi hoặc yêu cầu cần tư vấn thêm...',
+				'placeholder' => 'Nhập ghi chú hoặc yêu cầu cần tư vấn thêm...',
 				'required'    => false,
 				'rows'        => 3,
 			] );
@@ -136,9 +136,9 @@ $services    = vpc_get_consultation_services();
 		<div class="pt-2">
 			<?php
 			get_template_part( 'template-parts/components/button', null, [
-				'text'    => 'Gửi tư vấn ngay',
+				'text'    => 'Gửi yêu cầu tư vấn',
 				'variant' => 'primary',
-				'size'    => 'md',
+				'size'    => 'body',
 				'type'    => 'submit',
 				'class'   => 'w-full justify-center',
 			] );

@@ -192,6 +192,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			if (card) {
 				card.classList.remove('scale-95');
 				card.classList.add('scale-100');
+				card.classList.remove('opacity-0');
+				card.classList.add('opacity-100');
 			}
 			const focusable = getFocusableElements(modal);
 			if (focusable[0]) focusable[0].focus();
@@ -208,6 +210,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (card) {
 			card.classList.remove('scale-100');
 			card.classList.add('scale-95');
+			card.classList.remove('opacity-100');
+			card.classList.add('opacity-0');
 		}
 
 		setTimeout(function () {
@@ -236,6 +240,16 @@ document.addEventListener('DOMContentLoaded', function () {
 			e.preventDefault();
 			const modal = btn.closest('[data-modal]');
 			closeModal(modal);
+		});
+	});
+
+	// Success modal: return to the services section when the visitor wants another service.
+	document.querySelectorAll('[data-success-other]').forEach(function (btn) {
+		btn.addEventListener('click', function () {
+			closeModal(document.getElementById('vpc-success-modal'));
+			setTimeout(function () {
+				document.getElementById('trung-tam-o-cu')?.scrollIntoView({ behavior: 'smooth' });
+			}, 250);
 		});
 	});
 
@@ -328,7 +342,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				// Open success modal
 				setTimeout(function () {
 					openModal('vpc-success-modal');
-				}, parentModal ? 300 : 0);
+				}, parentModal ? 250 : 0);
 			}
 
 			function onSubmissionDone() {

@@ -108,7 +108,7 @@ if ( $is_disabled ) {
 
 <div class="vpc-custom-select-component flex flex-col <?php echo esc_attr( $extra_class ); ?>" data-custom-select>
 	<?php if ( ! empty( $label ) ) : ?>
-		<label for="<?php echo esc_attr( $id ); ?>-trigger" class="block text-base font-medium text-text-body-default mb-2 select-none">
+		<label for="<?php echo esc_attr( $id ); ?>-trigger" class="block text-base sm:text-xl leading-7 font-medium text-text-body-default mb-3 select-none">
 			<?php if ( $required ) : ?>
 				<span class="text-error-500 font-bold mr-0.5">*</span>
 			<?php endif; ?>

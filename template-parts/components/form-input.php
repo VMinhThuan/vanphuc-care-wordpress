@@ -76,7 +76,7 @@ $input_classes = trim( "{$base_input_classes} {$box_shape_classes} {$state_input
 
 <div class="vpc-form-field flex flex-col <?php echo esc_attr( $extra_class ); ?>">
 	<?php if ( ! empty( $label ) ) : ?>
-		<label for="<?php echo esc_attr( $id ); ?>" class="block text-base font-medium text-text-body-default mb-2 select-none">
+		<label for="<?php echo esc_attr( $id ); ?>" class="block text-base sm:text-xl leading-7 font-medium text-text-body-default mb-3 select-none">
 			<?php if ( $required ) : ?>
 				<span class="text-error-500 font-bold mr-0.5">*</span>
 			<?php endif; ?>

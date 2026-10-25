@@ -180,13 +180,13 @@ $instagram_url = get_theme_mod( 'vpc_instagram_url', '' );
 
 		<!-- Bottom Row: Navigation Links (Mobile flex-col gap-2 no divider, Desktop flex-row with text-neutral-600 divider) -->
 		<div class="pt-6 flex flex-col xl:flex-row items-start xl:items-center justify-start gap-2 xl:gap-3 text-base font-medium text-text-body-default">
-			<a href="<?php echo esc_url( home_url( '/dieu-khoan-su-dung' ) ); ?>" class="order-3 xl:order-1 hover:text-text-body-muted transition-colors">Điều khoản sử dụng</a>
-			<span class="order-4 hidden xl:inline text-neutral-600">|</span>
-			<a href="<?php echo esc_url( home_url( '/chinh-sach-bao-mat' ) ); ?>" class="order-4 xl:order-3 hover:text-text-body-muted transition-colors">Chính sách bảo mật</a>
-			<span class="order-5 hidden xl:inline text-neutral-600">|</span>
-			<a href="<?php echo esc_url( home_url( '/tuyen-dung' ) ); ?>" class="order-2 xl:order-5 hover:text-text-body-muted transition-colors">Tuyển dụng</a>
-			<span class="order-6 hidden xl:inline text-neutral-600">|</span>
-			<a href="<?php echo esc_url( home_url( '/lien-he' ) ); ?>" class="order-1 xl:order-7 hover:text-text-body-muted transition-colors">Liên hệ</a>
+			<a href="<?php echo esc_url( home_url( '/dieu-khoan-su-dung' ) ); ?>" class="hover:text-text-body-muted transition-colors">Điều khoản sử dụng</a>
+			<span class="hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
+			<a href="<?php echo esc_url( home_url( '/chinh-sach-bao-mat' ) ); ?>" class="hover:text-text-body-muted transition-colors">Chính sách bảo mật</a>
+			<span class="hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
+			<a href="<?php echo esc_url( home_url( '/tuyen-dung' ) ); ?>" class="hover:text-text-body-muted transition-colors">Tuyển dụng</a>
+			<span class="hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
+			<a href="<?php echo esc_url( home_url( '/lien-he' ) ); ?>" class="hover:text-text-body-muted transition-colors">Liên hệ</a>
 		</div>
 
 	</div>

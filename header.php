@@ -58,11 +58,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<!-- Right Action: Desktop CTA Button & Mobile Hamburger Toggle -->
 		<div class="flex items-center gap-3 sm:gap-4 shrink-0">
-			<!-- CTA Header: hidden on mobile, display on desktop >= 1280px -->
+			<!-- CTA Header: hidden on mobile, display on desktop >= 1280px (Size lg: h-14 / 56px, padding 32 14) -->
 			<button data-open-modal="vpc-consultation-modal" 
 			        type="button"
-				class="vpc-button hidden xl:inline-flex items-center justify-center h-10 rounded-full bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-border-focus-default">
-				<span>Tư vấn miễn phí</span>
+				class="vpc-button vpc-button-lg hidden xl:inline-flex items-center justify-center h-14 px-8 text-base font-semibold rounded-full bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-border-focus-default">
+				<span>Đăng ký tư vấn</span>
 			</button>
 
 			<!-- Mobile Hamburger Toggle (< 1280px) - Chỉ icon menu 24px, bỏ viền, bo góc, nền hover -->
@@ -126,30 +126,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</nav>
 		</div>
 
-		<!-- Vùng nút đúng Figma: CTA y=702, hotline y=762 trên artboard 390×844 -->
+		<!-- Vùng nút đúng Figma: CTA và hotline (Size md: h-12 / 48px, padding 24 12) -->
 		<div class="pt-0 px-5 pb-8 flex flex-col gap-3">
-			<button data-open-modal="vpc-consultation-modal" type="button" class="vpc-button w-full h-10 rounded-full bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default flex items-center justify-center transition-colors">
-				<span>Tư vấn miễn phí</span>
+			<button data-open-modal="vpc-consultation-modal" type="button" class="vpc-button vpc-button-md w-full h-12 px-6 py-3 rounded-full bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default font-medium text-base flex items-center justify-center transition-colors">
+				<span>Đăng ký tư vấn</span>
 			</button>
-		<a href="tel:02463296698" class="vpc-button w-full h-10 border border-border-primary-default rounded-full flex items-center justify-center gap-2 text-text-link-default hover:bg-primary-100/50 transition-colors">
+		<a href="tel:02463296698" class="vpc-button vpc-button-md w-full h-12 px-6 py-3 border border-border-primary-default rounded-full flex items-center justify-center gap-2 text-text-link-default hover:bg-primary-100/50 transition-colors">
 				<svg class="w-6 h-6 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
 				</svg>
-				<span>Hotline</span>
+				<span>Hotline: (024) 6329 6698</span>
 			</a>
 		</div>
 	</div>
 
-	<!-- Sticky CTA bar Mobile (< 1280px) - Cao 84px, bóng 0 -4px 16px rgb(0 0 0 / 0.12), gồm nút gọi và nút Đăng Ký Tư Vấn -->
+	<!-- Sticky CTA bar Mobile (< 1280px) - Size md (h-12 / 48px, padding 24 12) -->
 	<div id="mobile-sticky-cta" class="fixed bottom-0 left-0 right-0 z-40 h-[84px] bg-surface-background-default shadow-cta flex items-center justify-between px-5 py-3 gap-3 xl:hidden transition-[transform,opacity] duration-300 ease-out">
-		<a href="tel:02463296698" class="vpc-button flex-1 h-10 flex items-center justify-center gap-2 rounded-full border border-border-primary-default text-text-link-default transition-colors">
+		<a href="tel:02463296698" class="vpc-button vpc-button-md flex-1 h-12 px-6 py-3 flex items-center justify-center gap-2 rounded-full border border-border-primary-default text-text-link-default font-semibold text-base transition-colors">
 			<svg class="w-6 h-6 stroke-current fill-none shrink-0" viewBox="0 0 24 24" stroke-width="2">
 				<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
 			</svg>
 			<span>Gọi ngay</span>
 		</a>
-		<button data-open-modal="vpc-consultation-modal" type="button" class="vpc-button flex-1 h-10 flex items-center justify-center rounded-full bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default transition-colors">
-			<span>Tư vấn miễn phí</span>
+		<button data-open-modal="vpc-consultation-modal" type="button" class="vpc-button vpc-button-md flex-1 h-12 px-6 py-3 flex items-center justify-center rounded-full bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default font-medium text-base transition-colors">
+			<span>Đăng ký tư vấn</span>
 		</button>
 	</div>
 </header>

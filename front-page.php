@@ -105,54 +105,91 @@ $consultation_services = vpc_get_consultation_services();
 	     2. GIỚI THIỆU: HÀNH TRÌNH CÙNG MẸ - TRẢI ĐẦY YÊU THƯƠNG
 	     ========================================================================= -->
 	<section id="gioi-thieu" class="vpc-section bg-surface-background-default relative overflow-hidden">
-		<div class="vpc-container max-w-[1280px] mx-auto p-0">
+		<div class="vpc-home-container">
 			<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 xl:gap-16 items-center">
 				
-				<!-- Content & Value Props matching Figma (Left on Desktop: order-1 lg:order-1) -->
-				<div class="lg:col-span-6 flex flex-col space-y-5 lg:pr-4 order-1 lg:order-1">
-					<div class="hidden lg:block">
-						<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border-secondary-default text-text-link-hover bg-surface-badge-secondary font-body font-medium text-xs tracking-wider uppercase">
-							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="w-4 h-4 text-text-heading-secondary-default shrink-0">
-								<path d="M12 2L13.8 8.6L20.4 10.4L13.8 12.2L12 18.8L10.2 12.2L3.6 10.4L10.2 8.6L12 2Z" fill="currentColor"/>
+				<!-- Visual Asset (Nurse, Mother, Baby in Crib + 2 Floating Badges) (Left on Desktop: order-1 lg:order-1) -->
+				<div class="intro-visual lg:col-span-6 relative flex justify-center lg:justify-start lg:order-1 pt-0">
+					<div class="relative w-full max-w-[350px] sm:max-w-[500px] lg:max-w-[517px] mx-auto lg:ml-0">
+						<!-- Main Photo with Rounded Corners matching Figma (border-radius: 50px) -->
+						<div class="relative w-full aspect-[4/3] sm:aspect-[517/591] rounded-[32px] sm:rounded-[50px] overflow-hidden shadow-[0px_4px_30px_rgba(0,0,0,0.08)] bg-neutral-100">
+							<picture>
+								<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/hero-section-image.jpg' ); ?>" 
+								     alt="Hành trình cùng mẹ trải đầy yêu thương - Vạn Phúc Care" 
+								     class="w-full h-full object-cover block transition-transform duration-500 hover:scale-[1.02]" 
+								     loading="lazy" />
+							</picture>
+						</div>
+
+						<!-- Floating Badge 1 (Top Left) -->
+						<div class="absolute top-3 -left-3 sm:top-[7%] sm:-left-[13%] bg-surface-card-default rounded-xl p-2.5 sm:p-3 shadow-[0px_1px_5px_rgba(0,0,0,0.15)] border border-surface-background-default flex items-center gap-2.5 sm:gap-3 z-10 animate-fade-in">
+							<svg class="w-9 h-9 sm:w-[50px] sm:h-[50px] shrink-0" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M0 25C0 11.1929 11.1929 0 25 0C38.8071 0 50 11.1929 50 25C50 38.8071 38.8071 50 25 50C11.1929 50 0 38.8071 0 25Z" fill="#FDE6E6"/>
+								<path d="M23.988 12C17.364 12 12 17.376 12 24C12 30.624 17.364 36 23.988 36C30.624 36 36 30.624 36 24C36 17.376 30.624 12 23.988 12ZM29.076 31.2L24 28.14L18.924 31.2L20.268 25.428L15.792 21.552L21.696 21.048L24 15.6L26.304 21.036L32.208 21.54L27.732 25.416L29.076 31.2Z" fill="#F48283"/>
 							</svg>
+							<div>
+								<div class="font-body font-medium text-lg sm:text-2xl text-text-heading-primary-default leading-tight">98%</div>
+								<div class="text-xs sm:text-base text-text-body-muted font-medium font-body">Khách hàng hài lòng</div>
+							</div>
+						</div>
+
+						<!-- Floating Badge 2 (Bottom Right) -->
+						<div class="absolute bottom-3 -right-3 sm:bottom-[8%] sm:-right-[14%] bg-surface-card-default rounded-xl p-2.5 sm:p-3 shadow-[0px_1px_5px_rgba(0,0,0,0.15)] border border-surface-background-default flex items-center gap-2.5 sm:gap-3 z-10 animate-fade-in">
+							<svg class="w-9 h-9 sm:w-[50px] sm:h-[50px] shrink-0" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M0 25C0 11.1929 11.1929 0 25 0C38.8071 0 50 11.1929 50 25C50 38.8071 38.8071 50 25 50C11.1929 50 0 38.8071 0 25Z" fill="#FDE6E6"/>
+								<path d="M23.988 12C17.364 12 12 17.376 12 24C12 30.624 17.364 36 23.988 36C30.624 36 36 30.624 36 24C36 17.376 30.624 12 23.988 12ZM29.076 31.2L24 28.14L18.924 31.2L20.268 25.428L15.792 21.552L21.696 21.048L24 15.6L26.304 21.036L32.208 21.54L27.732 25.416L29.076 31.2Z" fill="#F48283"/>
+							</svg>
+							<div>
+								<div class="font-body font-medium text-lg sm:text-2xl text-text-heading-primary-default leading-tight">4,9/5</div>
+								<div class="text-xs sm:text-base text-text-body-muted font-medium font-body">800+ Đánh giá</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Content & Value Props matching Figma (Right on Desktop: order-2 lg:order-2) -->
+				<div class="intro-content lg:col-span-6 lg:flex lg:flex-col lg:space-y-5 lg:pl-4 lg:order-2">
+					<div class="intro-badge flex justify-center lg:justify-start">
+						<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border-secondary-default text-text-link-hover bg-surface-badge-secondary font-body font-medium text-xs tracking-wider uppercase">
+							<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/sparkle-pink.svg' ); ?>" width="24" height="24" class="w-4 h-4 shrink-0" alt="" aria-hidden="true" />
 							VẠN PHÚC CARE
 						</span>
 					</div>
 
-					<h2 class="font-heading font-semibold text-center lg:text-left text-h1-mobile xl:text-h1 tracking-tight">
+					<h2 class="intro-heading font-heading font-semibold text-center lg:text-left text-h1-mobile xl:text-h1 tracking-tight">
 						<span class="text-text-heading-primary-default font-semibold">Hành Trình Cùng Mẹ</span><br>
 						<span class="text-text-heading-secondary-default font-semibold">Trải Đầy Yêu Thương</span>
 					</h2>
 
-					<p class="font-body text-text-body-default text-center lg:text-left text-base sm:text-xl lg:text-2xl font-medium leading-relaxed lg:leading-[32px]">
+					<p class="intro-description font-body text-text-body-default text-center lg:text-left text-base sm:text-xl lg:text-2xl font-medium leading-relaxed lg:leading-[32px]">
 						Được thành lập từ năm 2021, Vạn Phúc Care là hệ sinh thái chăm sóc Mẹ và Bé toàn diện, tận tâm và đáng tin cậy cho mọi gia đình.
 					</p>
 
 					<!-- Checklist points matching Figma with blue check badge -->
-					<ul class="space-y-3 pt-1 text-sm sm:text-base font-body font-medium text-text-body-default">
+					<ul class="intro-checklist space-y-3 pt-1 text-sm sm:text-base font-body font-medium text-text-body-default">
 						<li class="flex items-start gap-3">
-							<svg class="w-5 h-5 text-text-heading-primary-default shrink-0 fill-current mt-0.5" viewBox="0 0 24 24">
-								<path d="M10.23 2.14a1.5 1.5 0 0 1 1.54 0l1.35.87c.36.23.8.32 1.23.25l1.58-.26a1.5 1.5 0 0 1 1.7 1.23l.36 1.57c.1.42.36.78.73 1.01l1.37.84a1.5 1.5 0 0 1 .6 2.02l-.76 1.43c-.2.38-.25.83-.14 1.26l.4 1.55a1.5 1.5 0 0 1-.95 1.79l-1.52.54c-.41.15-.74.45-.92.85l-.67 1.46a1.5 1.5 0 0 1-1.87.8l-1.55-.45a1.8 1.8 0 0 0-1.02 0l-1.55.45a1.5 1.5 0 0 1-1.87-.8l-.67-1.46a1.8 1.8 0 0 0-.92-.85l-1.52-.54a1.5 1.5 0 0 1-.95-1.79l.4-1.55c.11-.43.06-.88-.14-1.26l-.76-1.43a1.5 1.5 0 0 1 .6-2.02l1.37-.84c.37-.23.63-.59.73-1.01l.36-1.57a1.5 1.5 0 0 1 1.7-1.23l1.58.26c.43.07.87-.02 1.23-.25l1.35-.87zm-1.03 12.36l5.5-5.5-1.4-1.4-4.1 4.1-1.9-1.9-1.4 1.4 3.3 3.3z"/>
+							<svg class="w-5 h-5 shrink-0 mt-0.5" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M23.7581 12.6477C24.0806 12.2768 24.0806 11.725 23.7581 11.3542L21.8639 9.17583C21.6875 8.97297 21.6016 8.70687 21.6261 8.43917L21.8898 5.56056C21.9349 5.06888 21.6092 4.61975 21.1279 4.50979L18.3402 3.87296C18.0754 3.81247 17.8473 3.64541 17.7098 3.41122L16.2496 0.924729C15.9977 0.495784 15.4656 0.321788 15.0089 0.519011L12.3913 1.64949C12.1419 1.75718 11.8591 1.75718 11.6097 1.64949L8.99098 0.518536C8.53478 0.321516 8.00325 0.494934 7.75102 0.923092L6.29208 3.39961C6.154 3.63399 5.92519 3.80088 5.65983 3.86076L2.8757 4.48903C2.3932 4.59791 2.06613 5.04755 2.11114 5.54013L2.3751 8.42906C2.3995 8.69608 2.31405 8.96152 2.13846 9.16416L0.240724 11.3543C-0.0806752 11.7253 -0.0801875 12.2761 0.241868 12.6465L2.13723 14.8261C2.31357 15.0289 2.39946 15.2949 2.375 15.5625L2.11093 18.4527C2.06601 18.9443 2.3917 19.3933 2.87294 19.5033L5.6616 20.1403C5.92591 20.2007 6.15368 20.3673 6.29129 20.6009L7.74991 23.0769C8.00262 23.5058 8.53555 23.679 8.99213 23.4804L11.6088 22.3426C11.8587 22.234 12.1424 22.2336 12.3926 22.3417L15.01 23.472C15.4662 23.6691 15.9978 23.4956 16.25 23.0675L17.7097 20.5896C17.8473 20.356 18.0751 20.1894 18.3394 20.1291L21.1279 19.492C21.6092 19.3821 21.9349 18.933 21.8898 18.4413L21.6261 15.5627C21.6016 15.295 21.6875 15.0289 21.8639 14.826L23.7581 12.6477ZM10.1697 17.0066C9.99977 17.1779 9.72282 17.1779 9.55293 17.0066L6.42685 13.8544C5.97218 13.3959 5.97267 12.6565 6.42793 12.1986C6.88801 11.7359 7.63697 11.7367 8.09604 12.2004L9.6754 13.7956C9.77778 13.899 9.94485 13.8991 10.0473 13.7957L15.5799 8.21239C16.0392 7.74894 16.7881 7.7483 17.2481 8.21097C17.7035 8.66893 17.704 9.40853 17.2492 9.86711L10.1697 17.0066Z" fill="#1A77BA"/>
 							</svg>
 							<span>Liệu trình chuẩn y khoa, cá nhân hóa theo nhu cầu</span>
 						</li>
 						<li class="flex items-start gap-3">
-							<svg class="w-5 h-5 text-text-heading-primary-default shrink-0 fill-current mt-0.5" viewBox="0 0 24 24">
-								<path d="M10.23 2.14a1.5 1.5 0 0 1 1.54 0l1.35.87c.36.23.8.32 1.23.25l1.58-.26a1.5 1.5 0 0 1 1.7 1.23l.36 1.57c.1.42.36.78.73 1.01l1.37.84a1.5 1.5 0 0 1 .6 2.02l-.76 1.43c-.2.38-.25.83-.14 1.26l.4 1.55a1.5 1.5 0 0 1-.95 1.79l-1.52.54c-.41.15-.74.45-.92.85l-.67 1.46a1.5 1.5 0 0 1-1.87.8l-1.55-.45a1.8 1.8 0 0 0-1.02 0l-1.55.45a1.5 1.5 0 0 1-1.87-.8l-.67-1.46a1.8 1.8 0 0 0-.92-.85l-1.52-.54a1.5 1.5 0 0 1-.95-1.79l.4-1.55c.11-.43.06-.88-.14-1.26l-.76-1.43a1.5 1.5 0 0 1 .6-2.02l1.37-.84c.37-.23.63-.59.73-1.01l.36-1.57a1.5 1.5 0 0 1 1.7-1.23l1.58.26c.43.07.87-.02 1.23-.25l1.35-.87zm-1.03 12.36l5.5-5.5-1.4-1.4-4.1 4.1-1.9-1.9-1.4 1.4 3.3 3.3z"/>
+							<svg class="w-5 h-5 shrink-0 mt-0.5" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M23.7581 12.6477C24.0806 12.2768 24.0806 11.725 23.7581 11.3542L21.8639 9.17583C21.6875 8.97297 21.6016 8.70687 21.6261 8.43917L21.8898 5.56056C21.9349 5.06888 21.6092 4.61975 21.1279 4.50979L18.3402 3.87296C18.0754 3.81247 17.8473 3.64541 17.7098 3.41122L16.2496 0.924729C15.9977 0.495784 15.4656 0.321788 15.0089 0.519011L12.3913 1.64949C12.1419 1.75718 11.8591 1.75718 11.6097 1.64949L8.99098 0.518536C8.53478 0.321516 8.00325 0.494934 7.75102 0.923092L6.29208 3.39961C6.154 3.63399 5.92519 3.80088 5.65983 3.86076L2.8757 4.48903C2.3932 4.59791 2.06613 5.04755 2.11114 5.54013L2.3751 8.42906C2.3995 8.69608 2.31405 8.96152 2.13846 9.16416L0.240724 11.3543C-0.0806752 11.7253 -0.0801875 12.2761 0.241868 12.6465L2.13723 14.8261C2.31357 15.0289 2.39946 15.2949 2.375 15.5625L2.11093 18.4527C2.06601 18.9443 2.3917 19.3933 2.87294 19.5033L5.6616 20.1403C5.92591 20.2007 6.15368 20.3673 6.29129 20.6009L7.74991 23.0769C8.00262 23.5058 8.53555 23.679 8.99213 23.4804L11.6088 22.3426C11.8587 22.234 12.1424 22.2336 12.3926 22.3417L15.01 23.472C15.4662 23.6691 15.9978 23.4956 16.25 23.0675L17.7097 20.5896C17.8473 20.356 18.0751 20.1894 18.3394 20.1291L21.1279 19.492C21.6092 19.3821 21.9349 18.933 21.8898 18.4413L21.6261 15.5627C21.6016 15.295 21.6875 15.0289 21.8639 14.826L23.7581 12.6477ZM10.1697 17.0066C9.99977 17.1779 9.72282 17.1779 9.55293 17.0066L6.42685 13.8544C5.97218 13.3959 5.97267 12.6565 6.42793 12.1986C6.88801 11.7359 7.63697 11.7367 8.09604 12.2004L9.6754 13.7956C9.77778 13.899 9.94485 13.8991 10.0473 13.7957L15.5799 8.21239C16.0392 7.74894 16.7881 7.7483 17.2481 8.21097C17.7035 8.66893 17.704 9.40853 17.2492 9.86711L10.1697 17.0066Z" fill="#1A77BA"/>
 							</svg>
 							<span>100% đội ngũ điều dưỡng, hộ sinh chuyên môn cao, giàu kinh nghiệm</span>
 						</li>
 						<li class="flex items-start gap-3">
-							<svg class="w-5 h-5 text-text-heading-primary-default shrink-0 fill-current mt-0.5" viewBox="0 0 24 24">
-								<path d="M10.23 2.14a1.5 1.5 0 0 1 1.54 0l1.35.87c.36.23.8.32 1.23.25l1.58-.26a1.5 1.5 0 0 1 1.7 1.23l.36 1.57c.1.42.36.78.73 1.01l1.37.84a1.5 1.5 0 0 1 .6 2.02l-.76 1.43c-.2.38-.25.83-.14 1.26l.4 1.55a1.5 1.5 0 0 1-.95 1.79l-1.52.54c-.41.15-.74.45-.92.85l-.67 1.46a1.5 1.5 0 0 1-1.87.8l-1.55-.45a1.8 1.8 0 0 0-1.02 0l-1.55.45a1.5 1.5 0 0 1-1.87-.8l-.67-1.46a1.8 1.8 0 0 0-.92-.85l-1.52-.54a1.5 1.5 0 0 1-.95-1.79l.4-1.55c.11-.43.06-.88-.14-1.26l-.76-1.43a1.5 1.5 0 0 1 .6-2.02l1.37-.84c.37-.23.63-.59.73-1.01l.36-1.57a1.5 1.5 0 0 1 1.7-1.23l1.58.26c.43.07.87-.02 1.23-.25l1.35-.87zm-1.03 12.36l5.5-5.5-1.4-1.4-4.1 4.1-1.9-1.9-1.4 1.4 3.3 3.3z"/>
+							<svg class="w-5 h-5 shrink-0 mt-0.5" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M23.7581 12.6477C24.0806 12.2768 24.0806 11.725 23.7581 11.3542L21.8639 9.17583C21.6875 8.97297 21.6016 8.70687 21.6261 8.43917L21.8898 5.56056C21.9349 5.06888 21.6092 4.61975 21.1279 4.50979L18.3402 3.87296C18.0754 3.81247 17.8473 3.64541 17.7098 3.41122L16.2496 0.924729C15.9977 0.495784 15.4656 0.321788 15.0089 0.519011L12.3913 1.64949C12.1419 1.75718 11.8591 1.75718 11.6097 1.64949L8.99098 0.518536C8.53478 0.321516 8.00325 0.494934 7.75102 0.923092L6.29208 3.39961C6.154 3.63399 5.92519 3.80088 5.65983 3.86076L2.8757 4.48903C2.3932 4.59791 2.06613 5.04755 2.11114 5.54013L2.3751 8.42906C2.3995 8.69608 2.31405 8.96152 2.13846 9.16416L0.240724 11.3543C-0.0806752 11.7253 -0.0801875 12.2761 0.241868 12.6465L2.13723 14.8261C2.31357 15.0289 2.39946 15.2949 2.375 15.5625L2.11093 18.4527C2.06601 18.9443 2.3917 19.3933 2.87294 19.5033L5.6616 20.1403C5.92591 20.2007 6.15368 20.3673 6.29129 20.6009L7.74991 23.0769C8.00262 23.5058 8.53555 23.679 8.99213 23.4804L11.6088 22.3426C11.8587 22.234 12.1424 22.2336 12.3926 22.3417L15.01 23.472C15.4662 23.6691 15.9978 23.4956 16.25 23.0675L17.7097 20.5896C17.8473 20.356 18.0751 20.1894 18.3394 20.1291L21.1279 19.492C21.6092 19.3821 21.9349 18.933 21.8898 18.4413L21.6261 15.5627C21.6016 15.295 21.6875 15.0289 21.8639 14.826L23.7581 12.6477ZM10.1697 17.0066C9.99977 17.1779 9.72282 17.1779 9.55293 17.0066L6.42685 13.8544C5.97218 13.3959 5.97267 12.6565 6.42793 12.1986C6.88801 11.7359 7.63697 11.7367 8.09604 12.2004L9.6754 13.7956C9.77778 13.899 9.94485 13.8991 10.0473 13.7957L15.5799 8.21239C16.0392 7.74894 16.7881 7.7483 17.2481 8.21097C17.7035 8.66893 17.704 9.40853 17.2492 9.86711L10.1697 17.0066Z" fill="#1A77BA"/>
 							</svg>
-							<span>Đồng hành toàn diện cùng bé những năm đầu đời</span>
+							<span>Đồng hành cùng mẹ và bé trong năm đầu đời</span>
 						</li>
 					</ul>
 
 					<!-- 3 Stats Counter Single Card matching Figma -->
-					<div class="rounded-xl border border-surface-background-default bg-surface-card-default p-3 sm:py-3 sm:px-4 shadow-card">
-						<div class="grid grid-cols-3 divide-x divide-border-divider-default text-center">
+					<div class="intro-stats rounded-xl border border-surface-background-default bg-surface-card-default p-3 sm:py-3 sm:px-4 shadow-card">
+						<div class="grid grid-cols-3 divide-x divide-border-divider-default text-left">
 							<div class="px-1.5 sm:px-3">
 								<div class="font-body font-medium text-lg sm:text-2xl text-text-body-default leading-snug">5+ Năm</div>
 								<div class="text-xs sm:text-base text-text-body-muted mt-1 font-body font-medium">Kinh nghiệm</div>
@@ -168,52 +205,10 @@ $consultation_services = vpc_get_consultation_services();
 						</div>
 					</div>
 
-					<!-- Button 'Tìm Hiểu Thêm' matching Figma (full-width on mobile) -->
-					<div class="pt-2 w-full lg:w-auto flex justify-center lg:justify-start">
-						<a href="#gioi-thieu" class="vpc-button w-full sm:w-auto h-10 rounded-full border border-border-secondary-default text-text-heading-secondary-default hover:bg-surface-badge-secondary/60 flex items-center justify-center transition-colors">
+					<div class="intro-action pt-2 w-full lg:w-auto flex justify-center lg:justify-start">
+						<a href="#gioi-thieu" class="vpc-button w-full sm:w-auto h-10 xl:h-12 px-4 xl:px-6 rounded-full border border-border-secondary-default text-text-heading-secondary-default hover:bg-surface-badge-secondary/60 flex items-center justify-center transition-colors">
 							<span>Tìm Hiểu Thêm</span>
 						</a>
-					</div>
-				</div>
-
-				<!-- Visual Asset (Nurse, Mother, Baby in Crib + 2 Floating Badges) (Right on Desktop: order-2 lg:order-2) -->
-				<div class="lg:col-span-6 relative flex justify-center lg:justify-end order-2 lg:order-2 pt-4 lg:pt-0">
-					<div class="relative w-full max-w-[350px] sm:max-w-[500px] lg:max-w-[517px] mx-auto">
-						<!-- Main Photo with Rounded Corners matching Figma (border-radius: 50px) -->
-						<div class="relative w-full aspect-[4/3] sm:aspect-[517/591] rounded-[32px] sm:rounded-[50px] overflow-hidden shadow-[0px_4px_30px_rgba(0,0,0,0.08)] bg-neutral-100">
-							<picture>
-								<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/hero-section-image.jpg' ); ?>" 
-								     alt="Hành trình cùng mẹ trải đầy yêu thương - Vạn Phúc Care" 
-								     class="w-full h-full object-cover block transition-transform duration-500 hover:scale-[1.02]" 
-								     loading="lazy" />
-							</picture>
-						</div>
-
-						<!-- Floating Badge 1 (Top Left) -->
-						<div class="absolute -top-3 -left-3 sm:-top-5 sm:-left-5 bg-surface-card-default rounded-xl p-2.5 sm:p-3 shadow-[0px_1px_5px_rgba(0,0,0,0.15)] border border-surface-background-default flex items-center gap-2.5 sm:gap-3 z-10 animate-fade-in">
-							<div class="w-9 h-9 sm:w-[50px] sm:h-[50px] rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0">
-								<svg class="w-5 h-5 sm:w-6 sm:h-6 text-text-heading-secondary-default" viewBox="0 0 24 24" fill="currentColor">
-									<path d="M12 2l2.9 6.26L21.8 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.9-1.01L12 2z"/>
-								</svg>
-							</div>
-							<div>
-								<div class="font-body font-medium text-lg sm:text-2xl text-text-heading-primary-default leading-tight">98%</div>
-								<div class="text-xs sm:text-base text-text-body-muted font-medium font-body">Khách hàng hài lòng</div>
-							</div>
-						</div>
-
-						<!-- Floating Badge 2 (Bottom Right) -->
-						<div class="absolute -bottom-3 -right-3 sm:-bottom-5 sm:-right-5 bg-surface-card-default rounded-xl p-2.5 sm:p-3 shadow-[0px_1px_5px_rgba(0,0,0,0.15)] border border-surface-background-default flex items-center gap-2.5 sm:gap-3 z-10 animate-fade-in">
-							<div class="w-9 h-9 sm:w-[50px] sm:h-[50px] rounded-full bg-surface-background-primary flex items-center justify-center shrink-0">
-								<svg class="w-5 h-5 sm:w-6 sm:h-6 text-text-heading-primary-default" viewBox="0 0 24 24" fill="currentColor">
-									<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-								</svg>
-							</div>
-							<div>
-								<div class="font-body font-medium text-lg sm:text-2xl text-text-heading-secondary-default leading-tight">4.9/5</div>
-								<div class="text-xs sm:text-base text-text-body-muted font-medium font-body">800+ Đánh giá</div>
-							</div>
-						</div>
 					</div>
 				</div>
 
@@ -225,14 +220,16 @@ $consultation_services = vpc_get_consultation_services();
 	     3. DỊCH VỤ Ở CỮ (An Tâm Nghỉ Dưỡng, Ở Cữ Chuẩn Y Khoa)
 	     ========================================================================= -->
 	<section id="trung-tam-o-cu" class="vpc-section vpc-gradient-blue relative overflow-hidden">
-		<div class="max-w-[1280px] mx-auto flex flex-col items-center gap-6 sm:gap-10">
+		<div class="vpc-home-container flex flex-col items-center gap-6 sm:gap-10">
 			
 			<!-- Section Header Badge & Titles (Frame 2147224020) -->
-			<div class="flex flex-col items-center gap-3 sm:gap-5 text-center w-full max-w-[1000px]">
+			<div class="flex flex-col items-center gap-3 sm:gap-5 text-center w-full max-w-[1400px]">
 				<!-- Badge -->
 				<div class="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 bg-surface-badge-secondary border border-border-secondary-default rounded-full">
-					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="w-4 h-4 text-text-heading-secondary-default shrink-0">
-						<path d="M12 2L13.8 8.6L20.4 10.4L13.8 12.2L12 18.8L10.2 12.2L3.6 10.4L10.2 8.6L12 2Z" fill="currentColor"/>
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0" aria-hidden="true">
+						<path d="M6.36875 16.6265C6.65647 16.3389 7.12278 16.339 7.41055 16.6265C7.69831 16.9143 7.69835 17.3815 7.41055 17.6692L5.95332 19.1265C5.66552 19.4142 5.19836 19.4143 4.9106 19.1265C4.62304 18.8388 4.62322 18.3724 4.9106 18.0847L6.36875 16.6265ZM16.5887 16.6265C16.8764 16.3389 17.3427 16.3389 17.6305 16.6265L19.0886 18.0847C19.3761 18.3724 19.3763 18.8388 19.0886 19.1265C18.801 19.4142 18.3346 19.414 18.0468 19.1265L16.5887 17.6692C16.3009 17.3815 16.3009 16.9143 16.5887 16.6265ZM4.9106 4.95027C5.19836 4.66251 5.66553 4.66252 5.95332 4.95027L7.41055 6.40842C7.69835 6.69618 7.69831 7.16242 7.41055 7.45022C7.12278 7.73788 6.6565 7.73793 6.36875 7.45022L4.9106 5.99299C4.62284 5.70523 4.62285 5.23806 4.9106 4.95027ZM18.0468 4.95027C18.3346 4.66289 18.801 4.6627 19.0886 4.95027C19.3764 5.23807 19.3764 5.70523 19.0886 5.99299L17.6305 7.45022C17.3427 7.73796 16.8764 7.73796 16.5887 7.45022C16.3009 7.16244 16.301 6.69618 16.5887 6.40842L18.0468 4.95027Z" fill="#F48283"/>
+						<path d="M20.7723 12.6551C20.3656 12.6604 20.0312 12.3354 20.0256 11.9287C20.02 11.5218 20.3458 11.187 20.7528 11.1814L23.2525 11.1471C23.6595 11.1416 23.9944 11.4673 23.9999 11.8742C24.0054 12.2809 23.6801 12.615 23.2734 12.6209L20.7723 12.6551ZM11.8894 4.01352C11.4827 4.01891 11.1484 3.69372 11.1427 3.28707L11.1091 0.786984C11.1035 0.380078 11.4287 0.0459248 11.8356 0.0403495C12.2424 0.0349509 12.5768 0.360001 12.5824 0.7668L12.6166 3.26623C12.6222 3.67314 12.2964 4.00795 11.8894 4.01352ZM0.746805 12.9295C0.3399 12.9351 0.00574938 12.6099 7.06232e-05 12.203C-0.00550406 11.7961 0.319653 11.462 0.726624 11.4564L3.22639 11.4222C3.63336 11.4166 3.96755 11.7417 3.97313 12.1486C3.9786 12.5554 3.65348 12.8897 3.24657 12.8952L0.746805 12.9295ZM11.8552 23.9597C11.4485 23.9651 11.1142 23.6399 11.1085 23.2333L11.0749 20.7332C11.0693 20.3263 11.3944 19.9921 11.8014 19.9866C12.2082 19.9812 12.5426 20.3062 12.5481 20.713L12.5824 23.2125C12.588 23.6194 12.2622 23.9542 11.8552 23.9597Z" fill="#F48283"/>
+						<path d="M11.2731 18.2771C11.4714 18.7232 12.1037 18.7257 12.3056 18.2812L14.075 14.3852C14.1318 14.2601 14.2322 14.16 14.3574 14.1034L18.2327 12.3542C18.6768 12.1537 18.6768 11.523 18.2327 11.3225L14.3574 9.57326C14.2322 9.51673 14.1318 9.41657 14.075 9.29146L12.3056 5.39548C12.1037 4.95097 11.4714 4.95351 11.2731 5.39963L9.54503 9.28731C9.4883 9.41495 9.38637 9.51709 9.25886 9.5741L5.34973 11.3217C4.90311 11.5214 4.90311 12.1554 5.34973 12.355L9.25886 14.1026C9.38637 14.1596 9.4883 14.2618 9.54503 14.3894L11.2731 18.2771Z" fill="#F48283"/>
 					</svg>
 					<span class="font-body font-medium text-xs sm:text-sm text-text-link-hover tracking-wider uppercase">DỊCH VỤ Ở CỮ</span>
 				</div>
@@ -243,13 +240,13 @@ $consultation_services = vpc_get_consultation_services();
 				</h2>
 
 				<!-- Subtitle (Style chữ base 16/24) -->
-				<p class="font-body font-normal sm:font-medium text-base text-text-body-default leading-6 max-w-4xl">
+				<p class="font-body font-normal sm:font-medium text-base text-text-body-default leading-6 max-w-none xl:whitespace-nowrap">
 					Vượt qua những định kiến kiêng cữ khắt khe, mẹ được nâng niu chăm sóc và tận hưởng trọn vẹn hành trình làm mẹ thiêng liêng.
 				</p>
 			</div>
 
 			<!-- Room Visual Showcase (Rectangle 34624347) -->
-			<div class="w-full max-w-[1240px] rounded-[24px] overflow-hidden border border-border-divider-default shadow-[0px_4px_47px_rgba(0,0,0,0.01)] bg-neutral-100">
+			<div class="w-full max-w-[1400px] rounded-[24px] overflow-hidden border border-border-divider-default shadow-[0px_4px_47px_rgba(0,0,0,0.01)] bg-neutral-100">
 				<picture>
 					<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/trung-tam-o-cu.JPG' ); ?>" 
 					     alt="Không gian phòng nghỉ dưỡng trung tâm ở cữ Vạn Phúc Care" 
@@ -262,9 +259,9 @@ $consultation_services = vpc_get_consultation_services();
 			<div class="w-full max-w-[1230px] flex flex-col lg:flex-row justify-between items-center lg:items-start gap-6 lg:gap-12 xl:gap-[120px] pt-2">
 				<!-- Left Column -->
 				<div class="max-w-[685px] flex flex-col gap-3 sm:gap-6 text-center lg:text-left">
-					<h3 class="font-body font-medium text-2xl leading-8 text-text-body-default">
+					<h2 class="font-heading font-normal text-2xl sm:text-3xl lg:text-[40px] leading-snug lg:leading-[52px] text-text-heading-secondary-default">
 						Tĩnh dưỡng thảnh thơi<br>Mẹ an tâm - Con khoẻ mạnh
-					</h3>
+					</h2>
 					<p class="font-body font-normal sm:font-medium text-base text-text-body-default leading-6 text-center lg:text-left">
 						Gạt bỏ mọi áp lực và nỗi lo làm mẹ, tận hưởng không gian nghỉ dưỡng cao cấp cùng dịch vụ chăm sóc chuẩn y khoa, giúp mẹ hồi phục sức khỏe nhanh chóng và an tâm bên bé yêu.
 					</p>
@@ -276,7 +273,7 @@ $consultation_services = vpc_get_consultation_services();
 						<svg class="w-5 h-5 text-text-heading-secondary-default shrink-0" viewBox="0 0 24 24" fill="currentColor">
 							<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
 						</svg>
-						<span class="font-body font-normal sm:font-medium text-base text-text-body-default leading-6">An toàn và theo dõi sức khỏe</span>
+						<span class="font-body font-normal sm:font-medium text-base text-text-body-default leading-6">Nâng niu mẹ và thiên thần nhỏ</span>
 					</div>
 
 					<div class="flex items-center gap-3">
@@ -284,32 +281,22 @@ $consultation_services = vpc_get_consultation_services();
 							<path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/>
 							<path d="M9.5 12l2 2 4.5-4.5" stroke="var(--color-neutral-white)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
 						</svg>
-						<span class="font-body font-normal sm:font-medium text-base text-text-body-default leading-6">An toàn cho sức khỏe</span>
+						<span class="font-body font-normal sm:font-medium text-base text-text-body-default leading-6">Quy trình chăm sóc khoa học</span>
 					</div>
 
 					<div class="flex items-center gap-3">
-						<svg class="w-5 h-5 text-text-heading-secondary-default shrink-0" viewBox="0 0 24 24" fill="currentColor">
-							<path d="M12 3L2 12h3v8h14v-8h3L12 3z"/>
-							<path d="M12 15.5l-.6-.55C9.8 13.5 8.5 12.3 8.5 10.8c0-1.1.9-2 2-2 .7 0 1.3.3 1.5.8.2-.5.8-.8 1.5-.8 1.1 0 2 .9 2 2 0 1.5-1.3 2.7-2.9 4.15l-.6.55z" fill="var(--color-neutral-white)"/>
-						</svg>
-						<span class="font-body font-normal sm:font-medium text-base text-text-body-default leading-6">Tiện nghi đẳng cấp</span>
+						<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/icon-home-care-exact.svg' ); ?>" width="24" height="18" class="w-6 h-[18px] shrink-0" alt="" aria-hidden="true" />
+						<span class="font-body font-normal sm:font-medium text-base text-text-body-default leading-6">Phòng nhi và phòng mẹ riêng biệt</span>
 					</div>
 				</div>
 			</div>
 
 			<!-- White Highlights Card (Frame 2147224015) -->
-			<div class="w-full max-w-[1280px] bg-surface-background-default sm:bg-surface-card-default rounded-xl shadow-card p-4 sm:py-6 sm:px-6 lg:px-10">
+			<div class="w-full max-w-[1400px] bg-surface-background-default sm:bg-surface-card-default rounded-xl shadow-card p-4 sm:py-6 sm:px-6 lg:px-10">
 				<div class="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-border-divider-default gap-3 sm:gap-0">
 					<!-- Card 1 -->
 					<div class="flex items-center gap-4 py-2 sm:py-0 sm:px-6 first:sm:pl-0 bg-surface-card-default sm:bg-transparent rounded-lg sm:rounded-none p-3 sm:p-0">
-						<div class="w-[50px] h-[50px] rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0">
-							<svg class="w-6 h-6 text-text-heading-secondary-default" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<circle cx="12" cy="12" r="9"/>
-								<path d="M12 7v10"/>
-								<path d="M7 12h10"/>
-								<circle cx="12" cy="12" r="3" fill="currentColor"/>
-							</svg>
-						</div>
+						<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/postpartum-recovery.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px] shrink-0" alt="" aria-hidden="true" />
 						<div>
 							<h4 class="font-body font-medium text-lg sm:text-2xl text-text-heading-primary-default leading-snug mb-0.5">Phục hồi chuyên sâu</h4>
 							<p class="font-body font-normal text-xs sm:text-base text-text-body-muted leading-6">Tận hưởng hành trình làm mẹ</p>
@@ -318,11 +305,7 @@ $consultation_services = vpc_get_consultation_services();
 
 					<!-- Card 2 -->
 					<div class="flex items-center gap-4 py-2 sm:py-0 sm:px-6 bg-surface-card-default sm:bg-transparent rounded-lg sm:rounded-none p-3 sm:p-0">
-						<div class="w-[50px] h-[50px] rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0">
-							<svg class="w-6 h-6 text-text-heading-secondary-default" viewBox="0 0 24 24" fill="currentColor">
-								<path d="M12 2l2.9 6.26L21.8 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.9-1.01L12 2z"/>
-							</svg>
-						</div>
+						<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/premium-space.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px] shrink-0" alt="" aria-hidden="true" />
 						<div>
 							<h4 class="font-body font-medium text-lg sm:text-2xl text-text-heading-primary-default leading-snug mb-0.5">Không gian tiện nghi</h4>
 							<p class="font-body font-normal text-xs sm:text-base text-text-body-muted leading-6">View hồ Tây đẳng cấp</p>
@@ -331,12 +314,7 @@ $consultation_services = vpc_get_consultation_services();
 
 					<!-- Card 3 -->
 					<div class="flex items-center gap-4 py-2 sm:py-0 sm:px-6 last:sm:pr-0 bg-surface-card-default sm:bg-transparent rounded-lg sm:rounded-none p-3 sm:p-0">
-						<div class="w-[50px] h-[50px] rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0">
-							<svg class="w-6 h-6 text-text-heading-secondary-default" viewBox="0 0 24 24" fill="currentColor">
-								<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-								<path d="M12 7v4l2.5 1.5" stroke="var(--color-neutral-white)" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-							</svg>
-						</div>
+						<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/nursery-care.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px] shrink-0" alt="" aria-hidden="true" />
 						<div>
 							<h4 class="font-body font-medium text-lg sm:text-2xl text-text-heading-primary-default leading-snug mb-0.5">Phòng dưỡng nhi 24/7</h4>
 							<p class="font-body font-normal text-xs sm:text-base text-text-body-muted leading-6">Môi trường chăm sóc riêng biệt</p>
@@ -347,10 +325,10 @@ $consultation_services = vpc_get_consultation_services();
 
 			<!-- Action Buttons (Frame 2147224016) -->
 			<div class="flex flex-col sm:flex-row justify-center items-center gap-3 w-full sm:w-auto mt-1">
-				<button data-open-modal="vpc-consultation-modal" data-service="trung-tam-o-cu" class="vpc-button w-full sm:w-auto h-10 bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default rounded-full shadow-xs transition-colors flex items-center justify-center cursor-pointer">
-					Tư vấn miễn phí
+				<button data-open-modal="vpc-consultation-modal" data-service="trung-tam-o-cu" class="vpc-button w-full sm:w-auto h-10 xl:h-12 px-4 xl:px-6 bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default rounded-full shadow-xs transition-colors flex items-center justify-center cursor-pointer">
+					Đăng ký tư vấn
 				</button>
-				<button data-open-modal="vpc-consultation-modal" data-service="trung-tam-o-cu" class="vpc-button w-full sm:w-auto h-10 border border-border-secondary-default hover:bg-surface-badge-secondary/40 active:border-border-secondary-dark text-text-heading-secondary-default rounded-full transition-colors flex items-center justify-center cursor-pointer">
+				<button data-open-modal="vpc-consultation-modal" data-service="trung-tam-o-cu" class="vpc-button w-full sm:w-auto h-10 xl:h-12 px-4 xl:px-6 border border-border-secondary-default hover:bg-surface-badge-secondary/40 active:border-border-secondary-dark text-text-heading-secondary-default rounded-full transition-colors flex items-center justify-center cursor-pointer">
 					Xem chi tiết
 				</button>
 			</div>
@@ -362,14 +340,14 @@ $consultation_services = vpc_get_consultation_services();
 	     4. DỊCH VỤ BẢO MẪU TẠI NHÀ (Bảo Mẫu Tại Nhà, Chăm Bé Chuẩn Y Khoa)
 	     ========================================================================= -->
 	<section id="bao-mau-tai-nha" class="vpc-section vpc-gradient-pink relative overflow-hidden">
-		<div class="max-w-[1240px] mx-auto">
-			<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
+		<div class="vpc-home-container">
+			<div class="grid grid-cols-1 lg:grid-cols-[minmax(0,1.07fr)_minmax(0,1fr)] gap-8 lg:gap-12 xl:gap-[112px] items-center">
 				
 				<!-- Images: 2 overlapping photos matching Figma -->
 				<div class="relative flex items-center justify-center w-full order-1">
-					<div class="relative w-full max-w-[350px] sm:max-w-[420px] lg:max-w-[480px] h-[342px] sm:h-[400px] lg:h-[460px] mx-auto">
+					<div class="relative w-full max-w-[350px] sm:max-w-[420px] lg:max-w-[668px] h-[342px] sm:h-[400px] lg:h-[500px] xl:h-[570px] mx-auto">
 						<!-- Left Photo -->
-						<div class="absolute left-0 top-0 w-[170px] sm:w-[200px] lg:w-[230px] h-[210px] sm:h-[250px] lg:h-[290px] rounded-xl overflow-hidden shadow-[0_4px_18px_rgba(0,0,0,0.09)]">
+						<div class="absolute left-0 top-0 w-[170px] sm:w-[200px] lg:w-[47%] h-[210px] sm:h-[250px] lg:h-auto aspect-[325/402] rounded-xl overflow-hidden shadow-[0_4px_18px_rgba(0,0,0,0.09)]">
 							<picture>
 								<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/ba-mau-tai-nha-2.jpg' ); ?>" 
 								     alt="Bảo mẫu chăm sóc bé tại nhà - Vạn Phúc Care" 
@@ -378,7 +356,7 @@ $consultation_services = vpc_get_consultation_services();
 							</picture>
 						</div>
 						<!-- Right Photo (Staggered down) -->
-						<div class="absolute right-0 top-[38px] sm:top-[45px] lg:top-[50px] w-[170px] sm:w-[200px] lg:w-[230px] h-[273px] sm:h-[320px] lg:h-[370px] rounded-xl overflow-hidden shadow-[0_4px_18px_rgba(0,0,0,0.09)]">
+						<div class="absolute right-0 top-[38px] sm:top-[45px] lg:top-[56px] xl:top-[62px] w-[170px] sm:w-[200px] lg:w-[47%] h-[273px] sm:h-[320px] lg:h-auto aspect-[324/521] rounded-xl overflow-hidden shadow-[0_4px_18px_rgba(0,0,0,0.09)]">
 							<picture>
 								<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/bao-mau-tai-nha-1.jpg' ); ?>" 
 								     alt="Bảo mẫu tận tâm chăm sóc giấc ngủ của bé" 
@@ -393,9 +371,7 @@ $consultation_services = vpc_get_consultation_services();
 				<div class="flex flex-col items-center lg:items-start text-center lg:text-left w-full order-2 gap-5 sm:gap-6">
 					<!-- Badge -->
 					<div class="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 bg-surface-badge-secondary border border-border-secondary-default rounded-full">
-						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="w-4 h-4 text-text-heading-secondary-default shrink-0">
-							<path d="M12 2L13.8 8.6L20.4 10.4L13.8 12.2L12 18.8L10.2 12.2L3.6 10.4L10.2 8.6L12 2Z" fill="currentColor"/>
-						</svg>
+						<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/sparkle-pink.svg' ); ?>" width="24" height="24" class="w-4 h-4 shrink-0" alt="" aria-hidden="true" />
 						<span class="font-body font-medium text-xs sm:text-sm text-text-link-hover tracking-wider uppercase">DỊCH VỤ BẢO MẪU</span>
 					</div>
 
@@ -410,36 +386,15 @@ $consultation_services = vpc_get_consultation_services();
 					</div>
 
 					<!-- Subtitle -->
-					<p class="font-body font-normal sm:font-medium text-base text-text-body-default leading-6 max-w-[540px]">
+					<p class="font-body font-normal sm:font-medium text-base text-text-body-default leading-6 max-w-[612px]">
 						Sau sinh mẹ cần thời gian để nghỉ ngơi, hồi phục sức khỏe. Sử dụng dịch vụ bảo mẫu tại nhà là giải pháp tối ưu, giúp gia đình giải quyết những nỗi lo về công việc cá nhân cũng như khả năng chăm sóc trẻ sơ sinh ngay tại tư gia.
 					</p>
 
 					<!-- 2 Feature Cards -->
-					<div class="w-full flex flex-col gap-3 max-w-[540px]">
+					<div class="w-full flex flex-col gap-5 sm:gap-6 max-w-[612px]">
 						<!-- Card 1 -->
 						<div class="bg-surface-card-default rounded-xl shadow-card p-3 sm:p-4 flex items-center gap-3.5 text-left">
-							<div class="w-[50px] h-[50px] rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0">
-								<svg class="w-6 h-6 text-text-heading-secondary-default" viewBox="0 0 24 24" fill="currentColor">
-									<!-- Left foot -->
-									<g transform="translate(0, 2) rotate(-10 7.5 13)">
-										<path d="M8.2 11.5c-.8-.8-2-.9-3-.4-1.3.7-1.8 2.2-1.4 3.7.4 1.7 1.5 2.8 2.8 2.5 1.2-.2 1.8-1.2 2-2.3.2-1.3.1-2.6-.4-3.5z"/>
-										<circle cx="8.6" cy="9.5" r="1.15"/>
-										<circle cx="7.0" cy="8.9" r="0.9"/>
-										<circle cx="5.4" cy="9.0" r="0.8"/>
-										<circle cx="4.0" cy="9.6" r="0.7"/>
-										<circle cx="2.9" cy="10.6" r="0.6"/>
-									</g>
-									<!-- Right foot -->
-									<g transform="translate(2, -1.5) rotate(12 16 11)">
-										<path d="M15.8 9.5c.8-.8 2-.9 3-.4 1.3.7 1.8 2.2 1.4 3.7-.4 1.7-1.5 2.8-2.8 2.5-1.2-.2-1.8-1.2-2-2.3-.2-1.3-.1-2.6.4-3.5z"/>
-										<circle cx="15.4" cy="7.5" r="1.15"/>
-										<circle cx="17.0" cy="6.9" r="0.9"/>
-										<circle cx="18.6" cy="7.0" r="0.8"/>
-										<circle cx="20.0" cy="7.6" r="0.7"/>
-										<circle cx="21.1" cy="8.6" r="0.6"/>
-									</g>
-								</svg>
-							</div>
+							<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/icons/newborn-care.svg' ); ?>" alt="" width="50" height="50" class="w-[50px] h-[50px] shrink-0" aria-hidden="true">
 							<div>
 								<h4 class="font-body font-medium text-base sm:text-[20px] text-text-heading-primary-default leading-snug">Đa dạng gói chăm sóc trẻ sơ sinh</h4>
 							<p class="font-body font-medium text-xs sm:text-base text-text-body-muted leading-relaxed">Thoải mái lựa chọn phù hợp với nhu cầu từng gia đình</p>
@@ -448,13 +403,7 @@ $consultation_services = vpc_get_consultation_services();
 
 						<!-- Card 2 -->
 						<div class="bg-surface-card-default rounded-xl shadow-card p-3 sm:p-4 flex items-center gap-3.5 text-left">
-							<div class="w-[50px] h-[50px] rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0">
-								<svg class="w-6 h-6 text-text-heading-secondary-default" viewBox="0 0 24 24" fill="currentColor">
-									<path d="M4 9C7.5 7.2 16.5 7.2 20 9L18.4 14.5H5.6L4 9Z" />
-									<rect x="5" y="16" width="14" height="2.2" rx="1.1" fill="currentColor" />
-									<path d="M11 9.8H13V11.2H14.4V12.8H13V14.2H11V12.8H9.6V11.2H11V9.8Z" fill="var(--color-neutral-white)" />
-								</svg>
-							</div>
+							<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/pediatric-nurse.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px] shrink-0" alt="" aria-hidden="true" />
 							<div>
 								<h4 class="font-body font-medium text-base sm:text-[20px] text-text-heading-primary-default leading-snug">Bảo mẫu là điều dưỡng chuyên môn sản nhi</h4>
 							<p class="font-body font-medium text-xs sm:text-base text-text-body-muted leading-relaxed">Bé được chăm sóc tận tình, cá nhân hóa chuẩn y khoa</p>
@@ -464,10 +413,10 @@ $consultation_services = vpc_get_consultation_services();
 
 					<!-- Action Buttons (Size md) -->
 					<div class="flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-3 w-full sm:w-auto pt-1">
-						<button data-open-modal="vpc-consultation-modal" data-service="bao-mau-tai-nha" class="vpc-button w-full sm:w-auto h-10 bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default rounded-full shadow-xs transition-colors flex items-center justify-center cursor-pointer">
-							Tư vấn miễn phí
+						<button data-open-modal="vpc-consultation-modal" data-service="bao-mau-tai-nha" class="vpc-button w-full sm:w-auto h-10 xl:h-12 px-4 xl:px-6 bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default rounded-full shadow-xs transition-colors flex items-center justify-center cursor-pointer">
+							Đăng ký tư vấn
 						</button>
-						<button data-open-modal="vpc-consultation-modal" data-service="bao-mau-tai-nha" class="vpc-button w-full sm:w-auto h-10 border border-border-secondary-default hover:bg-surface-badge-secondary/40 active:border-border-secondary-dark text-text-heading-secondary-default rounded-full transition-colors flex items-center justify-center cursor-pointer">
+						<button data-open-modal="vpc-consultation-modal" data-service="bao-mau-tai-nha" class="vpc-button w-full sm:w-auto h-10 xl:h-12 px-4 xl:px-6 border border-border-secondary-default hover:bg-surface-badge-secondary/40 active:border-border-secondary-dark text-text-heading-secondary-default rounded-full transition-colors flex items-center justify-center cursor-pointer">
 							Xem chi tiết
 						</button>
 					</div>
@@ -482,7 +431,7 @@ $consultation_services = vpc_get_consultation_services();
 	     5. LỚP HỌC TIỀN SẢN (Chưa Sẵn Sàng Làm Mẹ ? Hãy Bắt Đầu Từ Lớp Tiền Sản)
 	     ========================================================================= -->
 	<section id="lop-hoc-tien-san" class="vpc-section vpc-gradient-blue-reverse relative overflow-hidden">
-		<div class="max-w-[1240px] mx-auto">
+		<div class="vpc-home-container">
 			<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
 				
 				<!-- Left 2-Photo Composition (50% width, staggered 2-column layout matching Figma) -->
@@ -493,7 +442,7 @@ $consultation_services = vpc_get_consultation_services();
 							<picture>
 								<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/lop-hoc-tien-san-1.jpg' ); ?>" 
 								     alt="Chăm sóc bé sơ sinh tại lớp học tiền sản Vạn Phúc Care" 
-								     class="w-full h-auto aspect-[316/388] object-cover rounded-xl block"
+									     class="w-full h-full aspect-[316/388] object-cover rounded-xl block"
 								     loading="lazy" />
 							</picture>
 						</div>
@@ -502,7 +451,7 @@ $consultation_services = vpc_get_consultation_services();
 							<picture>
 								<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/lop-hoc-tien-san-2.jpg' ); ?>" 
 								     alt="Tư vấn và giải đáp thắc mắc cùng điều dưỡng Vạn Phúc Care" 
-								     class="w-full h-auto aspect-[314/521] object-cover rounded-xl block" 
+									     class="w-full h-full aspect-[314/521] object-cover rounded-xl block" 
 								     loading="lazy" />
 							</picture>
 						</div>
@@ -513,9 +462,7 @@ $consultation_services = vpc_get_consultation_services();
 				<div class="flex flex-col items-center lg:items-start text-center lg:text-left w-full">
 					<!-- Badge -->
 					<div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-surface-badge-secondary border border-border-secondary-default rounded-full mb-2.5 sm:mb-3">
-						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="w-4 h-4 text-text-heading-secondary-default shrink-0">
-							<path d="M12 2L13.8 8.6L20.4 10.4L13.8 12.2L12 18.8L10.2 12.2L3.6 10.4L10.2 8.6L12 2Z" fill="currentColor"/>
-						</svg>
+						<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/sparkle-pink.svg' ); ?>" width="24" height="24" class="w-4 h-4 shrink-0" alt="" aria-hidden="true" />
 						<span class="font-body font-medium text-xs sm:text-sm text-text-link-hover tracking-wider uppercase">LỚP HỌC TIỀN SẢN</span>
 					</div>
 
@@ -524,13 +471,13 @@ $consultation_services = vpc_get_consultation_services();
 						<h2 class="font-heading font-semibold text-h1-mobile xl:text-h1 text-text-heading-primary-default">
 							Chưa Sẵn Sàng Làm Mẹ ?
 						</h2>
-						<h3 class="font-heading font-semibold text-h1-mobile xl:text-h1 text-text-heading-secondary-default whitespace-normal sm:whitespace-nowrap">
+						<h3 class="font-heading font-semibold text-h1-mobile lg:text-[38px] lg:leading-[48px] text-text-heading-secondary-default whitespace-normal lg:whitespace-nowrap">
 							Hãy Bắt Đầu Từ Lớp Tiền Sản
 						</h3>
 					</div>
 
 					<!-- Subtitle (Style chữ base 16/24) -->
-					<p class="font-body font-normal sm:font-medium text-base text-text-body-default leading-6 max-w-[540px] text-left w-full mb-4">
+					<p class="font-body font-normal sm:font-medium text-base text-text-body-default leading-6 max-w-[580px] text-left w-full mb-4">
 						Lộ trình học tập đi qua 8 Module chuyên sâu trong 01 buổi học, giúp cha mẹ tự tin trên hành trình mang thai và sau sinh hiểu rõ hành trình sau sinh.
 					</p>
 
@@ -541,21 +488,24 @@ $consultation_services = vpc_get_consultation_services();
 						</p>
 						<div class="w-full flex flex-col gap-3.5 sm:gap-4 lg:gap-6 items-start">
 							<div class="flex items-center gap-3.5 text-left w-full">
-								<svg class="w-6 h-6 shrink-0 text-text-heading-primary-default" viewBox="0 0 24 24" fill="currentColor">
+								<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/course-check.svg' ); ?>" width="25" height="24" class="w-[25px] h-6 shrink-0" alt="" aria-hidden="true" />
+								<svg class="hidden" viewBox="0 0 24 24" fill="currentColor">
 									<path d="M12 1L9.27 2.94 6 2.67l-.78 3.24L2.27 7.7l.88 3.19L1 13.56l2.39 2.33-.27 3.32 3.24.78 1.79 2.95 3.19-.88 2.66 2.15 2.33-2.39 3.32.27.78-3.24 2.95-1.79-.88-3.19L23 10.44l-2.39-2.33.27-3.32-3.24-.78L15.85 1.06 12.66 1.94 12 1z"/>
 									<path d="M8.5 12.2l2.2 2.2 4.8-4.8" stroke="var(--color-neutral-white)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
 								</svg>
 								<span class="font-body font-normal sm:font-medium text-base text-text-body-default leading-6">Phần 1: Thai kỳ an toàn &amp; Vượt cạn chủ động</span>
 							</div>
 							<div class="flex items-center gap-3.5 text-left w-full">
-								<svg class="w-6 h-6 shrink-0 text-text-heading-primary-default" viewBox="0 0 24 24" fill="currentColor">
+								<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/course-check.svg' ); ?>" width="25" height="24" class="w-[25px] h-6 shrink-0" alt="" aria-hidden="true" />
+								<svg class="hidden" viewBox="0 0 24 24" fill="currentColor">
 									<path d="M12 1L9.27 2.94 6 2.67l-.78 3.24L2.27 7.7l.88 3.19L1 13.56l2.39 2.33-.27 3.32 3.24.78 1.79 2.95 3.19-.88 2.66 2.15 2.33-2.39 3.32.27.78-3.24 2.95-1.79-.88-3.19L23 10.44l-2.39-2.33.27-3.32-3.24-.78L15.85 1.06 12.66 1.94 12 1z"/>
 									<path d="M8.5 12.2l2.2 2.2 4.8-4.8" stroke="var(--color-neutral-white)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
 								</svg>
 								<span class="font-body font-normal sm:font-medium text-base text-text-body-default leading-6">Phần 2: Nền tảng sữa mẹ &amp; Đọc vị nhu cầu của bé</span>
 							</div>
 							<div class="flex items-center gap-3.5 text-left w-full">
-								<svg class="w-6 h-6 shrink-0 text-text-heading-primary-default" viewBox="0 0 24 24" fill="currentColor">
+								<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/course-check.svg' ); ?>" width="25" height="24" class="w-[25px] h-6 shrink-0" alt="" aria-hidden="true" />
+								<svg class="hidden" viewBox="0 0 24 24" fill="currentColor">
 									<path d="M12 1L9.27 2.94 6 2.67l-.78 3.24L2.27 7.7l.88 3.19L1 13.56l2.39 2.33-.27 3.32 3.24.78 1.79 2.95 3.19-.88 2.66 2.15 2.33-2.39 3.32.27.78-3.24 2.95-1.79-.88-3.19L23 10.44l-2.39-2.33.27-3.32-3.24-.78L15.85 1.06 12.66 1.94 12 1z"/>
 									<path d="M8.5 12.2l2.2 2.2 4.8-4.8" stroke="var(--color-neutral-white)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
 								</svg>
@@ -571,7 +521,8 @@ $consultation_services = vpc_get_consultation_services();
 							<!-- Card 1 -->
 							<div class="bg-surface-card-default rounded-xl border border-border-divider-default shadow-card p-3 sm:px-3.5 sm:py-2.5 sm:min-h-[73px] flex items-center gap-3">
 								<div class="w-[50px] h-[50px] rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0">
-									<svg class="w-6 h-6 text-text-heading-secondary-default" viewBox="0 0 24 24" fill="none">
+									<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/course-time.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px]" alt="" aria-hidden="true" />
+									<svg class="hidden" viewBox="0 0 24 24" fill="none">
 										<path d="M12 3a9 9 0 0 0-7.7 4.3L3 6v4h4L5.6 8.6A7.2 7.2 0 1 1 4.8 12h-1.8A9 9 0 1 0 12 3z" fill="var(--color-secondary-500)"/>
 										<circle cx="12" cy="12" r="5" fill="var(--color-secondary-500)"/>
 										<path d="M12 9.5V12l1.8 1.1" stroke="var(--color-neutral-white)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
@@ -586,7 +537,8 @@ $consultation_services = vpc_get_consultation_services();
 							<!-- Card 2 -->
 							<div class="bg-surface-card-default rounded-xl border border-border-divider-default shadow-card p-3 sm:px-3.5 sm:py-2.5 sm:min-h-[73px] flex items-center gap-3">
 								<div class="w-[50px] h-[50px] rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0">
-									<svg class="w-6 h-6 text-text-heading-secondary-default" viewBox="0 0 24 24" fill="currentColor">
+									<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/calendar-clock-icon-exact.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px]" alt="" aria-hidden="true" />
+									<svg class="hidden" viewBox="0 0 24 24" fill="currentColor">
 										<path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7.1c-.1-.3-.1-.7-.1-1 0-3.3 2.7-6 6-6 .3 0 .7 0 1 .1V6c0-1.1-.9-2-2-2zm0 6H5V7h14v3z"/>
 										<path d="M18 13c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm1.5 6.5l-2-1.5V15h1v2.5l1.5 1.1-.5.9z"/>
 									</svg>
@@ -601,7 +553,8 @@ $consultation_services = vpc_get_consultation_services();
 						<!-- Card 3 -->
 						<div class="bg-surface-card-default rounded-xl border border-border-divider-default shadow-card p-3 sm:px-3.5 sm:py-2.5 sm:min-h-[73px] flex items-center gap-3 w-full">
 							<div class="w-[50px] h-[50px] rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0">
-								<svg class="w-6 h-6 text-text-heading-secondary-default" viewBox="0 0 24 24" fill="currentColor">
+								<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/course-location.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px]" alt="" aria-hidden="true" />
+								<svg class="hidden" viewBox="0 0 24 24" fill="currentColor">
 									<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
 								</svg>
 							</div>
@@ -614,7 +567,8 @@ $consultation_services = vpc_get_consultation_services();
 						<!-- Card 4 -->
 						<div class="bg-surface-card-default rounded-xl border border-border-divider-default shadow-card p-3 sm:px-3.5 sm:py-2.5 sm:min-h-[73px] flex items-center gap-3 w-full">
 							<div class="w-[50px] h-[50px] rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0">
-								<svg class="w-6 h-[18px]" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/course-participants.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px]" alt="" aria-hidden="true" />
+								<svg class="hidden" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M10.5 18C10.5 18 9 18 9 16.5C9 15 10.5 10.5 16.5 10.5C22.5 10.5 24 15 24 16.5C24 18 22.5 18 22.5 18H10.5ZM16.5 9C17.6935 9 18.8381 8.52589 19.682 7.68198C20.5259 6.83807 21 5.69347 21 4.5C21 3.30653 20.5259 2.16193 19.682 1.31802C18.8381 0.474106 17.6935 0 16.5 0C15.3065 0 14.1619 0.474106 13.318 1.31802C12.4741 2.16193 12 3.30653 12 4.5C12 5.69347 12.4741 6.83807 13.318 7.68198C14.1619 8.52589 15.3065 9 16.5 9Z" fill="var(--color-secondary-500)"/>
 									<path d="M7.824 18C7.60163 17.5317 7.49074 17.0183 7.5 16.5C7.5 14.4675 8.52 12.375 10.404 10.92C9.46364 10.6303 8.48392 10.4886 7.5 10.5C1.5 10.5 0 15 0 16.5C0 18 1.5 18 1.5 18H7.824Z" fill-rule="evenodd" clip-rule="evenodd" fill="var(--color-secondary-500)"/>
 									<path d="M6.75 9C7.74456 9 8.69839 8.60491 9.40165 7.90165C10.1049 7.19839 10.5 6.24456 10.5 5.25C10.5 4.25544 10.1049 3.30161 9.40165 2.59835C8.69839 1.89509 7.74456 1.5 6.75 1.5C5.75544 1.5 4.80161 1.89509 4.09835 2.59835C3.39509 3.30161 3 4.25544 3 5.25C3 6.24456 3.39509 7.19839 4.09835 7.90165C4.80161 8.60491 5.75544 9 6.75 9Z" fill="var(--color-secondary-500)"/>
@@ -629,10 +583,10 @@ $consultation_services = vpc_get_consultation_services();
 
 					<!-- Buttons (Size md) -->
 					<div class="flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-3 w-full sm:w-auto pt-2 lg:pt-6">
-						<button data-open-modal="vpc-consultation-modal" data-service="lop-hoc-tien-san" class="vpc-button w-full sm:w-auto h-10 px-6 bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default rounded-full shadow-xs transition-colors flex items-center justify-center cursor-pointer">
-							Tư vấn miễn phí
+						<button data-open-modal="vpc-consultation-modal" data-service="lop-hoc-tien-san" class="vpc-button w-full sm:w-auto h-10 xl:h-12 px-4 xl:px-6 bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default rounded-full shadow-xs transition-colors flex items-center justify-center cursor-pointer">
+							Đăng ký tư vấn
 						</button>
-						<button data-open-modal="vpc-consultation-modal" data-service="lop-hoc-tien-san" class="vpc-button w-full sm:w-auto h-10 px-6 border border-border-secondary-default hover:bg-surface-badge-secondary/40 active:border-border-secondary-dark text-text-heading-secondary-default rounded-full transition-colors flex items-center justify-center cursor-pointer">
+						<button data-open-modal="vpc-consultation-modal" data-service="lop-hoc-tien-san" class="vpc-button w-full sm:w-auto h-10 xl:h-12 px-4 xl:px-6 border border-border-secondary-default hover:bg-surface-badge-secondary/40 active:border-border-secondary-dark text-text-heading-secondary-default rounded-full transition-colors flex items-center justify-center cursor-pointer">
 							Xem chi tiết
 						</button>
 					</div>
@@ -648,7 +602,7 @@ $consultation_services = vpc_get_consultation_services();
 	     ========================================================================= -->
 	<section id="khoa-hoc-truc-tuyen" class="vpc-section bg-surface-background-default relative overflow-hidden">
 		<div id="dao-tao-easy" class="absolute -top-24"></div>
-		<div class="max-w-[1280px] mx-auto w-full flex flex-col items-center">
+		<div class="vpc-home-container flex flex-col items-center">
 			
 			<!-- Badge -->
 			<div class="inline-flex items-center gap-2 px-4 py-2 bg-surface-badge-secondary border border-border-secondary-default rounded-full mb-4">
@@ -663,7 +617,7 @@ $consultation_services = vpc_get_consultation_services();
 			<!-- Heading -->
 			<h2 class="font-heading font-semibold text-h1-mobile xl:text-h1 text-center mb-8 sm:mb-10 lg:mb-12">
 				<span class="text-text-heading-primary-default block font-semibold">Khoá Học Làm Mẹ,</span>
-				<span class="text-text-heading-secondary-default block font-semibold mt-1">Nuôi con không áp lực</span>
+				<span class="text-text-heading-secondary-default block font-semibold mt-1">Nuôi Con Không Áp Lực</span>
 			</h2>
 
 			<!-- 4 Cards Grid -->
@@ -705,7 +659,8 @@ $consultation_services = vpc_get_consultation_services();
 				<!-- Card 3 -->
 				<div class="bg-surface-card-default rounded-xl p-5 sm:p-6 lg:p-7 shadow-card border border-border-divider-default flex flex-col items-center text-center h-full transition-all duration-300 hover:shadow-[0_12px_32px_rgba(26,119,186,0.08)] hover:-translate-y-1">
 					<div class="w-12 h-12 rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0 mb-3 sm:mb-4">
-						<svg class="w-6 h-6 text-text-heading-secondary-default" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+						<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/lightbulb-hand-icon-transparent-50x50.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px]" alt="" aria-hidden="true" />
+						<svg class="hidden" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 							<path d="M12 1.5a.9.9 0 0 1 .9.9v1.2a.9.9 0 1 1-1.8 0V2.4a.9.9 0 0 1 .9-.9zm-6.2 3.8a.9.9 0 0 1 1.27 0l.85.85a.9.9 0 1 1-1.27 1.27l-.85-.85a.9.9 0 0 1 0-1.27zm12.4 0a.9.9 0 0 1 0 1.27l-.85.85a.9.9 0 1 1-1.27-1.27l.85-.85a.9.9 0 0 1 1.27 0zM3 11a.9.9 0 0 1 .9-.9h1.2a.9.9 0 1 1 0 1.8H3.9A.9.9 0 0 1 3 11zm15 0a.9.9 0 0 1 .9-.9h1.2a.9.9 0 1 1 0 1.8h-1.2a.9.9 0 0 1-.9-.9z"/>
 							<path d="M12 4.5a4.2 4.2 0 0 0-3.08 7.07c.45.48.75 1.08.75 1.83h4.66c0-.75.3-1.35.75-1.83A4.2 4.2 0 0 0 12 4.5zm-1.4 10.4h2.8v.9h-2.8v-.9z"/>
 							<path d="M5.5 14h2v7.5h-2zm3 4h3.2c.8 0 1.4.6 1.4 1.4s-.6 1.4-1.4 1.4H8.5V18zm0-2h3.8c1 0 1.9.8 1.9 1.8 0 .34-.1.66-.27.93l2.4-1.2c.43-.22.95-.04 1.17.39.22.43.04.95-.39 1.17l-3.7 1.85c-.47.24-1 .36-1.54.36H8.5V16z"/>
@@ -722,7 +677,8 @@ $consultation_services = vpc_get_consultation_services();
 				<!-- Card 4 -->
 				<div class="bg-surface-card-default rounded-xl p-5 sm:p-6 lg:p-7 shadow-card border border-border-divider-default flex flex-col items-center text-center h-full transition-all duration-300 hover:shadow-[0_12px_32px_rgba(26,119,186,0.08)] hover:-translate-y-1">
 					<div class="w-12 h-12 rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0 mb-3 sm:mb-4">
-						<svg class="w-6 h-6 text-text-heading-secondary-default" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+						<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/teaching-icon-50x50.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px]" alt="" aria-hidden="true" />
+						<svg class="hidden" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 							<path d="M9.5 3h12a1 1 0 0 1 1 1v9.5a1 1 0 0 1-1 1h-12a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1.5 2.5h8v1.5h-8V5.5zm0 3h5.5V10H11V8.5z"/>
 							<circle cx="5.5" cy="6" r="2.5"/>
 							<path d="M5.5 10c-2.2 0-4 1.8-4 4v5.5h7.5v-4.8l3.3-2.2c.38-.25.48-.76.23-1.14-.25-.38-.76-.48-1.14-.23L9 12.8A3.98 3.98 0 0 0 5.5 10z"/>
@@ -741,7 +697,7 @@ $consultation_services = vpc_get_consultation_services();
 			<!-- CTA Button (Size md, Direct external link to edu.vanphuccare.vn) -->
 			<div class="w-full sm:w-auto flex justify-center">
 				<a href="https://edu.vanphuccare.vn" target="_blank" rel="noopener noreferrer"
-				   class="vpc-button w-full sm:w-auto h-10 bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default rounded-full shadow-xs transition-colors flex items-center justify-center cursor-pointer">
+				   class="vpc-button w-full sm:w-auto h-10 xl:h-12 px-4 xl:px-6 bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default rounded-full shadow-xs transition-colors flex items-center justify-center cursor-pointer">
 					Khám phá ngay
 				</a>
 			</div>
@@ -752,27 +708,25 @@ $consultation_services = vpc_get_consultation_services();
 	<!-- =========================================================================
 	     7. VÌ SAO CHA MẸ CHỌN VẠN PHÚC CARE (Desktop - 24)
 	     ========================================================================= -->
-	<section id="vi-sao-chon-van-phuc" class="vpc-section vpc-gradient-neutral-primary relative overflow-hidden !py-12 xl:!pt-[61px] xl:!pb-[46px]">
-		<div class="max-w-[1280px] mx-auto px-5 xl:px-20 flex flex-col items-center gap-6 xl:gap-6">
+	<section id="vi-sao-chon-van-phuc" class="vpc-section vpc-gradient-neutral-primary relative overflow-hidden py-12 xl:pt-[61px] xl:pb-[46px]">
+		<div class="vpc-home-container flex flex-col items-center gap-6 xl:gap-6">
 			
 			<!-- Top Section Header -->
 			<div class="flex flex-col items-center text-center max-w-[860px] mx-auto gap-3">
 				<!-- Badge -->
 				<div class="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 bg-surface-badge-secondary border border-border-secondary-default rounded-full">
-					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="w-4 h-4 text-text-heading-secondary-default shrink-0">
-						<path d="M12 2L13.8 8.6L20.4 10.4L13.8 12.2L12 18.8L10.2 12.2L3.6 10.4L10.2 8.6L12 2Z" fill="currentColor"/>
-					</svg>
+					<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/sparkle-pink.svg' ); ?>" width="24" height="24" class="w-4 h-4 shrink-0" alt="" aria-hidden="true" />
 					<span class="font-body font-medium text-xs sm:text-sm text-text-link-hover tracking-wider uppercase">BẠN ĐỒNG HÀNH CỦA BA MẸ</span>
 				</div>
 
 				<!-- Main Heading -->
 				<h2 class="font-heading font-semibold text-h1-mobile xl:text-h1 text-center">
-					<span class="text-text-heading-primary-default">Vì sao cha mẹ chọn </span><br class="sm:hidden"><span class="text-text-heading-secondary-default whitespace-nowrap">Vạn Phúc Care</span>
+					<span class="text-text-heading-primary-default">Vì Sao Cha Mẹ Chọn </span><br class="sm:hidden"><span class="text-text-heading-secondary-default whitespace-nowrap">Vạn Phúc Care</span>
 				</h2>
 
 				<!-- Subtitle -->
-				<p class="font-body font-medium text-sm sm:text-base text-text-body-default leading-6 max-w-[540px]">
-					Không chỉ đơn thuần là dịch vụ chăm sóc sức khỏe, Vạn Phúc Care là người bạn đồng hành đáng tin cậy, cam kết mang đến sự an toàn, chuyên nghiệp và an tâm trọn vẹn cho mọi gia đình.
+				<p class="font-body font-normal sm:font-medium text-sm sm:text-base text-text-body-default leading-6 max-w-[540px]">
+					Người bạn đồng hành đáng tin cậy, cam kết mang đến<br class="hidden sm:inline"> sự an toàn, chuyên nghiệp và an tâm trọn vẹn cho mọi gia đình.
 				</p>
 			</div>
 
@@ -780,11 +734,14 @@ $consultation_services = vpc_get_consultation_services();
 			<div class="w-full flex flex-col lg:flex-row items-center justify-between gap-6 xl:gap-8">
 				
 				<!-- Center Image (Mobile order: 1, Desktop order: 2) -->
-				<div class="w-full max-w-[350px] sm:max-w-[480px] shrink-0 mx-auto flex justify-center items-center order-1 lg:order-2">
+				<div class="w-full max-w-[350px] sm:max-w-[479px] shrink-0 mx-auto flex justify-center items-center order-1 lg:order-2">
 					<picture>
+						<source srcset="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/vi-sao-chon-VPC.webp' ); ?>" type="image/webp">
 						<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/vi-sao-chon-VPC.jpg' ); ?>" 
 						     alt="Vì sao cha mẹ chọn Vạn Phúc Care"
-						     class="w-full h-auto aspect-[4/3] object-cover rounded-[24px] sm:rounded-[32px] shadow-[0px_4px_30px_rgba(0,0,0,0.08)] block" 
+						     width="479"
+						     height="276"
+						     class="w-full h-auto aspect-[479/276] object-cover rounded-[24px] sm:rounded-[32px] shadow-[0px_4px_30px_rgba(0,0,0,0.08)] block" 
 						     loading="lazy" />
 					</picture>
 				</div>
@@ -922,12 +879,10 @@ $consultation_services = vpc_get_consultation_services();
 	     ========================================================================= -->
 	<section id="feedback" class="vpc-section bg-surface-background-default overflow-hidden relative">
 		<!-- Section Header -->
-		<div class="vpc-container text-center mb-10 sm:mb-14">
+		<div class="vpc-home-container text-center mb-10 sm:mb-14">
 			<!-- Badge -->
 			<div class="inline-flex items-center justify-center gap-2 px-3.5 py-1 bg-surface-badge-secondary border border-border-secondary-default rounded-full mb-3 shadow-xs">
-				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="w-4 h-4 text-text-heading-secondary-default shrink-0">
-					<path d="M12 2L13.8 8.6L20.4 10.4L13.8 12.2L12 18.8L10.2 12.2L3.6 10.4L10.2 8.6L12 2Z" fill="currentColor"/>
-				</svg>
+				<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/sparkle-pink.svg' ); ?>" width="24" height="24" class="w-4 h-4 shrink-0" alt="" aria-hidden="true" />
 				<span class="font-body font-medium text-xs sm:text-sm text-text-link-hover tracking-wider uppercase">FEEDBACK</span>
 			</div>
 			<!-- Title (Figma 48px) -->
@@ -936,8 +891,9 @@ $consultation_services = vpc_get_consultation_services();
 				<span class="text-text-heading-secondary-default">Của Khách Hàng</span>
 			</h2>
 			<!-- Subtitle -->
-			<p class="font-body font-medium text-sm sm:text-base text-text-body-default leading-6 max-w-3xl mx-auto mt-3">
-				Trong hành trình cùng mẹ trải đầy yêu thương, Vạn Phúc Care đã nhận được sự tin yêu của hàng ngàn Mẹ bỉm. Chúng tôi cam kết đồng hành cùng Mẹ và Bé trong 2 năm đầu đời.
+			<p class="font-body font-medium text-sm sm:text-base text-text-body-default leading-6 max-w-4xl mx-auto mt-3">
+				<span class="block">Trong hành trình cùng mẹ trải đầy yêu thương, Vạn Phúc Care đã nhận được sự tin yêu của hàng ngàn mẹ bỉm.</span>
+				<span class="block">Chúng tôi cam kết đồng hành cùng Mẹ và Bé trong 2 năm đầu đời.</span>
 			</p>
 		</div>
 
@@ -1439,20 +1395,18 @@ $consultation_services = vpc_get_consultation_services();
 	</section>	<!-- =========================================================================
 	     9. BÁO CHÍ NÓI VỀ CHÚNG TÔI (Featured Press / Articles)
 	     ========================================================================= -->
-	<section id="bao-chi" class="vpc-section vpc-gradient-press relative overflow-hidden">
-		<div class="vpc-container">
+	<section id="bao-chi" style="background: linear-gradient(135deg, var(--color-surface-background-secondary) 0%, var(--color-surface-background-primary) 100%);" class="vpc-section vpc-gradient-press relative overflow-hidden">
+		<div class="vpc-home-container">
 			<!-- Section Header -->
 			<div class="text-center max-w-3xl mx-auto mb-8 sm:mb-14">
 				<!-- Badge -->
 				<div class="inline-flex items-center justify-center gap-2 px-3.5 py-1 bg-surface-badge-secondary border border-border-secondary-default rounded-full mb-3 shadow-xs">
-					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-text-heading-secondary-default shrink-0">
-						<path d="M12 2L13.8 8.6L20.4 10.4L13.8 12.2L12 18.8L10.2 12.2L3.6 10.4L10.2 8.6L12 2Z" fill="currentColor"/>
-					</svg>
+					<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/sparkle-pink.svg' ); ?>" width="24" height="24" class="w-4 h-4 shrink-0" alt="" aria-hidden="true" />
 					<span class="font-body font-medium text-xs sm:text-sm tracking-wider uppercase text-text-link-hover">BÀI BÁO NỔI BẬT</span>
 				</div>
 
-				<!-- Title (Figma Bold 48) -->
-				<h2 class="font-heading font-bold text-h1-mobile xl:text-h1 text-center">
+				<!-- Title -->
+				<h2 class="font-heading font-semibold text-h1-mobile xl:text-h1 text-center">
 					<span class="text-text-heading-primary-default">Báo Chí Nói </span><br class="sm:hidden">
 					<span class="text-text-heading-secondary-default">Về Chúng Tôi</span>
 				</h2>
@@ -1464,7 +1418,7 @@ $consultation_services = vpc_get_consultation_services();
 			</div>
 
 			<!-- 3 Press Cards (Mobile horizontal scroll snap, Desktop grid) -->
-			<div class="flex flex-row overflow-x-auto scrollbar-none gap-4 px-5 -mx-5 pb-2 snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-3 md:mx-0 md:px-0 md:pb-0">
+			<div class="flex flex-row overflow-x-auto scrollbar-none gap-6 md:gap-4 px-5 -mx-5 pb-2 snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-3 md:mx-0 md:px-0 md:pb-0">
 				
 				<!-- Card 1 -->
 				<article class="min-w-[300px] w-[300px] md:min-w-0 md:w-auto snap-start bg-surface-card-default rounded-2xl p-4 sm:p-5 border border-neutral-100 hover:shadow-md transition-all duration-300 flex flex-col group shrink-0 md:shrink">
@@ -1550,8 +1504,8 @@ $consultation_services = vpc_get_consultation_services();
 
 			<!-- Bottom CTA Button -->
 			<div class="w-full flex justify-center mt-8 sm:mt-12">
-				<span class="vpc-button w-full sm:w-auto max-w-[350px] h-10 rounded-full border border-border-secondary-default text-text-heading-secondary-default flex items-center justify-center shadow-xs" aria-disabled="true">
-					Xem Tất Cả
+				<span class="vpc-button w-full sm:w-auto max-w-[350px] h-10 xl:h-12 px-4 xl:px-6 rounded-full border border-border-secondary-default text-text-heading-secondary-default flex items-center justify-center shadow-xs" aria-disabled="true">
+					Xem tất cả
 				</span>
 			</div>
 		</div>
@@ -1561,13 +1515,13 @@ $consultation_services = vpc_get_consultation_services();
 	     10. ĐĂNG KÝ TƯ VẤN (SẴN SÀNG BẮT ĐẦU - HÀNH TRÌNH LÀM MẸ HẠNH PHÚC)
 	     ========================================================================= -->
 	<section id="dang-ky-tu-van" class="vpc-section vpc-gradient-consultation relative overflow-hidden">
-		<div class="vpc-container max-w-4xl mx-auto flex flex-col items-center gap-6">
+		<div class="vpc-home-container max-w-4xl mx-auto flex flex-col items-center gap-6">
 			
 			<div class="text-center">
 				<h2 class="font-heading font-semibold text-h1-mobile xl:text-h1 text-center">
-					<span class="text-text-heading-primary-default block uppercase">SẴN SÀNG BẮT ĐẦU</span>
-					<span class="text-text-heading-secondary-default block uppercase mt-1">
-						HÀNH TRÌNH LÀM <br class="sm:hidden">MẸ HẠNH PHÚC
+					<span class="text-text-heading-primary-default block">Sẵn Sàng Bắt Đầu</span>
+					<span class="text-text-heading-secondary-default block mt-1">
+						Hành Trình Làm Mẹ <span class="whitespace-nowrap">Hạnh Phúc</span>
 					</span>
 				</h2>
 			</div>
@@ -1616,19 +1570,39 @@ $consultation_services = vpc_get_consultation_services();
 						</div>
 					</div>
 
-					<!-- Câu hỏi -->
+					<!-- Tuần thai -->
 					<div class="flex flex-col gap-2">
 						<label class="font-body font-medium text-base sm:text-[20px] text-text-body-default">
-							Câu hỏi
+							<span class="text-text-error-default">*</span> Tuần thai
 						</label>
-						<input type="text" name="customer_note" placeholder="Cho chúng tôi biết thêm về nhu cầu."
+						<div class="relative">
+							<select name="gestational_age" required class="w-full h-[50px] px-4 rounded-xl border border-border-divider-default bg-surface-background-default text-text-body-default font-body text-base focus:border-border-primary-default focus:outline-none transition-all appearance-none pr-10">
+								<option value="" disabled selected>Tuần 35</option>
+								<option value="chua-mang-thai">Chưa mang thai / Đang chuẩn bị</option>
+								<option value="1-12-tuan">Mang thai 1 - 12 tuần</option>
+								<option value="13-27-tuan">Mang thai 13 - 27 tuần</option>
+								<option value="28-40-tuan">Mang thai 28 - 40 tuần</option>
+								<option value="da-sinh-be">Đã sinh bé</option>
+							</select>
+							<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-text-body-default">
+								<svg class="w-5 h-5 text-text-body-default" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+							</div>
+						</div>
+					</div>
+
+					<!-- Ghi chú -->
+					<div class="flex flex-col gap-2">
+						<label class="font-body font-medium text-base sm:text-[20px] text-text-body-default">
+							Ghi chú
+						</label>
+						<input type="text" name="customer_note" placeholder="Cho chúng tôi biết thêm về nhu cầu của bạn!"
 						       class="w-full h-[50px] px-4 rounded-xl border border-border-divider-default bg-surface-background-default text-text-body-default placeholder:text-text-disabled-light font-body text-base focus:border-border-primary-default focus:outline-none transition-all">
 					</div>
 
 					<!-- Submit Button -->
 					<div class="pt-2">
-						<button type="submit" class="vpc-button w-full h-10 bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default rounded-full flex items-center justify-center transition-all cursor-pointer shadow-xs font-body font-semibold">
-							Gửi tư vấn ngay
+						<button type="submit" class="vpc-button w-full h-10 xl:h-12 px-4 xl:px-6 bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default rounded-full flex items-center justify-center transition-all cursor-pointer shadow-xs font-body font-semibold">
+							Gửi yêu cầu tư vấn
 						</button>
 					</div>
 				</form>
@@ -1641,14 +1615,12 @@ $consultation_services = vpc_get_consultation_services();
 	     11. KIẾN THỨC NUÔI CON (Blog / Knowledge Section)
 	     ========================================================================= -->
 	<section id="kien-thuc-nuoi-con" class="vpc-section bg-surface-background-default relative overflow-hidden">
-		<div class="vpc-container">
+		<div class="vpc-home-container">
 			<!-- Section Header -->
 			<div class="text-center max-w-3xl mx-auto mb-6">
 				<!-- Badge -->
 				<div class="inline-flex items-center justify-center gap-2 px-3.5 py-1 bg-surface-badge-secondary border border-border-secondary-default rounded-full mb-3 shadow-xs">
-					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-text-heading-secondary-default shrink-0">
-						<path d="M12 2L13.8 8.6L20.4 10.4L13.8 12.2L12 18.8L10.2 12.2L3.6 10.4L10.2 8.6L12 2Z" fill="currentColor"/>
-					</svg>
+					<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/sparkle-pink.svg' ); ?>" width="24" height="24" class="w-4 h-4 shrink-0" alt="" aria-hidden="true" />
 					<span class="font-body font-medium text-xs sm:text-sm tracking-wider uppercase text-text-link-hover">BÀI VIẾT NỔI BẬT</span>
 				</div>
 
@@ -1751,8 +1723,8 @@ $consultation_services = vpc_get_consultation_services();
 
 			<!-- Bottom CTA Button -->
 			<div class="text-center mt-6 sm:mt-10 flex justify-center">
-				<span class="vpc-button w-full max-w-[350px] sm:w-auto h-10 inline-flex items-center justify-center rounded-full bg-transparent border border-border-secondary-default text-text-heading-secondary-default" aria-disabled="true">
-					Xem Tất Cả
+				<span class="vpc-button w-full max-w-[350px] sm:w-auto h-10 xl:h-12 px-4 xl:px-6 inline-flex items-center justify-center rounded-full bg-transparent border border-border-secondary-default text-text-heading-secondary-default" aria-disabled="true">
+					Xem tất cả
 				</span>
 			</div>
 		</div>

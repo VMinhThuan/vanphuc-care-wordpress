@@ -334,16 +334,13 @@
     background: linear-gradient(59.1deg, var(--color-neutral-100) 66.82%, var(--color-primary-100) 146.55%);
   }
   .vpc-gradient-press {
-    /* Figma press section gradient – màu chưa có trong token sheet.
-       Designer cần bổ sung token cho round tiếp theo.
-       Hex gốc: #FFF8F8 → #FDF1F1 → #FAF0F0 (secondary-100 pha cực nhạt). */
-    background: linear-gradient(180deg, #FFF8F8 0%, #FDF1F1 50%, #FAF0F0 100%);
+    background: linear-gradient(135deg, var(--color-surface-background-secondary) 0%, var(--color-surface-background-primary) 100%);
   }
   .vpc-button {
     box-sizing: border-box;
-    height: 2.5rem;
+    height: 2.5rem; /* Mobile 40px (size sm) */
     min-height: 2.5rem;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1rem; /* 12px 16px */
     font-family: var(--font-body);
     font-size: 1rem;
     font-weight: 500;
@@ -351,16 +348,83 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    border-radius: 9999px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    user-select: none;
+  }
+  @media (min-width: 1280px) {
+    .vpc-button {
+      height: 3rem; /* Desktop 48px (size md) */
+      min-height: 3rem;
+      padding: 0.75rem 1.5rem; /* 12px 24px */
+    }
+  }
+  .vpc-button-sm {
+    height: 2.5rem !important; /* 40px */
+    min-height: 2.5rem !important;
+    padding: 0.75rem 1rem !important; /* 12px 16px */
+  }
+  .vpc-button-md {
+    height: 3rem !important; /* 48px */
+    min-height: 3rem !important;
+    padding: 0.75rem 1.5rem !important; /* 12px 24px */
+  }
+  .vpc-button-lg {
+    height: 3.5rem !important; /* 56px */
+    min-height: 3.5rem !important;
+    padding: 0.875rem 2rem !important; /* 14px 32px */
+    font-weight: 600;
   }
 
-  /* Container toàn trang chuẩn theo tỉ lệ 1440px */
+
+  /* Khung header rộng 1560px, với phần nội dung thực rộng 1400px sau lề 80px. */
   .vpc-container {
     width: 100%;
-    max-width: 1440px;
+    max-width: 1560px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 1.25rem; /* 20px mobile margin */
     padding-right: 1.25rem;
+  }
+
+  /* Khung nội dung dùng chung cho các section trang chủ.
+     Khớp chính xác với vùng nội dung của header trên desktop. */
+  .vpc-home-container {
+    width: 100%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Intro section: on mobile, place the image directly after its heading. */
+  @media (max-width: 63.999rem) {
+    #gioi-thieu .intro-content {
+      display: contents;
+    }
+    #gioi-thieu .intro-badge {
+      order: 1;
+    }
+    #gioi-thieu .intro-heading {
+      order: 2;
+    }
+    #gioi-thieu .intro-visual {
+      order: 8;
+    }
+    #gioi-thieu .intro-description {
+      order: 4;
+    }
+    #gioi-thieu .intro-checklist {
+      order: 5;
+    }
+    #gioi-thieu .intro-stats {
+      order: 6;
+    }
+    #gioi-thieu .intro-action {
+      order: 7;
+    }
   }
   @media (min-width: 1280px) {
     .vpc-container {
@@ -657,8 +721,19 @@
   .scrollbar-none::-webkit-scrollbar {
     display: none;
   }
-  .scrollbar-none {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  /* On desktop these full-bleed content sections retain their design gutters.
+     Mobile uses the standard 20px .vpc-section gutter, matching the header. */
+  @media (min-width: 1280px) {
+    #vi-sao-chon-van-phuc,
+    #bao-chi,
+    #kien-thuc-nuoi-con {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+  }
+
+  /* Remove the legacy privacy reassurance rendered by older form markup. */
+  p.text-center.font-body.text-xs.text-text-body-muted.pt-1 {
+    display: none !important;
   }
 }

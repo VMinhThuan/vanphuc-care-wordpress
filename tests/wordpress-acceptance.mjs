@@ -139,18 +139,21 @@ try {
     failures.push(`WP sections missing .vpc-section: ${sectionReport.missingVpcSection.join(', ')}`);
   }
 
-  // B. Validate CTA Button Heights (40px standard) in WordPress Runtime
+  // B. Validate CTA Button Heights (Desktop: 48px body size md, 56px header CTA size lg) in WordPress Runtime
   const buttonHeightReport = await page.evaluate(() => {
     const buttons = Array.from(document.querySelectorAll('.vpc-button'));
     const nonCompliant = [];
     buttons.forEach((btn, idx) => {
       if (btn.offsetParent === null) return;
       const height = parseFloat(getComputedStyle(btn).height);
-      if (Math.abs(height - 40) > 1.5) {
+      const isHeaderCta = btn.classList.contains('vpc-button-lg') || btn.closest('header') !== null;
+      const expectedHeight = isHeaderCta ? 56 : 48;
+      if (Math.abs(height - expectedHeight) > 1.5) {
         nonCompliant.push({
           idx,
           text: btn.textContent.trim().slice(0, 30),
           height,
+          expectedHeight,
           classes: btn.className,
         });
       }
@@ -158,7 +161,7 @@ try {
     return nonCompliant;
   });
   if (buttonHeightReport.length > 0) {
-    failures.push(`WP buttons not 40px height: ${JSON.stringify(buttonHeightReport)}`);
+    failures.push(`WP buttons height mismatch: ${JSON.stringify(buttonHeightReport)}`);
   }
 
   // C. Hero Slider Navigation, Autoplay, Swipe in WordPress Runtime
@@ -204,6 +207,7 @@ try {
   const modalForm = page.locator('#vpc-consultation-modal form');
   await modalForm.locator('input[name="full_name"], input[name="customer_name"]').first().fill('Nguyễn Như Linh');
   await modalForm.locator('input[name="phone"], input[name="customer_phone"]').first().fill('0345678999');
+  await modalForm.locator('select[name="gestational_age"]').selectOption('28-40-tuan');
 
   const submitButton = modalForm.locator('button[type="submit"]');
 

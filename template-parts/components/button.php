@@ -17,7 +17,7 @@
  *   'text'        => 'Liên hệ ngay',
  *   'url'         => '#contact',
  *   'variant'     => 'primary', // primary | secondary | outline-primary | outline-secondary | ghost | text-link
- *   'size'        => 'md',      // sm | md | lg
+ *   'size'        => 'md',      // sm | md | lg | body (mobile sm, desktop md)
  *   'icon_left'   => '',        // optional raw svg or icon path
  *   'icon_right'  => '',        // optional raw svg
  *   'is_loading'  => false,
@@ -45,11 +45,15 @@ $type        = $args['type'] ?? 'button';
 // Base: Focus ring when tabbing
 $base_classes = 'vpc-button inline-flex items-center justify-center font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-border-focus-default select-none';
 
-// Size styles. Matches Figma variable handoff: CTA size md is 40px (h-10).
+// Size styles per Figma handoff:
+// - sm: mobile body button (h-10 / 40px, padding 16 12)
+// - md: desktop body button, drawer CTA, sticky CTA (h-12 / 48px, padding 24 12)
+// - lg: header CTA (h-14 / 56px, padding 32 14)
 $size_classes = [
-	'sm' => 'h-8 px-4 text-sm gap-1.5 rounded-full',
-	'md' => 'h-10 px-4 text-base gap-2 rounded-full',
-	'lg' => 'h-14 sm:h-16 px-7 sm:px-8 text-base sm:text-lg gap-2.5 rounded-full',
+	'sm' => 'h-10 px-4 text-sm gap-1.5 rounded-full',
+	'md' => 'h-12 px-6 text-base gap-2 rounded-full',
+	'lg' => 'h-14 px-8 text-base font-semibold gap-2.5 rounded-full',
+	'body' => 'h-10 px-4 text-sm gap-1.5 rounded-full xl:h-12 xl:px-6 xl:text-base xl:gap-2',
 ];
 $current_size = $size_classes[ $size ] ?? $size_classes['md'];
 
