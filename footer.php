@@ -154,14 +154,17 @@ $instagram_url = get_theme_mod( 'vpc_instagram_url', '' );
 
 			<!-- Badges (DMCA + Bộ Công Thương) -->
 			<div class="flex items-center gap-3.5">
-				<!-- DMCA Protected -->
-				<span class="inline-flex" aria-label="DMCA Protected">
-					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/dmca.svg' ); ?>" 
-					     alt="DMCA Protected" 
-					     width="120"
-					     height="55" 
-					     class="h-12 sm:h-[48px] md:h-[55px] w-auto object-contain block">
-				</span>
+				<!-- DMCA.com Protection Status Badge -->
+				<a href="//www.dmca.com/Protection/Status.aspx?ID=c7a60f67-9696-479d-baf5-2f48a09327be" 
+				   title="DMCA.com Protection Status" 
+				   class="dmca-badge inline-flex items-center hover:opacity-90 transition-opacity" 
+				   target="_blank" 
+				   rel="noopener noreferrer">
+					<img src="https://images.dmca.com/Badges/dmca_protected_sml_120n.png?ID=c7a60f67-9696-479d-baf5-2f48a09327be" 
+					     alt="DMCA.com Protection Status" 
+					     class="h-7 sm:h-8 w-auto object-contain block">
+				</a>
+				<script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
 
 				<!-- Bộ Công Thương -->
 				<span class="inline-flex" aria-label="Đã Thông Báo Bộ Công Thương">
