@@ -165,7 +165,7 @@ $instagram_url = get_theme_mod( 'vpc_instagram_url', '' );
 					     class="h-7 sm:h-8 w-auto object-contain block"
 					     loading="lazy">
 				</a>
-				<script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
+				<script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js" defer> </script>
 
 				<!-- Bộ Công Thương -->
 				<span class="inline-flex" aria-label="Đã Thông Báo Bộ Công Thương">

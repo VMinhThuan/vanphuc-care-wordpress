@@ -18,7 +18,9 @@ const browser = await chromium.launch({ headless: true });
 
 try {
   // 1. Verify WordPress Server Connectivity & Runtime Localization
-  const initialPage = await browser.newPage();
+  const context = await browser.newContext();
+  await context.route('**/*dmca.com/**', (route) => route.fulfill({ status: 200, contentType: 'application/javascript', body: '' }));
+  const initialPage = await context.newPage();
   const response = await initialPage.goto(WP_URL, { waitUntil: 'networkidle' });
   if (!response || response.status() !== 200) {
     failures.push(`WordPress server at ${WP_URL} did not return 200 OK`);
@@ -54,7 +56,8 @@ try {
 
   // 2. Viewport audits across all 8 viewports in WordPress Runtime
   for (const viewport of viewports) {
-    const page = await browser.newPage({ viewport });
+    const page = await context.newPage();
+    await page.setViewportSize({ width: viewport.width, height: viewport.height });
     const consoleErrors = [];
     const failedLocalRequests = [];
 
@@ -112,7 +115,7 @@ try {
   }
 
   // 3. Desktop Detailed Layout & Functionality Verification (1440x900)
-  const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  const page = await context.newPage({ viewport: { width: 1440, height: 900 } });
   const interactionErrors = [];
   page.on('console', (message) => {
     if (message.type() === 'error') interactionErrors.push(message.text());
