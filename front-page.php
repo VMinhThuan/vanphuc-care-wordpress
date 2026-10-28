@@ -206,7 +206,7 @@ $consultation_services = vpc_get_consultation_services();
 					</div>
 
 					<div class="intro-action pt-2 w-full lg:w-auto flex justify-center lg:justify-start">
-						<a href="#gioi-thieu" class="vpc-button w-full sm:w-auto h-10 xl:h-12 px-4 xl:px-6 rounded-full border border-border-secondary-default text-text-heading-secondary-default hover:bg-surface-badge-secondary/60 flex items-center justify-center transition-colors">
+						<a href="<?php echo esc_url( home_url( '/lien-he/' ) ); ?>" class="vpc-button w-full sm:w-auto h-10 xl:h-12 px-4 xl:px-6 rounded-full border border-border-secondary-default text-text-heading-secondary-default hover:bg-surface-badge-secondary/60 flex items-center justify-center transition-colors">
 							<span>Tìm Hiểu Thêm</span>
 						</a>
 					</div>

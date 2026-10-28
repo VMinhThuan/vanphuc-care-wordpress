@@ -44,7 +44,7 @@
 				<li><a href="##trung-tam-o-cu" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Ở cữ</a></li>
 				<li><a href="##dich-vu-tai-nha" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Bảo mẫu</a></li>
 				<li><a href="##dich-vu-noi-bat" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Dịch vụ</a></li>
-				<li><a href="#lop-hoc-tien-san" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Lớp học tiền sản</a></li>
+				<li><a href="./lophoctiensan.html" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Lớp học tiền sản</a></li>
 				<li><a href="##tin-tuc" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Kiến thức</a></li>
 			</ul>
 		</nav>
@@ -108,7 +108,7 @@
 					<span>Dịch vụ</span>
 					<svg class="w-6 h-6 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
 				</a>
-				<a href="#lop-hoc-tien-san" class="h-16 py-4 flex items-center justify-between border-b border-border-divider-default text-xl font-medium text-text-nav-default hover:text-text-nav-hover">
+				<a href="./lophoctiensan.html" class="h-16 py-4 flex items-center justify-between border-b border-border-divider-default text-xl font-medium text-text-nav-default hover:text-text-nav-hover">
 					<span>Lớp học tiền sản</span>
 					<svg class="w-6 h-6 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
 				</a>
@@ -333,7 +333,7 @@
 
 					<!-- Button 'Tìm Hiểu Thêm' matching Figma (full-width on mobile) -->
 					<div class="intro-action pt-2 w-full lg:w-auto flex justify-center lg:justify-start">
-						<a href="#gioi-thieu" class="vpc-button w-full sm:w-auto h-10 xl:h-12 px-4 xl:px-6 rounded-full border border-border-secondary-default text-text-heading-secondary-default hover:bg-surface-badge-secondary/60 flex items-center justify-center transition-colors">
+						<a href="?preview=contact" class="vpc-button w-full sm:w-auto h-10 xl:h-12 px-4 xl:px-6 rounded-full border border-border-secondary-default text-text-heading-secondary-default hover:bg-surface-badge-secondary/60 flex items-center justify-center transition-colors">
 							<span>Tìm Hiểu Thêm</span>
 						</a>
 					</div>
@@ -1776,13 +1776,14 @@
 						<div class="relative">
 							<select name="service" required class="w-full h-[50px] px-4 rounded-xl border border-border-divider-default bg-surface-background-default text-text-body-default font-body text-base focus:border-border-primary-default focus:outline-none transition-all appearance-none pr-10">
 								<option value="" disabled selected class="text-text-disabled-light">Chọn dịch vụ</option>
-								<option value="trung-tam-o-cu">Trung tâm Ở cữ</option>
+								<option value="trung-tam-o-cu">Trung tâm ở cữ</option>
 								<option value="bao-mau-tai-nha">Bảo mẫu tại nhà</option>
 								<option value="lop-hoc-tien-san">Lớp học tiền sản</option>
-								<option value="cham-soc-me-sau-sinh">Chăm sóc mẹ sau sinh</option>
-								<option value="tam-be-so-sinh">Tắm bé sơ sinh & Massage</option>
+								<option value="khoa-hoc-truc-tiep">Khóa học trực tiếp</option>
+								<option value="tu-van-nuoi-con-easy">Tư vấn nuôi con EASY</option>
+								<option value="tam-be-sau-sinh">Tắm bé sau sinh</option>
 								<option value="thong-tac-tia-sua">Thông tắc tia sữa</option>
-								<option value="dieu-duong-tai-nha">Điều dưỡng tại nhà</option>
+								<option value="cham-me-sau-sinh">Chăm mẹ sau sinh</option>
 							</select>
 							<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-text-body-default">
 								<svg class="w-5 h-5 text-text-body-default" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
@@ -1950,8 +1951,131 @@
 			</div>
 		</div>
 	</section>
+</main>
 
-<footer class="site-footer relative w-full overflow-hidden pt-8 pb-28 xl:py-6 px-5 xl:px-20 text-text-body-default" style="background: linear-gradient(180.91deg, var(--color-neutral-100) 22.32%, var(--color-primary-200) 146.38%);">
+<!-- Contact-page preview: open index.html?preview=contact -->
+<main id="contact-preview" class="hidden overflow-hidden bg-surface-background-default">
+	<div class="vpc-contact-hero min-h-[306px] xl:min-h-[458px] w-full flex flex-col items-center justify-center px-4 sm:px-10 xl:px-20 py-10 xl:py-24 text-center border-b border-border-divider-default/30">
+		<div class="max-w-5xl mx-auto flex flex-col items-center gap-5 sm:gap-6">
+			<div class="vpc-contact-badge shadow-xs">
+				<img src="./assets/images/icons/contact-sparkle.svg" class="w-6 h-6 shrink-0" alt="" aria-hidden="true">
+				<span class="vpc-contact-badge-text">HÀNH TRÌNH CÙNG MẸ - TRẢI ĐẦY YÊU THƯƠNG</span>
+			</div>
+			<h1 class="vpc-contact-hero-h1">
+				<span class="text-text-heading-primary-default block">Liên Hệ Với Chúng Tôi</span>
+				<span class="text-text-heading-secondary-default block mt-0 xl:mt-1">Vạn Phúc Care</span>
+			</h1>
+			<p class="vpc-contact-hero-desc px-1 sm:px-4">Mỗi hành trình làm mẹ đều cần một người đồng<br class="sm:hidden"> hành.<br class="hidden sm:inline"> Chúng tôi luôn sẵn sàng lắng nghe và sẻ<br class="sm:hidden"> chia cùng bạn.</p>
+		</div>
+	</div>
+
+	<div class="py-8 sm:py-12 lg:py-16 xl:py-24">
+		<div class="vpc-home-container max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="grid grid-cols-1 xl:grid-cols-[minmax(0,658px)_minmax(0,550px)] gap-8 xl:gap-[72px] items-start">
+				<div class="flex flex-col space-y-6">
+					<div class="space-y-4 sm:space-y-6">
+						<div class="flex items-center justify-center xl:justify-start gap-2 text-[#C36869]">
+							<img src="./assets/images/icons/heart-solid.svg" width="24" height="24" class="w-6 h-6 shrink-0" alt="" aria-hidden="true">
+							<span class="font-body font-semibold text-sm sm:text-base text-[#C36869]">Chúng tôi luôn lắng nghe</span>
+						</div>
+						<h2 class="font-heading font-semibold text-h1-mobile xl:text-h1 text-text-heading-primary-default text-center xl:text-left tracking-tight">Vạn Phúc Care Đồng<br class="sm:hidden"> Hành Cùng Bạn</h2>
+						<p class="font-body text-sm sm:text-base text-text-body-muted text-center xl:text-left leading-relaxed max-w-[340px] sm:max-w-none mx-auto xl:mx-0">Để lại lời nhắn, đội ngũ Vạn Phúc Care sẽ tư vấn dịch vụ phù hợp với nhu cầu của mẹ và bé.</p>
+					</div>
+					<form id="vpc-contact-preview-form" class="w-full bg-[#fafafa] border border-neutral-500 rounded-3xl p-4 sm:p-6 xl:p-8 flex flex-col gap-4 sm:gap-5 shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
+						<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-2">
+							<label class="flex flex-col gap-2 sm:gap-3 font-body font-medium text-base sm:text-lg xl:text-xl leading-6 sm:leading-7 text-text-body-default">
+								<span><span class="text-text-error-default">*</span> Họ và tên</span>
+								<input type="text" placeholder="Nguyễn Như Linh" class="w-full h-12 px-4 rounded-xl border border-neutral-500 bg-[#fafafa] text-base font-medium placeholder:text-text-disabled-light focus:border-border-primary-default focus:ring-1 focus:ring-border-primary-default focus:outline-none">
+							</label>
+							<label class="flex flex-col gap-2 sm:gap-3 font-body font-medium text-base sm:text-lg xl:text-xl leading-6 sm:leading-7 text-text-body-default">
+								<span><span class="text-text-error-default">*</span> Số điện thoại</span>
+								<input type="tel" placeholder="0345678***" class="w-full h-12 px-4 rounded-xl border border-neutral-500 bg-[#fafafa] text-base font-medium placeholder:text-text-disabled-light focus:border-border-primary-default focus:ring-1 focus:ring-border-primary-default focus:outline-none">
+							</label>
+						</div>
+						<fieldset class="block border-0 p-0 m-0">
+							<legend class="mb-2 sm:mb-3 font-body font-medium text-base sm:text-lg xl:text-xl leading-6 sm:leading-7 text-text-body-default">
+								<span class="text-text-error-default">*</span> Giai đoạn thai kỳ
+							</legend>
+							<div class="flex flex-col items-start gap-2.5 sm:flex-row sm:flex-wrap sm:gap-2">
+								<label><input class="peer sr-only" type="radio" name="preview-pregnancy" checked><span class="inline-flex items-center justify-center rounded-full border border-[#8FBCE1] sm:border-border-primary-default bg-[#fafafa] px-6 py-2.5 sm:py-3 font-body text-sm sm:text-base font-medium cursor-pointer peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đang mang thai</span></label>
+								<label><input class="peer sr-only" type="radio" name="preview-pregnancy"><span class="inline-flex items-center justify-center rounded-full border border-[#8FBCE1] sm:border-border-primary-default bg-[#fafafa] px-6 py-2.5 sm:py-3 font-body text-sm sm:text-base font-medium cursor-pointer peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Chuẩn bị mang thai</span></label>
+								<label><input class="peer sr-only" type="radio" name="preview-pregnancy"><span class="inline-flex items-center justify-center rounded-full border border-[#8FBCE1] sm:border-border-primary-default bg-[#fafafa] px-6 py-2.5 sm:py-3 font-body text-sm sm:text-base font-medium cursor-pointer peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đã sinh bé</span></label>
+							</div>
+						</fieldset>
+						<label class="flex flex-col gap-2 sm:gap-3 font-body font-medium text-base sm:text-lg xl:text-xl leading-6 sm:leading-7 text-text-body-default">
+							<span><span class="text-text-error-default">*</span> Dịch vụ quan tâm</span>
+							<span class="relative">
+								<select name="service" required class="w-full h-12 px-4 pr-10 appearance-none rounded-xl border border-neutral-500 bg-[#fafafa] text-base font-medium focus:border-border-primary-default focus:ring-1 focus:ring-border-primary-default focus:outline-none">
+									<option value="trung-tam-o-cu" selected>Trung tâm ở cữ</option>
+									<option value="bao-mau-tai-nha">Bảo mẫu tại nhà</option>
+									<option value="lop-hoc-tien-san">Lớp học tiền sản</option>
+									<option value="khoa-hoc-truc-tiep">Khóa học trực tiếp</option>
+									<option value="tu-van-nuoi-con-easy">Tư vấn nuôi con EASY</option>
+									<option value="tam-be-sau-sinh">Tắm bé sau sinh</option>
+									<option value="thong-tac-tia-sua">Thông tắc tia sữa</option>
+									<option value="cham-me-sau-sinh">Chăm mẹ sau sinh</option>
+								</select>
+								<img src="./assets/images/icons/contact-chevron-down.svg" class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2" alt="" aria-hidden="true">
+							</span>
+						</label>
+						<label class="flex flex-col gap-2 sm:gap-3 font-body font-medium text-base sm:text-lg xl:text-xl leading-6 sm:leading-7 text-text-body-default">
+							<span><span class="text-text-error-default">*</span> Tuần thai</span>
+							<span class="relative">
+								<select name="gestational_age" required class="w-full h-12 px-4 pr-10 appearance-none rounded-xl border border-neutral-500 bg-[#fafafa] text-base font-medium focus:border-border-primary-default focus:ring-1 focus:ring-border-primary-default focus:outline-none">
+									<option value="" disabled selected>Chọn giai đoạn</option>
+									<option value="tuan-24">Tuần 24</option>
+									<option value="tuan-25">Tuần 25</option>
+									<option value="tuan-26">Tuần 26</option>
+									<option value="tuan-27">Tuần 27</option>
+									<option value="tuan-28">Tuần 28</option>
+									<option value="tuan-29">Tuần 29</option>
+									<option value="tuan-30">Tuần 30</option>
+									<option value="tuan-31">Tuần 31</option>
+									<option value="tuan-32">Tuần 32</option>
+									<option value="tuan-33">Tuần 33</option>
+									<option value="tuan-34">Tuần 34</option>
+									<option value="tuan-35">Tuần 35</option>
+									<option value="tuan-36">Tuần 36</option>
+									<option value="tuan-37">Tuần 37</option>
+									<option value="tuan-38">Tuần 38</option>
+									<option value="tuan-39">Tuần 39</option>
+									<option value="tuan-40">Tuần 40</option>
+								</select>
+								<img src="./assets/images/icons/contact-chevron-down.svg" class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2" alt="" aria-hidden="true">
+							</span>
+						</label>
+						<label class="flex flex-col gap-2 sm:gap-3 font-body font-medium text-base sm:text-lg xl:text-xl leading-6 sm:leading-7 text-text-body-default">
+							<span>Ghi chú</span>
+							<textarea rows="2" placeholder="Cho chúng tôi biết thêm về nhu cầu của bạn!" class="w-full min-h-[58px] sm:min-h-[64px] px-4 py-2.5 rounded-xl border border-neutral-500 bg-[#fafafa] text-base font-medium placeholder:text-text-disabled-light focus:border-border-primary-default focus:ring-1 focus:ring-border-primary-default focus:outline-none resize-none leading-relaxed"></textarea>
+						</label>
+						<div class="pt-2 sm:pt-3">
+							<button type="button" class="vpc-button w-full sm:w-auto h-12 px-6 rounded-full bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default font-semibold text-base flex items-center justify-center transition-all cursor-pointer shadow-xs">Gửi yêu cầu tư vấn</button>
+						</div>
+					</form>
+				</div>
+
+				<aside class="w-full bg-neutral-white border border-border-divider-default/70 rounded-2xl sm:rounded-3xl p-4 sm:p-5 space-y-6 shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
+					<p class="font-body text-sm sm:text-[15px] text-text-body-default text-center sm:text-left leading-relaxed font-normal max-w-[320px] sm:max-w-none mx-auto sm:mx-0">Chào đón mẹ và gia đình đến thăm trung tâm, cảm nhận sự chăm sóc tận tâm dành cho mẹ và bé.</p>
+					<div class="w-full aspect-[318/194] sm:aspect-[510/318] rounded-2xl overflow-hidden relative shadow-xs bg-neutral-100">
+						<img src="./assets/images/contact-center-figma.png" alt="Trung Tâm Ở Cữ Vạn Phúc Care" class="w-full h-full object-cover block transition-transform duration-500 hover:scale-[1.02]" loading="lazy">
+					</div>
+					<div class="space-y-3">
+						<h3 class="font-heading font-semibold text-lg sm:text-xl text-neutral-800 tracking-tight">Trung Tâm Ở Cữ Vạn Phúc Care</h3>
+						<div class="flex items-start gap-3"><span class="w-6 h-6 shrink-0 mt-3 flex items-center justify-center"><img src="./assets/images/icons/contact-map.svg" alt=""></span><div><p class="font-body text-sm leading-snug">35B ngõ 399 Âu Cơ, Tây Hồ, Hà Nội</p><a href="https://maps.app.goo.gl/4WqoQBCA85gDo2q47" target="_blank" rel="noopener" class="font-body text-xs text-text-link-hover hover:underline font-medium inline-block mt-0.5">Xem đường đi</a></div></div>
+						<div class="flex items-center gap-3"><span class="w-6 h-6 shrink-0 flex items-center justify-center"><img src="./assets/images/icons/contact-duration.svg" alt=""></span><p class="font-body text-sm">Thời gian mở cửa: <strong class="font-medium">08h30 – 17h30 (hàng ngày)</strong></p></div>
+						<div class="flex items-center gap-3"><span class="w-6 h-6 shrink-0 flex items-center justify-center"><img src="./assets/images/icons/contact-email.svg" alt=""></span><a href="mailto:info@vanphuccare.vn" class="font-body text-sm text-text-body-default hover:text-text-link-hover transition-colors">Email: info@vanphuccare.vn</a></div>
+					</div>
+					<div class="space-y-3 pt-0">
+						<div class="border border-border-divider-default/80 rounded-2xl p-3.5 sm:p-4 bg-neutral-100 shadow-inner"><img src="./assets/images/contact-map-figma.png" alt="Bản đồ chỉ đường Trung Tâm Ở Cữ Vạn Phúc Care" class="w-full aspect-[286/150] sm:aspect-[478/258] object-cover rounded-xl" loading="lazy"></div>
+						<div class="text-center"><a href="https://maps.app.goo.gl/4WqoQBCA85gDo2q47" target="_blank" rel="noopener" class="font-body text-xs text-text-body-muted hover:text-text-link-hover transition-colors font-medium">Xem đường đi trên Google Map</a></div>
+					</div>
+				</aside>
+			</div>
+		</div>
+	</div>
+</main>
+
+<footer class="site-footer relative w-full overflow-hidden pt-8 pb-28 xl:py-6 text-text-body-default" style="background: linear-gradient(180.91deg, var(--color-neutral-100) 22.32%, var(--color-primary-200) 146.38%);">
 	<!-- Decorative faint watermark emblem on bottom-right (Exact Figma: 471x360px, fill white, opacity 0.3) -->
 	<div class="pointer-events-none absolute right-0 bottom-0 z-0 select-none overflow-hidden" aria-hidden="true">
 		<img src="./assets/images/footer-watermark.svg" 
@@ -1961,10 +2085,11 @@
 		     class="w-[280px] sm:w-[380px] xl:w-[471px] h-auto block select-none">
 	</div>
 
-	<div class="relative z-10 w-full max-w-[1280px] mx-auto">
+	<!-- Uses the same container as the header so both rows share the same width and edges. -->
+	<div class="vpc-container relative z-10">
 		
-		<!-- Head footer: py-6 xl:px-10, rộng 1280 -->
-		<div class="py-6 xl:px-10 flex flex-col md:flex-row md:flex-wrap xl:flex-nowrap justify-between items-start gap-8 xl:gap-6">
+		<!-- No inner horizontal padding: left/right columns align with the header container. -->
+		<div class="py-6 flex flex-col md:flex-row md:flex-wrap xl:flex-nowrap justify-between items-start gap-8 xl:gap-6">
 			
 			<!-- Column 1: Thông tin cty (Logo -> tagline gap 12px, còn lại gap 20px) -->
 			<div class="w-full md:w-[381px] shrink-0 flex flex-col">
@@ -2016,7 +2141,7 @@
 					<li class="h-6 flex items-center"><a href="#trung-tam-o-cu" class="hover:text-text-body-muted transition-colors">Trung tâm ở cữ</a></li>
 					<li class="h-6 flex items-center"><a href="#khoa-hoc-truc-tuyen" class="hover:text-text-body-muted transition-colors">Khóa học trực tuyến</a></li>
 					<li class="h-6 flex items-center"><a href="#bao-mau-tai-nha" class="hover:text-text-body-muted transition-colors">Bảo mẫu tại nhà</a></li>
-					<li class="h-6 flex items-center"><a href="#lop-hoc-tien-san" class="hover:text-text-body-muted transition-colors">Lớp học tiền sản</a></li>
+					<li class="h-6 flex items-center"><a href="./lophoctiensan.html" class="hover:text-text-body-muted transition-colors">Lớp học tiền sản</a></li>
 					<li class="h-6 flex items-center"><a href="#khoa-hoc-truc-tuyen" class="hover:text-text-body-muted transition-colors">Tư vấn nuôi con EASY</a></li>
 					<li class="h-6 flex items-center"><a href="#bao-mau-tai-nha" class="hover:text-text-body-muted transition-colors">Tắm trẻ sơ sinh</a></li>
 					<li class="h-6 flex items-center"><a href="#bao-mau-tai-nha" class="hover:text-text-body-muted transition-colors">Thông tắc tia sữa</a></li>
@@ -2215,13 +2340,14 @@
 				<div class="relative">
 				<select name="service" required class="w-full h-[50px] px-3 pr-10 appearance-none rounded-xl border border-neutral-400 focus:border-primary-500 focus-visible:ring-2 focus-visible:ring-border-focus-default font-body text-base font-medium outline-hidden bg-surface-background-default text-text-body-default">
 					<option value="">Chọn dịch vụ bạn cần tư vấn</option>
-					<option value="trung-tam-o-cu">Trung tâm Ở cữ</option>
+					<option value="trung-tam-o-cu">Trung tâm ở cữ</option>
 					<option value="bao-mau-tai-nha">Bảo mẫu tại nhà</option>
 					<option value="lop-hoc-tien-san">Lớp học tiền sản</option>
-					<option value="cham-soc-me-sau-sinh">Chăm sóc mẹ sau sinh tại nhà</option>
-					<option value="tam-be-so-sinh">Tắm bé & massage sơ sinh</option>
-					<option value="thong-tac-tia-sua">Thông tắc tia sữa chuyên sâu</option>
-					<option value="dieu-duong-tai-nha">Điều dưỡng y tế tại nhà</option>
+					<option value="khoa-hoc-truc-tiep">Khóa học trực tiếp</option>
+					<option value="tu-van-nuoi-con-easy">Tư vấn nuôi con EASY</option>
+					<option value="tam-be-sau-sinh">Tắm bé sau sinh</option>
+					<option value="thong-tac-tia-sua">Thông tắc tia sữa</option>
+					<option value="cham-me-sau-sinh">Chăm mẹ sau sinh</option>
 				</select>
 					<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-text-body-default"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg></div>
 				</div>
@@ -2287,6 +2413,14 @@ window.vpcData = window.vpcData || {
 	ajaxUrl: '/wp-admin/admin-ajax.php',
 	nonce: 'vpc_preview_nonce'
 };
+
+if (new URLSearchParams(window.location.search).get('preview') === 'contact') {
+	document.title = 'Liên hệ | Vạn Phúc Care';
+	document.getElementById('main-content')?.classList.add('hidden');
+	document.getElementById('contact-preview')?.classList.remove('hidden');
+	document.getElementById('mobile-sticky-cta')?.classList.add('hidden');
+	document.querySelector('aside[aria-label="Kênh liên hệ nhanh"]')?.classList.add('hidden');
+}
 </script>
 <script src="./assets/js/main.js"></script>
 

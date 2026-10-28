@@ -385,6 +385,12 @@ document.addEventListener('DOMContentLoaded', function () {
 	const sectionForm = document.getElementById('vpc-section-consultation-form');
 	if (sectionForm) handleFormSubmission(sectionForm);
 
+	const contactPageForm = document.getElementById('vpc-contact-page-form');
+	if (contactPageForm) handleFormSubmission(contactPageForm);
+
+	const prenatalForm = document.getElementById('vpc-prenatal-form');
+	if (prenatalForm) handleFormSubmission(prenatalForm);
+
 	// Hero Banner Slider
 	const heroSlider = document.getElementById('vpc-hero-slider');
 	if (heroSlider) {

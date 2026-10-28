@@ -52,8 +52,12 @@ function vpc_handle_consultation_submission() {
 		), 400 );
 	}
 
-	$services = vpc_get_consultation_services();
-	$gestational_age_options = array(
+	$services = vpc_get_consultation_services() + array(
+		'tam-be-so-sinh'       => 'Tắm bé sau sinh',
+		'cham-soc-me-sau-sinh' => 'Chăm mẹ sau sinh',
+		'dieu-duong-tai-nha'   => 'Điều dưỡng y tế tại nhà',
+	);
+	$gestational_age_options = vpc_get_gestational_age_options() + array(
 		'chua-mang-thai' => 'Chưa mang thai / Đang chuẩn bị',
 		'1-12-tuan'      => 'Mang thai 1 - 12 tuần',
 		'13-27-tuan'     => 'Mang thai 13 - 27 tuần',

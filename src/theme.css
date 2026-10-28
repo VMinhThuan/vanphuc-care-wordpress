@@ -5,6 +5,179 @@
 
 @import "tailwindcss";
 
+/* --------------------------------------------------------------------------
+   Lớp học tiền sản — page template (Figma node 2617:10577)
+   -------------------------------------------------------------------------- */
+@layer components {
+  .prenatal-container { width: min(1280px, 100%); margin-inline: auto; }
+  #primary .prenatal-hero, #primary .prenatal-intro, #primary .prenatal-video, #primary .prenatal-benefits, #primary .prenatal-program, #primary .prenatal-teacher, #primary .prenatal-registration, #primary .prenatal-faq, #primary .prenatal-services { padding-block: 96px; }
+  .prenatal-hero { background: #f8f8f8; padding-top: 96px; }
+  .prenatal-intro { background: linear-gradient(120deg, #f8f8f8 52%, #fde6e6 117%); }
+  .prenatal-video { background: linear-gradient(56deg, #d1e4f1 3%, #f8f8f8 41%); }
+  .prenatal-benefits, .prenatal-services { background: #f8f8f8; }
+  .prenatal-program, .prenatal-registration { background: linear-gradient(99deg, #f8f8f8 0%, #fde6e6 117%); }
+  .prenatal-teacher { background: linear-gradient(223deg, #f8f8f8 42%, #d1e4f1 112%); }
+  .prenatal-faq { background: linear-gradient(101deg, #f8f8f8 0%, #d1e4f1 117%); }
+  .prenatal-hero__layout, .prenatal-intro__content, .prenatal-teacher__layout, .prenatal-registration__layout { display: grid; align-items: center; gap: 72px; }
+  .prenatal-hero__layout { grid-template-columns: minmax(0, 645px) 454px; justify-content: space-between; position: relative; }
+  .prenatal-intro__content { grid-template-columns: 568px minmax(0, 587px); justify-content: space-between; }
+  .prenatal-teacher__layout { grid-template-columns: 540px minmax(0, 613px); justify-content: center; gap: 57px; }
+  .prenatal-registration__layout { grid-template-columns: minmax(0, 524px) minmax(0, 658px); justify-content: space-between; gap: 98px; }
+  .prenatal-hero__copy, .prenatal-intro__copy, .prenatal-teacher__copy, .prenatal-registration__intro { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+  .prenatal-badge { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid #f48283; color: #155f95; background: #fde6e6; border-radius: 999px; padding: 8px 16px; min-height: 42px; font: 500 16px/24px var(--font-body); white-space: nowrap; }
+  .prenatal-badge span { color: #f48283; font-size: 22px; line-height: 1; }
+  .prenatal-title, .prenatal-center h2, .prenatal-section-heading h2, .prenatal-registration h2 { margin: 0; font: 600 48px/64px var(--font-heading); font-variation-settings: "SOFT" 0, "WONK" 1; }
+  .prenatal-title span, .prenatal-center h2, .prenatal-section-heading h2, .prenatal-registration h2 { display: block; color: #1a77ba; }
+  .prenatal-title em { display: block; color: #f48283; font-style: normal; }
+  .prenatal-hero__copy > p, .prenatal-intro__copy > p, .prenatal-teacher__copy > p, .prenatal-registration__intro > p { margin: 0; color: #292929; font: 500 16px/24px var(--font-body); }
+  .prenatal-hero__image { width: 454px; height: 444px; object-fit: cover; border-radius: 24px; }
+  .prenatal-actions { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 16px; }
+  .prenatal-button { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 12px 24px; font: 500 16px/24px var(--font-body); text-decoration: none; cursor: pointer; transition: background-color .2s, color .2s, transform .2s; }
+  .prenatal-button:hover { transform: translateY(-1px); }
+  .prenatal-button--primary { color: #fafafa; background: #1a77ba; border: 1px solid #1a77ba; }
+  .prenatal-button--primary:hover { background: #155f95; }
+  .prenatal-button--secondary { color: #f48283; background: transparent; border: 1px solid #f48283; }
+  .prenatal-button--secondary:hover { background: #fde6e6; }
+  .prenatal-button--large { min-height: 64px; padding-inline: 32px; }
+  .prenatal-quick-info { display: none; }
+  .prenatal-intro__photo { height: 506px; overflow: hidden; border-radius: 24px; background: #d1e4f1; }
+  .prenatal-intro__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 43%; transform: scale(1.13); }
+  .prenatal-intro__copy { justify-content: center; }
+  .prenatal-feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; margin-top: 40px; }
+  .prenatal-feature-grid article { min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 16px 12px; border-radius: 12px; background: #fff; box-shadow: 0 1px 3px rgb(0 0 0 / .15); text-align: center; }
+  .prenatal-feature-grid i, .prenatal-benefit-grid i { display: grid; place-items: center; width: 50px; height: 50px; border-radius: 50%; color: #f48283; background: #fde6e6; font: 700 18px/1 var(--font-body); font-style: normal; }
+  .prenatal-feature-grid h3 { margin: 0; color: #1a77ba; font: 500 24px/32px var(--font-body); }
+  .prenatal-feature-grid p { margin: 0; color: #525252; font: 500 16px/24px var(--font-body); }
+  .prenatal-center { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 24px; }
+  .prenatal-center h2 { max-width: 920px; }
+  .prenatal-lead { max-width: 1020px; margin: 0; color: #525252; font: 500 16px/24px var(--font-body); }
+  .prenatal-video__frame { width: min(998px, 100%); aspect-ratio: 998 / 542; overflow: hidden; position: relative; display: block; border-radius: 16px; background: #d1e4f1; }
+  .prenatal-video__frame img { width: 100%; height: 100%; object-fit: cover; }
+  .prenatal-play { position: absolute; inset: 50% auto auto 50%; display: grid; place-items: center; width: 86px; height: 86px; border-radius: 50%; background: #fde6e6; color: #f48283; transform: translate(-50%, -50%); font-size: 32px; padding-left: 5px; }
+  .prenatal-video__cta h3 { margin: 0; color: #f48283; font: 400 40px/52px var(--font-heading); }
+  .prenatal-video__cta p { margin: 12px 0 0; color: #292929; font: 500 16px/24px var(--font-body); }
+  .prenatal-benefit-group + .prenatal-benefit-group { margin-top: 80px; }
+  .prenatal-section-heading { display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center; }
+  .prenatal-benefit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 24px; }
+  .prenatal-benefit-grid article { min-height: 222px; position: relative; padding: 28px 20px 20px; text-align: center; }
+  .prenatal-benefit-grid article::before { content: ""; position: absolute; inset: 0; z-index: 0; background: #fff; border-radius: 12px; box-shadow: 0 1px 3px rgb(0 0 0 / .15); }
+  .prenatal-benefit-grid > article > * { position: relative; z-index: 1; }
+  .prenatal-benefit-grid i { margin-inline: auto; }
+  .prenatal-benefit-grid h3 { margin: 12px 0 8px; color: #1a77ba; font: 500 20px/28px var(--font-body); }
+  .prenatal-benefit-grid p { margin: 0; color: #525252; font: 500 15px/22px var(--font-body); }
+  .prenatal-tabs { display: flex; justify-content: center; flex-wrap: wrap; gap: 24px; }
+  .prenatal-tabs button { min-height: 48px; border: 1px solid #1a77ba; color: #292929; background: transparent; padding: 12px 24px; border-radius: 999px; font: 500 16px/24px var(--font-body); cursor: pointer; }
+  .prenatal-tabs button.is-active { color: #fafafa; background: #1a77ba; }
+  .prenatal-step-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; width: min(1188px, 100%); text-align: left; }
+  .prenatal-step-grid article { min-height: 190px; padding: 24px; background: #fff; border-radius: 12px; box-shadow: 0 1px 3px rgb(0 0 0 / .15); }
+  .prenatal-step-grid b { color: #f48283; font: 600 28px/32px var(--font-heading); }
+  .prenatal-step-grid h3 { margin: 8px 0; color: #1a77ba; font: 500 20px/28px var(--font-body); }
+  .prenatal-step-grid p, .prenatal-note { margin: 0; color: #525252; font: 500 16px/24px var(--font-body); }
+  .prenatal-teacher__photo { height: 511px; overflow: hidden; position: relative; border-radius: 24px; background: #d1e4f1; }
+  .prenatal-teacher__bg { width: 100%; height: 100%; object-fit: cover; }
+  .prenatal-teacher__portrait { height: 117%; width: auto; position: absolute; bottom: -1px; left: 50%; transform: translateX(-50%); }
+  .prenatal-teacher__copy { gap: 20px; }
+  .prenatal-teacher__copy ul { display: grid; gap: 12px; padding: 0; margin: 0; list-style: none; color: #292929; font: 500 16px/24px var(--font-body); }
+  .prenatal-teacher__copy li { display: flex; gap: 12px; align-items: center; }
+  .prenatal-teacher__copy li::before { content: "✓"; display: grid; place-items: center; width: 24px; height: 24px; flex: 0 0 24px; border-radius: 50%; color: #fff; background: #f48283; font-size: 13px; }
+  .prenatal-registration__intro > h2 { font-size: 40px; line-height: 52px; }
+  .prenatal-info-card { width: 100%; min-height: 69px; display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-radius: 12px; background: #fff; box-shadow: 0 1px 3px rgb(0 0 0 / .15); }
+  .prenatal-info-card i { display: grid; place-items: center; width: 50px; height: 50px; flex: 0 0 50px; border-radius: 50%; color: #f48283; background: #fde6e6; font-size: 24px; font-style: normal; }
+  .prenatal-info-card span { display: flex; flex-direction: column; color: #525252; font: 500 14px/20px var(--font-body); }
+  .prenatal-info-card b { color: #1a77ba; font-size: 18px; line-height: 24px; }
+  .prenatal-info-card small { font: inherit; }
+  .prenatal-form-wrap h2 { margin-bottom: 24px; font-size: 40px; line-height: 52px; }
+  .prenatal-form { display: grid; gap: 20px; padding: 28px; border: 1px solid #cecece; border-radius: 24px; background: #fafafa; }
+  .prenatal-form label, .prenatal-form legend { display: block; margin-bottom: 8px; color: #292929; font: 500 18px/28px var(--font-body); }
+  .prenatal-form em { color: #f00; font-style: normal; }
+  .prenatal-form input:not([type=radio]), .prenatal-form textarea { width: 100%; border: 1px solid #cecece; border-radius: 12px; padding: 12px 16px; color: #292929; background: #fff; font: 500 16px/24px var(--font-body); }
+  .prenatal-form textarea { resize: vertical; }
+  .prenatal-form fieldset { display: flex; flex-wrap: wrap; gap: 8px; border: 0; padding: 0; margin: 0; }
+  .prenatal-form fieldset legend { width: 100%; }
+  .prenatal-form fieldset label { margin: 0; display: inline-flex; align-items: center; gap: 6px; border: 1px solid #1a77ba; border-radius: 999px; padding: 8px 14px; font-size: 14px; line-height: 20px; cursor: pointer; }
+  .prenatal-form button { justify-self: start; }
+  .prenatal-accordion { display: grid; gap: 16px; margin-top: 24px; }
+  .prenatal-accordion details { border: 1px solid #a5a5a5; border-radius: 12px; padding: 22px 24px; background: #fafafa; }
+  .prenatal-accordion details[open] { border: 2px solid #f69b9c; }
+  .prenatal-accordion summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; color: #1a77ba; font: 500 18px/28px var(--font-body); cursor: pointer; list-style: none; }
+  .prenatal-accordion summary::-webkit-details-marker { display: none; }
+  .prenatal-accordion summary::after { content: "+"; color: #f48283; font-size: 27px; line-height: 1; }
+  .prenatal-accordion details[open] summary::after { content: "−"; }
+  .prenatal-accordion p { max-width: 1050px; margin: 12px 0 0; color: #292929; font: 500 16px/24px var(--font-body); }
+  .prenatal-services__grid { display: grid; grid-template-columns: repeat(3, 300px); justify-content: center; gap: 24px; width: 100%; }
+  .prenatal-services__grid a { height: 320px; display: flex; flex-direction: column; overflow: hidden; gap: 12px; padding: 12px; border: 1px solid #cecece; border-radius: 12px; background: #fff; box-shadow: 0 1px 3px rgb(0 0 0 / .15); text-decoration: none; }
+  .prenatal-services__grid img { min-height: 0; flex: 1; width: 100%; object-fit: cover; border-radius: 8px; }
+  .prenatal-services__grid span { display: block; color: #1a77ba; font: 500 20px/28px var(--font-body); }
+
+  @media (max-width: 1023px) {
+    .prenatal-hero__layout, .prenatal-intro__content, .prenatal-teacher__layout, .prenatal-registration__layout { grid-template-columns: 1fr; gap: 40px; }
+    .prenatal-hero__image { justify-self: center; }
+    .prenatal-intro__photo { max-width: 568px; width: 100%; justify-self: center; }
+    .prenatal-intro__copy, .prenatal-teacher__copy, .prenatal-registration__intro { align-items: center; text-align: center; }
+    .prenatal-feature-grid, .prenatal-benefit-grid { grid-template-columns: repeat(2, 1fr); }
+    .prenatal-teacher__photo { max-width: 540px; width: 100%; justify-self: center; }
+    .prenatal-form-wrap { max-width: 658px; width: 100%; justify-self: center; }
+  }
+  @media (max-width: 639px) {
+    #primary .prenatal-hero, #primary .prenatal-intro, #primary .prenatal-video, #primary .prenatal-benefits, #primary .prenatal-program, #primary .prenatal-teacher, #primary .prenatal-registration, #primary .prenatal-faq, #primary .prenatal-services { padding: 40px 20px; }
+    .prenatal-hero { padding-top: 32px; }
+    .prenatal-hero__layout, .prenatal-intro__content, .prenatal-teacher__layout, .prenatal-registration__layout { gap: 24px; }
+    .prenatal-hero__copy, .prenatal-intro__copy, .prenatal-teacher__copy, .prenatal-registration__intro { width: 100%; gap: 24px; align-items: center; text-align: center; }
+    .prenatal-badge { min-height: 34px; padding: 4px 12px; font-size: 12px; line-height: 16px; }
+    .prenatal-badge span { font-size: 18px; }
+    .prenatal-title, .prenatal-center h2, .prenatal-section-heading h2, .prenatal-registration h2 { font-size: 32px; line-height: 36px; }
+    .prenatal-hero__copy > p, .prenatal-intro__copy > p, .prenatal-teacher__copy > p, .prenatal-registration__intro > p, .prenatal-lead { font-size: 16px; line-height: 24px; }
+    .prenatal-actions { width: 100%; display: grid; gap: 12px; margin-top: 0; }
+    .prenatal-actions .prenatal-button, .prenatal-button--large { width: 100%; min-height: 40px; padding-block: 8px; }
+    .prenatal-hero__image { width: 100%; height: 342px; }
+    .prenatal-quick-info { width: 100%; display: grid; gap: 8px; padding: 16px; border-radius: 12px; background: #fff; box-shadow: 0 1px 3px rgb(0 0 0 / .15); text-align: left; }
+    .prenatal-quick-info div { min-height: 60px; display: flex; flex-direction: column; justify-content: center; padding: 8px 12px; border-bottom: 1px solid #ebebeb; }
+    .prenatal-quick-info div:last-child { border-bottom: 0; }
+    .prenatal-quick-info b { color: #1a77ba; font: 500 16px/24px var(--font-body); }
+    .prenatal-quick-info span { color: #525252; font: 500 13px/20px var(--font-body); }
+    .prenatal-intro__photo { height: 312px; order: -1; }
+    .prenatal-intro__photo img { transform: scale(1.22); }
+    .prenatal-feature-grid, .prenatal-benefit-grid { grid-template-columns: 1fr; gap: 24px; margin-top: 0; }
+    .prenatal-feature-grid article { min-height: 190px; }
+    .prenatal-feature-grid h3 { font-size: 20px; line-height: 28px; }
+    .prenatal-benefit-group + .prenatal-benefit-group { margin-top: 40px; }
+    .prenatal-section-heading { gap: 16px; }
+    .prenatal-benefit-grid article { min-height: 150px; padding: 20px; text-align: left; display: grid; grid-template-columns: 50px 1fr; column-gap: 14px; align-items: center; }
+    .prenatal-benefit-grid i { grid-row: span 2; margin: 0; }
+    .prenatal-benefit-grid h3 { margin: 0; font-size: 18px; line-height: 24px; }
+    .prenatal-benefit-grid p { font-size: 14px; line-height: 20px; }
+    .prenatal-video { gap: 24px; }
+    .prenatal-video__frame { aspect-ratio: 350 / 190; }
+    .prenatal-play { width: 56px; height: 56px; font-size: 20px; }
+    .prenatal-video__cta h3 { font-size: 24px; line-height: 28px; }
+    .prenatal-video__cta p { font-size: 16px; line-height: 24px; }
+    .prenatal-video .prenatal-button { width: 100%; min-height: 40px; padding-block: 8px; }
+    .prenatal-tabs { width: 100%; display: grid; gap: 8px; }
+    .prenatal-tabs button { width: 100%; min-height: 40px; padding: 8px 16px; font-size: 16px; }
+    .prenatal-step-grid { grid-template-columns: 1fr; gap: 16px; }
+    .prenatal-step-grid article { min-height: 186px; }
+    .prenatal-note { font-size: 16px; line-height: 24px; }
+    .prenatal-teacher__photo { height: 389px; }
+    .prenatal-teacher__portrait { height: 118%; }
+    .prenatal-teacher__copy ul { width: 100%; text-align: left; }
+    .prenatal-registration__intro > h2, .prenatal-form-wrap h2 { font-size: 32px; line-height: 36px; }
+    .prenatal-info-card { text-align: left; min-height: 89px; }
+    .prenatal-info-card b { font-size: 16px; line-height: 22px; }
+    .prenatal-form { padding: 20px; border-radius: 16px; }
+    .prenatal-form label, .prenatal-form legend { font-size: 16px; line-height: 24px; }
+    .prenatal-form fieldset { display: grid; }
+    .prenatal-form fieldset label { width: 100%; }
+    .prenatal-form button { width: 100%; }
+    .prenatal-faq .prenatal-section-heading { flex-direction: column-reverse; }
+    .prenatal-accordion { margin-top: 0; }
+    .prenatal-accordion details { padding: 20px; }
+    .prenatal-accordion summary { font-size: 16px; line-height: 24px; }
+    .prenatal-accordion p { font-size: 16px; line-height: 24px; }
+    .prenatal-services__grid { grid-template-columns: 1fr; gap: 24px; }
+    .prenatal-services__grid a { height: 320px; }
+  }
+}
+
 /* Quét các file template PHP của WordPress Theme và file HTML test */
 @source "../**/*.php";
 @source "../*.php";
@@ -335,6 +508,105 @@
   }
   .vpc-gradient-press {
     background: linear-gradient(135deg, var(--color-surface-background-secondary) 0%, var(--color-surface-background-primary) 100%);
+  }
+  .vpc-gradient-contact-hero {
+    background: linear-gradient(179.09deg, #F8F8F8 0.72%, #FDE6E6 143.87%);
+  }
+
+  /* Contact Page Hero Banner (Figma: Mobile 390x306px, Desktop 1440x458px) */
+  .vpc-contact-hero {
+    min-height: 306px;
+    background: linear-gradient(179.09deg, #F8F8F8 0.72%, #FDE6E6 143.87%);
+  }
+  @media (min-width: 1280px) {
+    .vpc-contact-hero {
+      min-height: 458px;
+    }
+  }
+
+  /* Contact hero badge pill: 317x34px mobile, 416x42px desktop */
+  .vpc-contact-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 34px;
+    padding: 0 0.875rem;
+    border-radius: 9999px;
+    background-color: var(--color-surface-badge-secondary, #FDE6E6);
+    border: 1px solid var(--color-border-secondary-default, #F48283);
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  }
+  @media (min-width: 1280px) {
+    .vpc-contact-badge {
+      height: 42px;
+      padding: 0 1rem;
+    }
+  }
+
+  .vpc-contact-badge-text {
+    font-family: var(--font-body, "Manrope", sans-serif);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+    color: var(--color-primary-600, #155F95);
+    white-space: nowrap;
+  }
+  @media (min-width: 640px) {
+    .vpc-contact-badge-text {
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+  }
+  @media (min-width: 1280px) {
+    .vpc-contact-badge-text {
+      font-size: 0.875rem;
+      letter-spacing: 0.05em;
+    }
+  }
+
+  /* Contact hero 2-line heading */
+  .vpc-contact-hero-h1 {
+    font-family: var(--font-heading, "Fraunces", serif);
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: -0.02em;
+    font-size: clamp(26px, 7.8vw, 32px);
+    line-height: 2.25rem;
+  }
+  @media (min-width: 1280px) {
+    .vpc-contact-hero-h1 {
+      font-size: var(--text-h1, 3rem);
+      line-height: var(--text-h1--line-height, 4rem);
+      letter-spacing: -0.025em;
+    }
+  }
+
+  /* Contact hero subtitle */
+  .vpc-contact-hero-desc {
+    font-family: var(--font-body, "Manrope", sans-serif);
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+    color: var(--color-text-body-default, #292929);
+    text-align: center;
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (min-width: 640px) {
+    .vpc-contact-hero-desc {
+      font-weight: 500;
+      max-width: 42rem;
+    }
+  }
+  @media (min-width: 1280px) {
+    .vpc-contact-hero-desc {
+      font-size: 1rem;
+      max-width: 1280px;
+    }
   }
   .vpc-button {
     box-sizing: border-box;

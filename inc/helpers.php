@@ -21,13 +21,41 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function vpc_get_consultation_services() {
 	return array(
-		'trung-tam-o-cu'       => 'Trung tâm Ở cữ',
+		'trung-tam-o-cu'       => 'Trung tâm ở cữ',
 		'bao-mau-tai-nha'      => 'Bảo mẫu tại nhà',
 		'lop-hoc-tien-san'     => 'Lớp học tiền sản',
-		'cham-soc-me-sau-sinh' => 'Chăm sóc mẹ sau sinh tại nhà',
-		'tam-be-so-sinh'       => 'Tắm bé & massage sơ sinh',
-		'thong-tac-tia-sua'    => 'Thông tắc tia sữa chuyên sâu',
-		'dieu-duong-tai-nha'   => 'Điều dưỡng y tế tại nhà',
+		'khoa-hoc-truc-tiep'   => 'Khóa học trực tiếp',
+		'tu-van-nuoi-con-easy' => 'Tư vấn nuôi con EASY',
+		'tam-be-sau-sinh'      => 'Tắm bé sau sinh',
+		'thong-tac-tia-sua'    => 'Thông tắc tia sữa',
+		'cham-me-sau-sinh'     => 'Chăm mẹ sau sinh',
+	);
+}
+
+/**
+ * Returns the single source of truth for gestational age options (Tuần 24 đến Tuần 40).
+ *
+ * @return array<string, string>
+ */
+function vpc_get_gestational_age_options() {
+	return array(
+		'tuan-24' => 'Tuần 24',
+		'tuan-25' => 'Tuần 25',
+		'tuan-26' => 'Tuần 26',
+		'tuan-27' => 'Tuần 27',
+		'tuan-28' => 'Tuần 28',
+		'tuan-29' => 'Tuần 29',
+		'tuan-30' => 'Tuần 30',
+		'tuan-31' => 'Tuần 31',
+		'tuan-32' => 'Tuần 32',
+		'tuan-33' => 'Tuần 33',
+		'tuan-34' => 'Tuần 34',
+		'tuan-35' => 'Tuần 35',
+		'tuan-36' => 'Tuần 36',
+		'tuan-37' => 'Tuần 37',
+		'tuan-38' => 'Tuần 38',
+		'tuan-39' => 'Tuần 39',
+		'tuan-40' => 'Tuần 40',
 	);
 }
 

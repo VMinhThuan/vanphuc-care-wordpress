@@ -21,7 +21,7 @@ $instagram_url = get_theme_mod( 'vpc_instagram_url', '' );
 ?>
 </main><!-- #primary -->
 
-<footer class="site-footer relative w-full overflow-hidden pt-8 pb-28 xl:py-6 px-5 xl:px-20 text-text-body-default" style="background: linear-gradient(180.91deg, var(--color-neutral-100) 22.32%, var(--color-primary-200) 146.38%);">
+<footer class="site-footer relative w-full overflow-hidden pt-8 pb-28 xl:py-6 text-text-body-default" style="background: linear-gradient(180.91deg, var(--color-neutral-100) 22.32%, var(--color-primary-200) 146.38%);">
 	<!-- Decorative faint watermark emblem on bottom-right (Exact Figma: 471x360px, fill white, opacity 0.3) -->
 	<div class="pointer-events-none absolute right-0 bottom-0 z-0 select-none overflow-hidden" aria-hidden="true">
 		<img src="<?php echo esc_url( $theme_uri . '/assets/images/footer-watermark.svg' ); ?>" 
@@ -31,7 +31,8 @@ $instagram_url = get_theme_mod( 'vpc_instagram_url', '' );
 		     class="w-[280px] sm:w-[380px] xl:w-[471px] h-auto block select-none">
 	</div>
 
-	<div class="relative z-10 w-full max-w-[1280px] mx-auto">
+	<!-- Keep this exactly aligned with the header's logo / navigation / CTA container. -->
+	<div class="vpc-container relative z-10">
 		
 		<!-- Head footer: py-6, rộng 1280 -->
 		<div class="py-6 flex flex-col md:flex-row md:flex-wrap xl:flex-nowrap justify-between items-start gap-8 xl:gap-6">
@@ -86,7 +87,7 @@ $instagram_url = get_theme_mod( 'vpc_instagram_url', '' );
 					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#trung-tam-o-cu' ) ); ?>" class="hover:text-text-body-muted transition-colors">Trung tâm ở cữ</a></li>
 					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#khoa-hoc-truc-tuyen' ) ); ?>" class="hover:text-text-body-muted transition-colors">Khóa học trực tuyến</a></li>
 					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#bao-mau-tai-nha' ) ); ?>" class="hover:text-text-body-muted transition-colors">Bảo mẫu tại nhà</a></li>
-					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#lop-hoc-tien-san' ) ); ?>" class="hover:text-text-body-muted transition-colors">Lớp học tiền sản</a></li>
+					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/lop-hoc-tien-san/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Lớp học tiền sản</a></li>
 					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#khoa-hoc-truc-tuyen' ) ); ?>" class="hover:text-text-body-muted transition-colors">Tư vấn nuôi con EASY</a></li>
 					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#bao-mau-tai-nha' ) ); ?>" class="hover:text-text-body-muted transition-colors">Tắm trẻ sơ sinh</a></li>
 					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#bao-mau-tai-nha' ) ); ?>" class="hover:text-text-body-muted transition-colors">Thông tắc tia sữa</a></li>
