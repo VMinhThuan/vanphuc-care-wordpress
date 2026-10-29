@@ -15,7 +15,7 @@ get_header();
 $theme_uri = get_template_directory_uri();
 $image     = $theme_uri . '/assets/images/lop-hoc-tien-san/';
 
-// Keep the video section implemented but private until the final video is ready.
+// Video section is temporarily hidden on request.
 $show_prenatal_video = false;
 ?>
 
@@ -28,8 +28,7 @@ $show_prenatal_video = false;
 			</div>
 			<h1 id="prenatal-title" class="prenatal-title">
 				<span>Tự Tin Đón Con Yêu</span>
-				<em>Đọc Vị Nhu Cầu</em>
-				<em>Của Trẻ</em>
+				<em>Đọc Vị Nhu Cầu <span class="whitespace-nowrap">Của&nbsp;Trẻ</span></em>
 			</h1>
 			<p>Chuẩn bị vững vàng cho hành trình làm cha mẹ. Với sự đồng hành cùng điều dưỡng trưởng Thanh Thuỷ, cùng cha mẹ biến kiến thức y khoa thành kỹ năng chăm con thực tế, thấu hiểu nhu cầu của con trẻ bằng tình yêu thương.</p>
 			<div class="prenatal-actions">
@@ -134,6 +133,10 @@ $show_prenatal_video = false;
 <?php if ( $show_prenatal_video ) : ?>
 <section class="vpc-section prenatal-video" aria-labelledby="prenatal-video-title">
 	<div class="prenatal-container prenatal-center">
+		<div class="prenatal-badge">
+			<img class="prenatal-badge__icon" src="<?php echo esc_url( $image . 'icons/star-light.svg' ); ?>" alt="" aria-hidden="true" width="24" height="24" />
+			<span>MỘT GÓC LỚP HỌC TIỀN SẢN</span>
+		</div>
 		<h2 id="prenatal-video-title">Từ Bỡ Ngỡ Đến Tự Tin Chăm Con</h2>
 		<p class="prenatal-lead">Bố mẹ cùng học, cùng thực hành — với sự hướng dẫn trực tiếp của điều dưỡng.</p>
 		<a class="prenatal-video__frame" href="#prenatal-registration" aria-label="Đăng ký tư vấn lớp học">
@@ -241,11 +244,11 @@ $show_prenatal_video = false;
 		<h2 id="prenatal-program-title">Nội Dung Lớp Học <span class="whitespace-nowrap">Tiền&nbsp;Sản</span></h2>
 		<p class="prenatal-lead">Từ chăm sóc thai kỳ đến những thao tác chăm bé đầu tiên.<br>Lý thuyết tinh gọn kết hợp thực hành; đan xen các phiên Q&amp;A cá nhân hóa 1:1, thực hành trực tiếp, giải đáp đến từng băn khoăn.</p>
 		<div class="prenatal-tabs" role="tablist" aria-label="Nội dung chương trình">
-			<button class="is-active" type="button">Phần 1 - Sức khỏe thai kỳ</button>
-			<button type="button">Phần 2 - Nuôi con bằng sữa mẹ</button>
-			<button type="button">Phần 3 - Thực hành chăm sóc</button>
+			<button class="is-active" type="button" data-target="prenatal-panel-1" id="tab-1" role="tab" aria-selected="true" aria-controls="prenatal-panel-1">Phần 1 - Sức khỏe thai kỳ</button>
+			<button type="button" data-target="prenatal-panel-2" id="tab-2" role="tab" aria-selected="false" aria-controls="prenatal-panel-2">Phần 2 - Nuôi con bằng sữa mẹ</button>
+			<button type="button" data-target="prenatal-panel-3" id="tab-3" role="tab" aria-selected="false" aria-controls="prenatal-panel-3">Phần 3 - Thực hành chăm sóc</button>
 		</div>
-		<div class="prenatal-step-grid">
+		<div class="prenatal-step-grid is-active" id="prenatal-panel-1" role="tabpanel" aria-labelledby="tab-1">
 			<article>
 				<div class="prenatal-step-tag">Module 01</div>
 				<h3>Nhận biết tiền sản giật</h3>
@@ -260,6 +263,35 @@ $show_prenatal_video = false;
 				<div class="prenatal-step-tag">Module 03</div>
 				<h3>Tập thở &amp; rặn sinh</h3>
 				<p>Thực hành kỹ thuật thở và rặn sinh thường hiệu quả, giúp mẹ chủ động khi vượt cạn.</p>
+			</article>
+		</div>
+		<div class="prenatal-step-grid" id="prenatal-panel-2" role="tabpanel" aria-labelledby="tab-2" hidden>
+			<article>
+				<div class="prenatal-step-tag">Module 04</div>
+				<h3>Hiểu đúng về sữa mẹ</h3>
+				<p>Hiểu cơ chế nuôi con bằng sữa mẹ và chuẩn bị nền tảng cho hành trình đầu đời của bé.</p>
+			</article>
+			<article>
+				<div class="prenatal-step-tag">Module 05</div>
+				<h3>Đọc vị tín hiệu của bé</h3>
+				<p>Nhận biết tín hiệu đói, hướng dẫn cữ ăn đúng và đủ trong những ngày đầu sau sinh.</p>
+			</article>
+			<article>
+				<div class="prenatal-step-tag">Module 06</div>
+				<h3>Khớp ngậm chuẩn</h3>
+				<p>Hướng dẫn và chỉnh sửa trực tiếp khớp ngậm khi bé ti mẹ cùng đội ngũ điều dưỡng.</p>
+			</article>
+		</div>
+		<div class="prenatal-step-grid" id="prenatal-panel-3" role="tabpanel" aria-labelledby="tab-3" hidden>
+			<article>
+				<div class="prenatal-step-tag">Module 07</div>
+				<h3>Xử lý sặc sữa</h3>
+				<p>Thực hành kỹ thuật xử lý cấp cứu sặc sữa khẩn cấp trên mô hình búp bê y tế.</p>
+			</article>
+			<article>
+				<div class="prenatal-step-tag">Module 08</div>
+				<h3>Vỗ ợ hơi &amp; quấn chũn</h3>
+				<p>Thực hành vỗ ợ hơi đa tư thế và quấn chũn giúp bé an tâm, ngủ sâu giấc. Kết thúc bằng hỏi đáp, gỡ các thói quen chăm con thiếu khoa học.</p>
 			</article>
 		</div>
 		<p class="prenatal-note">Đan xen các phiên hỏi đáp cá nhân hóa cùng điều dưỡng, ngay tại lớp</p>
@@ -283,14 +315,13 @@ $show_prenatal_video = false;
 				<em>Thanh Thủy</em>
 			</h2>
 			<div class="prenatal-teacher__intro">
-				<p class="prenatal-teacher__handle">@methuylamy</p>
-				<p class="prenatal-teacher__workplace">Trung tâm ở cữ Vạn Phúc Care</p>
-				<p>Điều dưỡng trưởng Thanh Thủy trực tiếp thiết kế và giảng dạy chương trình, đưa những kiến thức y khoa trở nên gần gũi, dễ hiểu - để mỗi bố mẹ đều có thể tự tin áp dụng khi con chào đời.</p>
+				<p class="prenatal-teacher__meta">@methuylamy · Trung tâm ở cữ Vạn Phúc Care</p>
+				<p>Điều dưỡng trưởng Thanh Thủy trực tiếp thiết kế và giảng dạy chương trình, đưa những kiến thức y khoa trở nên gần gũi, dễ hiểu — để mỗi bố mẹ đều có thể tự tin áp dụng khi con chào đời.</p>
 			</div>
 			<ul class="prenatal-teacher__checklist">
-				<li><span>Hướng dẫn thực hành trực tiếp, chỉnh sửa từng thao tác</span></li>
-				<li><span>Giải đáp những lo lắng riêng của mỗi gia đình</span></li>
-				<li><span>Đội ngũ điều dưỡng hỗ trợ 1:1 trong suốt buổi học</span></li>
+				<li><img class="prenatal-check-icon" src="<?php echo esc_url( $image . 'icons/check-badge.svg' ); ?>" alt="" aria-hidden="true" width="24" height="24" /><span>Hướng dẫn thực hành trực tiếp, chỉnh sửa từng thao tác</span></li>
+				<li><img class="prenatal-check-icon" src="<?php echo esc_url( $image . 'icons/check-badge.svg' ); ?>" alt="" aria-hidden="true" width="24" height="24" /><span>Giải đáp những lo lắng riêng của mỗi gia đình</span></li>
+				<li><img class="prenatal-check-icon" src="<?php echo esc_url( $image . 'icons/check-badge.svg' ); ?>" alt="" aria-hidden="true" width="24" height="24" /><span>Đội ngũ điều dưỡng hỗ trợ 1:1 trong suốt buổi học</span></li>
 			</ul>
 			<a class="prenatal-button prenatal-button--primary" href="#prenatal-registration">Giới thiệu giảng viên</a>
 		</div>
@@ -304,9 +335,12 @@ $show_prenatal_video = false;
 				<img class="prenatal-badge__icon" src="<?php echo esc_url( $image . 'icons/star-light.svg' ); ?>" alt="" aria-hidden="true" width="24" height="24" />
 				<span>HẸN GẶP BỐ MẸ TẠI LỚP</span>
 			</div>
-			<h2>Cùng chuẩn bị cho<br>ngày con chào đời</h2>
-			<p>Một buổi học dành riêng cho bố mẹ, với không gian gần gũi và sự đồng hành tận tâm từ đội ngũ điều dưỡng.</p>
-			<div class="prenatal-info-card">
+			<div class="prenatal-registration__copy">
+				<h2 class="prenatal-registration__title">Cùng chuẩn bị cho<br>ngày con chào đời</h2>
+				<p>Một buổi học dành riêng cho bố mẹ, với không gian gần gũi và sự đồng hành tận tâm từ đội ngũ điều dưỡng.</p>
+			</div>
+			<div class="prenatal-registration__info">
+				<div class="prenatal-info-card">
 				<div class="prenatal-info-card__icon">
 					<img src="<?php echo esc_url( $image . 'icons/duration.svg' ); ?>" alt="" aria-hidden="true" width="24" height="24" />
 				</div>
@@ -315,7 +349,7 @@ $show_prenatal_video = false;
 					<small>Liên hệ để xác nhận lịch học gần nhất</small>
 				</div>
 			</div>
-			<div class="prenatal-info-card">
+				<div class="prenatal-info-card">
 				<div class="prenatal-info-card__icon">
 					<img src="<?php echo esc_url( $image . 'icons/participants.svg' ); ?>" alt="" aria-hidden="true" width="24" height="24" />
 				</div>
@@ -324,14 +358,15 @@ $show_prenatal_video = false;
 					<small>Bố tham gia cùng mẹ không phát sinh phụ phí</small>
 				</div>
 			</div>
-			<div class="prenatal-info-card">
+				<div class="prenatal-info-card">
 				<div class="prenatal-info-card__icon">
 					<img src="<?php echo esc_url( $image . 'icons/map.svg' ); ?>" alt="" aria-hidden="true" width="24" height="24" />
 				</div>
 				<div class="prenatal-info-card__text">
 					<b>Tầng 1 - Trung tâm ở cữ Vạn Phúc Care</b>
-					<small>35B ngõ 399 Âu Cơ, Tây Hồ, Hà Nội <a href="https://maps.google.com/?q=35B+ngõ+399+Âu+Cơ+Tây+Hồ+Hà+Nội" target="_blank" rel="noopener noreferrer" class="text-primary-500 hover:underline">Xem đường đi</a></small>
+					<small>35B ngõ 399 Âu Cơ, Tây Hồ, Hà Nội <a href="https://maps.app.goo.gl/4WqoQBCA85gDo2q47" target="_blank" rel="noopener noreferrer" class="text-primary-500 hover:underline">Xem đường đi</a></small>
 				</div>
+			</div>
 			</div>
 		</div>
 		<div class="prenatal-form-wrap">
@@ -339,24 +374,26 @@ $show_prenatal_video = false;
 			<form id="vpc-prenatal-form" class="prenatal-form" action="#" method="post">
 				<input type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" />
 				<input type="hidden" name="service" value="lop-hoc-tien-san" />
-				<div class="prenatal-form__field">
-					<label for="prenatal-name"><em>*</em> Họ và tên</label>
-					<input id="prenatal-name" name="full_name" required placeholder="Nguyễn Như Linh" />
-				</div>
-				<div class="prenatal-form__field">
-					<label for="prenatal-phone"><em>*</em> Số điện thoại</label>
-					<input id="prenatal-phone" name="phone" required type="tel" placeholder="0345678***" />
+				<div class="prenatal-form__row">
+					<div class="prenatal-form__field">
+						<label for="prenatal-name"><em>*</em> Họ và tên</label>
+						<input id="prenatal-name" name="full_name" required placeholder="Nguyễn Như Linh" />
+					</div>
+					<div class="prenatal-form__field">
+						<label for="prenatal-phone"><em>*</em> Số điện thoại</label>
+						<input id="prenatal-phone" name="phone" required type="tel" placeholder="0345678***" />
+					</div>
 				</div>
 				<div class="prenatal-form__field">
 					<fieldset>
 						<legend><em>*</em> Giai đoạn thai kỳ</legend>
 						<div class="prenatal-chips">
 							<label class="prenatal-chip is-active">
-								<input type="radio" name="gestational_age" value="13-27-tuan" checked class="sr-only" />
+								<input type="radio" name="gestational_age" value="dang-mang-thai" checked class="sr-only" />
 								<span>Đang mang thai</span>
 							</label>
 							<label class="prenatal-chip">
-								<input type="radio" name="gestational_age" value="chua-mang-thai" class="sr-only" />
+								<input type="radio" name="gestational_age" value="chuan-bi-mang-thai" class="sr-only" />
 								<span>Chuẩn bị mang thai</span>
 							</label>
 							<label class="prenatal-chip">
@@ -369,8 +406,9 @@ $show_prenatal_video = false;
 				<div class="prenatal-form__field">
 					<label for="prenatal-service-select"><em>*</em> Dịch vụ quan tâm</label>
 					<div class="prenatal-select-wrap">
-						<select id="prenatal-service-select" name="service_choice">
-							<option value="lop-hoc-tien-san" selected>Lớp học tiền sản</option>
+						<select id="prenatal-service-select" name="service_choice" required>
+							<option value="" disabled selected>Chọn dịch vụ quan tâm</option>
+							<option value="lop-hoc-tien-san">Lớp học tiền sản</option>
 							<option value="trung-tam-o-cu">Trung tâm ở cữ</option>
 							<option value="bao-mau-tai-nha">Bảo mẫu tại nhà</option>
 							<option value="nuoi-con-easy">Tư vấn nuôi con EASY</option>
@@ -381,7 +419,7 @@ $show_prenatal_video = false;
 				<div class="prenatal-form__field">
 					<label for="prenatal-stage-select"><em>*</em> Tuần thai</label>
 					<div class="prenatal-select-wrap">
-						<select id="prenatal-stage-select" name="stage_choice">
+						<select id="prenatal-stage-select" name="stage_choice" required>
 							<option value="" disabled selected>Chọn giai đoạn</option>
 							<option value="duoi-12-tuan">Dưới 12 tuần</option>
 							<option value="13-27-tuan">13 - 27 tuần</option>
@@ -391,7 +429,7 @@ $show_prenatal_video = false;
 				</div>
 				<div class="prenatal-form__field">
 					<label for="prenatal-note">Ghi chú</label>
-					<textarea id="prenatal-note" name="question" rows="3" placeholder="Cho chúng tôi biết thêm về nhu cầu của bạn!"></textarea>
+					<textarea id="prenatal-note" name="question" rows="2" placeholder="Cho chúng tôi biết thêm về nhu cầu của bạn!"></textarea>
 				</div>
 				<button class="prenatal-button prenatal-button--primary" type="submit">Gửi yêu cầu tư vấn</button>
 			</form>
@@ -402,11 +440,11 @@ $show_prenatal_video = false;
 <section class="vpc-section prenatal-faq" aria-labelledby="prenatal-faq-title">
 	<div class="prenatal-container">
 		<div class="prenatal-section-heading">
-			<h2 id="prenatal-faq-title">Những Điều Bố Mẹ <span class="whitespace-nowrap">Muốn&nbsp;Biết</span></h2>
 			<div class="prenatal-badge">
 				<img class="prenatal-badge__icon" src="<?php echo esc_url( $image . 'icons/star-light.svg' ); ?>" alt="" aria-hidden="true" width="24" height="24" />
 				<span>GIẢI ĐÁP CÙNG BỐ MẸ</span>
 			</div>
+			<h2 id="prenatal-faq-title">Những Điều Bố Mẹ <span class="whitespace-nowrap">Muốn&nbsp;Biết</span></h2>
 		</div>
 		<div class="prenatal-accordion">
 			<details open>
@@ -457,11 +495,27 @@ $show_prenatal_video = false;
 document.addEventListener('DOMContentLoaded', function () {
 	// Tabs switching for prenatal program
 	const tabs = document.querySelectorAll('.prenatal-tabs button');
-	if (tabs.length) {
+	const panels = document.querySelectorAll('.prenatal-step-grid');
+	if (tabs.length && panels.length) {
 		tabs.forEach(tab => {
 			tab.addEventListener('click', function () {
-				tabs.forEach(t => t.classList.remove('is-active'));
+				const targetId = this.getAttribute('data-target');
+				tabs.forEach(t => {
+					t.classList.remove('is-active');
+					t.setAttribute('aria-selected', 'false');
+				});
 				this.classList.add('is-active');
+				this.setAttribute('aria-selected', 'true');
+
+				panels.forEach(panel => {
+					if (panel.id === targetId) {
+						panel.classList.add('is-active');
+						panel.removeAttribute('hidden');
+					} else {
+						panel.classList.remove('is-active');
+						panel.setAttribute('hidden', '');
+					}
+				});
 			});
 		});
 	}
@@ -478,6 +532,86 @@ document.addEventListener('DOMContentLoaded', function () {
 			});
 		});
 	}
+
+	// Custom dropdowns retain their native selects for form submission.
+	const selectWraps = document.querySelectorAll('.prenatal-select-wrap');
+	const closeSelects = () => selectWraps.forEach(wrap => {
+		wrap.classList.remove('is-open');
+		const trigger = wrap.querySelector('.prenatal-select__trigger');
+		if (trigger) trigger.setAttribute('aria-expanded', 'false');
+		const menu = wrap.querySelector('.prenatal-select__menu');
+		if (menu) menu.hidden = true;
+	});
+	selectWraps.forEach(wrap => {
+		const select = wrap.querySelector('select');
+		if (!select) return;
+
+		wrap.classList.add('is-enhanced');
+		select.classList.add('prenatal-select__native');
+		const trigger = document.createElement('button');
+		trigger.type = 'button';
+		trigger.className = 'prenatal-select__trigger';
+		trigger.setAttribute('aria-haspopup', 'listbox');
+		trigger.setAttribute('aria-expanded', 'false');
+		const menu = document.createElement('div');
+		menu.className = 'prenatal-select__menu';
+		menu.setAttribute('role', 'listbox');
+		menu.hidden = true;
+		const menuId = `${select.id}-options`;
+		menu.id = menuId;
+		trigger.setAttribute('aria-controls', menuId);
+
+		const sync = () => {
+			const option = select.options[select.selectedIndex];
+			trigger.textContent = option ? option.text : '';
+			trigger.classList.toggle('is-placeholder', !select.value);
+			menu.querySelectorAll('.prenatal-select__option').forEach(button => {
+				button.classList.toggle('is-selected', button.value === select.value);
+				button.setAttribute('aria-selected', button.value === select.value ? 'true' : 'false');
+			});
+		};
+
+		Array.from(select.options).forEach(option => {
+			if (option.disabled) return;
+			const button = document.createElement('button');
+			button.type = 'button';
+			button.className = 'prenatal-select__option';
+			button.value = option.value;
+			button.setAttribute('role', 'option');
+			button.textContent = option.text;
+			button.addEventListener('click', () => {
+				select.value = option.value;
+				select.dispatchEvent(new Event('change', { bubbles: true }));
+				sync();
+				menu.hidden = true;
+				closeSelects();
+				trigger.focus();
+			});
+			menu.appendChild(button);
+		});
+
+		trigger.addEventListener('click', () => {
+			const willOpen = !wrap.classList.contains('is-open');
+			closeSelects();
+			wrap.classList.toggle('is-open', willOpen);
+			menu.hidden = !willOpen;
+			trigger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+		});
+		trigger.addEventListener('keydown', event => {
+			if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+				event.preventDefault();
+				trigger.click();
+				menu.querySelector('.prenatal-select__option')?.focus();
+			}
+			if (event.key === 'Escape') closeSelects();
+		});
+		select.addEventListener('change', sync);
+		wrap.append(trigger, menu);
+		sync();
+	});
+	document.addEventListener('click', event => {
+		if (!event.target.closest('.prenatal-select-wrap')) closeSelects();
+	});
 });
 </script>
 
