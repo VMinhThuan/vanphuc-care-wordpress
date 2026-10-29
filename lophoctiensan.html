@@ -12,34 +12,533 @@
 	<link rel="stylesheet" href="./assets/css/theme.css">
 </head>
 <body class="font-body bg-neutral-white text-text-body-default antialiased">
-	<header class="sticky top-0 z-50 w-full bg-surface-background-default">
+	<header id="site-header" class="sticky top-0 z-50 w-full bg-surface-background-default transition-all duration-300">
 		<div class="vpc-container flex h-20 xl:h-24 items-center justify-between">
-			<a href="./index.html" class="inline-flex items-center"><img src="./assets/images/logo.svg" alt="Vạn Phúc Care" width="116" height="36" class="h-8 w-[103px] xl:h-9 xl:w-[116px]"></a>
-			<nav class="hidden xl:block" aria-label="Điều hướng chính"><ul class="flex items-center gap-8 text-base font-semibold"><li><a href="./index.html" class="text-text-nav-default hover:text-text-nav-hover">Trang chủ</a></li><li><a href="./index.html#gioi-thieu" class="text-text-nav-default hover:text-text-nav-hover">Giới thiệu</a></li><li><a href="./index.html#trung-tam-o-cu" class="text-text-nav-default hover:text-text-nav-hover">Ở cữ</a></li><li><a href="./index.html#bao-mau-tai-nha" class="text-text-nav-default hover:text-text-nav-hover">Bảo mẫu</a></li><li><a href="./lophoctiensan.html" class="text-text-nav-active">Lớp học tiền sản</a></li><li><a href="./index.html#kien-thuc-nuoi-con" class="text-text-nav-default hover:text-text-nav-hover">Kiến thức</a></li></ul></nav>
-			<a class="vpc-button hidden xl:inline-flex h-14 px-8 items-center rounded-full bg-surface-button-primary-default text-text-inverse-default" href="#prenatal-registration">Đăng ký tư vấn</a>
-			<a href="./index.html" class="xl:hidden text-sm font-semibold text-text-link-default">Trang chủ</a>
+			<div class="site-logo flex shrink-0 items-center">
+				<a href="./index.html" rel="home" class="inline-flex items-center shrink-0">
+					<img src="./assets/images/logo.svg" alt="Vạn Phúc Care" width="116" height="36" class="h-8 w-[103px] xl:h-9 xl:w-[116px] object-contain block">
+				</a>
+			</div>
+			<nav class="hidden xl:flex items-center justify-center flex-1 max-w-[760px] mx-auto" aria-label="Điều hướng chính">
+				<ul class="vpc-nav-menu flex items-center justify-center gap-8 text-base font-semibold">
+					<li><a href="./index.html" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Trang chủ</a></li>
+					<li><a href="./index.html#gioi-thieu" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Giới thiệu</a></li>
+					<li><a href="./index.html#trung-tam-o-cu" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Ở cữ</a></li>
+					<li><a href="./index.html#bao-mau-tai-nha" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Bảo mẫu</a></li>
+					<li><a href="./lophoctiensan.html" class="py-0 px-1 text-text-nav-active transition-colors">Lớp học tiền sản</a></li>
+					<li><a href="./index.html#kien-thuc-nuoi-con" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Kiến thức</a></li>
+				</ul>
+			</nav>
+			<div class="flex items-center gap-3 sm:gap-4 shrink-0">
+				<a class="vpc-button vpc-button-lg hidden xl:inline-flex items-center justify-center h-14 px-8 text-base font-semibold rounded-full bg-surface-button-primary-default hover:bg-surface-button-primary-hover text-text-inverse-default transition-colors duration-200" href="#prenatal-registration">
+					<span>Đăng ký tư vấn</span>
+				</a>
+				<button id="mobile-menu-toggle" type="button" class="xl:hidden inline-flex items-center justify-center w-6 h-6 text-text-body-default focus:outline-hidden" aria-controls="mobile-menu-drawer" aria-expanded="false" aria-label="Toggle navigation menu">
+					<svg class="w-6 h-6 open-icon stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+					</svg>
+				</button>
+			</div>
+		</div>
+
+		<div id="mobile-menu-drawer" class="fixed inset-0 z-50 xl:hidden hidden bg-surface-background-default flex flex-col justify-between overflow-y-auto">
+			<div>
+				<div class="h-[72px] px-5 py-3 flex items-center justify-between border-b border-border-divider-default/40">
+					<a href="./index.html" class="inline-flex items-center shrink-0">
+						<img src="./assets/images/logo.svg" alt="Vạn Phúc Care" width="116" height="36" class="h-9 w-[116px] object-contain block">
+					</a>
+					<button id="mobile-menu-close" type="button" class="w-12 h-12 flex items-center justify-center text-text-body-default focus:outline-hidden cursor-pointer" aria-label="Close navigation menu">
+						<svg class="w-6 h-6 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+						</svg>
+					</button>
+				</div>
+				<nav class="pt-2 px-5 pb-0 flex flex-col" aria-label="Mobile navigation">
+					<a href="./index.html" class="h-16 py-4 flex items-center justify-between border-b border-border-divider-default text-xl font-medium text-text-nav-default">
+						<span>Trang chủ</span>
+						<svg class="w-6 h-6 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+					</a>
+					<a href="./lophoctiensan.html" class="h-16 py-4 flex items-center justify-between border-b border-border-divider-default text-xl font-medium text-text-nav-active">
+						<span>Lớp học tiền sản</span>
+						<svg class="w-6 h-6 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+					</a>
+				</nav>
+			</div>
 		</div>
 	</header>
 
 	<main id="primary" class="overflow-x-hidden">
-		<section class="vpc-section prenatal-hero" aria-labelledby="prenatal-title"><div class="prenatal-container prenatal-hero__layout"><div class="prenatal-hero__copy"><div class="prenatal-badge"><span aria-hidden="true">✦</span>LỚP HỌC TIỀN SẢN</div><h1 id="prenatal-title" class="prenatal-title"><span>Tự Tin Đón Con Yêu</span><em>Đọc Vị Nhu Cầu Của Trẻ</em></h1><p>Chuẩn bị vững vàng cho hành trình làm cha mẹ. Với sự đồng hành cùng điều dưỡng trưởng Thanh Thuỷ, cùng cha mẹ biến kiến thức y khoa thành kỹ năng chăm con thực tế, thấu hiểu nhu cầu của con trẻ bằng tình yêu thương.</p><div class="prenatal-actions"><a class="prenatal-button prenatal-button--primary" href="#prenatal-registration">Đăng ký giữ chỗ</a><a class="prenatal-button prenatal-button--secondary" href="#prenatal-program">Khám phá chương trình</a></div></div><img class="prenatal-hero__image" src="./assets/images/lop-hoc-tien-san/hero-mother-baby.png" alt="Mẹ âu yếm chăm sóc bàn chân của em bé"><div class="prenatal-quick-info"><div><b>01 buổi học</b><span>03 giờ thực hành</span></div><div><b>Tối đa 05 cặp</b><span>Hướng dẫn sát sao 1:1</span></div><div><b>Sáng cuối tuần</b><span>09:00 – 12:00</span></div><div><b>Tại Vạn Phúc Care</b><span>35B/399 Âu Cơ, Tây Hồ</span></div></div></div></section>
+		<!-- HERO SECTION -->
+		<section class="vpc-section prenatal-hero" aria-labelledby="prenatal-title">
+			<div class="prenatal-container prenatal-hero__layout">
+				<div class="prenatal-hero__copy">
+					<div class="prenatal-badge">
+						<img class="prenatal-badge__icon" src="./assets/images/lop-hoc-tien-san/icons/star-light.svg" alt="" aria-hidden="true" width="24" height="24" />
+						<span>LỚP HỌC TIỀN SẢN</span>
+					</div>
+					<h1 id="prenatal-title" class="prenatal-title">
+						<span>Tự Tin Đón Con Yêu</span>
+						<em>Đọc Vị Nhu Cầu</em>
+						<em>Của Trẻ</em>
+					</h1>
+					<p>Chuẩn bị vững vàng cho hành trình làm cha mẹ. Với sự đồng hành cùng điều dưỡng trưởng Thanh Thuỷ, cùng cha mẹ biến kiến thức y khoa thành kỹ năng chăm con thực tế, thấu hiểu nhu cầu của con trẻ bằng tình yêu thương.</p>
+					<div class="prenatal-actions">
+						<a class="prenatal-button prenatal-button--primary" href="#prenatal-registration">Đăng ký giữ chỗ</a>
+						<a class="prenatal-button prenatal-button--secondary" href="#prenatal-program">Khám phá chương trình</a>
+					</div>
+				</div>
+				<div class="prenatal-hero__media">
+					<picture>
+						<source media="(max-width: 639px)" srcset="./assets/images/lop-hoc-tien-san/hero-class-actual.png" />
+						<img class="prenatal-hero__image" src="./assets/images/lop-hoc-tien-san/hero-mother-baby.png" alt="Lớp học tiền sản thực tế tại Vạn Phúc Care" width="454" height="444" />
+					</picture>
+				</div>
+				<div class="prenatal-quick-info" aria-label="Thông tin lớp học nhanh">
+					<div class="prenatal-quick-info__item">
+						<div class="prenatal-quick-info__header">
+							<img src="./assets/images/lop-hoc-tien-san/icons/duration.svg" alt="" aria-hidden="true" width="22" height="24" />
+							<h3>Thời lượng</h3>
+						</div>
+						<p>01 buổi · 03 giờ (Offline)</p>
+					</div>
+					<div class="prenatal-quick-info__item">
+						<div class="prenatal-quick-info__header">
+							<img src="./assets/images/lop-hoc-tien-san/icons/participants.svg" alt="" aria-hidden="true" width="22" height="24" />
+							<h3>Số lượng tham gia</h3>
+						</div>
+						<p>Tối đa 05 cặp bố mẹ/ dưới 10 người</p>
+					</div>
+					<div class="prenatal-quick-info__item">
+						<div class="prenatal-quick-info__header">
+							<img src="./assets/images/lop-hoc-tien-san/icons/schedule.svg" alt="" aria-hidden="true" width="22" height="24" />
+							<h3>Thời gian</h3>
+						</div>
+						<p>9h00 – 12h00 (Sáng thứ 7 hàng tuần)</p>
+					</div>
+					<div class="prenatal-quick-info__item">
+						<div class="prenatal-quick-info__header">
+							<img src="./assets/images/lop-hoc-tien-san/icons/map.svg" alt="" aria-hidden="true" width="22" height="24" />
+							<h3>Địa điểm</h3>
+						</div>
+						<p>Trung tâm ở cữ -  Vạn Phúc Care</p>
+					</div>
+				</div>
+			</div>
+		</section>
 
-		<section class="vpc-section prenatal-intro" aria-labelledby="prenatal-intro-title"><div class="prenatal-container"><div class="prenatal-intro__content"><div class="prenatal-intro__photo"><img src="./assets/images/lop-hoc-tien-san/intro-family.png" alt="Bố mẹ tham gia lớp học cùng con"></div><div class="prenatal-intro__copy"><div class="prenatal-badge"><span aria-hidden="true">✦</span>MỘT KHỞI ĐẦU VỮNG VÀNG</div><h2 id="prenatal-intro-title" class="prenatal-title"><span>Yêu Thương Là Bản Năng</span><em>Chăm Con Là Kỹ Năng</em></h2><p>Ngày con chào đời là khởi đầu của một hành trình thiêng liêng. Bên cạnh tình yêu thương, cha mẹ còn cần những kiến thức đúng và kỹ năng thực tế để tự tin chăm sóc con yêu.</p><p>Lớp học tiền sản tại trung tâm ở cữ Vạn Phúc Care được hình thành với sứ mệnh giúp cha mẹ thực sự thấu hiểu nhu cầu của trẻ, biết khi nào cần can thiệp, khi nào nên kiên nhẫn — và cùng nhau chuẩn bị cho những ngày đầu đón bé.</p></div></div><div class="prenatal-feature-grid"><article><i>✦</i><h3>Chuyên môn vững vàng</h3><p>Đồng hành cùng điều dưỡng trưởng Thanh Thủy và đội ngũ giàu kinh nghiệm.</p></article><article><i>✓</i><h3>Thực hành chuẩn y khoa</h3><p>Thực hành trên mô hình búp bê y tế, được hướng dẫn sát sao 1:1.</p></article><article><i>♥</i><h3>Bố mẹ cùng đồng hành</h3><p>Bố tự tin chăm sóc con và san sẻ cùng mẹ từ những ngày đầu sau sinh.</p></article><article><i>▤</i><h3>Tài liệu hữu ích</h3><p>Mang về kiến thức tinh gọn, dễ nhớ và áp dụng được mỗi ngày.</p></article></div></div></section>
+		<!-- INTRO SECTION -->
+		<section class="vpc-section prenatal-intro" aria-labelledby="prenatal-intro-title">
+			<div class="prenatal-container">
+				<div class="prenatal-intro__content">
+					<div class="prenatal-intro__photo">
+						<picture>
+							<source media="(max-width: 639px)" srcset="./assets/images/lop-hoc-tien-san/intro-class-actual.png" />
+							<img src="./assets/images/lop-hoc-tien-san/intro-family.png" alt="Bố mẹ tham gia lớp học cùng con" />
+						</picture>
+					</div>
+					<div class="prenatal-intro__copy">
+						<div class="prenatal-badge">
+							<img class="prenatal-badge__icon" src="./assets/images/lop-hoc-tien-san/icons/star-light.svg" alt="" aria-hidden="true" width="24" height="24" />
+							<span>MỘT KHỞI ĐẦU VỮNG VÀNG</span>
+						</div>
+						<h2 id="prenatal-intro-title" class="prenatal-title">
+							<span>Yêu Thương Là Bản Năng</span>
+							<em>Chăm Con Là Kỹ Năng</em>
+						</h2>
+						<p>Ngày con chào đời là khởi đầu của một hành trình thiêng liêng. Bên cạnh tình yêu thương, cha mẹ còn cần những kiến thức đúng và kỹ năng thực tế để tự tin chăm sóc con yêu.</p>
+						<p>Lớp học tiền sản tại trung tâm ở cữ Vạn Phúc Care được hình thành với sứ mệnh giúp cha mẹ thực sự thấu hiểu nhu cầu của trẻ, biết khi nào cần can thiệp, khi nào nên kiên nhẫn — và cùng nhau chuẩn bị cho những ngày đầu đón bé.</p>
+					</div>
+				</div>
+				<div class="prenatal-feature-grid">
+					<article>
+						<div class="prenatal-feature-icon">
+							<img src="./assets/images/lop-hoc-tien-san/icons/professional.svg" alt="" aria-hidden="true" width="24" height="24" />
+						</div>
+						<h3>Chuyên môn vững vàng</h3>
+						<p>Đồng hành cùng điều dưỡng trưởng Thanh Thủy và đội ngũ giàu kinh nghiệm</p>
+					</article>
+					<article>
+						<div class="prenatal-feature-icon">
+							<img src="./assets/images/lop-hoc-tien-san/icons/monitoring.svg" alt="" aria-hidden="true" width="24" height="24" />
+						</div>
+						<h3>Thực hành chuẩn y khoa</h3>
+						<p>Trực tiếp thực hành trên mô hình búp bê y tế, đồng thời được hướng dẫn sát sao 1:1</p>
+					</article>
+					<article>
+						<div class="prenatal-feature-icon">
+							<img src="./assets/images/lop-hoc-tien-san/icons/companionship.svg" alt="" aria-hidden="true" width="24" height="24" />
+						</div>
+						<h3>Bố mẹ cùng đồng hành</h3>
+						<p>Bố tự tin chăm sóc con và san sẻ cùng mẹ ngay từ những ngày đầu sau sinh</p>
+					</article>
+					<article>
+						<div class="prenatal-feature-icon">
+							<img src="./assets/images/lop-hoc-tien-san/icons/materials.svg" alt="" aria-hidden="true" width="24" height="24" />
+						</div>
+						<h3>Dễ hiểu, dễ áp dụng</h3>
+						<p>Kiến thức khoa học được chuyển thành những kỹ năng gần gũi và thực tế</p>
+					</article>
+				</div>
+			</div>
+		</section>
 
-		<!-- Video block intentionally omitted until the production video is available. -->
+		<!-- BENEFITS SECTION -->
+		<section class="vpc-section prenatal-benefits" aria-label="Đối tượng và quyền lợi">
+			<div class="prenatal-container">
+				<div class="prenatal-benefit-group">
+					<div class="prenatal-section-heading">
+						<div class="prenatal-badge">
+							<img class="prenatal-badge__icon" src="./assets/images/lop-hoc-tien-san/icons/star-light.svg" alt="" aria-hidden="true" width="24" height="24" />
+							<span>LỚP HỌC DÀNH CHO AI?</span>
+						</div>
+						<h2>Bố Mẹ Nào Nên <span class="whitespace-nowrap">Tham&nbsp;Gia?</span></h2>
+					</div>
+					<div class="prenatal-benefit-grid">
+						<article>
+							<div class="prenatal-benefit-icon">
+								<img src="./assets/images/lop-hoc-tien-san/icons/week-20.svg" alt="" aria-hidden="true" width="24" height="24" />
+							</div>
+							<h3>Mẹ từ tuần thai thứ 20</h3>
+							<p>Giai đoạn sức khỏe mẹ đã ổn định, thuận tiện để học và thực hành các kỹ thuật</p>
+						</article>
+						<article>
+							<div class="prenatal-benefit-icon">
+								<img src="./assets/images/lop-hoc-tien-san/icons/first-child.svg" alt="" aria-hidden="true" width="24" height="24" />
+							</div>
+							<h3>Gia đình đón con đầu lòng</h3>
+							<p>Còn nhiều bỡ ngỡ, muốn được hướng dẫn từng bước dễ tự tin khi con chào đời.</p>
+						</article>
+						<article>
+							<div class="prenatal-benefit-icon">
+								<img src="./assets/images/lop-hoc-tien-san/icons/new-knowledge.svg" alt="" aria-hidden="true" width="24" height="24" />
+							</div>
+							<h3>Mẹ bầu muốn tiếp cận kiến thức mới</h3>
+							<p>Mẹ sinh bé thứ 2 hoặc 3, muốn cập nhật thêm kiến thức và kỹ năng chăm sóc bản thân và trẻ sơ sinh theo phương pháp hiện đại.</p>
+						</article>
+						<article>
+							<div class="prenatal-benefit-icon">
+								<img src="./assets/images/lop-hoc-tien-san/icons/pregnancy-health.svg" alt="" aria-hidden="true" width="24" height="24" />
+							</div>
+							<h3>Mẹ quan tâm sức khỏe thai kỳ</h3>
+							<p>Mong muốn lắng nghe những chia sẻ về tiền sản giật, dinh dưỡng thai kỳ và nuôi con bằng sữa mẹ.</p>
+						</article>
+					</div>
+				</div>
+				<div class="prenatal-benefit-group">
+					<div class="prenatal-section-heading">
+						<div class="prenatal-badge">
+							<img class="prenatal-badge__icon" src="./assets/images/lop-hoc-tien-san/icons/star-light.svg" alt="" aria-hidden="true" width="24" height="24" />
+							<span>LỢI ÍCH &amp; GIÁ TRỊ THỰC TẾ</span>
+						</div>
+						<h2>Bố Mẹ Nhận Được Gì Sau <span class="whitespace-nowrap">Buổi&nbsp;Học?</span></h2>
+					</div>
+					<div class="prenatal-benefit-grid">
+						<article>
+							<div class="prenatal-benefit-icon">
+								<img src="./assets/images/lop-hoc-tien-san/icons/baby-signals.svg" alt="" aria-hidden="true" width="24" height="24" />
+							</div>
+							<h3>Đọc vị tín hiệu của con</h3>
+							<p>Tự tin nhận biết nhu cầu của bé, biết khi nào cần can thiệp và khi nào nên kiên nhẫn.</p>
+						</article>
+						<article>
+							<div class="prenatal-benefit-icon">
+								<img src="./assets/images/lop-hoc-tien-san/icons/dad-support.svg" alt="" aria-hidden="true" width="24" height="24" />
+							</div>
+							<h3>Bố biết chăm bé, đỡ đần mẹ</h3>
+							<p>Bố tự tin, có khả năng trực tiếp thực hành các thao tác chăm sóc trẻ sơ sinh, san sẻ cùng mẹ ngay từ những ngày đầu.</p>
+						</article>
+						<article>
+							<div class="prenatal-benefit-icon">
+								<img src="./assets/images/lop-hoc-tien-san/icons/materials-return.svg" alt="" aria-hidden="true" width="24" height="24" />
+							</div>
+							<h3>Tài liệu mang về</h3>
+							<p>Tài liệu chuyên môn hoặc khóa học trực tuyến. Tổng hợp lại kiến thức giúp cha mẹ nhớ lâu, dễ dàng thực hành</p>
+						</article>
+						<article>
+							<div class="prenatal-benefit-icon">
+								<img src="./assets/images/lop-hoc-tien-san/icons/personalized-qa.svg" alt="" aria-hidden="true" width="24" height="24" />
+							</div>
+							<h3>Giải đáp cá nhân hóa</h3>
+							<p>Cha mẹ được chủ động đặt câu hỏi, giải đáp từng băn khoăn riêng và tháo gỡ các thói quen chăm con thiếu khoa học.</p>
+						</article>
+					</div>
+				</div>
+			</div>
+		</section>
 
-		<section class="vpc-section prenatal-benefits" aria-label="Đối tượng và quyền lợi"><div class="prenatal-container"><div class="prenatal-benefit-group"><div class="prenatal-section-heading"><div class="prenatal-badge"><span aria-hidden="true">✦</span>LỚP HỌC DÀNH CHO AI?</div><h2>Bố Mẹ Nào Nên Tham Gia?</h2></div><div class="prenatal-benefit-grid"><article><i>20</i><h3>Mẹ bầu từ tuần 20+</h3><p>Cần chuẩn bị kiến thức, kỹ năng trước khi bé yêu chào đời.</p></article><article><i>1st</i><h3>Lần đầu làm cha mẹ</h3><p>Mong có người đồng hành để chăm bé đúng cách và bình tĩnh hơn.</p></article><article><i>+</i><h3>Muốn cập nhật kiến thức</h3><p>Để chọn lọc thông tin, thực hành đúng và phù hợp với gia đình.</p></article><article><i>♥</i><h3>Quan tâm sức khỏe thai kỳ</h3><p>Muốn hiểu những chuẩn bị cần thiết trước và sau khi sinh.</p></article></div></div><div class="prenatal-benefit-group"><div class="prenatal-section-heading"><div class="prenatal-badge"><span aria-hidden="true">✦</span>GIÁ TRỊ NHẬN ĐƯỢC</div><h2>Bố Mẹ Nhận Được Gì Sau Buổi Học?</h2></div><div class="prenatal-benefit-grid"><article><i>✓</i><h3>Hiểu tín hiệu của bé</h3><p>Nhận biết nhu cầu ăn, ngủ, khó chịu để phản hồi đúng lúc.</p></article><article><i>☼</i><h3>Thực hành kỹ năng chăm bé</h3><p>Tắm bé, bế bé, quấn khăn và các thao tác căn bản.</p></article><article><i>▤</i><h3>Tài liệu dễ áp dụng</h3><p>Tóm tắt rõ ràng để bố mẹ tự tin thực hành tại nhà.</p></article><article><i>?</i><h3>Hỏi đáp cá nhân hóa</h3><p>Được giải đáp trực tiếp những băn khoăn của riêng gia đình.</p></article></div></div></div></section>
+		<!-- PROGRAM SECTION -->
+		<section id="prenatal-program" class="vpc-section prenatal-program" aria-labelledby="prenatal-program-title">
+			<div class="prenatal-container prenatal-center">
+				<div class="prenatal-badge">
+					<img class="prenatal-badge__icon" src="./assets/images/lop-hoc-tien-san/icons/star-light.svg" alt="" aria-hidden="true" width="24" height="24" />
+					<span>01 BUỔI · 03 GIỜ · 08 NỘI DUNG</span>
+				</div>
+				<h2 id="prenatal-program-title">Nội Dung Lớp Học <span class="whitespace-nowrap">Tiền&nbsp;Sản</span></h2>
+				<p class="prenatal-lead">Từ chăm sóc thai kỳ đến những thao tác chăm bé đầu tiên.<br>Lý thuyết tinh gọn kết hợp thực hành; đan xen các phiên Q&amp;A cá nhân hóa 1:1, thực hành trực tiếp, giải đáp đến từng băn khoăn.</p>
+				<div class="prenatal-tabs" role="tablist" aria-label="Nội dung chương trình">
+					<button class="is-active" type="button">Phần 1 - Sức khỏe thai kỳ</button>
+					<button type="button">Phần 2 - Nuôi con bằng sữa mẹ</button>
+					<button type="button">Phần 3 - Thực hành chăm sóc</button>
+				</div>
+				<div class="prenatal-step-grid">
+					<article>
+						<div class="prenatal-step-tag">Module 01</div>
+						<h3>Nhận biết tiền sản giật</h3>
+						<p>Nhận biết dấu hiệu và phòng ngừa tiền sản giật trong những tháng cuối thai kỳ</p>
+					</article>
+					<article>
+						<div class="prenatal-step-tag">Module 02</div>
+						<h3>Dinh dưỡng cho mẹ</h3>
+						<p>Dinh dưỡng khoa học cuối thai kỳ và phục hồi thể trạng sau sinh</p>
+					</article>
+					<article>
+						<div class="prenatal-step-tag">Module 03</div>
+						<h3>Tập thở &amp; rặn sinh</h3>
+						<p>Thực hành kỹ thuật thở và rặn sinh thường hiệu quả, giúp mẹ chủ động khi vượt cạn.</p>
+					</article>
+				</div>
+				<p class="prenatal-note">Đan xen các phiên hỏi đáp cá nhân hóa cùng điều dưỡng, ngay tại lớp</p>
+				<a class="prenatal-button prenatal-button--primary" href="#prenatal-registration">Đăng ký ngay</a>
+			</div>
+		</section>
 
-		<section id="prenatal-program" class="vpc-section prenatal-program" aria-labelledby="prenatal-program-title"><div class="prenatal-container prenatal-center"><div class="prenatal-badge"><span aria-hidden="true">✦</span>01 BUỔI · 03 GIỜ · 08 NỘI DUNG</div><h2 id="prenatal-program-title">Nội Dung Lớp Học Tiền Sản</h2><p class="prenatal-lead">Từ chăm sóc thai kỳ đến những thao tác chăm bé đầu tiên.<br>Lý thuyết tinh gọn kết hợp thực hành; đan xen các phiên Q&amp;A cá nhân hóa 1:1, thực hành trực tiếp, giải đáp đến từng băn khoăn.</p><div class="prenatal-tabs"><button class="is-active" type="button">Phần 1 - Sức khỏe thai kỳ</button><button type="button">Phần 2 - Nuôi con bằng sữa mẹ</button><button type="button">Phần 3 - Chăm sóc bé sơ sinh</button></div><div class="prenatal-step-grid"><article><b>01</b><h3>Chuẩn bị hành trang đón bé</h3><p>Những điều cần biết để mẹ an tâm trong những ngày cuối thai kỳ.</p></article><article><b>02</b><h3>Thực hành chăm bé</h3><p>Làm quen các thao tác chăm sóc cơ bản bằng mô hình trực quan.</p></article><article><b>03</b><h3>Nuôi con bằng yêu thương</h3><p>Đọc vị tín hiệu và xây nền nếp nhẹ nhàng cho bé ngay từ đầu.</p></article></div><p class="prenatal-note">Đan xen các phiên hỏi đáp cá nhân hóa cùng điều dưỡng, ngay tại lớp</p><a class="prenatal-button prenatal-button--primary" href="#prenatal-registration">Đăng ký tư vấn</a></div></section>
+		<!-- TEACHER SECTION -->
+		<section class="vpc-section prenatal-teacher" aria-labelledby="prenatal-teacher-title">
+			<div class="prenatal-container prenatal-teacher__layout">
+				<div class="prenatal-teacher__photo">
+					<img class="prenatal-teacher__bg" src="./assets/images/lop-hoc-tien-san/teacher-background.png" alt="" />
+					<img class="prenatal-teacher__portrait" src="./assets/images/lop-hoc-tien-san/teacher-thanh-thuy.png" alt="Điều dưỡng trưởng Thanh Thủy" />
+				</div>
+				<div class="prenatal-teacher__copy">
+					<div class="prenatal-badge">
+						<img class="prenatal-badge__icon" src="./assets/images/lop-hoc-tien-san/icons/star-light.svg" alt="" aria-hidden="true" width="24" height="24" />
+						<span>NGƯỜI BẠN ĐỒNG HÀNH CÙNG MỌI GIA ĐÌNH</span>
+					</div>
+					<h2 id="prenatal-teacher-title" class="prenatal-title">
+						<span>Điều Dưỡng Trưởng</span>
+						<em>Thanh Thủy</em>
+					</h2>
+					<div class="prenatal-teacher__intro">
+						<p class="prenatal-teacher__handle">@methuylamy</p>
+						<p class="prenatal-teacher__workplace">Trung tâm ở cữ Vạn Phúc Care</p>
+						<p>Điều dưỡng trưởng Thanh Thủy trực tiếp thiết kế và giảng dạy chương trình, đưa những kiến thức y khoa trở nên gần gũi, dễ hiểu - để mỗi bố mẹ đều có thể tự tin áp dụng khi con chào đời.</p>
+					</div>
+					<ul class="prenatal-teacher__checklist">
+						<li><span>Hướng dẫn thực hành trực tiếp, chỉnh sửa từng thao tác</span></li>
+						<li><span>Giải đáp những lo lắng riêng của mỗi gia đình</span></li>
+						<li><span>Đội ngũ điều dưỡng hỗ trợ 1:1 trong suốt buổi học</span></li>
+					</ul>
+					<a class="prenatal-button prenatal-button--primary" href="#prenatal-registration">Giới thiệu giảng viên</a>
+				</div>
+			</div>
+		</section>
 
-		<section class="vpc-section prenatal-teacher" aria-labelledby="prenatal-teacher-title"><div class="prenatal-container prenatal-teacher__layout"><div class="prenatal-teacher__photo"><img class="prenatal-teacher__bg" src="./assets/images/lop-hoc-tien-san/teacher-background.png" alt=""><img class="prenatal-teacher__portrait" src="./assets/images/lop-hoc-tien-san/teacher-thanh-thuy.png" alt="Điều dưỡng trưởng Thanh Thủy"></div><div class="prenatal-teacher__copy"><div class="prenatal-badge"><span aria-hidden="true">✦</span>NGƯỜI BẠN ĐỒNG HÀNH CỦA BỐ MẸ</div><h2 id="prenatal-teacher-title" class="prenatal-title"><span>Điều Dưỡng Trưởng</span><em>Thanh Thủy</em></h2><p><strong>@methuylamy</strong> · Trung tâm ở cữ Vạn Phúc Care<br>Điều dưỡng trưởng Thanh Thủy trực tiếp thiết kế và giảng dạy chương trình, đưa những kiến thức y khoa trở nên gần gũi, dễ hiểu — để mỗi bố mẹ đều có thể tự tin áp dụng khi con chào đời.</p><ul><li>Trực tiếp hướng dẫn và giải đáp tại lớp</li><li>Theo sát từng thao tác thực hành của bố mẹ</li><li>Đồng hành cùng gia đình sau buổi học</li></ul><a class="prenatal-button prenatal-button--primary" href="#prenatal-registration">Khám phá thêm</a></div></div></section>
+		<!-- REGISTRATION FORM SECTION -->
+		<section id="prenatal-registration" class="vpc-section prenatal-registration" aria-labelledby="prenatal-registration-title">
+			<div class="prenatal-container prenatal-registration__layout">
+				<div class="prenatal-registration__intro">
+					<div class="prenatal-badge">
+						<img class="prenatal-badge__icon" src="./assets/images/lop-hoc-tien-san/icons/star-light.svg" alt="" aria-hidden="true" width="24" height="24" />
+						<span>HẸN GẶP BỐ MẸ TẠI LỚP</span>
+					</div>
+					<h2>Cùng chuẩn bị cho<br>ngày con chào đời</h2>
+					<p>Một buổi học dành riêng cho bố mẹ, với không gian gần gũi và sự đồng hành tận tâm từ đội ngũ điều dưỡng.</p>
+					<div class="prenatal-info-card">
+						<div class="prenatal-info-card__icon">
+							<img src="./assets/images/lop-hoc-tien-san/icons/duration.svg" alt="" aria-hidden="true" width="24" height="24" />
+						</div>
+						<div class="prenatal-info-card__text">
+							<b>Sáng cuối tuần · 09:00 – 12:00</b>
+							<small>Liên hệ để xác nhận lịch học gần nhất</small>
+						</div>
+					</div>
+					<div class="prenatal-info-card">
+						<div class="prenatal-info-card__icon">
+							<img src="./assets/images/lop-hoc-tien-san/icons/participants.svg" alt="" aria-hidden="true" width="24" height="24" />
+						</div>
+						<div class="prenatal-info-card__text">
+							<b>Tối đa 05 cặp cha mẹ/ buổi</b>
+							<small>Bố tham gia cùng mẹ không phát sinh phụ phí</small>
+						</div>
+					</div>
+					<div class="prenatal-info-card">
+						<div class="prenatal-info-card__icon">
+							<img src="./assets/images/lop-hoc-tien-san/icons/map.svg" alt="" aria-hidden="true" width="24" height="24" />
+						</div>
+						<div class="prenatal-info-card__text">
+							<b>Tầng 1 - Trung tâm ở cữ Vạn Phúc Care</b>
+							<small>35B ngõ 399 Âu Cơ, Tây Hồ, Hà Nội <a href="https://maps.google.com/?q=35B+ngõ+399+Âu+Cơ+Tây+Hồ+Hà+Nội" target="_blank" rel="noopener noreferrer" class="text-primary-500 hover:underline">Xem đường đi</a></small>
+						</div>
+					</div>
+				</div>
+				<div class="prenatal-form-wrap">
+					<h2 id="prenatal-registration-title">Đăng Ký Tham Gia <span class="whitespace-nowrap">Lớp&nbsp;Học</span></h2>
+					<form id="vpc-prenatal-form" class="prenatal-form" action="#" method="post">
+						<input type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" />
+						<input type="hidden" name="service" value="lop-hoc-tien-san" />
+						<div class="prenatal-form__field">
+							<label for="prenatal-name"><em>*</em> Họ và tên</label>
+							<input id="prenatal-name" name="full_name" required placeholder="Nguyễn Như Linh" />
+						</div>
+						<div class="prenatal-form__field">
+							<label for="prenatal-phone"><em>*</em> Số điện thoại</label>
+							<input id="prenatal-phone" name="phone" required type="tel" placeholder="0345678***" />
+						</div>
+						<div class="prenatal-form__field">
+							<fieldset>
+								<legend><em>*</em> Giai đoạn thai kỳ</legend>
+								<div class="prenatal-chips">
+									<label class="prenatal-chip is-active">
+										<input type="radio" name="gestational_age" value="13-27-tuan" checked class="sr-only" />
+										<span>Đang mang thai</span>
+									</label>
+									<label class="prenatal-chip">
+										<input type="radio" name="gestational_age" value="chua-mang-thai" class="sr-only" />
+										<span>Chuẩn bị mang thai</span>
+									</label>
+									<label class="prenatal-chip">
+										<input type="radio" name="gestational_age" value="da-sinh-be" class="sr-only" />
+										<span>Đã sinh bé</span>
+									</label>
+								</div>
+							</fieldset>
+						</div>
+						<div class="prenatal-form__field">
+							<label for="prenatal-service-select"><em>*</em> Dịch vụ quan tâm</label>
+							<div class="prenatal-select-wrap">
+								<select id="prenatal-service-select" name="service_choice">
+									<option value="lop-hoc-tien-san" selected>Lớp học tiền sản</option>
+									<option value="trung-tam-o-cu">Trung tâm ở cữ</option>
+									<option value="bao-mau-tai-nha">Bảo mẫu tại nhà</option>
+									<option value="nuoi-con-easy">Tư vấn nuôi con EASY</option>
+									<option value="khoa-hoc-truc-tuyen">Khóa học trực tuyến</option>
+								</select>
+							</div>
+						</div>
+						<div class="prenatal-form__field">
+							<label for="prenatal-stage-select"><em>*</em> Tuần thai</label>
+							<div class="prenatal-select-wrap">
+								<select id="prenatal-stage-select" name="stage_choice">
+									<option value="" disabled selected>Chọn giai đoạn</option>
+									<option value="duoi-12-tuan">Dưới 12 tuần</option>
+									<option value="13-27-tuan">13 - 27 tuần</option>
+									<option value="tu-28-tuan">Từ 28 tuần trở lên</option>
+								</select>
+							</div>
+						</div>
+						<div class="prenatal-form__field">
+							<label for="prenatal-note">Ghi chú</label>
+							<textarea id="prenatal-note" name="question" rows="3" placeholder="Cho chúng tôi biết thêm về nhu cầu của bạn!"></textarea>
+						</div>
+						<button class="prenatal-button prenatal-button--primary" type="submit">Gửi yêu cầu tư vấn</button>
+					</form>
+				</div>
+			</div>
+		</section>
 
-		<section id="prenatal-registration" class="vpc-section prenatal-registration" aria-labelledby="prenatal-registration-title"><div class="prenatal-container prenatal-registration__layout"><div class="prenatal-registration__intro"><div class="prenatal-badge"><span aria-hidden="true">✦</span>HẸN GẶP BỐ MẸ TẠI LỚP</div><h2>Cùng chuẩn bị cho<br>ngày con chào đời</h2><p>Một buổi học dành riêng cho bố mẹ, với không gian gần gũi và sự đồng hành tận tâm từ đội ngũ điều dưỡng.</p><div class="prenatal-info-card"><i>◷</i><span><b>Sáng cuối tuần · 09:00 – 12:00</b><small>Liên hệ để xác nhận lịch học gần nhất</small></span></div><div class="prenatal-info-card"><i>♙</i><span><b>Tối đa 05 cặp cha mẹ/ buổi</b><small>Bố tham gia cùng mẹ không phát sinh phụ phí</small></span></div><div class="prenatal-info-card"><i>⌖</i><span><b>Trung tâm ở cữ Vạn Phúc Care</b><small>35B/399 Âu Cơ, phường Tây Hồ, Hà Nội</small></span></div></div><div class="prenatal-form-wrap"><h2 id="prenatal-registration-title">Đăng Ký Tham Gia Lớp Học</h2><form class="prenatal-form" action="#"><div><label for="name">Họ và tên <em>*</em></label><input id="name" required placeholder="Nhập họ và tên"></div><div><label for="phone">Số điện thoại <em>*</em></label><input id="phone" required type="tel" placeholder="Nhập số điện thoại"></div><fieldset><legend>Giai đoạn thai kỳ <em>*</em></legend><label><input type="radio" name="stage" checked> Đang mang thai</label><label><input type="radio" name="stage"> Chuẩn bị mang thai</label><label><input type="radio" name="stage"> Đã sinh bé</label></fieldset><div><label for="note">Điều bố mẹ quan tâm</label><textarea id="note" rows="3" placeholder="Cho chúng tôi biết thêm về nhu cầu của bạn!"></textarea></div><button class="prenatal-button prenatal-button--primary" type="button">Đăng ký giữ chỗ</button></form></div></div></section>
+		<!-- FAQ SECTION -->
+		<section class="vpc-section prenatal-faq" aria-labelledby="prenatal-faq-title">
+			<div class="prenatal-container">
+				<div class="prenatal-section-heading">
+					<h2 id="prenatal-faq-title">Những Điều Bố Mẹ <span class="whitespace-nowrap">Muốn&nbsp;Biết</span></h2>
+					<div class="prenatal-badge">
+						<img class="prenatal-badge__icon" src="./assets/images/lop-hoc-tien-san/icons/star-light.svg" alt="" aria-hidden="true" width="24" height="24" />
+						<span>GIẢI ĐÁP CÙNG BỐ MẸ</span>
+					</div>
+				</div>
+				<div class="prenatal-accordion">
+					<details open>
+						<summary>Bố có được đi học cùng mẹ không? Chi phí có tính thêm cho người đi cùng không?</summary>
+						<p>Lớp học rất khuyến khích cả bố và mẹ cùng tham gia, hoặc người thân trực tiếp hỗ trợ chăm bé sau sinh. Cha mẹ tham gia cùng nhau không phát sinh thêm phụ phí.</p>
+					</details>
+					<details>
+						<summary>Tham gia lớp học cần chuẩn bị trước những gì?</summary>
+						<p>Bố mẹ chỉ cần chuẩn bị tâm thế thoải mái và sẵn sàng cùng nhau học hỏi. Mọi học liệu, tài liệu và mô hình thực hành đều đã được trung tâm chuẩn bị sẵn sàng.</p>
+					</details>
+					<details>
+						<summary>Mẹ bầu ở tuần thai nào thì nên bắt đầu tham gia lớp học?</summary>
+						<p>Lớp phù hợp nhất từ tuần thai thứ 20 trở đi, khi bố mẹ đã có thời gian chuẩn bị cho ngày đón bé.</p>
+					</details>
+					<details>
+						<summary>Lớp học tổ chức vào thời gian nào và có giới hạn số lượng học viên không?</summary>
+						<p>Lớp diễn ra vào sáng cuối tuần từ 09:00 đến 12:00, giới hạn tối đa 05 cặp bố mẹ mỗi buổi để đảm bảo hướng dẫn sát sao 1:1.</p>
+					</details>
+					<details>
+						<summary>Sau khi học xong nếu về nhà quên thao tác hoặc gặp vấn đề khi sinh bé thì có được hỗ trợ không?</summary>
+						<p>Đội ngũ điều dưỡng Vạn Phúc Care tiếp tục đồng hành và giải đáp thắc mắc của bố mẹ sau buổi học qua nhóm hỗ trợ riêng.</p>
+					</details>
+				</div>
+			</div>
+		</section>
 
-		<section class="vpc-section prenatal-faq" aria-labelledby="prenatal-faq-title"><div class="prenatal-container"><div class="prenatal-section-heading"><h2 id="prenatal-faq-title">Những Điều Bố Mẹ Muốn Biết</h2><div class="prenatal-badge"><span aria-hidden="true">✦</span>GIẢI ĐÁP CÙNG BỐ MẸ</div></div><div class="prenatal-accordion"><details open><summary>Bố có được đi học cùng mẹ không? Chi phí có tính thêm cho người đi cùng không?</summary><p>Lớp học rất khuyến khích cả bố và mẹ cùng tham gia, hoặc người thân trực tiếp hỗ trợ chăm bé sau sinh. Cha mẹ tham gia cùng nhau không phát sinh thêm phụ phí.</p></details><details><summary>Lớp học phù hợp với mẹ bầu từ tuần bao nhiêu?</summary><p>Lớp phù hợp nhất từ tuần thai thứ 20 trở đi, khi bố mẹ đã có thời gian chuẩn bị cho ngày đón bé.</p></details><details><summary>Buổi học có thực hành trực tiếp không?</summary><p>Có. Bố mẹ sẽ được thực hành những thao tác chăm sóc bé căn bản trên mô hình y tế.</p></details><details><summary>Nếu có băn khoăn riêng thì có được hỏi không?</summary><p>Điều dưỡng dành thời gian hỏi đáp để giải đáp các nhu cầu riêng của từng gia đình.</p></details><details><summary>Học xong có tài liệu để xem lại không?</summary><p>Bố mẹ nhận được tài liệu tóm tắt để dễ dàng thực hành lại tại nhà.</p></details></div></div></section>
-
-		<section class="vpc-section prenatal-services" aria-labelledby="prenatal-services-title"><div class="prenatal-container prenatal-center"><h2 id="prenatal-services-title">Các Dịch Vụ Khác</h2><div class="prenatal-services__grid"><a href="./index.html#bao-mau-tai-nha"><img src="./assets/images/lop-hoc-tien-san/service-newborn.png" alt="Bảo mẫu tại nhà"><span>Bảo Mẫu Tại Nhà</span></a><a href="./index.html#khoa-hoc-truc-tuyen"><img src="./assets/images/lop-hoc-tien-san/service-massage.png" alt="Tư vấn nuôi con EASY"><span>Tư Vấn Nuôi Con EASY</span></a><a href="./index.html#trung-tam-o-cu"><img src="./assets/images/lop-hoc-tien-san/service-homecare.png" alt="Trung tâm ở cữ"><span>Trung Tâm Ở Cữ</span></a></div></div></section>
+		<!-- OTHER SERVICES SECTION -->
+		<section class="vpc-section prenatal-services" aria-labelledby="prenatal-services-title">
+			<div class="prenatal-container prenatal-center">
+				<h2 id="prenatal-services-title">Các Dịch Vụ Khác</h2>
+				<div class="prenatal-services__grid">
+					<a href="./index.html#bao-mau-tai-nha">
+						<img src="./assets/images/lop-hoc-tien-san/service-newborn.png" alt="Bảo mẫu tại nhà" />
+						<span>Bảo Mẫu Tại Nhà</span>
+					</a>
+					<a href="./index.html#khoa-hoc-truc-tuyen">
+						<img src="./assets/images/lop-hoc-tien-san/service-massage.png" alt="Tư vấn nuôi con EASY" />
+						<span>Tư Vấn Nuôi Con EASY</span>
+					</a>
+					<a href="./index.html#trung-tam-o-cu">
+						<img src="./assets/images/lop-hoc-tien-san/service-online-course.png" alt="Khóa học trực tuyến" />
+						<span>Khóa Học Trực Tuyến</span>
+					</a>
+				</div>
+			</div>
+		</section>
 	</main>
-	<footer class="py-10 px-5 bg-primary-100 text-center text-sm text-text-body-muted"><a href="./index.html" class="font-semibold text-text-link-default hover:underline">← Về trang chủ</a><p class="mt-3">© Vạn Phúc Care · Hành trình cùng mẹ, trải đầy yêu thương</p></footer>
+
+	<footer class="py-10 px-5 bg-primary-100 text-center text-sm text-text-body-muted">
+		<a href="./index.html" class="font-semibold text-text-link-default hover:underline">← Về trang chủ</a>
+		<p class="mt-3">© Vạn Phúc Care · Hành trình cùng mẹ, trải đầy yêu thương</p>
+	</footer>
+
+	<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		// Tabs switching for prenatal program
+		const tabs = document.querySelectorAll('.prenatal-tabs button');
+		if (tabs.length) {
+			tabs.forEach(tab => {
+				tab.addEventListener('click', function () {
+					tabs.forEach(t => t.classList.remove('is-active'));
+					this.classList.add('is-active');
+				});
+			});
+		}
+
+		// Radio chips selection for gestational age
+		const chips = document.querySelectorAll('.prenatal-chip');
+		if (chips.length) {
+			chips.forEach(chip => {
+				chip.addEventListener('click', function () {
+					chips.forEach(c => c.classList.remove('is-active'));
+					this.classList.add('is-active');
+					const radio = this.querySelector('input[type="radio"]');
+					if (radio) radio.checked = true;
+				});
+			});
+		}
+
+		// Mobile drawer navigation
+		const menuToggle = document.getElementById('mobile-menu-toggle');
+		const menuClose = document.getElementById('mobile-menu-close');
+		const menuDrawer = document.getElementById('mobile-menu-drawer');
+		if (menuToggle && menuDrawer) {
+			menuToggle.addEventListener('click', () => {
+				menuDrawer.classList.remove('hidden');
+			});
+		}
+		if (menuClose && menuDrawer) {
+			menuClose.addEventListener('click', () => {
+				menuDrawer.classList.add('hidden');
+			});
+		}
+	});
+	</script>
 </body>
 </html>
