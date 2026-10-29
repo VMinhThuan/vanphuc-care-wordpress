@@ -23,6 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<link rel="icon" type="image/png" sizes="300x300" href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Logo-van-phuc-care-300x300.png' ); ?>">
 	<link rel="icon" type="image/png" sizes="180x180" href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Logo-van-phuc-care-180x180.png' ); ?>">
 	<link rel="apple-touch-icon" sizes="180x180" href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Logo-van-phuc-care-180x180.png' ); ?>">
+	<style id="vpc-header-load-guard">#site-header{visibility:hidden}</style>
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class( 'font-body bg-neutral-white text-text-body-default antialiased selection:bg-primary-100 selection:text-primary-800' ); ?>>

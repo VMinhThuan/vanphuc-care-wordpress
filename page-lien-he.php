@@ -115,18 +115,6 @@ $gestational_age_options = vpc_get_gestational_age_options();
 								</div>
 							</div>
 
-							<!-- Giai đoạn thai kỳ (Placed right after Phone matching Figma) -->
-							<fieldset class="block border-0 p-0 m-0">
-								<legend class="mb-3 font-body font-medium text-xl leading-7 text-text-body-default flex items-center gap-1">
-									<span class="text-text-error-default">*</span> Giai đoạn thai kỳ
-								</legend>
-								<div class="flex flex-wrap gap-2" role="radiogroup" aria-label="Giai đoạn thai kỳ">
-									<label class="cursor-pointer"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="dang-mang-thai" checked required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-6 py-3 font-body text-base font-medium text-text-body-default cursor-pointer transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đang mang thai</span></label>
-									<label class="cursor-pointer"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="chuan-bi-mang-thai" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-6 py-3 font-body text-base font-medium text-text-body-default cursor-pointer transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Chuẩn bị mang thai</span></label>
-									<label class="cursor-pointer"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="da-sinh-be" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-6 py-3 font-body text-base font-medium text-text-body-default cursor-pointer transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đã sinh bé</span></label>
-								</div>
-							</fieldset>
-
 							<!-- Dịch vụ quan tâm -->
 							<div class="flex flex-col gap-3">
 								<label class="font-body font-medium text-xl leading-7 text-text-body-default flex items-center gap-1">
@@ -146,6 +134,18 @@ $gestational_age_options = vpc_get_gestational_age_options();
 									</div>
 								</div>
 							</div>
+
+							<!-- Giai đoạn thai kỳ -->
+							<fieldset class="block border-0 p-0 m-0">
+								<legend class="mb-3 font-body font-medium text-xl leading-7 text-text-body-default flex items-center gap-1">
+									<span class="text-text-error-default">*</span> Giai đoạn thai kỳ
+								</legend>
+								<div class="flex flex-wrap gap-2" role="radiogroup" aria-label="Giai đoạn thai kỳ">
+									<label class="cursor-pointer"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="dang-mang-thai" checked required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-6 py-3 font-body text-base font-medium text-text-body-default cursor-pointer transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đang mang thai</span></label>
+									<label class="cursor-pointer"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="chuan-bi-mang-thai" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-6 py-3 font-body text-base font-medium text-text-body-default cursor-pointer transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Chuẩn bị mang thai</span></label>
+									<label class="cursor-pointer"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="da-sinh-be" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-6 py-3 font-body text-base font-medium text-text-body-default cursor-pointer transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đã sinh bé</span></label>
+								</div>
+							</fieldset>
 
 							<!-- Tuần thai -->
 							<div class="flex flex-col gap-3">

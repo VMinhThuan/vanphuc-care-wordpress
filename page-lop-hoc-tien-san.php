@@ -15,8 +15,8 @@ get_header();
 $theme_uri = get_template_directory_uri();
 $image     = $theme_uri . '/assets/images/lop-hoc-tien-san/';
 
-// Video section is temporarily hidden on request.
-$show_prenatal_video = false;
+// The supplied desktop and mobile Figma frames both include this section.
+$show_prenatal_video = true;
 ?>
 
 <section class="vpc-section prenatal-hero" aria-labelledby="prenatal-title">
@@ -141,7 +141,10 @@ $show_prenatal_video = false;
 		<p class="prenatal-lead">Bố mẹ cùng học, cùng thực hành — với sự hướng dẫn trực tiếp của điều dưỡng.</p>
 		<a class="prenatal-video__frame" href="#prenatal-registration" aria-label="Đăng ký tư vấn lớp học">
 			<img src="<?php echo esc_url( $image . 'class-video.png' ); ?>" alt="Không khí thực hành trong lớp học tiền sản" />
-			<span class="prenatal-play" aria-hidden="true">▶</span>
+			<span class="prenatal-play" aria-hidden="true">
+				<img class="prenatal-play__circle" src="<?php echo esc_url( $image . 'icons/video-play-circle.svg' ); ?>" alt="" width="86" height="86" />
+				<img class="prenatal-play__triangle" src="<?php echo esc_url( $image . 'icons/video-play-triangle.svg' ); ?>" alt="" width="35.0565" height="26.3377" />
+			</span>
 		</a>
 		<div class="prenatal-video__cta">
 			<h3>Sẵn sàng cùng nhau đón bé?</h3>
@@ -302,8 +305,7 @@ $show_prenatal_video = false;
 <section class="vpc-section prenatal-teacher" aria-labelledby="prenatal-teacher-title">
 	<div class="prenatal-container prenatal-teacher__layout">
 		<div class="prenatal-teacher__photo">
-			<img class="prenatal-teacher__bg" src="<?php echo esc_url( $image . 'teacher-background.png' ); ?>" alt="" />
-			<img class="prenatal-teacher__portrait" src="<?php echo esc_url( $image . 'teacher-thanh-thuy.png' ); ?>" alt="Điều dưỡng trưởng Thanh Thủy" />
+			<img class="prenatal-teacher__card-img" src="<?php echo esc_url( $image . 'teacher-thanh-thuy-card.png' ); ?>" srcset="<?php echo esc_url( $image . 'teacher-thanh-thuy-card@2x.png' ); ?> 2x" alt="Điều dưỡng trưởng Thanh Thủy bế em bé" width="540" height="600" />
 		</div>
 		<div class="prenatal-teacher__copy">
 			<div class="prenatal-badge">
