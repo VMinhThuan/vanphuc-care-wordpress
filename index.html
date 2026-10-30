@@ -1982,7 +1982,7 @@
 						<p class="font-body text-sm sm:text-base text-text-body-muted text-center xl:text-left leading-relaxed max-w-[340px] sm:max-w-none mx-auto xl:mx-0">Để lại lời nhắn, đội ngũ Vạn Phúc Care sẽ tư vấn dịch vụ phù hợp với nhu cầu của mẹ và bé.</p>
 					</div>
 					<form id="vpc-contact-preview-form" class="w-full bg-surface-background-default border border-border-disabled-default rounded-3xl p-4 sm:p-6 xl:p-8 flex flex-col gap-4 sm:gap-5 shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
-						<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-2">
+						<div class="order-1 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-2">
 							<label class="flex flex-col gap-2 sm:gap-3 font-body font-medium text-base sm:text-lg xl:text-xl leading-6 sm:leading-7 text-text-body-default">
 								<span><span class="text-text-error-default">*</span> Họ và tên</span>
 								<input type="text" placeholder="Nguyễn Như Linh" class="w-full h-12 px-4 rounded-xl border border-border-disabled-default bg-surface-background-default text-base font-medium placeholder:text-text-disabled-light focus:border-border-primary-default focus:ring-1 focus:ring-border-primary-default focus:outline-none">
@@ -1992,17 +1992,17 @@
 								<input type="tel" placeholder="0345678***" class="w-full h-12 px-4 rounded-xl border border-border-disabled-default bg-surface-background-default text-base font-medium placeholder:text-text-disabled-light focus:border-border-primary-default focus:ring-1 focus:ring-border-primary-default focus:outline-none">
 							</label>
 						</div>
-						<fieldset class="block border-0 p-0 m-0">
+						<fieldset class="order-2 sm:order-3 block border-0 p-0 m-0">
 							<legend class="mb-2 sm:mb-3 font-body font-medium text-base sm:text-lg xl:text-xl leading-6 sm:leading-7 text-text-body-default">
 								<span class="text-text-error-default">*</span> Giai đoạn thai kỳ
 							</legend>
-							<div class="flex flex-nowrap items-center gap-2 sm:gap-2.5 xl:gap-3 overflow-x-auto sm:overflow-visible scrollbar-none pb-1 sm:pb-0">
-								<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="preview-pregnancy" checked><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-surface-background-default px-4 sm:px-5 xl:px-6 h-11 sm:h-12 font-body text-sm sm:text-base font-medium cursor-pointer whitespace-nowrap peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đang mang thai</span></label>
-								<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="preview-pregnancy"><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-surface-background-default px-4 sm:px-5 xl:px-6 h-11 sm:h-12 font-body text-sm sm:text-base font-medium cursor-pointer whitespace-nowrap peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Chuẩn bị mang thai</span></label>
-								<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="preview-pregnancy"><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-surface-background-default px-4 sm:px-5 xl:px-6 h-11 sm:h-12 font-body text-sm sm:text-base font-medium cursor-pointer whitespace-nowrap peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đã sinh bé</span></label>
+							<div class="flex flex-col items-start gap-2.5 sm:flex-row sm:flex-nowrap sm:items-center sm:gap-2.5 xl:gap-3">
+								<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="preview-pregnancy" checked><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-surface-background-default px-6 sm:px-4 xl:px-6 h-11 sm:h-12 font-body text-sm sm:text-base font-medium cursor-pointer whitespace-nowrap peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đang mang thai</span></label>
+								<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="preview-pregnancy"><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-surface-background-default px-6 sm:px-4 xl:px-6 h-11 sm:h-12 font-body text-sm sm:text-base font-medium cursor-pointer whitespace-nowrap peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Chuẩn bị mang thai</span></label>
+								<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="preview-pregnancy"><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-surface-background-default px-6 sm:px-4 xl:px-6 h-11 sm:h-12 font-body text-sm sm:text-base font-medium cursor-pointer whitespace-nowrap peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đã sinh bé</span></label>
 							</div>
 						</fieldset>
-						<label class="flex flex-col gap-2 sm:gap-3 font-body font-medium text-base sm:text-lg xl:text-xl leading-6 sm:leading-7 text-text-body-default">
+						<label class="order-3 sm:order-2 flex flex-col gap-2 sm:gap-3 font-body font-medium text-base sm:text-lg xl:text-xl leading-6 sm:leading-7 text-text-body-default">
 							<span><span class="text-text-error-default">*</span> Dịch vụ quan tâm</span>
 							<span class="relative">
 								<select name="service" required class="w-full h-12 px-4 pr-10 appearance-none rounded-xl border border-border-disabled-default bg-surface-background-default text-base font-medium focus:border-border-primary-default focus:ring-1 focus:ring-border-primary-default focus:outline-none">
@@ -2018,7 +2018,7 @@
 								<img src="./assets/images/icons/contact-chevron-down.svg" class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2" alt="" aria-hidden="true">
 							</span>
 						</label>
-						<label class="flex flex-col gap-2 sm:gap-3 font-body font-medium text-base sm:text-lg xl:text-xl leading-6 sm:leading-7 text-text-body-default">
+						<label class="order-4 flex flex-col gap-2 sm:gap-3 font-body font-medium text-base sm:text-lg xl:text-xl leading-6 sm:leading-7 text-text-body-default">
 							<span><span class="text-text-error-default">*</span> Tuần thai</span>
 							<span class="relative">
 								<select name="gestational_age" required class="w-full h-12 px-4 pr-10 appearance-none rounded-xl border border-border-disabled-default bg-surface-background-default text-base font-medium focus:border-border-primary-default focus:ring-1 focus:ring-border-primary-default focus:outline-none">
@@ -2044,11 +2044,11 @@
 								<img src="./assets/images/icons/contact-chevron-down.svg" class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2" alt="" aria-hidden="true">
 							</span>
 						</label>
-						<label class="flex flex-col gap-2 sm:gap-3 font-body font-medium text-base sm:text-lg xl:text-xl leading-6 sm:leading-7 text-text-body-default">
+						<label class="order-5 flex flex-col gap-2 sm:gap-3 font-body font-medium text-base sm:text-lg xl:text-xl leading-6 sm:leading-7 text-text-body-default">
 							<span>Ghi chú</span>
 							<textarea rows="2" placeholder="Cho chúng tôi biết thêm về nhu cầu của bạn!" class="w-full min-h-[58px] sm:min-h-[64px] px-4 py-2.5 rounded-xl border border-border-disabled-default bg-surface-background-default text-base font-medium placeholder:text-text-disabled-light focus:border-border-primary-default focus:ring-1 focus:ring-border-primary-default focus:outline-none resize-none leading-relaxed"></textarea>
 						</label>
-						<div class="pt-2 sm:pt-3">
+						<div class="order-6 pt-2 sm:pt-3">
 							<button type="button" class="vpc-button w-full sm:w-auto h-12 px-6 rounded-full bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default font-semibold text-base flex items-center justify-center transition-all cursor-pointer shadow-xs">Gửi yêu cầu tư vấn</button>
 						</div>
 					</form>

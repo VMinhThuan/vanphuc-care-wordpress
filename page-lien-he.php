@@ -91,7 +91,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 							<input type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
 							
 							<!-- Row 1: Họ và tên & Số điện thoại (2 columns on sm+ matching Figma) -->
-							<div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-4">
+							<div class="order-1 grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-4">
 								<!-- Họ và tên -->
 								<div class="flex flex-col gap-3">
 									<label class="font-body font-medium text-xl leading-7 text-text-body-default flex items-center gap-1">
@@ -117,20 +117,20 @@ $gestational_age_options = vpc_get_gestational_age_options();
 								</div>
 							</div>
 
-							<!-- Giai đoạn thai kỳ -->
-							<fieldset class="block border-0 p-0 m-0">
+							<!-- Giai đoạn thai kỳ (Mobile: order-2 trên Dịch vụ quan tâm, Web: sm:order-3 dưới Dịch vụ quan tâm) -->
+							<fieldset class="order-2 sm:order-3 block border-0 p-0 m-0">
 								<legend class="mb-3 font-body font-medium text-xl leading-7 text-text-body-default flex items-center gap-1">
 									<span class="text-text-error-default">*</span> Giai đoạn thai kỳ
 								</legend>
-								<div class="flex flex-nowrap items-center gap-2 sm:gap-2.5 xl:gap-3 overflow-x-auto sm:overflow-visible scrollbar-none pb-1 sm:pb-0" role="radiogroup" aria-label="Giai đoạn thai kỳ">
-									<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="dang-mang-thai" checked required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 sm:px-5 xl:px-6 h-11 sm:h-12 font-body text-sm sm:text-base font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đang mang thai</span></label>
-									<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="chuan-bi-mang-thai" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 sm:px-5 xl:px-6 h-11 sm:h-12 font-body text-sm sm:text-base font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Chuẩn bị mang thai</span></label>
-									<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="da-sinh-be" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 sm:px-5 xl:px-6 h-11 sm:h-12 font-body text-sm sm:text-base font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đã sinh bé</span></label>
+								<div class="flex flex-col items-start gap-2.5 sm:flex-row sm:flex-nowrap sm:items-center sm:gap-2.5 xl:gap-3" role="radiogroup" aria-label="Giai đoạn thai kỳ">
+									<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="dang-mang-thai" checked required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-6 sm:px-4 xl:px-6 h-11 sm:h-12 font-body text-sm sm:text-base font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đang mang thai</span></label>
+									<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="chuan-bi-mang-thai" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-6 sm:px-4 xl:px-6 h-11 sm:h-12 font-body text-sm sm:text-base font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Chuẩn bị mang thai</span></label>
+									<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="da-sinh-be" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-6 sm:px-4 xl:px-6 h-11 sm:h-12 font-body text-sm sm:text-base font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đã sinh bé</span></label>
 								</div>
 							</fieldset>
 
-							<!-- Dịch vụ quan tâm -->
-							<div class="flex flex-col gap-3">
+							<!-- Dịch vụ quan tâm (Mobile: order-3 dưới Giai đoạn thai kỳ, Web: sm:order-2 trên Giai đoạn thai kỳ) -->
+							<div class="order-3 sm:order-2 flex flex-col gap-3">
 								<label class="font-body font-medium text-xl leading-7 text-text-body-default flex items-center gap-1">
 									<span class="text-text-error-default">*</span> Dịch vụ quan tâm
 								</label>
@@ -150,7 +150,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 							</div>
 
 							<!-- Tuần thai -->
-							<div class="flex flex-col gap-3">
+							<div class="order-4 flex flex-col gap-3">
 								<label class="font-body font-medium text-xl leading-7 text-text-body-default flex items-center gap-1">
 									<span class="text-text-error-default">*</span> Tuần thai
 								</label>
@@ -168,7 +168,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 							</div>
 
 							<!-- Ghi chú (No asterisk matching Figma) -->
-							<div class="flex flex-col gap-3">
+							<div class="order-5 flex flex-col gap-3">
 								<label class="font-body font-medium text-xl leading-7 text-text-body-default">
 									Ghi chú
 								</label>
@@ -179,7 +179,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 							</div>
 
 							<!-- Submit Button: Pill button matching Figma -->
-							<div class="pt-0">
+							<div class="order-6 pt-0">
 								<button type="submit" class="vpc-button w-full xl:w-auto px-6 h-10 sm:h-12 bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default rounded-full flex items-center justify-center transition-all cursor-pointer font-body font-medium text-base">
 									Gửi yêu cầu tư vấn
 								</button>
