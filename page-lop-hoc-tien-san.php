@@ -14,6 +14,7 @@ get_header();
 
 $theme_uri = get_template_directory_uri();
 $image     = $theme_uri . '/assets/images/lop-hoc-tien-san/';
+$map_url   = 'https://www.google.com/maps/place/V%E1%BA%A1n+Ph%C3%BAc+Care/@21.0741276,105.8221623,1041m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135ab83e4098b37:0xb1b8897775e1ce60!8m2!3d21.0741276!4d105.8221623!16s%2Fg%2F11q2y0_pyw?entry=ttu&g_ep=EgoyMDI2MTAyMC4wIKXMDSoASAFQAw%3D%3D';
 
 // The supplied desktop and mobile Figma frames both include this section.
 $show_prenatal_video = true;
@@ -366,7 +367,10 @@ $show_prenatal_video = true;
 				</div>
 				<div class="prenatal-info-card__text">
 					<b>Tầng 1 - Trung tâm ở cữ Vạn Phúc Care</b>
-					<small>35B ngõ 399 Âu Cơ, Tây Hồ, Hà Nội <a href="https://maps.app.goo.gl/4WqoQBCA85gDo2q47" target="_blank" rel="noopener noreferrer" class="text-primary-500 hover:underline">Xem đường đi</a></small>
+					<small>
+						<span>35B ngõ 399 Âu Cơ, Tây Hồ, Hà Nội</span><br aria-hidden="true" />
+						<a href="<?php echo esc_url( $map_url ); ?>" target="_blank" rel="noopener noreferrer" class="prenatal-info-card__map-link">Xem đường đi</a>
+					</small>
 				</div>
 			</div>
 			</div>

@@ -19,6 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 
 $theme_uri               = get_template_directory_uri();
+$map_url                 = 'https://www.google.com/maps/place/V%E1%BA%A1n+Ph%C3%BAc+Care/@21.0741276,105.8221623,1041m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135ab83e4098b37:0xb1b8897775e1ce60!8m2!3d21.0741276!4d105.8221623!16s%2Fg%2F11q2y0_pyw?entry=ttu&g_ep=EgoyMDI2MTAyMC4wIKXMDSoASAFQAw%3D%3D';
 $consultation_services   = vpc_get_consultation_services();
 $gestational_age_options = vpc_get_gestational_age_options();
 ?>
@@ -27,7 +28,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 	     1. CONTACT HERO BANNER (FIGMA: MOBILE 390x306 / DESKTOP 1440x458)
 	     ========================================================================= -->
 	<section class="vpc-contact-hero min-h-[306px] xl:min-h-[458px] w-full flex flex-col items-center justify-center px-4 sm:px-10 xl:px-20 py-10 xl:py-24 text-center relative border-b border-border-divider-default/30">
-		<div class="max-w-5xl mx-auto flex flex-col items-center gap-5 sm:gap-6">
+		<div class="w-full max-w-5xl mx-auto flex flex-col items-center gap-5 sm:gap-6">
 			
 			<!-- Badge: Rounded pill matching Figma SVG (Mobile 317x34px, Desktop 416x42px) -->
 			<div class="vpc-contact-badge shadow-xs">
@@ -48,7 +49,8 @@ $gestational_age_options = vpc_get_gestational_age_options();
 
 			<!-- Subtitle: Manrope 16px/24px mobile, 16px/24px desktop matching Figma -->
 			<p class="vpc-contact-hero-desc">
-				Mỗi hành trình làm mẹ đều cần một người đồng hành. Chúng tôi luôn sẵn sàng lắng nghe và sẻ chia cùng bạn.
+				Mỗi hành trình làm mẹ đều cần một người đồng hành.<br class="vpc-contact-hero-desc-break" aria-hidden="true">
+				Chúng tôi luôn sẵn sàng lắng nghe và sẻ chia cùng bạn.
 			</p>
 
 		</div>
@@ -219,7 +221,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 									<p class="font-body text-base font-medium text-text-body-muted leading-6">
 										35B ngõ 399 Âu Cơ, Tây Hồ, Hà Nội
 									</p>
-									<a href="https://maps.app.goo.gl/4WqoQBCA85gDo2q47" 
+					<a href="<?php echo esc_url( $map_url ); ?>"
 									   target="_blank" 
 									   rel="noopener noreferrer" 
 									   class="font-body text-base font-medium text-text-body-muted hover:text-text-link-hover hover:underline inline-block">
@@ -247,12 +249,12 @@ $gestational_age_options = vpc_get_gestational_age_options();
 
 						<!-- Map Embed Container with Google Map Preview -->
 						<div class="bg-surface-background-default rounded-xl p-4 w-full flex flex-col gap-3 items-center">
-							<div class="w-full h-[150px] sm:h-auto sm:aspect-[478/258] overflow-hidden rounded-xl">
+							<a href="<?php echo esc_url( $map_url ); ?>" target="_blank" rel="noopener noreferrer" aria-label="Mở bản đồ Vạn Phúc Care trên Google Maps" class="block w-full h-[150px] sm:h-auto sm:aspect-[478/258] overflow-hidden rounded-xl">
 								<img src="<?php echo esc_url( $theme_uri . '/assets/images/contact-map-figma.png' ); ?>" alt="Bản đồ chỉ đường Trung Tâm Ở Cữ Vạn Phúc Care" class="w-full h-full object-cover rounded-xl" loading="lazy">
-							</div>
+							</a>
 							
 							<div class="text-center w-full">
-								<a href="https://maps.app.goo.gl/4WqoQBCA85gDo2q47" 
+								<a href="<?php echo esc_url( $map_url ); ?>"
 								   target="_blank" 
 								   rel="noopener noreferrer" 
 								   class="font-body text-xs font-normal text-text-body-muted hover:text-text-link-hover transition-colors leading-4 block">

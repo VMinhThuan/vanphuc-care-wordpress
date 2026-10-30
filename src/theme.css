@@ -508,6 +508,13 @@
     line-height: 28px;
   }
   .prenatal-info-card__text small { font: inherit; }
+  .prenatal-info-card__map-link {
+    color: var(--color-text-body-muted);
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-underline-position: from-font;
+  }
+  .prenatal-info-card__map-link:hover { color: var(--color-text-link-hover); }
   .prenatal-form-wrap h2 { margin: 0 0 24px; font: 600 48px/64px var(--font-heading); color: var(--color-text-heading-primary-default); text-align: center; font-variation-settings: "SOFT" 0, "WONK" 1; }
   .prenatal-form { display: grid; gap: 20px; padding: 32px 24px; border: 1px solid var(--color-border-disabled-default); border-radius: 24px; background: var(--color-surface-background-default); }
   .prenatal-form__row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; width: 100%; }
@@ -786,10 +793,14 @@
     line-height: 24px;
     color: var(--color-text-body-default);
     text-align: center;
+    width: 100%;
     max-width: 350px;
     margin-left: auto;
     margin-right: auto;
   }
+  /* Desktop follows the Figma sentence break; mobile flows continuously so
+     words are not stranded on their own line at narrow widths. */
+  .vpc-contact-hero-desc-break { display: none; }
   @media (min-width: 640px) {
     .vpc-contact-hero-desc {
       font-weight: 500;
@@ -797,6 +808,7 @@
     }
   }
   @media (min-width: 1280px) {
+    .vpc-contact-hero-desc-break { display: inline; }
     .vpc-contact-hero-desc {
       font-size: 1rem;
       max-width: 1280px;
