@@ -398,10 +398,6 @@ $show_prenatal_video = true;
 								<input type="radio" name="gestational_age" value="dang-mang-thai" checked class="sr-only" />
 								<span>Đang mang thai</span>
 							</label>
-							<label class="prenatal-chip">
-								<input type="radio" name="gestational_age" value="chuan-bi-mang-thai" class="sr-only" />
-								<span>Chuẩn bị mang thai</span>
-							</label>
 						</div>
 					</fieldset>
 				</div>

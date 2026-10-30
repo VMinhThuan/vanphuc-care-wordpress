@@ -63,7 +63,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<button data-open-modal="vpc-consultation-modal" 
 			        type="button"
 				class="vpc-button vpc-button-lg hidden xl:inline-flex items-center justify-center h-14 px-8 text-base font-semibold rounded-full bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-border-focus-default">
-				<span>Đăng ký tư vấn</span>
+				<span>Tư vấn miễn phí</span>
 			</button>
 
 			<!-- Mobile Hamburger Toggle (< 1280px) - Chỉ icon menu 24px, bỏ viền, bo góc, nền hover -->
@@ -130,7 +130,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<!-- Vùng nút đúng Figma: CTA và hotline (Size md: h-12 / 48px, padding 24 12) -->
 		<div class="pt-0 px-5 pb-8 flex flex-col gap-3">
 			<button data-open-modal="vpc-consultation-modal" type="button" class="vpc-button vpc-button-md w-full h-12 px-6 py-3 rounded-full bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default font-medium text-base flex items-center justify-center transition-colors">
-				<span>Đăng ký tư vấn</span>
+				<span>Tư vấn miễn phí</span>
 			</button>
 		<a href="tel:02463296698" class="vpc-button vpc-button-md w-full h-12 px-6 py-3 border border-border-primary-default rounded-full flex items-center justify-center gap-2 text-text-link-default hover:bg-primary-100/50 transition-colors">
 				<svg class="w-6 h-6 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2">
@@ -150,7 +150,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<span>Gọi ngay</span>
 		</a>
 		<button data-open-modal="vpc-consultation-modal" type="button" class="vpc-button vpc-button-md flex-1 h-12 px-6 py-3 flex items-center justify-center rounded-full bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default font-medium text-base transition-colors">
-			<span>Đăng ký tư vấn</span>
+			<span>Tư vấn miễn phí</span>
 		</button>
 	</div>
 </header>
