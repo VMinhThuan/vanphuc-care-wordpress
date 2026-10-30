@@ -1978,7 +1978,7 @@
 							<img src="./assets/images/icons/heart-solid.svg" width="24" height="24" class="w-6 h-6 shrink-0" alt="" aria-hidden="true">
 							<span class="font-body font-semibold text-sm sm:text-base text-text-caption-dark">Chúng tôi luôn lắng nghe</span>
 						</div>
-						<h2 class="font-heading font-semibold text-h1-mobile xl:text-h1 text-text-heading-primary-default text-center xl:text-left tracking-tight">Vạn Phúc Care Đồng<br class="sm:hidden"> Hành Cùng Bạn</h2>
+						<h2 class="font-heading font-semibold text-h1-mobile xl:text-h1 xl:leading-[64px] text-text-heading-primary-default text-center xl:text-left tracking-tight">Vạn Phúc Care Đồng<br class="sm:hidden"> Hành Cùng Bạn</h2>
 						<p class="font-body text-sm sm:text-base text-text-body-muted text-center xl:text-left leading-relaxed max-w-[340px] sm:max-w-none mx-auto xl:mx-0">Để lại lời nhắn, đội ngũ Vạn Phúc Care sẽ tư vấn dịch vụ phù hợp với nhu cầu của mẹ và bé.</p>
 					</div>
 					<form id="vpc-contact-preview-form" class="w-full bg-surface-background-default border border-border-disabled-default rounded-3xl p-4 sm:p-6 xl:p-8 flex flex-col gap-4 sm:gap-5 shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
@@ -1998,6 +1998,7 @@
 							</legend>
 							<div class="flex flex-col items-start gap-2.5 sm:flex-row sm:flex-wrap sm:gap-2">
 								<label><input class="peer sr-only" type="radio" name="preview-pregnancy" checked><span class="inline-flex items-center justify-center rounded-full border border-border-primary-lighter sm:border-border-primary-default bg-surface-background-default px-6 py-2.5 sm:py-3 font-body text-sm sm:text-base font-medium cursor-pointer peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đang mang thai</span></label>
+								<label><input class="peer sr-only" type="radio" name="preview-pregnancy"><span class="inline-flex items-center justify-center rounded-full border border-border-primary-lighter sm:border-border-primary-default bg-surface-background-default px-6 py-2.5 sm:py-3 font-body text-sm sm:text-base font-medium cursor-pointer peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Chuẩn bị mang thai</span></label>
 								<label><input class="peer sr-only" type="radio" name="preview-pregnancy"><span class="inline-flex items-center justify-center rounded-full border border-border-primary-lighter sm:border-border-primary-default bg-surface-background-default px-6 py-2.5 sm:py-3 font-body text-sm sm:text-base font-medium cursor-pointer peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đã sinh bé</span></label>
 							</div>
 						</fieldset>
@@ -2419,6 +2420,12 @@ if (new URLSearchParams(window.location.search).get('preview') === 'contact') {
 	document.getElementById('contact-preview')?.classList.remove('hidden');
 	document.getElementById('mobile-sticky-cta')?.classList.add('hidden');
 	document.querySelector('aside[aria-label="Kênh liên hệ nhanh"]')?.classList.add('hidden');
+
+	// Khi ở trang xem trước liên hệ, không hiển thị màu xanh active cho Trang chủ trên navbar
+	document.querySelectorAll('.vpc-nav-menu a, #mobile-menu-drawer nav a').forEach(function(link) {
+		link.classList.remove('text-text-nav-active');
+		link.classList.add('text-text-nav-default');
+	});
 }
 </script>
 <script src="./assets/js/main.js"></script>
