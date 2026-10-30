@@ -524,6 +524,7 @@
   .prenatal-form input:not([type=radio]), .prenatal-form select, .prenatal-form textarea { width: 100%; border: 1px solid var(--color-border-disabled-default); border-radius: 12px; padding: 12px 16px; color: var(--color-text-body-default); background: var(--color-surface-field-default); font: 500 16px/24px var(--font-body); outline: none; }
   .prenatal-form textarea { min-height: 80px; resize: vertical; }
   .prenatal-form fieldset { border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+  .prenatal-form fieldset legend { margin-bottom: 4px; }
   .prenatal-select-wrap { position: relative; width: 100%; }
   .prenatal-select-wrap select { appearance: none; background: var(--color-surface-field-default); padding-right: 40px; cursor: pointer; }
   .prenatal-select-wrap::after { content: ""; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); width: 20px; height: 12px; pointer-events: none; -webkit-mask: url('data:image/svg+xml;utf8,<svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L10 10L19 1" stroke="black" stroke-width="2" stroke-linecap="round"/></svg>') no-repeat center / contain; mask: url('data:image/svg+xml;utf8,<svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L10 10L19 1" stroke="black" stroke-width="2" stroke-linecap="round"/></svg>') no-repeat center / contain; background-color: var(--color-text-body-default); }
