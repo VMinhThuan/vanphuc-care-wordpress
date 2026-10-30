@@ -89,11 +89,20 @@ function vpc_handle_consultation_submission() {
 	}
 
 	if ( ! empty( $recipient ) ) {
+		$pregnancy_stage = isset( $_POST['pregnancy_stage'] ) ? sanitize_text_field( wp_unslash( $_POST['pregnancy_stage'] ) ) : '';
+		$pregnancy_stages = array(
+			'dang-mang-thai'     => 'Đang mang thai',
+			'chuan-bi-mang-thai' => 'Chuẩn bị mang thai',
+			'da-sinh-be'         => 'Đã sinh bé',
+		);
+		$stage_line = ! empty( $pregnancy_stages[ $pregnancy_stage ] ) ? "Giai đoạn thai kỳ: " . $pregnancy_stages[ $pregnancy_stage ] . "\n" : '';
+
 		$subject = '[Vạn Phúc Care] Yêu cầu tư vấn mới từ ' . $full_name;
 		$body    = "Yêu cầu tư vấn mới từ website:\n\n" .
 		           "Họ và tên: " . $full_name . "\n" .
 		           "Số điện thoại: " . $phone . "\n" .
 		           "Dịch vụ quan tâm: " . $services[ $service ] . "\n" .
+		           $stage_line .
 		           "Tuần thai: " . $gestational_age_label . "\n" .
 		           "Nội dung/Câu hỏi: " . ( $question ? $question : 'Không có' ) . "\n" .
 		           "Thời gian gửi: " . current_time( 'd/m/Y H:i:s' ) . "\n";

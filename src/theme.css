@@ -976,8 +976,9 @@
   }
   .vpc-nav-menu > li > a:hover,
   .vpc-nav-menu > li.current-menu-item > a,
-  .vpc-nav-menu > li.current_page_item > a {
-    color: var(--color-text-link-default);
+  .vpc-nav-menu > li.current_page_item > a,
+  .vpc-nav-menu > li > a.text-text-nav-active {
+    color: var(--color-text-nav-active);
   }
 
   /* Policy Styles (Chính sách, Điều khoản, Quy trình khiếu nại) */

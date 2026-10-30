@@ -45,15 +45,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 
 		<!-- Navigation Menu (Center) - Matches Figma: 760px width, font-medium 500, py-0 px-1 -->
+		<?php
+		$is_home        = is_front_page() || is_home();
+		$is_prenatal    = is_page( 'lop-hoc-tien-san' ) || is_singular() && get_post_field( 'post_name' ) === 'lop-hoc-tien-san';
+		$nav_active     = 'py-0 px-1 text-text-nav-active transition-colors';
+		$nav_default    = 'py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors';
+		?>
 		<nav class="hidden xl:flex items-center justify-center flex-1 max-w-[760px] mx-auto" aria-label="<?php esc_attr_e( 'Primary navigation', 'vanphuccare' ); ?>">
 			<ul class="vpc-nav-menu flex items-center justify-center gap-8 text-base font-semibold">
-				<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="py-0 px-1 text-text-nav-active transition-colors">Trang chủ</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/gioi-thieu' ) ); ?>" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Giới thiệu</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/#trung-tam-o-cu' ) ); ?>" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Ở cữ</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/#bao-mau-tai-nha' ) ); ?>" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Bảo mẫu</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/#bao-mau-tai-nha' ) ); ?>" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Dịch vụ</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/lop-hoc-tien-san/' ) ); ?>" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Lớp học tiền sản</a></li>
-				<li><a href="<?php echo esc_url( home_url( '/#kien-thuc-nuoi-con' ) ); ?>" class="py-0 px-1 text-text-nav-default hover:text-text-nav-hover transition-colors">Kiến thức</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="<?php echo $is_home ? $nav_active : $nav_default; ?>">Trang chủ</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/gioi-thieu' ) ); ?>" class="<?php echo $nav_default; ?>">Giới thiệu</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/#trung-tam-o-cu' ) ); ?>" class="<?php echo $nav_default; ?>">Ở cữ</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/#bao-mau-tai-nha' ) ); ?>" class="<?php echo $nav_default; ?>">Bảo mẫu</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/#bao-mau-tai-nha' ) ); ?>" class="<?php echo $nav_default; ?>">Dịch vụ</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/lop-hoc-tien-san/' ) ); ?>" class="<?php echo $is_prenatal ? $nav_active : $nav_default; ?>">Lớp học tiền sản</a></li>
+				<li><a href="<?php echo esc_url( home_url( '/#kien-thuc-nuoi-con' ) ); ?>" class="<?php echo $nav_default; ?>">Kiến thức</a></li>
 			</ul>
 		</nav>
 
@@ -96,33 +102,38 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<!-- Danh sách mục: pt-2 px-5 pb-0, mỗi mục cao 64px (h-16 py-4), text-xl font-medium text-text-nav-default có border-b và chevron phải 24px -->
 			<nav class="pt-2 px-5 pb-0 flex flex-col" aria-label="<?php esc_attr_e( 'Mobile navigation', 'vanphuccare' ); ?>">
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="h-16 py-4 flex items-center justify-between border-b border-border-divider-default text-xl font-medium text-text-nav-active">
+				<?php
+				$mob_active  = 'h-16 py-4 flex items-center justify-between border-b border-border-divider-default text-xl font-medium text-text-nav-active';
+				$mob_default = 'h-16 py-4 flex items-center justify-between border-b border-border-divider-default text-xl font-medium text-text-nav-default hover:text-text-nav-hover';
+				$chevron     = '<svg class="w-6 h-6 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>';
+				?>
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="<?php echo $is_home ? $mob_active : $mob_default; ?>">
 					<span>Trang chủ</span>
-					<svg class="w-6 h-6 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+					<?php echo $chevron; ?>
 				</a>
-				<a href="<?php echo esc_url( home_url( '/gioi-thieu' ) ); ?>" class="h-16 py-4 flex items-center justify-between border-b border-border-divider-default text-xl font-medium text-text-nav-default hover:text-text-nav-hover">
+				<a href="<?php echo esc_url( home_url( '/gioi-thieu' ) ); ?>" class="<?php echo $mob_default; ?>">
 					<span>Giới thiệu</span>
-					<svg class="w-6 h-6 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+					<?php echo $chevron; ?>
 				</a>
-				<a href="<?php echo esc_url( home_url( '/#trung-tam-o-cu' ) ); ?>" class="h-16 py-4 flex items-center justify-between border-b border-border-divider-default text-xl font-medium text-text-nav-default hover:text-text-nav-hover">
+				<a href="<?php echo esc_url( home_url( '/#trung-tam-o-cu' ) ); ?>" class="<?php echo $mob_default; ?>">
 					<span>Ở cữ</span>
-					<svg class="w-6 h-6 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+					<?php echo $chevron; ?>
 				</a>
-				<a href="<?php echo esc_url( home_url( '/#bao-mau-tai-nha' ) ); ?>" class="h-16 py-4 flex items-center justify-between border-b border-border-divider-default text-xl font-medium text-text-nav-default hover:text-text-nav-hover">
+				<a href="<?php echo esc_url( home_url( '/#bao-mau-tai-nha' ) ); ?>" class="<?php echo $mob_default; ?>">
 					<span>Bảo mẫu</span>
-					<svg class="w-6 h-6 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+					<?php echo $chevron; ?>
 				</a>
-				<a href="<?php echo esc_url( home_url( '/#bao-mau-tai-nha' ) ); ?>" class="h-16 py-4 flex items-center justify-between border-b border-border-divider-default text-xl font-medium text-text-nav-default hover:text-text-nav-hover">
+				<a href="<?php echo esc_url( home_url( '/#bao-mau-tai-nha' ) ); ?>" class="<?php echo $mob_default; ?>">
 					<span>Dịch vụ</span>
-					<svg class="w-6 h-6 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+					<?php echo $chevron; ?>
 				</a>
-				<a href="<?php echo esc_url( home_url( '/lop-hoc-tien-san/' ) ); ?>" class="h-16 py-4 flex items-center justify-between border-b border-border-divider-default text-xl font-medium text-text-nav-default hover:text-text-nav-hover">
+				<a href="<?php echo esc_url( home_url( '/lop-hoc-tien-san/' ) ); ?>" class="<?php echo $is_prenatal ? $mob_active : $mob_default; ?>">
 					<span>Lớp học tiền sản</span>
-					<svg class="w-6 h-6 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+					<?php echo $chevron; ?>
 				</a>
-				<a href="<?php echo esc_url( home_url( '/#kien-thuc-nuoi-con' ) ); ?>" class="h-16 py-4 flex items-center justify-between border-b border-border-divider-default text-xl font-medium text-text-nav-default hover:text-text-nav-hover">
+				<a href="<?php echo esc_url( home_url( '/#kien-thuc-nuoi-con' ) ); ?>" class="<?php echo $mob_default; ?>">
 					<span>Kiến thức</span>
-					<svg class="w-6 h-6 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+					<?php echo $chevron; ?>
 				</a>
 			</nav>
 		</div>

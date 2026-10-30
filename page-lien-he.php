@@ -75,7 +75,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 							</span>
 						</div>
 						
-						<h2 class="font-heading font-semibold text-[32px] leading-[36px] xl:text-h1 text-text-heading-primary-default text-center xl:text-left tracking-tight">
+						<h2 class="font-heading font-semibold text-h1-mobile xl:text-h1 xl:leading-[64px] text-text-heading-primary-default text-center xl:text-left tracking-tight">
 							Vạn Phúc Care Đồng<br class="sm:hidden"> Hành Cùng Bạn
 						</h2>
 						
@@ -144,6 +144,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 								</legend>
 								<div class="flex flex-wrap gap-2" role="radiogroup" aria-label="Giai đoạn thai kỳ">
 									<label class="cursor-pointer"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="dang-mang-thai" checked required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-6 py-3 font-body text-base font-medium text-text-body-default cursor-pointer transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đang mang thai</span></label>
+									<label class="cursor-pointer"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="chuan-bi-mang-thai" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-6 py-3 font-body text-base font-medium text-text-body-default cursor-pointer transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Chuẩn bị mang thai</span></label>
 									<label class="cursor-pointer"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="da-sinh-be" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-6 py-3 font-body text-base font-medium text-text-body-default cursor-pointer transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đã sinh bé</span></label>
 								</div>
 							</fieldset>
