@@ -29,4 +29,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		}
 		?>
 	</div>
+
+	<?php if ( is_singular() ) : ?>
+		<?php wp_link_pages( array( 'before' => '<nav class="page-links">' . esc_html__( 'Trang:', 'vanphuccare' ), 'after' => '</nav>' ) ); ?>
+	<?php endif; ?>
 </article>

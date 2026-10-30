@@ -117,6 +117,19 @@ $gestational_age_options = vpc_get_gestational_age_options();
 								</div>
 							</div>
 
+							<!-- Email -->
+							<div class="order-1 flex flex-col gap-3">
+								<label class="font-body font-medium text-xl leading-7 text-text-body-default flex items-center gap-1">
+									<span class="text-text-error-default">*</span> Email
+								</label>
+								<input type="email"
+								       name="email"
+								       required
+								       autocomplete="email"
+								       placeholder="email@example.com"
+								       class="w-full h-12 px-3 sm:px-4 rounded-xl border border-border-disabled-default bg-surface-background-default text-text-body-default placeholder:text-text-disabled-light font-body font-medium text-base focus:border-border-primary-default focus:ring-1 focus:ring-border-primary-default focus:outline-none transition-all">
+							</div>
+
 							<!-- Giai đoạn thai kỳ (Mobile: order-2 trên Dịch vụ quan tâm, Web: sm:order-3 dưới Dịch vụ quan tâm) -->
 							<fieldset class="order-2 sm:order-3 block border-0 p-0 m-0">
 								<legend class="mb-3 font-body font-medium text-xl leading-7 text-text-body-default flex items-center gap-1">

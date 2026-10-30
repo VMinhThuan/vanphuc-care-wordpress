@@ -207,6 +207,7 @@ try {
   const modalForm = page.locator('#vpc-consultation-modal form');
   await modalForm.locator('input[name="full_name"], input[name="customer_name"]').first().fill('Nguyễn Như Linh');
   await modalForm.locator('input[name="phone"], input[name="customer_phone"]').first().fill('0345678999');
+  await modalForm.locator('input[name="email"]').fill('linh@example.test');
   await modalForm.locator('select[name="gestational_age"]').selectOption('28-40-tuan');
 
   const submitButton = modalForm.locator('button[type="submit"]');

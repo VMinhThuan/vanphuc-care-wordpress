@@ -391,15 +391,19 @@ $show_prenatal_video = true;
 					</div>
 				</div>
 				<div class="prenatal-form__field">
+					<label for="prenatal-email"><em>*</em> Email</label>
+					<input id="prenatal-email" name="email" required type="email" autocomplete="email" placeholder="email@example.com" />
+				</div>
+				<div class="prenatal-form__field">
 					<fieldset>
 						<legend><em>*</em> Giai đoạn thai kỳ</legend>
 						<div class="prenatal-chips">
 							<label class="prenatal-chip is-active">
-								<input type="radio" name="gestational_age" value="dang-mang-thai" checked class="sr-only" />
+								<input type="radio" name="pregnancy_stage" value="dang-mang-thai" checked class="sr-only" />
 								<span>Đang mang thai</span>
 							</label>
 							<label class="prenatal-chip">
-								<input type="radio" name="gestational_age" value="chuan-bi-mang-thai" class="sr-only" />
+								<input type="radio" name="pregnancy_stage" value="chuan-bi-mang-thai" class="sr-only" />
 								<span>Chuẩn bị mang thai</span>
 							</label>
 						</div>
@@ -410,9 +414,9 @@ $show_prenatal_video = true;
 					<div class="prenatal-select-wrap">
 						<select id="prenatal-stage-select" name="stage_choice" required>
 							<option value="" disabled selected>Chọn giai đoạn</option>
-							<option value="duoi-12-tuan">Dưới 12 tuần</option>
+							<option value="1-12-tuan">Dưới 12 tuần</option>
 							<option value="13-27-tuan">13 - 27 tuần</option>
-							<option value="tu-28-tuan">Từ 28 tuần trở lên</option>
+							<option value="28-40-tuan">Từ 28 tuần trở lên</option>
 						</select>
 					</div>
 				</div>

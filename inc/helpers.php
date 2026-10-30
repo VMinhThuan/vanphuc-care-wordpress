@@ -60,14 +60,47 @@ function vpc_get_gestational_age_options() {
 }
 
 /**
- * Resolves the consultation lead recipient from one configurable location.
- * Set the `vpc_consultation_recipient` option or filter this value when the
- * confirmed CRM/email destination is available; no recipient is hard-coded.
+ * Validates the configured external lead receiver. Lead delivery must never
+ * fall back to WordPress email or post meta: that risks creating a second,
+ * unverified data store for sensitive customer information.
  *
  * @return string
  */
-function vpc_get_consultation_recipient() {
-	$recipient = get_theme_mod( 'vpc_consultation_recipient', get_option( 'vpc_consultation_recipient', get_option( 'admin_email' ) ) );
+function vpc_sanitize_consultation_api_endpoint( $endpoint ) {
+	$endpoint = esc_url_raw( trim( (string) $endpoint ) );
+	$parts    = wp_parse_url( $endpoint );
 
-	return apply_filters( 'vpc_consultation_recipient', sanitize_email( $recipient ) );
+	if ( empty( $parts['host'] ) || empty( $parts['scheme'] ) || 'https' !== strtolower( $parts['scheme'] ) ) {
+		return '';
+	}
+
+	return $endpoint;
+}
+
+/**
+ * Gets the configured external HTTPS endpoint for consultation leads.
+ *
+ * @return string
+ */
+function vpc_get_consultation_api_endpoint() {
+	$endpoint = get_theme_mod( 'vpc_consultation_api_endpoint', get_option( 'vpc_consultation_api_endpoint', '' ) );
+
+	return apply_filters( 'vpc_consultation_api_endpoint', vpc_sanitize_consultation_api_endpoint( $endpoint ) );
+}
+
+/**
+ * Normalizes and validates Vietnamese 10-digit mobile numbers.
+ *
+ * @param string $phone Submitted phone number.
+ * @return string Empty when invalid; normalized number otherwise.
+ */
+function vpc_normalize_vietnamese_phone( $phone ) {
+	$phone = preg_replace( '/[^0-9+]/', '', (string) $phone );
+	if ( 0 === strpos( $phone, '+84' ) ) {
+		$phone = '0' . substr( $phone, 3 );
+	} elseif ( 0 === strpos( $phone, '84' ) && 11 === strlen( $phone ) ) {
+		$phone = '0' . substr( $phone, 2 );
+	}
+
+	return preg_match( '/^0[35789][0-9]{8}$/', $phone ) ? $phone : '';
 }

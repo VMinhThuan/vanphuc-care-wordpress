@@ -305,6 +305,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		form.addEventListener('submit', function (e) {
 			e.preventDefault();
+			const phoneField = form.querySelector('input[name="phone"], input[name="customer_phone"]');
+			if (phoneField) {
+				const normalizedPhone = phoneField.value.replace(/[\s().-]/g, '').replace(/^\+84/, '0').replace(/^84(?=\d{9}$)/, '0');
+				if (!/^0[35789]\d{8}$/.test(normalizedPhone)) {
+					phoneField.setCustomValidity('Vui lòng nhập số điện thoại di động Việt Nam gồm 10 chữ số.');
+					phoneField.reportValidity();
+					return;
+				}
+				phoneField.setCustomValidity('');
+			}
 
 			const submitBtn = form.querySelector('button[type="submit"]');
 			const originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
@@ -321,6 +331,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 
 			function onSubmissionSuccess(msg) {
+				try { sessionStorage.removeItem('vpcConsultationRetry'); } catch (ignore) {}
 				form.reset();
 				// Reset custom select label if exists
 				const labelSpan = form.querySelector('[data-select-label]');
@@ -367,6 +378,9 @@ document.addEventListener('DOMContentLoaded', function () {
 				})
 				.catch(function (err) {
 					console.error('Submission error:', err);
+					// Never store lead fields in browser storage. This only retains a short-lived
+					// retry indicator so the visitor can resubmit the form themselves.
+					try { sessionStorage.setItem('vpcConsultationRetry', JSON.stringify({ formId: form.id || '', at: Date.now() })); } catch (ignore) {}
 					showStatus('Không thể kết nối đến máy chủ. Vui lòng thử lại sau ít phút!', true);
 				})
 				.finally(function () {

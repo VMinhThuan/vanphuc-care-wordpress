@@ -61,14 +61,14 @@ function vanphuccare_customize_contact_settings( $wp_customize ) {
 		'description' => 'Để trống nếu PO chưa xác nhận. Icon sẽ không điều hướng.',
 	) );
 
-	$wp_customize->add_setting( 'vpc_consultation_recipient', array(
-		'sanitize_callback' => 'sanitize_email',
+	$wp_customize->add_setting( 'vpc_consultation_api_endpoint', array(
+		'sanitize_callback' => 'vpc_sanitize_consultation_api_endpoint',
 	) );
-	$wp_customize->add_control( 'vpc_consultation_recipient', array(
-		'label'       => 'Email nhận lead tư vấn đã xác nhận',
+	$wp_customize->add_control( 'vpc_consultation_api_endpoint', array(
+		'label'       => 'HTTPS REST API nhận lead tư vấn',
 		'section'     => 'vpc_contact_settings',
-		'type'        => 'email',
-		'description' => 'Để trống để dùng email quản trị WordPress hiện tại.',
+		'type'        => 'url',
+		'description' => 'Bắt buộc dùng HTTPS. Theme chỉ chuyển lead đến endpoint này; không lưu lead vào WordPress hoặc thay thế bằng email.',
 	) );
 }
 add_action( 'customize_register', 'vanphuccare_customize_contact_settings' );

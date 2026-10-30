@@ -122,6 +122,19 @@ $services    = vpc_get_consultation_services();
 				?>
 			</div>
 
+			<div>
+				<?php
+				get_template_part( 'template-parts/components/form-input', null, [
+					'id'          => $modal_id . '-email',
+					'name'        => 'email',
+					'label'       => 'Email',
+					'type'        => 'email',
+					'placeholder' => 'email@example.com',
+					'required'    => true,
+				] );
+				?>
+			</div>
+
 			<!-- Row 2: Dịch vụ quan tâm (Custom Select Dropdown Figma Board 8/9) -->
 			<div>
 				<?php
