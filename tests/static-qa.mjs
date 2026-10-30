@@ -107,6 +107,27 @@ try {
     if (consoleErrors.length) failures.push(`${viewport.name}: console errors: ${consoleErrors.join(' | ')}`);
     if (failedLocalRequests.length) failures.push(`${viewport.name}: failed local requests: ${failedLocalRequests.join(', ')}`);
 
+    // The desktop header must remain a single row at the breakpoint. In
+    // particular, multi-word navigation labels must never wrap while loading.
+    if (viewport.width >= 1280) {
+      const headerLayout = await page.evaluate(() => {
+        const navLinks = Array.from(document.querySelectorAll('#site-header .vpc-nav-menu > li > a'));
+        const nav = document.querySelector('#site-header nav');
+        const cta = document.querySelector('#site-header [data-open-modal]');
+        const rows = new Set(navLinks.map((link) => Math.round(link.getBoundingClientRect().top)));
+
+        return {
+          hasWrappedLabel: navLinks.some((link) => link.getBoundingClientRect().height > 25),
+          rowCount: rows.size,
+          overlapsCta: Boolean(nav && cta && nav.getBoundingClientRect().right > cta.getBoundingClientRect().left),
+        };
+      });
+
+      if (headerLayout.hasWrappedLabel || headerLayout.rowCount !== 1 || headerLayout.overlapsCta) {
+        failures.push(`${viewport.name}: desktop header navigation wrapped or overlaps the CTA`);
+      }
+    }
+
     // Check Mobile navigation drawer on viewports < 1280
     if (viewport.width < 1280) {
       await page.locator('#mobile-menu-toggle').click();
