@@ -139,6 +139,15 @@ try {
     failures.push(`WP sections missing .vpc-section: ${sectionReport.missingVpcSection.join(', ')}`);
   }
 
+  // Knowledge cards must be backed by distinct WordPress post IDs.
+  const knowledgeCardIds = await page.locator('#kien-thuc-nuoi-con article[data-post-id]').evaluateAll((cards) => cards.map((card) => card.dataset.postId));
+  if (knowledgeCardIds.length > 3) {
+    failures.push(`WP knowledge cards: expected at most 3 cards, found ${knowledgeCardIds.length}`);
+  }
+  if (knowledgeCardIds.length !== new Set(knowledgeCardIds).size) {
+    failures.push(`WP knowledge cards: duplicate post IDs rendered: ${knowledgeCardIds.join(', ')}`);
+  }
+
   // B. Validate CTA Button Heights (Desktop: 48px body size md, 56px header CTA size lg) in WordPress Runtime
   const buttonHeightReport = await page.evaluate(() => {
     const buttons = Array.from(document.querySelectorAll('.vpc-button'));

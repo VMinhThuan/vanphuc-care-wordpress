@@ -57,6 +57,22 @@ const baseUrl = `http://127.0.0.1:${serverAddress.port}/index.html`;
 const browser = await chromium.launch({ headless: true });
 const failures = [];
 const staticMarkup = readFileSync(path.join(projectRoot, 'index.html'), 'utf8');
+const frontPageSource = readFileSync(path.join(projectRoot, 'front-page.php'), 'utf8');
+const knowledgeStart = frontPageSource.indexOf('KIẾN THỨC NUÔI CON');
+const knowledgeEnd = frontPageSource.indexOf('get_footer();', knowledgeStart);
+const knowledgeSectionSource = frontPageSource.slice(knowledgeStart, knowledgeEnd);
+
+// Regression guard: homepage knowledge cards must remain CMS-driven and must
+// never regress to the old duplicated hardcoded cards.
+if (!knowledgeSectionSource.includes("'category_name'       => 'kien-thuc'")) {
+  failures.push('knowledge cards: missing existing kien-thuc category query');
+}
+if (!knowledgeSectionSource.includes('data-post-id')) {
+  failures.push('knowledge cards: missing post ID marker for uniqueness checks');
+}
+if (/Sữa Trưởng Thành|Tên tác giả|12\/09\/2024/.test(knowledgeSectionSource)) {
+  failures.push('knowledge cards: duplicated hardcoded post metadata remains in source');
+}
 
 // 1. Audit static asset references
 for (const attribute of staticMarkup.matchAll(/(?:src|srcset)="([^"]+)"/g)) {
