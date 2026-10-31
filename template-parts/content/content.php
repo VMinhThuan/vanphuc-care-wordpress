@@ -20,6 +20,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
 	</header>
 
+	<?php if ( has_post_thumbnail() ) : ?>
+		<div class="entry-thumbnail">
+			<?php
+			if ( is_singular() ) {
+				the_post_thumbnail( 'large', array( 'loading' => 'eager' ) );
+			} else {
+				printf( '<a href="%s" rel="bookmark">', esc_url( get_permalink() ) );
+				the_post_thumbnail( 'medium_large' );
+				echo '</a>';
+			}
+			?>
+		</div>
+	<?php endif; ?>
+
 	<div class="entry-content">
 		<?php
 		if ( is_singular() ) {

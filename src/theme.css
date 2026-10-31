@@ -904,6 +904,11 @@
       order: 7;
     }
   }
+  @media (min-width: 64rem) {
+    #gioi-thieu .intro-visual > div {
+      margin-left: 67px;
+    }
+  }
   @media (min-width: 1280px) {
     .vpc-container {
       padding-left: 5rem; /* 80px desktop margin */
@@ -956,6 +961,7 @@
     list-style: none;
     margin: 0;
     padding: 0;
+	gap: 2rem;
   }
   .vpc-nav-menu > li {
     flex: 0 0 auto;
@@ -979,6 +985,193 @@
   .vpc-nav-menu > li.current_page_item > a,
   .vpc-nav-menu > li > a.text-text-nav-active {
     color: var(--color-text-nav-active);
+  }
+
+  .vpc-mobile-nav {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .vpc-mobile-nav > li {
+    border-bottom: 1px solid var(--color-border-divider-default);
+    list-style: none;
+  }
+  .vpc-mobile-nav > li > a {
+    display: flex;
+    align-items: center;
+    min-height: 4rem;
+    padding: 1rem 0;
+    color: var(--color-text-nav-default);
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.75rem;
+    text-decoration: none;
+  }
+  .vpc-mobile-nav > li.current-menu-item > a,
+  .vpc-mobile-nav > li.current_page_item > a {
+    color: var(--color-text-nav-active);
+  }
+
+  /* Submenu Dropdowns */
+  .vpc-nav-menu > li {
+    position: relative;
+  }
+  .vpc-nav-menu .sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 220px;
+    background: #ffffff;
+    border: 1px solid var(--color-border-divider-default);
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 0;
+    margin: 0;
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: all 0.2s ease;
+    z-index: 50;
+  }
+  .vpc-nav-menu li:hover > .sub-menu,
+  .vpc-nav-menu li:focus-within > .sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .vpc-nav-menu .sub-menu li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .vpc-nav-menu .sub-menu a {
+    display: block;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-body-default);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+  }
+  .vpc-nav-menu .sub-menu a:hover,
+  .vpc-nav-menu .sub-menu li.current-menu-item > a {
+    background-color: var(--color-primary-100);
+    color: var(--color-primary-600);
+  }
+  .vpc-mobile-nav .sub-menu {
+    list-style: none;
+    padding: 0 0 0.5rem 1rem;
+    margin: 0;
+  }
+  .vpc-mobile-nav .sub-menu li {
+    list-style: none;
+    padding: 0.25rem 0;
+    border: none;
+  }
+  .vpc-mobile-nav .sub-menu a {
+    font-size: 1rem;
+    color: var(--color-text-body-muted);
+    text-decoration: none;
+    min-height: auto;
+    padding: 0.5rem 0;
+  }
+  .vpc-mobile-nav .sub-menu li.current-menu-item > a {
+    color: var(--color-primary-600);
+    font-weight: 600;
+  }
+
+  /* Standard WordPress content remains readable when a legacy page or post
+     has no Figma-specific template. This intentionally styles markup only;
+     it does not alter block data or editor output. */
+  .site-main > article,
+  .site-main > .page-header,
+  .site-main > .no-results {
+    width: min(896px, calc(100% - 40px));
+    margin: 48px auto;
+  }
+  .entry-header { margin-bottom: 24px; }
+  .entry-title { color: var(--color-text-heading-primary-default); font: 600 40px/1.25 var(--font-heading); }
+  .entry-thumbnail { margin-bottom: 24px; overflow: hidden; border-radius: 16px; background: var(--color-surface-background-primary); }
+  .entry-thumbnail img { width: 100%; height: auto; }
+  .entry-content { color: var(--color-text-body-default); font: 500 16px/1.6 var(--font-body); }
+  .entry-content > * + * { margin-top: 1.25rem; }
+  .entry-content h2, .entry-content h3, .entry-content h4, .entry-content h5, .entry-content h6 {
+    color: var(--color-text-heading-primary-default);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .entry-content h2 { font-size: 1.75rem; line-height: 1.3; }
+  .entry-content h3 { font-size: 1.375rem; line-height: 1.35; }
+  .entry-content p { margin-bottom: 1rem; }
+  .entry-content :is(ul, ol) { padding-left: 1.5rem; }
+  .entry-content ul { list-style: disc; }
+  .entry-content ol { list-style: decimal; }
+  .entry-content a { color: var(--color-text-link-hover); text-decoration: underline; }
+  .entry-content img { border-radius: 1rem; max-width: 100%; height: auto; }
+  .entry-content figure { margin: 1.5rem 0; }
+  .entry-content figcaption { font-size: 0.875rem; color: var(--color-text-body-muted); text-align: center; margin-top: 0.5rem; }
+  .entry-content blockquote {
+    border-left: 4px solid var(--color-primary-500);
+    padding-left: 1rem;
+    font-style: italic;
+    color: var(--color-neutral-700);
+    margin: 1.5rem 0;
+  }
+  .entry-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+  }
+  .entry-content th, .entry-content td {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border-divider-default);
+    text-align: left;
+  }
+  .entry-content th {
+    background-color: var(--color-neutral-100);
+    font-weight: 600;
+  }
+  .page-links { display: flex; gap: .5rem; margin-top: 1.5rem; }
+  @media (max-width: 639px) { .entry-title { font-size: 32px; } }
+
+  /* Legacy Lazy Block presentational styles conforming to Figma design */
+  .wp-block-lazyblock-lth-banner-service,
+  .wp-block-lazyblock-lth-banner {
+    position: relative;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+  .wp-block-lazyblock-lth-section {
+    padding: 2rem 0;
+  }
+  .wp-block-lazyblock-lth-button .btn,
+  .wp-block-lazyblock-lth-button a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background-color: var(--color-primary-500);
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  .wp-block-lazyblock-lth-button .btn:hover,
+  .wp-block-lazyblock-lth-button a:hover {
+    background-color: var(--color-primary-600);
+  }
+  .wp-block-lazyblock-lth-step-detail,
+  .wp-block-lazyblock-lth-servicepack,
+  .wp-block-lazyblock-lth-faq {
+    margin: 2rem 0;
   }
 
   /* Policy Styles (Chính sách, Điều khoản, Quy trình khiếu nại) */

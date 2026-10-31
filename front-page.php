@@ -110,7 +110,7 @@ $consultation_services = vpc_get_consultation_services();
 				
 				<!-- Visual Asset (Nurse, Mother, Baby in Crib + 2 Floating Badges) (Left on Desktop: order-1 lg:order-1) -->
 				<div class="intro-visual lg:col-span-6 relative flex justify-center lg:justify-start lg:order-1 pt-0">
-					<div class="relative w-full max-w-[350px] sm:max-w-[500px] lg:max-w-[517px] mx-auto lg:ml-0">
+					<div class="relative w-full max-w-[350px] sm:max-w-[500px] lg:max-w-[517px] mx-auto lg:ml-[67px]">
 						<!-- Main Photo with Rounded Corners matching Figma (border-radius: 50px) -->
 						<div class="relative w-full aspect-[4/3] sm:aspect-[517/591] rounded-[32px] sm:rounded-[50px] overflow-hidden shadow-[0px_4px_30px_rgba(0,0,0,0.08)] bg-neutral-100">
 							<picture>
@@ -1630,102 +1630,115 @@ $consultation_services = vpc_get_consultation_services();
 				</h2>
 			</div>
 
-			<!-- 3 Blog Cards (Mobile horizontal scroll snap, Desktop grid) -->
+			<!-- Existing WordPress posts, preserving the Figma card layout. -->
 			<div class="flex flex-row overflow-x-auto scrollbar-none gap-4 px-5 -mx-5 pb-2 snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-3 md:mx-0 md:px-0 md:pb-0">
-				
-				<!-- Card 1 -->
-				<article class="min-w-[290px] w-[290px] md:min-w-0 md:w-auto snap-start bg-surface-card-default rounded-xl p-3 border border-neutral-100 shadow-[0px_4px_19px_rgba(0,0,0,0.08)] hover:shadow-md transition-all duration-300 flex flex-col group shrink-0 md:shrink">
-					<!-- Thumbnail Image -->
-					<div class="relative w-full aspect-[380/219] rounded-lg overflow-hidden bg-neutral-100 mb-3">
-						<picture>
+				<?php
+				$featured_posts = new WP_Query( array(
+					'post_type'           => 'post',
+					'posts_per_page'      => 3,
+					'ignore_sticky_posts' => true,
+					'category_name'       => 'kien-thuc',
+				) );
+				if ( ! $featured_posts->have_posts() ) {
+					$featured_posts = new WP_Query( array(
+						'post_type'           => 'post',
+						'posts_per_page'      => 3,
+						'ignore_sticky_posts' => true,
+					) );
+				}
+				if ( $featured_posts->have_posts() ) :
+					while ( $featured_posts->have_posts() ) :
+						$featured_posts->the_post();
+						$categories = get_the_category();
+						$category   = ! empty( $categories ) ? $categories[0]->name : __( 'Kiến thức', 'vanphuccare' );
+						?>
+						<article <?php post_class( 'min-w-[290px] w-[290px] md:min-w-0 md:w-auto snap-start bg-surface-card-default rounded-xl p-3 border border-neutral-100 shadow-[0px_4px_19px_rgba(0,0,0,0.08)] hover:shadow-md transition-all duration-300 flex flex-col group shrink-0 md:shrink' ); ?>>
+							<a href="<?php the_permalink(); ?>" class="relative w-full aspect-[380/219] rounded-lg overflow-hidden bg-neutral-100 mb-3 block">
+								<?php if ( has_post_thumbnail() ) : ?>
+									<?php the_post_thumbnail( 'medium_large', array( 'class' => 'w-full h-full object-cover transition-transform duration-500 group-hover:scale-105', 'loading' => 'lazy' ) ); ?>
+								<?php else : ?>
+									<img src="<?php echo esc_url( $theme_uri . '/assets/images/blog_post_ultrasound.jpg' ); ?>" alt="" class="w-full h-full object-cover" loading="lazy">
+								<?php endif; ?>
+							</a>
+							<div class="flex flex-col flex-grow">
+								<span class="text-text-heading-primary-default font-semibold text-xs sm:text-sm mb-1.5 block"><?php echo esc_html( $category ); ?></span>
+								<h3 class="font-body font-medium text-base sm:text-xl text-neutral-900 group-hover:text-text-heading-primary-default transition-colors leading-snug line-clamp-2 mb-2 font-bold"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+								<p class="font-body text-sm sm:text-base text-text-body-muted leading-relaxed line-clamp-3 mb-4 flex-grow"><?php echo esc_html( wp_trim_words( get_the_excerpt(), 28 ) ); ?></p>
+								<div class="flex items-center justify-between pt-3 border-t border-neutral-100 mt-auto">
+									<span class="text-xs font-medium text-neutral-700"><?php the_author(); ?></span>
+									<time class="text-xs text-neutral-400 font-medium" datetime="<?php echo esc_attr( get_the_date( DATE_W3C ) ); ?>"><?php echo esc_html( get_the_date() ); ?></time>
+								</div>
+							</div>
+						</article>
+					<?php endwhile; wp_reset_postdata(); ?>
+				<?php else : ?>
+					<!-- Fallback Figma design cards when CMS has no published posts -->
+					<article class="min-w-[290px] w-[290px] md:min-w-0 md:w-auto snap-start bg-surface-card-default rounded-xl p-3 border border-neutral-100 shadow-[0px_4px_19px_rgba(0,0,0,0.08)] hover:shadow-md transition-all duration-300 flex flex-col group shrink-0 md:shrink">
+						<div class="relative w-full aspect-[380/219] rounded-lg overflow-hidden bg-neutral-100 mb-3">
 							<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/Dac-Diem-Sua-me-giai-doan-sua-truong-thanh.jpg' ); ?>" alt="Sữa Trưởng Thành: Giai đoạn hoàn thiện của sữa mẹ" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
-						</picture>
-					</div>
-					
-					<!-- Content -->
-					<div class="flex flex-col flex-grow">
-						<span class="text-text-heading-primary-default font-semibold text-xs sm:text-sm mb-1.5 block">Cẩm nang cho mẹ</span>
-						<h3 class="font-body font-medium text-base sm:text-xl text-neutral-900 group-hover:text-text-heading-primary-default transition-colors leading-snug line-clamp-2 mb-2 font-bold">
-							<span>Sữa Trưởng Thành: Giai đoạn hòa thiện của sữa mẹ</span>
-						</h3>
-						<p class="font-body text-sm sm:text-base text-text-body-muted leading-relaxed line-clamp-3 mb-4 flex-grow">
-							Khởi đầu từ khát vọng mang đến sự chăm sóc chuyên nghiệp và hoàn hảo nhất cho mẹ và bé, Vạn Phúc Care đã trải qua một hành trình đầy tự hào.
-						</p>
-						
-						<!-- Footer info -->
-						<div class="flex items-center justify-between pt-3 border-t border-neutral-100 mt-auto">
-							<div class="flex items-center gap-2">
-								<img src="<?php echo esc_url( $theme_uri . '/assets/images/avatars/avatar_1.jpg' ); ?>" alt="Tác giả" class="w-5 h-5 rounded-full object-cover shrink-0">
-								<span class="text-xs font-medium text-neutral-700">Tên tác giả</span>
-							</div>
-							<span class="text-xs text-neutral-400 font-medium">12/09/2024</span>
 						</div>
-					</div>
-				</article>
-
-				<!-- Card 2 -->
-				<article class="min-w-[290px] w-[290px] md:min-w-0 md:w-auto snap-start bg-surface-card-default rounded-xl p-3 border border-neutral-100 shadow-[0px_4px_19px_rgba(0,0,0,0.08)] hover:shadow-md transition-all duration-300 flex flex-col group shrink-0 md:shrink">
-					<!-- Thumbnail Image -->
-					<div class="relative w-full aspect-[380/219] rounded-lg overflow-hidden bg-neutral-100 mb-3">
-						<img src="<?php echo esc_url( $theme_uri . '/assets/images/blog_post_ultrasound.jpg' ); ?>" alt="Sữa Trưởng Thành: Giai đoạn hoàn thiện của sữa mẹ" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
-					</div>
-					
-					<!-- Content -->
-					<div class="flex flex-col flex-grow">
-						<span class="text-text-heading-primary-default font-semibold text-xs sm:text-sm mb-1.5 block">Cẩm nang cho mẹ</span>
-						<h3 class="font-body font-medium text-base sm:text-xl text-neutral-900 group-hover:text-text-heading-primary-default transition-colors leading-snug line-clamp-2 mb-2 font-bold">
-							<span>Sữa Trưởng Thành: Giai đoạn hòa thiện của sữa mẹ</span>
-						</h3>
-						<p class="font-body text-sm sm:text-base text-text-body-muted leading-relaxed line-clamp-3 mb-4 flex-grow">
-							Khởi đầu từ khát vọng mang đến sự chăm sóc chuyên nghiệp và hoàn hảo nhất cho mẹ và bé, Vạn Phúc Care đã trải qua một hành trình đầy sáng tạo.
-						</p>
-						
-						<!-- Footer info -->
-						<div class="flex items-center justify-between pt-3 border-t border-neutral-100 mt-auto">
-							<div class="flex items-center gap-2">
-								<img src="<?php echo esc_url( $theme_uri . '/assets/images/avatars/avatar_1.jpg' ); ?>" alt="Tác giả" class="w-5 h-5 rounded-full object-cover shrink-0">
-								<span class="text-xs font-medium text-neutral-700">Tên tác giả</span>
+						<div class="flex flex-col flex-grow">
+							<span class="text-text-heading-primary-default font-semibold text-xs sm:text-sm mb-1.5 block">Cẩm nang cho mẹ</span>
+							<h3 class="font-body font-medium text-base sm:text-xl text-neutral-900 group-hover:text-text-heading-primary-default transition-colors leading-snug line-clamp-2 mb-2 font-bold">
+								<span>Sữa Trưởng Thành: Giai đoạn hoàn thiện của sữa mẹ</span>
+							</h3>
+							<p class="font-body text-sm sm:text-base text-text-body-muted leading-relaxed line-clamp-3 mb-4 flex-grow">
+								Khởi đầu từ khát vọng mang đến sự chăm sóc chuyên nghiệp và hoàn hảo nhất cho mẹ và bé, Vạn Phúc Care đã trải qua một hành trình đầy tự hào.
+							</p>
+							<div class="flex items-center justify-between pt-3 border-t border-neutral-100 mt-auto">
+								<span class="text-xs font-medium text-neutral-700">Vạn Phúc Care</span>
+								<span class="text-xs text-neutral-400 font-medium">12/09/2024</span>
 							</div>
-							<span class="text-xs text-neutral-400 font-medium">12/09/2024</span>
 						</div>
-					</div>
-				</article>
-
-				<!-- Card 3 -->
-				<article class="min-w-[290px] w-[290px] md:min-w-0 md:w-auto snap-start bg-surface-card-default rounded-xl p-3 border border-neutral-100 shadow-[0px_4px_19px_rgba(0,0,0,0.08)] hover:shadow-md transition-all duration-300 flex flex-col group shrink-0 md:shrink">
-					<!-- Thumbnail Image -->
-					<div class="relative w-full aspect-[380/219] rounded-lg overflow-hidden bg-neutral-100 mb-3">
-						<img src="<?php echo esc_url( $theme_uri . '/assets/images/blog_post_ultrasound.jpg' ); ?>" alt="Sữa Trưởng Thành: Giai đoạn hoàn thiện của sữa mẹ" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
-					</div>
-					
-					<!-- Content -->
-					<div class="flex flex-col flex-grow">
-						<span class="text-text-heading-primary-default font-semibold text-xs sm:text-sm mb-1.5 block">Cẩm nang cho mẹ</span>
-						<h3 class="font-body font-medium text-base sm:text-xl text-neutral-900 group-hover:text-text-heading-primary-default transition-colors leading-snug line-clamp-2 mb-2 font-bold">
-							<span>Sữa Trưởng Thành: Giai đoạn hòa thiện của sữa mẹ</span>
-						</h3>
-						<p class="font-body text-sm sm:text-base text-text-body-muted leading-relaxed line-clamp-3 mb-4 flex-grow">
-							Khởi đầu từ khát vọng mang đến sự chăm sóc chuyên nghiệp và hoàn hảo nhất cho mẹ và bé, Vạn Phúc Care đã trải qua một hành trình đầy sáng tạo.
-						</p>
-						
-						<!-- Footer info -->
-						<div class="flex items-center justify-between pt-3 border-t border-neutral-100 mt-auto">
-							<div class="flex items-center gap-2">
-								<img src="<?php echo esc_url( $theme_uri . '/assets/images/avatars/avatar_1.jpg' ); ?>" alt="Tác giả" class="w-5 h-5 rounded-full object-cover shrink-0">
-								<span class="text-xs font-medium text-neutral-700">Tên tác giả</span>
+					</article>
+					<article class="min-w-[290px] w-[290px] md:min-w-0 md:w-auto snap-start bg-surface-card-default rounded-xl p-3 border border-neutral-100 shadow-[0px_4px_19px_rgba(0,0,0,0.08)] hover:shadow-md transition-all duration-300 flex flex-col group shrink-0 md:shrink">
+						<div class="relative w-full aspect-[380/219] rounded-lg overflow-hidden bg-neutral-100 mb-3">
+							<img src="<?php echo esc_url( $theme_uri . '/assets/images/blog_post_ultrasound.jpg' ); ?>" alt="Sữa Trưởng Thành: Giai đoạn hoàn thiện của sữa mẹ" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+						</div>
+						<div class="flex flex-col flex-grow">
+							<span class="text-text-heading-primary-default font-semibold text-xs sm:text-sm mb-1.5 block">Cẩm nang cho mẹ</span>
+							<h3 class="font-body font-medium text-base sm:text-xl text-neutral-900 group-hover:text-text-heading-primary-default transition-colors leading-snug line-clamp-2 mb-2 font-bold">
+								<span>Sữa Trưởng Thành: Giai đoạn hoàn thiện của sữa mẹ</span>
+							</h3>
+							<p class="font-body text-sm sm:text-base text-text-body-muted leading-relaxed line-clamp-3 mb-4 flex-grow">
+								Khởi đầu từ khát vọng mang đến sự chăm sóc chuyên nghiệp và hoàn hảo nhất cho mẹ và bé, Vạn Phúc Care đã trải qua một hành trình đầy sáng tạo.
+							</p>
+							<div class="flex items-center justify-between pt-3 border-t border-neutral-100 mt-auto">
+								<span class="text-xs font-medium text-neutral-700">Vạn Phúc Care</span>
+								<span class="text-xs text-neutral-400 font-medium">12/09/2024</span>
 							</div>
-							<span class="text-xs text-neutral-400 font-medium">12/09/2024</span>
 						</div>
-					</div>
-				</article>
-
+					</article>
+					<article class="min-w-[290px] w-[290px] md:min-w-0 md:w-auto snap-start bg-surface-card-default rounded-xl p-3 border border-neutral-100 shadow-[0px_4px_19px_rgba(0,0,0,0.08)] hover:shadow-md transition-all duration-300 flex flex-col group shrink-0 md:shrink">
+						<div class="relative w-full aspect-[380/219] rounded-lg overflow-hidden bg-neutral-100 mb-3">
+							<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/Dac-Diem-Sua-me-giai-doan-sua-truong-thanh.jpg' ); ?>" alt="Sữa Trưởng Thành: Giai đoạn hoàn thiện của sữa mẹ" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+						</div>
+						<div class="flex flex-col flex-grow">
+							<span class="text-text-heading-primary-default font-semibold text-xs sm:text-sm mb-1.5 block">Cẩm nang cho mẹ</span>
+							<h3 class="font-body font-medium text-base sm:text-xl text-neutral-900 group-hover:text-text-heading-primary-default transition-colors leading-snug line-clamp-2 mb-2 font-bold">
+								<span>Sữa Trưởng Thành: Giai đoạn hoàn thiện của sữa mẹ</span>
+							</h3>
+							<p class="font-body text-sm sm:text-base text-text-body-muted leading-relaxed line-clamp-3 mb-4 flex-grow">
+								Khởi đầu từ khát vọng mang đến sự chăm sóc chuyên nghiệp và hoàn hảo nhất cho mẹ và bé, Vạn Phúc Care đã trải qua một hành trình đầy tự hào.
+							</p>
+							<div class="flex items-center justify-between pt-3 border-t border-neutral-100 mt-auto">
+								<span class="text-xs font-medium text-neutral-700">Vạn Phúc Care</span>
+								<span class="text-xs text-neutral-400 font-medium">12/09/2024</span>
+							</div>
+						</div>
+					</article>
+				<?php endif; ?>
 			</div>
 
 			<!-- Bottom CTA Button -->
 			<div class="text-center mt-6 sm:mt-10 flex justify-center">
-				<span class="vpc-button w-full max-w-[350px] sm:w-auto h-10 xl:h-12 px-4 xl:px-6 inline-flex items-center justify-center rounded-full bg-transparent border border-border-secondary-default text-text-heading-secondary-default" aria-disabled="true">
+				<?php
+				$knowledge_category = get_category_by_slug( 'kien-thuc' );
+				$knowledge_url      = $knowledge_category ? get_category_link( $knowledge_category ) : home_url( '/kien-thuc/' );
+				?>
+				<a href="<?php echo esc_url( $knowledge_url ); ?>" class="vpc-button w-full max-w-[350px] sm:w-auto h-10 xl:h-12 px-4 xl:px-6 inline-flex items-center justify-center rounded-full bg-transparent border border-border-secondary-default text-text-heading-secondary-default hover:bg-surface-badge-secondary/60 transition-colors">
 					Xem tất cả
-				</span>
+				</a>
 			</div>
 		</div>
 	</section>
