@@ -479,11 +479,11 @@ $show_prenatal_video = false;
 				<span>Bảo Mẫu Tại Nhà</span>
 			</a>
 			<a href="<?php echo esc_url( home_url( '/#khoa-hoc-truc-tuyen' ) ); ?>">
-				<img src="<?php echo esc_url( $image . 'service-massage.png' ); ?>" alt="Tư vấn nuôi con EASY" />
+				<img class="prenatal-services__image--consultation" src="<?php echo esc_url( $image . 'service-massage.png' ); ?>" alt="Tư vấn nuôi con EASY" />
 				<span>Tư Vấn Nuôi Con EASY</span>
 			</a>
 			<a href="<?php echo esc_url( home_url( '/#trung-tam-o-cu' ) ); ?>">
-				<img src="<?php echo esc_url( $image . 'service-online-course.png' ); ?>" alt="Khóa học trực tuyến" />
+				<img class="prenatal-services__image--online-course" src="<?php echo esc_url( $image . 'service-online-course.png' ); ?>" alt="Khóa học trực tuyến" />
 				<span>Khóa Học Trực Tuyến</span>
 			</a>
 		</div>
