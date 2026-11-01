@@ -709,7 +709,7 @@
     background: linear-gradient(59.1deg, var(--color-neutral-100) 66.82%, var(--color-primary-100) 146.55%);
   }
   .vpc-gradient-press {
-    background: linear-gradient(135deg, var(--color-surface-background-secondary) 0%, var(--color-surface-background-primary) 100%);
+    background: linear-gradient(135deg, var(--color-surface-background-default) 0%, var(--color-surface-background-secondary) 100%);
   }
   .vpc-gradient-contact-hero {
     background: linear-gradient(179.09deg, var(--color-surface-background-default) 0.72%, var(--color-surface-background-secondary) 143.87%);
@@ -906,7 +906,7 @@
   }
   @media (min-width: 64rem) {
     #gioi-thieu .intro-visual > div {
-      margin-left: 67px;
+      margin-left: 80px;
     }
   }
   @media (min-width: 1280px) {
@@ -1396,17 +1396,6 @@
   .scrollbar-none::-webkit-scrollbar {
     display: none;
   }
-  /* On desktop these full-bleed content sections retain their design gutters.
-     Mobile uses the standard 20px .vpc-section gutter, matching the header. */
-  @media (min-width: 1280px) {
-    #vi-sao-chon-van-phuc,
-    #bao-chi,
-    #kien-thuc-nuoi-con {
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-    }
-  }
-
   /* Remove the legacy privacy reassurance rendered by older form markup. */
   p.text-center.font-body.text-xs.text-text-body-muted.pt-1 {
     display: none !important;

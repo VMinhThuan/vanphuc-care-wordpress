@@ -23,6 +23,7 @@ $subtitle    = $args['subtitle'] ?? '';
 $action_url  = $args['action_url'] ?? '';
 $extra_class = $args['class'] ?? '';
 $services    = vpc_get_consultation_services();
+$gestational_age_options = vpc_get_gestational_age_options();
 ?>
 
 <div class="vpc-consultation-card bg-surface-background-default rounded-[24px] p-6 sm:p-8 md:p-9 border border-neutral-300 shadow-sm max-w-2xl mx-auto <?php echo esc_attr( $extra_class ); ?>">
@@ -96,7 +97,19 @@ $services    = vpc_get_consultation_services();
 			?>
 		</div>
 
-		<!-- Row 3: Tuần thai -->
+		<!-- Row 3: Giai đoạn thai kỳ (cập nhật theo comment Figma) -->
+		<fieldset class="border-0 p-0 m-0">
+			<legend class="block text-base sm:text-xl leading-7 font-medium text-text-body-default mb-3 select-none">
+				<span class="text-error-500 font-bold mr-0.5">*</span> Giai đoạn thai kỳ
+			</legend>
+			<div class="flex flex-wrap items-center gap-2" role="radiogroup" aria-label="Giai đoạn thai kỳ">
+				<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="dang-mang-thai" checked required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 h-10 font-body text-sm font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đang mang thai</span></label>
+				<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="chuan-bi-mang-thai" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 h-10 font-body text-sm font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Chuẩn bị mang thai</span></label>
+				<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="da-sinh-be" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 h-10 font-body text-sm font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đã sinh bé</span></label>
+			</div>
+		</fieldset>
+
+		<!-- Row 4: Tuần thai; placeholder mới theo Figma là "Chọn giai đoạn". -->
 		<div>
 			<?php
 			get_template_part( 'template-parts/components/form-input', null, [
@@ -104,15 +117,9 @@ $services    = vpc_get_consultation_services();
 				'name'        => 'gestational_age',
 				'label'       => 'Tuần thai',
 				'type'        => 'select',
-				'placeholder' => 'Tuần 35',
+				'placeholder' => 'Chọn giai đoạn',
 				'required'    => true,
-				'options'     => [
-					'chua-mang-thai' => 'Chưa mang thai / Đang chuẩn bị',
-					'1-12-tuan'      => 'Mang thai 1 - 12 tuần (Tam cá nguyệt 1)',
-					'13-27-tuan'     => 'Mang thai 13 - 27 tuần (Tam cá nguyệt 2)',
-					'28-40-tuan'     => 'Mang thai 28 - 40 tuần (Tam cá nguyệt 3)',
-					'da-sinh-be'     => 'Đã sinh bé',
-				],
+				'options'     => $gestational_age_options,
 			] );
 			?>
 		</div>

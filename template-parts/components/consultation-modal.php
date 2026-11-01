@@ -20,9 +20,10 @@
  * - Form Fields (Kế thừa trọn vẹn quy chuẩn Input/Select VPC):
  *   + Hàng 1 (2 cột): Họ và tên (*), Số điện thoại (*) -> placeholder "Nguyễn Như Linh", "0345678***"
  *   + Hàng 2: Dịch vụ quan tâm (*) -> Select dropdown trigger 50px, bo góc 12px, placeholder "Chọn dịch vụ"
- *   + Hàng 3: Tuần thai (*) -> Select dropdown trigger 50px
- *   + Hàng 4: Ghi chú -> Input placeholder "Cho chúng tôi biết thêm về nhu cầu của bạn!"
- *   + Hàng 5: Nút Submit "Gửi yêu cầu tư vấn" -> chiều cao 48px, bo góc 24px, bg #1A77BA (Primary 500), text trắng
+ *   + Hàng 3: Giai đoạn thai kỳ (*) -> 3 lựa chọn dạng pill
+ *   + Hàng 4: Tuần thai (*) -> Select dropdown trigger 50px, placeholder "Chọn giai đoạn"
+ *   + Hàng 5: Ghi chú -> Input placeholder "Cho chúng tôi biết thêm về nhu cầu của bạn!"
+ *   + Hàng 6: Nút Submit "Gửi yêu cầu tư vấn" -> chiều cao 48px, bo góc 24px, bg #1A77BA (Primary 500), text trắng
  * - Trợ năng & Phím tắt:
  *   + Hỗ trợ phím Escape để đóng modal
  *   + Click backdrop ngoài modal để đóng
@@ -49,6 +50,7 @@ $subtitle    = $args['subtitle'] ?? 'Để lại thông tin, Vạn Phúc Care s�
 $action_url  = $args['action_url'] ?? '';
 $extra_class = $args['class'] ?? '';
 $services    = vpc_get_consultation_services();
+$gestational_age_options = vpc_get_gestational_age_options();
 ?>
 
 <!-- Consultation Modal Backdrop & Container -->
@@ -149,7 +151,19 @@ $services    = vpc_get_consultation_services();
 				?>
 			</div>
 
-			<!-- Row 3: Tuần thai -->
+			<!-- Row 3: Giai đoạn thai kỳ (cập nhật theo comment Figma) -->
+			<fieldset class="border-0 p-0 m-0">
+				<legend class="block text-base sm:text-xl leading-7 font-medium text-text-body-default mb-3 select-none">
+					<span class="text-error-500 font-bold mr-0.5">*</span> Giai đoạn thai kỳ
+				</legend>
+				<div class="flex flex-wrap items-center gap-2" role="radiogroup" aria-label="Giai đoạn thai kỳ">
+					<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="dang-mang-thai" checked required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 h-10 font-body text-sm font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đang mang thai</span></label>
+					<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="chuan-bi-mang-thai" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 h-10 font-body text-sm font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Chuẩn bị mang thai</span></label>
+					<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="da-sinh-be" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 h-10 font-body text-sm font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đã sinh bé</span></label>
+				</div>
+			</fieldset>
+
+			<!-- Row 4: Tuần thai; placeholder mới theo Figma là "Chọn giai đoạn". -->
 			<div>
 				<?php
 				get_template_part( 'template-parts/components/form-input', null, [
@@ -157,15 +171,9 @@ $services    = vpc_get_consultation_services();
 					'name'        => 'gestational_age',
 					'label'       => 'Tuần thai',
 					'type'        => 'select',
-					'placeholder' => 'Tuần 35',
+					'placeholder' => 'Chọn giai đoạn',
 					'required'    => true,
-					'options'     => [
-						'chua-mang-thai' => 'Chưa mang thai / Đang chuẩn bị',
-						'1-12-tuan'      => 'Mang thai 1 - 12 tuần',
-						'13-27-tuan'     => 'Mang thai 13 - 27 tuần',
-						'28-40-tuan'     => 'Mang thai 28 - 40 tuần',
-						'da-sinh-be'     => 'Đã sinh bé',
-					],
+					'options'     => $gestational_age_options,
 				] );
 				?>
 			</div>

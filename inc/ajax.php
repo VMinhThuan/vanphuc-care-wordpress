@@ -44,6 +44,7 @@ function vpc_handle_consultation_submission() {
 	$phone     = isset( $_POST['phone'] ) ? sanitize_text_field( wp_unslash( $_POST['phone'] ) ) : ( isset( $_POST['customer_phone'] ) ? sanitize_text_field( wp_unslash( $_POST['customer_phone'] ) ) : '' );
 	$email     = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
 	$service   = isset( $_POST['service'] ) ? sanitize_text_field( wp_unslash( $_POST['service'] ) ) : '';
+	$pregnancy_stage = isset( $_POST['pregnancy_stage'] ) ? sanitize_text_field( wp_unslash( $_POST['pregnancy_stage'] ) ) : '';
 	$gestational_age = isset( $_POST['gestational_age'] ) ? sanitize_text_field( wp_unslash( $_POST['gestational_age'] ) ) : '';
 	$question  = isset( $_POST['question'] ) ? sanitize_textarea_field( wp_unslash( $_POST['question'] ) ) : ( isset( $_POST['customer_note'] ) ? sanitize_textarea_field( wp_unslash( $_POST['customer_note'] ) ) : '' );
 
@@ -68,10 +69,20 @@ function vpc_handle_consultation_submission() {
 		'28-40-tuan'     => 'Mang thai 28 - 40 tuần',
 		'da-sinh-be'     => 'Đã sinh bé',
 	);
+	$pregnancy_stages = array(
+		'dang-mang-thai'     => 'Đang mang thai',
+		'chuan-bi-mang-thai' => 'Chuẩn bị mang thai',
+		'da-sinh-be'         => 'Đã sinh bé',
+	);
 	$gestational_age_label = $gestational_age_options[ $gestational_age ] ?? 'Chưa cung cấp';
 	if ( empty( $service ) || ! isset( $services[ $service ] ) ) {
 		wp_send_json_error( array(
 			'message' => 'Vui lòng chọn dịch vụ bạn quan tâm.',
+		), 400 );
+	}
+	if ( ! empty( $pregnancy_stage ) && ! isset( $pregnancy_stages[ $pregnancy_stage ] ) ) {
+		wp_send_json_error( array(
+			'message' => 'Vui lòng chọn đúng giai đoạn thai kỳ.',
 		), 400 );
 	}
 	if ( empty( $gestational_age ) || ! isset( $gestational_age_options[ $gestational_age ] ) ) {
@@ -94,12 +105,6 @@ function vpc_handle_consultation_submission() {
 		), 503 );
 	}
 
-	$pregnancy_stage = isset( $_POST['pregnancy_stage'] ) ? sanitize_text_field( wp_unslash( $_POST['pregnancy_stage'] ) ) : '';
-	$pregnancy_stages = array(
-		'dang-mang-thai'     => 'Đang mang thai',
-		'chuan-bi-mang-thai' => 'Chuẩn bị mang thai',
-		'da-sinh-be'         => 'Đã sinh bé',
-	);
 	$payload = array(
 		'full_name'          => $full_name,
 		'email'              => $email,
