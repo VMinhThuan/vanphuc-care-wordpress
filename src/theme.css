@@ -606,13 +606,13 @@
     .prenatal-feature-grid p { font-size: 16px; line-height: 24px; color: var(--color-text-body-muted); }
     .prenatal-benefit-group + .prenatal-benefit-group { margin-top: 40px; }
     .prenatal-section-heading { gap: 16px; text-align: center; }
-    .prenatal-benefit-grid { display: flex; flex-direction: column; gap: 24px; margin-top: 0; width: 100%; }
+    .prenatal-benefit-grid { display: flex; flex-direction: column; gap: 24px; margin-top: 32px; width: 100%; }
     .prenatal-benefit-grid article { min-height: auto; padding: 0; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; background: transparent; box-shadow: none; border-radius: 0; }
     .prenatal-benefit-grid article::before { display: none; }
     .prenatal-benefit-icon { width: 50px; height: 50px; border-radius: 50%; border: 1px solid var(--color-border-secondary-default); background: transparent; margin: 0; }
     .prenatal-benefit-icon img { width: 24px; height: 24px; }
     .prenatal-benefit-grid h3 { margin: 0; font-size: 20px; line-height: 28px; color: var(--color-text-body-default); }
-    .prenatal-benefit-grid p { font-size: 16px; line-height: 24px; color: var(--color-text-body-muted); }
+    .prenatal-benefit-grid p { margin-top: -8px; font-size: 16px; line-height: 24px; color: var(--color-text-body-muted); }
     .prenatal-video { gap: 24px; }
     .prenatal-video .prenatal-badge { display: none; }
     .prenatal-video__frame { aspect-ratio: 350 / 190; border-radius: 16px; }
