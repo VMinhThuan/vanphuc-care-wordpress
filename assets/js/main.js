@@ -35,18 +35,19 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 	}
 
-	// Hide the mobile sticky CTA as soon as the footer reaches its fixed area.
+	// Hide the mobile sticky CTA while any part of the footer is visible so it
+	// cannot cover the footer links or certification badges on small screens.
 	const mobileStickyCta = document.getElementById('mobile-sticky-cta');
 	const siteFooter = document.querySelector('.site-footer');
 	if (mobileStickyCta && siteFooter) {
 		function updateMobileStickyCta() {
 			const footerBounds = siteFooter.getBoundingClientRect();
-			const ctaHeight = mobileStickyCta.offsetHeight;
-			const footerOverlapsCta = footerBounds.top <= window.innerHeight - ctaHeight && footerBounds.bottom > 0;
+			const footerIsVisible = footerBounds.top < window.innerHeight && footerBounds.bottom > 0;
 
-			mobileStickyCta.classList.toggle('translate-y-full', footerOverlapsCta);
-			mobileStickyCta.classList.toggle('opacity-0', footerOverlapsCta);
-			mobileStickyCta.classList.toggle('pointer-events-none', footerOverlapsCta);
+			mobileStickyCta.classList.toggle('translate-y-full', footerIsVisible);
+			mobileStickyCta.classList.toggle('opacity-0', footerIsVisible);
+			mobileStickyCta.classList.toggle('invisible', footerIsVisible);
+			mobileStickyCta.classList.toggle('pointer-events-none', footerIsVisible);
 		}
 
 		updateMobileStickyCta();

@@ -252,15 +252,21 @@ $gestational_age_options = vpc_get_gestational_age_options();
 
 						<!-- Live Google Maps embed centered on Vạn Phúc Care -->
 						<div class="bg-surface-background-default rounded-xl p-4 w-full flex flex-col gap-3 items-center">
-							<div class="w-full h-[150px] sm:h-auto sm:aspect-[478/258] overflow-hidden rounded-xl border border-border-divider-default/70">
+							<div class="relative w-full h-[150px] sm:h-auto sm:aspect-[478/258] overflow-hidden rounded-xl border border-border-divider-default/70">
 								<iframe
 									src="<?php echo esc_url( $map_embed_url ); ?>"
 									title="Bản đồ chỉ đường Trung Tâm Ở Cữ Vạn Phúc Care"
-									class="w-full h-full border-0"
+									class="w-full h-full border-0 pointer-events-none"
 									loading="lazy"
 									referrerpolicy="no-referrer-when-downgrade"
 									allowfullscreen>
 								</iframe>
+								<a href="<?php echo esc_url( $map_url ); ?>"
+								   target="_blank"
+								   rel="noopener noreferrer"
+								   aria-label="Mở bản đồ Vạn Phúc Care trên Google Maps"
+								   class="absolute inset-0 z-10 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border-primary-default">
+								</a>
 							</div>
 							
 							<div class="text-center w-full">
