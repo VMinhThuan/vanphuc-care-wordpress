@@ -182,13 +182,13 @@ $instagram_url = get_theme_mod( 'vpc_instagram_url', '' );
 
 		<!-- Bottom Row: divider and navigation links on mobile; inline links on desktop. -->
 		<div class="mt-8 border-t border-border-divider-default pt-8 flex flex-col xl:flex-row items-start xl:items-center justify-start gap-2 xl:gap-3 text-base font-medium text-text-body-default xl:mt-0 xl:border-t-0 xl:pt-6">
-			<a href="<?php echo esc_url( home_url( '/dieu-khoan-su-dung' ) ); ?>" class="hover:text-text-body-muted transition-colors">Điều khoản sử dụng</a>
+			<a href="<?php echo esc_url( home_url( '/dieu-khoan-su-dung' ) ); ?>" class="order-3 xl:order-none hover:text-text-body-muted transition-colors">Điều khoản sử dụng</a>
 			<span class="hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
-			<a href="<?php echo esc_url( home_url( '/chinh-sach-bao-mat' ) ); ?>" class="hover:text-text-body-muted transition-colors">Chính sách bảo mật</a>
+			<a href="<?php echo esc_url( home_url( '/chinh-sach-bao-mat' ) ); ?>" class="order-4 xl:order-none hover:text-text-body-muted transition-colors">Chính sách bảo mật</a>
 			<span class="hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
-			<a href="<?php echo esc_url( home_url( '/tuyen-dung' ) ); ?>" class="hover:text-text-body-muted transition-colors">Tuyển dụng</a>
+			<a href="<?php echo esc_url( home_url( '/tuyen-dung' ) ); ?>" class="order-2 xl:order-none hover:text-text-body-muted transition-colors">Tuyển dụng</a>
 			<span class="hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
-			<a href="<?php echo esc_url( home_url( '/lien-he' ) ); ?>" class="hover:text-text-body-muted transition-colors">Liên hệ</a>
+			<a href="<?php echo esc_url( home_url( '/lien-he' ) ); ?>" class="order-1 xl:order-none hover:text-text-body-muted transition-colors">Liên hệ</a>
 		</div>
 
 	</div>
