@@ -20,6 +20,7 @@ get_header();
 
 $theme_uri               = get_template_directory_uri();
 $map_url                 = 'https://www.google.com/maps/place/V%E1%BA%A1n+Ph%C3%BAc+Care/@21.0741276,105.8221623,1041m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135ab83e4098b37:0xb1b8897775e1ce60!8m2!3d21.0741276!4d105.8221623!16s%2Fg%2F11q2y0_pyw?entry=ttu&g_ep=EgoyMDI2MTAyMC4wIKXMDSoASAFQAw%3D%3D';
+$map_embed_url           = 'https://www.google.com/maps?q=21.0741276%2C105.8221623&z=16&hl=vi&output=embed';
 $consultation_services   = vpc_get_consultation_services();
 $gestational_age_options = vpc_get_gestational_age_options();
 ?>
@@ -60,7 +61,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 	     2. CONTACT CONTENT SECTION (FORM & LOCATION INFO)
 	     ========================================================================= -->
 	<section class="vpc-section bg-surface-background-default py-10 sm:py-12 lg:py-16 xl:py-24">
-		<div class="vpc-home-container max-w-[1280px] mx-auto px-5 sm:px-6 lg:px-8">
+		<div class="vpc-home-container max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="grid grid-cols-1 xl:grid-cols-[minmax(0,658px)_minmax(0,550px)] gap-8 xl:gap-[72px] items-start">
 				
 				<!-- LEFT COLUMN: Consultation Form (7 columns on Desktop) -->
@@ -85,7 +86,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 					</div>
 
 					<!-- Form Card Container -->
-					<div class="w-full max-w-[350px] sm:max-w-none mx-auto bg-surface-background-default border border-border-disabled-default rounded-3xl px-4 py-6 sm:p-6 xl:p-8">
+					<div class="w-full max-w-[358px] sm:max-w-none mx-auto bg-surface-background-default border border-border-disabled-default rounded-3xl px-4 py-6 sm:p-6 xl:p-8">
 						<form id="vpc-contact-page-form" class="flex flex-col gap-5">
 							<?php wp_nonce_field( 'vpc_consultation_nonce', 'vpc_consultation_nonce' ); ?>
 							<input type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
@@ -135,50 +136,39 @@ $gestational_age_options = vpc_get_gestational_age_options();
 								<legend class="mb-3 font-body font-medium text-xl leading-7 text-text-body-default flex items-center gap-1">
 									<span class="text-text-error-default">*</span> Giai đoạn thai kỳ
 								</legend>
-								<div class="flex flex-col items-start gap-2.5 sm:flex-row sm:flex-nowrap sm:items-center sm:gap-2.5 xl:gap-3" role="radiogroup" aria-label="Giai đoạn thai kỳ">
-									<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="dang-mang-thai" checked required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-6 sm:px-4 xl:px-6 h-11 sm:h-12 font-body text-sm sm:text-base font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đang mang thai</span></label>
-									<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="chuan-bi-mang-thai" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-6 sm:px-4 xl:px-6 h-11 sm:h-12 font-body text-sm sm:text-base font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Chuẩn bị mang thai</span></label>
-									<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="da-sinh-be" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-6 sm:px-4 xl:px-6 h-11 sm:h-12 font-body text-sm sm:text-base font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đã sinh bé</span></label>
+								<div class="flex flex-wrap items-center gap-2 sm:gap-2.5 xl:gap-3" role="radiogroup" aria-label="Giai đoạn thai kỳ">
+									<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="dang-mang-thai" checked required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 h-10 sm:h-12 xl:px-6 font-body text-sm sm:text-base font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đang mang thai</span></label>
+									<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="chuan-bi-mang-thai" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 h-10 sm:h-12 xl:px-6 font-body text-sm sm:text-base font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Chuẩn bị mang thai</span></label>
+									<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="da-sinh-be" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 h-10 sm:h-12 xl:px-6 font-body text-sm sm:text-base font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đã sinh bé</span></label>
 								</div>
 							</fieldset>
 
 							<!-- Dịch vụ quan tâm (Mobile: order-3 dưới Giai đoạn thai kỳ, Web: sm:order-2 trên Giai đoạn thai kỳ) -->
-							<div class="order-3 sm:order-2 flex flex-col gap-3">
-								<label class="font-body font-medium text-xl leading-7 text-text-body-default flex items-center gap-1">
-									<span class="text-text-error-default">*</span> Dịch vụ quan tâm
-								</label>
-								<div class="relative">
-									<select name="service" required class="w-full h-12 px-3 sm:px-4 rounded-xl border border-border-disabled-default bg-surface-background-default text-text-body-default font-body font-medium text-base focus:border-border-primary-default focus:ring-1 focus:ring-border-primary-default focus:outline-none transition-all appearance-none pr-10">
-										<option value="trung-tam-o-cu" selected>Trung tâm ở cữ</option>
-										<?php foreach ( $consultation_services as $service_value => $service_label ) : ?>
-											<?php if ( $service_value !== 'trung-tam-o-cu' ) : ?>
-												<option value="<?php echo esc_attr( $service_value ); ?>"><?php echo esc_html( $service_label ); ?></option>
-											<?php endif; ?>
-										<?php endforeach; ?>
-									</select>
-									<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3.5">
-										<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/contact-chevron-down.svg' ); ?>" alt="" aria-hidden="true" width="20" height="12">
-									</div>
-								</div>
-							</div>
+						<?php
+						get_template_part( 'template-parts/components/custom-select', null, array(
+							'id'          => 'contact-service',
+							'name'        => 'service',
+							'label'       => 'Dịch vụ quan tâm',
+							'placeholder' => 'Chọn dịch vụ',
+							'required'    => true,
+							'value'       => 'trung-tam-o-cu',
+							'options'     => $consultation_services,
+							'class'       => 'order-3 sm:order-2',
+						) );
+						?>
 
 							<!-- Tuần thai -->
-							<div class="order-4 flex flex-col gap-3">
-								<label class="font-body font-medium text-xl leading-7 text-text-body-default flex items-center gap-1">
-									<span class="text-text-error-default">*</span> Tuần thai
-								</label>
-								<div class="relative">
-									<select name="gestational_age" required class="w-full h-12 px-3 sm:px-4 rounded-xl border border-border-disabled-default bg-surface-background-default text-text-body-default font-body font-medium text-base focus:border-border-primary-default focus:ring-1 focus:ring-border-primary-default focus:outline-none transition-all appearance-none pr-10">
-										<option value="" disabled selected>Chọn giai đoạn</option>
-										<?php foreach ( $gestational_age_options as $age_value => $age_label ) : ?>
-											<option value="<?php echo esc_attr( $age_value ); ?>"><?php echo esc_html( $age_label ); ?></option>
-										<?php endforeach; ?>
-									</select>
-									<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3.5">
-										<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/contact-chevron-down.svg' ); ?>" alt="" aria-hidden="true" width="20" height="12">
-									</div>
-								</div>
-							</div>
+						<?php
+						get_template_part( 'template-parts/components/custom-select', null, array(
+							'id'          => 'contact-gestational-age',
+							'name'        => 'gestational_age',
+							'label'       => 'Tuần thai',
+							'placeholder' => 'Chọn giai đoạn',
+							'required'    => true,
+							'options'     => $gestational_age_options,
+							'class'       => 'order-4',
+						) );
+						?>
 
 							<!-- Ghi chú (No asterisk matching Figma) -->
 							<div class="order-5 flex flex-col gap-3">
@@ -204,7 +194,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 
 				<!-- RIGHT COLUMN: Center Info Card (5 columns on Desktop) -->
 				<div class="flex flex-col">
-					<div class="w-full max-w-[350px] sm:max-w-none mx-auto bg-neutral-white border border-border-disabled-default/60 sm:border-border-divider-default/70 rounded-2xl sm:rounded-3xl p-4 sm:p-5 xl:p-6 space-y-6">
+					<div class="w-full max-w-[358px] sm:max-w-none mx-auto bg-neutral-white border border-border-disabled-default/60 sm:border-border-divider-default/70 rounded-2xl sm:rounded-3xl p-4 sm:p-5 xl:p-6 space-y-6">
 						
 						<!-- Intro Text: Centered on mobile matching Figma -->
 						<p class="font-body text-base text-text-body-default text-center sm:text-left leading-6 font-medium max-w-[318px] sm:max-w-none mx-auto sm:mx-0">
@@ -260,11 +250,18 @@ $gestational_age_options = vpc_get_gestational_age_options();
 							</div>
 						</div>
 
-						<!-- Map Embed Container with Google Map Preview -->
+						<!-- Live Google Maps embed centered on Vạn Phúc Care -->
 						<div class="bg-surface-background-default rounded-xl p-4 w-full flex flex-col gap-3 items-center">
-							<a href="<?php echo esc_url( $map_url ); ?>" target="_blank" rel="noopener noreferrer" aria-label="Mở bản đồ Vạn Phúc Care trên Google Maps" class="block w-full h-[150px] sm:h-auto sm:aspect-[478/258] overflow-hidden rounded-xl">
-								<img src="<?php echo esc_url( $theme_uri . '/assets/images/contact-map-figma.png' ); ?>" alt="Bản đồ chỉ đường Trung Tâm Ở Cữ Vạn Phúc Care" class="w-full h-full object-cover rounded-xl" loading="lazy">
-							</a>
+							<div class="w-full h-[150px] sm:h-auto sm:aspect-[478/258] overflow-hidden rounded-xl border border-border-divider-default/70">
+								<iframe
+									src="<?php echo esc_url( $map_embed_url ); ?>"
+									title="Bản đồ chỉ đường Trung Tâm Ở Cữ Vạn Phúc Care"
+									class="w-full h-full border-0"
+									loading="lazy"
+									referrerpolicy="no-referrer-when-downgrade"
+									allowfullscreen>
+								</iframe>
+							</div>
 							
 							<div class="text-center w-full">
 								<a href="<?php echo esc_url( $map_url ); ?>"

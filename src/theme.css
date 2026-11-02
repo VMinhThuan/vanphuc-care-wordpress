@@ -390,8 +390,10 @@
     gap: 12px;
   }
   .prenatal-quick-info__header img {
-    width: 22px;
-    height: 24px;
+    width: auto;
+    height: auto;
+    max-width: 24px;
+    max-height: 24px;
     object-fit: contain;
     flex-shrink: 0;
   }
@@ -593,7 +595,7 @@
     .prenatal-quick-info__item { padding: 16px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; min-height: auto; border-bottom: 0; }
     .prenatal-quick-info__item:not(:last-child)::after { display: none; }
     .prenatal-quick-info__header { display: flex; align-items: center; justify-content: center; gap: 12px; }
-    .prenatal-quick-info__header img { width: 22px; height: 24px; object-fit: contain; }
+    .prenatal-quick-info__header img { width: auto; height: auto; max-width: 24px; max-height: 24px; object-fit: contain; }
     .prenatal-quick-info__header h3 { margin: 0; color: var(--color-text-body-default); font: 500 20px/28px var(--font-body); }
     .prenatal-quick-info__item p { margin: 0; color: var(--color-text-body-muted); font: 500 16px/24px var(--font-body); }
     .prenatal-intro__photo { height: auto; aspect-ratio: 718 / 545; order: -1; border-radius: 24px; overflow: hidden; width: 100%; }
@@ -683,7 +685,9 @@
     .prenatal-services h2 { font-size: 32px; line-height: 36px; color: var(--color-text-heading-primary-default); margin-bottom: 0; }
     .prenatal-services__grid { display: flex; flex-direction: column; gap: 24px; width: 100%; margin-top: 0; }
     .prenatal-services__grid a { height: auto; width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--color-border-disabled-default); background: var(--color-surface-card-default); box-shadow: var(--shadow-card); }
-    .prenatal-services__grid img { width: 100%; height: 260px; object-fit: cover; border-radius: 8px; }
+    /* Preserve each service image's native ratio on mobile so faces stay
+       visible instead of being cropped into the fixed desktop card height. */
+    .prenatal-services__grid img { width: 100%; height: auto; object-fit: contain; object-position: center top; border-radius: 8px; }
     .prenatal-services__grid span { font-size: 20px; line-height: 28px; color: var(--color-text-accent-default); text-align: center; }
   }
 

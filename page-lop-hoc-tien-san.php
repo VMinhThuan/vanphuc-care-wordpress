@@ -46,28 +46,28 @@ $show_prenatal_video = false;
 		<div class="prenatal-quick-info" aria-label="Thông tin lớp học nhanh">
 			<div class="prenatal-quick-info__item">
 				<div class="prenatal-quick-info__header">
-					<img src="<?php echo esc_url( $image . 'icons/duration.svg' ); ?>" alt="" aria-hidden="true" width="22" height="24" />
+					<img src="<?php echo esc_url( $image . 'icons/duration.svg' ); ?>" alt="" aria-hidden="true" width="24" height="24" />
 					<h3>Thời lượng</h3>
 				</div>
 				<p>01 buổi · 03 giờ (Offline)</p>
 			</div>
 			<div class="prenatal-quick-info__item">
 				<div class="prenatal-quick-info__header">
-					<img src="<?php echo esc_url( $image . 'icons/participants.svg' ); ?>" alt="" aria-hidden="true" width="22" height="24" />
+					<img src="<?php echo esc_url( $image . 'icons/participants.svg' ); ?>" alt="" aria-hidden="true" width="22" height="16.5" />
 					<h3>Số lượng tham gia</h3>
 				</div>
 				<p>Tối đa 05 cặp bố mẹ/ dưới 10 người</p>
 			</div>
 			<div class="prenatal-quick-info__item">
 				<div class="prenatal-quick-info__header">
-					<img src="<?php echo esc_url( $image . 'icons/schedule.svg' ); ?>" alt="" aria-hidden="true" width="22" height="24" />
+					<img src="<?php echo esc_url( $image . 'icons/schedule.svg' ); ?>" alt="" aria-hidden="true" width="22" height="21.9988" />
 					<h3>Thời gian</h3>
 				</div>
 				<p>9h00 – 12h00 (Sáng thứ 7 hàng tuần)</p>
 			</div>
 			<div class="prenatal-quick-info__item">
 				<div class="prenatal-quick-info__header">
-					<img src="<?php echo esc_url( $image . 'icons/map.svg' ); ?>" alt="" aria-hidden="true" width="22" height="24" />
+					<img src="<?php echo esc_url( $image . 'icons/map.svg' ); ?>" alt="" aria-hidden="true" width="22" height="30.4051" />
 					<h3>Địa điểm</h3>
 				</div>
 				<p>Trung tâm ở cữ -  Vạn Phúc Care</p>
