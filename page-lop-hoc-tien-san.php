@@ -16,8 +16,8 @@ $theme_uri = get_template_directory_uri();
 $image     = $theme_uri . '/assets/images/lop-hoc-tien-san/';
 $map_url   = 'https://www.google.com/maps/place/V%E1%BA%A1n+Ph%C3%BAc+Care/@21.0741276,105.8221623,1041m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135ab83e4098b37:0xb1b8897775e1ce60!8m2!3d21.0741276!4d105.8221623!16s%2Fg%2F11q2y0_pyw?entry=ttu&g_ep=EgoyMDI2MTAyMC4wIKXMDSoASAFQAw%3D%3D';
 
-// Temporarily hidden on the responsive website pending the next PO review.
-$show_prenatal_video = false;
+// Visible again after PO review.
+$show_prenatal_video = true;
 ?>
 
 <section class="vpc-section prenatal-hero" aria-labelledby="prenatal-title">
@@ -473,19 +473,33 @@ $show_prenatal_video = false;
 <section class="vpc-section prenatal-services" aria-labelledby="prenatal-services-title">
 	<div class="prenatal-container prenatal-center">
 		<h2 id="prenatal-services-title">Các Dịch Vụ Khác</h2>
-		<div class="prenatal-services__grid">
-			<a href="<?php echo esc_url( home_url( '/#bao-mau-tai-nha' ) ); ?>">
-				<img src="<?php echo esc_url( $image . 'service-newborn.png' ); ?>" alt="Bảo mẫu tại nhà" />
-				<span>Bảo Mẫu Tại Nhà</span>
-			</a>
-			<a href="<?php echo esc_url( home_url( '/#khoa-hoc-truc-tuyen' ) ); ?>">
-				<img class="prenatal-services__image--consultation" src="<?php echo esc_url( $image . 'service-massage.png' ); ?>" alt="Tư vấn nuôi con EASY" />
-				<span>Tư Vấn Nuôi Con EASY</span>
-			</a>
-			<a href="<?php echo esc_url( home_url( '/#trung-tam-o-cu' ) ); ?>">
-				<img class="prenatal-services__image--online-course" src="<?php echo esc_url( $image . 'service-online-course.png' ); ?>" alt="Khóa học trực tuyến" />
-				<span>Khóa Học Trực Tuyến</span>
-			</a>
+		<div class="prenatal-services__carousel" data-services-carousel>
+			<button class="prenatal-services__control prenatal-services__control--prev" type="button" data-services-prev aria-label="Dịch vụ trước" disabled>
+				<span aria-hidden="true">‹</span>
+			</button>
+			<div class="prenatal-services__viewport" data-services-viewport>
+				<div class="prenatal-services__track" data-services-track>
+					<a class="prenatal-services__card" href="<?php echo esc_url( home_url( '/#trung-tam-o-cu' ) ); ?>">
+						<img src="<?php echo esc_url( $image . 'service-homecare.png' ); ?>" alt="Trung tâm ở cữ" loading="lazy" />
+						<span>Trung Tâm Ở Cữ</span>
+					</a>
+					<a class="prenatal-services__card" href="<?php echo esc_url( home_url( '/#bao-mau-tai-nha' ) ); ?>">
+						<img src="<?php echo esc_url( $image . 'service-newborn.png' ); ?>" alt="Bảo mẫu tại nhà" loading="lazy" />
+						<span>Bảo Mẫu Tại Nhà</span>
+					</a>
+					<a class="prenatal-services__card" href="<?php echo esc_url( home_url( '/#khoa-hoc-truc-tuyen' ) ); ?>">
+						<img src="<?php echo esc_url( $image . 'service-massage.png' ); ?>" alt="Tư vấn nuôi con EASY" loading="lazy" />
+						<span>Tư Vấn Nuôi Con EASY</span>
+					</a>
+					<a class="prenatal-services__card" href="<?php echo esc_url( home_url( '/#khoa-hoc-truc-tuyen' ) ); ?>">
+						<img src="<?php echo esc_url( $image . 'service-online-course.png' ); ?>" alt="Khóa học trực tuyến" loading="lazy" />
+						<span>Khóa Học Trực Tuyến</span>
+					</a>
+				</div>
+			</div>
+			<button class="prenatal-services__control prenatal-services__control--next" type="button" data-services-next aria-label="Dịch vụ tiếp theo">
+				<span aria-hidden="true">›</span>
+			</button>
 		</div>
 	</div>
 </section>
@@ -517,6 +531,30 @@ document.addEventListener('DOMContentLoaded', function () {
 				});
 			});
 		});
+	}
+
+	// Other services carousel: keep the Figma horizontal card rail swipeable on touch screens.
+	const servicesCarousel = document.querySelector('[data-services-carousel]');
+	if (servicesCarousel) {
+		const servicesViewport = servicesCarousel.querySelector('[data-services-viewport]');
+		const servicesPrev = servicesCarousel.querySelector('[data-services-prev]');
+		const servicesNext = servicesCarousel.querySelector('[data-services-next]');
+		const updateServicesControls = () => {
+			const maxScroll = servicesViewport.scrollWidth - servicesViewport.clientWidth;
+			servicesPrev.disabled = servicesViewport.scrollLeft <= 1;
+			servicesNext.disabled = servicesViewport.scrollLeft >= maxScroll - 1;
+		};
+		const scrollServices = direction => {
+			const card = servicesViewport.querySelector('.prenatal-services__card');
+			const gap = 24;
+			servicesViewport.scrollBy({ left: direction * ((card?.offsetWidth || 256) + gap), behavior: 'smooth' });
+		};
+
+		servicesPrev.addEventListener('click', () => scrollServices(-1));
+		servicesNext.addEventListener('click', () => scrollServices(1));
+		servicesViewport.addEventListener('scroll', updateServicesControls, { passive: true });
+		window.addEventListener('resize', updateServicesControls);
+		updateServicesControls();
 	}
 
 	// Radio chips selection for gestational age

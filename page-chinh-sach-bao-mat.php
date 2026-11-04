@@ -36,41 +36,7 @@ if ( have_posts() ) :
 			<div class="vpc-container">
 				<div class="policy-main-content">
 
-					<?php
-					$has_custom_content = trim( get_the_content() );
-					if ( ! empty( $has_custom_content ) ) :
-						the_content();
-					else :
-					?>
-
-					<div class="policy-block">
-						<h2 class="policy-section-title">1. Mục đích thu thập thông tin cá nhân</h2>
-						<p>Vạn Phúc Care thu thập thông tin của khách hàng nhằm mục đích cung cấp dịch vụ chăm sóc y tế mẹ và bé tốt nhất, bao gồm:</p>
-						<ul class="policy-list">
-							<li>Tư vấn và thực hiện các gói dịch vụ ở cữ, bảo mẫu tại nhà, tắm bé, thông tắc tia sữa.</li>
-							<li>Quản lý hồ sơ sức khỏe điện tử, theo dõi lịch tiêm chủng và sinh hoạt của mẹ và bé.</li>
-							<li>Hỗ trợ giải đáp các thắc mắc y tế từ đội ngũ chuyên gia.</li>
-						</ul>
-					</div>
-
-					<div class="policy-block">
-						<h2 class="policy-section-title">2. Phạm vi sử dụng thông tin</h2>
-						<p>Chúng tôi chỉ sử dụng thông tin trong nội bộ doanh nghiệp nhằm phục vụ việc chăm sóc và cải thiện chất lượng dịch vụ. Vạn Phúc Care cam kết không bán, chia sẻ hay tiết lộ thông tin cá nhân của khách hàng cho bất kỳ bên thứ ba nào nếu không có sự đồng ý của khách hàng, ngoại trừ trường hợp theo yêu cầu của cơ quan pháp luật có thẩm quyền.</p>
-					</div>
-
-					<div class="policy-block">
-						<h2 class="policy-section-title">3. Bảo mật thông tin khách hàng</h2>
-						<p>Mọi thông tin y tế và dữ liệu cá nhân của khách hàng được lưu trữ bảo mật trên hệ thống máy chủ an toàn với các lớp mã hóa tiêu chuẩn y khoa.</p>
-					</div>
-
-					<div class="policy-block">
-						<h2 class="policy-section-title">4. Đơn vị thu thập và quản lý thông tin</h2>
-						<p><strong>Công Ty TNHH Vạn Phúc Care</strong></p>
-						<p>Địa chỉ: 35B ngõ 399 Âu Cơ, Tây Hồ, Hà Nội</p>
-						<p>Hotline: <a href="tel:0908093198" class="policy-contact-highlight">090 809 3198</a> - Email: <a href="mailto:cskh@vanphuccare.vn" class="policy-contact-highlight">cskh@vanphuccare.vn</a></p>
-					</div>
-
-					<?php endif; ?>
+					<?php the_content(); ?>
 
 					<!-- Related Terms & Policies Callout Box -->
 					<div class="related-policies-box">

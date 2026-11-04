@@ -14,12 +14,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		if (shouldShow) {
 			menuDrawer.classList.remove('hidden');
+			menuDrawer.setAttribute('aria-hidden', 'false');
 			document.body.classList.add('overflow-hidden');
 			if (menuToggle) menuToggle.setAttribute('aria-expanded', 'true');
+			if (menuClose) menuClose.focus();
 		} else {
 			menuDrawer.classList.add('hidden');
+			menuDrawer.setAttribute('aria-hidden', 'true');
 			document.body.classList.remove('overflow-hidden');
 			if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+			if (menuToggle) menuToggle.focus();
 		}
 	}
 
@@ -417,6 +421,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		let currentIndex = 0;
 		let autoplayTimer = null;
 		const totalSlides = slides.length;
+		const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 		function goToSlide(index) {
 			if (index < 0) {
@@ -429,6 +434,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			if (slidesContainer) {
 				slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+				slidesContainer.style.transitionDuration = reducedMotionQuery.matches ? '0ms' : '';
 			}
 
 			dots.forEach((dot, i) => {
@@ -444,6 +450,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		function startAutoplay() {
 			stopAutoplay();
+			if (reducedMotionQuery.matches || totalSlides < 2) return;
 			autoplayTimer = setInterval(() => {
 				goToSlide(currentIndex + 1);
 			}, 5000);
@@ -483,6 +490,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		heroSlider.addEventListener('mouseenter', stopAutoplay);
 		heroSlider.addEventListener('mouseleave', startAutoplay);
+
+		const handleReducedMotionChange = () => {
+			if (reducedMotionQuery.matches) {
+				stopAutoplay();
+			} else {
+				startAutoplay();
+			}
+			goToSlide(currentIndex);
+		};
+		if (typeof reducedMotionQuery.addEventListener === 'function') {
+			reducedMotionQuery.addEventListener('change', handleReducedMotionChange);
+		} else if (typeof reducedMotionQuery.addListener === 'function') {
+			reducedMotionQuery.addListener(handleReducedMotionChange);
+		}
 
 		// Touch swipe support
 		let touchStartX = 0;

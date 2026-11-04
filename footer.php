@@ -18,10 +18,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $theme_uri     = get_template_directory_uri();
 $instagram_url = get_theme_mod( 'vpc_instagram_url', '' );
+if ( empty( $instagram_url ) ) {
+	$instagram_url = 'https://www.instagram.com/vanphuccare?utm_source=ig_web_button_share_sheet&exln=ZDNlZDc0MzIxNw==';
+}
 ?>
 </main><!-- #primary -->
 
-<footer class="site-footer relative w-full overflow-hidden pt-8 pb-8 xl:py-6 text-text-body-default" style="background: linear-gradient(180deg, var(--color-neutral-100) 38.823%, var(--color-primary-100) 99.976%);">
+<footer class="site-footer relative w-full overflow-hidden pt-8 pb-8 xl:py-6 text-text-body-default" style="--footer-background: linear-gradient(180deg, var(--color-neutral-100) 38.823%, var(--color-primary-100) 99.976%);">
 	<!-- Decorative watermark: centered and intentionally wider than the mobile viewport, as in Figma. -->
 	<div class="pointer-events-none absolute bottom-0 left-1/2 z-0 w-[464px] -translate-x-1/2 select-none overflow-hidden sm:right-0 sm:left-auto sm:w-[380px] sm:translate-x-0 xl:w-[471px]" aria-hidden="true">
 		<img src="<?php echo esc_url( $theme_uri . '/assets/images/footer-watermark.svg' ); ?>" 
@@ -38,7 +41,7 @@ $instagram_url = get_theme_mod( 'vpc_instagram_url', '' );
 		<div class="pt-0 pb-0 xl:py-6 flex flex-col md:flex-row md:flex-wrap xl:flex-nowrap justify-between items-start gap-8 xl:gap-6">
 			
 			<!-- Column 1: Thông tin cty (Logo -> tagline gap 12px, còn lại gap 20px) -->
-			<div class="w-full md:w-[381px] shrink-0 flex flex-col">
+			<div class="hidden md:flex w-full md:w-[381px] shrink-0 flex-col">
 				<div class="footer-logo mb-3">
 					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="inline-flex items-center shrink-0">
 						<img src="<?php echo esc_url( $theme_uri . '/assets/images/logo.svg' ); ?>" 
@@ -79,7 +82,7 @@ $instagram_url = get_theme_mod( 'vpc_instagram_url', '' );
 			</div>
 
 			<!-- Column 2: DỊCH VỤ CỦA CHÚNG TÔI -->
-			<div class="w-full sm:w-auto flex flex-col space-y-2 xl:space-y-3">
+			<div class="hidden md:flex w-full sm:w-auto flex-col space-y-2 xl:space-y-3">
 				<h3 class="font-body text-base font-bold text-text-body-default uppercase xl:pb-1">
 					DỊCH VỤ CỦA CHÚNG TÔI
 				</h3>
@@ -97,11 +100,11 @@ $instagram_url = get_theme_mod( 'vpc_instagram_url', '' );
 			</div>
 
 			<!-- Column 3: KIẾN THỨC -->
-			<div class="w-full sm:w-auto flex flex-col space-y-2 xl:space-y-3">
-				<h3 class="font-body text-base font-bold text-text-body-default uppercase xl:pb-1">
+			<div class="footer-link-column w-full sm:w-auto flex flex-col space-y-2 xl:space-y-3">
+				<h3 class="font-body text-sm md:text-base font-bold text-text-body-default uppercase xl:pb-1">
 					KIẾN THỨC
 				</h3>
-				<ul class="space-y-2 text-base font-medium text-text-body-default">
+				<ul class="space-y-2 text-sm md:text-base font-medium text-text-body-default">
 					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#khoa-hoc-truc-tuyen' ) ); ?>" class="hover:text-text-body-muted transition-colors">Phương pháp EASY</a></li>
 					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#kien-thuc-nuoi-con' ) ); ?>" class="hover:text-text-body-muted transition-colors">Cẩm nang làm mẹ</a></li>
 					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#kien-thuc-nuoi-con' ) ); ?>" class="hover:text-text-body-muted transition-colors">Hội chứng biếng ăn</a></li>
@@ -111,11 +114,11 @@ $instagram_url = get_theme_mod( 'vpc_instagram_url', '' );
 			</div>
 
 			<!-- Column 4: TIN TỨC & SỰ KIỆN -->
-			<div class="w-full sm:w-auto flex flex-col space-y-2 xl:space-y-3">
-				<h3 class="font-body text-base font-bold text-text-body-default uppercase xl:pb-1">
+			<div class="footer-link-column w-full sm:w-auto flex flex-col space-y-2 xl:space-y-3">
+				<h3 class="font-body text-sm md:text-base font-bold text-text-body-default uppercase xl:pb-1">
 					TIN TỨC & SỰ KIỆN
 				</h3>
-				<ul class="space-y-2 text-base font-medium text-text-body-default">
+				<ul class="space-y-2 text-sm md:text-base font-medium text-text-body-default">
 					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#kien-thuc-nuoi-con' ) ); ?>" class="hover:text-text-body-muted transition-colors">Mẹ và bé</a></li>
 					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#kien-thuc-nuoi-con' ) ); ?>" class="hover:text-text-body-muted transition-colors">Tin tức & sự kiện</a></li>
 				</ul>
@@ -126,35 +129,29 @@ $instagram_url = get_theme_mod( 'vpc_instagram_url', '' );
 		<!-- Row: 3 social icons sized to the footer design + 2 certification badges -->
 		<div class="pt-8 pb-0 sm:py-6 border-b-0 sm:border-b sm:border-border-divider-default flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 sm:gap-6">
 			<!-- Social icon slots are 52x44 on mobile; the artwork itself stays 40px. -->
-			<div class="flex items-center gap-3">
+			<div class="flex items-center gap-4">
 				<!-- Facebook -->
 				<a href="https://facebook.com/vanphuccare" target="_blank" rel="noopener noreferrer" 
-				   class="w-[52px] h-11 xl:w-12 xl:h-12 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center"
+				   class="w-8 h-8 xl:w-12 xl:h-12 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center"
 				   aria-label="Facebook">
-					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/facebook.svg' ); ?>" alt="Facebook" class="w-10 h-10 xl:w-full xl:h-full object-contain">
+					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/facebook.svg' ); ?>" alt="Facebook" class="w-8 h-8 xl:w-full xl:h-full object-contain">
 				</a>
 
-				<!-- Instagram remains visible; it becomes a link only after PO configures its verified URL. -->
-				<?php if ( ! empty( $instagram_url ) ) : ?>
-					<a href="<?php echo esc_url( $instagram_url ); ?>" target="_blank" rel="noopener noreferrer" class="w-[52px] h-11 xl:w-12 xl:h-12 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center" aria-label="Instagram">
-						<img src="<?php echo esc_url( $theme_uri . '/assets/icons/instagram.svg' ); ?>" alt="Instagram" class="w-10 h-10 xl:w-full xl:h-full object-contain">
-					</a>
-				<?php else : ?>
-					<span class="w-[52px] h-11 xl:w-12 xl:h-12 shrink-0 rounded-full overflow-hidden flex items-center justify-center" aria-label="Instagram">
-						<img src="<?php echo esc_url( $theme_uri . '/assets/icons/instagram.svg' ); ?>" alt="Instagram" class="w-10 h-10 xl:w-full xl:h-full object-contain">
-					</span>
-				<?php endif; ?>
+				<!-- Instagram -->
+				<a href="<?php echo esc_url( $instagram_url ); ?>" target="_blank" rel="noopener noreferrer" class="w-8 h-8 xl:w-12 xl:h-12 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center" aria-label="Instagram">
+					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/instagram.svg' ); ?>" alt="Instagram" class="w-8 h-8 xl:w-full xl:h-full object-contain">
+				</a>
 
 				<!-- TikTok -->
 				<a href="https://tiktok.com/@vanphuccare" target="_blank" rel="noopener noreferrer" 
-				   class="w-[52px] h-11 xl:w-12 xl:h-12 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center"
+				   class="w-8 h-8 xl:w-12 xl:h-12 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center"
 				   aria-label="TikTok">
-					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/tiktok.svg' ); ?>" alt="TikTok" class="w-10 h-10 xl:w-full xl:h-full object-contain">
+					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/tiktok.svg' ); ?>" alt="TikTok" class="w-8 h-8 xl:w-full xl:h-full object-contain">
 				</a>
 			</div>
 
 			<!-- Badges (DMCA + Bộ Công Thương) -->
-			<div class="flex items-center gap-6 xl:gap-3.5">
+			<div class="flex items-center gap-3 xl:gap-3.5">
 				<!-- DMCA.com Protection Status Badge: use the local Figma asset to preserve the designed colors. -->
 				<a href="https://www.dmca.com/Protection/Status.aspx?ID=c7a60f67-9696-479d-baf5-2f48a09327be" 
 				   title="DMCA.com Protection Status" 
@@ -181,14 +178,14 @@ $instagram_url = get_theme_mod( 'vpc_instagram_url', '' );
 		</div>
 
 		<!-- Bottom Row: divider and navigation links on mobile; inline links on desktop. -->
-		<div class="mt-8 border-t border-border-divider-default pt-8 flex flex-col xl:flex-row items-start xl:items-center justify-start gap-2 xl:gap-3 text-base font-medium text-text-body-default xl:mt-0 xl:border-t-0 xl:pt-6">
-			<a href="<?php echo esc_url( home_url( '/dieu-khoan-su-dung' ) ); ?>" class="order-3 xl:order-none hover:text-text-body-muted transition-colors">Điều khoản sử dụng</a>
+		<div class="mt-8 border-t border-border-divider-default pt-8 flex flex-col xl:flex-row items-start xl:items-center justify-start gap-1 md:gap-2 xl:gap-3 text-sm md:text-base font-medium text-text-body-default xl:mt-0 xl:border-t-0 xl:pt-6">
+			<a href="<?php echo esc_url( home_url( '/dieu-khoan-su-dung' ) ); ?>" class="order-1 xl:order-none hover:text-text-body-muted transition-colors">Điều khoản sử dụng</a>
 			<span class="hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
-			<a href="<?php echo esc_url( home_url( '/chinh-sach-bao-mat' ) ); ?>" class="order-4 xl:order-none hover:text-text-body-muted transition-colors">Chính sách bảo mật</a>
+			<a href="<?php echo esc_url( home_url( '/chinh-sach-bao-mat' ) ); ?>" class="order-2 xl:order-none hover:text-text-body-muted transition-colors">Chính sách bảo mật</a>
 			<span class="hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
-			<a href="<?php echo esc_url( home_url( '/tuyen-dung' ) ); ?>" class="order-2 xl:order-none hover:text-text-body-muted transition-colors">Tuyển dụng</a>
+			<a href="<?php echo esc_url( home_url( '/tuyen-dung' ) ); ?>" class="order-3 xl:order-none hover:text-text-body-muted transition-colors">Tuyển dụng</a>
 			<span class="hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
-			<a href="<?php echo esc_url( home_url( '/lien-he' ) ); ?>" class="order-1 xl:order-none hover:text-text-body-muted transition-colors">Liên hệ</a>
+			<a href="<?php echo esc_url( home_url( '/lien-he' ) ); ?>" class="order-4 xl:order-none hover:text-text-body-muted transition-colors">Liên hệ</a>
 		</div>
 
 	</div>

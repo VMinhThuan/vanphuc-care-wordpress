@@ -123,6 +123,40 @@ try {
     if (consoleErrors.length) failures.push(`${viewport.name}: console errors: ${consoleErrors.join(' | ')}`);
     if (failedLocalRequests.length) failures.push(`${viewport.name}: failed local requests: ${failedLocalRequests.join(', ')}`);
 
+    // Regression guard for lazy images and scroll-driven visibility bugs:
+    // traverse the full page down/up five times and ensure loaded images remain
+    // rendered instead of becoming transparent or hidden.
+    const scrollRegression = [390, 768, 1440].includes(viewport.width)
+      ? await page.evaluate(async () => {
+        for (let cycle = 0; cycle < 5; cycle += 1) {
+          window.scrollTo(0, document.documentElement.scrollHeight);
+          await new Promise((resolve) => setTimeout(resolve, 80));
+          window.scrollTo(0, 0);
+          await new Promise((resolve) => setTimeout(resolve, 80));
+        }
+        const images = Array.from(document.images);
+        // Force every lazy image through the viewport so the check distinguishes
+        // an actual failed request from a browser that has not scheduled a lazy
+        // request yet.
+        for (const image of images) {
+          image.scrollIntoView({ block: 'center' });
+          await new Promise((resolve) => setTimeout(resolve, 120));
+        }
+        window.scrollTo(0, 0);
+        await new Promise((resolve) => setTimeout(resolve, 120));
+
+        return {
+          broken: images.filter((image) => image.complete && image.naturalWidth === 0).map((image) => image.currentSrc || image.src),
+          hidden: images.filter((image) => {
+            const style = getComputedStyle(image);
+            return style.opacity === '0' || style.visibility === 'hidden';
+          }).map((image) => image.currentSrc || image.src),
+        };
+      })
+      : { broken: [], hidden: [] };
+    if (scrollRegression.broken.length) failures.push(`${viewport.name}: images became incomplete after scroll regression: ${scrollRegression.broken.join(', ')}`);
+    if (scrollRegression.hidden.length) failures.push(`${viewport.name}: images became hidden after scroll regression: ${scrollRegression.hidden.join(', ')}`);
+
     // The desktop header must remain a single row at the breakpoint. In
     // particular, multi-word navigation labels must never wrap while loading.
     if (viewport.width >= 1280) {

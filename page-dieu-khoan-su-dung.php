@@ -32,39 +32,7 @@ if ( have_posts() ) :
 			<div class="vpc-container">
 				<div class="policy-main-content">
 
-					<?php
-					$has_custom_content = trim( get_the_content() );
-					if ( ! empty( $has_custom_content ) ) :
-						the_content();
-					else :
-					?>
-
-					<!-- Nội dung giao diện chuẩn đầy đủ 100% theo Figma -->
-					<p class="policy-lead-text">
-						<strong>Chào mừng quý khách đến với website của Công Ty TNHH Vạn Phúc Care.</strong> Khi truy cập và sử dụng dịch vụ trên website của chúng tôi, quý khách đồng ý tuân thủ các điều khoản và điều kiện được nêu dưới đây. Vui lòng đọc kỹ trước khi sử dụng các dịch vụ chăm sóc mẹ và bé của chúng tôi.
-					</p>
-
-					<div class="policy-block">
-						<h2 class="policy-section-title">1. Chấp thuận các điều khoản</h2>
-						<p>Bằng việc truy cập, đăng ký tư vấn hoặc sử dụng bất kỳ dịch vụ nào do Vạn Phúc Care cung cấp, quý khách xác nhận đã đọc, hiểu và đồng ý chịu sự ràng buộc bởi các điều khoản sử dụng này.</p>
-					</div>
-
-					<div class="policy-block">
-						<h2 class="policy-section-title">2. Dịch vụ chăm sóc mẹ và bé</h2>
-						<p>Vạn Phúc Care cung cấp các dịch vụ chăm sóc sức khỏe chuyên nghiệp bao gồm: Trung tâm ở cữ, Bảo mẫu tại nhà, Chăm sóc mẹ sau sinh, Tắm bé sơ sinh, Thông tắc tia sữa và các lớp học tiền sản. Các dịch vụ được thực hiện bởi đội ngũ y tá, điều dưỡng viên và chuyên gia được đào tạo chuyên môn.</p>
-					</div>
-
-					<div class="policy-block">
-						<h2 class="policy-section-title">3. Quyền và trách nhiệm của khách hàng</h2>
-						<p>Khách hàng có trách nhiệm cung cấp thông tin chính xác về tình trạng sức khỏe của mẹ và bé nhằm phục vụ việc chăm sóc y tế an toàn. Khách hàng cam kết tuân thủ các hướng dẫn chuyên môn từ điều dưỡng viên và thanh toán phí dịch vụ theo thỏa thuận hợp đồng.</p>
-					</div>
-
-					<div class="policy-block">
-						<h2 class="policy-section-title">4. Quyền sở hữu trí tuệ</h2>
-						<p>Toàn bộ nội dung, hình ảnh, bài viết kiến thức, nhãn hiệu và tài liệu trên website đều thuộc quyền sở hữu trí tuệ của Công Ty TNHH Vạn Phúc Care. Mọi hành vi sao chép, trích dẫn cần ghi rõ nguồn và được sự đồng ý bằng văn bản của Vạn Phúc Care.</p>
-					</div>
-
-					<?php endif; ?>
+					<?php the_content(); ?>
 
 					<!-- Related Terms & Policies Callout Box (Group 1000005850) -->
 					<div class="related-policies-box">

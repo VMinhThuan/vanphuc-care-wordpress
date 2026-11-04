@@ -39,7 +39,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 				<div class="vpc-hero-slide w-full shrink-0 relative">
 					<a href="https://www.edu.vanphuccare.vn" target="_blank" rel="noopener noreferrer" class="block w-full relative group/item" title="Khóa học Chăm sóc bé yêu KHOA HỌC từ con số 0 - Vạn Phúc Care">
 						<picture>
-							<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/hero-banner.png' ); ?>" 
+							<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/hero-banner.png' ); ?>"
 							     alt="Chăm sóc bé yêu KHOA HỌC từ con số 0 - Hệ thống khóa học online chuẩn y khoa dành cho cha mẹ hiện đại - Vạn Phúc Care" 
 							     width="1440" 
 							     height="581" 
@@ -60,7 +60,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 				<div class="vpc-hero-slide w-full shrink-0 relative">
 					<a href="#trung-tam-o-cu" class="block w-full relative group/item" title="Trung tâm ở cữ Vạn Phúc Care - Mẹ thảnh thơi nghỉ dưỡng, Bé phát triển toàn diện">
 						<picture>
-							<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/hero-banner-2.jpg' ); ?>" 
+							<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/hero-banner-2.jpg' ); ?>"
 							     alt="Trung tâm ở cữ Vạn Phúc Care - Mẹ thảnh thơi nghỉ dưỡng, Bé phát triển toàn diện" 
 							     width="1440" 
 							     height="581" 
@@ -74,7 +74,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 				<div class="vpc-hero-slide w-full shrink-0 relative">
 					<a href="#gioi-thieu" class="block w-full relative group/item" title="Hành trình cùng mẹ, trải đầy yêu thương - Vạn Phúc Care">
 						<picture>
-							<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/hero-banner-3.JPG' ); ?>" 
+							<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/hero-banner-3.JPG' ); ?>"
 							     alt="Hệ sinh thái chăm sóc Mẹ và Bé Vạn Phúc Care" 
 							     width="1440" 
 							     height="581" 
@@ -115,7 +115,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<!-- Main Photo with Rounded Corners matching Figma (border-radius: 50px) -->
 						<div class="relative w-full aspect-[4/3] sm:aspect-[517/591] rounded-[32px] sm:rounded-[50px] overflow-hidden shadow-[0px_4px_30px_rgba(0,0,0,0.08)] bg-neutral-100">
 							<picture>
-								<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/hero-section-image.jpg' ); ?>" 
+								<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/hero-section-image.jpg' ); ?>"
 								     alt="Hành trình cùng mẹ trải đầy yêu thương - Vạn Phúc Care" 
 								     class="w-full h-full object-cover block transition-transform duration-500 hover:scale-[1.02]" 
 								     loading="lazy" />
@@ -249,7 +249,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 			<!-- Room Visual Showcase (Rectangle 34624347) -->
 			<div class="w-full max-w-[1400px] rounded-[24px] overflow-hidden border border-border-divider-default shadow-[0px_4px_47px_rgba(0,0,0,0.01)] bg-neutral-100">
 				<picture>
-					<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/trung-tam-o-cu.JPG' ); ?>" 
+					<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/trung-tam-o-cu.JPG' ); ?>"
 					     alt="Không gian phòng nghỉ dưỡng trung tâm ở cữ Vạn Phúc Care" 
 					     class="w-full h-auto aspect-[350/220] sm:aspect-[1240/670] object-cover block"
 					     loading="lazy" />
@@ -257,7 +257,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 			</div>
 
 			<!-- Middle 2-Column Info Row (Frame 2147224019) -->
-			<div class="w-full max-w-[1200px] flex flex-col lg:flex-row justify-between items-center lg:items-start gap-6 lg:gap-12 xl:gap-[120px] pt-2">
+			<div class="w-full max-w-[1400px] flex flex-col lg:flex-row justify-between items-center lg:items-start gap-6 lg:gap-12 xl:gap-[120px] pt-2">
 				<!-- Left Column -->
 				<div class="max-w-[685px] flex flex-col gap-3 sm:gap-6 text-center lg:text-left">
 					<h2 class="font-heading font-normal text-2xl sm:text-3xl lg:text-[40px] leading-snug lg:leading-[52px] text-text-heading-secondary-default">
@@ -286,7 +286,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 					</div>
 
 					<div class="flex items-center gap-3">
-						<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/icon-home-care-exact.svg' ); ?>" width="24" height="18" class="w-6 h-[18px] shrink-0" alt="" aria-hidden="true" />
+						<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/icon-home-care-exact.svg' ); ?>" width="24" height="18" class="w-6 h-[18px] shrink-0" alt="" aria-hidden="true" />
 						<span class="font-body font-normal sm:font-medium text-base text-text-body-default leading-6">Phòng nhi và phòng mẹ riêng biệt</span>
 					</div>
 				</div>
@@ -350,7 +350,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<!-- Left Photo -->
 						<div class="absolute left-0 top-0 w-[170px] sm:w-[200px] lg:w-[47%] h-[210px] sm:h-[250px] lg:h-auto aspect-[325/402] rounded-xl overflow-hidden shadow-[0_4px_18px_rgba(0,0,0,0.09)]">
 							<picture>
-								<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/ba-mau-tai-nha-2.jpg' ); ?>" 
+								<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/ba-mau-tai-nha-2.jpg' ); ?>"
 								     alt="Bảo mẫu chăm sóc bé tại nhà - Vạn Phúc Care" 
 								     class="w-full h-full object-cover block" 
 								     loading="lazy" />
@@ -359,7 +359,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<!-- Right Photo (Staggered down) -->
 						<div class="absolute right-0 top-[38px] sm:top-[45px] lg:top-[56px] xl:top-[62px] w-[170px] sm:w-[200px] lg:w-[47%] h-[273px] sm:h-[320px] lg:h-auto aspect-[324/521] rounded-xl overflow-hidden shadow-[0_4px_18px_rgba(0,0,0,0.09)]">
 							<picture>
-								<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/bao-mau-tai-nha-1.jpg' ); ?>" 
+								<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/bao-mau-tai-nha-1.jpg' ); ?>"
 								     alt="Bảo mẫu tận tâm chăm sóc giấc ngủ của bé" 
 								     class="w-full h-full object-cover block" 
 								     loading="lazy" />
@@ -441,7 +441,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<!-- Left Photo (Top-aligned) -->
 						<div class="relative w-full">
 							<picture>
-								<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/lop-hoc-tien-san-1.jpg' ); ?>" 
+								<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/lop-hoc-tien-san-1.jpg' ); ?>"
 								     alt="Chăm sóc bé sơ sinh tại lớp học tiền sản Vạn Phúc Care" 
 									     class="w-full h-full aspect-[316/388] object-cover rounded-xl block"
 								     loading="lazy" />
@@ -450,7 +450,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<!-- Right Photo (Staggered down) -->
 						<div class="relative w-full pt-8 sm:pt-12 lg:pt-20">
 							<picture>
-								<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/lop-hoc-tien-san-2.jpg' ); ?>" 
+								<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/lop-hoc-tien-san-2.jpg' ); ?>"
 								     alt="Tư vấn và giải đáp thắc mắc cùng điều dưỡng Vạn Phúc Care" 
 									     class="w-full h-full aspect-[314/521] object-cover rounded-xl block" 
 								     loading="lazy" />
@@ -656,7 +656,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 				<!-- Card 3 -->
 				<div class="bg-surface-card-default rounded-xl p-5 sm:p-6 lg:p-7 shadow-card border border-border-divider-default flex flex-col items-center text-center h-full transition-all duration-300 hover:shadow-[0_12px_32px_rgba(26,119,186,0.08)] hover:-translate-y-1">
 					<div class="w-12 h-12 rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0 mb-3 sm:mb-4">
-						<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/lightbulb-hand-icon-transparent-50x50.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px]" alt="" aria-hidden="true" />
+						<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/lightbulb-hand-icon-transparent-50x50.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px]" alt="" aria-hidden="true" />
 						<svg class="hidden" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 							<path d="M12 1.5a.9.9 0 0 1 .9.9v1.2a.9.9 0 1 1-1.8 0V2.4a.9.9 0 0 1 .9-.9zm-6.2 3.8a.9.9 0 0 1 1.27 0l.85.85a.9.9 0 1 1-1.27 1.27l-.85-.85a.9.9 0 0 1 0-1.27zm12.4 0a.9.9 0 0 1 0 1.27l-.85.85a.9.9 0 1 1-1.27-1.27l.85-.85a.9.9 0 0 1 1.27 0zM3 11a.9.9 0 0 1 .9-.9h1.2a.9.9 0 1 1 0 1.8H3.9A.9.9 0 0 1 3 11zm15 0a.9.9 0 0 1 .9-.9h1.2a.9.9 0 1 1 0 1.8h-1.2a.9.9 0 0 1-.9-.9z"/>
 							<path d="M12 4.5a4.2 4.2 0 0 0-3.08 7.07c.45.48.75 1.08.75 1.83h4.66c0-.75.3-1.35.75-1.83A4.2 4.2 0 0 0 12 4.5zm-1.4 10.4h2.8v.9h-2.8v-.9z"/>
@@ -674,7 +674,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 				<!-- Card 4 -->
 				<div class="bg-surface-card-default rounded-xl p-5 sm:p-6 lg:p-7 shadow-card border border-border-divider-default flex flex-col items-center text-center h-full transition-all duration-300 hover:shadow-[0_12px_32px_rgba(26,119,186,0.08)] hover:-translate-y-1">
 					<div class="w-12 h-12 rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0 mb-3 sm:mb-4">
-						<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/teaching-icon-50x50.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px]" alt="" aria-hidden="true" />
+						<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/teaching-icon-50x50.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px]" alt="" aria-hidden="true" />
 						<svg class="hidden" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 							<path d="M9.5 3h12a1 1 0 0 1 1 1v9.5a1 1 0 0 1-1 1h-12a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1.5 2.5h8v1.5h-8V5.5zm0 3h5.5V10H11V8.5z"/>
 							<circle cx="5.5" cy="6" r="2.5"/>
@@ -733,8 +733,8 @@ $gestational_age_options = vpc_get_gestational_age_options();
 				<!-- Center Image (Mobile order: 1, Desktop order: 2) -->
 				<div class="w-full max-w-[350px] sm:max-w-[479px] shrink-0 mx-auto flex justify-center items-center order-1 lg:order-2">
 					<picture>
-						<source srcset="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/vi-sao-chon-VPC.webp' ); ?>" type="image/webp">
-						<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/vi-sao-chon-VPC.jpg' ); ?>" 
+						<source srcset="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/vi-sao-chon-VPC.webp' ); ?>" type="image/webp">
+						<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/vi-sao-chon-VPC.jpg' ); ?>"
 						     alt="Vì sao cha mẹ chọn Vạn Phúc Care"
 						     width="479"
 						     height="276"
@@ -1392,7 +1392,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 	</section>	<!-- =========================================================================
 	     9. BÁO CHÍ NÓI VỀ CHÚNG TÔI (Featured Press / Articles)
 	     ========================================================================= -->
-	<section id="bao-chi" style="background: linear-gradient(135deg, var(--color-surface-background-default) 0%, var(--color-surface-background-secondary) 100%);" class="vpc-section vpc-gradient-press relative overflow-hidden">
+	<section id="bao-chi" class="vpc-section vpc-gradient-press relative overflow-hidden">
 		<div class="vpc-home-container">
 			<!-- Section Header -->
 			<div class="text-center max-w-3xl mx-auto mb-8 sm:mb-14">
@@ -1422,7 +1422,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 					<!-- Thumbnail Image -->
 					<div class="relative w-full aspect-[268/208] rounded-xl overflow-hidden bg-neutral-200">
 						<picture>
-							<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/Bai-bao-noi-bat.jpg' ); ?>" alt="Vạn Phúc Care - Báo chí đưa tin" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+							<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/Bai-bao-noi-bat.jpg' ); ?>" alt="Vạn Phúc Care - Báo chí đưa tin" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
 						</picture>
 					</div>
 					
@@ -1501,7 +1501,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 
 			<!-- Bottom CTA Button -->
 			<div class="w-full flex justify-center mt-8 sm:mt-12">
-				<span class="vpc-button w-full sm:w-auto max-w-[350px] h-10 xl:h-12 px-4 xl:px-6 rounded-full border border-border-secondary-default bg-surface-card-default text-text-heading-secondary-default hover:bg-surface-badge-secondary transition-colors flex items-center justify-center shadow-xs" aria-disabled="true">
+				<span class="vpc-button w-full sm:w-auto max-w-[350px] h-10 xl:h-12 px-4 xl:px-6 rounded-full border border-border-secondary-default bg-transparent text-text-heading-secondary-default hover:bg-surface-badge-secondary transition-colors flex items-center justify-center shadow-xs" aria-disabled="true">
 					Xem tất cả
 				</span>
 			</div>
@@ -1512,11 +1512,10 @@ $gestational_age_options = vpc_get_gestational_age_options();
 	     10. ĐĂNG KÝ TƯ VẤN (SẴN SÀNG BẮT ĐẦU - HÀNH TRÌNH LÀM MẸ HẠNH PHÚC)
 	     ========================================================================= -->
 	<section id="dang-ky-tu-van" class="vpc-section vpc-gradient-consultation relative overflow-hidden">
-		<div class="vpc-home-container max-w-4xl mx-auto flex flex-col items-center gap-6">
+		<div class="consultation-section-inner vpc-home-container max-w-4xl mx-auto flex flex-col items-center gap-6 lg:gap-2">
 			
 			<div class="text-center">
 				<h2 class="font-heading font-semibold text-h1-mobile xl:text-h1 text-center">
-					<span class="text-text-heading-primary-default block">Sẵn Sàng Bắt Đầu</span>
 					<span class="text-text-heading-secondary-default block mt-1">
 						Hành Trình Làm Mẹ <span class="whitespace-nowrap">Hạnh Phúc</span>
 					</span>
@@ -1566,27 +1565,6 @@ $gestational_age_options = vpc_get_gestational_age_options();
 							</div>
 						</div>
 					</div>
-
-					<!-- Giai đoạn thai kỳ: cập nhật theo comment Figma, dùng radio để luôn gửi đúng lựa chọn về hệ thống. -->
-					<fieldset class="flex flex-col gap-2 border-0 p-0 m-0">
-						<legend class="font-body font-medium text-base sm:text-[20px] text-text-body-default">
-							<span class="text-text-error-default">*</span> Giai đoạn thai kỳ
-						</legend>
-						<div class="flex flex-wrap items-center gap-2" role="radiogroup" aria-label="Giai đoạn thai kỳ">
-							<label class="cursor-pointer shrink-0">
-								<input class="peer sr-only" type="radio" name="pregnancy_stage" value="dang-mang-thai" checked required>
-								<span class="inline-flex h-10 items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 font-body text-sm font-medium text-text-body-default whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đang mang thai</span>
-							</label>
-							<label class="cursor-pointer shrink-0">
-								<input class="peer sr-only" type="radio" name="pregnancy_stage" value="chuan-bi-mang-thai" required>
-								<span class="inline-flex h-10 items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 font-body text-sm font-medium text-text-body-default whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Chuẩn bị mang thai</span>
-							</label>
-							<label class="cursor-pointer shrink-0">
-								<input class="peer sr-only" type="radio" name="pregnancy_stage" value="da-sinh-be" required>
-								<span class="inline-flex h-10 items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 font-body text-sm font-medium text-text-body-default whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đã sinh bé</span>
-							</label>
-						</div>
-					</fieldset>
 
 					<!-- Tuần thai: placeholder mới theo Figma là "Chọn giai đoạn". -->
 					<div class="flex flex-col gap-2">

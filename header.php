@@ -23,7 +23,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<link rel="icon" type="image/png" sizes="300x300" href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Logo-van-phuc-care-300x300.png' ); ?>">
 	<link rel="icon" type="image/png" sizes="180x180" href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Logo-van-phuc-care-180x180.png' ); ?>">
 	<link rel="apple-touch-icon" sizes="180x180" href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Logo-van-phuc-care-180x180.png' ); ?>">
-	<style id="vpc-header-load-guard">#site-header{visibility:hidden}</style>
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class( 'font-body bg-neutral-white text-text-body-default antialiased selection:bg-primary-100 selection:text-primary-800' ); ?>>
@@ -78,9 +77,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</div>
 
 	<!-- Mobile Drawer Menu: full mobile canvas matching the Figma artwork -->
-	<div id="mobile-menu-drawer" class="fixed inset-0 z-50 xl:hidden hidden bg-surface-background-default flex flex-col justify-between overflow-y-auto">
+	<div id="mobile-menu-drawer" class="fixed inset-0 z-50 xl:hidden hidden bg-surface-background-default flex flex-col justify-between overflow-y-auto" aria-hidden="true">
 		<div>
-			<!-- Top Bar: Cao 72px (h-[72px] px-5 py-3): logo 116x36 bên trái, nút đóng 48x48 bên phải -->
+			<!-- Top Bar: logo bên trái, nút đóng tròn màu xanh nhạt bên phải -->
 			<div class="h-[72px] px-5 py-3 flex items-center justify-between border-b border-border-divider-default/40">
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="inline-flex items-center shrink-0">
 					<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.svg' ); ?>" 
@@ -89,15 +88,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 					     height="36" 
 					     class="h-9 w-[116px] object-contain block">
 				</a>
-				<button id="mobile-menu-close" type="button" class="w-12 h-12 flex items-center justify-center text-text-body-default focus:outline-hidden cursor-pointer" aria-label="Close navigation menu">
-					<svg class="w-6 h-6 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2">
+				<button id="mobile-menu-close" type="button" class="w-12 h-12 rounded-full bg-primary-100 text-primary-500 hover:bg-primary-200 active:bg-primary-300 flex items-center justify-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border-focus-default cursor-pointer" aria-label="Close navigation menu">
+					<svg class="w-5 h-5 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2">
 						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
 					</svg>
 				</button>
 			</div>
 
-			<!-- Danh sách mục: pt-2 px-5 pb-0, mỗi mục cao 64px (h-16 py-4), text-xl font-medium text-text-nav-default có border-b và chevron phải 24px -->
-			<nav class="pt-2 px-5 pb-0 flex flex-col" aria-label="<?php esc_attr_e( 'Mobile navigation', 'vanphuccare' ); ?>">
+			<!-- Danh sách mục: mỗi mục cao 64px, text-xl và chevron nhỏ bên phải -->
+			<nav class="mobile-menu-nav pt-2 px-5 pb-0 flex flex-col" aria-label="<?php esc_attr_e( 'Mobile navigation', 'vanphuccare' ); ?>">
 				<?php
 				wp_nav_menu(
 					array(
@@ -112,8 +111,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</nav>
 		</div>
 
-		<!-- Vùng nút đúng Figma: CTA và hotline (Size md: h-12 / 48px, padding 24 12) -->
-		<div class="pt-0 px-5 pb-8 flex flex-col gap-3">
+		<!-- CTA và hotline được ghim ở cuối drawer, đúng khoảng cách trên mobile -->
+		<div class="pt-0 px-5 pb-6 flex flex-col gap-2">
 			<button data-open-modal="vpc-consultation-modal" type="button" class="vpc-button vpc-button-md w-full h-12 px-6 py-3 rounded-full bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default font-medium text-base flex items-center justify-center transition-colors">
 				<span>Tư vấn miễn phí</span>
 			</button>

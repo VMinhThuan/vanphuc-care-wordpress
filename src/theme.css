@@ -428,8 +428,9 @@
       display: none;
     }
   }
-  .prenatal-intro__photo { height: 506px; overflow: hidden; border-radius: 24px; background: var(--color-surface-background-primary); }
-  .prenatal-intro__photo img { position: relative; top: -46.05%; left: -10.46%; width: 120.91%; height: 192.09%; max-width: none; object-fit: cover; }
+  .prenatal-intro__photo { height: 506px; overflow: hidden; border-radius: 24px; background: var(--color-surface-background-default); }
+  .prenatal-intro__photo picture { display: block; width: 100%; height: 100%; }
+  .prenatal-intro__photo img { display: block; position: relative; top: -46.05%; left: -10.46%; width: 120.91%; height: 192.09%; max-width: none; object-fit: cover; }
   .prenatal-intro__copy { justify-content: center; }
   .prenatal-feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; margin-top: 40px; }
   .prenatal-feature-grid article { min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 16px 12px 12px; border-radius: 12px; background: var(--color-surface-card-default); box-shadow: var(--shadow-card); text-align: center; }
@@ -554,13 +555,20 @@
   .prenatal-accordion summary::after { content: ""; display: block; width: 20px; height: 12px; flex: 0 0 20px; -webkit-mask: url('data:image/svg+xml;utf8,<svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L10 10L19 1" stroke="black" stroke-width="2" stroke-linecap="round"/></svg>') no-repeat center / contain; mask: url('data:image/svg+xml;utf8,<svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L10 10L19 1" stroke="black" stroke-width="2" stroke-linecap="round"/></svg>') no-repeat center / contain; background-color: var(--color-icon-primary-default); transition: transform .2s ease; }
   .prenatal-accordion details[open] summary::after { transform: rotate(-180deg); }
   .prenatal-accordion p { max-width: 1050px; margin: 12px 0 0; color: var(--color-text-body-muted); font: 500 16px/24px var(--font-body); }
-  .prenatal-services__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 384px)); justify-content: center; gap: 24px; width: 100%; margin-top: 40px; }
-  .prenatal-services__grid a { display: flex; flex-direction: column; overflow: hidden; gap: 12px; padding: 12px; border: 1px solid var(--color-border-disabled-default); border-radius: 12px; background: var(--color-surface-card-default); box-shadow: var(--shadow-card); text-decoration: none; transition: transform .2s, box-shadow .2s; }
-  .prenatal-services__grid a:hover { transform: translateY(-2px); box-shadow: 0 4px 12px color-mix(in srgb, var(--color-neutral-black) 8%, transparent); }
-  .prenatal-services__grid img { width: 100%; height: 320px; object-fit: cover; border-radius: 8px; }
-  .prenatal-services__grid .prenatal-services__image--consultation,
-  .prenatal-services__grid .prenatal-services__image--online-course { object-position: center top; }
-  .prenatal-services__grid span { display: block; color: var(--color-text-accent-default); font: 500 24px/32px var(--font-body); text-align: center; margin-block: 4px; }
+  .prenatal-services h2 { color: var(--color-text-heading-primary-default); font-size: 40px; line-height: 48px; text-align: center; }
+  .prenatal-services__carousel { display: flex; align-items: center; width: min(1130px, 100%); margin: 24px auto 0; }
+  .prenatal-services__viewport { min-width: 0; flex: 1 1 auto; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; scroll-snap-type: x proximity; }
+  .prenatal-services__viewport::-webkit-scrollbar { display: none; }
+  .prenatal-services__track { display: flex; gap: 24px; width: max-content; }
+  .prenatal-services__card { display: flex; flex: 0 0 256px; flex-direction: column; overflow: hidden; gap: 12px; padding: 12px; border: 1px solid var(--color-border-disabled-default); border-radius: 12px; background: var(--color-surface-card-default); box-shadow: var(--shadow-card); text-decoration: none; scroll-snap-align: start; transition: transform .2s, box-shadow .2s; }
+  .prenatal-services__card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px color-mix(in srgb, var(--color-neutral-black) 8%, transparent); }
+  .prenatal-services__card img { display: block; width: 100%; height: 220px; object-fit: cover; border-radius: 8px; }
+  .prenatal-services__card span { display: block; color: var(--color-text-accent-default); font: 500 20px/28px var(--font-body); text-align: center; margin-block: 0 2px; }
+  .prenatal-services__control { display: inline-flex; flex: 0 0 56px; width: 56px; height: 56px; align-items: center; justify-content: center; border: 1px solid var(--color-border-disabled-default); border-radius: 4px; color: var(--color-primary-500); background: var(--color-surface-card-default); cursor: pointer; transition: background-color .2s, color .2s, opacity .2s; }
+  .prenatal-services__control span { display: block; font: 400 34px/1 var(--font-body); }
+  .prenatal-services__control:hover:not(:disabled) { background: var(--color-surface-background-primary); }
+  .prenatal-services__control:disabled { color: var(--color-neutral-400); border-color: transparent; background: transparent; cursor: default; }
+  .prenatal-services__control:focus-visible { outline: 2px solid var(--color-primary-500); outline-offset: -2px; }
 
   @media (max-width: 1023px) {
     .prenatal-hero__layout, .prenatal-intro__content, .prenatal-teacher__layout, .prenatal-registration__layout { grid-template-columns: 1fr; gap: 40px; }
@@ -570,6 +578,20 @@
     .prenatal-feature-grid, .prenatal-benefit-grid { grid-template-columns: repeat(2, 1fr); }
     .prenatal-teacher__photo { max-width: 540px; width: 100%; justify-self: center; }
     .prenatal-form-wrap { max-width: 658px; width: 100%; justify-self: center; }
+
+    /* The Figma tablet layout keeps the service cards in one vertical rail.
+       The desktop carousel is reserved for wide screens only. */
+    .prenatal-services__carousel { display: block; width: 100%; margin-top: 24px; }
+    .prenatal-services__viewport { overflow: visible; }
+    .prenatal-services__track { display: flex; flex-direction: column; gap: 36px; width: min(700px, 100%); margin-inline: auto; }
+    .prenatal-services__card { width: 100%; flex: 0 0 auto; gap: 24px; padding: 20px; border-radius: 16px; }
+    .prenatal-services__card:nth-child(1) { order: 2; }
+    .prenatal-services__card:nth-child(2) { order: 3; }
+    .prenatal-services__card:nth-child(3) { order: 1; }
+    .prenatal-services__card:nth-child(4) { order: 4; }
+    .prenatal-services__card img { height: auto; aspect-ratio: 560 / 390; object-fit: cover; object-position: center top; border-radius: 12px; }
+    .prenatal-services__card span { font-size: 32px; line-height: 48px; }
+    .prenatal-services__control { display: none; }
   }
   @media (max-width: 639px) {
     #primary .prenatal-video, #primary .prenatal-benefits, #primary .prenatal-program, #primary .prenatal-teacher, #primary .prenatal-registration, #primary .prenatal-faq, #primary .prenatal-services { padding: 40px 20px; }
@@ -586,6 +608,10 @@
     .prenatal-badge span { font-size: 12px; line-height: 16px; }
     .prenatal-badge__icon { width: 24px; height: 24px; }
     .prenatal-title, .prenatal-center h2, .prenatal-section-heading h2, .prenatal-form-wrap h2 { font-size: 32px; line-height: 36px; text-align: center; }
+    #primary .vpc-section h1,
+    #primary .vpc-section h2,
+    #primary .vpc-section h3,
+    #primary .vpc-section h4 { text-wrap: balance; }
     .prenatal-video h2 { font-size: 32px; line-height: 36px; }
     .prenatal-hero__copy > p, .prenatal-intro__copy > p, .prenatal-teacher__copy > p, .prenatal-teacher__intro > p, .prenatal-registration__intro > p, .prenatal-lead { font-size: 16px; line-height: 24px; text-align: center; color: var(--color-text-body-muted); }
     .prenatal-actions { width: 100%; display: grid; gap: 12px; margin-top: 0; }
@@ -683,12 +709,20 @@
     .prenatal-accordion summary { font-size: 16px; line-height: 24px; color: var(--color-text-accent-default); }
     .prenatal-accordion p { font-size: 16px; line-height: 24px; color: var(--color-text-body-default); margin-top: 12px; }
     .prenatal-services h2 { font-size: 32px; line-height: 36px; color: var(--color-text-heading-primary-default); margin-bottom: 0; }
-    .prenatal-services__grid { display: flex; flex-direction: column; gap: 24px; width: 100%; margin-top: 0; }
-    .prenatal-services__grid a { height: auto; width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--color-border-disabled-default); background: var(--color-surface-card-default); box-shadow: var(--shadow-card); }
-    /* Preserve each service image's native ratio on mobile so faces stay
-       visible instead of being cropped into the fixed desktop card height. */
-    .prenatal-services__grid img { width: 100%; height: auto; object-fit: contain; object-position: center top; border-radius: 8px; }
-    .prenatal-services__grid span { font-size: 20px; line-height: 28px; color: var(--color-text-accent-default); text-align: center; }
+  }
+
+  .site-footer {
+    background: var(--footer-background);
+  }
+
+  @media (max-width: 639px) {
+    .site-footer {
+      background: var(--color-primary-100);
+    }
+
+    .site-footer .footer-link-column li {
+      height: 20px !important;
+    }
   }
 
   /* Shared homepage primitives. Keep visual values named rather than repeated
@@ -699,6 +733,13 @@
   @media (min-width: 64rem) {
     .vpc-section {
       padding: 6rem 5rem;
+    }
+
+    /* The homepage consultation frame is intentionally compact: the Figma
+       layout places the title close to the form and ends at the card baseline. */
+    #dang-ky-tu-van {
+      padding-top: 2rem;
+      padding-bottom: 0;
     }
   }
   .vpc-gradient-blue {
@@ -717,7 +758,12 @@
     background: linear-gradient(59.1deg, var(--color-neutral-100) 66.82%, var(--color-primary-100) 146.55%);
   }
   .vpc-gradient-press {
-    background: linear-gradient(135deg, var(--color-surface-background-default) 0%, var(--color-surface-background-secondary) 100%);
+    /* Keep the pink accent concentrated near the heading so outlined secondary
+       actions remain visible and consistent with the rest of the site. */
+    background: linear-gradient(150deg, var(--color-surface-background-secondary) 0%, var(--color-surface-background-default) 34%, var(--color-surface-background-default) 100%);
+  }
+  .vpc-gradient-press .vpc-button {
+    background-color: transparent;
   }
   .vpc-gradient-contact-hero {
     background: linear-gradient(179.09deg, var(--color-surface-background-default) 0.72%, var(--color-surface-background-secondary) 143.87%);
@@ -1016,6 +1062,21 @@
     font-weight: 500;
     line-height: 1.75rem;
     text-decoration: none;
+  }
+  .vpc-mobile-nav > li > a > svg {
+    width: 1rem;
+    height: 1rem;
+    color: var(--color-neutral-600);
+    flex: 0 0 auto;
+  }
+  .mobile-menu-nav > a > svg {
+    width: 1rem;
+    height: 1rem;
+    color: var(--color-neutral-600);
+    flex: 0 0 auto;
+  }
+  .vpc-mobile-nav > li {
+    border-bottom-color: var(--color-neutral-200);
   }
   .vpc-mobile-nav > li.current-menu-item > a,
   .vpc-mobile-nav > li.current_page_item > a {

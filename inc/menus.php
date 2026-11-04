@@ -55,7 +55,7 @@ function vanphuccare_primary_menu_fallback() {
 function vanphuccare_mobile_menu_fallback() {
 	$is_home     = is_front_page() || is_home();
 	$is_prenatal = is_page( 'lop-hoc-tien-san' );
-	$chevron     = '<svg class="w-6 h-6 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>';
+	$chevron     = '<svg class="w-4 h-4 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>';
 
 	$items = array(
 		array( 'url' => home_url( '/' ), 'title' => 'Trang chủ', 'active' => $is_home ),

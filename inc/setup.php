@@ -39,8 +39,35 @@ function vanphuccare_setup() {
 add_action( 'after_setup_theme', 'vanphuccare_setup' );
 
 /**
+ * Removes an accidental duplicated "Cữ" token from document/SEO titles
+ * without changing the stored post title.
+ *
+ * @param string $title Document title.
+ * @return string
+ */
+function vanphuccare_normalize_title_text( $title ) {
+	return preg_replace( '/(Ở\s+Cữ)\s+Cữ/ui', '$1', (string) $title );
+}
+
+/**
+ * Applies the title normalization to core and common SEO plugin title hooks.
+ *
+ * @param array<string, string> $parts Document title parts.
+ * @return array<string, string>
+ */
+function vanphuccare_normalize_document_title_parts( $parts ) {
+	foreach ( $parts as $key => $part ) {
+		$parts[ $key ] = vanphuccare_normalize_title_text( $part );
+	}
+
+	return $parts;
+}
+add_filter( 'document_title_parts', 'vanphuccare_normalize_document_title_parts' );
+add_filter( 'wpseo_title', 'vanphuccare_normalize_title_text' );
+add_filter( 'rank_math/frontend/title', 'vanphuccare_normalize_title_text' );
+
+/**
  * Adds the verified external/contact destinations in one editable location.
- * Empty values deliberately render as non-links instead of placeholder URLs.
  *
  * @param WP_Customize_Manager $wp_customize Customizer instance.
  * @return void
@@ -52,13 +79,14 @@ function vanphuccare_customize_contact_settings( $wp_customize ) {
 	) );
 
 	$wp_customize->add_setting( 'vpc_instagram_url', array(
+		'default'           => 'https://www.instagram.com/vanphuccare?utm_source=ig_web_button_share_sheet&exln=ZDNlZDc0MzIxNw==',
 		'sanitize_callback' => 'esc_url_raw',
 	) );
 	$wp_customize->add_control( 'vpc_instagram_url', array(
 		'label'       => 'Instagram URL đã xác nhận',
 		'section'     => 'vpc_contact_settings',
 		'type'        => 'url',
-		'description' => 'Để trống nếu PO chưa xác nhận. Icon sẽ không điều hướng.',
+		'description' => 'URL Instagram của Vạn Phúc Care.',
 	) );
 
 	$wp_customize->add_setting( 'vpc_consultation_api_endpoint', array(
