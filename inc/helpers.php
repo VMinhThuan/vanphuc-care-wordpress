@@ -60,6 +60,92 @@ function vpc_get_gestational_age_options() {
 }
 
 /**
+ * Resolve a theme image through WordPress Media Library when the match is
+ * unambiguous, while retaining the checked theme asset as a safe fallback.
+ *
+ * The resolver deliberately matches the attachment's stored file basename,
+ * not a guessed URL or a similar-looking image. Sites with duplicate media
+ * basenames are left on the theme fallback until an explicit Attachment ID is
+ * supplied through the `vpc_image_attachment_id` filter or the corresponding
+ * theme mod (`vpc_image_<slug>_id`).
+ *
+ * @param string $path Relative path below assets/images/.
+ * @param string $size WordPress image size to request for a resolved media item.
+ * @return string
+ */
+function vpc_image_url( $path, $size = 'full' ) {
+	$path = ltrim( wp_normalize_path( rawurldecode( (string) $path ) ), '/' );
+	if ( '' === $path || false !== strpos( $path, '..' ) ) {
+		return '';
+	}
+
+	$slug = sanitize_key( preg_replace( '/[^a-z0-9]+/i', '_', $path ) );
+	$attachment_id = absint( get_theme_mod( 'vpc_image_' . $slug . '_id', 0 ) );
+
+	if ( ! $attachment_id ) {
+		$attachment_id = vpc_find_attachment_id_by_filename( $path );
+	}
+
+	$attachment_id = absint( apply_filters( 'vpc_image_attachment_id', $attachment_id, $path ) );
+	if ( $attachment_id && wp_attachment_is_image( $attachment_id ) ) {
+		$media_url = wp_get_attachment_image_url( $attachment_id, $size );
+		if ( $media_url ) {
+			return $media_url;
+		}
+	}
+
+	$theme_file = get_theme_file_path( 'assets/images/' . $path );
+	return file_exists( $theme_file ) ? get_theme_file_uri( 'assets/images/' . $path ) : '';
+}
+
+/**
+ * Find a Media Library image only when its stored filename is unique.
+ *
+ * @param string $path Relative image path or filename.
+ * @return int
+ */
+function vpc_find_attachment_id_by_filename( $path ) {
+	static $cache = array();
+	static $basename_index = null;
+
+	$path_key = strtolower( wp_normalize_path( (string) $path ) );
+	if ( array_key_exists( $path_key, $cache ) ) {
+		return $cache[ $path_key ];
+	}
+
+	$filename = strtolower( wp_basename( $path_key ) );
+	if ( null === $basename_index ) {
+		$basename_index = array();
+		$attachments     = get_posts(
+			array(
+				'post_type'      => 'attachment',
+				'post_status'    => 'inherit',
+				'posts_per_page' => -1,
+				'fields'         => 'ids',
+				'no_found_rows'  => true,
+				'meta_key'       => '_wp_attached_file',
+			)
+		);
+
+		foreach ( $attachments as $attachment_id ) {
+			if ( ! wp_attachment_is_image( $attachment_id ) ) {
+				continue;
+			}
+
+			$attached_file = strtolower( wp_normalize_path( (string) get_post_meta( $attachment_id, '_wp_attached_file', true ) ) );
+			$basename      = strtolower( wp_basename( $attached_file ) );
+			if ( '' !== $basename ) {
+				$basename_index[ $basename ][] = absint( $attachment_id );
+			}
+		}
+	}
+
+	$matches             = $basename_index[ $filename ] ?? array();
+	$cache[ $path_key ] = 1 === count( $matches ) ? $matches[0] : 0;
+	return $cache[ $path_key ];
+}
+
+/**
  * Validates the configured external lead receiver. Lead delivery must never
  * fall back to WordPress email or post meta: that risks creating a second,
  * unverified data store for sensitive customer information.

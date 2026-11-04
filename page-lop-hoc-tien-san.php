@@ -14,6 +14,9 @@ get_header();
 
 $theme_uri = get_template_directory_uri();
 $image     = $theme_uri . '/assets/images/lop-hoc-tien-san/';
+$prenatal_image = static function ( $filename, $size = 'full' ) {
+	return vpc_image_url( 'lop-hoc-tien-san/' . ltrim( $filename, '/' ), $size );
+};
 $map_url   = 'https://www.google.com/maps/place/V%E1%BA%A1n+Ph%C3%BAc+Care/@21.0741276,105.8221623,1041m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3135ab83e4098b37:0xb1b8897775e1ce60!8m2!3d21.0741276!4d105.8221623!16s%2Fg%2F11q2y0_pyw?entry=ttu&g_ep=EgoyMDI2MTAyMC4wIKXMDSoASAFQAw%3D%3D';
 
 // Visible again after PO review.
@@ -39,8 +42,8 @@ $show_prenatal_video = true;
 		</div>
 		<div class="prenatal-hero__media">
 			<picture>
-				<source media="(max-width: 639px)" srcset="<?php echo esc_url( $image . 'hero-class-actual.png' ); ?>" />
-				<img class="prenatal-hero__image" src="<?php echo esc_url( $image . 'hero-mother-baby.png' ); ?>" alt="Lớp học tiền sản thực tế tại Vạn Phúc Care" width="454" height="444" />
+				<source media="(max-width: 639px)" srcset="<?php echo esc_url( $prenatal_image( 'hero-class-actual.png', 'full' ) ); ?>" />
+				<img class="prenatal-hero__image" src="<?php echo esc_url( $prenatal_image( 'hero-mother-baby.png', 'full' ) ); ?>" alt="Lớp học tiền sản thực tế tại Vạn Phúc Care" width="454" height="444" />
 			</picture>
 		</div>
 		<div class="prenatal-quick-info" aria-label="Thông tin lớp học nhanh">
@@ -81,8 +84,8 @@ $show_prenatal_video = true;
 		<div class="prenatal-intro__content">
 			<div class="prenatal-intro__photo">
 				<picture>
-					<source media="(max-width: 639px)" srcset="<?php echo esc_url( $image . 'intro-class-actual.png' ); ?>" />
-					<img src="<?php echo esc_url( $image . 'intro-family.png' ); ?>" alt="Bố mẹ tham gia lớp học cùng con" />
+					<source media="(max-width: 639px)" srcset="<?php echo esc_url( $prenatal_image( 'intro-class-actual.png', 'full' ) ); ?>" />
+					<img src="<?php echo esc_url( $prenatal_image( 'intro-family.png', 'full' ) ); ?>" alt="Bố mẹ tham gia lớp học cùng con" />
 				</picture>
 			</div>
 			<div class="prenatal-intro__copy">
@@ -141,7 +144,7 @@ $show_prenatal_video = true;
 		<h2 id="prenatal-video-title">Từ Bỡ Ngỡ Đến Tự Tin Chăm Con</h2>
 		<p class="prenatal-lead">Bố mẹ cùng học, cùng thực hành — với sự hướng dẫn trực tiếp của điều dưỡng.</p>
 		<a class="prenatal-video__frame" href="#prenatal-registration" aria-label="Đăng ký tư vấn lớp học">
-			<img src="<?php echo esc_url( $image . 'class-video.png' ); ?>" alt="Không khí thực hành trong lớp học tiền sản" />
+			<img src="<?php echo esc_url( $prenatal_image( 'class-video.png', 'large' ) ); ?>" alt="Không khí thực hành trong lớp học tiền sản" />
 			<span class="prenatal-play" aria-hidden="true">
 				<img class="prenatal-play__circle" src="<?php echo esc_url( $image . 'icons/video-play-circle.svg' ); ?>" alt="" width="86" height="86" />
 				<img class="prenatal-play__triangle" src="<?php echo esc_url( $image . 'icons/video-play-triangle.svg' ); ?>" alt="" width="35.0565" height="26.3377" />
@@ -306,7 +309,7 @@ $show_prenatal_video = true;
 <section class="vpc-section prenatal-teacher" aria-labelledby="prenatal-teacher-title">
 	<div class="prenatal-container prenatal-teacher__layout">
 		<div class="prenatal-teacher__photo">
-			<img class="prenatal-teacher__card-img" src="<?php echo esc_url( $image . 'teacher-thanh-thuy-card.png' ); ?>" srcset="<?php echo esc_url( $image . 'teacher-thanh-thuy-card@2x.png' ); ?> 2x" alt="Điều dưỡng trưởng Thanh Thủy bế em bé" width="540" height="600" />
+			<img class="prenatal-teacher__card-img" src="<?php echo esc_url( $prenatal_image( 'teacher-thanh-thuy-card.png', 'large' ) ); ?>" srcset="<?php echo esc_url( $prenatal_image( 'teacher-thanh-thuy-card@2x.png', 'full' ) ); ?> 2x" alt="Điều dưỡng trưởng Thanh Thủy bế em bé" width="540" height="600" />
 		</div>
 		<div class="prenatal-teacher__copy">
 			<div class="prenatal-badge">
@@ -480,19 +483,19 @@ $show_prenatal_video = true;
 			<div class="prenatal-services__viewport" data-services-viewport>
 				<div class="prenatal-services__track" data-services-track>
 					<a class="prenatal-services__card" href="<?php echo esc_url( home_url( '/#trung-tam-o-cu' ) ); ?>">
-						<img src="<?php echo esc_url( $image . 'service-homecare.png' ); ?>" alt="Trung tâm ở cữ" loading="lazy" />
+						<img src="<?php echo esc_url( $prenatal_image( 'service-homecare.png', 'large' ) ); ?>" alt="Trung tâm ở cữ" loading="lazy" />
 						<span>Trung Tâm Ở Cữ</span>
 					</a>
 					<a class="prenatal-services__card" href="<?php echo esc_url( home_url( '/#bao-mau-tai-nha' ) ); ?>">
-						<img src="<?php echo esc_url( $image . 'service-newborn.png' ); ?>" alt="Bảo mẫu tại nhà" loading="lazy" />
+						<img src="<?php echo esc_url( $prenatal_image( 'service-newborn.png', 'large' ) ); ?>" alt="Bảo mẫu tại nhà" loading="lazy" />
 						<span>Bảo Mẫu Tại Nhà</span>
 					</a>
 					<a class="prenatal-services__card" href="<?php echo esc_url( home_url( '/#khoa-hoc-truc-tuyen' ) ); ?>">
-						<img src="<?php echo esc_url( $image . 'service-massage.png' ); ?>" alt="Tư vấn nuôi con EASY" loading="lazy" />
+						<img src="<?php echo esc_url( $prenatal_image( 'service-massage.png', 'large' ) ); ?>" alt="Tư vấn nuôi con EASY" loading="lazy" />
 						<span>Tư Vấn Nuôi Con EASY</span>
 					</a>
 					<a class="prenatal-services__card" href="<?php echo esc_url( home_url( '/#khoa-hoc-truc-tuyen' ) ); ?>">
-						<img src="<?php echo esc_url( $image . 'service-online-course.png' ); ?>" alt="Khóa học trực tuyến" loading="lazy" />
+						<img src="<?php echo esc_url( $prenatal_image( 'service-online-course.png', 'large' ) ); ?>" alt="Khóa học trực tuyến" loading="lazy" />
 						<span>Khóa Học Trực Tuyến</span>
 					</a>
 				</div>

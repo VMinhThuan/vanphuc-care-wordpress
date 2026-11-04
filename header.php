@@ -20,9 +20,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="icon" type="image/png" sizes="300x300" href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Logo-van-phuc-care-300x300.png' ); ?>">
-	<link rel="icon" type="image/png" sizes="180x180" href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Logo-van-phuc-care-180x180.png' ); ?>">
-	<link rel="apple-touch-icon" sizes="180x180" href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/Logo-van-phuc-care-180x180.png' ); ?>">
+	<link rel="icon" type="image/png" sizes="300x300" href="<?php echo esc_url( vpc_image_url( 'Logo-van-phuc-care-300x300.png', 'full' ) ); ?>">
+	<link rel="icon" type="image/png" sizes="180x180" href="<?php echo esc_url( vpc_image_url( 'Logo-van-phuc-care-180x180.png', 'full' ) ); ?>">
+	<link rel="apple-touch-icon" sizes="180x180" href="<?php echo esc_url( vpc_image_url( 'Logo-van-phuc-care-180x180.png', 'full' ) ); ?>">
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class( 'font-body bg-neutral-white text-text-body-default antialiased selection:bg-primary-100 selection:text-primary-800' ); ?>>
@@ -35,7 +35,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<!-- Site Logo (Left) - Mobile: 103x32px, Desktop: 116x36px -->
 		<div class="site-logo flex shrink-0 items-center">
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="inline-flex items-center shrink-0 transition-transform duration-200 hover:scale-102">
-				<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.svg' ); ?>" 
+				<img src="<?php echo esc_url( vpc_image_url( 'logo.svg', 'full' ) ); ?>"
 				     alt="<?php bloginfo( 'name' ); ?>" 
 				     width="116" 
 				     height="36" 
@@ -82,7 +82,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<!-- Top Bar: logo bên trái, nút đóng tròn màu xanh nhạt bên phải -->
 			<div class="h-[72px] px-5 py-3 flex items-center justify-between border-b border-border-divider-default/40">
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="inline-flex items-center shrink-0">
-					<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.svg' ); ?>" 
+					<img src="<?php echo esc_url( vpc_image_url( 'logo.svg', 'full' ) ); ?>"
 					     alt="<?php bloginfo( 'name' ); ?>" 
 					     width="116" 
 					     height="36" 

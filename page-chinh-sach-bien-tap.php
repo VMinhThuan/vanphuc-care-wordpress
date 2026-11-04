@@ -22,7 +22,7 @@ if ( have_posts() ) :
 		?>
 
 		<!-- Hero Banner Section -->
-		<section class="policy-hero-banner" style="background-image: linear-gradient(90.7deg, rgba(243, 128, 131, 0.81) -2.2%, rgba(26, 119, 186, 0.81) 99.39%), url('<?php echo esc_url( get_template_directory_uri() . '/assets/images/hero_bg.jpg' ); ?>');">
+		<section class="policy-hero-banner" style="background-image: linear-gradient(90.7deg, rgba(243, 128, 131, 0.81) -2.2%, rgba(26, 119, 186, 0.81) 99.39%), url('<?php echo esc_url( vpc_image_url( 'hero_bg.jpg', 'full' ) ); ?>');">
 			<div class="vpc-container">
 				<h1 class="policy-hero-title"><?php echo esc_html( $page_title ); ?></h1>
 				<p class="policy-hero-desc">
