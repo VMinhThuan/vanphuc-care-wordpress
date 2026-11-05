@@ -25,6 +25,7 @@ function vanphuccare_enqueue_assets() {
 	$tailwind_ver  = file_exists( $tailwind_path ) ? (string) filemtime( $tailwind_path ) : $theme_version;
 	$about_path    = get_template_directory() . '/assets/css/about.css';
 	$about_ver     = file_exists( $about_path ) ? (string) filemtime( $about_path ) : $theme_version;
+	$is_about_page = is_page_template( 'page-gioi-thieu.php' ) || is_page( 'gioi-thieu' );
 
 	// Enqueue Google Fonts: Fraunces (Heading) & Manrope (Body) - optimized weights, no italic
 	wp_enqueue_style(
@@ -44,7 +45,7 @@ function vanphuccare_enqueue_assets() {
 		);
 	}
 
-	if ( is_front_page() && file_exists( $about_path ) ) {
+	if ( $is_about_page && file_exists( $about_path ) ) {
 		wp_enqueue_style(
 			'vanphuccare-about',
 			get_template_directory_uri() . '/assets/css/about.css',
@@ -71,3 +72,23 @@ function vanphuccare_enqueue_assets() {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'vanphuccare_enqueue_assets' );
+
+/**
+ * Preloads only the primary homepage hero image so the first viewport can
+ * render sooner without making every page download homepage assets.
+ *
+ * @return void
+ */
+function vanphuccare_preload_homepage_hero() {
+	if ( ! is_front_page() || ! function_exists( 'vpc_image_url' ) ) {
+		return;
+	}
+
+	$hero_url = vpc_image_url( 'Trang chủ/hero-banner.webp', 'full' );
+	if ( ! $hero_url ) {
+		return;
+	}
+
+	printf( '<link rel="preload" as="image" href="%s" fetchpriority="high">\n', esc_url( $hero_url ) );
+}
+add_action( 'wp_head', 'vanphuccare_preload_homepage_hero', 1 );

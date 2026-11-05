@@ -24,7 +24,7 @@ if ( empty( $instagram_url ) ) {
 ?>
 </main><!-- #primary -->
 
-<footer class="site-footer <?php echo is_front_page() ? 'site-footer--about' : ''; ?> relative w-full overflow-hidden pt-8 pb-8 xl:py-6 text-text-body-default" style="--footer-background: linear-gradient(180deg, var(--color-neutral-100) 38.823%, var(--color-primary-100) 99.976%);">
+<footer class="site-footer <?php echo ( is_page_template( 'page-gioi-thieu.php' ) || is_page( 'gioi-thieu' ) ) ? 'site-footer--about' : ''; ?> relative w-full overflow-hidden pt-8 pb-8 xl:py-6 text-text-body-default" style="--footer-background: linear-gradient(180deg, var(--color-neutral-100) 38.823%, var(--color-primary-100) 99.976%);">
 	<!-- Decorative watermark: centered and intentionally wider than the mobile viewport, as in Figma. -->
 	<div class="pointer-events-none absolute bottom-0 left-1/2 z-0 w-[464px] -translate-x-1/2 select-none overflow-hidden sm:right-0 sm:left-auto sm:w-[380px] sm:translate-x-0 xl:w-[471px]" aria-hidden="true">
 		<?php $footer_watermark_url = vpc_image_url( 'footer-watermark.svg', 'full' ); ?>

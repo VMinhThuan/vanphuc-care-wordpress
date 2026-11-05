@@ -33,12 +33,13 @@ add_action( 'after_setup_theme', 'vanphuccare_register_menus' );
 function vanphuccare_primary_menu_fallback() {
 	$is_home     = is_front_page() || is_home();
 	$is_prenatal = is_page( 'lop-hoc-tien-san' );
+	$is_about    = is_page_template( 'page-gioi-thieu.php' ) || is_page( 'gioi-thieu' );
 	$nav_active  = 'text-text-nav-active';
 	$nav_default = 'text-text-nav-default hover:text-text-nav-hover';
 
 	echo '<ul class="vpc-nav-menu">';
 	printf( '<li class="%s"><a href="%s" class="%s">%s</a></li>', $is_home ? 'current-menu-item' : '', esc_url( home_url( '/' ) ), $is_home ? $nav_active : $nav_default, esc_html__( 'Trang chủ', 'vanphuccare' ) );
-	printf( '<li><a href="%s" class="%s">%s</a></li>', esc_url( home_url( '/gioi-thieu' ) ), $nav_default, esc_html__( 'Giới thiệu', 'vanphuccare' ) );
+	printf( '<li class="%s"><a href="%s" class="%s">%s</a></li>', $is_about ? 'current-menu-item' : '', esc_url( home_url( '/gioi-thieu' ) ), $is_about ? $nav_active : $nav_default, esc_html__( 'Giới thiệu', 'vanphuccare' ) );
 	printf( '<li><a href="%s" class="%s">%s</a></li>', esc_url( home_url( '/dich-vu/trung-tam-o-cu/' ) ), $nav_default, esc_html__( 'Ở cữ', 'vanphuccare' ) );
 	printf( '<li><a href="%s" class="%s">%s</a></li>', esc_url( home_url( '/dich-vu/bao-mau-tai-nha/' ) ), $nav_default, esc_html__( 'Bảo mẫu', 'vanphuccare' ) );
 	printf( '<li><a href="%s" class="%s">%s</a></li>', esc_url( home_url( '/dich-vu/' ) ), $nav_default, esc_html__( 'Dịch vụ', 'vanphuccare' ) );
@@ -55,11 +56,12 @@ function vanphuccare_primary_menu_fallback() {
 function vanphuccare_mobile_menu_fallback() {
 	$is_home     = is_front_page() || is_home();
 	$is_prenatal = is_page( 'lop-hoc-tien-san' );
+	$is_about    = is_page_template( 'page-gioi-thieu.php' ) || is_page( 'gioi-thieu' );
 	$chevron     = '<svg class="w-4 h-4 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>';
 
 	$items = array(
 		array( 'url' => home_url( '/' ), 'title' => 'Trang chủ', 'active' => $is_home ),
-		array( 'url' => home_url( '/gioi-thieu' ), 'title' => 'Giới thiệu', 'active' => false ),
+		array( 'url' => home_url( '/gioi-thieu' ), 'title' => 'Giới thiệu', 'active' => $is_about ),
 		array( 'url' => home_url( '/dich-vu/trung-tam-o-cu/' ), 'title' => 'Ở cữ', 'active' => false ),
 		array( 'url' => home_url( '/dich-vu/bao-mau-tai-nha/' ), 'title' => 'Bảo mẫu', 'active' => false ),
 		array( 'url' => home_url( '/dich-vu/' ), 'title' => 'Dịch vụ', 'active' => false ),
