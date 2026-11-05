@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "description": "Verified WordPress Media Library mappings for VanPhucCare. Keep verified_attachment_id null until the attachment is confirmed from a staging export or manual review.",
+  "entries": [
+    { "key": "homepage.hero.slide_1", "filename": "Trang chủ/hero-banner.png", "verified_attachment_id": null, "locations": ["front-page.php:31"] },
+    { "key": "homepage.hero.slide_2", "filename": "Trang chủ/hero-banner-2.jpg", "verified_attachment_id": null, "locations": ["front-page.php:40"] },
+    { "key": "homepage.hero.slide_3", "filename": "Trang chủ/hero-banner-3.JPG", "verified_attachment_id": null, "locations": ["front-page.php:46"] },
+    { "key": "homepage.intro", "filename": "Trang chủ/hero-section-image.jpg", "verified_attachment_id": null, "locations": ["front-page.php:131"] },
+    { "key": "homepage.postpartum_center", "filename": "Trang chủ/trung-tam-o-cu.JPG", "verified_attachment_id": null, "locations": ["front-page.php:268"] },
+    { "key": "homepage.homecare.left", "filename": "Trang chủ/ba-mau-tai-nha-2.jpg", "verified_attachment_id": null, "locations": ["front-page.php:371"] },
+    { "key": "homepage.homecare.right", "filename": "Trang chủ/bao-mau-tai-nha-1.jpg", "verified_attachment_id": null, "locations": ["front-page.php:383"] },
+    { "key": "homepage.prenatal.left", "filename": "Trang chủ/lop-hoc-tien-san-1.jpg", "verified_attachment_id": null, "locations": ["front-page.php:471"] },
+    { "key": "homepage.prenatal.right", "filename": "Trang chủ/lop-hoc-tien-san-2.jpg", "verified_attachment_id": null, "locations": ["front-page.php:483"] },
+    { "key": "homepage.why_vpc.webp", "filename": "Trang chủ/vi-sao-chon-VPC.webp", "verified_attachment_id": null, "locations": ["front-page.php:770"] },
+    { "key": "homepage.why_vpc.jpg", "filename": "Trang chủ/vi-sao-chon-VPC.jpg", "verified_attachment_id": null, "locations": ["front-page.php:771"] },
+    { "key": "homepage.press.featured", "filename": "Trang chủ/Bai-bao-noi-bat.jpg", "verified_attachment_id": null, "locations": ["front-page.php:1466"] },
+    { "key": "homepage.press.event_2", "filename": "press_event_2.jpg", "verified_attachment_id": null, "locations": ["front-page.php:1497"] },
+    { "key": "homepage.press.event_3", "filename": "press_event_3.jpg", "verified_attachment_id": null, "locations": ["front-page.php:1526"] },
+    { "key": "homepage.knowledge.no_featured_image", "filename": "blog_post_ultrasound.jpg", "verified_attachment_id": null, "locations": ["front-page.php:1700"] },
+    { "key": "homepage.feedback.avatar_1", "filename": "avatars/customer_1.png", "verified_attachment_id": null, "locations": ["front-page.php:954,1080,1311"] },
+    { "key": "homepage.feedback.avatar_2", "filename": "avatars/customer_2.png", "verified_attachment_id": null, "locations": ["front-page.php:979,1105,1211,1337"] },
+    { "key": "homepage.feedback.avatar_3", "filename": "avatars/customer_3.png", "verified_attachment_id": null, "locations": ["front-page.php:1004,1130,1236,1362"] },
+    { "key": "homepage.feedback.avatar_4", "filename": "avatars/customer_4.png", "verified_attachment_id": null, "locations": ["front-page.php:1029,1155,1261,1387"] },
+    { "key": "homepage.feedback.avatar_5", "filename": "avatars/customer_5.png", "verified_attachment_id": null, "locations": ["front-page.php:1054,1180,1286,1412"] },
+    { "key": "site.logo", "filename": "logo.svg", "verified_attachment_id": null, "locations": ["header.php:42,92", "footer.php:50"] },
+    { "key": "site.favicon_300", "filename": "Logo-van-phuc-care-300x300.png", "verified_attachment_id": null, "locations": ["header.php:23"] },
+    { "key": "site.favicon_180", "filename": "Logo-van-phuc-care-180x180.png", "verified_attachment_id": null, "locations": ["header.php:24,25"] },
+    { "key": "site.footer_watermark", "filename": "footer-watermark.svg", "verified_attachment_id": null, "locations": ["footer.php:30"] },
+    { "key": "contact.center_image", "filename": "contact-center-figma.jpg", "verified_attachment_id": null, "locations": ["page-lien-he.php:205"] },
+    { "key": "policy.hero", "filename": "hero_bg.jpg", "verified_attachment_id": null, "locations": ["page-chinh-sach-bao-mat.php:25", "page-chinh-sach-bien-tap.php:25", "page-dieu-khoan-su-dung.php:21", "page-quy-trinh-khieu-nai.php:25"] },
+    { "key": "success_modal.image", "filename": "Trang chủ/success-consultation-modal.svg", "verified_attachment_id": null, "locations": ["template-parts/components/success-modal.php:24"] },
+    { "key": "homepage.homecare.newborn_icon", "filename": "icons/newborn-care.svg", "verified_attachment_id": null, "locations": ["front-page.php:424"] },
+    {
+      "key": "prenatal_page.dynamic_media",
+      "prefix": "lop-hoc-tien-san/",
+      "filenames": [
+        "hero-class-actual.png",
+        "hero-mother-baby.png",
+        "intro-class-actual.png",
+        "intro-family.png",
+        "class-video.png",
+        "teacher-thanh-thuy-card.png",
+        "teacher-thanh-thuy-card@2x.png",
+        "service-homecare.png",
+        "service-newborn.png",
+        "service-massage.png",
+        "service-online-course.png"
+      ],
+      "verified_attachment_id": null,
+      "locations": ["page-lop-hoc-tien-san.php:18,44-523"]
+    }
+  ]
+}

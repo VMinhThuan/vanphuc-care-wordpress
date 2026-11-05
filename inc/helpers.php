@@ -60,16 +60,16 @@ function vpc_get_gestational_age_options() {
 }
 
 /**
- * Resolve a theme image through WordPress Media Library when the match is
- * unambiguous, while retaining the checked theme asset as a safe fallback.
+ * Resolve an image through the WordPress Media Library, then the theme asset
+ * directory when the matching attachment is not available yet.
  *
  * The resolver deliberately matches the attachment's stored file basename,
  * not a guessed URL or a similar-looking image. Sites with duplicate media
- * basenames are left on the theme fallback until an explicit Attachment ID is
+ * basenames return an empty string until an explicit valid Attachment ID is
  * supplied through the `vpc_image_attachment_id` filter or the corresponding
  * theme mod (`vpc_image_<slug>_id`).
  *
- * @param string $path Relative path below assets/images/.
+ * @param string $path Theme-owned image key used only to match Media Library filenames.
  * @param string $size WordPress image size to request for a resolved media item.
  * @return string
  */
@@ -94,8 +94,29 @@ function vpc_image_url( $path, $size = 'full' ) {
 		}
 	}
 
-	$theme_file = get_theme_file_path( 'assets/images/' . $path );
-	return file_exists( $theme_file ) ? get_theme_file_uri( 'assets/images/' . $path ) : '';
+	return vpc_theme_asset_url( $path );
+}
+
+/**
+ * Resolve a theme-owned image when it has not been imported into the Media Library.
+ *
+ * @param string $path Relative path inside assets/images.
+ * @return string
+ */
+function vpc_theme_asset_url( $path ) {
+	$path = ltrim( wp_normalize_path( rawurldecode( (string) $path ) ), '/' );
+	if ( '' === $path || false !== strpos( $path, '..' ) ) {
+		return '';
+	}
+
+	$relative_path = 'assets/images/' . $path;
+	$absolute_path = trailingslashit( get_template_directory() ) . $relative_path;
+	if ( ! is_file( $absolute_path ) ) {
+		return '';
+	}
+
+	$url_path = implode( '/', array_map( 'rawurlencode', explode( '/', $relative_path ) ) );
+	return trailingslashit( get_template_directory_uri() ) . $url_path;
 }
 
 /**

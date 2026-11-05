@@ -26,81 +26,96 @@ get_header();
 $theme_uri = get_template_directory_uri();
 $consultation_services = vpc_get_consultation_services();
 $gestational_age_options = vpc_get_gestational_age_options();
+$hero_slide_specs = array(
+	array(
+		'image'    => 'Trang chủ/hero-banner.webp',
+		'href'     => 'https://www.edu.vanphuccare.vn',
+		'target'   => true,
+		'title'    => 'Khóa học Chăm sóc bé yêu KHOA HỌC từ con số 0 - Vạn Phúc Care',
+		'alt'      => 'Chăm sóc bé yêu KHOA HỌC từ con số 0 - Hệ thống khóa học online chuẩn y khoa dành cho cha mẹ hiện đại - Vạn Phúc Care',
+		'heading'  => 'Chăm sóc bé yêu KHOA HỌC từ con số 0 - Hệ thống khóa học online chuẩn y khoa dành cho cha mẹ hiện đại',
+		'hotspot'  => true,
+	),
+	array(
+		'image'   => 'Trang chủ/hero-banner-2.webp',
+		'href'    => '#trung-tam-o-cu',
+		'title'   => 'Trung tâm ở cữ Vạn Phúc Care - Mẹ thảnh thơi nghỉ dưỡng, Bé phát triển toàn diện',
+		'alt'     => 'Trung tâm ở cữ Vạn Phúc Care - Mẹ thảnh thơi nghỉ dưỡng, Bé phát triển toàn diện',
+	),
+	array(
+		'image'   => 'Trang chủ/hero-banner-3.webp',
+		'href'    => '/dich-vu/trung-tam-o-cu/',
+		'title'   => 'Trung tâm ở cữ Vạn Phúc Care',
+		'alt'     => 'Trung tâm ở cữ Vạn Phúc Care - Không gian nghỉ dưỡng và chăm sóc mẹ bé chuẩn y khoa',
+	),
+);
+$hero_slides = array();
+foreach ( $hero_slide_specs as $slide_spec ) {
+	$slide_src = vpc_image_url( $slide_spec['image'], 'full' );
+	if ( '' === $slide_src ) {
+		continue;
+	}
+
+	$slide_spec['src'] = $slide_src;
+	$hero_slides[]     = $slide_spec;
+}
 ?>
 
 <!-- =========================================================================
 	     1. HERO PROMOTIONAL BANNER (Khóa Học Chăm Bé Khoa Học từ con số 0)
 	     ========================================================================= -->
+<?php if ( ! empty( $hero_slides ) ) : ?>
 	<section class="vpc-section hero-banner-section w-full p-0 m-0 bg-primary-200 relative">
 		<div id="vpc-hero-slider" class="w-full relative overflow-hidden group select-none">
 			<!-- Slides wrapper -->
 			<div id="vpc-hero-slides" class="flex transition-transform duration-700 ease-in-out w-full">
-				<!-- Slide 1: Khóa học chăm bé từ con số 0 -->
-				<div class="vpc-hero-slide w-full shrink-0 relative">
-					<a href="https://www.edu.vanphuccare.vn" target="_blank" rel="noopener noreferrer" class="block w-full relative group/item" title="Khóa học Chăm sóc bé yêu KHOA HỌC từ con số 0 - Vạn Phúc Care">
-						<picture>
-								<img src="<?php echo esc_url( vpc_image_url( 'Trang chủ/hero-banner.png', 'full' ) ); ?>"
-							     alt="Chăm sóc bé yêu KHOA HỌC từ con số 0 - Hệ thống khóa học online chuẩn y khoa dành cho cha mẹ hiện đại - Vạn Phúc Care" 
-							     width="1440" 
-							     height="581" 
-							     class="w-full h-auto object-cover block" 
-							     loading="eager" 
-							     fetchpriority="high" />
-						</picture>
+				<?php foreach ( $hero_slides as $slide_index => $slide ) : ?>
+					<div class="vpc-hero-slide w-full shrink-0 relative">
+						<a href="<?php echo esc_url( $slide['href'] ); ?>" <?php echo ! empty( $slide['target'] ) ? 'target="_blank" rel="noopener noreferrer"' : ''; ?> class="block w-full relative group/item" title="<?php echo esc_attr( $slide['title'] ); ?>">
+							<picture>
+								<img src="<?php echo esc_url( $slide['src'] ); ?>"
+								     alt="<?php echo esc_attr( $slide['alt'] ); ?>"
+								     width="1440"
+								     height="581"
+								     class="w-full h-auto <?php echo 0 === $slide_index ? 'object-cover' : 'aspect-[1440/581] object-cover'; ?> block"
+								     loading="<?php echo 0 === $slide_index ? 'eager' : 'lazy'; ?>"
+								     decoding="async"
+								     <?php echo 0 === $slide_index ? 'fetchpriority="high"' : ''; ?> />
+							</picture>
 
-						<!-- Screen-reader accessible semantic text -->
-						<h1 class="sr-only">Chăm sóc bé yêu KHOA HỌC từ con số 0 - Hệ thống khóa học online chuẩn y khoa dành cho cha mẹ hiện đại</h1>
+							<?php if ( ! empty( $slide['heading'] ) ) : ?>
+								<h1 class="sr-only"><?php echo esc_html( $slide['heading'] ); ?></h1>
+							<?php endif; ?>
 
-						<!-- Clickable interactive CTA hotspot on 'Truy cập ngay' pill button -->
-						<span class="absolute right-[21%] sm:right-[22%] lg:right-[23%] bottom-[16%] sm:bottom-[17%] lg:bottom-[19%] w-[44%] sm:w-[39%] lg:w-[35%] h-[12%] sm:h-[13%] rounded-full cursor-pointer transition-all duration-200 hover:ring-4 hover:ring-primary-400/40 hover:bg-neutral-white/10" aria-label="Truy cập ngay www.edu.vanphuccare.vn"></span>
-					</a>
-				</div>
-
-				<!-- Slide 2: Trung tâm ở cữ Vạn Phúc Care -->
-				<div class="vpc-hero-slide w-full shrink-0 relative">
-					<a href="#trung-tam-o-cu" class="block w-full relative group/item" title="Trung tâm ở cữ Vạn Phúc Care - Mẹ thảnh thơi nghỉ dưỡng, Bé phát triển toàn diện">
-						<picture>
-								<img src="<?php echo esc_url( vpc_image_url( 'Trang chủ/hero-banner-2.jpg', 'full' ) ); ?>"
-							     alt="Trung tâm ở cữ Vạn Phúc Care - Mẹ thảnh thơi nghỉ dưỡng, Bé phát triển toàn diện" 
-							     width="1440" 
-							     height="581" 
-							     class="w-full h-auto aspect-[1440/581] object-cover block" 
-							     loading="lazy" />
-						</picture>
-					</a>
-				</div>
-
-				<!-- Slide 3: Hệ sinh thái chăm sóc Mẹ và Bé -->
-				<div class="vpc-hero-slide w-full shrink-0 relative">
-					<a href="#gioi-thieu" class="block w-full relative group/item" title="Hành trình cùng mẹ, trải đầy yêu thương - Vạn Phúc Care">
-						<picture>
-								<img src="<?php echo esc_url( vpc_image_url( 'Trang chủ/hero-banner-3.JPG', 'full' ) ); ?>"
-							     alt="Hệ sinh thái chăm sóc Mẹ và Bé Vạn Phúc Care" 
-							     width="1440" 
-							     height="581" 
-							     class="w-full h-auto aspect-[1440/581] object-cover block" 
-							     loading="lazy" />
-						</picture>
-					</a>
-				</div>
+							<?php if ( ! empty( $slide['hotspot'] ) ) : ?>
+								<span class="absolute right-[21%] sm:right-[22%] lg:right-[23%] bottom-[16%] sm:bottom-[17%] lg:bottom-[19%] w-[44%] sm:w-[39%] lg:w-[35%] h-[12%] sm:h-[13%] rounded-full cursor-pointer transition-all duration-200 hover:ring-4 hover:ring-primary-400/40 hover:bg-neutral-white/10" aria-label="Truy cập ngay www.edu.vanphuccare.vn"></span>
+							<?php endif; ?>
+						</a>
+					</div>
+				<?php endforeach; ?>
 			</div>
 
 			<!-- Navigation Controls (Prev / Next Buttons) -->
+			<?php if ( count( $hero_slides ) > 1 ) : ?>
 			<button type="button" id="vpc-hero-prev" class="absolute left-2.5 sm:left-6 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-neutral-white/80 hover:bg-neutral-white text-neutral-800 shadow-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 cursor-pointer backdrop-blur-xs focus:opacity-100" aria-label="Slide trước">
 				<svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
 			</button>
 			<button type="button" id="vpc-hero-next" class="absolute right-2.5 sm:right-6 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-neutral-white/80 hover:bg-neutral-white text-neutral-800 shadow-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-20 cursor-pointer backdrop-blur-xs focus:opacity-100" aria-label="Slide tiếp theo">
 				<svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
 			</button>
+			<?php endif; ?>
 
 			<!-- Dots pagination -->
+			<?php if ( count( $hero_slides ) > 1 ) : ?>
 			<div class="absolute bottom-2.5 sm:bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-20">
-				<button type="button" data-hero-dot="0" class="h-2.5 w-8 rounded-full bg-surface-button-primary-default transition-all duration-300 cursor-pointer shadow-xs" aria-label="Chuyển đến banner 1"></button>
-				<button type="button" data-hero-dot="1" class="h-2.5 w-2.5 rounded-full bg-neutral-white/70 hover:bg-neutral-white transition-all duration-300 cursor-pointer shadow-xs" aria-label="Chuyển đến banner 2"></button>
-				<button type="button" data-hero-dot="2" class="h-2.5 w-2.5 rounded-full bg-neutral-white/70 hover:bg-neutral-white transition-all duration-300 cursor-pointer shadow-xs" aria-label="Chuyển đến banner 3"></button>
+				<?php foreach ( $hero_slides as $slide_index => $slide ) : ?>
+					<button type="button" data-hero-dot="<?php echo esc_attr( $slide_index ); ?>" class="h-2.5 <?php echo 0 === $slide_index ? 'w-8 bg-surface-button-primary-default' : 'w-2.5 bg-neutral-white/70'; ?> rounded-full hover:bg-neutral-white transition-all duration-300 cursor-pointer shadow-xs" aria-label="Chuyển đến banner <?php echo esc_attr( $slide_index + 1 ); ?>"></button>
+				<?php endforeach; ?>
 			</div>
+			<?php endif; ?>
 		</div>
 	</section>
+<?php endif; ?>
 
 	<!-- =========================================================================
 	     2. GIỚI THIỆU: HÀNH TRÌNH CÙNG MẸ - TRẢI ĐẦY YÊU THƯƠNG
@@ -114,12 +129,15 @@ $gestational_age_options = vpc_get_gestational_age_options();
 					<div class="relative w-full max-w-[350px] sm:max-w-[500px] lg:max-w-[517px] mx-auto lg:ml-20">
 						<!-- Main Photo with Rounded Corners matching Figma (border-radius: 50px) -->
 						<div class="relative w-full aspect-[4/3] sm:aspect-[517/591] rounded-[32px] sm:rounded-[50px] overflow-hidden shadow-[0px_4px_30px_rgba(0,0,0,0.08)] bg-neutral-100">
-							<picture>
-									<img src="<?php echo esc_url( vpc_image_url( 'Trang chủ/hero-section-image.jpg', 'large' ) ); ?>"
-								     alt="Hành trình cùng mẹ trải đầy yêu thương - Vạn Phúc Care" 
-								     class="w-full h-full object-cover block transition-transform duration-500 hover:scale-[1.02]" 
-								     loading="lazy" />
-							</picture>
+							<?php $intro_image_url = vpc_image_url( 'Trang chủ/hero-section-image.webp', 'large' ); ?>
+							<?php if ( $intro_image_url ) : ?>
+								<picture>
+									<img src="<?php echo esc_url( $intro_image_url ); ?>"
+									     alt="Hành trình cùng mẹ trải đầy yêu thương - Vạn Phúc Care"
+									     class="w-full h-full object-cover block transition-transform duration-500 hover:scale-[1.02]"
+									     loading="lazy" />
+								</picture>
+							<?php endif; ?>
 						</div>
 
 						<!-- Floating Badge 1 (Top Left) -->
@@ -248,12 +266,15 @@ $gestational_age_options = vpc_get_gestational_age_options();
 
 			<!-- Room Visual Showcase (Rectangle 34624347) -->
 			<div class="w-full max-w-[1400px] rounded-[24px] overflow-hidden border border-border-divider-default shadow-[0px_4px_47px_rgba(0,0,0,0.01)] bg-neutral-100">
-				<picture>
-					<img src="<?php echo esc_url( vpc_image_url( 'Trang chủ/trung-tam-o-cu.JPG', 'large' ) ); ?>"
-					     alt="Không gian phòng nghỉ dưỡng trung tâm ở cữ Vạn Phúc Care" 
-					     class="w-full h-auto aspect-[350/220] sm:aspect-[1240/670] object-cover block"
-					     loading="lazy" />
-				</picture>
+					<?php $postpartum_center_image_url = vpc_image_url( 'Trang chủ/trung-tam-o-cu.webp', 'large' ); ?>
+					<?php if ( $postpartum_center_image_url ) : ?>
+						<picture>
+							<img src="<?php echo esc_url( $postpartum_center_image_url ); ?>"
+							     alt="Không gian phòng nghỉ dưỡng trung tâm ở cữ Vạn Phúc Care"
+							     class="w-full h-auto aspect-[350/220] sm:aspect-[1240/670] object-cover block"
+							     loading="lazy" />
+						</picture>
+					<?php endif; ?>
 			</div>
 
 			<!-- Middle 2-Column Info Row (Frame 2147224019) -->
@@ -348,23 +369,29 @@ $gestational_age_options = vpc_get_gestational_age_options();
 				<div class="relative flex items-center justify-center w-full order-1">
 					<div class="relative w-full max-w-[350px] sm:max-w-[420px] lg:max-w-[668px] h-[342px] sm:h-[400px] lg:h-[500px] xl:h-[570px] mx-auto">
 						<!-- Left Photo -->
-						<div class="absolute left-0 top-0 w-[170px] sm:w-[200px] lg:w-[47%] h-[210px] sm:h-[250px] lg:h-auto aspect-[325/402] rounded-xl overflow-hidden shadow-[0_4px_18px_rgba(0,0,0,0.09)]">
-							<picture>
-								<img src="<?php echo esc_url( vpc_image_url( 'Trang chủ/ba-mau-tai-nha-2.jpg', 'large' ) ); ?>"
-								     alt="Bảo mẫu chăm sóc bé tại nhà - Vạn Phúc Care" 
-								     class="w-full h-full object-cover block" 
-								     loading="lazy" />
-							</picture>
-						</div>
+						<?php $homecare_image_url = vpc_image_url( 'Trang chủ/ba-mau-tai-nha-2.webp', 'large' ); ?>
+						<?php if ( $homecare_image_url ) : ?>
+							<div class="absolute left-0 top-0 w-[170px] sm:w-[200px] lg:w-[47%] h-[210px] sm:h-[250px] lg:h-auto aspect-[325/402] rounded-xl overflow-hidden shadow-[0_4px_18px_rgba(0,0,0,0.09)]">
+								<picture>
+									<img src="<?php echo esc_url( $homecare_image_url ); ?>"
+									     alt="Bảo mẫu chăm sóc bé tại nhà - Vạn Phúc Care"
+									     class="w-full h-full object-cover block"
+									     loading="lazy" />
+								</picture>
+							</div>
+						<?php endif; ?>
 						<!-- Right Photo (Staggered down) -->
-						<div class="absolute right-0 top-[38px] sm:top-[45px] lg:top-[56px] xl:top-[62px] w-[170px] sm:w-[200px] lg:w-[47%] h-[273px] sm:h-[320px] lg:h-auto aspect-[324/521] rounded-xl overflow-hidden shadow-[0_4px_18px_rgba(0,0,0,0.09)]">
-							<picture>
-								<img src="<?php echo esc_url( vpc_image_url( 'Trang chủ/bao-mau-tai-nha-1.jpg', 'large' ) ); ?>"
-								     alt="Bảo mẫu tận tâm chăm sóc giấc ngủ của bé" 
-								     class="w-full h-full object-cover block" 
-								     loading="lazy" />
-							</picture>
-						</div>
+						<?php $homecare_night_image_url = vpc_image_url( 'Trang chủ/bao-mau-tai-nha-1.webp', 'large' ); ?>
+						<?php if ( $homecare_night_image_url ) : ?>
+							<div class="absolute right-0 top-[38px] sm:top-[45px] lg:top-[56px] xl:top-[62px] w-[170px] sm:w-[200px] lg:w-[47%] h-[273px] sm:h-[320px] lg:h-auto aspect-[324/521] rounded-xl overflow-hidden shadow-[0_4px_18px_rgba(0,0,0,0.09)]">
+								<picture>
+									<img src="<?php echo esc_url( $homecare_night_image_url ); ?>"
+									     alt="Bảo mẫu tận tâm chăm sóc giấc ngủ của bé"
+									     class="w-full h-full object-cover block"
+									     loading="lazy" />
+								</picture>
+							</div>
+						<?php endif; ?>
 					</div>
 				</div>
 
@@ -395,7 +422,10 @@ $gestational_age_options = vpc_get_gestational_age_options();
 					<div class="w-full flex flex-col gap-5 sm:gap-6 max-w-[612px]">
 						<!-- Card 1 -->
 						<div class="bg-surface-card-default rounded-xl shadow-card p-3 sm:p-4 flex items-center gap-3.5 text-left">
-							<img src="<?php echo esc_url( vpc_image_url( 'icons/newborn-care.svg', 'full' ) ); ?>" alt="" width="50" height="50" class="w-[50px] h-[50px] shrink-0" aria-hidden="true">
+							<?php $newborn_care_icon_url = vpc_image_url( 'icons/newborn-care.svg', 'full' ); ?>
+							<?php if ( $newborn_care_icon_url ) : ?>
+								<img src="<?php echo esc_url( $newborn_care_icon_url ); ?>" alt="" width="50" height="50" class="w-[50px] h-[50px] shrink-0" aria-hidden="true">
+							<?php endif; ?>
 							<div>
 								<h4 class="font-body font-medium text-base sm:text-[20px] text-text-heading-primary-default leading-snug">Đa dạng gói chăm sóc trẻ sơ sinh</h4>
 							<p class="font-body font-medium text-xs sm:text-base text-text-body-muted leading-relaxed">Thoải mái lựa chọn phù hợp với nhu cầu từng gia đình</p>
@@ -439,23 +469,29 @@ $gestational_age_options = vpc_get_gestational_age_options();
 				<div class="relative flex items-center justify-center w-full">
 					<div class="grid grid-cols-2 gap-4 sm:gap-5 items-start w-full max-w-[350px] sm:max-w-[540px] mx-auto lg:max-w-none">
 						<!-- Left Photo (Top-aligned) -->
-						<div class="relative w-full">
-							<picture>
-								<img src="<?php echo esc_url( vpc_image_url( 'Trang chủ/lop-hoc-tien-san-1.jpg', 'large' ) ); ?>"
-								     alt="Chăm sóc bé sơ sinh tại lớp học tiền sản Vạn Phúc Care" 
+						<?php $prenatal_home_image_url = vpc_image_url( 'Trang chủ/lop-hoc-tien-san-1.webp', 'large' ); ?>
+						<?php if ( $prenatal_home_image_url ) : ?>
+							<div class="relative w-full">
+								<picture>
+									<img src="<?php echo esc_url( $prenatal_home_image_url ); ?>"
+									     alt="Chăm sóc bé sơ sinh tại lớp học tiền sản Vạn Phúc Care"
 									     class="w-full h-full aspect-[316/388] object-cover rounded-xl block"
-								     loading="lazy" />
-							</picture>
-						</div>
+									     loading="lazy" />
+								</picture>
+							</div>
+						<?php endif; ?>
 						<!-- Right Photo (Staggered down) -->
-						<div class="relative w-full pt-8 sm:pt-12 lg:pt-20">
-							<picture>
-								<img src="<?php echo esc_url( vpc_image_url( 'Trang chủ/lop-hoc-tien-san-2.jpg', 'large' ) ); ?>"
-								     alt="Tư vấn và giải đáp thắc mắc cùng điều dưỡng Vạn Phúc Care" 
-									     class="w-full h-full aspect-[314/521] object-cover rounded-xl block" 
-								     loading="lazy" />
-							</picture>
-						</div>
+						<?php $prenatal_home_second_image_url = vpc_image_url( 'Trang chủ/lop-hoc-tien-san-2.webp', 'large' ); ?>
+						<?php if ( $prenatal_home_second_image_url ) : ?>
+							<div class="relative w-full pt-8 sm:pt-12 lg:pt-20">
+								<picture>
+									<img src="<?php echo esc_url( $prenatal_home_second_image_url ); ?>"
+									     alt="Tư vấn và giải đáp thắc mắc cùng điều dưỡng Vạn Phúc Care"
+									     class="w-full h-full aspect-[314/521] object-cover rounded-xl block"
+									     loading="lazy" />
+								</picture>
+							</div>
+						<?php endif; ?>
 					</div>
 				</div>
 
@@ -732,15 +768,22 @@ $gestational_age_options = vpc_get_gestational_age_options();
 				
 				<!-- Center Image (Mobile order: 1, Desktop order: 2) -->
 				<div class="w-full max-w-[350px] sm:max-w-[479px] shrink-0 mx-auto flex justify-center items-center order-1 lg:order-2">
-					<picture>
-						<source srcset="<?php echo esc_url( vpc_image_url( 'Trang chủ/vi-sao-chon-VPC.webp', 'large' ) ); ?>" type="image/webp">
-						<img src="<?php echo esc_url( vpc_image_url( 'Trang chủ/vi-sao-chon-VPC.jpg', 'large' ) ); ?>"
-						     alt="Vì sao cha mẹ chọn Vạn Phúc Care"
-						     width="479"
-						     height="276"
-						     class="w-full h-auto aspect-[479/276] object-cover rounded-[24px] sm:rounded-[32px] shadow-[0px_4px_30px_rgba(0,0,0,0.08)] block" 
-						     loading="lazy" />
-					</picture>
+					<?php $why_vpc_webp_url = vpc_image_url( 'Trang chủ/vi-sao-chon-VPC.webp', 'large' ); ?>
+					<?php $why_vpc_jpg_url = vpc_image_url( 'Trang chủ/vi-sao-chon-VPC.jpg', 'large' ); ?>
+					<?php $why_vpc_image_url = $why_vpc_jpg_url ? $why_vpc_jpg_url : $why_vpc_webp_url; ?>
+					<?php if ( $why_vpc_image_url ) : ?>
+						<picture>
+							<?php if ( $why_vpc_webp_url && $why_vpc_jpg_url ) : ?>
+								<source srcset="<?php echo esc_url( $why_vpc_webp_url ); ?>" type="image/webp">
+							<?php endif; ?>
+							<img src="<?php echo esc_url( $why_vpc_image_url ); ?>"
+							     alt="Vì sao cha mẹ chọn Vạn Phúc Care"
+							     width="479"
+							     height="276"
+							     class="w-full h-auto aspect-[479/276] object-cover rounded-[24px] sm:rounded-[32px] shadow-[0px_4px_30px_rgba(0,0,0,0.08)] block"
+							     loading="lazy" />
+						</picture>
+					<?php endif; ?>
 				</div>
 
 				<!-- Left 2 Features (Mobile order: 2, Desktop order: 1) -->
@@ -909,7 +952,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<img src="<?php echo esc_url( vpc_image_url( 'avatars/customer_1.png', 'thumbnail' ) ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0">
+									<?php if ( $feedback_avatar_1_url = vpc_image_url( 'avatars/customer_1.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_1_url ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Nguyễn Thị Ngọc Trân</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -934,7 +977,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<img src="<?php echo esc_url( vpc_image_url( 'avatars/customer_2.png', 'thumbnail' ) ); ?>" alt="Phạm Thị Thanh Lý" class="w-10 h-10 rounded-full object-cover shrink-0">
+									<?php if ( $feedback_avatar_2_url = vpc_image_url( 'avatars/customer_2.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_2_url ); ?>" alt="Phạm Thị Thanh Lý" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Phạm Thị Thanh Lý</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -959,7 +1002,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<img src="<?php echo esc_url( vpc_image_url( 'avatars/customer_3.png', 'thumbnail' ) ); ?>" alt="Nguyễn Như Ân" class="w-10 h-10 rounded-full object-cover shrink-0">
+									<?php if ( $feedback_avatar_3_url = vpc_image_url( 'avatars/customer_3.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_3_url ); ?>" alt="Nguyễn Như Ân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Nguyễn Như Ân</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -984,7 +1027,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<img src="<?php echo esc_url( vpc_image_url( 'avatars/customer_4.png', 'thumbnail' ) ); ?>" alt="La Thanh Nhàn" class="w-10 h-10 rounded-full object-cover shrink-0">
+									<?php if ( $feedback_avatar_4_url = vpc_image_url( 'avatars/customer_4.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_4_url ); ?>" alt="La Thanh Nhàn" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">La Thanh Nhàn</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1009,7 +1052,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<img src="<?php echo esc_url( vpc_image_url( 'avatars/customer_5.png', 'thumbnail' ) ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0">
+									<?php if ( $feedback_avatar_5_url = vpc_image_url( 'avatars/customer_5.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_5_url ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Nguyễn Thị Ngọc Trân</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1035,7 +1078,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<img src="<?php echo esc_url( vpc_image_url( 'avatars/customer_1.png', 'thumbnail' ) ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0">
+									<?php if ( $feedback_avatar_1_url = vpc_image_url( 'avatars/customer_1.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_1_url ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Nguyễn Thị Ngọc Trân</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1060,7 +1103,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<img src="<?php echo esc_url( vpc_image_url( 'avatars/customer_2.png', 'thumbnail' ) ); ?>" alt="Phạm Thị Thanh Lý" class="w-10 h-10 rounded-full object-cover shrink-0">
+									<?php if ( $feedback_avatar_2_url = vpc_image_url( 'avatars/customer_2.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_2_url ); ?>" alt="Phạm Thị Thanh Lý" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Phạm Thị Thanh Lý</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1085,7 +1128,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<img src="<?php echo esc_url( vpc_image_url( 'avatars/customer_3.png', 'thumbnail' ) ); ?>" alt="Nguyễn Như Ân" class="w-10 h-10 rounded-full object-cover shrink-0">
+									<?php if ( $feedback_avatar_3_url = vpc_image_url( 'avatars/customer_3.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_3_url ); ?>" alt="Nguyễn Như Ân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Nguyễn Như Ân</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1110,7 +1153,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<img src="<?php echo esc_url( vpc_image_url( 'avatars/customer_4.png', 'thumbnail' ) ); ?>" alt="La Thanh Nhàn" class="w-10 h-10 rounded-full object-cover shrink-0">
+									<?php if ( $feedback_avatar_4_url = vpc_image_url( 'avatars/customer_4.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_4_url ); ?>" alt="La Thanh Nhàn" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">La Thanh Nhàn</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1135,7 +1178,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<img src="<?php echo esc_url( vpc_image_url( 'avatars/customer_5.png', 'thumbnail' ) ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0">
+									<?php if ( $feedback_avatar_5_url = vpc_image_url( 'avatars/customer_5.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_5_url ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Nguyễn Thị Ngọc Trân</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1166,7 +1209,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<img src="<?php echo esc_url( vpc_image_url( 'avatars/customer_2.png', 'thumbnail' ) ); ?>" alt="Phạm Thị Thanh Lý" class="w-10 h-10 rounded-full object-cover shrink-0">
+									<?php if ( $feedback_avatar_2_url = vpc_image_url( 'avatars/customer_2.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_2_url ); ?>" alt="Phạm Thị Thanh Lý" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Phạm Thị Thanh Lý</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1191,7 +1234,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<img src="<?php echo esc_url( vpc_image_url( 'avatars/customer_3.png', 'thumbnail' ) ); ?>" alt="Nguyễn Như Ân" class="w-10 h-10 rounded-full object-cover shrink-0">
+									<?php if ( $feedback_avatar_3_url = vpc_image_url( 'avatars/customer_3.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_3_url ); ?>" alt="Nguyễn Như Ân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Nguyễn Như Ân</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1216,7 +1259,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<img src="<?php echo esc_url( vpc_image_url( 'avatars/customer_4.png', 'thumbnail' ) ); ?>" alt="La Thanh Nhàn" class="w-10 h-10 rounded-full object-cover shrink-0">
+									<?php if ( $feedback_avatar_4_url = vpc_image_url( 'avatars/customer_4.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_4_url ); ?>" alt="La Thanh Nhàn" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">La Thanh Nhàn</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1241,7 +1284,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<img src="<?php echo esc_url( vpc_image_url( 'avatars/customer_5.png', 'thumbnail' ) ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0">
+									<?php if ( $feedback_avatar_5_url = vpc_image_url( 'avatars/customer_5.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_5_url ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Nguyễn Thị Ngọc Trân</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1266,7 +1309,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<img src="<?php echo esc_url( vpc_image_url( 'avatars/customer_1.png', 'thumbnail' ) ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0">
+									<?php if ( $feedback_avatar_1_url = vpc_image_url( 'avatars/customer_1.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_1_url ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Nguyễn Thị Ngọc Trân</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1292,7 +1335,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<img src="<?php echo esc_url( vpc_image_url( 'avatars/customer_2.png', 'thumbnail' ) ); ?>" alt="Phạm Thị Thanh Lý" class="w-10 h-10 rounded-full object-cover shrink-0">
+									<?php if ( $feedback_avatar_2_url = vpc_image_url( 'avatars/customer_2.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_2_url ); ?>" alt="Phạm Thị Thanh Lý" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Phạm Thị Thanh Lý</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1317,7 +1360,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<img src="<?php echo esc_url( vpc_image_url( 'avatars/customer_3.png', 'thumbnail' ) ); ?>" alt="Nguyễn Như Ân" class="w-10 h-10 rounded-full object-cover shrink-0">
+									<?php if ( $feedback_avatar_3_url = vpc_image_url( 'avatars/customer_3.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_3_url ); ?>" alt="Nguyễn Như Ân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Nguyễn Như Ân</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1342,7 +1385,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<img src="<?php echo esc_url( vpc_image_url( 'avatars/customer_4.png', 'thumbnail' ) ); ?>" alt="La Thanh Nhàn" class="w-10 h-10 rounded-full object-cover shrink-0">
+									<?php if ( $feedback_avatar_4_url = vpc_image_url( 'avatars/customer_4.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_4_url ); ?>" alt="La Thanh Nhàn" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">La Thanh Nhàn</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1367,7 +1410,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<img src="<?php echo esc_url( vpc_image_url( 'avatars/customer_5.png', 'thumbnail' ) ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0">
+									<?php if ( $feedback_avatar_5_url = vpc_image_url( 'avatars/customer_5.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_5_url ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Nguyễn Thị Ngọc Trân</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1421,9 +1464,12 @@ $gestational_age_options = vpc_get_gestational_age_options();
 				<article class="min-w-[300px] w-[300px] md:min-w-0 md:w-auto snap-start bg-surface-card-default rounded-2xl p-4 sm:p-5 border border-neutral-100 hover:shadow-md transition-all duration-300 flex flex-col group shrink-0 md:shrink">
 					<!-- Thumbnail Image -->
 					<div class="relative w-full aspect-[268/208] rounded-xl overflow-hidden bg-neutral-200">
-						<picture>
-									<img src="<?php echo esc_url( vpc_image_url( 'Trang chủ/Bai-bao-noi-bat.jpg', 'large' ) ); ?>" alt="Vạn Phúc Care - Báo chí đưa tin" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
-						</picture>
+							<?php $press_featured_image_url = vpc_image_url( 'Trang chủ/Bai-bao-noi-bat.webp', 'large' ); ?>
+							<?php if ( $press_featured_image_url ) : ?>
+								<picture>
+									<img src="<?php echo esc_url( $press_featured_image_url ); ?>" alt="Vạn Phúc Care - Báo chí đưa tin" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+								</picture>
+							<?php endif; ?>
 					</div>
 					
 					<!-- Content -->
@@ -1449,7 +1495,10 @@ $gestational_age_options = vpc_get_gestational_age_options();
 				<article class="min-w-[300px] w-[300px] md:min-w-0 md:w-auto snap-start bg-surface-card-default rounded-2xl p-4 sm:p-5 border border-neutral-100 hover:shadow-md transition-all duration-300 flex flex-col group shrink-0 md:shrink">
 					<!-- Thumbnail Image -->
 					<div class="relative w-full aspect-[268/208] rounded-xl overflow-hidden bg-neutral-200">
-						<img src="<?php echo esc_url( vpc_image_url( 'press_event_2.jpg', 'large' ) ); ?>" alt="Vạn Phúc Care - Báo chí đưa tin" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+							<?php $press_event_two_image_url = vpc_image_url( 'press_event_2.jpg', 'large' ); ?>
+							<?php if ( $press_event_two_image_url ) : ?>
+								<img src="<?php echo esc_url( $press_event_two_image_url ); ?>" alt="Vạn Phúc Care - Báo chí đưa tin" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+							<?php endif; ?>
 					</div>
 					
 					<!-- Content -->
@@ -1475,7 +1524,10 @@ $gestational_age_options = vpc_get_gestational_age_options();
 				<article class="min-w-[300px] w-[300px] md:min-w-0 md:w-auto snap-start bg-surface-card-default rounded-2xl p-4 sm:p-5 border border-neutral-100 hover:shadow-md transition-all duration-300 flex flex-col group shrink-0 md:shrink">
 					<!-- Thumbnail Image -->
 					<div class="relative w-full aspect-[268/208] rounded-xl overflow-hidden bg-neutral-200">
-						<img src="<?php echo esc_url( vpc_image_url( 'press_event_3.jpg', 'large' ) ); ?>" alt="Vạn Phúc Care - Báo chí đưa tin" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+							<?php $press_event_three_image_url = vpc_image_url( 'press_event_3.jpg', 'large' ); ?>
+							<?php if ( $press_event_three_image_url ) : ?>
+								<img src="<?php echo esc_url( $press_event_three_image_url ); ?>" alt="Vạn Phúc Care - Báo chí đưa tin" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+							<?php endif; ?>
 					</div>
 					
 					<!-- Content -->
@@ -1646,7 +1698,10 @@ $gestational_age_options = vpc_get_gestational_age_options();
 								<?php if ( has_post_thumbnail() ) : ?>
 									<?php the_post_thumbnail( 'medium_large', array( 'class' => 'w-full h-full object-cover transition-transform duration-500 group-hover:scale-105', 'loading' => 'lazy' ) ); ?>
 								<?php else : ?>
-									<img src="<?php echo esc_url( vpc_image_url( 'blog_post_ultrasound.jpg', 'medium_large' ) ); ?>" alt="" class="w-full h-full object-cover" loading="lazy">
+									<?php $knowledge_fallback_image_url = vpc_image_url( 'blog_post_ultrasound.jpg', 'medium_large' ); ?>
+									<?php if ( $knowledge_fallback_image_url ) : ?>
+										<img src="<?php echo esc_url( $knowledge_fallback_image_url ); ?>" alt="" class="w-full h-full object-cover" loading="lazy">
+									<?php endif; ?>
 								<?php endif; ?>
 							</a>
 							<div class="flex flex-col flex-grow">

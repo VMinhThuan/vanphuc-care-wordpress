@@ -27,11 +27,14 @@ if ( empty( $instagram_url ) ) {
 <footer class="site-footer relative w-full overflow-hidden pt-8 pb-8 xl:py-6 text-text-body-default" style="--footer-background: linear-gradient(180deg, var(--color-neutral-100) 38.823%, var(--color-primary-100) 99.976%);">
 	<!-- Decorative watermark: centered and intentionally wider than the mobile viewport, as in Figma. -->
 	<div class="pointer-events-none absolute bottom-0 left-1/2 z-0 w-[464px] -translate-x-1/2 select-none overflow-hidden sm:right-0 sm:left-auto sm:w-[380px] sm:translate-x-0 xl:w-[471px]" aria-hidden="true">
-		<img src="<?php echo esc_url( vpc_image_url( 'footer-watermark.svg', 'full' ) ); ?>"
-		     alt="" 
-		     width="471" 
-		     height="360" 
-		     class="w-full h-auto block select-none">
+		<?php $footer_watermark_url = vpc_image_url( 'footer-watermark.svg', 'full' ); ?>
+		<?php if ( $footer_watermark_url ) : ?>
+			<img src="<?php echo esc_url( $footer_watermark_url ); ?>"
+			     alt=""
+			     width="471"
+			     height="360"
+			     class="w-full h-auto block select-none">
+		<?php endif; ?>
 	</div>
 
 	<!-- Keep this exactly aligned with the header's logo / navigation / CTA container. -->
@@ -44,11 +47,14 @@ if ( empty( $instagram_url ) ) {
 			<div class="hidden md:flex w-full md:w-[381px] shrink-0 flex-col">
 				<div class="footer-logo mb-3">
 					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="inline-flex items-center shrink-0">
-						<img src="<?php echo esc_url( vpc_image_url( 'logo.svg', 'full' ) ); ?>"
-						     alt="Vạn Phúc Care Logo" 
-						     width="155" 
-						     height="48" 
-						     class="h-[48px] w-[155px] object-contain block">
+						<?php $footer_logo_url = vpc_image_url( 'logo.svg', 'full' ); ?>
+						<?php if ( $footer_logo_url ) : ?>
+							<img src="<?php echo esc_url( $footer_logo_url ); ?>"
+							     alt="Vạn Phúc Care Logo"
+							     width="155"
+							     height="48"
+							     class="h-[48px] w-[155px] object-contain block">
+						<?php endif; ?>
 					</a>
 				</div>
 				

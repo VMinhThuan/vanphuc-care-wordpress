@@ -202,12 +202,15 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						</p>
 
 						<!-- Center Photo with Rounded Corners matching Figma (8px on mobile) -->
-						<div class="w-full h-[194px] sm:h-auto sm:aspect-[510/318] rounded-[8px] sm:rounded-2xl overflow-hidden relative shadow-xs bg-neutral-100">
-							<img src="<?php echo esc_url( vpc_image_url( 'contact-center-figma.jpg', 'large' ) ); ?>"
-							     alt="Trung Tâm Ở Cữ Vạn Phúc Care" 
-							     class="w-full h-full object-cover block transition-transform duration-500 hover:scale-[1.02] rounded-[8px] sm:rounded-2xl" 
-							     loading="lazy">
-						</div>
+						<?php $contact_center_image_url = vpc_image_url( 'contact-center-figma.jpg', 'large' ); ?>
+						<?php if ( $contact_center_image_url ) : ?>
+							<div class="w-full h-[194px] sm:h-auto sm:aspect-[510/318] rounded-[8px] sm:rounded-2xl overflow-hidden relative shadow-xs bg-neutral-100">
+								<img src="<?php echo esc_url( $contact_center_image_url ); ?>"
+								     alt="Trung Tâm Ở Cữ Vạn Phúc Care"
+								     class="w-full h-full object-cover block transition-transform duration-500 hover:scale-[1.02] rounded-[8px] sm:rounded-2xl"
+								     loading="lazy">
+							</div>
+						<?php endif; ?>
 
 						<!-- Center Name: Manrope Medium 20px matching Figma -->
 						<h3 class="font-body font-medium text-xl leading-7 text-text-body-default tracking-tight pt-1">

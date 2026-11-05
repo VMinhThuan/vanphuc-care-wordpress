@@ -21,7 +21,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	data-modal
 >
 	<div class="vpc-modal-card relative w-full max-w-[624px] aspect-[624/570] transition-transform duration-300 transform scale-95" data-modal-card>
-		<img src="<?php echo esc_url( vpc_image_url( 'Trang chủ/success-consultation-modal.svg', 'full' ) ); ?>" width="624" height="570" class="h-full w-full select-none" alt="Đăng ký thành công" aria-hidden="true">
+		<?php $success_modal_image_url = vpc_image_url( 'Trang chủ/success-consultation-modal.svg', 'full' ); ?>
+		<?php if ( $success_modal_image_url ) : ?>
+			<img src="<?php echo esc_url( $success_modal_image_url ); ?>" width="624" height="570" class="h-full w-full select-none" alt="Đăng ký thành công" aria-hidden="true">
+		<?php endif; ?>
 
 		<h3 id="vpc-success-modal-title" class="sr-only">Đăng ký thành công</h3>
 		<p id="vpc-success-modal-message" class="sr-only">Cảm ơn Ba/Mẹ đã tin tưởng và đăng ký dịch vụ của Vạn Phúc Care. Bộ phận dịch vụ khách hàng sẽ liên hệ lại trong thời gian sớm nhất.</p>

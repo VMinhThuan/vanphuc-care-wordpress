@@ -58,9 +58,29 @@ const browser = await chromium.launch({ headless: true });
 const failures = [];
 const staticMarkup = readFileSync(path.join(projectRoot, 'index.html'), 'utf8');
 const frontPageSource = readFileSync(path.join(projectRoot, 'front-page.php'), 'utf8');
+const helpersSource = readFileSync(path.join(projectRoot, 'inc/helpers.php'), 'utf8');
 const knowledgeStart = frontPageSource.indexOf('KIẾN THỨC NUÔI CON');
 const knowledgeEnd = frontPageSource.indexOf('get_footer();', knowledgeStart);
 const knowledgeSectionSource = frontPageSource.slice(knowledgeStart, knowledgeEnd);
+
+// Media mapping regression guards: Media Library remains the first source,
+// while bundled theme assets are a valid fallback for deployments where the
+// matching attachment has not been imported into WordPress yet.
+if (!helpersSource.includes('function vpc_theme_asset_url') || !helpersSource.includes('return vpc_theme_asset_url( $path )')) {
+  failures.push('image resolver: missing safe theme asset fallback');
+}
+if (/(?:src|srcset)="[^"\n]*vpc_image_url\s*\(/.test(frontPageSource)) {
+  failures.push('image resolver: front-page.php emits a resolver call directly in an image attribute');
+}
+if (/background-image:[^;\n]*vpc_image_url/.test(frontPageSource)) {
+  failures.push('image resolver: front-page.php emits background-image without a URL guard');
+}
+if (!frontPageSource.includes('$hero_slide_specs') || !frontPageSource.includes('if ( ! empty( $hero_slides ) )')) {
+  failures.push('hero slider: missing Media Library-only dynamic slide collection');
+}
+if (!frontPageSource.includes('count( $hero_slides ) > 1')) {
+  failures.push('hero slider: controls are not conditional on the number of valid slides');
+}
 
 // Regression guard: homepage knowledge cards must remain CMS-driven and must
 // never regress to the old duplicated hardcoded cards.
