@@ -20,8 +20,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<?php $favicon_300_url = vpc_image_url( 'Logo-van-phuc-care-300x300.png', 'full' ); ?>
-	<?php $favicon_180_url = vpc_image_url( 'Logo-van-phuc-care-180x180.png', 'full' ); ?>
+	<?php $favicon_300_url = vpc_image_url( 'Logo-van-phuc-care-300x300.webp', 'full' ); ?>
+	<?php $favicon_180_url = vpc_image_url( 'Logo-van-phuc-care-180x180.webp', 'full' ); ?>
 	<?php if ( $favicon_300_url ) : ?><link rel="icon" type="image/png" sizes="300x300" href="<?php echo esc_url( $favicon_300_url ); ?>"><?php endif; ?>
 	<?php if ( $favicon_180_url ) : ?>
 		<link rel="icon" type="image/png" sizes="180x180" href="<?php echo esc_url( $favicon_180_url ); ?>">

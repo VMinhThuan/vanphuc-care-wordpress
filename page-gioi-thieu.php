@@ -86,7 +86,7 @@ $mission_image = $hero_image;
 			<div class="about-timeline__step about-timeline__step--2024"><strong>2024</strong><p>Ra mắt hệ thống giáo dục khoá học trực tuyến, đóng vai trò là hành trang giúp ba mẹ tự tin hơn trong hành trình chăm sóc con nhỏ. Phạm vi vượt ngoài lãnh thổ Việt Nam và được cha mẹ Việt kiều đón nhận.</p></div>
 			<div class="about-timeline__step about-timeline__step--2025"><strong>2025</strong><p>Liên tục tham gia các sự kiện hướng nghiệp dành cho điều dưỡng viên, nữ hộ sinh lớp nhân lực trẻ kế cận. Kết hợp và cộng tác với các trường đại học uy tín tại Hà Nội.</p></div>
 			<div class="about-timeline__step about-timeline__step--2026"><strong>2026- Nay</strong><p>Khai trương trung tâm ở cữ chuyên biệt, hiện đại tại Hà Nội. Hoàn thiện mảnh ghép quan trọng trong hệ thống chăm sóc mẹ và bé toàn diện tại Vạn Phúc Care.</p></div>
-			<img class="about-timeline__visual" src="<?php echo esc_url( $about_uri . '/nurse-baby-cutout.png' ); ?>" width="340" height="502" alt="Điều dưỡng chăm sóc em bé" loading="lazy" decoding="async">
+			<img class="about-timeline__visual" src="<?php echo esc_url( $about_uri . '/nurse-baby-cutout.webp' ); ?>" width="340" height="502" alt="Điều dưỡng chăm sóc em bé" loading="lazy" decoding="async">
 		</div>
 	</section>
 
@@ -118,8 +118,8 @@ $mission_image = $hero_image;
 
 	<section class="about-section about-founder" data-figma-node="3131:44972">
 		<div class="about-founder__visual">
-			<img class="about-founder__cutout" src="<?php echo esc_url( $about_uri . '/founder-cutout.png' ); ?>" width="420" height="599" alt="Chị Thanh Thủy và em bé" loading="lazy">
-			<img class="about-founder__mascot" src="<?php echo esc_url( $about_uri . '/mascot-large.png' ); ?>" width="230" height="296" alt="Vạn Phúc Care mascot" loading="lazy">
+			<img class="about-founder__cutout" src="<?php echo esc_url( $about_uri . '/founder-cutout.webp' ); ?>" width="420" height="599" alt="Chị Thanh Thủy và em bé" loading="lazy">
+			<img class="about-founder__mascot" src="<?php echo esc_url( $about_uri . '/mascot-large.webp' ); ?>" width="230" height="296" alt="Vạn Phúc Care mascot" loading="lazy">
 			<img class="about-founder__decoration" src="<?php echo esc_url( $about_uri . '/founder-decoration.svg' ); ?>" width="104" height="114" alt="" aria-hidden="true">
 		</div>
 		<div class="about-founder__copy">
@@ -142,7 +142,7 @@ $mission_image = $hero_image;
 		<div class="about-tiktok__content">
 			<h2 class="about-heading about-tiktok__title"><span class="about-heading--blue">Tiktok</span> <span class="about-heading--pink">Mẹ Thủy Làm Y</span></h2>
 			<p class="about-copy about-tiktok__description">Bên cạnh công việc điều dưỡng, chị Thanh Thủy cũng tích cực chia sẻ kiến thức đến cộng đồng,<br> hướng đến sứ mệnh nâng cao chất lượng cuộc sống dành cho Mẹ &amp; Bé.</p>
-			<img class="about-tiktok__image" src="<?php echo esc_url( $about_uri . '/tiktok.png' ); ?>" width="963" height="522" alt="Kênh TikTok Mẹ Thủy Làm Y" loading="lazy">
+			<img class="about-tiktok__image" src="<?php echo esc_url( $about_uri . '/tiktok.webp' ); ?>" width="963" height="522" alt="Kênh TikTok Mẹ Thủy Làm Y" loading="lazy">
 		</div>
 		<a class="about-button about-tiktok__button" href="https://www.tiktok.com/@methuylamy" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">＋</span>&nbsp; Theo dõi</a>
 	</section>
@@ -159,10 +159,10 @@ $mission_image = $hero_image;
 		<div class="about-team__grid">
 			<?php
 			$team_members = array(
-				array( 'image' => 'team-3.png', 'name' => 'Cô Vương Thanh Thủy', 'role' => 'Điều dưỡng trưởng' ),
-				array( 'image' => 'team-2.png', 'name' => 'Cô Trần Thị Trang', 'role' => 'Điều dưỡng viên' ),
-				array( 'image' => 'team-1.png', 'name' => 'Cô Đỗ Thị Duyên', 'role' => 'Điều dưỡng viên' ),
-				array( 'image' => 'team-4.png', 'name' => 'Cô Tống Thị Nguyệt', 'role' => 'Điều dưỡng viên' ),
+				array( 'image' => 'team-3.webp', 'name' => 'Cô Vương Thanh Thủy', 'role' => 'Điều dưỡng trưởng' ),
+				array( 'image' => 'team-2.webp', 'name' => 'Cô Trần Thị Trang', 'role' => 'Điều dưỡng viên' ),
+				array( 'image' => 'team-1.webp', 'name' => 'Cô Đỗ Thị Duyên', 'role' => 'Điều dưỡng viên' ),
+				array( 'image' => 'team-4.webp', 'name' => 'Cô Tống Thị Nguyệt', 'role' => 'Điều dưỡng viên' ),
 			);
 			foreach ( $team_members as $member ) :
 				$image_url = $about_uri . '/' . $member['image'];
@@ -184,11 +184,11 @@ $mission_image = $hero_image;
 		<h2 class="about-heading about-heading--blue about-partners__title">Đối Tác Chiến lược</h2>
 		<p class="about-copy about-partners__description">Vạn Phúc Care tự hào về chất lượng nhân sự và chuyên môn chuẩn y khoa.<br>Với đội ngũ nhân sự được tạo nguồn từ các trường đại học uy tín.</p>
 		<div class="about-partners__logos" aria-label="Đối tác chiến lược">
-			<img src="<?php echo esc_url( $about_uri . '/partner-1.png' ); ?>" width="80" height="98" alt="Đại học Y Hà Nội" loading="lazy">
-			<img src="<?php echo esc_url( $about_uri . '/partner-7.png' ); ?>" width="100" height="100" alt="Cao đẳng Y khoa Hà Nội" loading="lazy">
-			<img src="<?php echo esc_url( $about_uri . '/partner-3.png' ); ?>" width="100" height="100" alt="Cao đẳng Y Hà Nội" loading="lazy">
-			<img src="<?php echo esc_url( $about_uri . '/partner-6.png' ); ?>" width="100" height="100" alt="Hanoi Medical College" loading="lazy">
-			<img src="<?php echo esc_url( $about_uri . '/partner-2.png' ); ?>" width="100" height="100" alt="Đại học Đông Á" loading="lazy">
+			<img src="<?php echo esc_url( $about_uri . '/partner-1.webp' ); ?>" width="80" height="98" alt="Đại học Y Hà Nội" loading="lazy">
+			<img src="<?php echo esc_url( $about_uri . '/partner-7.webp' ); ?>" width="100" height="100" alt="Cao đẳng Y khoa Hà Nội" loading="lazy">
+			<img src="<?php echo esc_url( $about_uri . '/partner-3.webp' ); ?>" width="100" height="100" alt="Cao đẳng Y Hà Nội" loading="lazy">
+			<img src="<?php echo esc_url( $about_uri . '/partner-6.webp' ); ?>" width="100" height="100" alt="Hanoi Medical College" loading="lazy">
+			<img src="<?php echo esc_url( $about_uri . '/partner-2.webp' ); ?>" width="100" height="100" alt="Đại học Đông Á" loading="lazy">
 		</div>
 	</section>
 </div>

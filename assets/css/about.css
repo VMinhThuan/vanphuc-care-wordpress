@@ -414,7 +414,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	inset: 0;
 	content: '';
 	border-radius: 71px;
-	background: url('../images/about/founder-bg.jpg') center / cover no-repeat;
+	background: url('../images/about/founder-bg.webp') center / cover no-repeat;
 	box-shadow: inset 0 -3px 22px 7px rgba(0, 0, 0, .1);
 }
 

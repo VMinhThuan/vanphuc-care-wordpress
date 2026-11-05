@@ -769,7 +769,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 				<!-- Center Image (Mobile order: 1, Desktop order: 2) -->
 				<div class="w-full max-w-[350px] sm:max-w-[479px] shrink-0 mx-auto flex justify-center items-center order-1 lg:order-2">
 					<?php $why_vpc_webp_url = vpc_image_url( 'Trang chủ/vi-sao-chon-VPC.webp', 'large' ); ?>
-					<?php $why_vpc_jpg_url = vpc_image_url( 'Trang chủ/vi-sao-chon-VPC.jpg', 'large' ); ?>
+					<?php $why_vpc_jpg_url = vpc_image_url( 'Trang chủ/vi-sao-chon-VPC.webp', 'large' ); ?>
 					<?php $why_vpc_image_url = $why_vpc_jpg_url ? $why_vpc_jpg_url : $why_vpc_webp_url; ?>
 					<?php if ( $why_vpc_image_url ) : ?>
 						<picture>
@@ -952,7 +952,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<?php if ( $feedback_avatar_1_url = vpc_image_url( 'avatars/customer_1.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_1_url ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
+									<?php if ( $feedback_avatar_1_url = vpc_image_url( 'avatars/customer_1.webp', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_1_url ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Nguyễn Thị Ngọc Trân</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -977,7 +977,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<?php if ( $feedback_avatar_2_url = vpc_image_url( 'avatars/customer_2.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_2_url ); ?>" alt="Phạm Thị Thanh Lý" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
+									<?php if ( $feedback_avatar_2_url = vpc_image_url( 'avatars/customer_2.webp', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_2_url ); ?>" alt="Phạm Thị Thanh Lý" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Phạm Thị Thanh Lý</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1002,7 +1002,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<?php if ( $feedback_avatar_3_url = vpc_image_url( 'avatars/customer_3.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_3_url ); ?>" alt="Nguyễn Như Ân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
+									<?php if ( $feedback_avatar_3_url = vpc_image_url( 'avatars/customer_3.webp', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_3_url ); ?>" alt="Nguyễn Như Ân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Nguyễn Như Ân</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1027,7 +1027,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<?php if ( $feedback_avatar_4_url = vpc_image_url( 'avatars/customer_4.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_4_url ); ?>" alt="La Thanh Nhàn" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
+									<?php if ( $feedback_avatar_4_url = vpc_image_url( 'avatars/customer_4.webp', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_4_url ); ?>" alt="La Thanh Nhàn" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">La Thanh Nhàn</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1052,7 +1052,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<?php if ( $feedback_avatar_5_url = vpc_image_url( 'avatars/customer_5.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_5_url ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
+									<?php if ( $feedback_avatar_5_url = vpc_image_url( 'avatars/customer_5.webp', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_5_url ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Nguyễn Thị Ngọc Trân</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1078,7 +1078,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<?php if ( $feedback_avatar_1_url = vpc_image_url( 'avatars/customer_1.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_1_url ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
+									<?php if ( $feedback_avatar_1_url = vpc_image_url( 'avatars/customer_1.webp', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_1_url ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Nguyễn Thị Ngọc Trân</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1103,7 +1103,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<?php if ( $feedback_avatar_2_url = vpc_image_url( 'avatars/customer_2.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_2_url ); ?>" alt="Phạm Thị Thanh Lý" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
+									<?php if ( $feedback_avatar_2_url = vpc_image_url( 'avatars/customer_2.webp', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_2_url ); ?>" alt="Phạm Thị Thanh Lý" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Phạm Thị Thanh Lý</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1128,7 +1128,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<?php if ( $feedback_avatar_3_url = vpc_image_url( 'avatars/customer_3.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_3_url ); ?>" alt="Nguyễn Như Ân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
+									<?php if ( $feedback_avatar_3_url = vpc_image_url( 'avatars/customer_3.webp', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_3_url ); ?>" alt="Nguyễn Như Ân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Nguyễn Như Ân</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1153,7 +1153,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<?php if ( $feedback_avatar_4_url = vpc_image_url( 'avatars/customer_4.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_4_url ); ?>" alt="La Thanh Nhàn" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
+									<?php if ( $feedback_avatar_4_url = vpc_image_url( 'avatars/customer_4.webp', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_4_url ); ?>" alt="La Thanh Nhàn" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">La Thanh Nhàn</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1178,7 +1178,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<?php if ( $feedback_avatar_5_url = vpc_image_url( 'avatars/customer_5.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_5_url ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
+									<?php if ( $feedback_avatar_5_url = vpc_image_url( 'avatars/customer_5.webp', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_5_url ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Nguyễn Thị Ngọc Trân</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1209,7 +1209,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<?php if ( $feedback_avatar_2_url = vpc_image_url( 'avatars/customer_2.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_2_url ); ?>" alt="Phạm Thị Thanh Lý" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
+									<?php if ( $feedback_avatar_2_url = vpc_image_url( 'avatars/customer_2.webp', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_2_url ); ?>" alt="Phạm Thị Thanh Lý" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Phạm Thị Thanh Lý</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1234,7 +1234,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<?php if ( $feedback_avatar_3_url = vpc_image_url( 'avatars/customer_3.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_3_url ); ?>" alt="Nguyễn Như Ân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
+									<?php if ( $feedback_avatar_3_url = vpc_image_url( 'avatars/customer_3.webp', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_3_url ); ?>" alt="Nguyễn Như Ân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Nguyễn Như Ân</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1259,7 +1259,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<?php if ( $feedback_avatar_4_url = vpc_image_url( 'avatars/customer_4.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_4_url ); ?>" alt="La Thanh Nhàn" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
+									<?php if ( $feedback_avatar_4_url = vpc_image_url( 'avatars/customer_4.webp', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_4_url ); ?>" alt="La Thanh Nhàn" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">La Thanh Nhàn</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1284,7 +1284,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<?php if ( $feedback_avatar_5_url = vpc_image_url( 'avatars/customer_5.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_5_url ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
+									<?php if ( $feedback_avatar_5_url = vpc_image_url( 'avatars/customer_5.webp', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_5_url ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Nguyễn Thị Ngọc Trân</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1309,7 +1309,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<?php if ( $feedback_avatar_1_url = vpc_image_url( 'avatars/customer_1.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_1_url ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
+									<?php if ( $feedback_avatar_1_url = vpc_image_url( 'avatars/customer_1.webp', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_1_url ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Nguyễn Thị Ngọc Trân</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1335,7 +1335,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<?php if ( $feedback_avatar_2_url = vpc_image_url( 'avatars/customer_2.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_2_url ); ?>" alt="Phạm Thị Thanh Lý" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
+									<?php if ( $feedback_avatar_2_url = vpc_image_url( 'avatars/customer_2.webp', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_2_url ); ?>" alt="Phạm Thị Thanh Lý" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Phạm Thị Thanh Lý</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1360,7 +1360,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<?php if ( $feedback_avatar_3_url = vpc_image_url( 'avatars/customer_3.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_3_url ); ?>" alt="Nguyễn Như Ân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
+									<?php if ( $feedback_avatar_3_url = vpc_image_url( 'avatars/customer_3.webp', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_3_url ); ?>" alt="Nguyễn Như Ân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Nguyễn Như Ân</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1385,7 +1385,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<?php if ( $feedback_avatar_4_url = vpc_image_url( 'avatars/customer_4.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_4_url ); ?>" alt="La Thanh Nhàn" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
+									<?php if ( $feedback_avatar_4_url = vpc_image_url( 'avatars/customer_4.webp', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_4_url ); ?>" alt="La Thanh Nhàn" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">La Thanh Nhàn</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1410,7 +1410,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 						<div>
 							<div class="flex items-start justify-between gap-3">
 								<div class="flex items-center gap-3">
-									<?php if ( $feedback_avatar_5_url = vpc_image_url( 'avatars/customer_5.png', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_5_url ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
+									<?php if ( $feedback_avatar_5_url = vpc_image_url( 'avatars/customer_5.webp', 'thumbnail' ) ) : ?><img src="<?php echo esc_url( $feedback_avatar_5_url ); ?>" alt="Nguyễn Thị Ngọc Trân" class="w-10 h-10 rounded-full object-cover shrink-0"><?php endif; ?>
 									<div>
 										<h4 class="font-body font-semibold text-sm text-text-body-default leading-tight">Nguyễn Thị Ngọc Trân</h4>
 										<div class="flex items-center gap-1 mt-1.5">
@@ -1495,7 +1495,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 				<article class="min-w-[300px] w-[300px] md:min-w-0 md:w-auto snap-start bg-surface-card-default rounded-2xl p-4 sm:p-5 border border-neutral-100 hover:shadow-md transition-all duration-300 flex flex-col group shrink-0 md:shrink">
 					<!-- Thumbnail Image -->
 					<div class="relative w-full aspect-[268/208] rounded-xl overflow-hidden bg-neutral-200">
-							<?php $press_event_two_image_url = vpc_image_url( 'press_event_2.jpg', 'large' ); ?>
+							<?php $press_event_two_image_url = vpc_image_url( 'press_event_2.webp', 'large' ); ?>
 							<?php if ( $press_event_two_image_url ) : ?>
 								<img src="<?php echo esc_url( $press_event_two_image_url ); ?>" alt="Vạn Phúc Care - Báo chí đưa tin" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
 							<?php endif; ?>
@@ -1524,7 +1524,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 				<article class="min-w-[300px] w-[300px] md:min-w-0 md:w-auto snap-start bg-surface-card-default rounded-2xl p-4 sm:p-5 border border-neutral-100 hover:shadow-md transition-all duration-300 flex flex-col group shrink-0 md:shrink">
 					<!-- Thumbnail Image -->
 					<div class="relative w-full aspect-[268/208] rounded-xl overflow-hidden bg-neutral-200">
-							<?php $press_event_three_image_url = vpc_image_url( 'press_event_3.jpg', 'large' ); ?>
+							<?php $press_event_three_image_url = vpc_image_url( 'press_event_3.webp', 'large' ); ?>
 							<?php if ( $press_event_three_image_url ) : ?>
 								<img src="<?php echo esc_url( $press_event_three_image_url ); ?>" alt="Vạn Phúc Care - Báo chí đưa tin" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
 							<?php endif; ?>
@@ -1698,7 +1698,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 								<?php if ( has_post_thumbnail() ) : ?>
 									<?php the_post_thumbnail( 'medium_large', array( 'class' => 'w-full h-full object-cover transition-transform duration-500 group-hover:scale-105', 'loading' => 'lazy' ) ); ?>
 								<?php else : ?>
-									<?php $knowledge_fallback_image_url = vpc_image_url( 'blog_post_ultrasound.jpg', 'medium_large' ); ?>
+									<?php $knowledge_fallback_image_url = vpc_image_url( 'blog_post_ultrasound.webp', 'medium_large' ); ?>
 									<?php if ( $knowledge_fallback_image_url ) : ?>
 										<img src="<?php echo esc_url( $knowledge_fallback_image_url ); ?>" alt="" class="w-full h-full object-cover" loading="lazy">
 									<?php endif; ?>

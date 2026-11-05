@@ -41,8 +41,8 @@ $show_prenatal_video = true;
 			</div>
 		</div>
 		<div class="prenatal-hero__media">
-			<?php $prenatal_hero_mobile_url = $prenatal_image( 'hero-class-actual.png', 'full' ); ?>
-			<?php $prenatal_hero_desktop_url = $prenatal_image( 'hero-mother-baby.png', 'full' ); ?>
+			<?php $prenatal_hero_mobile_url = $prenatal_image( 'hero-class-actual.webp', 'full' ); ?>
+			<?php $prenatal_hero_desktop_url = $prenatal_image( 'hero-mother-baby.webp', 'full' ); ?>
 			<?php $prenatal_hero_image_url = $prenatal_hero_desktop_url ? $prenatal_hero_desktop_url : $prenatal_hero_mobile_url; ?>
 			<?php if ( $prenatal_hero_image_url ) : ?>
 				<picture>
@@ -90,8 +90,8 @@ $show_prenatal_video = true;
 	<div class="prenatal-container">
 		<div class="prenatal-intro__content">
 			<div class="prenatal-intro__photo">
-				<?php $prenatal_intro_mobile_url = $prenatal_image( 'intro-class-actual.png', 'full' ); ?>
-				<?php $prenatal_intro_desktop_url = $prenatal_image( 'intro-family.png', 'full' ); ?>
+				<?php $prenatal_intro_mobile_url = $prenatal_image( 'intro-class-actual.webp', 'full' ); ?>
+				<?php $prenatal_intro_desktop_url = $prenatal_image( 'intro-family.webp', 'full' ); ?>
 				<?php $prenatal_intro_image_url = $prenatal_intro_desktop_url ? $prenatal_intro_desktop_url : $prenatal_intro_mobile_url; ?>
 				<?php if ( $prenatal_intro_image_url ) : ?>
 					<picture>
@@ -157,7 +157,7 @@ $show_prenatal_video = true;
 		</div>
 		<h2 id="prenatal-video-title">Từ Bỡ Ngỡ Đến Tự Tin Chăm Con</h2>
 		<p class="prenatal-lead">Bố mẹ cùng học, cùng thực hành — với sự hướng dẫn trực tiếp của điều dưỡng.</p>
-		<?php $prenatal_video_image_url = $prenatal_image( 'class-video.png', 'large' ); ?>
+		<?php $prenatal_video_image_url = $prenatal_image( 'class-video.webp', 'large' ); ?>
 		<?php if ( $prenatal_video_image_url ) : ?>
 			<a class="prenatal-video__frame" href="#prenatal-registration" aria-label="Đăng ký tư vấn lớp học">
 				<img src="<?php echo esc_url( $prenatal_video_image_url ); ?>" alt="Không khí thực hành trong lớp học tiền sản" />
@@ -326,8 +326,8 @@ $show_prenatal_video = true;
 <section class="vpc-section prenatal-teacher" aria-labelledby="prenatal-teacher-title">
 	<div class="prenatal-container prenatal-teacher__layout">
 		<div class="prenatal-teacher__photo">
-				<?php $teacher_card_image_url = $prenatal_image( 'teacher-thanh-thuy-card.png', 'large' ); ?>
-				<?php $teacher_card_2x_image_url = $prenatal_image( 'teacher-thanh-thuy-card@2x.png', 'full' ); ?>
+				<?php $teacher_card_image_url = $prenatal_image( 'teacher-thanh-thuy-card.webp', 'large' ); ?>
+				<?php $teacher_card_2x_image_url = $prenatal_image( 'teacher-thanh-thuy-card@2x.webp', 'full' ); ?>
 				<?php if ( $teacher_card_image_url ) : ?>
 					<img class="prenatal-teacher__card-img" src="<?php echo esc_url( $teacher_card_image_url ); ?>"<?php if ( $teacher_card_2x_image_url ) : ?> srcset="<?php echo esc_url( $teacher_card_2x_image_url ); ?> 2x"<?php endif; ?> alt="Điều dưỡng trưởng Thanh Thủy bế em bé" width="540" height="600" />
 				<?php endif; ?>
@@ -504,22 +504,22 @@ $show_prenatal_video = true;
 			<div class="prenatal-services__viewport" data-services-viewport>
 				<div class="prenatal-services__track" data-services-track>
 					<a class="prenatal-services__card" href="<?php echo esc_url( home_url( '/#trung-tam-o-cu' ) ); ?>">
-						<?php $service_homecare_image_url = $prenatal_image( 'service-homecare.png', 'large' ); ?>
+						<?php $service_homecare_image_url = $prenatal_image( 'service-homecare.webp', 'large' ); ?>
 						<?php if ( $service_homecare_image_url ) : ?><img src="<?php echo esc_url( $service_homecare_image_url ); ?>" alt="Trung tâm ở cữ" loading="lazy" /><?php endif; ?>
 						<span>Trung Tâm Ở Cữ</span>
 					</a>
 					<a class="prenatal-services__card" href="<?php echo esc_url( home_url( '/#bao-mau-tai-nha' ) ); ?>">
-						<?php $service_newborn_image_url = $prenatal_image( 'service-newborn.png', 'large' ); ?>
+						<?php $service_newborn_image_url = $prenatal_image( 'service-newborn.webp', 'large' ); ?>
 						<?php if ( $service_newborn_image_url ) : ?><img src="<?php echo esc_url( $service_newborn_image_url ); ?>" alt="Bảo mẫu tại nhà" loading="lazy" /><?php endif; ?>
 						<span>Bảo Mẫu Tại Nhà</span>
 					</a>
 					<a class="prenatal-services__card" href="<?php echo esc_url( home_url( '/#khoa-hoc-truc-tuyen' ) ); ?>">
-						<?php $service_massage_image_url = $prenatal_image( 'service-massage.png', 'large' ); ?>
+						<?php $service_massage_image_url = $prenatal_image( 'service-massage.webp', 'large' ); ?>
 						<?php if ( $service_massage_image_url ) : ?><img src="<?php echo esc_url( $service_massage_image_url ); ?>" alt="Tư vấn nuôi con EASY" loading="lazy" /><?php endif; ?>
 						<span>Tư Vấn Nuôi Con EASY</span>
 					</a>
 					<a class="prenatal-services__card" href="<?php echo esc_url( home_url( '/#khoa-hoc-truc-tuyen' ) ); ?>">
-						<?php $service_online_image_url = $prenatal_image( 'service-online-course.png', 'large' ); ?>
+						<?php $service_online_image_url = $prenatal_image( 'service-online-course.webp', 'large' ); ?>
 						<?php if ( $service_online_image_url ) : ?><img src="<?php echo esc_url( $service_online_image_url ); ?>" alt="Khóa học trực tuyến" loading="lazy" /><?php endif; ?>
 						<span>Khóa Học Trực Tuyến</span>
 					</a>

@@ -18,7 +18,7 @@ if ( have_posts() ) :
 		?>
 
 		<!-- Hero Banner Section -->
-		<?php $policy_hero_image_url = vpc_image_url( 'hero_bg.jpg', 'full' ); ?>
+		<?php $policy_hero_image_url = vpc_image_url( 'hero_bg.webp', 'full' ); ?>
 		<section class="policy-hero-banner"<?php if ( $policy_hero_image_url ) : ?> style="background-image: linear-gradient(90.7deg, rgba(243, 128, 131, 0.81) -2.2%, rgba(26, 119, 186, 0.81) 99.39%), url('<?php echo esc_url( $policy_hero_image_url ); ?>');"<?php endif; ?>>
 			<div class="vpc-container">
 				<h1 class="policy-hero-title"><?php the_title(); ?></h1>
