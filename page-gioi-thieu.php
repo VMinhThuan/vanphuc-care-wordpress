@@ -19,7 +19,7 @@ $about_uri     = trailingslashit( get_template_directory_uri() ) . 'assets/image
 $badge_icon    = $about_uri . '/badge-star.svg';
 $feature_icon  = $about_uri . '/feature-star.svg';
 $hero_image    = $about_uri . '/hero-mission.webp';
-$mission_image = $hero_image;
+$mission_image = $about_uri . '/mission.webp';
 
 /*
  * Compatibility anchors for the existing homepage regression suite. The
@@ -120,8 +120,12 @@ $mission_image = $hero_image;
 
 	<section class="about-section about-founder" data-figma-node="3131:44972">
 		<div class="about-founder__visual">
-			<img class="about-founder__cutout" src="<?php echo esc_url( $about_uri . '/founder-cutout.webp' ); ?>" width="420" height="599" alt="Chị Thanh Thủy và em bé" loading="lazy">
-			<img class="about-founder__mascot" src="<?php echo esc_url( $about_uri . '/mascot-large.webp' ); ?>" width="230" height="296" alt="Vạn Phúc Care mascot" loading="lazy">
+			<div class="about-founder__cutout-frame">
+				<img class="about-founder__cutout" src="<?php echo esc_url( $about_uri . '/founder-cutout.webp' ); ?>" width="420" height="599" alt="Chị Thanh Thủy và em bé" loading="lazy">
+			</div>
+			<div class="about-founder__mascot-frame">
+				<img class="about-founder__mascot" src="<?php echo esc_url( $about_uri . '/mascot-large.webp' ); ?>" width="230" height="296" alt="Vạn Phúc Care mascot" loading="lazy">
+			</div>
 			<div class="about-founder__decoration" aria-hidden="true">
 				<img class="about-founder__decoration-curve" src="<?php echo esc_url( $about_uri . '/founder-decoration-curve.svg' ); ?>" width="80" height="91" alt="">
 				<img class="about-founder__decoration-stem" src="<?php echo esc_url( $about_uri . '/founder-decoration-stem.svg' ); ?>" width="21" height="29" alt="">
@@ -148,7 +152,7 @@ $mission_image = $hero_image;
 	<section class="about-section about-tiktok" data-figma-node="3131:45002">
 		<div class="about-tiktok__content">
 			<h2 class="about-heading about-tiktok__title"><span class="about-heading--blue">Tiktok</span> <span class="about-heading--pink">Mẹ Thủy Làm Y</span></h2>
-			<p class="about-copy about-tiktok__description">Bên cạnh công việc điều dưỡng, chị Thanh Thủy cũng tích cực chia sẻ kiến thức đến cộng đồng,<br> hướng đến sứ mệnh nâng cao chất lượng cuộc sống dành cho Mẹ &amp; Bé.</p>
+			<p class="about-copy about-tiktok__description">Bên cạnh công việc điều dưỡng, chị Thanh Thủy cũng tích cực chia sẻ kiến thức đến cộng đồng, hướng đến sứ mệnh nâng cao chất lượng cuộc sống dành cho Mẹ &amp; Bé.</p>
 			<div class="about-tiktok__image-frame">
 				<img class="about-tiktok__image" src="<?php echo esc_url( $about_uri . '/tiktok.webp' ); ?>" width="963" height="522" alt="Kênh TikTok Mẹ Thủy Làm Y" loading="lazy" decoding="async">
 			</div>
@@ -195,10 +199,10 @@ $mission_image = $hero_image;
 			BẢO CHỨNG UY TÍN
 		</span>
 		<h2 class="about-heading about-heading--blue about-partners__title">Đối Tác Chiến lược</h2>
-		<p class="about-copy about-partners__description">Vạn Phúc Care tự hào về chất lượng nhân sự và chuyên môn chuẩn y khoa.<br>Với đội ngũ nhân sự được tạo nguồn từ các trường đại học uy tín.</p>
+		<p class="about-copy about-partners__description">Vạn Phúc Care tự hào về chất lượng nhân sự và chuyên môn chuẩn y khoa. Với đội ngũ nhân sự được tạo nguồn từ các trường đại học uy tín.</p>
 		<div class="about-partners__logos" aria-label="Đối tác chiến lược">
 			<img src="<?php echo esc_url( $about_uri . '/partner-1.webp' ); ?>" width="80" height="98" alt="Đại học Y Hà Nội" loading="lazy">
-			<img src="<?php echo esc_url( $about_uri . '/partner-7.webp' ); ?>" width="100" height="100" alt="Cao đẳng Y khoa Hà Nội" loading="lazy">
+			<img src="<?php echo esc_url( $about_uri . '/partner-2-figma.svg' ); ?>" width="100" height="100" alt="Cao đẳng Y khoa Hà Nội" loading="lazy">
 			<img src="<?php echo esc_url( $about_uri . '/partner-3.webp' ); ?>" width="100" height="100" alt="Cao đẳng Y Hà Nội" loading="lazy">
 			<img src="<?php echo esc_url( $about_uri . '/partner-6.webp' ); ?>" width="100" height="100" alt="Hanoi Medical College" loading="lazy">
 			<img src="<?php echo esc_url( $about_uri . '/partner-2.webp' ); ?>" width="100" height="100" alt="Đại học Đông Á" loading="lazy">
