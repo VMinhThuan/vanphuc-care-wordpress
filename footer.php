@@ -24,7 +24,7 @@ if ( empty( $instagram_url ) ) {
 ?>
 </main><!-- #primary -->
 
-<footer class="site-footer relative w-full overflow-hidden pt-8 pb-8 xl:py-6 text-text-body-default" style="--footer-background: linear-gradient(180deg, var(--color-neutral-100) 38.823%, var(--color-primary-100) 99.976%);">
+<footer class="site-footer <?php echo is_front_page() ? 'site-footer--about' : ''; ?> relative w-full overflow-hidden pt-8 pb-8 xl:py-6 text-text-body-default" style="--footer-background: linear-gradient(180deg, var(--color-neutral-100) 38.823%, var(--color-primary-100) 99.976%);">
 	<!-- Decorative watermark: centered and intentionally wider than the mobile viewport, as in Figma. -->
 	<div class="pointer-events-none absolute bottom-0 left-1/2 z-0 w-[464px] -translate-x-1/2 select-none overflow-hidden sm:right-0 sm:left-auto sm:w-[380px] sm:translate-x-0 xl:w-[471px]" aria-hidden="true">
 		<?php $footer_watermark_url = vpc_image_url( 'footer-watermark.svg', 'full' ); ?>
@@ -41,10 +41,10 @@ if ( empty( $instagram_url ) ) {
 	<div class="vpc-container relative z-10 px-4 xl:px-20">
 		
 		<!-- Footer content: 32px top spacing on mobile, 24px on desktop. -->
-		<div class="pt-0 pb-0 xl:py-6 flex flex-col md:flex-row md:flex-wrap xl:flex-nowrap justify-between items-start gap-8 xl:gap-6">
+		<div class="vpc-footer-main pt-0 pb-0 xl:py-6 flex flex-col md:flex-row md:flex-wrap xl:flex-nowrap justify-between items-start gap-8 xl:gap-6">
 			
 			<!-- Column 1: Thông tin cty (Logo -> tagline gap 12px, còn lại gap 20px) -->
-			<div class="hidden md:flex w-full md:w-[381px] shrink-0 flex-col">
+			<div class="vpc-footer-about-company hidden md:flex w-full md:w-[381px] shrink-0 flex-col">
 				<div class="footer-logo mb-3">
 					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="inline-flex items-center shrink-0">
 						<?php $footer_logo_url = vpc_image_url( 'logo.svg', 'full' ); ?>
@@ -63,7 +63,7 @@ if ( empty( $instagram_url ) ) {
 						Hành Trình Cùng Mẹ, Trải Đầy Yêu Thương
 					</p>
 					
-					<h3 class="font-body text-2xl font-bold text-text-body-default uppercase">
+					<h3 class="vpc-footer-company-name font-body text-2xl font-bold text-text-body-default uppercase">
 						CÔNG TY TNHH VẠN PHÚC CARE
 					</h3>
 					
@@ -88,7 +88,7 @@ if ( empty( $instagram_url ) ) {
 			</div>
 
 			<!-- Column 2: DỊCH VỤ CỦA CHÚNG TÔI -->
-			<div class="hidden md:flex w-full sm:w-auto flex-col space-y-2 xl:space-y-3">
+			<div class="vpc-footer-about-services hidden md:flex w-full sm:w-auto flex-col space-y-2 xl:space-y-3">
 				<h3 class="font-body text-base font-bold text-text-body-default uppercase xl:pb-1">
 					DỊCH VỤ CỦA CHÚNG TÔI
 				</h3>
@@ -133,7 +133,7 @@ if ( empty( $instagram_url ) ) {
 		</div>
 
 		<!-- Row: 3 social icons sized to the footer design + 2 certification badges -->
-		<div class="pt-8 pb-0 sm:py-6 border-b-0 sm:border-b sm:border-border-divider-default flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 sm:gap-6">
+		<div class="vpc-footer-social pt-8 pb-0 sm:py-6 border-b-0 sm:border-b sm:border-border-divider-default flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 sm:gap-6">
 			<!-- Social icon slots are 52x44 on mobile; the artwork itself stays 40px. -->
 			<div class="flex items-center gap-4">
 				<!-- Facebook -->
@@ -184,14 +184,14 @@ if ( empty( $instagram_url ) ) {
 		</div>
 
 		<!-- Bottom Row: divider and navigation links on mobile; inline links on desktop. -->
-		<div class="mt-8 border-t border-border-divider-default pt-8 flex flex-col xl:flex-row items-start xl:items-center justify-start gap-1 md:gap-2 xl:gap-3 text-sm md:text-base font-medium text-text-body-default xl:mt-0 xl:border-t-0 xl:pt-6">
-			<a href="<?php echo esc_url( home_url( '/dieu-khoan-su-dung' ) ); ?>" class="order-1 xl:order-none hover:text-text-body-muted transition-colors">Điều khoản sử dụng</a>
+		<div class="vpc-footer-legal mt-8 border-t border-border-divider-default pt-8 flex flex-col xl:flex-row items-start xl:items-center justify-start gap-1 md:gap-2 xl:gap-3 text-sm md:text-base font-medium text-text-body-default xl:mt-0 xl:border-t-0 xl:pt-6">
+			<a href="<?php echo esc_url( home_url( '/dieu-khoan-su-dung' ) ); ?>" class="vpc-footer-legal-terms order-1 xl:order-none hover:text-text-body-muted transition-colors">Điều khoản sử dụng</a>
 			<span class="hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
-			<a href="<?php echo esc_url( home_url( '/chinh-sach-bao-mat' ) ); ?>" class="order-2 xl:order-none hover:text-text-body-muted transition-colors">Chính sách bảo mật</a>
+			<a href="<?php echo esc_url( home_url( '/chinh-sach-bao-mat' ) ); ?>" class="vpc-footer-legal-privacy order-2 xl:order-none hover:text-text-body-muted transition-colors">Chính sách bảo mật</a>
 			<span class="hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
-			<a href="<?php echo esc_url( home_url( '/tuyen-dung' ) ); ?>" class="order-3 xl:order-none hover:text-text-body-muted transition-colors">Tuyển dụng</a>
+			<a href="<?php echo esc_url( home_url( '/tuyen-dung' ) ); ?>" class="vpc-footer-legal-careers order-3 xl:order-none hover:text-text-body-muted transition-colors">Tuyển dụng</a>
 			<span class="hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
-			<a href="<?php echo esc_url( home_url( '/lien-he' ) ); ?>" class="order-4 xl:order-none hover:text-text-body-muted transition-colors">Liên hệ</a>
+			<a href="<?php echo esc_url( home_url( '/lien-he' ) ); ?>" class="vpc-footer-legal-contact order-4 xl:order-none hover:text-text-body-muted transition-colors">Liên hệ</a>
 		</div>
 
 	</div>

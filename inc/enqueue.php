@@ -23,6 +23,8 @@ function vanphuccare_enqueue_assets() {
 
 	$tailwind_path = get_template_directory() . '/assets/css/theme.css';
 	$tailwind_ver  = file_exists( $tailwind_path ) ? (string) filemtime( $tailwind_path ) : $theme_version;
+	$about_path    = get_template_directory() . '/assets/css/about.css';
+	$about_ver     = file_exists( $about_path ) ? (string) filemtime( $about_path ) : $theme_version;
 
 	// Enqueue Google Fonts: Fraunces (Heading) & Manrope (Body) - optimized weights, no italic
 	wp_enqueue_style(
@@ -39,6 +41,15 @@ function vanphuccare_enqueue_assets() {
 			get_template_directory_uri() . '/assets/css/theme.css',
 			array( 'vanphuccare-fonts' ),
 			$tailwind_ver
+		);
+	}
+
+	if ( is_front_page() && file_exists( $about_path ) ) {
+		wp_enqueue_style(
+			'vanphuccare-about',
+			get_template_directory_uri() . '/assets/css/about.css',
+			array( 'vanphuccare-tailwind' ),
+			$about_ver
 		);
 	}
 
