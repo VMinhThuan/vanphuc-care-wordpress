@@ -84,7 +84,10 @@ function vanphuccare_preload_homepage_hero() {
 		return;
 	}
 
-	$hero_url = vpc_image_url( 'Trang chủ/hero-banner.webp', 'full' );
+	$hero_url = vpc_theme_asset_url( 'home/hero-banner.webp' );
+	if ( ! $hero_url ) {
+		$hero_url = vpc_image_url( 'home/hero-banner.webp', 'full' );
+	}
 	if ( ! $hero_url ) {
 		return;
 	}

@@ -28,7 +28,7 @@ $consultation_services = vpc_get_consultation_services();
 $gestational_age_options = vpc_get_gestational_age_options();
 $hero_slide_specs = array(
 	array(
-		'image'    => 'Trang chủ/hero-banner.webp',
+		'image'    => 'home/hero-banner.webp',
 		'href'     => 'https://www.edu.vanphuccare.vn',
 		'target'   => true,
 		'title'    => 'Khóa học Chăm sóc bé yêu KHOA HỌC từ con số 0 - Vạn Phúc Care',
@@ -37,13 +37,13 @@ $hero_slide_specs = array(
 		'hotspot'  => true,
 	),
 	array(
-		'image'   => 'Trang chủ/hero-banner-2.webp',
+		'image'   => 'home/hero-banner-2.webp',
 		'href'    => '#trung-tam-o-cu',
 		'title'   => 'Trung tâm ở cữ Vạn Phúc Care - Mẹ thảnh thơi nghỉ dưỡng, Bé phát triển toàn diện',
 		'alt'     => 'Trung tâm ở cữ Vạn Phúc Care - Mẹ thảnh thơi nghỉ dưỡng, Bé phát triển toàn diện',
 	),
 	array(
-		'image'   => 'Trang chủ/hero-banner-3.webp',
+		'image'   => 'home/hero-banner-3.webp',
 		'href'    => '/dich-vu/trung-tam-o-cu/',
 		'title'   => 'Trung tâm ở cữ Vạn Phúc Care',
 		'alt'     => 'Trung tâm ở cữ Vạn Phúc Care - Không gian nghỉ dưỡng và chăm sóc mẹ bé chuẩn y khoa',
@@ -51,7 +51,11 @@ $hero_slide_specs = array(
 );
 $hero_slides = array();
 foreach ( $hero_slide_specs as $slide_spec ) {
-	$slide_src = vpc_image_url( $slide_spec['image'], 'full' );
+	// Keep the homepage hero independent from Media Library attachment state.
+	$slide_src = vpc_theme_asset_url( $slide_spec['image'] );
+	if ( '' === $slide_src ) {
+		$slide_src = vpc_image_url( $slide_spec['image'], 'full' );
+	}
 	if ( '' === $slide_src ) {
 		continue;
 	}
@@ -129,7 +133,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 					<div class="relative w-full max-w-[350px] sm:max-w-[500px] lg:max-w-[517px] mx-auto lg:ml-20">
 						<!-- Main Photo with Rounded Corners matching Figma (border-radius: 50px) -->
 						<div class="relative w-full aspect-[4/3] sm:aspect-[517/591] rounded-[32px] sm:rounded-[50px] overflow-hidden shadow-[0px_4px_30px_rgba(0,0,0,0.08)] bg-neutral-100">
-							<?php $intro_image_url = vpc_image_url( 'Trang chủ/hero-section-image.webp', 'large' ); ?>
+							<?php $intro_image_url = vpc_image_url( 'home/hero-section-image.webp', 'large' ); ?>
 							<?php if ( $intro_image_url ) : ?>
 								<picture>
 									<img src="<?php echo esc_url( $intro_image_url ); ?>"
@@ -266,7 +270,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 
 			<!-- Room Visual Showcase (Rectangle 34624347) -->
 			<div class="w-full max-w-[1400px] rounded-[24px] overflow-hidden border border-border-divider-default shadow-[0px_4px_47px_rgba(0,0,0,0.01)] bg-neutral-100">
-					<?php $postpartum_center_image_url = vpc_image_url( 'Trang chủ/trung-tam-o-cu.webp', 'large' ); ?>
+					<?php $postpartum_center_image_url = vpc_image_url( 'home/trung-tam-o-cu.webp', 'large' ); ?>
 					<?php if ( $postpartum_center_image_url ) : ?>
 						<picture>
 							<img src="<?php echo esc_url( $postpartum_center_image_url ); ?>"
@@ -307,7 +311,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 					</div>
 
 					<div class="flex items-center gap-3">
-						<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/icon-home-care-exact.svg' ); ?>" width="24" height="18" class="w-6 h-[18px] shrink-0" alt="" aria-hidden="true" />
+						<img src="<?php echo esc_url( $theme_uri . '/assets/images/home/icon-home-care-exact.svg' ); ?>" width="24" height="18" class="w-6 h-[18px] shrink-0" alt="" aria-hidden="true" />
 						<span class="font-body font-normal sm:font-medium text-base text-text-body-default leading-6">Phòng nhi và phòng mẹ riêng biệt</span>
 					</div>
 				</div>
@@ -369,7 +373,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 				<div class="relative flex items-center justify-center w-full order-1">
 					<div class="relative w-full max-w-[350px] sm:max-w-[420px] lg:max-w-[668px] h-[342px] sm:h-[400px] lg:h-[500px] xl:h-[570px] mx-auto">
 						<!-- Left Photo -->
-						<?php $homecare_image_url = vpc_image_url( 'Trang chủ/ba-mau-tai-nha-2.webp', 'large' ); ?>
+						<?php $homecare_image_url = vpc_image_url( 'home/ba-mau-tai-nha-2.webp', 'large' ); ?>
 						<?php if ( $homecare_image_url ) : ?>
 							<div class="absolute left-0 top-0 w-[170px] sm:w-[200px] lg:w-[47%] h-[210px] sm:h-[250px] lg:h-auto aspect-[325/402] rounded-xl overflow-hidden shadow-[0_4px_18px_rgba(0,0,0,0.09)]">
 								<picture>
@@ -381,7 +385,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 							</div>
 						<?php endif; ?>
 						<!-- Right Photo (Staggered down) -->
-						<?php $homecare_night_image_url = vpc_image_url( 'Trang chủ/bao-mau-tai-nha-1.webp', 'large' ); ?>
+						<?php $homecare_night_image_url = vpc_image_url( 'home/bao-mau-tai-nha-1.webp', 'large' ); ?>
 						<?php if ( $homecare_night_image_url ) : ?>
 							<div class="absolute right-0 top-[38px] sm:top-[45px] lg:top-[56px] xl:top-[62px] w-[170px] sm:w-[200px] lg:w-[47%] h-[273px] sm:h-[320px] lg:h-auto aspect-[324/521] rounded-xl overflow-hidden shadow-[0_4px_18px_rgba(0,0,0,0.09)]">
 								<picture>
@@ -469,7 +473,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 				<div class="relative flex items-center justify-center w-full">
 					<div class="grid grid-cols-2 gap-4 sm:gap-5 items-start w-full max-w-[350px] sm:max-w-[540px] mx-auto lg:max-w-none">
 						<!-- Left Photo (Top-aligned) -->
-						<?php $prenatal_home_image_url = vpc_image_url( 'Trang chủ/lop-hoc-tien-san-1.webp', 'large' ); ?>
+						<?php $prenatal_home_image_url = vpc_image_url( 'home/lop-hoc-tien-san-1.webp', 'large' ); ?>
 						<?php if ( $prenatal_home_image_url ) : ?>
 							<div class="relative w-full">
 								<picture>
@@ -481,7 +485,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 							</div>
 						<?php endif; ?>
 						<!-- Right Photo (Staggered down) -->
-						<?php $prenatal_home_second_image_url = vpc_image_url( 'Trang chủ/lop-hoc-tien-san-2.webp', 'large' ); ?>
+						<?php $prenatal_home_second_image_url = vpc_image_url( 'home/lop-hoc-tien-san-2.webp', 'large' ); ?>
 						<?php if ( $prenatal_home_second_image_url ) : ?>
 							<div class="relative w-full pt-8 sm:pt-12 lg:pt-20">
 								<picture>
@@ -692,7 +696,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 				<!-- Card 3 -->
 				<div class="bg-surface-card-default rounded-xl p-5 sm:p-6 lg:p-7 shadow-card border border-border-divider-default flex flex-col items-center text-center h-full transition-all duration-300 hover:shadow-[0_12px_32px_rgba(26,119,186,0.08)] hover:-translate-y-1">
 					<div class="w-12 h-12 rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0 mb-3 sm:mb-4">
-						<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/lightbulb-hand-icon-transparent-50x50.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px]" alt="" aria-hidden="true" />
+						<img src="<?php echo esc_url( $theme_uri . '/assets/images/home/lightbulb-hand-icon-transparent-50x50.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px]" alt="" aria-hidden="true" />
 						<svg class="hidden" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 							<path d="M12 1.5a.9.9 0 0 1 .9.9v1.2a.9.9 0 1 1-1.8 0V2.4a.9.9 0 0 1 .9-.9zm-6.2 3.8a.9.9 0 0 1 1.27 0l.85.85a.9.9 0 1 1-1.27 1.27l-.85-.85a.9.9 0 0 1 0-1.27zm12.4 0a.9.9 0 0 1 0 1.27l-.85.85a.9.9 0 1 1-1.27-1.27l.85-.85a.9.9 0 0 1 1.27 0zM3 11a.9.9 0 0 1 .9-.9h1.2a.9.9 0 1 1 0 1.8H3.9A.9.9 0 0 1 3 11zm15 0a.9.9 0 0 1 .9-.9h1.2a.9.9 0 1 1 0 1.8h-1.2a.9.9 0 0 1-.9-.9z"/>
 							<path d="M12 4.5a4.2 4.2 0 0 0-3.08 7.07c.45.48.75 1.08.75 1.83h4.66c0-.75.3-1.35.75-1.83A4.2 4.2 0 0 0 12 4.5zm-1.4 10.4h2.8v.9h-2.8v-.9z"/>
@@ -710,7 +714,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 				<!-- Card 4 -->
 				<div class="bg-surface-card-default rounded-xl p-5 sm:p-6 lg:p-7 shadow-card border border-border-divider-default flex flex-col items-center text-center h-full transition-all duration-300 hover:shadow-[0_12px_32px_rgba(26,119,186,0.08)] hover:-translate-y-1">
 					<div class="w-12 h-12 rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0 mb-3 sm:mb-4">
-						<img src="<?php echo esc_url( $theme_uri . '/assets/images/Trang chủ/teaching-icon-50x50.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px]" alt="" aria-hidden="true" />
+						<img src="<?php echo esc_url( $theme_uri . '/assets/images/home/teaching-icon-50x50.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px]" alt="" aria-hidden="true" />
 						<svg class="hidden" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 							<path d="M9.5 3h12a1 1 0 0 1 1 1v9.5a1 1 0 0 1-1 1h-12a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1.5 2.5h8v1.5h-8V5.5zm0 3h5.5V10H11V8.5z"/>
 							<circle cx="5.5" cy="6" r="2.5"/>
@@ -768,8 +772,8 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 
 				<!-- Center Image (Mobile order: 1, Desktop order: 2) -->
 				<div class="w-full max-w-[350px] sm:max-w-[479px] shrink-0 mx-auto flex justify-center items-center order-1 lg:order-2">
-					<?php $why_vpc_webp_url = vpc_image_url( 'Trang chủ/vi-sao-chon-VPC.webp', 'large' ); ?>
-					<?php $why_vpc_jpg_url = vpc_image_url( 'Trang chủ/vi-sao-chon-VPC.jpg', 'large' ); ?>
+					<?php $why_vpc_webp_url = vpc_image_url( 'home/vi-sao-chon-VPC.webp', 'large' ); ?>
+					<?php $why_vpc_jpg_url = vpc_image_url( 'home/vi-sao-chon-VPC.jpg', 'large' ); ?>
 					<?php $why_vpc_image_url = $why_vpc_jpg_url ? $why_vpc_jpg_url : $why_vpc_webp_url; ?>
 					<?php if ( $why_vpc_image_url ) : ?>
 						<picture>
@@ -1464,7 +1468,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 				<article class="min-w-[300px] w-[300px] md:min-w-0 md:w-auto snap-start bg-surface-card-default rounded-2xl p-4 sm:p-5 border border-neutral-100 hover:shadow-md transition-all duration-300 flex flex-col group shrink-0 md:shrink">
 					<!-- Thumbnail Image -->
 					<div class="relative w-full aspect-[268/208] rounded-xl overflow-hidden bg-neutral-200">
-							<?php $press_featured_image_url = vpc_image_url( 'Trang chủ/Bai-bao-noi-bat.webp', 'large' ); ?>
+							<?php $press_featured_image_url = vpc_image_url( 'home/Bai-bao-noi-bat.webp', 'large' ); ?>
 							<?php if ( $press_featured_image_url ) : ?>
 								<picture>
 									<img src="<?php echo esc_url( $press_featured_image_url ); ?>" alt="Vạn Phúc Care - Báo chí đưa tin" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
