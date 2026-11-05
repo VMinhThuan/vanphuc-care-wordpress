@@ -566,7 +566,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	flex-direction: column;
 	align-items: center;
 	gap: 40px;
-	height: 963px;
+	min-height: 963px;
 	padding: 96px 80px;
 	background: var(--about-surface);
 }
@@ -596,11 +596,15 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	text-align: center;
 }
 
+.about-tiktok__description p {
+	margin: 0;
+}
+
 .about-tiktok__image-frame {
 	position: relative;
 	width: 962.5px;
 	max-width: 100%;
-	height: 522px;
+	height: 522.189px;
 	overflow: hidden;
 }
 
@@ -608,8 +612,8 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 962.5px;
-	max-width: none;
+	width: 100%;
+	max-width: 100%;
 	height: 154.35%;
 }
 
@@ -653,6 +657,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	flex-wrap: nowrap;
 	gap: 26px;
 	width: min(1234px, 100%);
 	margin-top: 0;
@@ -666,18 +671,18 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	max-width: 289px;
 	flex-direction: column;
 	align-items: center;
-	gap: 0;
+	gap: 12px;
 	padding: 8px 12px;
 	border: 1px solid #f69b9c;
 	border-radius: 12px;
-	background: linear-gradient(180deg, #fbcdcd 1%, #fafafa 100%);
-	box-shadow: 0 1px 5px rgba(0, 0, 0, .15);
+	background: linear-gradient(180deg, #fbcdcd 1.4614%, #fafafa 99.955%);
+	box-shadow: 0 1px 2.5px rgba(0, 0, 0, .15);
 }
 
 .about-team-card__photo {
 	position: relative;
 	display: flex;
-	align-items: flex-end;
+	align-items: flex-start;
 	justify-content: center;
 	width: 100%;
 	height: 320px;
@@ -703,6 +708,14 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	object-position: bottom;
 }
 
+.about-team-card__meta {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+	width: 100%;
+}
+
 .about-team-card--member-2 .about-team-card__image-frame img {
 	top: -12.33%;
 	left: -5.83%;
@@ -712,7 +725,6 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 
 .about-team-card__name {
 	width: 100%;
-	margin-top: 12px;
 	color: var(--about-blue);
 	font-size: 16px;
 	font-weight: 700;
@@ -722,7 +734,6 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 
 .about-team-card__role {
 	width: 100%;
-	margin-top: 8px;
 	font-size: 16px;
 	line-height: 24px;
 	text-align: center;
@@ -749,10 +760,15 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	margin: 0 auto;
 }
 
+.about-partners__description p {
+	margin: 0;
+}
+
 .about-partners__logos {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	flex-wrap: nowrap;
 	gap: 64px;
 	width: 100%;
 	height: 180px;

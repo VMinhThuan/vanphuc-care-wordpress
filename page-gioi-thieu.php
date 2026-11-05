@@ -152,7 +152,10 @@ $mission_image = $about_uri . '/mission.webp';
 	<section class="about-section about-tiktok" data-figma-node="3131:45002">
 		<div class="about-tiktok__content">
 			<h2 class="about-heading about-tiktok__title"><span class="about-heading--blue">Tiktok</span> <span class="about-heading--pink">Mẹ Thủy Làm Y</span></h2>
-			<p class="about-copy about-tiktok__description">Bên cạnh công việc điều dưỡng, chị Thanh Thủy cũng tích cực chia sẻ kiến thức đến cộng đồng, hướng đến sứ mệnh nâng cao chất lượng cuộc sống dành cho Mẹ &amp; Bé.</p>
+			<div class="about-copy about-tiktok__description">
+				<p>Bên cạnh công việc điều dưỡng, chị Thanh Thủy cũng tích cực chia sẻ kiến thức đến cộng đồng,</p>
+				<p>hướng đến sứ mệnh nâng cao chất lượng cuộc sống dành cho Mẹ &amp; Bé.</p>
+			</div>
 			<div class="about-tiktok__image-frame">
 				<img class="about-tiktok__image" src="<?php echo esc_url( $about_uri . '/tiktok.webp' ); ?>" width="963" height="522" alt="Kênh TikTok Mẹ Thủy Làm Y" loading="lazy" decoding="async">
 			</div>
@@ -186,8 +189,10 @@ $mission_image = $about_uri . '/mission.webp';
 					<div class="about-team-card__photo">
 						<div class="about-team-card__image-frame"><img src="<?php echo esc_url( $image_url ); ?>" width="223" height="292" alt="<?php echo esc_attr( $member['name'] ); ?>" loading="lazy" decoding="async"></div>
 					</div>
-					<div class="about-team-card__name"><?php echo esc_html( $member['name'] ); ?></div>
-					<div class="about-team-card__role"><?php echo esc_html( $member['role'] ); ?></div>
+					<div class="about-team-card__meta">
+						<div class="about-team-card__name"><?php echo esc_html( $member['name'] ); ?></div>
+						<div class="about-team-card__role"><?php echo esc_html( $member['role'] ); ?></div>
+					</div>
 				</article>
 			<?php endforeach; ?>
 		</div>
@@ -199,7 +204,10 @@ $mission_image = $about_uri . '/mission.webp';
 			BẢO CHỨNG UY TÍN
 		</span>
 		<h2 class="about-heading about-heading--blue about-partners__title">Đối Tác Chiến lược</h2>
-		<p class="about-copy about-partners__description">Vạn Phúc Care tự hào về chất lượng nhân sự và chuyên môn chuẩn y khoa. Với đội ngũ nhân sự được tạo nguồn từ các trường đại học uy tín.</p>
+		<div class="about-copy about-partners__description">
+			<p>Vạn Phúc Care tự hào về chất lượng nhân sự và chuyên môn chuẩn y khoa.</p>
+			<p>Với đội ngũ nhân sự được tạo nguồn từ các trường đại học uy tín.</p>
+		</div>
 		<div class="about-partners__logos" aria-label="Đối tác chiến lược">
 			<img src="<?php echo esc_url( $about_uri . '/partner-1.webp' ); ?>" width="80" height="98" alt="Đại học Y Hà Nội" loading="lazy">
 			<img src="<?php echo esc_url( $about_uri . '/partner-2-figma.svg' ); ?>" width="100" height="100" alt="Cao đẳng Y khoa Hà Nội" loading="lazy">
