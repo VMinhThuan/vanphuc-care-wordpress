@@ -424,7 +424,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	gap: 127px;
 	height: 703px;
 	padding: 96px 80px;
-	background: linear-gradient(217deg, #f8f8f8 44%, #fde6e6 113%);
+	background: linear-gradient(217.158deg, #f8f8f8 43.755%, #fde6e6 112.55%);
 }
 
 .about-founder__visual {
@@ -452,9 +452,13 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 }
 
 .about-founder__cutout {
-	width: 100%;
+	position: absolute;
+	top: 0;
+	left: -20.8%;
+	width: 124.64%;
+	max-width: none;
 	height: 100%;
-	object-fit: contain;
+	object-fit: fill;
 }
 
 .about-founder__mascot-frame {
@@ -464,18 +468,22 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	width: 230px;
 	height: 296px;
 	overflow: visible;
+}
 
 .about-founder__mascot {
-	width: 100%;
-	height: 100%;
-	object-fit: contain;
-	object-position: bottom left;
+	position: absolute;
+	top: -1.16%;
+	left: -87.29%;
+	width: 278.82%;
+	max-width: none;
+	height: 135.51%;
+	object-fit: fill;
 }
 
 .about-founder__decoration {
 	position: absolute;
 	top: -6.13px;
-	left: 540px;
+	left: 430px;
 	width: 175.647px;
 	height: 171.68px;
 }
@@ -537,6 +545,14 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 
 .about-founder__text p {
 	text-align: justify;
+}
+
+.about-founder__text p + p {
+	margin-top: 24px;
+}
+
+.about-founder__text h2 + .about-copy {
+	margin-top: 3px;
 }
 
 .about-founder__link {
