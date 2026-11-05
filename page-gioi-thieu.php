@@ -86,7 +86,9 @@ $mission_image = $hero_image;
 			<div class="about-timeline__step about-timeline__step--2024"><strong>2024</strong><p>Ra mắt hệ thống giáo dục khoá học trực tuyến, đóng vai trò là hành trang giúp ba mẹ tự tin hơn trong hành trình chăm sóc con nhỏ. Phạm vi vượt ngoài lãnh thổ Việt Nam và được cha mẹ Việt kiều đón nhận.</p></div>
 			<div class="about-timeline__step about-timeline__step--2025"><strong>2025</strong><p>Liên tục tham gia các sự kiện hướng nghiệp dành cho điều dưỡng viên, nữ hộ sinh lớp nhân lực trẻ kế cận. Kết hợp và cộng tác với các trường đại học uy tín tại Hà Nội.</p></div>
 			<div class="about-timeline__step about-timeline__step--2026"><strong>2026- Nay</strong><p>Khai trương trung tâm ở cữ chuyên biệt, hiện đại tại Hà Nội. Hoàn thiện mảnh ghép quan trọng trong hệ thống chăm sóc mẹ và bé toàn diện tại Vạn Phúc Care.</p></div>
-			<img class="about-timeline__visual" src="<?php echo esc_url( $about_uri . '/nurse-baby-cutout.webp' ); ?>" width="340" height="502" alt="Điều dưỡng chăm sóc em bé" loading="lazy" decoding="async">
+			<div class="about-timeline__visual" aria-hidden="true">
+				<img src="<?php echo esc_url( $about_uri . '/nurse-baby-cutout.webp' ); ?>" width="484" height="502" alt="" loading="lazy" decoding="async">
+			</div>
 		</div>
 	</section>
 
@@ -120,7 +122,12 @@ $mission_image = $hero_image;
 		<div class="about-founder__visual">
 			<img class="about-founder__cutout" src="<?php echo esc_url( $about_uri . '/founder-cutout.webp' ); ?>" width="420" height="599" alt="Chị Thanh Thủy và em bé" loading="lazy">
 			<img class="about-founder__mascot" src="<?php echo esc_url( $about_uri . '/mascot-large.webp' ); ?>" width="230" height="296" alt="Vạn Phúc Care mascot" loading="lazy">
-			<img class="about-founder__decoration" src="<?php echo esc_url( $about_uri . '/founder-decoration.svg' ); ?>" width="104" height="114" alt="" aria-hidden="true">
+			<div class="about-founder__decoration" aria-hidden="true">
+				<img class="about-founder__decoration-curve" src="<?php echo esc_url( $about_uri . '/founder-decoration-curve.svg' ); ?>" width="80" height="91" alt="">
+				<img class="about-founder__decoration-stem" src="<?php echo esc_url( $about_uri . '/founder-decoration-stem.svg' ); ?>" width="21" height="29" alt="">
+				<img class="about-founder__decoration-tail" src="<?php echo esc_url( $about_uri . '/founder-decoration-tail.svg' ); ?>" width="34" height="7" alt="">
+				<img class="about-founder__decoration-tip" src="<?php echo esc_url( $about_uri . '/founder-decoration-tip.svg' ); ?>" width="18" height="14" alt="">
+			</div>
 		</div>
 		<div class="about-founder__copy">
 			<div class="about-founder__text">
@@ -142,9 +149,11 @@ $mission_image = $hero_image;
 		<div class="about-tiktok__content">
 			<h2 class="about-heading about-tiktok__title"><span class="about-heading--blue">Tiktok</span> <span class="about-heading--pink">Mẹ Thủy Làm Y</span></h2>
 			<p class="about-copy about-tiktok__description">Bên cạnh công việc điều dưỡng, chị Thanh Thủy cũng tích cực chia sẻ kiến thức đến cộng đồng,<br> hướng đến sứ mệnh nâng cao chất lượng cuộc sống dành cho Mẹ &amp; Bé.</p>
-			<img class="about-tiktok__image" src="<?php echo esc_url( $about_uri . '/tiktok.webp' ); ?>" width="963" height="522" alt="Kênh TikTok Mẹ Thủy Làm Y" loading="lazy">
+			<div class="about-tiktok__image-frame">
+				<img class="about-tiktok__image" src="<?php echo esc_url( $about_uri . '/tiktok.webp' ); ?>" width="963" height="522" alt="Kênh TikTok Mẹ Thủy Làm Y" loading="lazy" decoding="async">
+			</div>
 		</div>
-		<a class="about-button about-tiktok__button" href="https://www.tiktok.com/@methuylamy" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">＋</span>&nbsp; Theo dõi</a>
+		<a class="about-button about-tiktok__button" href="https://www.tiktok.com/@methuylamy" target="_blank" rel="noopener noreferrer"><img src="<?php echo esc_url( $about_uri . '/tiktok-plus.svg' ); ?>" width="15" height="25" alt="" aria-hidden="true"><span>Theo dõi</span></a>
 	</section>
 
 	<section id="doi-ngu" class="about-section about-team" data-figma-node="3131:45011">
@@ -159,16 +168,20 @@ $mission_image = $hero_image;
 		<div class="about-team__grid">
 			<?php
 			$team_members = array(
-				array( 'image' => 'team-3.webp', 'name' => 'Cô Vương Thanh Thủy', 'role' => 'Điều dưỡng trưởng' ),
-				array( 'image' => 'team-2.webp', 'name' => 'Cô Trần Thị Trang', 'role' => 'Điều dưỡng viên' ),
-				array( 'image' => 'team-1.webp', 'name' => 'Cô Đỗ Thị Duyên', 'role' => 'Điều dưỡng viên' ),
-				array( 'image' => 'team-4.webp', 'name' => 'Cô Tống Thị Nguyệt', 'role' => 'Điều dưỡng viên' ),
+				array( 'image' => 'team-member-1.webp', 'name' => 'Cô Vương Thanh Thủy', 'role' => 'Điều dưỡng trưởng' ),
+				array( 'image' => 'team-member-2.webp', 'name' => 'Cô Trần Thị Trang', 'role' => 'Điều dưỡng viên' ),
+				array( 'image' => 'team-member-3.webp', 'name' => 'Cô Đỗ Thị Duyên', 'role' => 'Điều dưỡng viên' ),
+				array( 'image' => 'team-member-4.webp', 'name' => 'Cô Tống Thị Nguyệt', 'role' => 'Điều dưỡng viên' ),
 			);
+			$member_index = 0;
 			foreach ( $team_members as $member ) :
+				$member_index++;
 				$image_url = $about_uri . '/' . $member['image'];
 				?>
-				<article class="about-team-card">
-					<div class="about-team-card__photo"><img src="<?php echo esc_url( $image_url ); ?>" width="223" height="292" alt="<?php echo esc_attr( $member['name'] ); ?>" loading="lazy"></div>
+				<article class="about-team-card about-team-card--member-<?php echo esc_attr( $member_index ); ?>">
+					<div class="about-team-card__photo">
+						<div class="about-team-card__image-frame"><img src="<?php echo esc_url( $image_url ); ?>" width="223" height="292" alt="<?php echo esc_attr( $member['name'] ); ?>" loading="lazy" decoding="async"></div>
+					</div>
 					<div class="about-team-card__name"><?php echo esc_html( $member['name'] ); ?></div>
 					<div class="about-team-card__role"><?php echo esc_html( $member['role'] ); ?></div>
 				</article>
@@ -176,7 +189,7 @@ $mission_image = $hero_image;
 		</div>
 	</section>
 
-	<section class="about-section about-partners" data-figma-node="3131:45022">
+	<section class="about-section about-partners" data-figma-node="3131:45023">
 		<span class="about-badge">
 			<?php if ( $badge_icon ) : ?><img src="<?php echo esc_url( $badge_icon ); ?>" width="24" height="24" alt="" aria-hidden="true"><?php endif; ?>
 			BẢO CHỨNG UY TÍN
