@@ -769,7 +769,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 				<!-- Center Image (Mobile order: 1, Desktop order: 2) -->
 				<div class="w-full max-w-[350px] sm:max-w-[479px] shrink-0 mx-auto flex justify-center items-center order-1 lg:order-2">
 					<?php $why_vpc_webp_url = vpc_image_url( 'Trang chủ/vi-sao-chon-VPC.webp', 'large' ); ?>
-					<?php $why_vpc_jpg_url = vpc_image_url( 'Trang chủ/vi-sao-chon-VPC.webp', 'large' ); ?>
+					<?php $why_vpc_jpg_url = vpc_image_url( 'Trang chủ/vi-sao-chon-VPC.jpg', 'large' ); ?>
 					<?php $why_vpc_image_url = $why_vpc_jpg_url ? $why_vpc_jpg_url : $why_vpc_webp_url; ?>
 					<?php if ( $why_vpc_image_url ) : ?>
 						<picture>

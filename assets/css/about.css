@@ -274,9 +274,9 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 .about-timeline__node--2021 { top: 0; left: 0; }
 .about-timeline__node--2022 { top: 49px; left: 329px; }
 .about-timeline__node--2023 { top: 241px; left: 329px; }
-.about-timeline__node--2024 { top: 511px; left: 368px; }
-.about-timeline__node--2025 { top: 511px; left: 683px; }
-.about-timeline__node--2026 { top: 511px; left: 998px; }
+.about-timeline__node--2024 { top: 450px; left: 368px; }
+.about-timeline__node--2025 { top: 450px; left: 678px; }
+.about-timeline__node--2026 { top: 450px; left: 998px; }
 
 .about-timeline__step {
 	position: absolute;
@@ -308,7 +308,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 .about-timeline__visual {
 	position: absolute;
 	top: 317px;
-	left: 0;
+	left: -96px;
 	width: 484px;
 	height: 502px;
 	overflow: hidden;
