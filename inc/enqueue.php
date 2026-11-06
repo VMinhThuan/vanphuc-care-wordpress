@@ -25,7 +25,30 @@ function vanphuccare_enqueue_assets() {
 	$tailwind_ver  = file_exists( $tailwind_path ) ? (string) filemtime( $tailwind_path ) : $theme_version;
 	$about_path    = get_template_directory() . '/assets/css/about.css';
 	$about_ver     = file_exists( $about_path ) ? (string) filemtime( $about_path ) : $theme_version;
+	$o_cu_path     = get_template_directory() . '/assets/css/o-cu.css';
+	$o_cu_ver      = file_exists( $o_cu_path ) ? (string) filemtime( $o_cu_path ) : $theme_version;
+	$bao_mau_path  = get_template_directory() . '/assets/css/bao-mau.css';
+	$bao_mau_ver   = file_exists( $bao_mau_path ) ? (string) filemtime( $bao_mau_path ) : $theme_version;
+	$bao_mau_js    = get_template_directory() . '/assets/js/bao-mau.js';
+	$bao_mau_js_ver = file_exists( $bao_mau_js ) ? (string) filemtime( $bao_mau_js ) : $theme_version;
+	$easy_path     = get_template_directory() . '/assets/css/easy.css';
+	$easy_ver      = file_exists( $easy_path ) ? (string) filemtime( $easy_path ) : $theme_version;
+	$easy_js       = get_template_directory() . '/assets/js/easy.js';
+	$easy_js_ver   = file_exists( $easy_js ) ? (string) filemtime( $easy_js ) : $theme_version;
+	$bath_path     = get_template_directory() . '/assets/css/bath.css';
+	$bath_ver      = file_exists( $bath_path ) ? (string) filemtime( $bath_path ) : $theme_version;
+	$bath_js       = get_template_directory() . '/assets/js/bath.js';
+	$bath_js_ver   = file_exists( $bath_js ) ? (string) filemtime( $bath_js ) : $theme_version;
+	$milk_path     = get_template_directory() . '/assets/css/milk.css';
+	$milk_ver      = file_exists( $milk_path ) ? (string) filemtime( $milk_path ) : $theme_version;
+	$milk_js       = get_template_directory() . '/assets/js/milk.js';
+	$milk_js_ver   = file_exists( $milk_js ) ? (string) filemtime( $milk_js ) : $theme_version;
 	$is_about_page = is_page_template( 'page-gioi-thieu.php' ) || is_page( 'gioi-thieu' );
+	$is_o_cu_page  = vanphuccare_is_o_cu_page();
+	$is_bao_mau_page = vanphuccare_is_bao_mau_page();
+	$is_easy_page    = vanphuccare_is_easy_page();
+	$is_bath_page   = vanphuccare_is_tam_be_page();
+	$is_milk_page   = vanphuccare_is_thong_tac_page();
 
 	// Enqueue Google Fonts: Fraunces (Heading) & Manrope (Body) - optimized weights, no italic
 	wp_enqueue_style(
@@ -54,6 +77,51 @@ function vanphuccare_enqueue_assets() {
 		);
 	}
 
+	if ( $is_o_cu_page && file_exists( $o_cu_path ) ) {
+		wp_enqueue_style(
+			'vanphuccare-o-cu',
+			get_template_directory_uri() . '/assets/css/o-cu.css',
+			array( 'vanphuccare-tailwind' ),
+			$o_cu_ver
+		);
+	}
+
+	if ( $is_bao_mau_page && file_exists( $bao_mau_path ) ) {
+		wp_enqueue_style(
+			'vanphuccare-bao-mau',
+			get_template_directory_uri() . '/assets/css/bao-mau.css',
+			array( 'vanphuccare-tailwind' ),
+			$bao_mau_ver
+		);
+	}
+
+	if ( $is_easy_page && file_exists( $easy_path ) ) {
+		wp_enqueue_style(
+			'vanphuccare-easy',
+			get_template_directory_uri() . '/assets/css/easy.css',
+			array( 'vanphuccare-tailwind' ),
+			$easy_ver
+		);
+	}
+
+	if ( $is_bath_page && file_exists( $bath_path ) ) {
+		wp_enqueue_style(
+			'vanphuccare-bath',
+			get_template_directory_uri() . '/assets/css/bath.css',
+			array( 'vanphuccare-tailwind' ),
+			$bath_ver
+		);
+	}
+
+	if ( $is_milk_page && file_exists( $milk_path ) ) {
+		wp_enqueue_style(
+			'vanphuccare-milk',
+			get_template_directory_uri() . '/assets/css/milk.css',
+			array( 'vanphuccare-tailwind' ),
+			$milk_ver
+		);
+	}
+
 	wp_enqueue_script(
 		'vanphuccare-main',
 		get_template_directory_uri() . '/assets/js/main.js',
@@ -61,6 +129,46 @@ function vanphuccare_enqueue_assets() {
 		$js_version,
 		true
 	);
+
+	if ( $is_bao_mau_page && file_exists( $bao_mau_js ) ) {
+		wp_enqueue_script(
+			'vanphuccare-bao-mau',
+			get_template_directory_uri() . '/assets/js/bao-mau.js',
+			array(),
+			$bao_mau_js_ver,
+			true
+		);
+	}
+
+	if ( $is_easy_page && file_exists( $easy_js ) ) {
+		wp_enqueue_script(
+			'vanphuccare-easy',
+			get_template_directory_uri() . '/assets/js/easy.js',
+			array(),
+			$easy_js_ver,
+			true
+		);
+	}
+
+	if ( $is_bath_page && file_exists( $bath_js ) ) {
+		wp_enqueue_script(
+			'vanphuccare-bath',
+			get_template_directory_uri() . '/assets/js/bath.js',
+			array(),
+			$bath_js_ver,
+			true
+		);
+	}
+
+	if ( $is_milk_page && file_exists( $milk_js ) ) {
+		wp_enqueue_script(
+			'vanphuccare-milk',
+			get_template_directory_uri() . '/assets/js/milk.js',
+			array(),
+			$milk_js_ver,
+			true
+		);
+	}
 
 	wp_localize_script(
 		'vanphuccare-main',

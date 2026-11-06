@@ -3,7 +3,7 @@
  * Site footer template for Vạn Phúc Care.
  * Matches exact Figma Footer specification:
  * - Column 1: Logo + Slogan + Company Name + Address + 2 Hotlines + 2 Emails
- * - Column 2: DỊCH VỤ CỦA CHÚNG TÔI (9 items)
+ * - Column 2: DỊCH VỤ CỦA CHÚNG TÔI (7 items)
  * - Column 3: KIẾN THỨC (5 items)
  * - Column 4: TIN TỨC & SỰ KIỆN (2 items)
  * - Middle Row: 3 Social Icons (Facebook, Instagram, TikTok) + 2 Certifications (DMCA, Bộ Công Thương)
@@ -97,11 +97,9 @@ if ( empty( $instagram_url ) ) {
 					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#khoa-hoc-truc-tuyen' ) ); ?>" class="hover:text-text-body-muted transition-colors">Khóa học trực tuyến</a></li>
 					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#bao-mau-tai-nha' ) ); ?>" class="hover:text-text-body-muted transition-colors">Bảo mẫu tại nhà</a></li>
 					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/lop-hoc-tien-san/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Lớp học tiền sản</a></li>
-					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#khoa-hoc-truc-tuyen' ) ); ?>" class="hover:text-text-body-muted transition-colors">Tư vấn nuôi con EASY</a></li>
-					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#bao-mau-tai-nha' ) ); ?>" class="hover:text-text-body-muted transition-colors">Tắm trẻ sơ sinh</a></li>
-					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#bao-mau-tai-nha' ) ); ?>" class="hover:text-text-body-muted transition-colors">Thông tắc tia sữa</a></li>
-					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#bao-mau-tai-nha' ) ); ?>" class="hover:text-text-body-muted transition-colors">Chăm sóc bé tại nhà</a></li>
-					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#bao-mau-tai-nha' ) ); ?>" class="hover:text-text-body-muted transition-colors">Chăm sóc mẹ sau sinh</a></li>
+					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/tu-van-nuoi-con-easy/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Tư vấn nuôi con EASY</a></li>
+					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/tam-be-tai-nha/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Tắm trẻ sơ sinh</a></li>
+					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/thong-tac-tia-sua/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Thông tắc tia sữa</a></li>
 				</ul>
 			</div>
 

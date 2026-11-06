@@ -1,0 +1,737 @@
+/* Figma page 3123:33008 — Trung tâm Ở cữ */
+.vpc-o-cu {
+	--ocu-blue: #1a77ba;
+	--ocu-pink: #f48283;
+	--ocu-bg: #f8f8f8;
+	--ocu-muted: #525252;
+	background: var(--ocu-bg);
+	color: #292929;
+	font-family: var(--font-body, "Manrope", sans-serif);
+	overflow: hidden;
+}
+
+.vpc-o-cu * {
+	box-sizing: border-box;
+}
+
+.vpc-o-cu p,
+.vpc-o-cu h1,
+.vpc-o-cu h2,
+.vpc-o-cu h3 {
+	margin: 0;
+}
+
+.ocu-hero {
+	min-height: 1152px;
+	padding: 96px 80px;
+	background: var(--ocu-bg);
+}
+
+.ocu-hero__content {
+	width: min(800px, 100%);
+	min-height: 960px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 24px;
+}
+
+.ocu-badge {
+	min-height: 42px;
+	padding: 8px 16px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	border: 1px solid var(--ocu-pink);
+	border-radius: 999px;
+	background: #fde6e6;
+	color: var(--ocu-blue);
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+	white-space: nowrap;
+}
+
+.ocu-badge img {
+	width: 24px;
+	height: 24px;
+	flex: 0 0 24px;
+}
+
+.ocu-hero__title,
+.ocu-section-heading h2,
+.ocu-space__copy h2,
+.ocu-cta h2 {
+	font: 600 48px/64px var(--font-heading, "Fraunces", serif);
+	font-variation-settings: "SOFT" 0, "WONK" 1;
+	text-align: center;
+}
+
+.ocu-hero__title {
+	width: 100%;
+}
+
+.ocu-heading--blue {
+	color: var(--ocu-blue);
+}
+
+.ocu-heading--pink {
+	color: var(--ocu-pink);
+}
+
+.ocu-hero__title span {
+	display: block;
+}
+
+.ocu-hero__description {
+	max-width: 701px;
+	color: #292929;
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+	text-align: center;
+}
+
+.ocu-highlights {
+	width: 100%;
+	height: 108px;
+	padding: 12px 24px;
+	display: grid;
+	grid-template-columns: 1.37fr 1fr .78fr;
+	align-items: stretch;
+	background: #fff;
+	border-radius: 12px;
+	box-shadow: 0 1px 5px #00000026;
+}
+
+.ocu-highlight {
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	text-align: center;
+}
+
+.ocu-highlight + .ocu-highlight {
+	border-left: 1px solid #d8d8d8;
+}
+
+.ocu-highlight__heading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+}
+
+.ocu-highlight__heading img {
+	width: 24px;
+	height: 24px;
+	object-fit: contain;
+}
+
+.ocu-highlight h2 {
+	color: #292929;
+	font: 500 20px/28px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-highlight p {
+	color: var(--ocu-muted);
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-highlight:last-child p span {
+	color: var(--ocu-blue);
+	letter-spacing: 1px;
+}
+
+.ocu-hero__image {
+	width: 100%;
+	height: 450px;
+	border-radius: 12px;
+	object-fit: cover;
+	display: block;
+}
+
+.ocu-actions {
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	gap: 24px;
+	margin-top: 16px;
+}
+
+.ocu-button {
+	min-height: 48px;
+	padding: 12px 24px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 999px;
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+	text-decoration: none;
+	transition: background-color .2s ease, color .2s ease, transform .2s ease;
+}
+
+.ocu-button:hover {
+	transform: translateY(-1px);
+}
+
+.ocu-button--primary {
+	border: 1px solid var(--ocu-blue);
+	background: var(--ocu-blue);
+	color: #fff;
+}
+
+.ocu-button--primary:hover {
+	background: #155f95;
+	color: #fff;
+}
+
+.ocu-button--secondary {
+	border: 1px solid var(--ocu-pink);
+	background: transparent;
+	color: var(--ocu-pink);
+}
+
+.ocu-button--secondary:hover {
+	background: #fde6e6;
+	color: var(--ocu-pink);
+}
+
+.ocu-benefits {
+	min-height: 918px;
+	padding: 96px 80px;
+	background: linear-gradient(136deg, #f8f8f8 55.5%, #d1e4f1 97.7%);
+}
+
+.ocu-section-heading {
+	max-width: 920px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 24px;
+	text-align: center;
+}
+
+.ocu-section-heading h2 {
+	line-height: 64px;
+}
+
+.ocu-section-heading p {
+	max-width: 820px;
+	color: var(--ocu-muted);
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-benefit-grid {
+	width: min(1280px, 100%);
+	margin: 40px auto 0;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.ocu-benefit-row {
+	display: grid;
+	gap: 24px;
+	align-items: stretch;
+}
+
+.ocu-benefit-row--two {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ocu-benefit-row--three {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ocu-benefit-card {
+	min-height: 278px;
+	padding: 24px 16px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 12px;
+	border-radius: 16px;
+	background: #fff;
+	box-shadow: 0 1px 2.5px #00000026;
+}
+
+.ocu-benefit-card__icon {
+	width: 50px;
+	height: 50px;
+	padding: 12px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 999px;
+	background: #fde6e6;
+	flex: 0 0 50px;
+}
+
+.ocu-benefit-card__icon img {
+	width: 24px;
+	height: 24px;
+	object-fit: contain;
+}
+
+.ocu-benefit-card h3 {
+	color: var(--ocu-blue);
+	font: 500 20px/28px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-benefit-card p {
+	color: #292929;
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+	text-align: justify;
+}
+
+.ocu-space {
+	min-height: 720px;
+	padding: 96px 80px;
+	display: grid;
+	grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+	align-items: center;
+	gap: 72px;
+	background: linear-gradient(115deg, #f8f8f8 35%, #fde6e6 120%);
+}
+
+.ocu-space__image {
+	border-radius: 24px;
+	overflow: hidden;
+}
+
+.ocu-space__image img {
+	width: 100%;
+	height: 100%;
+	min-height: 430px;
+	display: block;
+	object-fit: cover;
+}
+
+.ocu-space__copy {
+	max-width: 560px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 24px;
+}
+
+.ocu-space__copy h2,
+.ocu-cta h2 {
+	text-align: left;
+}
+
+.ocu-space__copy p,
+.ocu-cta p {
+	color: var(--ocu-muted);
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-nursery {
+	min-height: 1240px;
+	padding: 96px 80px;
+	background: linear-gradient(139deg, #f8f8f8 61.6%, #fde6e6 110.2%);
+}
+
+.ocu-nursery .ocu-section-heading h2 span {
+	display: block;
+}
+
+.ocu-room-bento {
+	width: min(1248px, 100%);
+	height: 480px;
+	margin: 40px auto 0;
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 16px;
+}
+
+.ocu-room-bento__hero {
+	height: 480px;
+	position: relative;
+	border-radius: 24px;
+	overflow: hidden;
+}
+
+.ocu-room-bento__hero img {
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: cover;
+}
+
+.ocu-room-bento__hero span {
+	position: absolute;
+	left: 20px;
+	bottom: 20px;
+	padding: 8px 16px;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	border-radius: 999px;
+	background: #fff;
+	color: #292929;
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-room-bento__hero strong {
+	color: var(--ocu-blue);
+	font-weight: 500;
+}
+
+.ocu-room-bento__side {
+	height: 480px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.ocu-room-card {
+	padding: 28px 32px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 12px;
+	border: 1px solid #cecece;
+	border-radius: 24px;
+	background: #fff;
+}
+
+.ocu-room-card--feature {
+	min-height: 300px;
+	flex: 1;
+}
+
+.ocu-room-card__eyebrow {
+	color: var(--ocu-pink);
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-room-card h3 {
+	margin-top: 4px;
+	color: var(--ocu-blue);
+	font: 400 40px/52px var(--font-heading, "Fraunces", serif);
+	font-variation-settings: "SOFT" 0, "WONK" 1;
+}
+
+.ocu-room-card p,
+.ocu-room-points p {
+	color: #292929;
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-chip-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.ocu-chip-list span {
+	padding: 7px 14px 7px 12px;
+	border-radius: 999px;
+	background: #a3c9e34d;
+	color: var(--ocu-blue);
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-room-bento__thumbs {
+	height: 164px;
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 16px;
+}
+
+.ocu-room-bento__thumbs img {
+	width: 100%;
+	height: 164px;
+	border-radius: 16px;
+	display: block;
+	object-fit: cover;
+}
+
+.ocu-room-points {
+	width: min(1248px, 100%);
+	margin: 40px auto 0;
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 24px;
+}
+
+.ocu-room-points article {
+	padding: 24px 16px;
+	border-radius: 16px;
+	background: #fff;
+	box-shadow: 0 1px 2.5px #00000026;
+}
+
+.ocu-room-points strong {
+	color: var(--ocu-pink);
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-room-points h3 {
+	margin: 12px 0;
+	color: var(--ocu-blue);
+	font: 500 20px/28px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-cta {
+	min-height: 300px;
+	padding: 72px 80px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 40px;
+	background: #fff;
+}
+
+.ocu-cta h2 {
+	font-size: 40px;
+	line-height: 52px;
+}
+
+.ocu-cta p {
+	margin-top: 16px;
+}
+
+@media (max-width: 1279px) {
+	.ocu-hero,
+	.ocu-benefits,
+	.ocu-space,
+	.ocu-cta {
+		padding-inline: 32px;
+	}
+
+	.ocu-benefit-grid {
+		width: 100%;
+	}
+}
+
+@media (max-width: 767px) {
+	.ocu-hero {
+		min-height: 998px;
+		padding: 40px 20px;
+	}
+
+	.ocu-hero__content {
+		min-height: 918px;
+		gap: 24px;
+	}
+
+	.ocu-badge {
+		min-height: 34px;
+		padding: 4px 12px;
+		font-size: 12px;
+		line-height: 16px;
+	}
+
+	.ocu-badge img {
+		width: 24px;
+		height: 24px;
+	}
+
+	.ocu-hero__title,
+	.ocu-section-heading h2,
+	.ocu-space__copy h2,
+	.ocu-cta h2 {
+		font-size: 32px;
+		line-height: 36px;
+	}
+
+	.ocu-hero__title span {
+		max-width: 350px;
+		margin-inline: auto;
+	}
+
+	.ocu-hero__description {
+		max-width: 350px;
+	}
+
+	.ocu-highlights {
+		height: 256px;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		box-shadow: none;
+		background: transparent;
+	}
+
+	.ocu-highlight {
+		min-height: 0;
+		height: 76px;
+		padding: 12px;
+		gap: 4px;
+		border-radius: 12px;
+		background: #fff;
+		box-shadow: 0 1px 5px #00000026;
+	}
+
+	.ocu-highlight + .ocu-highlight {
+		border-left: 0;
+	}
+
+	.ocu-highlight:last-child {
+		height: 80px;
+	}
+
+	.ocu-highlight__heading {
+		gap: 8px;
+	}
+
+	.ocu-highlight h2,
+	.ocu-highlight p {
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	.ocu-hero__image {
+		height: 220px;
+	}
+
+	.ocu-actions {
+		justify-content: center;
+		gap: 12px;
+		margin-top: 0;
+	}
+
+	.ocu-button {
+		min-height: 40px;
+		padding: 8px 16px;
+		font-size: 16px;
+		line-height: 24px;
+		white-space: nowrap;
+	}
+
+	.ocu-benefits {
+		min-height: 1644px;
+		padding: 40px 20px;
+		background: linear-gradient(124deg, #f8f8f8 20.7%, #d1e4f1 131.3%);
+	}
+
+	.ocu-section-heading {
+		gap: 24px;
+	}
+
+	.ocu-section-heading p {
+		max-width: 350px;
+	}
+
+	.ocu-desktop-break {
+		display: none;
+	}
+
+	.ocu-benefit-grid {
+		margin-top: 32px;
+		gap: 16px;
+	}
+
+	.ocu-benefit-row {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	.ocu-benefit-card {
+		min-height: 0;
+		padding: 24px 16px;
+		align-items: center;
+		text-align: center;
+	}
+
+	.ocu-benefit-card h3,
+	.ocu-benefit-card p {
+		text-align: center;
+	}
+
+	.ocu-space {
+		min-height: 720px;
+		padding: 40px 20px;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 32px;
+	}
+
+	.ocu-nursery {
+		min-height: 1520px;
+		padding: 40px 20px;
+	}
+
+	.ocu-room-bento {
+		height: auto;
+		margin-top: 32px;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	.ocu-room-bento__hero {
+		height: 260px;
+	}
+
+	.ocu-room-bento__hero span {
+		left: 12px;
+		bottom: 12px;
+		padding: 6px 12px;
+		font-size: 14px;
+		line-height: 20px;
+	}
+
+	.ocu-room-bento__side {
+		height: auto;
+	}
+
+	.ocu-room-card {
+		padding: 24px 16px;
+		border-radius: 16px;
+		align-items: center;
+		text-align: center;
+	}
+
+	.ocu-room-card h3 {
+		font-size: 32px;
+		line-height: 36px;
+	}
+
+	.ocu-room-card p {
+		text-align: center;
+	}
+
+	.ocu-room-bento__thumbs {
+		height: 180px;
+	}
+
+	.ocu-room-bento__thumbs img {
+		height: 180px;
+	}
+
+	.ocu-room-points {
+		margin-top: 32px;
+		grid-template-columns: 1fr;
+		gap: 16px;
+	}
+
+	.ocu-room-points article {
+		text-align: center;
+	}
+
+	.ocu-space__image img {
+		min-height: 220px;
+		height: 220px;
+	}
+
+	.ocu-space__copy {
+		gap: 20px;
+	}
+
+	.ocu-cta {
+		min-height: 320px;
+		padding: 48px 20px;
+		align-items: flex-start;
+		flex-direction: column;
+		gap: 24px;
+	}
+}

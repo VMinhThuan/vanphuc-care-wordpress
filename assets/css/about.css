@@ -24,9 +24,8 @@
 	max-width: 100%;
 }
 
-/* These two Figma assets intentionally extend beyond their frame. */
-.vpc-about-page .about-founder__cutout,
-.vpc-about-page .about-founder__mascot {
+/* The founder cutout extends beyond its image frame as in Figma. */
+.vpc-about-page .about-founder__cutout {
 	max-width: none;
 }
 
@@ -485,7 +484,8 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	left: 35px;
 	width: 230.387px;
 	height: 296.261px;
-	overflow: visible;
+	/* Hide the excess lower legs/feet at the same boundary as the Figma frame. */
+	overflow: hidden;
 }
 
 .about-founder__mascot {
