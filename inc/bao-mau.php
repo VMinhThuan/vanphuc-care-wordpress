@@ -41,6 +41,23 @@ function vanphuccare_bao_mau_template( $template ) {
 add_filter( 'template_include', 'vanphuccare_bao_mau_template' );
 
 /**
+ * Keep the standalone route from being canonicalized to the homepage
+ * when no WordPress Page with this slug exists yet.
+ *
+ * @param string|false $redirect_url  Canonical redirect URL.
+ * @param string       $requested_url Original requested URL.
+ * @return string|false
+ */
+function vanphuccare_bao_mau_canonical_redirect( $redirect_url, $requested_url ) {
+	if ( vanphuccare_is_bao_mau_page() ) {
+		return false;
+	}
+
+	return $redirect_url;
+}
+add_filter( 'redirect_canonical', 'vanphuccare_bao_mau_canonical_redirect', 10, 2 );
+
+/**
  * Make the fallback route return HTTP 200 instead of a soft 404.
  *
  * @return void

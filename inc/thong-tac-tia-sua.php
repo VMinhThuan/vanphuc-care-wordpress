@@ -29,6 +29,23 @@ function vanphuccare_thong_tac_template( $template ) {
 }
 add_filter( 'template_include', 'vanphuccare_thong_tac_template' );
 
+/**
+ * Keep the standalone service route from being canonicalized to the homepage
+ * when no WordPress Page with this slug exists yet.
+ *
+ * @param string|false $redirect_url  Canonical redirect URL.
+ * @param string       $requested_url Original requested URL.
+ * @return string|false
+ */
+function vanphuccare_thong_tac_canonical_redirect( $redirect_url, $requested_url ) {
+	if ( vanphuccare_is_thong_tac_page() ) {
+		return false;
+	}
+
+	return $redirect_url;
+}
+add_filter( 'redirect_canonical', 'vanphuccare_thong_tac_canonical_redirect', 10, 2 );
+
 function vanphuccare_thong_tac_status() {
 	if ( ! is_admin() && is_404() && vanphuccare_is_thong_tac_page() ) {
 		status_header( 200 );

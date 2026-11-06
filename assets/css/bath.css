@@ -131,7 +131,7 @@
 .vpc-bath__lead { height: 797px; padding: 96px 0; background: linear-gradient(118deg, #f8f8f8 40%, #fde6e6 120%); }
 .vpc-bath__lead-card { width: 658px; min-height: 444px; margin: 48px auto 0; padding: 32px 24px; display: flex; flex-direction: column; gap: 20px; border: 1px solid var(--bath-border); border-radius: 24px; background: #fafafa; }
 .vpc-bath__lead-card label { display: flex; flex-direction: column; gap: 12px; font: 500 20px/28px var(--font-body, "Manrope", sans-serif); }
-.vpc-bath__lead-card label b { color: red; }
+.vpc-bath__lead-card label b { margin-right: 4px; color: red; }
 .vpc-bath__lead-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .vpc-bath__lead-card input, .vpc-bath__lead-card select { width: 100%; min-height: 48px; padding: 12px; border: 1px solid var(--bath-border); border-radius: 12px; color: var(--bath-muted); background: #fafafa; font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
 .vpc-bath__lead-card button { min-height: 48px; border: 0; cursor: pointer; }
@@ -226,6 +226,7 @@
 	.vpc-bath__packages .vpc-bath__section-heading { align-items: flex-start; text-align: left; }
 	.vpc-bath__packages .vpc-bath__section-heading h2 { text-align: left; }
 	.vpc-bath__packages .vpc-bath__section-heading > p { white-space: normal; }
+	.vpc-bath__packages .vpc-bath__days { white-space: nowrap; }
 	.vpc-bath__package-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 24px; }
 	.vpc-bath__package-card { min-height: 480px; padding: 36px 24px 24px; }
 	.vpc-bath__package-card.is-featured { order: -1; }
@@ -355,6 +356,26 @@
 		width: 119.58%;
 		max-width: none;
 		height: 149.09%;
+	}
+
+	.vpc-bath__health .vpc-bath__split-image {
+		overflow: visible;
+		border-radius: 0;
+	}
+
+	.vpc-bath__health .vpc-bath__split-image picture {
+		display: block;
+		width: 386px;
+		height: 336px;
+		margin: -14px 0 0 -18px;
+	}
+
+	.vpc-bath__health .vpc-bath__split-image picture img {
+		position: static;
+		width: 386px;
+		max-width: none;
+		height: 336px;
+		object-fit: contain;
 	}
 
 	.vpc-bath__process {
