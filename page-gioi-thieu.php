@@ -119,6 +119,7 @@ $mission_image = $about_uri . '/mission.webp';
 	</section>
 
 	<section class="about-section about-founder" data-figma-node="3131:44972" data-figma-mobile-node="3131:45169">
+		<div class="about-founder__inner">
 		<div class="about-founder__visual" data-node-id="3131:44973" data-mobile-node-id="3131:45170">
 			<div class="about-founder__cutout-frame" data-node-id="3131:44976" data-mobile-node-id="3131:45174">
 				<img class="about-founder__cutout" src="<?php echo esc_url( $about_uri . '/founder-cutout.webp' ); ?>" width="420" height="599" alt="Chị Thanh Thủy và em bé" loading="lazy">
@@ -146,6 +147,7 @@ $mission_image = $about_uri . '/mission.webp';
 				</div>
 			</div>
 			<a class="about-button" data-node-id="3131:44985" data-mobile-node-id="3131:45182" href="#doi-ngu">Giới thiệu người sáng lập</a>
+		</div>
 		</div>
 	</section>
 

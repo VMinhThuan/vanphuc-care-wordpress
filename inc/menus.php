@@ -49,9 +49,15 @@ add_filter( 'nav_menu_link_attributes', 'vanphuccare_o_cu_menu_link', 10, 2 );
  */
 function vanphuccare_bao_mau_menu_link( $atts, $item ) {
 	$menu_title = isset( $item->title ) ? wp_strip_all_tags( $item->title ) : '';
+	$menu_title = trim( $menu_title );
+	$menu_href  = isset( $atts['href'] ) ? (string) $atts['href'] : '';
 
-	if ( in_array( $menu_title, array( 'Bảo mẫu', 'Bảo mẫu tại nhà' ), true ) ) {
-		$atts['href'] = home_url( '/bao-mau/' );
+	if (
+		in_array( $menu_title, array( 'Bảo mẫu', 'Bảo mẫu tại nhà' ), true )
+		|| false !== strpos( $menu_href, '#bao-mau-tai-nha' )
+		|| false !== strpos( $menu_href, '/bao-mau-tai-nha' )
+	) {
+		$atts['href'] = home_url( '/bao-mau-tai-nha/' );
 	}
 
 	return $atts;
@@ -83,6 +89,7 @@ add_filter( 'nav_menu_css_class', 'vanphuccare_o_cu_menu_class', 10, 2 );
  */
 function vanphuccare_bao_mau_menu_class( $classes, $item ) {
 	$menu_title = isset( $item->title ) ? wp_strip_all_tags( $item->title ) : '';
+	$menu_title = trim( $menu_title );
 
 	if ( vanphuccare_is_bao_mau_page() && in_array( $menu_title, array( 'Bảo mẫu', 'Bảo mẫu tại nhà' ), true ) ) {
 		$classes[] = 'current-menu-item';
@@ -111,7 +118,7 @@ function vanphuccare_primary_menu_fallback() {
 	printf( '<li class="%s"><a href="%s" class="%s">%s</a></li>', $is_home ? 'current-menu-item' : '', esc_url( home_url( '/' ) ), $is_home ? $nav_active : $nav_default, esc_html__( 'Trang chủ', 'vanphuccare' ) );
 	printf( '<li class="%s"><a href="%s" class="%s">%s</a></li>', $is_about ? 'current-menu-item' : '', esc_url( home_url( '/gioi-thieu' ) ), $is_about ? $nav_active : $nav_default, esc_html__( 'Giới thiệu', 'vanphuccare' ) );
 	printf( '<li class="%s"><a href="%s" class="%s">%s</a></li>', $is_o_cu ? 'current-menu-item' : '', esc_url( home_url( '/o-cu/' ) ), $is_o_cu ? $nav_active : $nav_default, esc_html__( 'Ở cữ', 'vanphuccare' ) );
-	printf( '<li class="%s"><a href="%s" class="%s">%s</a></li>', $is_bao_mau ? 'current-menu-item' : '', esc_url( home_url( '/bao-mau/' ) ), $is_bao_mau ? $nav_active : $nav_default, esc_html__( 'Bảo mẫu', 'vanphuccare' ) );
+	printf( '<li class="%s"><a href="%s" class="%s">%s</a></li>', $is_bao_mau ? 'current-menu-item' : '', esc_url( home_url( '/bao-mau-tai-nha/' ) ), $is_bao_mau ? $nav_active : $nav_default, esc_html__( 'Bảo mẫu', 'vanphuccare' ) );
 	printf( '<li><a href="%s" class="%s">%s</a></li>', esc_url( home_url( '/dich-vu/' ) ), $nav_default, esc_html__( 'Dịch vụ', 'vanphuccare' ) );
 	printf( '<li class="%s"><a href="%s" class="%s">%s</a></li>', $is_prenatal ? 'current-menu-item' : '', esc_url( home_url( '/lop-hoc-tien-san/' ) ), $is_prenatal ? $nav_active : $nav_default, esc_html__( 'Lớp học tiền sản', 'vanphuccare' ) );
 	printf( '<li><a href="%s" class="%s">%s</a></li>', esc_url( home_url( '/kien-thuc/' ) ), $nav_default, esc_html__( 'Kiến thức', 'vanphuccare' ) );
@@ -135,7 +142,7 @@ function vanphuccare_mobile_menu_fallback() {
 		array( 'url' => home_url( '/' ), 'title' => 'Trang chủ', 'active' => $is_home ),
 		array( 'url' => home_url( '/gioi-thieu' ), 'title' => 'Giới thiệu', 'active' => $is_about ),
 		array( 'url' => home_url( '/o-cu/' ), 'title' => 'Ở cữ', 'active' => $is_o_cu ),
-		array( 'url' => home_url( '/bao-mau/' ), 'title' => 'Bảo mẫu', 'active' => $is_bao_mau ),
+		array( 'url' => home_url( '/bao-mau-tai-nha/' ), 'title' => 'Bảo mẫu', 'active' => $is_bao_mau ),
 		array( 'url' => home_url( '/dich-vu/' ), 'title' => 'Dịch vụ', 'active' => false ),
 		array( 'url' => home_url( '/lop-hoc-tien-san/' ), 'title' => 'Lớp học tiền sản', 'active' => $is_prenatal ),
 		array( 'url' => home_url( '/kien-thuc/' ), 'title' => 'Kiến thức', 'active' => false ),
