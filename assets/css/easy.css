@@ -30,6 +30,8 @@
 .vpc-easy__section-heading h2, .vpc-easy__split-copy h2, .vpc-easy__hero h1, .vpc-easy__lead h2 { color: var(--easy-blue); font: 600 48px/64px var(--font-heading, "Fraunces", serif); }
 .vpc-easy__section-heading h2 em, .vpc-easy__split-copy h2 em, .vpc-easy__lead h2 em { display: inline; color: var(--easy-pink); font-style: normal; }
 .vpc-easy__section-heading p, .vpc-easy__split-copy > p { color: #4a4a4a; font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
+.vpc-easy__mobile-title-break { display: inline; }
+.vpc-easy__lead-title-break { display: inline; }
 
 .vpc-easy__hero { height: 757px; padding: 96px 0; background: var(--easy-gray); }
 .vpc-easy__hero-grid { height: 565px; display: grid; grid-template-columns: minmax(0, 642px) 590px; gap: 48px; align-items: center; }
@@ -181,14 +183,18 @@
 	.vpc-easy__choice-image { height: 366px; }
 	.vpc-easy__health { height: 918px; padding: 40px 0; }
 	.vpc-easy__health .vpc-easy__split-copy { gap: 24px; }
+	.vpc-easy__mobile-title-break { display: block; }
+	.vpc-easy__lead-title-break { display: block; }
 	.vpc-easy__process { height: 2207.2px; padding: 40px 0; }
+	.vpc-easy__process .vpc-easy__section-heading h2 em { display: block; }
 	.vpc-easy__process-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 24px; }
 	.vpc-easy__process-card { min-height: 300px; gap: 16px; }
 	.vpc-easy__process-card h3 { max-width: 350px; font-size: 24px; line-height: 32px; }
 	.vpc-easy__process-card p { max-width: 350px; }
 	.vpc-easy__packages { height: 1642px; padding: 40px 0; }
 	.vpc-easy__packages .vpc-easy__section-heading { align-items: flex-start; text-align: left; }
-	.vpc-easy__packages .vpc-easy__section-heading h2 { text-align: left; }
+	.vpc-easy__packages .vpc-easy__section-heading h2 { color: var(--easy-blue); text-align: left; }
+	.vpc-easy__packages { background: var(--easy-pink-soft); }
 	.vpc-easy__package-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 24px; }
 	.vpc-easy__package-card { min-height: 640px; padding: 36px 24px 24px; }
 	.vpc-easy__package-card.is-featured { order: -1; }
