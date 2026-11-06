@@ -48,7 +48,9 @@ add_filter( 'nav_menu_link_attributes', 'vanphuccare_o_cu_menu_link', 10, 2 );
  * @return array
  */
 function vanphuccare_bao_mau_menu_link( $atts, $item ) {
-	if ( isset( $item->title ) && 'Bảo mẫu' === wp_strip_all_tags( $item->title ) ) {
+	$menu_title = isset( $item->title ) ? wp_strip_all_tags( $item->title ) : '';
+
+	if ( in_array( $menu_title, array( 'Bảo mẫu', 'Bảo mẫu tại nhà' ), true ) ) {
 		$atts['href'] = home_url( '/bao-mau/' );
 	}
 
@@ -80,7 +82,9 @@ add_filter( 'nav_menu_css_class', 'vanphuccare_o_cu_menu_class', 10, 2 );
  * @return array
  */
 function vanphuccare_bao_mau_menu_class( $classes, $item ) {
-	if ( vanphuccare_is_bao_mau_page() && isset( $item->title ) && 'Bảo mẫu' === wp_strip_all_tags( $item->title ) ) {
+	$menu_title = isset( $item->title ) ? wp_strip_all_tags( $item->title ) : '';
+
+	if ( vanphuccare_is_bao_mau_page() && in_array( $menu_title, array( 'Bảo mẫu', 'Bảo mẫu tại nhà' ), true ) ) {
 		$classes[] = 'current-menu-item';
 	}
 

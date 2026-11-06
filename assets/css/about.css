@@ -488,24 +488,30 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 }
 
 .about-founder__mascot-frame {
-	position: absolute;
-	bottom: 2.87px;
-	left: 35px;
-	width: 230.387px;
-	height: 296.261px;
-	z-index: 3;
+	position: absolute !important;
+	bottom: 2.87px !important;
+	left: 35px !important;
+	width: 230.387px !important;
+	height: 296.261px !important;
+	z-index: 10 !important;
+	display: block !important;
+	visibility: visible !important;
+	opacity: 1 !important;
 	/* Hide the excess lower legs/feet at the same boundary as the Figma frame. */
-	overflow: hidden;
+	overflow: hidden !important;
 }
 
 .about-founder__mascot {
-	position: absolute;
-	top: -1.16%;
-	left: -87.29%;
-	width: 278.82%;
-	max-width: none;
-	height: 135.51%;
-	object-fit: fill;
+	position: absolute !important;
+	top: -1.16% !important;
+	left: -87.29% !important;
+	width: 278.82% !important;
+	max-width: none !important;
+	height: 135.51% !important;
+	object-fit: fill !important;
+	display: block !important;
+	visibility: visible !important;
+	opacity: 1 !important;
 }
 
 .about-founder__decoration {
@@ -1194,15 +1200,15 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	}
 
 	.about-founder__mascot-frame {
-		top: 194.32px;
-		bottom: auto;
-		left: 2.685px;
-		width: 149.325px;
-		height: 192.021px;
-		display: block;
-		visibility: visible;
-		opacity: 1;
-		z-index: 3;
+		top: 194.32px !important;
+		bottom: auto !important;
+		left: 2.685px !important;
+		width: 149.325px !important;
+		height: 192.021px !important;
+		display: block !important;
+		visibility: visible !important;
+		opacity: 1 !important;
+		z-index: 3 !important;
 	}
 
 	.about-founder__mascot {

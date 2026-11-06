@@ -65,7 +65,7 @@ $other_services = array(
 $button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="bao-mau-tai-nha"';
 ?>
 
-<div class="vpc-bao-mau" data-figma-node="3126:39926">
+<div class="vpc-bao-mau" data-figma-node="3126:39926" data-figma-mobile-node="3126:40060">
 	<section class="vpc-bao-mau__hero" aria-labelledby="bao-mau-title">
 		<div class="vpc-bao-mau__container vpc-bao-mau__hero-grid">
 			<div class="vpc-bao-mau__hero-copy">

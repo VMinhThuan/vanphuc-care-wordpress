@@ -124,7 +124,7 @@ $mission_image = $about_uri . '/mission.webp';
 				<img class="about-founder__cutout" src="<?php echo esc_url( $about_uri . '/founder-cutout.webp' ); ?>" width="420" height="599" alt="Chị Thanh Thủy và em bé" loading="lazy">
 			</div>
 			<div class="about-founder__mascot-frame" data-node-id="3131:44986" data-mobile-node-id="3131:45175">
-				<img class="about-founder__mascot" src="<?php echo esc_url( $about_uri . '/mascot-large.webp' ); ?>" width="230" height="296" alt="Vạn Phúc Care mascot" loading="eager" decoding="async">
+				<img class="about-founder__mascot" src="<?php echo esc_url( $about_uri . '/mascot-large.webp' ); ?>" width="230" height="296" alt="Vạn Phúc Care mascot" loading="eager" fetchpriority="high" decoding="async">
 			</div>
 			<div class="about-founder__decoration" data-node-id="3131:44987" aria-hidden="true">
 				<img class="about-founder__decoration-curve" data-node-id="3131:44995" src="<?php echo esc_url( $about_uri . '/founder-decoration-curve.svg' ); ?>" width="80" height="91" alt="">
