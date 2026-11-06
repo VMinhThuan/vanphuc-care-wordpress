@@ -24,7 +24,7 @@
 .vpc-bath__badge img { width: 24px; height: 24px; object-fit: contain; }
 .vpc-bath__button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 24px; border-radius: 999px; text-decoration: none; font: 500 16px/24px var(--font-body, "Manrope", sans-serif); transition: transform .2s ease, opacity .2s ease; }
 .vpc-bath__button:hover { transform: translateY(-1px); opacity: .9; }
-.vpc-bath__button--primary { border: 0; color: #fafafa; background: var(--bath-blue); }
+.vpc-bath .vpc-bath__button--primary { border: 0; color: #fff; background: var(--bath-blue); }
 .vpc-bath__section-heading { display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center; }
 .vpc-bath__section-heading h2, .vpc-bath__split-copy h2, .vpc-bath__hero h1, .vpc-bath__lead h2 { color: var(--bath-blue); font: 600 48px/64px var(--font-heading, "Fraunces", serif); }
 .vpc-bath__section-heading h2 em, .vpc-bath__split-copy h2 em, .vpc-bath__lead h2 em { display: inline; color: var(--bath-pink); font-style: normal; }
@@ -66,15 +66,15 @@
 
 .vpc-bath__packages { height: 784px; padding: 96px 0; background: linear-gradient(145deg, #d1e4f1 -2%, #f8f8f8 95%); }
 .vpc-bath__packages .vpc-bath__section-heading { max-width: 869px; margin-inline: auto; }
-.vpc-bath__packages .vpc-bath__section-heading h2 { color: var(--bath-pink); }
+.vpc-bath__packages .vpc-bath__section-heading h2 { color: var(--bath-blue); }
 .vpc-bath__package-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; justify-content: center; margin-top: 48px; }
 .vpc-bath__package-card { position: relative; min-height: 500px; padding: 36px 24px 24px; display: flex; flex-direction: column; gap: 24px; border: 1px solid var(--bath-border); border-radius: 24px; background: #fff; box-shadow: 0 1px 2.5px #00000026; }
 .vpc-bath__package-card.is-featured { border: 2px solid var(--bath-blue); }
 .vpc-bath__package-heading { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
 .vpc-bath__package-heading h3 { color: var(--bath-muted); font: 500 24px/32px var(--font-body, "Manrope", sans-serif); }
 .vpc-bath__package-heading strong { color: var(--bath-blue); font: 700 32px/40px var(--font-body, "Manrope", sans-serif); }
-.vpc-bath__package-copy { min-height: 48px; color: var(--bath-ink); font: 500 16px/24px var(--font-body, "Manrope", sans-serif); text-align: center; }
-.vpc-bath__package-card h4 { color: var(--bath-pink); text-align: center; font: 500 20px/28px var(--font-body, "Manrope", sans-serif); }
+.vpc-bath__package-copy { min-height: 48px; color: var(--bath-ink); font: 500 16px/24px var(--font-body, "Manrope", sans-serif); text-align: left; }
+.vpc-bath__package-card h4 { color: var(--bath-pink); text-align: left; font: 500 20px/28px var(--font-body, "Manrope", sans-serif); }
 .vpc-bath__package-card ul { display: flex; flex-direction: column; gap: 12px; }
 .vpc-bath__package-card li { display: flex; gap: 8px; align-items: flex-start; font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
 .vpc-bath__package-card li img { width: 24px; height: 24px; flex: 0 0 24px; }
@@ -203,6 +203,7 @@
 	.vpc-bath__hero-image {
 		position: relative;
 		height: 339px;
+		border-radius: 16px;
 	}
 
 	.vpc-bath__hero-image img {
@@ -212,7 +213,8 @@
 		width: 100%;
 		max-width: none;
 		height: 111.68%;
-		object-fit: fill;
+		object-fit: cover;
+		object-position: center top;
 	}
 
 	.vpc-bath__challenges {
