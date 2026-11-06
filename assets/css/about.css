@@ -161,6 +161,10 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	width: 100%;
 }
 
+.about-hero__title-nowrap {
+	white-space: nowrap;
+}
+
 .about-hero__description {
 	max-width: 739px;
 	margin-top: 12px;
@@ -252,6 +256,10 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 .about-timeline__title {
 	flex: 0 0 auto;
 	text-align: center;
+	white-space: nowrap;
+}
+
+.about-timeline__title-nowrap {
 	white-space: nowrap;
 }
 
@@ -484,6 +492,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	left: 35px;
 	width: 230.387px;
 	height: 296.261px;
+	z-index: 1;
 	/* Hide the excess lower legs/feet at the same boundary as the Figma frame. */
 	overflow: hidden;
 }
@@ -501,7 +510,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 .about-founder__decoration {
 	position: absolute;
 	top: -6.13px;
-	left: 430px;
+	left: 539.898px;
 	width: 175.647px;
 	height: 171.68px;
 	z-index: 2;
@@ -956,7 +965,8 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	.about-hero__description {
 		width: 100%;
 		margin-top: 0;
-		font-size: 14px;
+		font-size: 16px;
+		font-weight: 500;
 		line-height: 24px;
 		text-align: center;
 	}
@@ -981,6 +991,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 		margin-top: 0;
 		padding: 8px 12px;
 		border-radius: 24px;
+		box-shadow: 0 1px 2.5px rgba(0, 0, 0, .15);
 	}
 
 	.about-stat {
@@ -988,10 +999,10 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		gap: 4px;
+		gap: 8px;
 		flex: 1 1 84px;
 		min-height: 0;
-		padding: 8px 16px;
+		padding: 12px 8px;
 		text-align: center;
 	}
 
@@ -1002,7 +1013,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 
 	.about-stat__content {
 		align-items: center;
-		gap: 4px;
+		gap: 8px;
 	}
 
 	.about-stat__value {
@@ -1022,7 +1033,8 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	}
 
 	.about-timeline__title {
-		text-align: left;
+		width: 100%;
+		text-align: center;
 		white-space: normal;
 	}
 
@@ -1196,12 +1208,19 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 		align-items: center;
 		gap: 24px;
 		max-width: none;
+		width: 100%;
 		text-align: center;
 	}
 
 	.about-founder__text {
 		align-items: center;
 		gap: 24px;
+		width: 100%;
+	}
+
+	.about-founder__text h2,
+	.about-founder__text .about-copy {
+		width: 100%;
 	}
 
 	.about-founder__text h2 > span {
@@ -1209,15 +1228,16 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	}
 
 	.about-founder__text p {
-		text-align: justify;
+		text-align: center;
 	}
 
 	.about-founder__link {
-		width: 100%;
+		width: auto;
+		text-decoration: underline;
 	}
 
 	.about-tiktok {
-		height: auto;
+		height: 551px;
 		min-height: 551px;
 		padding: 40px 20px;
 		gap: 24px;
@@ -1230,9 +1250,9 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 
 	.about-tiktok__title {
 		flex-direction: column;
-		align-items: flex-start;
-		text-align: left;
-		justify-content: flex-start;
+		align-items: center;
+		text-align: center;
+		justify-content: center;
 		white-space: normal;
 		gap: 0;
 	}
@@ -1243,7 +1263,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 
 	.about-tiktok__description {
 		width: 100%;
-		text-align: left;
+		text-align: center;
 	}
 
 	.about-tiktok__image-frame {
@@ -1308,7 +1328,16 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	.about-partners__description {
 		width: 100%;
 		margin-top: 12px;
-		text-align: left;
+		text-align: center;
+	}
+
+	/* Figma mobile uses one continuous text run so the copy wraps to three lines. */
+	.about-partners__description p {
+		display: inline;
+	}
+
+	.about-partners__description p + p::before {
+		content: ' ';
 	}
 
 	.about-partners__logos {

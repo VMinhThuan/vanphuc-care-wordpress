@@ -50,7 +50,7 @@ $mission_image = $about_uri . '/mission.webp';
 				</span>
 				<h1 class="about-hero__title">
 					<span class="about-heading--blue">Đồng Hành Cùng Mẹ</span>
-					<span class="about-heading--pink">Chăm Sóc Vẹn Toàn Cho Bé</span>
+					<span class="about-heading--pink">Chăm Sóc Vẹn Toàn <span class="about-hero__title-nowrap">Cho Bé</span></span>
 				</h1>
 				<div class="about-hero__description about-copy">
 					<p>Từ giây phút chào đời, sự an toàn của Bé và sức khoẻ của Mẹ luôn là ưu tiên hàng đầu.</p>
@@ -70,7 +70,7 @@ $mission_image = $about_uri . '/mission.webp';
 	</section>
 
 	<section class="about-section about-timeline" data-figma-node="3131:44934">
-		<h2 class="about-heading about-heading--blue about-timeline__title" data-node-id="3131:44935">Quá Trình Hình Thành &amp; Phát Triển</h2>
+		<h2 class="about-heading about-heading--blue about-timeline__title" data-node-id="3131:44935">Quá Trình Hình Thành <span class="about-timeline__title-nowrap">&amp; Phát Triển</span></h2>
 		<div class="about-timeline__canvas" data-node-id="3131:44936">
 			<img class="about-timeline__path" data-node-id="3131:44937" src="<?php echo esc_url( $about_uri . '/timeline-path.svg' ); ?>" width="989" height="457" alt="" aria-hidden="true">
 			<div class="about-timeline__node about-timeline__node--2021" data-node-id="3131:44938"><img src="<?php echo esc_url( $about_uri . '/timeline-node.svg' ); ?>" width="37" height="37" alt="" aria-hidden="true"></div>
@@ -118,12 +118,12 @@ $mission_image = $about_uri . '/mission.webp';
 		</div>
 	</section>
 
-	<section class="about-section about-founder" data-figma-node="3131:44972">
-		<div class="about-founder__visual">
-			<div class="about-founder__cutout-frame">
+	<section class="about-section about-founder" data-figma-node="3131:44972" data-figma-mobile-node="3131:45169">
+		<div class="about-founder__visual" data-node-id="3131:45170">
+			<div class="about-founder__cutout-frame" data-node-id="3131:45174">
 				<img class="about-founder__cutout" src="<?php echo esc_url( $about_uri . '/founder-cutout.webp' ); ?>" width="420" height="599" alt="Chị Thanh Thủy và em bé" loading="lazy">
 			</div>
-			<div class="about-founder__mascot-frame">
+			<div class="about-founder__mascot-frame" data-node-id="3131:44986" data-mobile-node-id="3131:45175">
 				<img class="about-founder__mascot" src="<?php echo esc_url( $about_uri . '/mascot-large.webp' ); ?>" width="230" height="296" alt="Vạn Phúc Care mascot" loading="lazy">
 			</div>
 			<div class="about-founder__decoration" aria-hidden="true">
@@ -133,34 +133,34 @@ $mission_image = $about_uri . '/mission.webp';
 				<img class="about-founder__decoration-tip" data-node-id="3131:45001" src="<?php echo esc_url( $about_uri . '/founder-decoration-tip.svg' ); ?>" width="18" height="14" alt="">
 			</div>
 		</div>
-		<div class="about-founder__copy">
+		<div class="about-founder__copy" data-node-id="3131:45176">
 			<div class="about-founder__text">
 				<span class="about-badge">
 					<?php if ( $badge_icon ) : ?><img src="<?php echo esc_url( $badge_icon ); ?>" width="24" height="24" alt="" aria-hidden="true"><?php endif; ?>
 					ĐIỀU DƯỠNG TRƯỞNG
 				</span>
-				<h2 class="about-heading"><span class="about-heading--blue">Giới Thiệu</span><span class="about-heading--pink">Người Sáng Lập</span></h2>
-				<div class="about-copy">
+				<h2 class="about-heading" data-node-id="3131:45178"><span class="about-heading--blue" data-node-id="3131:45179">Giới Thiệu</span><span class="about-heading--pink" data-node-id="3131:45180">Người Sáng Lập</span></h2>
+				<div class="about-copy" data-node-id="3131:45181">
 					<p>Sáng lập viên là <a class="about-founder__link" href="#doi-ngu">chị Thanh Thủy</a> – người đã nhiều năm kinh nghiệm hoạt động trong lĩnh vực chăm sóc sức khỏe mẹ &amp; bé. Và cũng là một người mẹ với 3 nhóc tì xinh xắn.</p>
 					<p>Ý tưởng thành lập Vạn Phúc Care được thai nghén từ khi chị Thanh Thủy còn ngồi trên ghế giảng đường. Lắng nghe nỗi niềm sẻ chia của các mẹ ở thời kỳ hậu sản – sau sinh nở, những khó khăn khi chăm sóc con nhỏ cùng với băn khoăn lo lắng về sức khỏe bản thân…</p>
 				</div>
 			</div>
-			<a class="about-button" href="#doi-ngu">Giới thiệu người sáng lập</a>
+			<a class="about-button" data-node-id="3131:45182" href="#doi-ngu">Giới thiệu người sáng lập</a>
 		</div>
 	</section>
 
-	<section class="about-section about-tiktok" data-figma-node="3131:45002">
-		<div class="about-tiktok__content">
-			<h2 class="about-heading about-tiktok__title"><span class="about-heading--blue">Tiktok</span> <span class="about-heading--pink">Mẹ Thủy Làm Y</span></h2>
-			<div class="about-copy about-tiktok__description">
+	<section class="about-section about-tiktok" data-figma-node="3131:45002" data-figma-mobile-node="3131:45183">
+		<div class="about-tiktok__content" data-node-id="3131:45184">
+			<h2 class="about-heading about-tiktok__title" data-node-id="3131:45185"><span class="about-heading--blue" data-node-id="3131:45186">Tiktok</span> <span class="about-heading--pink" data-node-id="3131:45187">Mẹ Thủy Làm Y</span></h2>
+			<div class="about-copy about-tiktok__description" data-node-id="3131:45188">
 				<p>Bên cạnh công việc điều dưỡng, chị Thanh Thủy cũng tích cực chia sẻ kiến thức đến cộng đồng,</p>
 				<p>hướng đến sứ mệnh nâng cao chất lượng cuộc sống dành cho Mẹ &amp; Bé.</p>
 			</div>
-			<div class="about-tiktok__image-frame">
+			<div class="about-tiktok__image-frame" data-node-id="3131:45189">
 				<img class="about-tiktok__image" src="<?php echo esc_url( $about_uri . '/tiktok.webp' ); ?>" width="963" height="522" alt="Kênh TikTok Mẹ Thủy Làm Y" loading="lazy" decoding="async">
 			</div>
 		</div>
-		<a class="about-button about-tiktok__button" href="https://www.tiktok.com/@methuylamy" target="_blank" rel="noopener noreferrer"><img src="<?php echo esc_url( $about_uri . '/tiktok-plus.svg' ); ?>" width="15" height="25" alt="" aria-hidden="true"><span>Theo dõi</span></a>
+		<a class="about-button about-tiktok__button" data-node-id="3131:45190" href="https://www.tiktok.com/@methuylamy" target="_blank" rel="noopener noreferrer"><img src="<?php echo esc_url( $about_uri . '/tiktok-plus.svg' ); ?>" width="15" height="25" alt="" aria-hidden="true"><span>Theo dõi</span></a>
 	</section>
 
 	<section id="doi-ngu" class="about-section about-team" data-figma-node="3131:45011">
@@ -198,22 +198,22 @@ $mission_image = $about_uri . '/mission.webp';
 		</div>
 	</section>
 
-	<section class="about-section about-partners" data-figma-node="3131:45023">
+	<section class="about-section about-partners" data-figma-node="3131:45023" data-figma-mobile-node="3131:45201">
 		<span class="about-badge">
 			<?php if ( $badge_icon ) : ?><img src="<?php echo esc_url( $badge_icon ); ?>" width="24" height="24" alt="" aria-hidden="true"><?php endif; ?>
 			BẢO CHỨNG UY TÍN
 		</span>
-		<h2 class="about-heading about-heading--blue about-partners__title">Đối Tác Chiến lược</h2>
-		<div class="about-copy about-partners__description">
+		<h2 class="about-heading about-heading--blue about-partners__title" data-node-id="3131:45204">Đối Tác Chiến lược</h2>
+		<div class="about-copy about-partners__description" data-node-id="3131:45205">
 			<p>Vạn Phúc Care tự hào về chất lượng nhân sự và chuyên môn chuẩn y khoa.</p>
 			<p>Với đội ngũ nhân sự được tạo nguồn từ các trường đại học uy tín.</p>
 		</div>
-		<div class="about-partners__logos" aria-label="Đối tác chiến lược">
-			<img src="<?php echo esc_url( $about_uri . '/partner-1.webp' ); ?>" width="80" height="98" alt="Đại học Y Hà Nội" loading="lazy">
-			<img src="<?php echo esc_url( $about_uri . '/partner-2-figma.svg' ); ?>" width="100" height="100" alt="Cao đẳng Y khoa Hà Nội" loading="lazy">
-			<img src="<?php echo esc_url( $about_uri . '/partner-3.webp' ); ?>" width="100" height="100" alt="Cao đẳng Y Hà Nội" loading="lazy">
-			<img src="<?php echo esc_url( $about_uri . '/partner-6.webp' ); ?>" width="100" height="100" alt="Hanoi Medical College" loading="lazy">
-			<img src="<?php echo esc_url( $about_uri . '/partner-2.webp' ); ?>" width="100" height="100" alt="Đại học Đông Á" loading="lazy">
+		<div class="about-partners__logos" data-node-id="3131:45206" aria-label="Đối tác chiến lược">
+			<img data-node-id="3131:45208" src="<?php echo esc_url( $about_uri . '/partner-1.webp' ); ?>" width="80" height="98" alt="Đại học Y Hà Nội" loading="lazy">
+			<img data-node-id="3131:45210" src="<?php echo esc_url( $about_uri . '/partner-2-figma.svg' ); ?>" width="100" height="100" alt="Cao đẳng Y khoa Hà Nội" loading="lazy">
+			<img data-node-id="3131:45282" src="<?php echo esc_url( $about_uri . '/partner-3.webp' ); ?>" width="100" height="100" alt="Cao đẳng Y Hà Nội" loading="lazy">
+			<img data-node-id="3131:45284" src="<?php echo esc_url( $about_uri . '/partner-6.webp' ); ?>" width="100" height="100" alt="Hanoi Medical College" loading="lazy">
+			<img data-node-id="3131:45286" src="<?php echo esc_url( $about_uri . '/partner-2.webp' ); ?>" width="100" height="100" alt="Đại học Đông Á" loading="lazy">
 		</div>
 	</section>
 </div>

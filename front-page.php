@@ -1568,90 +1568,81 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 	     10. ĐĂNG KÝ TƯ VẤN (SẴN SÀNG BẮT ĐẦU - HÀNH TRÌNH LÀM MẸ HẠNH PHÚC)
 	     ========================================================================= -->
 	<section id="dang-ky-tu-van" class="vpc-section vpc-gradient-consultation relative overflow-hidden">
-		<div class="consultation-section-inner vpc-home-container max-w-4xl mx-auto flex flex-col items-center gap-6 lg:gap-2">
+		<div class="consultation-section-inner vpc-home-container">
 
-			<div class="text-center">
-				<h2 class="font-heading font-semibold text-h1-mobile xl:text-h1 text-center">
-					<span class="text-text-heading-secondary-default block mt-1">
-						Hành Trình Làm Mẹ <span class="whitespace-nowrap">Hạnh Phúc</span>
-					</span>
+			<div class="vpc-consultation-heading">
+				<h2>
+					<span class="vpc-consultation-heading__blue">Sẵn Sàng Bắt Đầu</span>
+					<span class="vpc-consultation-heading__pink">Hành Trình Làm Mẹ Hạnh Phúc</span>
 				</h2>
 			</div>
 
-			<div class="w-full max-w-[350px] sm:max-w-[658px] bg-surface-background-default border border-border-divider-default/60 rounded-3xl p-5 sm:px-6 sm:py-8 shadow-card">
-				<form id="vpc-section-consultation-form" class="space-y-4 sm:space-y-5">
+			<div class="vpc-consultation-card">
+				<form id="vpc-section-consultation-form" class="vpc-consultation-form">
 					<?php wp_nonce_field( 'vpc_consultation_nonce', 'vpc_consultation_nonce' ); ?>
 					<input type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
 
-					<!-- Row 1: Họ và tên & Số điện thoại (2 columns on sm+ matching Figma) -->
-					<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-2">
-						<!-- Họ và tên -->
-						<div class="flex flex-col gap-2">
-							<label class="font-body font-medium text-base sm:text-[20px] text-text-body-default">
+					<div class="vpc-consultation-form__identity">
+						<div class="vpc-consultation-field">
+							<label>
 								<span class="text-text-error-default">*</span> Họ và tên
 							</label>
 							<input type="text" name="customer_name" required placeholder="Nguyễn Như Linh"
-							       class="w-full h-[50px] px-4 rounded-xl border border-border-divider-default bg-surface-background-default text-text-body-default placeholder:text-text-disabled-light font-body text-base focus:border-border-primary-default focus:outline-none transition-all">
+							       class="vpc-consultation-control">
 						</div>
 
-						<!-- Số điện thoại -->
-						<div class="flex flex-col gap-2">
-							<label class="font-body font-medium text-base sm:text-[20px] text-text-body-default">
+						<div class="vpc-consultation-field">
+							<label>
 								<span class="text-text-error-default">*</span> Số điện thoại
 							</label>
 							<input type="tel" name="customer_phone" required placeholder="0345678***"
-							       class="w-full h-[50px] px-4 rounded-xl border border-border-divider-default bg-surface-background-default text-text-body-default placeholder:text-text-disabled-light font-body text-base focus:border-border-primary-default focus:outline-none transition-all">
+							       class="vpc-consultation-control">
 						</div>
 					</div>
 
-					<!-- Dịch vụ quan tâm -->
-					<div class="flex flex-col gap-2">
-						<label class="font-body font-medium text-base sm:text-[20px] text-text-body-default">
+					<div class="vpc-consultation-field">
+						<label>
 							<span class="text-text-error-default">*</span> Dịch vụ quan tâm
 						</label>
-						<div class="relative">
-							<select name="service" required class="w-full h-[50px] px-4 rounded-xl border border-border-divider-default bg-surface-background-default text-text-body-default font-body text-base focus:border-border-primary-default focus:outline-none transition-all appearance-none pr-10">
-								<option value="" disabled selected class="text-text-disabled-light">Chọn dịch vụ</option>
+						<div class="vpc-consultation-select-wrap">
+							<select name="service" required class="vpc-consultation-control vpc-consultation-select">
+								<option value="" disabled selected>Trung tâm ở cữ</option>
 								<?php foreach ( $consultation_services as $service_value => $service_label ) : ?>
 									<option value="<?php echo esc_attr( $service_value ); ?>"><?php echo esc_html( $service_label ); ?></option>
 								<?php endforeach; ?>
 							</select>
-							<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-text-body-default">
-								<svg class="w-5 h-5 text-text-body-default" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
-							</div>
 						</div>
 					</div>
 
-					<!-- Tuần thai: placeholder mới theo Figma là "Chọn giai đoạn". -->
-					<div class="flex flex-col gap-2">
-						<label class="font-body font-medium text-base sm:text-[20px] text-text-body-default">
-							<span class="text-text-error-default">*</span> Tuần thai
-						</label>
-						<div class="relative">
-							<select name="gestational_age" required class="w-full h-[50px] px-4 rounded-xl border border-border-divider-default bg-surface-background-default text-text-body-default font-body text-base focus:border-border-primary-default focus:outline-none transition-all appearance-none pr-10">
-								<option value="" disabled selected class="text-text-disabled-light">Chọn giai đoạn</option>
+					<fieldset class="vpc-consultation-field vpc-consultation-stage">
+						<legend><span class="text-text-error-default">*</span> Giai đoạn thai kỳ</legend>
+						<div class="vpc-consultation-stage__options" role="radiogroup" aria-label="Giai đoạn thai kỳ">
+							<label><input type="radio" name="pregnancy_stage" value="dang-mang-thai" checked required><span>Đang mang thai</span></label>
+							<label><input type="radio" name="pregnancy_stage" value="chuan-bi-mang-thai" required><span>Chuẩn bị mang thai</span></label>
+							<label><input type="radio" name="pregnancy_stage" value="da-sinh-be" required><span>Đã sinh bé</span></label>
+						</div>
+					</fieldset>
+
+					<div class="vpc-consultation-field">
+						<label><span class="text-text-error-default">*</span> Tuần thai</label>
+						<div class="vpc-consultation-select-wrap">
+							<select name="gestational_age" required class="vpc-consultation-control vpc-consultation-select">
+								<option value="" disabled selected>Chọn giai đoạn</option>
 								<?php foreach ( $gestational_age_options as $age_value => $age_label ) : ?>
 									<option value="<?php echo esc_attr( $age_value ); ?>"><?php echo esc_html( $age_label ); ?></option>
 								<?php endforeach; ?>
 							</select>
-							<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-text-body-default">
-								<svg class="w-5 h-5 text-text-body-default" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
-							</div>
 						</div>
 					</div>
 
-					<!-- Ghi chú -->
-					<div class="flex flex-col gap-2">
-						<label class="font-body font-medium text-base sm:text-[20px] text-text-body-default">
-							Ghi chú
-						</label>
+					<div class="vpc-consultation-field">
+						<label>Ghi chú</label>
 						<input type="text" name="customer_note" placeholder="Cho chúng tôi biết thêm về nhu cầu của bạn!"
-						       class="w-full h-[50px] px-4 rounded-xl border border-border-divider-default bg-surface-background-default text-text-body-default placeholder:text-text-disabled-light font-body text-base focus:border-border-primary-default focus:outline-none transition-all">
+						       class="vpc-consultation-control">
 					</div>
 
-					<!-- Submit Button -->
-					<div class="pt-2">
-						<button type="submit" class="vpc-button w-full h-10 xl:h-12 px-4 xl:px-6 bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default rounded-full flex items-center justify-center transition-all cursor-pointer shadow-xs font-body font-semibold">
+					<div class="vpc-consultation-submit">
+						<button type="submit" class="vpc-button">
 							Gửi yêu cầu tư vấn
 						</button>
 					</div>
