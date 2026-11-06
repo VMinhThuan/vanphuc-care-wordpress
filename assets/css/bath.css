@@ -56,7 +56,22 @@
 .vpc-bath__challenge-last-copy { flex: 1; min-width: 0; }
 .vpc-bath__mobile-break { display: none; }
 
-.vpc-bath__health { display: block; }
+.vpc-bath__health {
+	display: block;
+	min-height: 651.36px;
+	padding: 96px 0;
+	background: linear-gradient(98.291deg, #f8f8f8 59.631%, #fde6e6 110.45%);
+}
+.vpc-bath__health .vpc-bath__split-grid {
+	height: 456px;
+	grid-template-columns: 540px 652px;
+	gap: 0;
+	justify-content: space-between;
+}
+.vpc-bath__health .vpc-bath__split-image {
+	width: 540px;
+	height: 456px;
+}
 .vpc-bath__process { height: 1027.733px; padding: 96px 0; background: var(--bath-gray); }
 .vpc-bath__process-grid { display: grid; grid-template-columns: repeat(3, 293px); gap: 24px 40px; justify-content: center; margin-top: 24px; }
 .vpc-bath__process-card { min-height: 319px; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
@@ -199,7 +214,7 @@
 	.vpc-bath__split-copy { width: 100%; align-items: center; text-align: center; }
 	.vpc-bath__split-copy h2 { width: 100%; }
 	.vpc-bath__icon-list { width: 100%; gap: 16px; text-align: left; }
-	.vpc-bath__health { display: block; height: 942px; padding: 40px 0; background: linear-gradient(145deg, #f8f8f8 42%, #fde6e6 108%); }
+	.vpc-bath__health { display: block; height: 942px; padding: 40px 0; background: linear-gradient(98.291deg, #f8f8f8 59.631%, #fde6e6 110.45%); }
 	.vpc-bath__health .vpc-bath__split-image { height: 280px; }
 	.vpc-bath__process { height: 2018.3337px; padding: 40px 0; }
 	.vpc-bath__process-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 24px; }
@@ -324,7 +339,7 @@
 	.vpc-bath__health {
 		height: auto;
 		min-height: 942px;
-		background: linear-gradient(101.7deg, #f8f8f8 0%, #fde6e6 116.67%);
+		background: linear-gradient(98.291deg, #f8f8f8 59.631%, #fde6e6 110.45%);
 	}
 
 	.vpc-bath__health .vpc-bath__split-image {
