@@ -41,7 +41,7 @@
 .vpc-bath__hero-benefits li, .vpc-bath__icon-list li { display: flex; align-items: flex-start; gap: 8px; color: var(--bath-ink); font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
 .vpc-bath__hero-benefits img, .vpc-bath__icon-list img { width: 24px; height: 24px; flex: 0 0 24px; object-fit: contain; }
 .vpc-bath__hero-image { width: 590px; height: 565px; overflow: hidden; border-radius: 16px; }
-.vpc-bath__hero-image img { width: 100%; height: 100%; object-fit: contain; object-position: center; }
+.vpc-bath__hero-image img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 
 .vpc-bath__challenges { height: 726px; padding: 96px 0; background: linear-gradient(215deg, #f8f8f8 37%, #fde6e6 102%); }
 .vpc-bath__split-grid { display: grid; grid-template-columns: 581px minmax(0, 602px); gap: 96px; align-items: center; height: 100%; }
@@ -56,7 +56,7 @@
 .vpc-bath__challenge-last-copy { flex: 1; min-width: 0; }
 .vpc-bath__mobile-break { display: none; }
 
-.vpc-bath__health { display: none; }
+.vpc-bath__health { display: block; }
 .vpc-bath__process { height: 1027.733px; padding: 96px 0; background: var(--bath-gray); }
 .vpc-bath__process-grid { display: grid; grid-template-columns: repeat(3, 293px); gap: 24px 40px; justify-content: center; margin-top: 24px; }
 .vpc-bath__process-card { min-height: 319px; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
@@ -150,6 +150,12 @@
 }
 
 @media (min-width: 1280px) {
+	.vpc-bath__hero-image {
+		width: 100%;
+		max-width: 590px;
+		border-radius: 24px;
+	}
+
 	/* Match the 1400px content area inside the desktop header. */
 	.vpc-bath .vpc-bath__services > .vpc-bath__container {
 		width: min(1400px, calc(100% - 160px));
@@ -246,6 +252,10 @@
 		align-items: center;
 	}
 
+	.vpc-bath__hero-benefits li {
+		align-items: center;
+	}
+
 	.vpc-bath__health .vpc-bath__icon-list li {
 		align-items: center;
 	}
@@ -272,10 +282,20 @@
 		min-height: 885px;
 	}
 
+	/* Match the mobile header's 20px side padding exactly. */
+	.vpc-bath__hero > .vpc-bath__hero-grid {
+		width: calc(100% - 40px);
+		max-width: none;
+		margin-inline: auto;
+	}
+
 	.vpc-bath__hero-image {
 		position: relative;
+		width: 100%;
+		max-width: none;
 		height: 339px;
 		border-radius: 16px;
+		overflow: hidden;
 	}
 
 	.vpc-bath__hero-image img {
@@ -283,7 +303,7 @@
 		width: 100%;
 		max-width: 100%;
 		height: 100%;
-		object-fit: contain;
+		object-fit: cover;
 		object-position: center;
 	}
 
@@ -368,6 +388,10 @@
 
 	.vpc-bath__packages .vpc-bath__section-heading h2 {
 		text-align: center;
+	}
+
+	.vpc-bath__packages .vpc-bath__days {
+		white-space: nowrap;
 	}
 
 	.vpc-bath__package-grid {
