@@ -123,7 +123,7 @@
 
 .vpc-bath__services { height: 600px; padding: 96px 0; background: #fff; }
 .vpc-bath__services .vpc-bath__section-heading h2 { color: var(--bath-blue); }
-.vpc-bath__services-carousel { width: 100%; max-width: 920px; margin: 24px auto 0; display: flex; align-items: center; gap: 16px; }
+.vpc-bath__services-carousel { width: 100%; max-width: 1400px; margin: 24px auto 0; display: flex; align-items: center; gap: 16px; }
 .vpc-bath__services-viewport { flex: 1 1 auto; min-width: 0; overflow: hidden; }
 .vpc-bath__services-track { display: flex; gap: 24px; width: max-content; }
 .vpc-bath__services-arrow { width: 32px; height: 32px; flex: 0 0 32px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgba(0, 0, 0, .16); cursor: pointer; }
@@ -132,6 +132,47 @@
 .vpc-bath__service-card { width: 216px; height: 245px; flex: 0 0 216px; overflow: hidden; border: 1px solid #e1e1e1; border-radius: 12px; background: #fafafa; text-decoration: none; }
 .vpc-bath__service-card img { width: 216px; height: 184px; object-fit: cover; }
 .vpc-bath__service-card h3 { padding: 16px 8px; color: var(--bath-blue); text-align: center; font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
+
+/* Keep the shared feedback section centered against the same full content
+ * shell as the desktop header on both bath and EASY pages. */
+.vpc-bath > #feedback > .vpc-home-container {
+	width: 100%;
+	max-width: 1400px;
+	margin-inline: auto;
+	text-align: center;
+}
+
+.vpc-bath > #feedback > .vpc-home-container > p {
+	width: 100%;
+	max-width: none;
+	margin-inline: auto;
+	text-align: center;
+}
+
+@media (min-width: 1280px) {
+	/* Match the 1400px content area inside the desktop header. */
+	.vpc-bath .vpc-bath__services > .vpc-bath__container {
+		width: min(1400px, calc(100% - 160px));
+	}
+
+	.vpc-bath .vpc-bath__services-carousel {
+		max-width: none;
+	}
+
+	/* Keep the fourth card half-visible so the next arrow remains discoverable. */
+	.vpc-bath .vpc-bath__service-card {
+		width: calc((min(1400px, calc(100vw - 160px)) - 168px) / 3.5);
+		flex-basis: calc((min(1400px, calc(100vw - 160px)) - 168px) / 3.5);
+		height: auto;
+	}
+
+	.vpc-bath .vpc-bath__service-card img {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 216 / 184;
+		max-width: none;
+	}
+}
 
 @media (max-width: 1279px) {
 	.vpc-bath__container { width: min(100% - 40px, 900px); }

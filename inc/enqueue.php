@@ -106,7 +106,7 @@ function vanphuccare_enqueue_assets() {
 		);
 	}
 
-	if ( ( $is_bath_page || $is_easy_page ) && file_exists( $bath_path ) ) {
+	if ( ( $is_bath_page || $is_easy_page || $is_milk_page ) && file_exists( $bath_path ) ) {
 		wp_enqueue_style(
 			'vanphuccare-bath',
 			get_template_directory_uri() . '/assets/css/bath.css',
@@ -162,7 +162,7 @@ function vanphuccare_enqueue_assets() {
 		);
 	}
 
-	if ( ( $is_bath_page || $is_easy_page ) && file_exists( $bath_js ) ) {
+	if ( ( $is_bath_page || $is_easy_page || $is_milk_page ) && file_exists( $bath_js ) ) {
 		wp_enqueue_script(
 			'vanphuccare-bath',
 			get_template_directory_uri() . '/assets/js/bath.js',
