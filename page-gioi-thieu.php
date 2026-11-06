@@ -41,29 +41,29 @@ $mission_image = $about_uri . '/mission.webp';
 
 <div class="vpc-about-page" data-figma-node="3131:44914">
 	<!-- Legacy integration anchors: id="trung-tam-o-cu" id="bao-mau-tai-nha" id="lop-hoc-tien-san" id="khoa-hoc-truc-tuyen" id="vi-sao-chon-van-phuc" id="feedback" id="bao-chi" id="dang-ky-tu-van" id="kien-thuc-nuoi-con" id="vpc-consultation-modal" id="vpc-success-modal" -->
-	<section id="gioi-thieu" class="about-section about-hero hero-banner-section" data-figma-node="3131:44917">
-		<div class="about-hero__inner">
+	<section id="gioi-thieu" class="about-section about-hero hero-banner-section" data-figma-node="3131:44917" data-figma-mobile-node="3131:45111">
+		<div class="about-hero__inner" data-node-id="3131:45112">
 			<div class="about-hero__copy">
 				<span class="about-badge">
 					<?php if ( $badge_icon ) : ?><img src="<?php echo esc_url( $badge_icon ); ?>" width="24" height="24" alt="" aria-hidden="true"><?php endif; ?>
 					VẠN PHÚC CARE
 				</span>
-				<h1 class="about-hero__title">
-					<span class="about-heading--blue">Đồng Hành Cùng Mẹ</span>
-					<span class="about-heading--pink">Chăm Sóc Vẹn Toàn <span class="about-hero__title-nowrap">Cho Bé</span></span>
+				<h1 class="about-hero__title" data-node-id="3131:45114">
+					<span class="about-heading--blue" data-node-id="3131:45115">Đồng Hành Cùng Mẹ</span>
+					<span class="about-heading--pink" data-node-id="3131:45116">Chăm Sóc Vẹn Toàn <span class="about-hero__title-nowrap">Cho Bé</span></span>
 				</h1>
-				<div class="about-hero__description about-copy">
+				<div class="about-hero__description about-copy" data-node-id="3131:45117">
 					<p>Từ giây phút chào đời, sự an toàn của Bé và sức khoẻ của Mẹ luôn là ưu tiên hàng đầu.</p>
 					<p>Với nền tảng vững vàng trong chuyên môn điều dưỡng sản nhi, Trung tâm ở cữ Vạn Phúc Care tự hào là đơn vị cung cấp dịch vụ chăm sóc Mẹ và Bé toàn diện, giúp Mẹ hồi phục nhanh chóng và Bé yêu phát triển khỏe mạnh trong môi trường an lành, thân thiện, chuyên nghiệp.</p>
 				</div>
-				<div class="about-stats" aria-label="Thông tin Vạn Phúc Care">
-					<div class="about-stat"><div class="about-stat__content"><span class="about-stat__value">5+ Năm</span><span class="about-stat__label">Hoạt động trong ngành</span></div></div>
-					<div class="about-stat"><div class="about-stat__content"><span class="about-stat__value">8+ Dịch vụ</span><span class="about-stat__label">Chăm sóc mẹ và bé</span></div></div>
-					<div class="about-stat"><div class="about-stat__content"><span class="about-stat__value">50+ Nhân sự</span><span class="about-stat__label">Điều dưỡng</span></div></div>
-					<div class="about-stat"><div class="about-stat__content"><span class="about-stat__value">5000+ Khách hàng</span><span class="about-stat__label">Đã sử dụng dịch vụ</span></div></div>
+				<div class="about-stats" data-node-id="3131:45119" aria-label="Thông tin Vạn Phúc Care">
+					<div class="about-stat" data-node-id="3131:45121"><div class="about-stat__content"><span class="about-stat__value">5+ Năm</span><span class="about-stat__label">Hoạt động trong ngành</span></div></div>
+					<div class="about-stat" data-node-id="3131:45122"><div class="about-stat__content"><span class="about-stat__value">8+ Dịch vụ</span><span class="about-stat__label">Chăm sóc mẹ và bé</span></div></div>
+					<div class="about-stat" data-node-id="3131:45124"><div class="about-stat__content"><span class="about-stat__value">50+ Nhân sự</span><span class="about-stat__label">Điều dưỡng</span></div></div>
+					<div class="about-stat" data-node-id="3131:45125"><div class="about-stat__content"><span class="about-stat__value">5000+ Khách hàng</span><span class="about-stat__label">Đã sử dụng dịch vụ</span></div></div>
 				</div>
 			</div>
-			<div class="about-hero__image">
+			<div class="about-hero__image" data-node-id="3131:45118">
 				<?php if ( $hero_image ) : ?><img src="<?php echo esc_url( $hero_image ); ?>" width="507" height="387" alt="Điều dưỡng chăm sóc mẹ và bé" fetchpriority="high"><?php endif; ?>
 			</div>
 		</div>
@@ -119,33 +119,33 @@ $mission_image = $about_uri . '/mission.webp';
 	</section>
 
 	<section class="about-section about-founder" data-figma-node="3131:44972" data-figma-mobile-node="3131:45169">
-		<div class="about-founder__visual" data-node-id="3131:45170">
-			<div class="about-founder__cutout-frame" data-node-id="3131:45174">
+		<div class="about-founder__visual" data-node-id="3131:44973" data-mobile-node-id="3131:45170">
+			<div class="about-founder__cutout-frame" data-node-id="3131:44976" data-mobile-node-id="3131:45174">
 				<img class="about-founder__cutout" src="<?php echo esc_url( $about_uri . '/founder-cutout.webp' ); ?>" width="420" height="599" alt="Chị Thanh Thủy và em bé" loading="lazy">
 			</div>
 			<div class="about-founder__mascot-frame" data-node-id="3131:44986" data-mobile-node-id="3131:45175">
-				<img class="about-founder__mascot" src="<?php echo esc_url( $about_uri . '/mascot-large.webp' ); ?>" width="230" height="296" alt="Vạn Phúc Care mascot" loading="lazy">
+				<img class="about-founder__mascot" src="<?php echo esc_url( $about_uri . '/mascot-large.webp' ); ?>" width="230" height="296" alt="Vạn Phúc Care mascot" loading="eager" decoding="async">
 			</div>
-			<div class="about-founder__decoration" aria-hidden="true">
+			<div class="about-founder__decoration" data-node-id="3131:44987" aria-hidden="true">
 				<img class="about-founder__decoration-curve" data-node-id="3131:44995" src="<?php echo esc_url( $about_uri . '/founder-decoration-curve.svg' ); ?>" width="80" height="91" alt="">
-				<img class="about-founder__decoration-stem" src="<?php echo esc_url( $about_uri . '/founder-decoration-stem.svg' ); ?>" width="21" height="29" alt="">
-				<img class="about-founder__decoration-tail" src="<?php echo esc_url( $about_uri . '/founder-decoration-tail.svg' ); ?>" width="34" height="7" alt="">
+				<img class="about-founder__decoration-stem" data-node-id="3131:44996" src="<?php echo esc_url( $about_uri . '/founder-decoration-stem.svg' ); ?>" width="21" height="29" alt="">
+				<img class="about-founder__decoration-tail" data-node-id="3131:44997" src="<?php echo esc_url( $about_uri . '/founder-decoration-tail.svg' ); ?>" width="34" height="7" alt="">
 				<img class="about-founder__decoration-tip" data-node-id="3131:45001" src="<?php echo esc_url( $about_uri . '/founder-decoration-tip.svg' ); ?>" width="18" height="14" alt="">
 			</div>
 		</div>
-		<div class="about-founder__copy" data-node-id="3131:45176">
+		<div class="about-founder__copy" data-node-id="3131:44977" data-mobile-node-id="3131:45176">
 			<div class="about-founder__text">
 				<span class="about-badge">
 					<?php if ( $badge_icon ) : ?><img src="<?php echo esc_url( $badge_icon ); ?>" width="24" height="24" alt="" aria-hidden="true"><?php endif; ?>
 					ĐIỀU DƯỠNG TRƯỞNG
 				</span>
-				<h2 class="about-heading" data-node-id="3131:45178"><span class="about-heading--blue" data-node-id="3131:45179">Giới Thiệu</span><span class="about-heading--pink" data-node-id="3131:45180">Người Sáng Lập</span></h2>
-				<div class="about-copy" data-node-id="3131:45181">
+				<h2 class="about-heading" data-node-id="3131:44981" data-mobile-node-id="3131:45178"><span class="about-heading--blue" data-node-id="3131:44982" data-mobile-node-id="3131:45179">Giới Thiệu</span><span class="about-heading--pink" data-node-id="3131:44983" data-mobile-node-id="3131:45180">Người Sáng Lập</span></h2>
+				<div class="about-copy" data-node-id="3131:44984" data-mobile-node-id="3131:45181">
 					<p>Sáng lập viên là <a class="about-founder__link" href="#doi-ngu">chị Thanh Thủy</a> – người đã nhiều năm kinh nghiệm hoạt động trong lĩnh vực chăm sóc sức khỏe mẹ &amp; bé. Và cũng là một người mẹ với 3 nhóc tì xinh xắn.</p>
 					<p>Ý tưởng thành lập Vạn Phúc Care được thai nghén từ khi chị Thanh Thủy còn ngồi trên ghế giảng đường. Lắng nghe nỗi niềm sẻ chia của các mẹ ở thời kỳ hậu sản – sau sinh nở, những khó khăn khi chăm sóc con nhỏ cùng với băn khoăn lo lắng về sức khỏe bản thân…</p>
 				</div>
 			</div>
-			<a class="about-button" data-node-id="3131:45182" href="#doi-ngu">Giới thiệu người sáng lập</a>
+			<a class="about-button" data-node-id="3131:44985" data-mobile-node-id="3131:45182" href="#doi-ngu">Giới thiệu người sáng lập</a>
 		</div>
 	</section>
 

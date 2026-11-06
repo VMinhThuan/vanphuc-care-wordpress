@@ -456,6 +456,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	position: relative;
 	flex: 0 0 540px;
 	height: 511px;
+	isolation: isolate;
 }
 
 .about-founder__visual::before {
@@ -492,7 +493,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	left: 35px;
 	width: 230.387px;
 	height: 296.261px;
-	z-index: 1;
+	z-index: 3;
 	/* Hide the excess lower legs/feet at the same boundary as the Figma frame. */
 	overflow: hidden;
 }
@@ -510,7 +511,9 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 .about-founder__decoration {
 	position: absolute;
 	top: -6.13px;
-	left: 539.898px;
+	/* Figma places the decoration at x=510px in the section. The visual
+	 * starts at x=80px, so its local offset is 430px. */
+	left: 430px;
 	width: 175.647px;
 	height: 171.68px;
 	z-index: 2;
@@ -982,6 +985,14 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 		border-radius: 16px;
 	}
 
+	.about-hero__image img {
+		width: 114.48%;
+		max-width: none;
+		height: 100%;
+		margin-left: -7.24%;
+		object-fit: fill;
+	}
+
 	.about-stats {
 		display: flex;
 		flex-direction: column;
@@ -1188,6 +1199,10 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 		left: 2.685px;
 		width: 149.325px;
 		height: 192.021px;
+		display: block;
+		visibility: visible;
+		opacity: 1;
+		z-index: 3;
 	}
 
 	.about-founder__mascot {
