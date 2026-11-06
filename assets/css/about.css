@@ -241,20 +241,27 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 
 /* Timeline */
 .about-timeline {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 24px;
 	height: 1003px;
 	padding: 96px 80px;
 	background: linear-gradient(121deg, #f8f8f8 21%, #fde6e6 126%);
 }
 
 .about-timeline__title {
+	flex: 0 0 auto;
 	text-align: center;
+	white-space: nowrap;
 }
 
 .about-timeline__canvas {
 	position: relative;
+	flex: 0 0 723px;
 	width: 1248px;
 	height: 723px;
-	margin: 24px auto 0;
+	margin: 0 auto;
 }
 
 .about-timeline__path {
@@ -268,8 +275,8 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 .about-timeline__node {
 	position: absolute;
 	z-index: 2;
-	width: 37px;
-	height: 37px;
+	width: 36.787px;
+	height: 36.787px;
 }
 
 .about-timeline__node img {
@@ -278,8 +285,8 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 }
 
 .about-timeline__node--2021 { top: 0; left: 0; }
-.about-timeline__node--2022 { top: 49px; left: 329px; }
-.about-timeline__node--2023 { top: 241px; left: 329px; }
+.about-timeline__node--2022 { top: 49.13px; left: 329px; width: 37.856px; }
+.about-timeline__node--2023 { top: 241px; left: 329px; width: 37.856px; }
 .about-timeline__node--2024 { top: 450px; left: 368px; }
 .about-timeline__node--2025 { top: 450px; left: 678px; }
 .about-timeline__node--2026 { top: 450px; left: 998px; }
@@ -426,7 +433,12 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 .about-founder {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	/* The Figma frame is 1440px wide: 80px side padding +
+	 * 540px visual + 127px gap + 613px copy. Keeping the
+	 * children at a fixed start position prevents wider browser
+	 * viewports from stretching that gap and moving the copy away
+	 * from the reference frame. */
+	justify-content: flex-start;
 	gap: 127px;
 	height: 703px;
 	padding: 96px 80px;
@@ -492,6 +504,8 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	left: 430px;
 	width: 175.647px;
 	height: 171.68px;
+	z-index: 2;
+	pointer-events: none;
 }
 
 .about-founder__decoration img {
@@ -502,10 +516,14 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 }
 
 .about-founder__decoration-curve {
-	top: 24.72px;
-	left: 31.92px;
 	width: 79.97px;
 	height: 90.888px;
+}
+
+/* Exact vector slots from Figma nodes 3131:44995 and 3131:45001. */
+.about-founder__decoration-curve[data-node-id="3131:44995"] {
+	top: 24.72px;
+	left: 31.92px;
 }
 
 .about-founder__decoration-stem {
@@ -523,10 +541,13 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 }
 
 .about-founder__decoration-tip {
-	top: 42.28px;
-	left: 73px;
 	width: 17.667px;
 	height: 14.004px;
+}
+
+.about-founder__decoration-tip[data-node-id="3131:45001"] {
+	top: 42.28px;
+	left: 73px;
 }
 
 .about-founder__copy {
@@ -1002,12 +1023,13 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 
 	.about-timeline__title {
 		text-align: left;
+		white-space: normal;
 	}
 
 	.about-timeline__canvas {
 		width: 100%;
 		height: 1008px;
-		margin-top: 24px;
+		margin-top: 0;
 	}
 
 	.about-timeline__path {
