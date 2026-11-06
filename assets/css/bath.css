@@ -35,6 +35,7 @@
 .vpc-bath__hero-grid { height: 565px; display: grid; grid-template-columns: minmax(0, 642px) 590px; gap: 48px; align-items: center; }
 .vpc-bath__hero-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
 .vpc-bath__hero h1 { line-height: 64px; }
+.vpc-bath__hero-title-mobile-break { display: inline; }
 .vpc-bath__hero-copy > p { color: #4a4a4a; font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
 .vpc-bath__hero-benefits { display: flex; flex-direction: column; gap: 16px; width: 100%; }
 .vpc-bath__hero-benefits li, .vpc-bath__icon-list li { display: flex; align-items: flex-start; gap: 8px; color: var(--bath-ink); font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
@@ -50,6 +51,7 @@
 .vpc-bath__split-copy h2 { display: flex; flex-direction: column; }
 .vpc-bath__split-copy h2 span, .vpc-bath__section-heading h2 span, .vpc-bath__lead h2 span { color: var(--bath-blue); }
 .vpc-bath__split-copy h2 em, .vpc-bath__section-heading h2 em, .vpc-bath__lead h2 em { color: var(--bath-pink); }
+.vpc-bath__health-title-assistant { display: inline; }
 .vpc-bath__icon-list { display: flex; flex-direction: column; gap: 16px; width: 100%; }
 .vpc-bath__challenge-last-copy { flex: 1; min-width: 0; }
 .vpc-bath__mobile-break { display: none; }
@@ -69,6 +71,7 @@
 .vpc-bath__packages .vpc-bath__section-heading { max-width: 869px; margin-inline: auto; }
 .vpc-bath__packages .vpc-bath__section-heading h2 { color: var(--bath-blue); }
 .vpc-bath__packages .vpc-bath__section-heading > p { white-space: nowrap; }
+.vpc-bath__packages .vpc-bath__section-heading > p span { display: block; }
 .vpc-bath__package-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; justify-content: center; margin-top: 48px; }
 .vpc-bath__package-card { position: relative; min-height: 500px; padding: 36px 24px 24px; display: flex; flex-direction: column; gap: 24px; border: 1px solid var(--bath-border); border-radius: 24px; background: #fff; box-shadow: 0 1px 2.5px #00000026; }
 .vpc-bath__package-card.is-featured { border: 2px solid var(--bath-blue); }
@@ -120,7 +123,7 @@
 
 .vpc-bath__services { height: 600px; padding: 96px 0; background: #fff; }
 .vpc-bath__services .vpc-bath__section-heading h2 { color: var(--bath-blue); }
-.vpc-bath__services-carousel { width: 100%; max-width: 1024px; margin: 24px auto 0; display: flex; align-items: center; gap: 16px; }
+.vpc-bath__services-carousel { width: 100%; max-width: 920px; margin: 24px auto 0; display: flex; align-items: center; gap: 16px; }
 .vpc-bath__services-viewport { flex: 1 1 auto; min-width: 0; overflow: hidden; }
 .vpc-bath__services-track { display: flex; gap: 24px; width: max-content; }
 .vpc-bath__services-arrow { width: 32px; height: 32px; flex: 0 0 32px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgba(0, 0, 0, .16); cursor: pointer; }
@@ -187,6 +190,26 @@
 /* Mobile layout follows Figma frame 3207:38701 (390px reference width). */
 @media (max-width: 767px) {
 	.vpc-bath__mobile-break {
+		display: block;
+	}
+
+	.vpc-bath__hero-title-mobile-break {
+		display: block;
+	}
+
+	.vpc-bath__health-title-assistant {
+		display: block;
+	}
+
+	.vpc-bath__challenges .vpc-bath__icon-list li {
+		align-items: center;
+	}
+
+	.vpc-bath__health .vpc-bath__icon-list li {
+		align-items: center;
+	}
+
+	.vpc-bath__process .vpc-bath__section-heading h2 em {
 		display: block;
 	}
 
@@ -337,6 +360,9 @@
 
 	.vpc-bath__package-button,
 	.vpc-bath__package-card.is-featured .vpc-bath__package-button {
+		align-self: center;
+		width: 293px;
+		max-width: 100%;
 		min-height: 40px;
 		border-color: var(--bath-blue);
 		color: #fff;
@@ -345,7 +371,7 @@
 
 	.vpc-bath__faq {
 		height: auto;
-		min-height: 1336px;
+		min-height: 0;
 		background: linear-gradient(129.95deg, #f8f8f8 20.674%, #d1e4f1 131.25%);
 	}
 
