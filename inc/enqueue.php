@@ -200,6 +200,6 @@ function vanphuccare_preload_homepage_hero() {
 		return;
 	}
 
-	printf( '<link rel="preload" as="image" href="%s" fetchpriority="high">\n', esc_url( $hero_url ) );
+	printf( "<link rel=\"preload\" as=\"image\" href=\"%s\" fetchpriority=\"high\">\n", esc_url( $hero_url ) );
 }
 add_action( 'wp_head', 'vanphuccare_preload_homepage_hero', 1 );

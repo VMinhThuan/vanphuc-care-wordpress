@@ -459,6 +459,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	flex: 0 0 540px;
 	height: 511px;
 	isolation: isolate;
+	overflow: visible;
 }
 
 .about-founder__visual::before {
@@ -499,8 +500,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	display: block !important;
 	visibility: visible !important;
 	opacity: 1 !important;
-	/* Hide the excess lower legs/feet at the same boundary as the Figma frame. */
-	overflow: hidden !important;
+	overflow: visible !important;
 }
 
 .about-founder__mascot {
@@ -524,7 +524,8 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	left: 430px;
 	width: 175.647px;
 	height: 171.68px;
-	z-index: 2;
+	z-index: 4;
+	overflow: visible;
 	pointer-events: none;
 }
 
