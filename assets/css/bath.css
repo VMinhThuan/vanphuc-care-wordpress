@@ -171,6 +171,26 @@
 		border-radius: 24px;
 	}
 
+	/* The Figma health-book asset has an 18px transparent/shadow frame around
+	 * the 540px image. Scale that frame so the visible image matches the
+	 * 581px-wide image used in the section above. */
+	.vpc-bath__health .vpc-bath__split-grid {
+		height: 530px;
+		grid-template-columns: 620px minmax(0, 612px);
+	}
+
+	.vpc-bath__health .vpc-bath__split-image {
+		width: 620px;
+		height: 530px;
+		margin-left: -19px;
+	}
+
+	.vpc-bath__health .vpc-bath__split-image img {
+		width: 620px;
+		height: 530px;
+		max-width: none;
+	}
+
 	/* Match the 1400px content area inside the desktop header. */
 	.vpc-bath .vpc-bath__services > .vpc-bath__container {
 		width: min(1400px, calc(100% - 160px));
@@ -345,17 +365,17 @@
 
 	.vpc-bath__health .vpc-bath__split-image {
 		position: relative;
-		height: 300px;
-		box-shadow: 0 4px 18px rgba(0, 0, 0, .09);
+		width: calc(100% + 40px);
+		height: 336px;
+		margin-left: -20px;
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		box-shadow: none;
 	}
 
 	.vpc-bath__health .vpc-bath__split-image img {
-		position: absolute;
-		top: -32.69%;
-		left: -3.29%;
-		width: 119.58%;
-		max-width: none;
-		height: 149.09%;
+		position: static;
 	}
 
 	.vpc-bath__health .vpc-bath__split-image {
@@ -367,7 +387,8 @@
 		display: block;
 		width: 386px;
 		height: 336px;
-		margin: -14px 0 0 -18px;
+		margin: 0;
+		flex: 0 0 386px;
 	}
 
 	.vpc-bath__health .vpc-bath__split-image picture img {
