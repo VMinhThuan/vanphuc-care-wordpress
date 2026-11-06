@@ -24,8 +24,8 @@
 .vpc-easy__badge img { width: 24px; height: 24px; object-fit: contain; }
 .vpc-easy__button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 24px; border-radius: 999px; text-decoration: none; font: 500 16px/24px var(--font-body, "Manrope", sans-serif); transition: transform .2s ease, opacity .2s ease; }
 .vpc-easy__button:hover { transform: translateY(-1px); opacity: .9; }
-.vpc-easy__button--primary { border: 0; color: #fafafa; background: var(--easy-blue); }
-.vpc-easy__button--secondary { border: 1px solid var(--easy-pink); color: var(--easy-pink); background: transparent; }
+.vpc-easy a.vpc-easy__button--primary { border: 0; color: #fff; background: var(--easy-blue); }
+.vpc-easy a.vpc-easy__button--secondary { border: 1px solid var(--easy-pink); color: var(--easy-pink); background: transparent; }
 .vpc-easy__section-heading { display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center; }
 .vpc-easy__section-heading h2, .vpc-easy__split-copy h2, .vpc-easy__hero h1, .vpc-easy__lead h2 { color: var(--easy-blue); font: 600 48px/64px var(--font-heading, "Fraunces", serif); }
 .vpc-easy__section-heading h2 em, .vpc-easy__split-copy h2 em, .vpc-easy__lead h2 em { display: inline; color: var(--easy-pink); font-style: normal; }
@@ -68,8 +68,8 @@
 .vpc-easy__choice-card > p { min-height: 48px; color: var(--easy-ink); font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
 .vpc-easy__line { width: 100%; height: 1px; object-fit: fill; }
 .vpc-easy__choice-card ul { display: flex; flex-direction: column; gap: 8px; }
-.vpc-easy__choice-card li { position: relative; padding-left: 28px; color: var(--easy-ink); font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
-.vpc-easy__choice-card li::before { content: "✓"; position: absolute; left: 0; color: var(--easy-blue); font-weight: 700; }
+.vpc-easy__choice-card li { display: flex; align-items: flex-start; gap: 8px; color: var(--easy-ink); font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
+.vpc-easy__choice-check { width: 24px; height: 24px; flex: 0 0 24px; object-fit: contain; }
 .vpc-easy__choice-card a { display: inline-flex; align-items: center; gap: 12px; margin-top: auto; color: var(--easy-blue); font: 500 16px/24px var(--font-body, "Manrope", sans-serif); text-decoration: underline; }
 .vpc-easy__choice-card a img { width: 9px; height: 15px; object-fit: contain; }
 
@@ -81,7 +81,7 @@
 .vpc-easy__process { height: 1039.733px; padding: 96px 0; background: var(--easy-gray); }
 .vpc-easy__process-grid { display: grid; grid-template-columns: repeat(3, 293px); gap: 24px 40px; justify-content: center; margin-top: 24px; }
 .vpc-easy__process-card { min-height: 319px; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
-.vpc-easy__process-image { position: relative; width: 189px; height: 189px; padding: 2px; border: 2px solid var(--easy-blue); border-radius: 50%; box-shadow: 0 1px 2.5px #00000026; }
+.vpc-easy__process-image { position: relative; width: 189px; height: 189px; padding: 16px; border: 2px solid var(--easy-blue); border-radius: 50%; box-shadow: 0 1px 2.5px #00000026; }
 .vpc-easy__process-image img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 .vpc-easy__process-image span { position: absolute; top: -1px; right: -1px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #fff; background: var(--easy-blue); font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
 .vpc-easy__process-card h3 { color: var(--easy-blue); font: 500 24px/32px var(--font-body, "Manrope", sans-serif); }

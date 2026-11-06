@@ -19,7 +19,7 @@ $about_uri     = trailingslashit( get_template_directory_uri() ) . 'assets/image
 $badge_icon    = $about_uri . '/badge-star.svg';
 $feature_icon  = $about_uri . '/feature-star.svg';
 $hero_image    = $about_uri . '/hero-mission.webp';
-$mission_image = $about_uri . '/mission-postpartum-care.webp';
+$mission_image = $about_uri . '/mission.webp';
 $avatars_uri   = trailingslashit( get_template_directory_uri() ) . 'assets/images/avatars';
 $feedback_uri  = trailingslashit( get_template_directory_uri() ) . 'assets/images/bao-mau';
 $services_uri  = trailingslashit( get_template_directory_uri() ) . 'assets/images';
@@ -158,7 +158,7 @@ $about_feedback = array(
 					<p>Ý tưởng thành lập Vạn Phúc Care được thai nghén từ khi chị Thanh Thủy còn ngồi trên ghế giảng đường. Lắng nghe nỗi niềm sẻ chia của các mẹ ở thời kỳ hậu sản – sau sinh nở, những khó khăn khi chăm sóc con nhỏ cùng với băn khoăn lo lắng về sức khỏe bản thân…</p>
 				</div>
 			</div>
-			<a class="about-button" data-node-id="3131:44985" data-mobile-node-id="3131:45182" href="#doi-ngu">Giới thiệu người sáng lập</a>
+			<a class="about-button" data-node-id="3131:44985" data-mobile-node-id="3131:45182" href="https://methuylamy.vn/" target="_blank" rel="noopener noreferrer">Giới thiệu người sáng lập</a>
 		</div>
 		</div>
 	</section>

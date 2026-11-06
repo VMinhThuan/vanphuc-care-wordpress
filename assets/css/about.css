@@ -26,6 +26,14 @@
 	max-width: 100%;
 }
 
+/* The introduction page ends after the partners section. These shared
+ * homepage sections are intentionally not shown here. */
+.vpc-about-page > .about-services,
+.vpc-about-page > .about-feedback,
+.vpc-about-page > .about-consultation {
+	display: none;
+}
+
 /* The founder cutout extends beyond its image frame as in Figma. */
 .vpc-about-page .about-founder__cutout {
 	max-width: none;
@@ -358,6 +366,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 }
 
 .about-mission__image {
+	position: relative;
 	flex: 0 0 534px;
 	height: 471px;
 	overflow: hidden;
@@ -365,11 +374,14 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 }
 
 .about-mission__image img {
+	position: absolute;
+	top: -0.03%;
+	left: -9.14%;
 	display: block;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	object-position: center;
+	width: 132.36%;
+	max-width: none;
+	height: 100.06%;
+	object-fit: fill;
 }
 
 .about-mission__copy {
@@ -1592,10 +1604,20 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	}
 
 	.about-mission__image {
+		position: relative;
 		flex: 0 0 auto;
 		width: 100%;
 		height: 309px;
 		border-radius: 16px;
+	}
+
+	.about-mission__image img {
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
 	}
 
 	.about-mission__copy {
