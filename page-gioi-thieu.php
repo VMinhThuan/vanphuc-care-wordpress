@@ -128,10 +128,7 @@ $mission_image = $about_uri . '/mission.webp';
 				<img class="about-founder__mascot" src="<?php echo esc_url( $about_uri . '/mascot-large.webp' ); ?>" width="230" height="296" alt="Vạn Phúc Care mascot" loading="eager" fetchpriority="high" decoding="async">
 			</div>
 			<div class="about-founder__decoration" data-node-id="3131:44987" aria-hidden="true">
-				<img class="about-founder__decoration-curve" data-node-id="3131:44995" src="<?php echo esc_url( $about_uri . '/founder-decoration-curve.svg' ); ?>" width="80" height="91" alt="">
-				<img class="about-founder__decoration-stem" data-node-id="3131:44996" src="<?php echo esc_url( $about_uri . '/founder-decoration-stem.svg' ); ?>" width="21" height="29" alt="">
-				<img class="about-founder__decoration-tail" data-node-id="3131:44997" src="<?php echo esc_url( $about_uri . '/founder-decoration-tail.svg' ); ?>" width="34" height="7" alt="">
-				<img class="about-founder__decoration-tip" data-node-id="3131:45001" src="<?php echo esc_url( $about_uri . '/founder-decoration-tip.svg' ); ?>" width="18" height="14" alt="">
+				<img class="about-founder__decoration-arrow" src="<?php echo esc_url( $about_uri . '/van-phuc-care-arrow-sparkle.svg' ); ?>" width="172" height="114" alt="">
 			</div>
 		</div>
 		<div class="about-founder__copy" data-node-id="3131:44977" data-mobile-node-id="3131:45176">

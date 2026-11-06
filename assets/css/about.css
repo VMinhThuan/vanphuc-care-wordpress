@@ -7,6 +7,8 @@
 	--about-muted: #525252;
 	--about-border: #d8d8d8;
 	--about-surface: #f8f8f8;
+	--about-shell-width: 1560px;
+	--about-shell-gutter: 80px;
 	background: var(--about-surface);
 	color: var(--about-text);
 	font-family: 'Manrope', sans-serif;
@@ -500,7 +502,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	display: block !important;
 	visibility: visible !important;
 	opacity: 1 !important;
-	overflow: visible !important;
+	overflow: hidden !important;
 }
 
 .about-founder__mascot {
@@ -518,57 +520,24 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 
 .about-founder__decoration {
 	position: absolute;
-	top: -6.13px;
+	top: 4px;
 	/* Figma places the decoration at x=510px in the section. The visual
 	 * starts at x=80px, so its local offset is 430px. */
 	left: 430px;
-	width: 175.647px;
-	height: 171.68px;
+	width: 172px;
+	height: 114px;
 	z-index: 4;
 	overflow: visible;
 	pointer-events: none;
 }
 
-.about-founder__decoration img {
+.about-founder__decoration-arrow {
 	position: absolute;
+	inset: 0;
+	width: 172px;
+	height: 114px;
 	max-width: none;
-	transform: rotate(56.09deg);
-	transform-origin: center;
-}
-
-.about-founder__decoration-curve {
-	width: 79.97px;
-	height: 90.888px;
-}
-
-/* Exact vector slots from Figma nodes 3131:44995 and 3131:45001. */
-.about-founder__decoration-curve[data-node-id="3131:44995"] {
-	top: 24.72px;
-	left: 31.92px;
-}
-
-.about-founder__decoration-stem {
-	top: 2.35px;
-	left: 66.06px;
-	width: 21.087px;
-	height: 29.06px;
-}
-
-.about-founder__decoration-tail {
-	top: 12.4px;
-	left: 41.23px;
-	width: 33.766px;
-	height: 7.302px;
-}
-
-.about-founder__decoration-tip {
-	width: 17.667px;
-	height: 14.004px;
-}
-
-.about-founder__decoration-tip[data-node-id="3131:45001"] {
-	top: 42.28px;
-	left: 73px;
+	object-fit: contain;
 }
 
 .about-founder__copy {
@@ -837,6 +806,23 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 .about-partners__logos img:first-child {
 	width: 80px;
 	height: 98px;
+}
+
+/* Keep full-bleed backgrounds, but align section content with the 1560px
+ * header shell at wide desktop widths. */
+@media (min-width: 1280px) {
+	.about-timeline,
+	.about-mission,
+	.about-tiktok,
+	.about-team {
+		padding-right: max(var(--about-shell-gutter), calc((100% - var(--about-shell-width)) / 2 + var(--about-shell-gutter)));
+		padding-left: max(var(--about-shell-gutter), calc((100% - var(--about-shell-width)) / 2 + var(--about-shell-gutter)));
+	}
+
+	.about-partners__logos {
+		padding-right: max(var(--about-shell-gutter), calc((100% - var(--about-shell-width)) / 2 + var(--about-shell-gutter)));
+		padding-left: max(var(--about-shell-gutter), calc((100% - var(--about-shell-width)) / 2 + var(--about-shell-gutter)));
+	}
 }
 
 @media (max-width: 1279px) and (min-width: 768px) {
@@ -1213,7 +1199,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	.about-founder__mascot-frame {
 		top: 194.32px !important;
 		bottom: auto !important;
-		left: 2.685px !important;
+		left: 22.69px !important;
 		width: 149.325px !important;
 		height: 192.021px !important;
 		display: block !important;

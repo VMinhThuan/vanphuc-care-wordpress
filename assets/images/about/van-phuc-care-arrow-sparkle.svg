@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="172" height="114" viewBox="0 0 172 114" fill="none" role="img" aria-label="Curved arrow and sparkle">
+  <g stroke="#4679BE" stroke-linecap="round" stroke-linejoin="round">
+    <!-- The continuous hand-drawn curl and arrow shaft -->
+    <path d="M 23.5 63.5 C 28 49.3 41.3 35.3 50.4 37.6 C 57.4 38.5 63.5 45.7 62.7 52.0 C 61.8 58.4 51.3 66.9 44.2 66.8 C 36.5 66.5 39.6 57.8 46.7 53.0 C 53.8 48.1 60.3 48.1 68.9 48.8 C 87.0 50.2 102.6 57.9 113.4 66.3" stroke-width="3.35"/>
+    <!-- Two short wings form the arrowhead -->
+    <path d="M 98.2 47.2 C 102.0 54.6 107.4 61.8 113.6 66.1" stroke-width="3.15"/>
+    <path d="M 88.9 67.1 C 96.8 64.1 105.8 64.4 113.6 66.2" stroke-width="3.1"/>
+    <!-- Four-point hand-drawn sparkle -->
+    <path d="M 137.2 63.6 C 138.6 65.7 140.6 66.9 144.0 65.5 C 141.4 68.1 141.7 70.2 143.1 73.5 C 140.6 71.4 138.9 70.4 135.9 70.4 C 138.3 68.3 138.3 66.6 137.2 63.6 Z" stroke-width="1.7"/>
+  </g>
+</svg>

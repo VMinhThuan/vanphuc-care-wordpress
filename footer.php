@@ -99,7 +99,7 @@ if ( empty( $instagram_url ) ) {
 					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/lop-hoc-tien-san/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Lớp học tiền sản</a></li>
 					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/tu-van-nuoi-con-easy/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Tư vấn nuôi con EASY</a></li>
 					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/tam-be-tai-nha/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Tắm trẻ sơ sinh</a></li>
-					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/thong-tac-tia-sua/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Thông tắc tia sữa</a></li>
+					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/thong-tac-tia-sua/' ) ); ?>" class="hover:text-text-body-muted transition-colors"<?php echo vanphuccare_is_thong_tac_page() ? ' aria-current="page"' : ''; ?>>Thông tắc tia sữa</a></li>
 				</ul>
 			</div>
 

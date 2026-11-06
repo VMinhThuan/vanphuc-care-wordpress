@@ -15,6 +15,7 @@
 .vpc-milk__section-heading h2,.vpc-milk__split-copy h2,.vpc-milk__hero h1,.vpc-milk__lead h2 { color:var(--milk-blue); font:600 48px/64px var(--font-heading,"Fraunces",serif); }
 .vpc-milk__section-heading h2 em,.vpc-milk__split-copy h2 em,.vpc-milk__lead h2 em { display:inline; color:var(--milk-pink); font-style:normal; }
 .vpc-milk__section-heading p,.vpc-milk__split-copy>p { color:#4a4a4a; font:500 16px/24px var(--font-body,"Manrope",sans-serif); }
+.vpc-milk__responsive-copy--mobile { display:none; }
 
 .vpc-milk__hero { height:698px; padding:96px 0; background:var(--milk-gray); }
 .vpc-milk__hero-grid { height:506px; display:grid; grid-template-columns:minmax(0,661px) 567px; gap:52px; align-items:center; }
@@ -135,6 +136,8 @@
 	.vpc-milk__packages { height:1614px; padding:40px 0; }
 	.vpc-milk__packages .vpc-milk__section-heading { align-items:flex-start; text-align:left; }
 	.vpc-milk__packages .vpc-milk__section-heading h2 { text-align:left; }
+	.vpc-milk__responsive-copy--desktop { display:none; }
+	.vpc-milk__responsive-copy--mobile { display:block; }
 	.vpc-milk__package-grid { grid-template-columns:1fr; gap:24px; margin-top:24px; }
 	.vpc-milk__package-card,.vpc-milk__package-card.is-featured { width:100%; height:444px; }
 	.vpc-milk__faq { height:1294px; padding:40px 0; }
