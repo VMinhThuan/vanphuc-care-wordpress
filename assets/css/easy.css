@@ -198,7 +198,7 @@
 	.vpc-easy__package-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 24px; }
 	.vpc-easy__package-card { min-height: 640px; padding: 36px 24px 24px; }
 	.vpc-easy__package-card.is-featured { order: -1; }
-	.vpc-easy__faq { height: 1022px; padding: 40px 0; }
+	.vpc-easy__faq { height: auto; padding: 40px 0; }
 	.vpc-easy__faq .vpc-easy__section-heading > p { max-width: 350px; }
 	.vpc-easy__faq-list { gap: 16px; margin-top: 24px; }
 	.vpc-easy__faq details { padding: 16px; }
