@@ -121,6 +121,7 @@
 	.vpc-milk__hero h1 { width:100%; }
 	.vpc-milk__hero-copy>p { max-width:350px; }
 	.vpc-milk__hero-benefits { gap:16px; max-width:350px; text-align:left; }
+	.vpc-milk__hero-benefits li,.vpc-milk__icon-list li { align-items:center; }
 	.vpc-milk__hero .vpc-milk__button { width:100%; min-height:40px; padding:8px 16px; }
 	.vpc-milk__challenges { height:830px; padding:40px 0; }
 	.vpc-milk__split-grid { height:auto; display:flex; flex-direction:column; gap:24px; }
@@ -129,13 +130,14 @@
 	.vpc-milk__split-copy h2 { width:100%; }
 	.vpc-milk__icon-list { width:100%; gap:16px; text-align:left; }
 	.vpc-milk__process { height:1384.6002px; padding:40px 0; }
+	.vpc-milk__process .vpc-milk__section-heading h2 em { display:block; white-space:nowrap; }
 	.vpc-milk__process-grid { grid-template-columns:1fr; gap:40px; margin-top:24px; }
 	.vpc-milk__process-card { min-height:356.8667px; }
 	.vpc-milk__process-card h3 { max-width:350px; }
 	.vpc-milk__process-card p { max-width:350px; }
 	.vpc-milk__packages { height:1614px; padding:40px 0; }
-	.vpc-milk__packages .vpc-milk__section-heading { align-items:flex-start; text-align:left; }
-	.vpc-milk__packages .vpc-milk__section-heading h2 { text-align:left; }
+	.vpc-milk__packages .vpc-milk__section-heading { align-items:center; text-align:center; }
+	.vpc-milk__packages .vpc-milk__section-heading h2 { text-align:center; }
 	.vpc-milk__responsive-copy--desktop { display:none; }
 	.vpc-milk__responsive-copy--mobile { display:block; }
 	.vpc-milk__package-grid { grid-template-columns:1fr; gap:24px; margin-top:24px; }

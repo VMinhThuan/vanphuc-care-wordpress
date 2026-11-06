@@ -172,6 +172,8 @@
 	.vpc-bao-mau__process-image { width: 100%; max-width: 293px; }
 	.vpc-bao-mau__package-grid { grid-template-columns: 1fr; gap: 24px; margin-top: 24px; }
 	.vpc-bao-mau__package-card { width: 100%; min-height: 490px; }
+	.vpc-bao-mau__section-heading--packages { align-items: center; text-align: center; }
+	.vpc-bao-mau__section-heading--packages h2 { text-align: center; }
 	.vpc-bao-mau__team .vpc-bao-mau__section-heading > p, .vpc-bao-mau__faq .vpc-bao-mau__section-heading > p, .vpc-bao-mau__feedback .vpc-bao-mau__section-heading > p { max-width: none; }
 	.vpc-bao-mau__team-viewport { width: calc(100vw - 40px); margin-inline: auto; }
 	.vpc-bao-mau__team-grid { width: max-content; grid-template-columns: repeat(4, 289px); justify-content: start; gap: 16px; margin-top: 24px; }
