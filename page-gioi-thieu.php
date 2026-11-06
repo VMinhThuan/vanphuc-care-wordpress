@@ -169,7 +169,7 @@ $mission_image = $about_uri . '/mission.webp';
 		</span>
 		<div class="about-team__intro">
 			<h2 class="about-heading about-heading--blue">Đội Ngũ Của Chúng Tôi</h2>
-			<p class="about-copy about-team__description">Đội ngũ điều dưỡng viên với nền tảng điều dưỡng, được đào tạo chuyên sâu lĩnh vực sản nhi, đảm bảo đem đến dịch vụ an toàn, chuyên nghiệp cho mọi gia đình.</p>
+			<p class="about-copy about-team__description">Đội ngũ điều dưỡng viên với nền tảng điều dưỡng, được đào tạo chuyên sâu lĩnh vực sản nhi, đảm bảo đem đến dịch vụ an toàn, chuyên nghiệp cho<br class="about-team__mobile-break"> mọi gia đình.</p>
 		</div>
 		<div class="about-team__grid">
 			<?php

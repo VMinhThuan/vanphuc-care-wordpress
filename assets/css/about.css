@@ -251,6 +251,8 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	align-items: center;
 	gap: 24px;
 	height: 1003px;
+	max-width: var(--about-shell-width);
+	margin-inline: auto;
 	padding: 96px 80px;
 	background: linear-gradient(121deg, #f8f8f8 21%, #fde6e6 126%);
 }
@@ -522,10 +524,10 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	position: absolute;
 	top: 4px;
 	/* Figma places the decoration at x=510px in the section. The visual
-	 * starts at x=80px, so its local offset is 430px. */
-	left: 430px;
-	width: 172px;
-	height: 114px;
+	 * starts at x=80px, so its local offset is visual width - 110px. */
+	left: calc(100% - 110px);
+	width: 220px;
+	height: 146px;
 	z-index: 4;
 	overflow: visible;
 	pointer-events: none;
@@ -534,8 +536,8 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 .about-founder__decoration-arrow {
 	position: absolute;
 	inset: 0;
-	width: 172px;
-	height: 114px;
+	width: 220px;
+	height: 146px;
 	max-width: none;
 	object-fit: contain;
 }
@@ -552,6 +554,11 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	display: flex;
 	flex-direction: column;
 	gap: 24px;
+	width: 100%;
+}
+
+.about-founder__text > .about-badge {
+	align-self: flex-start;
 }
 
 .about-founder__text h2 {
@@ -674,22 +681,27 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	max-width: 100%;
 }
 
+.about-team__mobile-break {
+	display: none;
+}
+
 .about-team__grid {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	flex-wrap: nowrap;
 	gap: 26px;
-	width: min(1234px, 100%);
+	width: 100%;
+	max-width: none;
 	margin-top: 0;
 }
 
 .about-team-card {
 	display: flex;
-	flex: 0 0 289px;
-	width: 289px;
-	min-width: 289px;
-	max-width: 289px;
+	flex: 1 1 0;
+	width: auto;
+	min-width: 0;
+	max-width: none;
 	flex-direction: column;
 	align-items: center;
 	gap: 12px;
@@ -825,6 +837,48 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	}
 }
 
+/* The desktop Figma frame is 1440px wide. At the in-between desktop
+ * widths, scale the fixed timeline canvas so it stays inside the header shell. */
+@media (min-width: 1280px) and (max-width: 1439px) {
+	.about-timeline {
+		overflow: hidden;
+	}
+
+	.about-timeline__canvas {
+		transform: scale(.82);
+		transform-origin: top center;
+	}
+
+	.about-founder__inner {
+		gap: 32px;
+	}
+
+	.about-founder__visual {
+		flex: 0 1 43%;
+		min-width: 0;
+	}
+
+	.about-founder__copy {
+		flex: 1 1 0;
+		min-width: 0;
+	}
+
+	.about-founder__text h2 > span {
+		width: 100%;
+	}
+
+	.about-team-card__photo {
+		padding-right: 12px;
+		padding-left: 12px;
+	}
+
+	.about-team-card__image-frame {
+		flex: 0 1 223px;
+		width: 223px;
+		max-width: 100%;
+	}
+}
+
 @media (max-width: 1279px) and (min-width: 768px) {
 	.about-hero__inner,
 	.about-mission,
@@ -885,6 +939,13 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 		overflow-x: auto;
 		justify-content: flex-start;
 		padding-bottom: 12px;
+	}
+
+	.about-team-card {
+		flex: 0 0 289px;
+		width: 289px;
+		min-width: 289px;
+		max-width: 289px;
 	}
 }
 
@@ -962,10 +1023,17 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 
 	.about-hero__description {
 		width: 100%;
+		max-width: 350px;
+		margin-inline: auto;
 		margin-top: 0;
 		font-size: 16px;
 		font-weight: 500;
 		line-height: 24px;
+		text-align: center;
+	}
+
+	.about-hero__description p {
+		width: 100%;
 		text-align: center;
 	}
 
@@ -993,10 +1061,10 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 		flex-direction: column;
 		align-items: stretch;
 		width: 100%;
-		flex: 0 0 324px;
-		height: 324px;
+		flex: 0 0 354px;
+		height: 354px;
 		margin-top: 0;
-		padding: 16px 12px;
+		padding: 8px 12px;
 		border-radius: 24px;
 		box-shadow: 0 1px 2.5px rgba(0, 0, 0, .15);
 	}
@@ -1007,9 +1075,9 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 		align-items: center;
 		justify-content: center;
 		gap: 8px;
-		flex: 0 0 73px;
-		height: 73px;
-		min-height: 73px;
+		flex: 0 0 84px;
+		height: 84px;
+		min-height: 84px;
 		padding: 12px 8px;
 		text-align: center;
 	}
@@ -1230,6 +1298,10 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 		text-align: center;
 	}
 
+	.about-founder__text > .about-badge {
+		align-self: center;
+	}
+
 	.about-founder__text {
 		align-items: center;
 		gap: 24px;
@@ -1319,6 +1391,10 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 		text-align: center;
 	}
 
+	.about-team__mobile-break {
+		display: block;
+	}
+
 	.about-team__grid {
 		justify-content: flex-start;
 		width: 100%;
@@ -1330,7 +1406,10 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	}
 
 	.about-team-card {
-		flex-basis: 289px;
+		flex: 0 0 289px;
+		width: 289px;
+		min-width: 289px;
+		max-width: 289px;
 	}
 
 	.about-partners {
@@ -1339,8 +1418,12 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 		gap: 0;
 	}
 
+	.about-partners > .about-badge {
+		margin: 0 0 24px;
+	}
+
 	.about-partners__title {
-		margin-top: 24px;
+		margin-top: 0;
 	}
 
 	.about-partners__description {
@@ -1359,19 +1442,23 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	}
 
 	.about-partners__logos {
-		justify-content: center;
-		gap: 16px;
+		justify-content: space-between;
+		gap: 0;
+		width: 100%;
+		max-width: 350px;
 		height: 62px;
 		margin-top: 24px;
-		padding: 0;
+		padding: 0 9px;
 	}
 
 	.about-partners__logos img {
+		flex: 0 0 50px;
 		width: 50px;
 		height: 50px;
 	}
 
 	.about-partners__logos img:first-child {
+		flex-basis: 68px;
 		width: 68px;
 		height: 62px;
 	}
@@ -1381,6 +1468,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	.site-footer--about .vpc-container {
 		display: flex;
 		flex-direction: column;
+		gap: 32px;
 	}
 
 	.site-footer--about .vpc-footer-main,
@@ -1427,7 +1515,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 
 	.site-footer--about .vpc-footer-legal {
 		order: 2;
-		gap: 8px;
+		gap: 0;
 		margin-top: 0;
 		padding-top: 0;
 		border-top: 0;
