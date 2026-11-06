@@ -451,9 +451,9 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 						<button data-open-modal="vpc-consultation-modal" data-service="bao-mau-tai-nha" class="vpc-button w-full sm:w-auto h-10 xl:h-12 px-4 xl:px-6 bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default rounded-full shadow-xs transition-colors flex items-center justify-center cursor-pointer">
 							Đăng ký tư vấn
 						</button>
-						<button data-open-modal="vpc-consultation-modal" data-service="bao-mau-tai-nha" class="vpc-button w-full sm:w-auto h-10 xl:h-12 px-4 xl:px-6 border border-border-secondary-default hover:bg-surface-badge-secondary/40 active:border-border-secondary-dark text-text-heading-secondary-default rounded-full transition-colors flex items-center justify-center cursor-pointer">
+						<a href="<?php echo esc_url( home_url( '/bao-mau-tai-nha/' ) ); ?>" class="vpc-button w-full sm:w-auto h-10 xl:h-12 px-4 xl:px-6 border border-border-secondary-default hover:bg-surface-badge-secondary/40 active:border-border-secondary-dark text-text-heading-secondary-default rounded-full transition-colors flex items-center justify-center cursor-pointer">
 							Xem chi tiết
-						</button>
+						</a>
 					</div>
 
 				</div>

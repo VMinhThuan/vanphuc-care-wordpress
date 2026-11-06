@@ -8,6 +8,8 @@
 	--bm-muted: #525252;
 	--bm-bg: #f8f8f8;
 	--bm-border: #cecece;
+	--bm-shell-width: 1560px;
+	--bm-shell-gutter: 80px;
 	background: var(--bm-bg);
 	color: var(--bm-ink);
 	font-family: var(--font-body, "Manrope", sans-serif);
@@ -18,7 +20,12 @@
 .vpc-bao-mau h1, .vpc-bao-mau h2, .vpc-bao-mau h3, .vpc-bao-mau h4, .vpc-bao-mau p, .vpc-bao-mau ul { margin: 0; }
 .vpc-bao-mau ul { padding: 0; list-style: none; }
 .vpc-bao-mau button, .vpc-bao-mau input, .vpc-bao-mau select { font: inherit; }
-.vpc-bao-mau__container { width: min(1280px, calc(100% - 40px)); margin-inline: auto; }
+.vpc-bao-mau__container {
+	width: 100%;
+	max-width: var(--bm-shell-width);
+	margin-inline: auto;
+	padding-inline: var(--bm-shell-gutter);
+}
 .vpc-bao-mau__badge { min-height: 42px; padding: 8px 16px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--bm-pink); border-radius: 999px; background: var(--bm-pink-light); color: var(--bm-blue-dark); font: 500 16px/24px var(--font-body, "Manrope", sans-serif); white-space: nowrap; }
 .vpc-bao-mau__badge img { width: 24px; height: 24px; flex: 0 0 24px; }
 .vpc-bao-mau__hero, .vpc-bao-mau__stats, .vpc-bao-mau__process, .vpc-bao-mau__feedback, .vpc-bao-mau__services { background: var(--bm-bg); }
@@ -139,7 +146,7 @@
 .vpc-bao-mau__service-card h3 { padding: 20px 12px; text-align: center; color: var(--bm-blue); font: 500 24px/32px var(--font-body, "Manrope", sans-serif); }
 
 @media (max-width: 1279px) {
-	.vpc-bao-mau__container { width: min(100% - 40px, 900px); }
+	.vpc-bao-mau__container { width: 100%; max-width: none; padding-inline: 40px; }
 	.vpc-bao-mau__hero { height: auto; padding: 40px 0 80px; }
 	.vpc-bao-mau__hero-grid { height: auto; display: flex; flex-direction: column; align-items: stretch; gap: 24px; }
 	.vpc-bao-mau__hero-copy { align-items: center; text-align: center; }
@@ -179,6 +186,22 @@
 	.vpc-bao-mau__lead-row { grid-template-columns: 1fr; }
 	.vpc-bao-mau__services-viewport { width: calc(100vw - 40px); margin-inline: auto; }
 	.vpc-bao-mau__services-track { gap: 24px; }
+}
+
+@media (min-width: 1280px) and (max-width: 1439px) {
+	/* Keep the desktop composition inside the same shell as the header at
+	 * 1280–1439px, where the 80px header gutters leave a narrower canvas. */
+	.vpc-bao-mau__hero-grid { grid-template-columns: minmax(0, .729fr) minmax(0, 1fr); }
+	.vpc-bao-mau__hero-image { width: 100%; height: auto; aspect-ratio: 650 / 366; }
+	.vpc-bao-mau__intro-grid { grid-template-columns: minmax(0, .828fr) minmax(0, 1fr); gap: clamp(24px, 6.111vw, 88px); }
+	.vpc-bao-mau__intro-image { width: 100%; max-width: 540px; height: auto; aspect-ratio: 540 / 456; }
+	.vpc-bao-mau__package-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+	.vpc-bao-mau__team-viewport { overflow-x: auto; }
+	.vpc-bao-mau__team-grid { width: max-content; justify-content: start; }
+}
+
+@media (max-width: 767px) {
+	.vpc-bao-mau__container { padding-inline: 20px; }
 }
 
 @media (min-width: 1280px) {

@@ -35,7 +35,7 @@ $feedback = array(
 
 $other_services = array(
 	array( 'image' => 'service-1.jpg', 'title' => 'Trung tâm ở cữ', 'href' => home_url( '/o-cu/' ) ),
-	array( 'image' => 'service-2.jpg', 'title' => 'Bảo mẫu tại nhà', 'href' => home_url( '/bao-mau/' ) ),
+	array( 'image' => 'service-2.jpg', 'title' => 'Bảo mẫu tại nhà', 'href' => home_url( '/bao-mau-tai-nha/' ) ),
 	array( 'image' => 'service-3.jpg', 'title' => 'Khóa học trực tuyến', 'href' => home_url( '/kien-thuc/' ) ),
 	array( 'image' => 'service-4.jpg', 'title' => 'Lớp học tiền sản', 'href' => home_url( '/lop-hoc-tien-san/' ) ),
 	array( 'image' => 'service-5.jpg', 'title' => 'Tắm bé sơ sinh', 'href' => home_url( '/tam-be-tai-nha/' ) ),

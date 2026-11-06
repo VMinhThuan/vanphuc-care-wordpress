@@ -43,6 +43,8 @@ function vanphuccare_enqueue_assets() {
 	$milk_ver      = file_exists( $milk_path ) ? (string) filemtime( $milk_path ) : $theme_version;
 	$milk_js       = get_template_directory() . '/assets/js/milk.js';
 	$milk_js_ver   = file_exists( $milk_js ) ? (string) filemtime( $milk_js ) : $theme_version;
+	$about_js      = get_template_directory() . '/assets/js/about.js';
+	$about_js_ver  = file_exists( $about_js ) ? (string) filemtime( $about_js ) : $theme_version;
 	$is_about_page = is_page_template( 'page-gioi-thieu.php' ) || is_page( 'gioi-thieu' );
 	$is_o_cu_page  = vanphuccare_is_o_cu_page();
 	$is_bao_mau_page = vanphuccare_is_bao_mau_page();
@@ -136,6 +138,16 @@ function vanphuccare_enqueue_assets() {
 			get_template_directory_uri() . '/assets/js/bao-mau.js',
 			array(),
 			$bao_mau_js_ver,
+			true
+		);
+	}
+
+	if ( $is_about_page && file_exists( $about_js ) ) {
+		wp_enqueue_script(
+			'vanphuccare-about',
+			get_template_directory_uri() . '/assets/js/about.js',
+			array(),
+			$about_js_ver,
 			true
 		);
 	}

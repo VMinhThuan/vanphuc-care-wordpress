@@ -508,7 +508,7 @@ $show_prenatal_video = true;
 						<?php if ( $service_homecare_image_url ) : ?><img src="<?php echo esc_url( $service_homecare_image_url ); ?>" alt="Trung tâm ở cữ" loading="lazy" /><?php endif; ?>
 						<span>Trung Tâm Ở Cữ</span>
 					</a>
-					<a class="prenatal-services__card" href="<?php echo esc_url( home_url( '/#bao-mau-tai-nha' ) ); ?>">
+					<a class="prenatal-services__card" href="<?php echo esc_url( home_url( '/bao-mau-tai-nha/' ) ); ?>">
 						<?php $service_newborn_image_url = $prenatal_image( 'service-newborn.webp', 'large' ); ?>
 						<?php if ( $service_newborn_image_url ) : ?><img src="<?php echo esc_url( $service_newborn_image_url ); ?>" alt="Bảo mẫu tại nhà" loading="lazy" /><?php endif; ?>
 						<span>Bảo Mẫu Tại Nhà</span>

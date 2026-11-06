@@ -15,7 +15,7 @@ $bath_uri   = trailingslashit( get_template_directory_uri() ) . 'assets/images/b
 $shared_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/easy';
 
 $processes = array(
-	array( 'image' => 'process-1.png', 'title' => 'Kiểm tra tổng quan', 'copy' => 'Kiểm tra nhiệt độ, tình trạng cuống rốn, tình trạng da, kẽ tay, kẽ chân, phần phụ.' ),
+	array( 'image' => 'process-1.png', 'title' => 'Kiểm tra tổng quan', 'copy' => 'Kiểm tra nhiệt độ, tình trạng cuống rốn, tình trạng da, kẽ tay, kẽ chân, phần phụ.' ),
 	array( 'image' => 'process-2.png', 'title' => 'Massage vận động nhẹ', 'copy' => 'Massage body giúp bé thoải mái, xoa dịu căng thẳng. Kết hợp các bài tập vận động, hỗ trợ khả năng phát triển.' ),
 	array( 'image' => 'process-3.png', 'title' => 'Tắm bé', 'copy' => 'Kiểm tra nhiệt độ nước, vệ sinh cơ thể bé từ đầu, mặt, cổ, tay chân cho tới cuống rốn và bộ phận sinh dục của bé.' ),
 	array( 'image' => 'process-4.png', 'title' => 'Vệ sinh', 'copy' => 'Phần vệ sinh cá nhân cho bé gồm những vùng như tai, mũi, lưỡi. Nhỏ mắt và bôi dầu chàm giữ ấm cơ thể.' ),
@@ -35,7 +35,7 @@ $feedback = array(
 
 $other_services = array(
 	array( 'image' => 'service-1.jpg', 'title' => 'Trung tâm ở cữ', 'href' => home_url( '/o-cu/' ) ),
-	array( 'image' => 'service-2.jpg', 'title' => 'Bảo mẫu tại nhà', 'href' => home_url( '/bao-mau/' ) ),
+	array( 'image' => 'service-2.jpg', 'title' => 'Bảo mẫu tại nhà', 'href' => home_url( '/bao-mau-tai-nha/' ) ),
 	array( 'image' => 'service-3.jpg', 'title' => 'Khóa học trực tuyến', 'href' => home_url( '/kien-thuc/' ) ),
 	array( 'image' => 'service-4.jpg', 'title' => 'Lớp học tiền sản', 'href' => home_url( '/lop-hoc-tien-san/' ) ),
 	array( 'image' => 'service-5.jpg', 'title' => 'Tư vấn nuôi con Easy', 'href' => home_url( '/tu-van-nuoi-con-easy/' ) ),
@@ -49,7 +49,7 @@ $button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="tam-be-t
 	<section class="vpc-bath__hero" aria-labelledby="bath-title">
 		<div class="vpc-bath__container vpc-bath__hero-grid">
 			<div class="vpc-bath__hero-copy">
-				<div class="vpc-bath__badge"><img src="<?php echo esc_url( $shared_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">DÀNH CHO BÉ TỪ 0-6 THÁNG TUỔI</div>
+				<div class="vpc-bath__badge"><img src="<?php echo esc_url( $shared_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true"><span class="vpc-bath__badge-label--desktop">DÀNH CHO BÉ TỪ 0-6 THÁNG TUỔI</span><span class="vpc-bath__badge-label--mobile">DÀNH CHO BÉ TỪ 0-12 THÁNG</span></div>
 				<h1 id="bath-title">Tắm Bé Sơ Sinh Tại Nhà</h1>
 				<p>Tắm trẻ sơ sinh là một phần quan trọng của quy trình chăm sóc bé hằng ngày. Khi em bé mới chào đời, hệ miễn dịch còn non nớt. Vệ sinh đúng chuẩn là cách tốt nhất để bảo vệ sức khỏe.</p>
 				<ul class="vpc-bath__hero-benefits">
@@ -65,7 +65,7 @@ $button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="tam-be-t
 	<section class="vpc-bath__challenges" aria-labelledby="bath-challenges-title">
 		<div class="vpc-bath__container vpc-bath__split-grid">
 			<div class="vpc-bath__split-image"><img src="<?php echo esc_url( $bath_uri . '/challenges.png' ); ?>" width="581" height="532" alt="Mẹ chăm sóc em bé sơ sinh" loading="lazy"></div>
-			<div class="vpc-bath__split-copy"><div class="vpc-bath__badge"><img src="<?php echo esc_url( $shared_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">NỖI LO CỦA MẸ</div><h2 id="bath-challenges-title"><span>Những Điều Khó Khăn</span><em>Mẹ Thường Gặp</em></h2><p>Việc tắm bé tưởng như đơn giản cũng có thể đem đến những khó khăn cho mẹ trong những tuần đầu sau sinh:</p><ul class="vpc-bath__icon-list vpc-bath__icon-list--negative"><li><img src="<?php echo esc_url( $shared_uri . '/x-circle.svg' ); ?>" width="24" height="24" alt="">Mẹ sinh mổ, vết thương chưa lành, chưa thể bế ẵm hay tắm cho bé.</li><li><img src="<?php echo esc_url( $shared_uri . '/x-circle.svg' ); ?>" width="24" height="24" alt="">Trẻ sơ sinh chưa rụng rốn, dễ nhiễm trùng nếu không tắm đúng quy trình.</li><li><img src="<?php echo esc_url( $shared_uri . '/x-circle.svg' ); ?>" width="24" height="24" alt="">Ngồi xổm tắm bé gây áp lực lên khoang chậu và vết mổ chưa phục hồi.</li><li><img src="<?php echo esc_url( $shared_uri . '/x-circle.svg' ); ?>" width="24" height="24" alt="">Chưa có kinh nghiệm massage giải toả lo âu cho bé.</li></ul></div>
+			<div class="vpc-bath__split-copy"><div class="vpc-bath__badge"><img src="<?php echo esc_url( $shared_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">NỖI LO CỦA MẸ</div><h2 id="bath-challenges-title"><span>Những Điều Khó Khăn</span><em>Mẹ Thường Gặp</em></h2><p>Việc tắm bé tưởng như đơn giản cũng có thể đem đến những khó khăn cho mẹ trong những tuần đầu sau sinh:</p><ul class="vpc-bath__icon-list vpc-bath__icon-list--negative"><li><img src="<?php echo esc_url( $shared_uri . '/x-circle.svg' ); ?>" width="24" height="24" alt="">Mẹ sinh mổ, vết thương chưa lành, chưa thể bế ẵm hay tắm cho bé.</li><li><img src="<?php echo esc_url( $shared_uri . '/x-circle.svg' ); ?>" width="24" height="24" alt="">Trẻ sơ sinh chưa rụng rốn, dễ nhiễm trùng nếu không tắm đúng quy trình.</li><li><img src="<?php echo esc_url( $shared_uri . '/x-circle.svg' ); ?>" width="24" height="24" alt="">Ngồi xổm tắm bé gây áp lực lên khoang chậu và vết mổ chưa phục hồi.</li><li><img src="<?php echo esc_url( $shared_uri . '/x-circle.svg' ); ?>" width="24" height="24" alt=""><span class="vpc-bath__challenge-last-copy">Chưa có kinh nghiệm massage giải toả lo âu cho<br class="vpc-bath__mobile-break">bé.</span></li></ul></div>
 		</div>
 	</section>
 
