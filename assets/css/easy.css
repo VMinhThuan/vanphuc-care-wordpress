@@ -81,9 +81,9 @@
 .vpc-easy__process { height: 1039.733px; padding: 96px 0; background: var(--easy-gray); }
 .vpc-easy__process-grid { display: grid; grid-template-columns: repeat(3, 293px); gap: 24px 40px; justify-content: center; margin-top: 24px; }
 .vpc-easy__process-card { min-height: 319px; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
-.vpc-easy__process-image { position: relative; width: 189px; height: 189px; padding: 16px; border: 2px solid var(--easy-blue); border-radius: 50%; box-shadow: 0 1px 2.5px #00000026; }
+.vpc-easy__process-image { position: relative; width: 188.867px; height: 188.867px; padding: 8px; border: 1px solid var(--easy-blue); border-radius: 50%; box-shadow: 0 1px 2.5px #00000026; }
 .vpc-easy__process-image img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-.vpc-easy__process-image span { position: absolute; top: -1px; right: -1px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #fff; background: var(--easy-blue); font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
+.vpc-easy__process-image span { position: absolute; top: 0; left: 124.32px; width: 64.549px; height: 64.549px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #fff; background: var(--easy-blue); font: 500 20px/28px var(--font-body, "Manrope", sans-serif); }
 .vpc-easy__process-card h3 { color: var(--easy-blue); font: 500 24px/32px var(--font-body, "Manrope", sans-serif); }
 .vpc-easy__process-card p { color: var(--easy-muted); font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
 

@@ -276,8 +276,8 @@ $about_feedback = array(
 			</span>
 			<h2 id="about-feedback-title" class="about-heading"><span class="about-heading--blue">Cảm Nhận</span><span class="about-heading--pink">Của Khách Hàng</span></h2>
 			<div class="about-copy about-feedback__description">
-				<p>Trong hành trình cùng mẹ trải đầy yêu thương, Trung tâm ở cữ Vạn Phúc Care đã nhận được sự tin yêu của hàng ngàn Mẹ bỉm.</p>
-				<p>Chúng tôi cam kết đồng hành, mang đến giải pháp chăm sóc sức khoẻ phù hợp cho mọi gia đình.</p>
+				<p>Trong hành trình cùng mẹ trải đầy yêu thương, Vạn Phúc Care đã nhận được sự tin yêu của hàng ngàn mẹ bỉm.</p>
+				<p>Chúng tôi cam kết đồng hành cùng Mẹ và Bé trong 2 năm đầu đời.</p>
 			</div>
 		</div>
 

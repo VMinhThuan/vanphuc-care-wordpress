@@ -26,9 +26,8 @@
 	max-width: 100%;
 }
 
-/* The introduction page ends after the partners section. These shared
- * homepage sections are intentionally not shown here. */
-.vpc-about-page > .about-services,
+/* Keep the shared feedback and consultation sections off this page. The
+ * services carousel remains part of the introduction page. */
 .vpc-about-page > .about-feedback,
 .vpc-about-page > .about-consultation {
 	display: none;
@@ -858,7 +857,14 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 }
 
 .about-feedback__description {
+	width: min(100%, 1280px);
 	max-width: 1280px;
+	margin-inline: auto;
+	text-align: center;
+}
+
+.about-feedback__description p {
+	margin: 0;
 	text-align: center;
 }
 
@@ -2049,7 +2055,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	align-items: center;
 	gap: 12px;
 	width: 100%;
-	max-width: 1560px;
+	max-width: 1400px;
 	height: 320px;
 	min-width: 0;
 }
@@ -2178,6 +2184,13 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	.about-services__title {
 		font-size: 40px;
 		line-height: 52px;
+	}
+}
+
+@media (min-width: 1280px) {
+	.about-services {
+		padding-right: max(var(--about-shell-gutter), calc((100% - var(--about-shell-width)) / 2 + var(--about-shell-gutter)));
+		padding-left: max(var(--about-shell-gutter), calc((100% - var(--about-shell-width)) / 2 + var(--about-shell-gutter)));
 	}
 }
 
