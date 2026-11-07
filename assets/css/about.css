@@ -1653,7 +1653,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 
 	.about-founder {
 		height: auto;
-		min-height: 980px;
+		min-height: 0;
 	}
 
 	.about-founder__inner {
@@ -1763,8 +1763,8 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	}
 
 	.about-tiktok {
-		height: 551px;
-		min-height: 551px;
+		height: auto;
+		min-height: 0;
 		padding: 40px 20px;
 		gap: 24px;
 	}

@@ -69,7 +69,7 @@ $button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="bao-mau-
 	<section class="vpc-bao-mau__hero" aria-labelledby="bao-mau-title">
 		<div class="vpc-bao-mau__container vpc-bao-mau__hero-grid">
 			<div class="vpc-bao-mau__hero-copy">
-				<div class="vpc-bao-mau__badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">DỊCH VỤ BẢO MẪU</div>
+				<div class="vpc-bao-mau__badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">HÀNH TRÌNH CÙNG MẸ, TRẢI ĐẦY YÊU THƯƠNG</div>
 				<h1 id="bao-mau-title"><span>Dịch Vụ Bảo Mẫu</span><em>Chăm Sóc Bé Tại Nhà</em></h1>
 				<p>Bé được chăm sóc tận tâm, mẹ có thêm thời gian nghỉ ngơi. Vạn Phúc Care đồng hành cùng gia đình bằng chuyên môn,sự thấu hiểu và yêu thương.</p>
 				<div class="vpc-bao-mau__actions">
@@ -106,7 +106,7 @@ $button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="bao-mau-
 		<div class="vpc-bao-mau__container vpc-bao-mau__intro-grid">
 			<img class="vpc-bao-mau__intro-image" src="<?php echo esc_url( $asset_uri . '/challenges.png' ); ?>" width="540" height="456" alt="Mẹ chăm sóc em bé sau sinh" loading="lazy">
 			<div class="vpc-bao-mau__intro-copy">
-				<div class="vpc-bao-mau__badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">VẠN PHÚC CARE</div>
+				<div class="vpc-bao-mau__badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">KHÓ KHĂN</div>
 				<h2><span>Những Điều Khó Khăn</span><em>Mẹ Thường Gặp</em></h2>
 				<p>Hành trình nuôi con thiêng liêng và ý nghĩa biết bao, nhưng cũng đem đến cho cha mẹ nhiều thách thức, khó khăn:</p>
 				<ul class="vpc-bao-mau__check-list">
@@ -162,13 +162,12 @@ $button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="bao-mau-
 			</div>
 			<div class="vpc-bao-mau__package-grid">
 				<?php foreach ( $packages as $package_index => $package ) : ?>
-					<article class="vpc-bao-mau__package-card <?php echo 1 === $package_index ? 'is-featured' : ''; ?>">
-						<div class="vpc-bao-mau__package-top"><span class="vpc-bao-mau__package-number">0<?php echo esc_html( $package_index + 1 ); ?></span><h3><?php echo esc_html( $package['name'] ); ?></h3><strong><?php echo esc_html( $package['price'] ); ?></strong><p><?php echo esc_html( $package['copy'] ); ?></p></div>
+					<article class="vpc-bao-mau__package-card">
+						<div class="vpc-bao-mau__package-top"><h3><?php echo esc_html( $package['name'] ); ?></h3><strong><?php echo esc_html( $package['price'] ); ?></strong><p><?php echo esc_html( $package['copy'] ); ?></p></div>
 						<h4>Quyền lợi:</h4>
 						<ul class="vpc-bao-mau__package-benefits">
-							<li>10 - 12 tiếng/ ngày</li>
+							<li><?php echo 2 === $package_index ? '24/24' : '10 - 12 tiếng/ ngày'; ?></li>
 							<?php foreach ( $package_benefits as $benefit ) : ?><li><?php echo esc_html( $benefit ); ?></li><?php endforeach; ?>
-							<?php if ( 2 === $package_index ) : ?><li>24/24</li><?php endif; ?>
 						</ul>
 						<button type="button" class="vpc-bao-mau__button vpc-bao-mau__button--primary" <?php echo $button_attrs; ?>>Tư vấn gói này</button>
 					</article>

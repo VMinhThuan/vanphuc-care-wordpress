@@ -22,7 +22,6 @@ $hero_image    = $about_uri . '/hero-mission.webp';
 $mission_image = $about_uri . '/mission.webp';
 $avatars_uri   = trailingslashit( get_template_directory_uri() ) . 'assets/images/avatars';
 $feedback_uri  = trailingslashit( get_template_directory_uri() ) . 'assets/images/bao-mau';
-$services_uri  = trailingslashit( get_template_directory_uri() ) . 'assets/images';
 
 $about_feedback = array(
 	array( 'name' => 'Mẹ bé Kami', 'image' => 'customer_1.webp', 'copy' => 'Mình thực sự thấy quyết định chọn ở cữ ở Vạn Phúc Care là sáng suốt nhất trong hành trình đi đẻ. Phòng hạng có view hồ Tây, rộng rãi, sang trọng và đầy đủ tiện nghi. Trọn vẹn 30 ngày ở cữ rất nhẹ nhàng, 2 mẹ con được chăm sóc sức khỏe chu đáo mỗi ngày và nhàn nhất là không bị áp lực đêm hôm chăm con. Bé Kami trộm vía về nhà vẫn ăn ngoan ngủ ngon. Cảm ơn Vạn Phúc Care và đội ngũ điều dưỡng đã mang đến cho gia đình trải nghiệm ở cữ tuyệt vời!' ),
@@ -228,43 +227,6 @@ $about_feedback = array(
 			<img data-node-id="3131:45282" src="<?php echo esc_url( $about_uri . '/partner-3.webp' ); ?>" width="100" height="100" alt="Cao đẳng Y Hà Nội" loading="lazy">
 			<img data-node-id="3131:45284" src="<?php echo esc_url( $about_uri . '/partner-6.webp' ); ?>" width="100" height="100" alt="Hanoi Medical College" loading="lazy">
 			<img data-node-id="3131:45286" src="<?php echo esc_url( $about_uri . '/partner-2.webp' ); ?>" width="100" height="100" alt="Đại học Đông Á" loading="lazy">
-		</div>
-	</section>
-
-	<section class="about-section about-services" data-figma-node="3207:38686" aria-labelledby="about-services-title">
-		<h2 id="about-services-title" class="about-heading about-heading--blue about-services__title" data-node-id="3207:38687">Các Dịch Vụ Khác</h2>
-
-		<div class="about-services__carousel" data-node-id="3207:38688">
-			<button type="button" class="about-services__arrow about-services__arrow--prev" data-node-id="3207:38689" aria-label="Dịch vụ trước">
-				<img data-node-id="3207:38690" src="<?php echo esc_url( $feedback_uri . '/chevron-left.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">
-			</button>
-
-			<div class="about-services__viewport" data-node-id="3207:38691" tabindex="0" aria-label="Danh sách dịch vụ khác">
-				<div class="about-services__track">
-					<?php
-					$about_services = array(
-						array( 'title' => 'Trung tâm ở cữ', 'image' => $services_uri . '/home/trung-tam-o-cu.webp', 'node' => '3207:38692' ),
-						array( 'title' => 'Bảo mẫu tại nhà', 'image' => $services_uri . '/home/bao-mau-tai-nha-1.webp', 'node' => '3207:38693' ),
-						array( 'title' => 'Khóa học trực tuyến', 'image' => $services_uri . '/bao-mau/service-2.jpg', 'node' => '3207:38694' ),
-						array( 'title' => 'Lớp học tiền sản', 'image' => $services_uri . '/home/lop-hoc-tien-san-1.webp', 'node' => '3207:38695' ),
-						array( 'title' => 'Tư vấn nuôi con Easy', 'image' => $services_uri . '/bao-mau/service-5.jpg', 'node' => '3207:38696' ),
-						array( 'title' => 'Thông tắc tia sữa', 'image' => $services_uri . '/easy/service-6.jpg', 'node' => '3207:38697' ),
-					);
-					foreach ( $about_services as $service ) :
-						?>
-						<article class="about-services-card <?php echo '3207:38696' === $service['node'] ? 'about-services-card--easy' : ''; ?>" data-node-id="<?php echo esc_attr( $service['node'] ); ?>">
-							<div class="about-services-card__media">
-								<img src="<?php echo esc_url( $service['image'] ); ?>" width="276" height="252" alt="<?php echo esc_attr( $service['title'] ); ?>" loading="lazy" decoding="async">
-							</div>
-							<h3><?php echo esc_html( $service['title'] ); ?></h3>
-						</article>
-					<?php endforeach; ?>
-				</div>
-			</div>
-
-			<button type="button" class="about-services__arrow about-services__arrow--next" data-node-id="3207:38698" aria-label="Dịch vụ tiếp theo">
-				<img data-node-id="3207:38699" src="<?php echo esc_url( $feedback_uri . '/chevron-left.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">
-			</button>
 		</div>
 	</section>
 
