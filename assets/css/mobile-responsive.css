@@ -14,8 +14,7 @@
 	.vpc-milk > section,
 	.vpc-bao-mau > section,
 	.vpc-o-cu > section,
-	.vpc-services-page > section,
-	.vpc-about-page > .about-section {
+	.vpc-services-page > section {
 		height: auto !important;
 		min-height: 0 !important;
 	}
@@ -61,11 +60,18 @@
 	.vpc-bao-mau__section-heading > p br,
 	.prenatal-lead br,
 	.prenatal-registration__title br {
-		display: none !important;
+		display: inline !important;
 	}
 
 	.vpc-bath__packages .vpc-bath__days {
 		white-space: normal !important;
+	}
+
+	body:has(.vpc-bath__packages) .vpc-bath__package-description-line {
+		display: block !important;
+		white-space: nowrap !important;
+		font-size: clamp(14px, 3.6vw, 16px);
+		line-height: 24px;
 	}
 
 	/* Figma node 3207:38766: the bath package CTA is content-sized, not
