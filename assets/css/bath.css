@@ -274,7 +274,7 @@
 /* Mobile layout follows Figma frame 3207:38701 (390px reference width). */
 @media (max-width: 767px) {
 	.vpc-bath__mobile-break {
-		display: block;
+		display: inline;
 	}
 
 	.vpc-bath__hero-title-mobile-break {

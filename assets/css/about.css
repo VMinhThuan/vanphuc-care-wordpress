@@ -1724,6 +1724,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	}
 
 	.about-founder__copy {
+		flex: 0 0 auto;
 		align-items: center;
 		gap: 24px;
 		max-width: none;
@@ -1790,6 +1791,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	.about-tiktok__description {
 		width: 100%;
 		text-align: center;
+		text-wrap: pretty;
 	}
 
 	.about-tiktok__image-frame {
@@ -1825,10 +1827,11 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	.about-team__description {
 		width: 100%;
 		text-align: center;
+		text-wrap: pretty;
 	}
 
 	.about-team__mobile-break {
-		display: block;
+		display: none;
 	}
 
 	.about-team__grid {

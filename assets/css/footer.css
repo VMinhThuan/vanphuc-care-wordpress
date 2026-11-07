@@ -1,0 +1,132 @@
+/**
+ * Shared mobile footer layout.
+ *
+ * The Figma mobile footer is one vertical flow shared by every page. The
+ * desktop footer keeps its existing Tailwind layout; these rules only apply
+ * below the mobile breakpoint.
+ */
+
+@media (max-width: 767px) {
+	.site-footer {
+		background: var(--footer-background) !important;
+		padding-top: 32px !important;
+		padding-bottom: 32px !important;
+	}
+
+	.site-footer > .vpc-container {
+		display: flex;
+		flex-direction: column;
+		gap: 32px;
+		width: 100%;
+	}
+
+	/* Show all four Figma content groups on every page. */
+	.site-footer .vpc-footer-main {
+		display: flex !important;
+		flex-direction: column;
+		flex-wrap: nowrap;
+		gap: 32px;
+		width: 100%;
+		padding: 0 !important;
+	}
+
+	.site-footer .vpc-footer-about-company,
+	.site-footer .vpc-footer-about-services,
+	.site-footer .footer-link-column {
+		display: flex !important;
+		flex: 0 0 auto;
+		width: 100% !important;
+		min-width: 0;
+	}
+
+	.site-footer .vpc-footer-about-company {
+		flex-direction: column;
+	}
+
+	.site-footer .vpc-footer-about-company > .flex.flex-col {
+		gap: 20px;
+	}
+
+	.site-footer .vpc-footer-about-company > .flex.flex-col > *,
+	.site-footer .vpc-footer-about-company > .flex.flex-col > ul > li {
+		margin-block: 0;
+	}
+
+	.site-footer .vpc-footer-about-company > .flex.flex-col > ul {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	.site-footer .footer-logo {
+		margin-bottom: 12px;
+	}
+
+	.site-footer .vpc-footer-company-name {
+		font-size: 20px;
+		font-weight: 500;
+		line-height: 28px;
+	}
+
+	.site-footer .vpc-footer-about-services,
+	.site-footer .footer-link-column {
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	.site-footer .vpc-footer-about-services h3,
+	.site-footer .footer-link-column h3,
+	.site-footer .vpc-footer-about-services ul,
+	.site-footer .footer-link-column ul,
+	.site-footer .vpc-footer-legal {
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	.site-footer .vpc-footer-about-services ul,
+	.site-footer .footer-link-column ul {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	.site-footer .vpc-footer-about-services li,
+	.site-footer .footer-link-column li {
+		height: 24px !important;
+		margin: 0 !important;
+	}
+
+	.site-footer .vpc-footer-social {
+		order: 3;
+		width: 100%;
+		gap: 32px;
+		padding-top: 0 !important;
+		padding-bottom: 0 !important;
+		border-bottom: 1px solid var(--color-neutral-300);
+	}
+
+	.site-footer .vpc-footer-legal {
+		order: 2;
+		gap: 0;
+		margin-top: 0;
+		padding-top: 0;
+		border-top: 0;
+	}
+
+	/* Figma mobile order: Liên hệ, Tuyển dụng, Điều khoản, Chính sách. */
+	.site-footer .vpc-footer-legal-contact {
+		order: 1;
+	}
+
+	.site-footer .vpc-footer-legal-careers {
+		order: 2;
+	}
+
+	.site-footer .vpc-footer-legal-terms {
+		order: 3;
+	}
+
+	.site-footer .vpc-footer-legal-privacy {
+		order: 4;
+	}
+}

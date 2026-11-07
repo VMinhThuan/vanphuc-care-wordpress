@@ -225,6 +225,38 @@
 	.vpc-easy__package-card { min-height: 640px; }
 }
 
+/* Let the mobile sections grow with their content so a longer card cannot
+ * overlap or push the following health-book section into the wrong position. */
+@media (max-width: 767px) {
+	.vpc-easy__choices {
+		height: auto;
+		min-height: 0;
+	}
+
+	.vpc-easy__health {
+		height: auto;
+		min-height: 0;
+		padding: 40px 0 48px;
+	}
+
+	.vpc-easy__health .vpc-easy__split-grid {
+		height: auto;
+		gap: 24px;
+	}
+
+	.vpc-easy__health .vpc-easy__split-image {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 540 / 456;
+	}
+
+	.vpc-easy__health .vpc-easy__split-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+	}
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.vpc-easy__button { transition: none; }
 }

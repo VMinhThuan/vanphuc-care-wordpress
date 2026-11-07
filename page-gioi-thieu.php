@@ -166,8 +166,7 @@ $about_feedback = array(
 		<div class="about-tiktok__content" data-node-id="3131:45184">
 			<h2 class="about-heading about-tiktok__title" data-node-id="3131:45185"><span class="about-heading--blue" data-node-id="3131:45186">Tiktok</span> <span class="about-heading--pink" data-node-id="3131:45187">Mẹ Thủy Làm Y</span></h2>
 			<div class="about-copy about-tiktok__description" data-node-id="3131:45188">
-				<p>Bên cạnh công việc điều dưỡng, chị Thanh Thủy cũng tích cực chia sẻ kiến thức đến cộng đồng,</p>
-				<p>hướng đến sứ mệnh nâng cao chất lượng cuộc sống dành cho Mẹ &amp; Bé.</p>
+				<p>Bên cạnh công việc điều dưỡng, chị Thanh Thủy cũng tích cực chia sẻ kiến thức đến cộng&nbsp;đồng, hướng đến sứ mệnh nâng cao chất lượng cuộc sống dành cho Mẹ &amp; Bé.</p>
 			</div>
 			<div class="about-tiktok__image-frame" data-node-id="3131:45189">
 				<img class="about-tiktok__image" src="<?php echo esc_url( $about_uri . '/tiktok.webp' ); ?>" width="963" height="522" alt="Kênh TikTok Mẹ Thủy Làm Y" loading="lazy" decoding="async">
@@ -182,7 +181,7 @@ $about_feedback = array(
 			ĐIỀU DƯỠNG VIÊN
 		</span>
 		<div class="about-team__intro">
-			<h2 class="about-heading about-heading--blue">Đội Ngũ Của Chúng Tôi</h2>
+			<h2 class="about-heading about-heading--blue">Đội Ngũ Của Chúng&nbsp;Tôi</h2>
 			<p class="about-copy about-team__description">Đội ngũ điều dưỡng viên với nền tảng điều dưỡng, được đào tạo chuyên sâu lĩnh vực sản nhi, đảm bảo đem đến dịch vụ an toàn, chuyên nghiệp cho<br class="about-team__mobile-break"> mọi gia đình.</p>
 		</div>
 		<div class="about-team__grid">

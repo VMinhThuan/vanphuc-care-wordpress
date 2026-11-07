@@ -31,7 +31,7 @@
 .vpc-bao-mau__hero, .vpc-bao-mau__stats, .vpc-bao-mau__process, .vpc-bao-mau__feedback, .vpc-bao-mau__services { background: var(--bm-bg); }
 .vpc-bao-mau__hero { height: 570px; padding: 96px 0; }
 .vpc-bao-mau__hero { background: linear-gradient(118deg, #f8f8f8 34%, #fde6e6 125%); }
-.vpc-bao-mau__hero-grid { height: 100%; display: grid; grid-template-columns: 474px 650px; align-items: start; justify-content: space-between; }
+.vpc-bao-mau__hero-grid { height: 100%; display: grid; grid-template-columns: 520px 650px; align-items: start; justify-content: space-between; }
 .vpc-bao-mau__hero-copy { padding-top: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
 .vpc-bao-mau__hero h1, .vpc-bao-mau__intro h2, .vpc-bao-mau__section-heading h2, .vpc-bao-mau__lead h2 { font: 600 48px/64px var(--font-heading, "Fraunces", serif); font-variation-settings: "SOFT" 0, "WONK" 1; }
 .vpc-bao-mau__hero h1 span, .vpc-bao-mau__intro h2 span, .vpc-bao-mau__section-heading h2 span, .vpc-bao-mau__lead h2 span { color: var(--bm-blue); display: block; }
@@ -47,7 +47,9 @@
 .vpc-bao-mau__button--secondary:hover { background: var(--bm-pink-light); color: var(--bm-pink); }
 
 .vpc-bao-mau__stats { height: 172px; background: #fff; }
-.vpc-bao-mau__stats-grid { height: 100%; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 0 6px; }
+/* Reuse the same max-width and gutters as the desktop header container so
+ * the four feature cells line up exactly with the header shell. */
+.vpc-bao-mau__stats-grid { height: 100%; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 0; }
 .vpc-bao-mau__stat { padding: 32px 24px; display: flex; flex-direction: column; gap: 8px; }
 .vpc-bao-mau__stat + .vpc-bao-mau__stat { border-left: 1px solid var(--bm-border); }
 .vpc-bao-mau__stat-heading { display: flex; align-items: center; gap: 12px; }
@@ -87,6 +89,7 @@
 .vpc-bao-mau__section-heading--packages { max-width: 870px; margin-inline: auto; }
 .vpc-bao-mau__section-heading--packages { gap: 12px; }
 .vpc-bao-mau__section-heading--packages h2 { color: var(--bm-pink); }
+.vpc-bao-mau__section-heading--packages h2 span { color: var(--bm-pink); }
 .vpc-bao-mau__package-grid { margin-top: 24px; display: grid; grid-template-columns: repeat(3, minmax(0, 362px)); justify-content: center; gap: 24px; }
 .vpc-bao-mau__package-card { min-height: 490px; padding: 24px 16px; display: flex; flex-direction: column; gap: 16px; border: 1px solid #a7d4f0; border-radius: 24px; background: #fff; box-shadow: none; }
 .vpc-bao-mau__package-top { text-align: center; }
@@ -226,13 +229,19 @@
 @media (min-width: 1280px) and (max-width: 1439px) {
 	/* Keep the desktop composition inside the same shell as the header at
 	 * 1280–1439px, where the 80px header gutters leave a narrower canvas. */
-	.vpc-bao-mau__hero-grid { grid-template-columns: minmax(0, .729fr) minmax(0, 1fr); }
+	.vpc-bao-mau__hero-grid { grid-template-columns: minmax(0, 520px) minmax(0, 1fr); }
 	.vpc-bao-mau__hero-image { width: 100%; height: auto; aspect-ratio: 650 / 366; }
 	.vpc-bao-mau__intro-grid { grid-template-columns: minmax(0, .828fr) minmax(0, 1fr); gap: clamp(24px, 6.111vw, 88px); }
 	.vpc-bao-mau__intro-image { width: 100%; max-width: 540px; height: auto; aspect-ratio: 540 / 456; }
 	.vpc-bao-mau__package-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 	.vpc-bao-mau__team-viewport { overflow-x: auto; }
 	.vpc-bao-mau__team-grid { width: max-content; justify-content: start; }
+}
+
+@media (min-width: 768px) {
+	/* Keep the pink headline phrase on one line once the layout has enough
+	 * horizontal space. It remains naturally wrapped on narrow phones. */
+	.vpc-bao-mau__hero h1 em { white-space: nowrap; }
 }
 
 @media (max-width: 767px) {

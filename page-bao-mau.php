@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 
 $asset_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/bao-mau';
+$health_book_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/easy/health-book.png';
 
 $processes = array(
 	array( 'image' => 'process-1.png', 'title' => 'Kiểm tra toàn trạng', 'copy' => 'Vệ sinh phòng, kiểm tra tổng quan sức khỏe của bé. Trường hợp phát hiện vấn đề bất thường, điều dưỡng viên sẽ trao đổi lại với mẹ.' ),
@@ -121,7 +122,7 @@ $button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="bao-mau-
 
 	<section class="vpc-bao-mau__intro vpc-bao-mau__intro--health">
 		<div class="vpc-bao-mau__container vpc-bao-mau__intro-grid">
-			<img class="vpc-bao-mau__intro-image" src="<?php echo esc_url( $asset_uri . '/health-book.png' ); ?>" width="540" height="456" alt="Sổ sức khỏe điện tử cho trẻ sơ sinh" loading="lazy">
+			<img class="vpc-bao-mau__intro-image" src="<?php echo esc_url( $health_book_uri ); ?>" width="540" height="456" alt="Sổ sức khỏe điện tử cho trẻ sơ sinh" loading="lazy">
 			<div class="vpc-bao-mau__intro-copy">
 				<div class="vpc-bao-mau__badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">SỔ SỨC KHỎE ĐIỆN TỬ</div>
 				<h2><span>Sổ Sức Khỏe Điện Tử - Trợ Lý</span><em>Giúp Mẹ Nuôi Con Easy</em></h2>

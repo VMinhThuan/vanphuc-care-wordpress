@@ -1,0 +1,91 @@
+/**
+ * Content-driven mobile layout.
+ *
+ * Several page sections were given fixed Figma frame heights. That is useful
+ * for desktop artboards, but it leaves large empty areas when copy wraps
+ * differently on a real phone. Mobile sections should grow from their
+ * content; images and cards keep their own designed dimensions.
+ */
+
+@media (max-width: 767px) {
+	/* Do not reserve the desktop/artboard height on mobile. */
+	.vpc-bath > section,
+	.vpc-easy > section,
+	.vpc-milk > section,
+	.vpc-bao-mau > section,
+	.vpc-o-cu > section,
+	.vpc-services-page > section,
+	.vpc-about-page > .about-section {
+		height: auto !important;
+		min-height: 0 !important;
+	}
+
+	/* These are content cards, not empty artboard frames. */
+	.vpc-bath__process-card,
+	.vpc-easy__process-card,
+	.vpc-easy__choice-card,
+	.vpc-easy__package-card,
+	.vpc-milk__process-card,
+	.vpc-milk__package-card,
+	.vpc-o-cu .ocu-room-points article,
+	.vpc-o-cu .ocu-room-panel {
+		height: auto !important;
+		min-height: 0 !important;
+	}
+
+	/* Mobile copy must flow naturally instead of obeying design-only breaks. */
+	.vpc-bath__mobile-break,
+	.vpc-bath__hero-title-mobile-break,
+	.vpc-bath__health-title-assistant,
+	.vpc-bath__lead-title-break,
+	.vpc-easy__mobile-title-break,
+	.vpc-easy__lead-title-break,
+	.vpc-bath__process .vpc-bath__section-heading h2 em,
+	.vpc-easy__process .vpc-easy__section-heading h2 em,
+	.vpc-milk__process .vpc-milk__section-heading h2 em {
+		display: inline !important;
+		white-space: normal !important;
+	}
+
+	/* Let package descriptions wrap only where the phone has no room. */
+	.vpc-bath__packages .vpc-bath__section-heading > p,
+	.vpc-easy__packages .vpc-easy__section-heading > p {
+		white-space: normal !important;
+	}
+
+	.vpc-bath__packages .vpc-bath__section-heading > p span,
+	.vpc-easy__packages .vpc-easy__section-heading > p span,
+	.vpc-bath__packages .vpc-bath__section-heading > p br,
+	.vpc-easy__packages .vpc-easy__section-heading > p br,
+	.vpc-easy__choices .vpc-easy__section-heading > p br,
+	.vpc-bao-mau__section-heading > p br,
+	.prenatal-lead br,
+	.prenatal-registration__title br {
+		display: none !important;
+	}
+
+	.vpc-bath__packages .vpc-bath__days {
+		white-space: normal !important;
+	}
+
+	/* The final challenge sentence in the screenshot must not split at an
+	 * explicit HTML break before “bé”. */
+	.vpc-bath__challenges .vpc-bath__challenge-last-copy {
+		white-space: normal;
+	}
+
+	/* Shared room/service sections had a second set of large mobile minimums. */
+	.vpc-o-cu .ocu-shared-section,
+	.vpc-o-cu .ocu-benefits,
+	.vpc-o-cu .ocu-space,
+	.vpc-o-cu .ocu-nursery,
+	.vpc-o-cu .ocu-experience,
+	.vpc-o-cu .ocu-spaces,
+	.vpc-o-cu .ocu-cta,
+	.vpc-services-page .vpc-services-list,
+	.vpc-services-page .vpc-services-features,
+	.vpc-services-page .vpc-services-process,
+	.vpc-services-page .vpc-services-feedback {
+		min-height: 0 !important;
+	}
+}

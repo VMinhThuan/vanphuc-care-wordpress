@@ -23,6 +23,10 @@ function vanphuccare_enqueue_assets() {
 
 	$tailwind_path = get_template_directory() . '/assets/css/theme.css';
 	$tailwind_ver  = file_exists( $tailwind_path ) ? (string) filemtime( $tailwind_path ) : $theme_version;
+	$footer_path   = get_template_directory() . '/assets/css/footer.css';
+	$footer_ver    = file_exists( $footer_path ) ? (string) filemtime( $footer_path ) : $theme_version;
+	$mobile_path   = get_template_directory() . '/assets/css/mobile-responsive.css';
+	$mobile_ver    = file_exists( $mobile_path ) ? (string) filemtime( $mobile_path ) : $theme_version;
 	$about_path    = get_template_directory() . '/assets/css/about.css';
 	$about_ver     = file_exists( $about_path ) ? (string) filemtime( $about_path ) : $theme_version;
 	$o_cu_path     = get_template_directory() . '/assets/css/o-cu.css';
@@ -143,6 +147,26 @@ function vanphuccare_enqueue_assets() {
 			get_template_directory_uri() . '/assets/css/services.css',
 			array( 'vanphuccare-tailwind' ),
 			$services_ver
+		);
+	}
+
+	/* Shared footer overrides must load after page-specific styles. */
+	if ( file_exists( $footer_path ) ) {
+		wp_enqueue_style(
+			'vanphuccare-footer',
+			get_template_directory_uri() . '/assets/css/footer.css',
+			array( 'vanphuccare-tailwind' ),
+			$footer_ver
+		);
+	}
+
+	/* Keep mobile pages content-driven after all page-specific CSS is loaded. */
+	if ( file_exists( $mobile_path ) ) {
+		wp_enqueue_style(
+			'vanphuccare-mobile-responsive',
+			get_template_directory_uri() . '/assets/css/mobile-responsive.css',
+			array( 'vanphuccare-footer' ),
+			$mobile_ver
 		);
 	}
 
