@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 
 $asset_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/bao-mau';
+$hero_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/home/bao-mau-tai-nha-1.jpg';
 $health_book_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/easy/health-book.png';
 
 $processes = array(
@@ -78,7 +79,7 @@ $button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="bao-mau-
 					<a class="vpc-bao-mau__button vpc-bao-mau__button--secondary" href="#bao-mau-packages">Xem gói dịch vụ</a>
 				</div>
 			</div>
-			<img class="vpc-bao-mau__hero-image" src="<?php echo esc_url( $asset_uri . '/hero.jpg' ); ?>" width="650" height="366" alt="Điều dưỡng chăm sóc em bé tại nhà" fetchpriority="high">
+			<img class="vpc-bao-mau__hero-image" src="<?php echo esc_url( $hero_uri ); ?>" width="650" height="366" alt="Điều dưỡng chăm sóc em bé tại nhà" fetchpriority="high">
 		</div>
 	</section>
 
@@ -205,17 +206,20 @@ $button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="bao-mau-
 		</div>
 	</section>
 
-	<section class="vpc-bao-mau__feedback" aria-labelledby="bao-mau-feedback-title">
-		<div class="vpc-bao-mau__container">
-			<div class="vpc-bao-mau__section-heading"><div class="vpc-bao-mau__badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">KHÁCH HÀNG</div><h2 id="bao-mau-feedback-title"><span>Cảm Nhận</span><em>Của Khách Hàng</em></h2><p>Trong hành trình cùng mẹ trải đầy yêu thương, Trung tâm ở cữ Vạn Phúc Care đã nhận được sự tin yêu của hàng ngàn Mẹ bỉm.<br>Chúng tôi cam kết đồng hành, mang đến giải pháp chăm sóc sức khoẻ phù hợp cho mọi gia đình.</p></div>
-			<div class="vpc-bao-mau__feedback-row"><div class="vpc-bao-mau__feedback-track">
-				<?php foreach ( array_slice( $feedback, 0, 4 ) as $item ) : ?><article class="vpc-bao-mau__feedback-card"><div class="vpc-bao-mau__feedback-author"><img src="<?php echo esc_url( $asset_uri . '/' . $item['image'] ); ?>" width="40" height="40" alt="" loading="lazy"><div><strong><?php echo esc_html( $item['name'] ); ?></strong><span>★★★★★</span></div></div><img class="vpc-bao-mau__quote" src="<?php echo esc_url( $asset_uri . '/quotation.svg' ); ?>" width="32" height="32" alt="" aria-hidden="true"><p><?php echo esc_html( $item['copy'] ); ?></p></article><?php endforeach; ?>
-			</div></div>
-			<div class="vpc-bao-mau__feedback-row vpc-bao-mau__feedback-row--second"><div class="vpc-bao-mau__feedback-track">
-				<?php foreach ( array_slice( $feedback, 4 ) as $item ) : ?><article class="vpc-bao-mau__feedback-card"><div class="vpc-bao-mau__feedback-author"><img src="<?php echo esc_url( $asset_uri . '/' . $item['image'] ); ?>" width="40" height="40" alt="" loading="lazy"><div><strong><?php echo esc_html( $item['name'] ); ?></strong><span>★★★★★</span></div></div><img class="vpc-bao-mau__quote" src="<?php echo esc_url( $asset_uri . '/quotation.svg' ); ?>" width="32" height="32" alt="" aria-hidden="true"><p><?php echo esc_html( $item['copy'] ); ?></p></article><?php endforeach; ?>
-			</div></div>
-		</div>
-	</section>
+	<?php
+	get_template_part(
+		'template-parts/sections/feedback',
+		null,
+		array(
+			'items'        => $feedback,
+			'image_prefix' => 'bao-mau',
+			'badge'        => 'KHÁCH HÀNG',
+			'description'  => array(
+				'Trong hành trình cùng mẹ trải đầy yêu thương, Vạn Phúc Care đã nhận được sự tin yêu của hàng ngàn mẹ bỉm.',
+				'Chúng tôi cam kết đồng hành, mang đến giải pháp chăm sóc sức khoẻ phù hợp cho mọi gia đình.',
+			),
+		)
+	); ?>
 
 	<section class="vpc-bao-mau__lead" aria-labelledby="bao-mau-lead-title">
 		<div class="vpc-bao-mau__container"><div class="vpc-bao-mau__section-heading"><h2 id="bao-mau-lead-title"><span>Sẵn Sàng Bắt Đầu</span><em>Hành Trình Làm Mẹ Hạnh Phúc</em></h2></div>

@@ -41,6 +41,11 @@ $default_items = array(
 
 $items        = isset( $args['items'] ) && is_array( $args['items'] ) && ! empty( $args['items'] ) ? $args['items'] : $default_items;
 $image_prefix = isset( $args['image_prefix'] ) ? trim( (string) $args['image_prefix'], '/' ) : '';
+$badge        = isset( $args['badge'] ) ? (string) $args['badge'] : 'FEEDBACK';
+$description  = isset( $args['description'] ) && is_array( $args['description'] ) ? $args['description'] : array(
+	'Trong hành trình cùng mẹ trải đầy yêu thương, Vạn Phúc Care đã nhận được sự tin yêu của hàng ngàn mẹ bỉm.',
+	'Chúng tôi cam kết đồng hành cùng Mẹ và Bé trong 2 năm đầu đời.',
+);
 $image_url    = static function ( $path ) use ( $image_prefix ) {
 	$path = ( $image_prefix ? $image_prefix . '/' : '' ) . ltrim( (string) $path, '/' );
 	return function_exists( 'vpc_image_url' ) ? vpc_image_url( $path, 'thumbnail' ) : '';
@@ -54,15 +59,16 @@ $row_two = array_merge( array_reverse( $items ), array_reverse( $items ) );
 	<div class="vpc-home-container text-center mb-10 sm:mb-14">
 		<div class="inline-flex items-center justify-center gap-2 px-3.5 py-1 bg-surface-badge-secondary border border-border-secondary-default rounded-full mb-3 shadow-xs">
 			<img src="<?php echo esc_url( vpc_theme_asset_url( 'icons/sparkle-pink.svg' ) ); ?>" width="24" height="24" class="w-4 h-4 shrink-0" alt="" aria-hidden="true">
-			<span class="font-body font-medium text-xs sm:text-sm text-text-link-hover tracking-wider uppercase">FEEDBACK</span>
+			<span class="font-body font-medium text-xs sm:text-sm text-text-link-hover tracking-wider uppercase"><?php echo esc_html( $badge ); ?></span>
 		</div>
 		<h2 id="feedback-title" class="font-heading font-semibold text-h1-mobile xl:text-h1 text-center">
 			<span class="text-text-heading-primary-default">Cảm Nhận </span><br class="sm:hidden">
 			<span class="text-text-heading-secondary-default">Của Khách Hàng</span>
 		</h2>
 		<p class="w-full max-w-4xl mx-auto mt-3 text-center font-body font-medium text-sm sm:text-base text-text-body-default leading-6">
-			<span class="block text-center">Trong hành trình cùng mẹ trải đầy yêu thương, Vạn Phúc Care đã nhận được sự tin yêu của hàng ngàn mẹ bỉm.</span>
-			<span class="block text-center">Chúng tôi cam kết đồng hành cùng Mẹ và Bé trong 2 năm đầu đời.</span>
+			<?php foreach ( $description as $description_line ) : ?>
+				<span class="block text-center"><?php echo esc_html( $description_line ); ?></span>
+			<?php endforeach; ?>
 		</p>
 	</div>
 

@@ -47,8 +47,8 @@
 .vpc-bao-mau__button--secondary:hover { background: var(--bm-pink-light); color: var(--bm-pink); }
 
 .vpc-bao-mau__stats { height: 172px; background: #fff; }
-/* Reuse the same max-width and gutters as the desktop header container so
- * the four feature cells line up exactly with the header shell. */
+/* The header's usable desktop content is 1,400px wide after its 80px
+ * horizontal gutters. Keep the four feature cells on that same rail. */
 .vpc-bao-mau__stats-grid { height: 100%; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 0; }
 .vpc-bao-mau__stat { padding: 32px 24px; display: flex; flex-direction: column; gap: 8px; }
 .vpc-bao-mau__stat + .vpc-bao-mau__stat { border-left: 1px solid var(--bm-border); }
@@ -95,6 +95,7 @@
 .vpc-bao-mau__package-top { text-align: center; }
 .vpc-bao-mau__package-card h3 { color: var(--bm-muted); font: 500 24px/32px var(--font-body, "Manrope", sans-serif); }
 .vpc-bao-mau__package-card strong { display: block; margin-top: 8px; color: var(--bm-blue); font: 700 32px/40px var(--font-body, "Manrope", sans-serif); }
+.vpc-bao-mau__package-top > p { text-align: left; }
 .vpc-bao-mau__package-card p, .vpc-bao-mau__package-card h4, .vpc-bao-mau__package-benefits { font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
 .vpc-bao-mau__package-card h4 { margin-top: 4px; color: var(--bm-pink); font-weight: 500; }
 .vpc-bao-mau__package-benefits { display: flex; flex-direction: column; gap: 8px; }
@@ -236,6 +237,14 @@
 	.vpc-bao-mau__package-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 	.vpc-bao-mau__team-viewport { overflow-x: auto; }
 	.vpc-bao-mau__team-grid { width: max-content; justify-content: start; }
+}
+
+@media (min-width: 1280px) {
+	.vpc-bao-mau__stats-grid {
+		width: min(1400px, calc(100% - 160px));
+		max-width: 1400px;
+		padding-inline: 0;
+	}
 }
 
 @media (min-width: 768px) {

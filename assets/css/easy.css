@@ -197,6 +197,8 @@
 	.vpc-easy__packages { background: var(--easy-pink-soft); }
 	.vpc-easy__package-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 24px; }
 	.vpc-easy__package-card { min-height: 640px; padding: 36px 24px 24px; }
+	.vpc-easy__facts div span { flex: 0 0 auto; white-space: nowrap; }
+	.vpc-easy__facts div b { min-width: 0; }
 	.vpc-easy__package-card h4 { text-align: left; }
 	.vpc-easy__package-card.is-featured { order: -1; }
 	.vpc-easy__faq { height: auto; padding: 40px 0; }
