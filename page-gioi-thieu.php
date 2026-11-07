@@ -276,7 +276,7 @@ $about_feedback = array(
 		<div class="about-consultation__heading" data-node-id="3207:38682">
 			<h2 id="about-consultation-title">
 				<span class="about-consultation__heading-blue" data-node-id="3207:38683">Sẵn Sàng Bắt Đầu</span>
-				<span class="about-consultation__heading-pink" data-node-id="3207:38684">Hành Trình Làm Mẹ Hạnh Phúc</span>
+				<span class="about-consultation__heading-pink" data-node-id="3207:38684">Hành Trình Làm Mẹ <span class="vpc-lead-title-happiness">Hạnh Phúc</span></span>
 			</h2>
 		</div>
 

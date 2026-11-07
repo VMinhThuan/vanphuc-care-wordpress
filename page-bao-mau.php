@@ -88,7 +88,7 @@ $button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="bao-mau-
 			<?php
 			$stats = array(
 				array( 'icon' => 'health-safety.svg', 'title' => 'An tâm', 'copy' => 'Ứng dụng công nghệ với sổ sức khoẻ điện tử, theo dõi tình trạng sức khỏe bé thường xuyên.' ),
-				array( 'icon' => 'vector52.svg', 'title' => 'Chuyên môn', 'copy' => 'Các hoạt động chăm sóc được thực hiện hoặc giám sát từ xa bởi bộ phận điều dưỡng.' ),
+				array( 'icon' => 'professional-expertise.svg', 'title' => 'Chuyên môn', 'copy' => 'Các hoạt động chăm sóc được thực hiện hoặc giám sát từ xa bởi bộ phận điều dưỡng.' ),
 				array( 'icon' => 'professional.svg', 'title' => 'Rèn nếp sinh hoạt', 'copy' => 'Hỗ trợ bé ăn, ngủ, thiết lập nếp sinh hoạt theo lịch trình EASY. Cá nhân hoá phù hợp với mỗi trẻ.' ),
 				array( 'icon' => 'mother-companion.svg', 'title' => 'Đồng hành cùng mẹ', 'copy' => 'Chia sẻ kinh nghiệm, hỗ trợ giải đáp những băn khoăn, lo lắng để mẹ có thêm thời gian nghỉ ngơi.' ),
 			);
@@ -126,7 +126,7 @@ $button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="bao-mau-
 			<img class="vpc-bao-mau__intro-image" src="<?php echo esc_url( $health_book_uri ); ?>" width="540" height="456" alt="Sổ sức khỏe điện tử cho trẻ sơ sinh" loading="lazy">
 			<div class="vpc-bao-mau__intro-copy">
 				<div class="vpc-bao-mau__badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">SỔ SỨC KHỎE ĐIỆN TỬ</div>
-				<h2><span>Sổ Sức Khỏe Điện Tử - Trợ Lý</span><em>Giúp Mẹ Nuôi Con Easy</em></h2>
+			<h2><span>Sổ Sức Khỏe Điện Tử - Trợ&nbsp;Lý</span><em>Giúp Mẹ Nuôi Con Easy</em></h2>
 				<p>Vạn Phúc Care là đơn vị tiên phong ứng dụng số hoá dữ liệu sức khoẻ, triển khai sổ sức khỏe điện tử dành cho trẻ sơ sinh:</p>
 				<ul class="vpc-bao-mau__check-list">
 					<li>Giúp mẹ dễ dàng truy vấn lịch sử sức khỏe của con mọi lúc, mọi nơi.</li>
@@ -222,7 +222,7 @@ $button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="bao-mau-
 	); ?>
 
 	<section class="vpc-bao-mau__lead" aria-labelledby="bao-mau-lead-title">
-		<div class="vpc-bao-mau__container"><div class="vpc-bao-mau__section-heading"><h2 id="bao-mau-lead-title"><span>Sẵn Sàng Bắt Đầu</span><em>Hành Trình Làm Mẹ Hạnh Phúc</em></h2></div>
+		<div class="vpc-bao-mau__container"><div class="vpc-bao-mau__section-heading"><h2 id="bao-mau-lead-title"><span>Sẵn Sàng Bắt Đầu</span><em>Hành Trình Làm Mẹ <span class="vpc-bao-mau__lead-title-break vpc-lead-title-happiness">Hạnh Phúc</span></em></h2></div>
 			<div class="vpc-bao-mau__lead-card">
 				<div class="vpc-bao-mau__lead-row"><label><span class="vpc-bao-mau__label-text"><b>*</b>Họ và tên</span><input type="text" placeholder="Nguyễn Như Linh" aria-label="Họ và tên"></label><label><span class="vpc-bao-mau__label-text"><b>*</b>Số điện thoại</span><input type="tel" placeholder="0345678***" aria-label="Số điện thoại"></label></div>
 				<label><span class="vpc-bao-mau__label-text"><b>*</b>Gói dịch vụ quan tâm</span><select aria-label="Gói dịch vụ quan tâm"><option>Gói Thảnh Thơi</option><option>Gói Linh Hoạt</option><option>Gói An Tâm</option></select></label>

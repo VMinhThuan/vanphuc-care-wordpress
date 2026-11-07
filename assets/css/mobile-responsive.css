@@ -72,6 +72,22 @@
 		display: inline !important;
 	}
 
+	/* Keep the milk-service process heading as two intentional lines:
+	 * blue title first, pink title second. */
+	.vpc-milk__process .vpc-milk__section-heading h2 span,
+	.vpc-milk__process .vpc-milk__section-heading h2 em {
+		display: block !important;
+		white-space: nowrap !important;
+	}
+
+	/* Keep “Hạnh Phúc” together on the final CTA heading and use the
+	 * pink accent consistently across all service pages. */
+	.vpc-lead-title-happiness {
+		display: block !important;
+		white-space: nowrap !important;
+		color: #f48283 !important;
+	}
+
 	.vpc-bath__packages .vpc-bath__days {
 		white-space: normal !important;
 	}
@@ -80,6 +96,13 @@
 		display: block !important;
 		white-space: nowrap !important;
 		font-size: clamp(14px, 3.6vw, 16px);
+		line-height: 24px;
+	}
+
+	body:has(.vpc-bath__packages) .vpc-bath__package-description-first-line {
+		display: block !important;
+		white-space: nowrap !important;
+		font-size: clamp(12px, 3.2vw, 14px);
 		line-height: 24px;
 	}
 

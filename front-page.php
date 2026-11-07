@@ -1053,7 +1053,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 			<div class="vpc-consultation-heading">
 				<h2>
 					<span class="vpc-consultation-heading__blue">Sẵn Sàng Bắt Đầu</span>
-					<span class="vpc-consultation-heading__pink">Hành Trình Làm Mẹ Hạnh Phúc</span>
+					<span class="vpc-consultation-heading__pink">Hành Trình Làm Mẹ <span class="vpc-lead-title-happiness">Hạnh Phúc</span></span>
 				</h2>
 			</div>
 
