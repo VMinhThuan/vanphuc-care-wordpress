@@ -62,7 +62,7 @@
 .vpc-bao-mau__intro-copy h2 { width: 100%; }
 .vpc-bao-mau__check-list { display: flex; flex-direction: column; gap: 24px; }
 .vpc-bao-mau__check-list li { position: relative; padding-left: 32px; font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
-.vpc-bao-mau__check-list li::before { content: "✓"; position: absolute; left: 0; top: 0; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; color: #fff; background: var(--bm-blue); font-size: 14px; font-weight: 700; }
+.vpc-bao-mau__check-list li::before { content: "✓"; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; color: #fff; background: var(--bm-blue); font-size: 14px; font-weight: 700; }
 
 .vpc-bao-mau__process { min-height: 1044px; padding: 96px 0; }
 .vpc-bao-mau__section-heading { display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center; }
@@ -89,7 +89,7 @@
 .vpc-bao-mau__package-card h4 { margin-top: 4px; font-weight: 700; }
 .vpc-bao-mau__package-benefits { display: flex; flex-direction: column; gap: 8px; }
 .vpc-bao-mau__package-benefits li { padding-left: 28px; position: relative; }
-.vpc-bao-mau__package-benefits li::before { content: "✓"; position: absolute; left: 0; color: var(--bm-blue); font-weight: 700; }
+.vpc-bao-mau__package-benefits li::before { content: "✓"; position: absolute; left: 0; top: 50%; transform: translateY(-50%); color: var(--bm-blue); font-weight: 700; }
 .vpc-bao-mau__package-card > .vpc-bao-mau__button { width: 100%; margin-top: auto; }
 
 .vpc-bao-mau__team { min-height: 812px; padding: 96px 0; background: linear-gradient(132deg, #f8f8f8 40%, #d1e4f1 130%); }

@@ -38,8 +38,8 @@
 .vpc-bath__hero-title-mobile-break { display: inline; }
 .vpc-bath__hero-copy > p { color: #4a4a4a; font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
 .vpc-bath__hero-benefits { display: flex; flex-direction: column; gap: 16px; width: 100%; }
-.vpc-bath__hero-benefits li, .vpc-bath__icon-list li { display: flex; align-items: flex-start; gap: 8px; color: var(--bath-ink); font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
-.vpc-bath__hero-benefits img, .vpc-bath__icon-list img { width: 24px; height: 24px; flex: 0 0 24px; object-fit: contain; }
+.vpc-bath__hero-benefits li, .vpc-bath__icon-list li { display: flex; align-items: center; gap: 8px; color: var(--bath-ink); font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
+.vpc-bath__hero-benefits img, .vpc-bath__icon-list img { width: 24px; height: 24px; flex: 0 0 24px; align-self: center; object-fit: contain; }
 .vpc-bath__hero-image { width: 590px; height: 565px; overflow: hidden; border-radius: 16px; }
 .vpc-bath__hero-image img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 
@@ -51,7 +51,8 @@
 .vpc-bath__split-copy h2 { display: flex; flex-direction: column; }
 .vpc-bath__split-copy h2 span, .vpc-bath__section-heading h2 span, .vpc-bath__lead h2 span { color: var(--bath-blue); }
 .vpc-bath__split-copy h2 em, .vpc-bath__section-heading h2 em, .vpc-bath__lead h2 em { color: var(--bath-pink); }
-.vpc-bath__health-title-assistant { display: inline; }
+.vpc-bath__health-title-assistant { display: inline; white-space: nowrap; }
+.vpc-bath__lead-title-break { display: inline; }
 .vpc-bath__icon-list { display: flex; flex-direction: column; gap: 16px; width: 100%; }
 .vpc-bath__challenge-last-copy { flex: 1; min-width: 0; }
 .vpc-bath__mobile-break { display: none; }
@@ -96,8 +97,8 @@
 .vpc-bath__package-copy { min-height: 48px; color: var(--bath-ink); font: 500 16px/24px var(--font-body, "Manrope", sans-serif); text-align: left; }
 .vpc-bath__package-card h4 { color: var(--bath-pink); text-align: left; font: 500 20px/28px var(--font-body, "Manrope", sans-serif); }
 .vpc-bath__package-card ul { display: flex; flex-direction: column; gap: 12px; }
-.vpc-bath__package-card li { display: flex; gap: 8px; align-items: flex-start; font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
-.vpc-bath__package-card li img { width: 24px; height: 24px; flex: 0 0 24px; }
+.vpc-bath__package-card li { display: flex; gap: 8px; align-items: center; font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
+.vpc-bath__package-card li img { width: 24px; height: 24px; flex: 0 0 24px; align-self: center; }
 .vpc-bath__package-button { min-height: 48px; margin-top: auto; border: 1px solid var(--bath-pink); border-radius: 999px; color: var(--bath-pink); background: #fff; font: 500 16px/24px var(--font-body, "Manrope", sans-serif); cursor: pointer; }
 .vpc-bath__package-card.is-featured .vpc-bath__package-button { border-color: var(--bath-blue); color: #fff; background: var(--bath-blue); }
 .vpc-bath__featured { position: absolute; top: -22px; left: 50%; transform: translateX(-50%); padding: 8px 16px; border-radius: 999px; color: #fff; background: var(--bath-pink); font: 500 16px/24px var(--font-body, "Manrope", sans-serif); white-space: nowrap; }
@@ -469,7 +470,7 @@
 	}
 
 	.vpc-bath__featured {
-		display: none;
+		display: block;
 	}
 
 	.vpc-bath__package-copy {
@@ -478,6 +479,11 @@
 
 	.vpc-bath__package-card h4 {
 		text-align: left;
+	}
+
+	.vpc-bath__lead-title-break {
+		display: block;
+		white-space: nowrap;
 	}
 
 	.vpc-bath__package-button,
