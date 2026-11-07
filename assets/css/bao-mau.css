@@ -63,6 +63,7 @@
 .vpc-bao-mau__intro-image { width: 540px; height: 456px; display: block; border-radius: 12px; object-fit: cover; }
 .vpc-bao-mau__intro-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
 .vpc-bao-mau__intro-copy h2 { width: 100%; }
+.vpc-bao-mau__intro h2 span.vpc-health-title-assistant { display: inline; }
 .vpc-bao-mau__check-list { display: flex; flex-direction: column; gap: 24px; }
 .vpc-bao-mau__check-list li { position: relative; padding-left: 32px; font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
 .vpc-bao-mau__check-list li::before { content: ""; position: absolute; left: 0; top: 50%; width: 24px; height: 24px; transform: translateY(-50%); background: url("../images/bao-mau/check-badge.svg") center / contain no-repeat; }

@@ -126,7 +126,7 @@ $button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="bao-mau-
 			<img class="vpc-bao-mau__intro-image" src="<?php echo esc_url( $health_book_uri ); ?>" width="540" height="456" alt="Sổ sức khỏe điện tử cho trẻ sơ sinh" loading="lazy">
 			<div class="vpc-bao-mau__intro-copy">
 				<div class="vpc-bao-mau__badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">SỔ SỨC KHỎE ĐIỆN TỬ</div>
-			<h2><span>Sổ Sức Khỏe Điện Tử - Trợ&nbsp;Lý</span><em>Giúp Mẹ Nuôi Con Easy</em></h2>
+				<h2><span>Sổ Sức Khỏe Điện Tử - <span class="vpc-health-title-assistant">Trợ Lý</span></span><em>Giúp Mẹ Nuôi Con Easy</em></h2>
 				<p>Vạn Phúc Care là đơn vị tiên phong ứng dụng số hoá dữ liệu sức khoẻ, triển khai sổ sức khỏe điện tử dành cho trẻ sơ sinh:</p>
 				<ul class="vpc-bao-mau__check-list">
 					<li>Giúp mẹ dễ dàng truy vấn lịch sử sức khỏe của con mọi lúc, mọi nơi.</li>

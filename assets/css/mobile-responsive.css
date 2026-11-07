@@ -88,6 +88,21 @@
 		color: #f48283 !important;
 	}
 
+	/* Special mobile heading case: keep “Trợ Lý” together on its own line
+	 * instead of allowing the browser to split it into “Trợ” and “Lý”. */
+	.vpc-health-title-assistant {
+		display: block !important;
+		white-space: nowrap !important;
+	}
+
+	/* Bath process heading: keep the blue and pink titles on separate rows,
+	 * with “Tắm Bé Tại Nhà” kept together on one line. */
+	.vpc-bath__process .vpc-bath__section-heading h2 span,
+	.vpc-bath__process .vpc-bath__section-heading h2 em {
+		display: block !important;
+		white-space: nowrap !important;
+	}
+
 	.vpc-bath__packages .vpc-bath__days {
 		white-space: normal !important;
 	}
@@ -171,5 +186,19 @@
 	.vpc-bao-mau .vpc-bao-mau__services-viewport::-webkit-scrollbar,
 	.vpc-bao-mau .vpc-bao-mau__team-viewport::-webkit-scrollbar {
 		display: none;
+	}
+
+	/* Figma mobile stats are a flat list, not four bordered cards. */
+	.vpc-bao-mau .vpc-bao-mau__stat {
+		min-height: 0 !important;
+		padding: 24px 0 !important;
+		border: 0 !important;
+		border-radius: 0 !important;
+		background: transparent !important;
+		box-shadow: none !important;
+	}
+
+	.vpc-bao-mau .vpc-bao-mau__stat + .vpc-bao-mau__stat {
+		border-left: 0 !important;
 	}
 }
