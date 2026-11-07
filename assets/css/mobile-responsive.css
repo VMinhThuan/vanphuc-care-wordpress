@@ -106,6 +106,15 @@
 		line-height: 24px;
 	}
 
+	/* The generic package rule above is more specific than the shared span
+	 * reset. Keep the two bath-package sentences on separate, fluid lines. */
+	.vpc-bath__packages .vpc-bath__section-heading > p > .vpc-bath__package-description-first-line,
+	.vpc-bath__packages .vpc-bath__section-heading > p > .vpc-bath__package-description-line {
+		display: block !important;
+		white-space: normal !important;
+		text-align: center;
+	}
+
 	/* Figma node 3207:38766: the bath package CTA is content-sized, not
 	 * stretched to the card width. Keep this scoped to the bath package page. */
 	body:has(.vpc-bath__packages) .vpc-bath__package-button,
@@ -139,5 +148,28 @@
 	.vpc-services-page .vpc-services-process,
 	.vpc-services-page .vpc-services-feedback {
 		min-height: 0 !important;
+	}
+
+	/* Bảo mẫu hero: remove the desktop/tablet bottom reserve so the stats
+	 * section sits close to the two CTA buttons on a phone. */
+	.vpc-bao-mau > .vpc-bao-mau__hero {
+		padding-bottom: 32px !important;
+	}
+
+	/* Bảo mẫu horizontal galleries must remain touch-scrollable. The desktop
+	 * clipping rule otherwise hides the cards after the first item. */
+	.vpc-bao-mau .vpc-bao-mau__services-viewport,
+	.vpc-bao-mau .vpc-bao-mau__team-viewport {
+		overflow-x: auto !important;
+		overflow-y: hidden !important;
+		touch-action: pan-x;
+		overscroll-behavior-x: contain;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none;
+	}
+
+	.vpc-bao-mau .vpc-bao-mau__services-viewport::-webkit-scrollbar,
+	.vpc-bao-mau .vpc-bao-mau__team-viewport::-webkit-scrollbar {
+		display: none;
 	}
 }

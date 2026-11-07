@@ -85,11 +85,11 @@
 .vpc-bao-mau__process-card h3 { color: var(--bm-blue); font: 500 24px/32px var(--font-body, "Manrope", sans-serif); }
 .vpc-bao-mau__process-card p { color: var(--bm-muted); font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
 
-.vpc-bao-mau__packages { min-height: 832px; padding: 96px 0; background: linear-gradient(118deg, #d1e4f1 -2%, #f8f8f8 58%, #fde6e6 125%); }
+.vpc-bao-mau__packages { min-height: 832px; padding: 96px 0; background: var(--bm-pink-light); }
 .vpc-bao-mau__section-heading--packages { max-width: 870px; margin-inline: auto; }
 .vpc-bao-mau__section-heading--packages { gap: 12px; }
-.vpc-bao-mau__section-heading--packages h2 { color: var(--bm-pink); }
-.vpc-bao-mau__section-heading--packages h2 span { color: var(--bm-pink); }
+.vpc-bao-mau__section-heading--packages h2 { color: var(--bm-blue); }
+.vpc-bao-mau__section-heading--packages h2 span { color: var(--bm-blue); }
 .vpc-bao-mau__package-grid { margin-top: 24px; display: grid; grid-template-columns: repeat(3, minmax(0, 362px)); justify-content: center; gap: 24px; }
 .vpc-bao-mau__package-card { min-height: 490px; padding: 24px 16px; display: flex; flex-direction: column; gap: 16px; border: 1px solid #a7d4f0; border-radius: 24px; background: #fff; box-shadow: none; }
 .vpc-bao-mau__package-top { text-align: center; }
