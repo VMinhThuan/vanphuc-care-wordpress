@@ -32,6 +32,15 @@
 		min-height: 0 !important;
 	}
 
+	/* The health-book split grid has a desktop height that is more specific
+	 * than the generic mobile rule. Let its copy determine the section height
+	 * so the following process section cannot overlap it. */
+	.vpc-bath__health .vpc-bath__split-grid,
+	.vpc-easy__health .vpc-easy__split-grid,
+	.vpc-milk__health .vpc-milk__split-grid {
+		height: auto !important;
+	}
+
 	/* Mobile copy must flow naturally instead of obeying design-only breaks. */
 	.vpc-bath__mobile-break,
 	.vpc-bath__hero-title-mobile-break,
