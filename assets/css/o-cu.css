@@ -735,3 +735,1080 @@
 		gap: 24px;
 	}
 }
+
+/* Room gallery dialogs from Figma node 7004:14553. */
+.ocu-room-card-large[data-room-open],
+.ocu-room-panel[data-room-open] {
+	cursor: pointer;
+}
+
+.ocu-room-modal[hidden] {
+	display: none;
+}
+
+.ocu-room-modal {
+	position: fixed;
+	inset: 0;
+	z-index: 1000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 32px 16px;
+}
+
+.ocu-room-modal__backdrop {
+	position: absolute;
+	inset: 0;
+	background: rgba(41, 41, 41, .6);
+}
+
+.ocu-room-modal__dialog {
+	position: relative;
+	z-index: 1;
+	width: min(960px, 100%);
+	max-height: calc(100vh - 64px);
+	overflow: auto;
+	padding: 32px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	border-radius: 24px;
+	background: #fafafa;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, .2);
+}
+
+.ocu-room-modal__header,
+.ocu-room-modal__footer {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 20px;
+}
+
+.ocu-room-modal__header p,
+.ocu-room-modal__amenities > div > p {
+	color: var(--ocu-pink);
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-room-modal__header h2 {
+	color: var(--ocu-blue);
+	font: 400 28px/36px var(--font-heading, "Fraunces", serif);
+	font-variation-settings: "SOFT" 0, "WONK" 1;
+}
+
+.ocu-room-modal__close {
+	width: 24px;
+	height: 24px;
+	padding: 0;
+	border: 0;
+	color: #292929;
+	font: 400 30px/20px Arial, sans-serif;
+	cursor: pointer;
+}
+
+.ocu-room-modal__variants {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 16px;
+}
+
+.ocu-room-modal__variants button {
+	min-height: 48px;
+	padding: 12px 24px;
+	border: 1px solid var(--ocu-pink);
+	border-radius: 999px;
+	background: transparent;
+	color: #292929;
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+	cursor: pointer;
+}
+
+.ocu-room-modal__variants button.is-active {
+	background: var(--ocu-pink);
+	color: #fff;
+}
+
+.ocu-room-modal__body {
+	display: grid;
+	grid-template-columns: 480px minmax(0, 1fr);
+	gap: 24px;
+	align-items: stretch;
+}
+
+.ocu-room-modal__gallery {
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.ocu-room-modal__main-image {
+	height: 407px;
+	position: relative;
+	overflow: hidden;
+	border-radius: 16px;
+}
+
+.ocu-room-modal__main-image > img {
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: cover;
+}
+
+.ocu-room-modal__gallery-controls {
+	position: absolute;
+	left: 50%;
+	bottom: 12px;
+	transform: translateX(-50%);
+	display: flex;
+	gap: 12px;
+}
+
+.ocu-room-modal__gallery-controls button {
+	width: 40px;
+	height: 40px;
+	border: 0;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, .92);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+	color: #292929;
+	font: 400 30px/30px Arial, sans-serif;
+	cursor: pointer;
+}
+
+.ocu-room-modal__counter {
+	position: absolute;
+	right: 8px;
+	bottom: 8px;
+	padding: 4px 12px;
+	border-radius: 999px;
+	background: rgba(0, 0, 0, .55);
+	color: #fff;
+	font: 500 14px/20px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-room-modal__thumbs {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 8px;
+}
+
+.ocu-room-modal__thumbs button {
+	height: 72px;
+	padding: 0;
+	border: 2px solid transparent;
+	border-radius: 12px;
+	overflow: hidden;
+	opacity: .7;
+	cursor: pointer;
+}
+
+.ocu-room-modal__thumbs button.is-active {
+	border-color: var(--ocu-blue);
+	opacity: 1;
+}
+
+.ocu-room-modal__thumbs img {
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: cover;
+}
+
+.ocu-room-modal__amenities {
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	border-radius: 16px;
+	background: rgba(26, 119, 186, .06);
+}
+
+.ocu-room-modal__amenities ul {
+	margin: 8px 0 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	list-style: none;
+}
+
+.ocu-room-modal__amenities li {
+	position: relative;
+	padding-left: 32px;
+	color: #292929;
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-room-modal__amenities li::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 24px;
+	height: 24px;
+	transform: translateY(-50%);
+	background: url("../images/bao-mau/check-badge.svg") center / contain no-repeat;
+}
+
+.ocu-room-modal__footer {
+	align-items: center;
+}
+
+.ocu-room-modal__footer p {
+	max-width: 580px;
+	color: #292929;
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-room-modal__footer .ocu-button {
+	flex: 0 0 auto;
+}
+
+body.ocu-room-modal-open {
+	overflow: hidden;
+}
+
+@media (max-width: 767px) {
+	.ocu-room-modal {
+		padding: 16px;
+	}
+
+	.ocu-room-modal__dialog {
+		max-height: calc(100vh - 32px);
+		padding: 20px 16px;
+		border-radius: 16px;
+	}
+
+	.ocu-room-modal__body {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	.ocu-room-modal__variants {
+		gap: 8px;
+	}
+
+	.ocu-room-modal__variants button {
+		min-height: 40px;
+		padding: 8px 10px;
+		font-size: 13px;
+		line-height: 20px;
+	}
+
+	.ocu-room-modal__main-image {
+		height: 220px;
+		border-radius: 12px;
+	}
+
+	.ocu-room-modal__thumbs button {
+		height: 58px;
+	}
+
+	.ocu-room-modal__amenities {
+		padding: 16px;
+		gap: 12px;
+	}
+
+	.ocu-room-modal__amenities li,
+	.ocu-room-modal__footer p {
+		font-size: 14px;
+		line-height: 20px;
+	}
+
+	.ocu-room-modal__footer {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 12px;
+	}
+
+	.ocu-room-modal__footer .ocu-button {
+		width: 100%;
+	}
+}
+
+/* O Cu design extension: sections below the nursery are shared with the
+ * established Bảo mẫu cards, while these rules keep the Figma O Cữ spacing. */
+.vpc-o-cu .vpc-bao-mau__container {
+	max-width: 1440px;
+	padding-inline: 80px;
+}
+
+.vpc-o-cu .ocu-benefit-row--two {
+	grid-template-columns: minmax(0, 2.063fr) minmax(0, 1fr);
+}
+
+.vpc-o-cu .ocu-benefit-row--two .ocu-benefit-card {
+	min-height: 226px;
+}
+
+.vpc-o-cu .ocu-benefit-row--three .ocu-benefit-card {
+	min-height: 250px;
+}
+
+.ocu-room-bento__stats {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 16px;
+}
+
+.ocu-room-bento__stats article {
+	min-height: 194px;
+	padding: 24px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 8px;
+	border-radius: 24px;
+	background: #fff;
+	box-shadow: 0 1px 2.5px #00000026;
+}
+
+.ocu-room-bento__stats strong {
+	color: var(--ocu-blue);
+	font: 600 40px/52px var(--font-heading, "Fraunces", serif);
+}
+
+.ocu-room-bento__stats span,
+.ocu-room-points li,
+.ocu-daily li,
+.ocu-experience li {
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-room-points ul,
+.ocu-daily ul,
+.ocu-experience ul,
+.ocu-room-panel ul,
+.ocu-room-card-large ul {
+	margin: 16px 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.ocu-room-points li,
+.ocu-daily li,
+.ocu-experience li,
+.ocu-room-panel li,
+.ocu-room-card-large li {
+	position: relative;
+	padding-left: 32px;
+}
+
+.ocu-room-points li::before,
+.ocu-daily li::before,
+.ocu-experience li::before,
+.ocu-room-panel li::before,
+.ocu-room-card-large li::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 24px;
+	height: 24px;
+	transform: translateY(-50%);
+	background: url("../images/bao-mau/check-badge.svg") center / contain no-repeat;
+}
+
+.ocu-daily {
+	width: min(1248px, 100%);
+	margin: 96px auto 0;
+	display: grid;
+	grid-template-columns: 560px minmax(0, 1fr);
+	gap: 64px;
+	align-items: center;
+}
+
+.ocu-daily > img {
+	width: 560px;
+	height: 480px;
+	border-radius: 24px;
+	object-fit: cover;
+}
+
+.ocu-daily > div,
+.ocu-experience__inner > div {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 24px;
+}
+
+.ocu-daily h2,
+.ocu-experience h2 {
+	font: 600 48px/64px var(--font-heading, "Fraunces", serif);
+	font-variation-settings: "SOFT" 0, "WONK" 1;
+}
+
+.ocu-daily h2 span,
+.ocu-experience h2 span {
+	display: block;
+}
+
+.ocu-daily p,
+.ocu-daily li,
+.ocu-experience p,
+.ocu-experience li {
+	color: var(--ocu-muted);
+}
+
+.ocu-experience {
+	min-height: 651px;
+	padding: 96px 80px;
+	background: linear-gradient(115deg, #f8f8f8 35%, #d1e4f1 130%);
+}
+
+.ocu-experience__inner {
+	width: min(1280px, 100%);
+	margin-inline: auto;
+	display: grid;
+	grid-template-columns: 540px minmax(0, 1fr);
+	gap: 88px;
+	align-items: center;
+}
+
+.ocu-experience__inner > img {
+	width: 540px;
+	height: 456px;
+	border-radius: 12px;
+	object-fit: cover;
+}
+
+.ocu-experience h3 {
+	color: var(--ocu-pink);
+	font: 500 20px/28px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-spaces {
+	min-height: 1137px;
+	padding: 96px 80px;
+	background: var(--ocu-bg);
+}
+
+.ocu-spaces .ocu-section-heading p {
+	max-width: 870px;
+}
+
+.ocu-room-cards {
+	width: min(1248px, 100%);
+	margin: 48px auto 0;
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 24px;
+}
+
+.ocu-room-card-large {
+	min-height: 755px;
+	padding: 24px 16px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 16px;
+	border: 1px solid #cecece;
+	border-radius: 24px;
+	background: #fff;
+	box-shadow: 0 1px 5px #00000026;
+}
+
+.ocu-room-card-large > img {
+	width: 100%;
+	height: 288px;
+	border-radius: 12px;
+	object-fit: cover;
+}
+
+.ocu-room-card-large__meta {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: var(--ocu-pink);
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-room-card-large__meta small {
+	color: var(--ocu-muted);
+}
+
+.ocu-room-card-large h3,
+.ocu-room-panel h3 {
+	color: #292929;
+	font: 500 24px/32px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-room-card-large p,
+.ocu-room-card-large li,
+.ocu-room-panel p,
+.ocu-room-panel li {
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-room-card-large ul,
+.ocu-room-panel ul {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.ocu-room-card-large .ocu-chip-list,
+.ocu-room-panel .ocu-chip-list {
+	margin-top: auto;
+}
+
+.ocu-room-card-large a,
+.ocu-room-panel a {
+	color: var(--ocu-blue);
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+	text-decoration: underline;
+}
+
+.ocu-room-card-large a span,
+.ocu-room-panel a span {
+	font-size: 24px;
+	text-decoration: none;
+}
+
+.ocu-room-selector {
+	display: none;
+}
+
+.ocu-room-panel__header,
+.ocu-room-panel__variants,
+.ocu-room-panel__gallery,
+.ocu-room-panel__features,
+.ocu-room-panel__amenities,
+.ocu-room-panel__consult {
+	width: 100%;
+}
+
+.ocu-room-panel__header span {
+	color: var(--ocu-pink);
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-room-panel__header h3 {
+	margin-top: 4px;
+	color: #155f95;
+	font: 400 28px/32px var(--font-heading, "Fraunces", serif);
+	font-variation-settings: "SOFT" 0, "WONK" 1;
+}
+
+.ocu-room-panel__variants {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+.ocu-room-panel__variants button {
+	padding: 8px 16px;
+	border: 1px solid var(--ocu-pink);
+	border-radius: 999px;
+	background: transparent;
+	color: #292929;
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-room-panel__variants button.is-active {
+	background: var(--ocu-pink);
+	color: #fff;
+}
+
+.ocu-room-panel__gallery {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.ocu-room-panel__main-image {
+	position: relative;
+	height: 200px;
+	overflow: hidden;
+	border-radius: 16px;
+}
+
+.ocu-room-panel__main-image > img {
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: cover;
+}
+
+.ocu-room-panel__main-image > span {
+	position: absolute;
+	right: 12px;
+	bottom: 12px;
+	padding: 4px 12px;
+	border-radius: 999px;
+	background: rgb(0 0 0 / 55%);
+	color: #fff;
+	font: 400 12px/16px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-room-panel__thumbs {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 8px;
+	overflow: hidden;
+}
+
+.ocu-room-panel__thumbs button {
+	height: 48px;
+	padding: 0;
+	border: 0;
+	border-radius: 8px;
+	background: transparent;
+	overflow: hidden;
+	opacity: .7;
+}
+
+.ocu-room-panel__thumbs button.is-active {
+	border: 2px solid var(--ocu-blue);
+	opacity: 1;
+}
+
+.ocu-room-panel__thumbs img {
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: cover;
+}
+
+.ocu-room-panel__description {
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-room-panel__features {
+	margin-top: 0 !important;
+}
+
+.ocu-room-panel__amenities {
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	border-radius: 16px;
+	background: rgb(163 201 227 / 20%);
+}
+
+.ocu-room-accordion + .ocu-room-accordion {
+	padding-top: 12px;
+	border-top: 1px solid #a3c9e3;
+}
+
+.ocu-room-accordion > button {
+	width: 100%;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border: 0;
+	background: transparent;
+	color: var(--ocu-pink);
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+	text-align: left;
+}
+
+.ocu-room-accordion > button > span:last-child {
+	width: 12px;
+	height: 12px;
+	border-right: 2px solid var(--ocu-blue);
+	border-bottom: 2px solid var(--ocu-blue);
+	transform: rotate(45deg) translateY(-3px);
+	transition: transform .2s ease;
+}
+
+.ocu-room-accordion.is-open > button > span:last-child {
+	transform: rotate(225deg) translate(-2px, -2px);
+}
+
+.ocu-room-accordion__content {
+	padding-top: 10px;
+}
+
+.ocu-room-accordion__content[hidden] {
+	display: none;
+}
+
+.vpc-o-cu .ocu-shared-section.vpc-bao-mau__team {
+	min-height: 812px;
+}
+
+.vpc-o-cu .ocu-shared-section.vpc-bao-mau__faq {
+	min-height: 970px;
+}
+
+.vpc-o-cu .ocu-shared-section.vpc-bao-mau__feedback {
+	min-height: 1346px;
+}
+
+.vpc-o-cu .ocu-shared-section.vpc-bao-mau__lead {
+	min-height: 907px;
+}
+
+.vpc-o-cu .ocu-shared-section.vpc-bao-mau__services {
+	min-height: 600px;
+}
+
+@media (max-width: 1279px) {
+	.vpc-o-cu .vpc-bao-mau__container {
+		padding-inline: 40px;
+	}
+
+	.ocu-experience {
+		padding-inline: 40px;
+	}
+
+	.ocu-experience__inner {
+		grid-template-columns: minmax(0, .828fr) minmax(0, 1fr);
+		gap: 40px;
+	}
+
+	.ocu-experience__inner > img {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 540 / 456;
+	}
+
+	.ocu-spaces {
+		padding-inline: 40px;
+	}
+}
+
+@media (max-width: 767px) {
+	.vpc-o-cu .vpc-bao-mau__container {
+		padding-inline: 20px;
+	}
+
+	.vpc-o-cu .ocu-hero {
+		min-height: 923px;
+	}
+
+	.vpc-o-cu .ocu-hero__content {
+		min-height: 843px;
+	}
+
+	.vpc-o-cu .ocu-hero__description {
+		line-height: 24px;
+	}
+
+	.vpc-o-cu .ocu-actions {
+		width: auto;
+	}
+
+	.vpc-o-cu .ocu-benefits {
+		min-height: 1644px;
+	}
+
+	.vpc-o-cu .ocu-benefit-row--two,
+	.vpc-o-cu .ocu-benefit-row--three {
+		grid-template-columns: 1fr;
+	}
+
+	.vpc-o-cu .ocu-benefit-row--two .ocu-benefit-card,
+	.vpc-o-cu .ocu-benefit-row--three .ocu-benefit-card {
+		min-height: 0;
+	}
+
+	.vpc-o-cu .ocu-nursery {
+		min-height: 0;
+		padding: 40px 20px 48px;
+	}
+
+	.vpc-o-cu .ocu-nursery .ocu-section-heading {
+		gap: 24px;
+	}
+
+	.vpc-o-cu .ocu-nursery .ocu-section-heading h2 {
+		line-height: 36px;
+	}
+
+	.vpc-o-cu .ocu-room-bento {
+		margin-top: 32px;
+	}
+
+	.vpc-o-cu .ocu-room-bento__hero {
+		height: 220px;
+	}
+
+	.vpc-o-cu .ocu-room-bento__side {
+		height: auto;
+	}
+
+	.vpc-o-cu .ocu-room-card--feature {
+		min-height: 264px;
+	}
+
+	.vpc-o-cu .ocu-room-bento__stats article {
+		min-height: 150px;
+		padding: 16px;
+		border-radius: 16px;
+	}
+
+	.vpc-o-cu .ocu-room-bento__stats strong {
+		font-size: 32px;
+		line-height: 40px;
+	}
+
+	.vpc-o-cu .ocu-room-points {
+		width: calc(100vw - 20px);
+		margin-left: 0;
+		display: flex;
+		gap: 16px;
+		overflow-x: auto;
+		padding-right: 20px;
+	}
+
+	.vpc-o-cu .ocu-room-points article {
+		width: 300px;
+		min-width: 300px;
+		min-height: 570px;
+		text-align: left;
+	}
+
+	.vpc-o-cu .ocu-daily {
+		width: 100%;
+		margin-top: 48px;
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+		align-items: stretch;
+	}
+
+	.vpc-o-cu .ocu-daily > img {
+		width: 100%;
+		height: 240px;
+		border-radius: 16px;
+	}
+
+	.vpc-o-cu .ocu-daily > div,
+	.vpc-o-cu .ocu-experience__inner > div {
+		gap: 24px;
+		align-items: center;
+		text-align: center;
+	}
+
+	.vpc-o-cu .ocu-daily h2,
+	.vpc-o-cu .ocu-experience h2 {
+		font-size: 32px;
+		line-height: 36px;
+	}
+
+	.vpc-o-cu .ocu-daily ul,
+	.vpc-o-cu .ocu-experience ul {
+		width: 100%;
+		text-align: left;
+	}
+
+	.ocu-experience {
+		min-height: 894px;
+		padding: 40px 20px;
+	}
+
+	.ocu-experience__inner {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+	}
+
+	.ocu-experience__inner > img {
+		width: 100%;
+		height: 300px;
+		aspect-ratio: auto;
+		border-radius: 16px;
+	}
+
+	.ocu-spaces {
+		min-height: 1428px;
+		padding: 40px 20px;
+	}
+
+	.ocu-spaces .ocu-section-heading h2 span {
+		display: block;
+	}
+
+	.ocu-room-cards {
+		display: none;
+	}
+
+	.ocu-room-selector {
+		display: block;
+		margin-top: 32px;
+	}
+
+	.ocu-room-tabs {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 8px;
+	}
+
+	.ocu-room-tabs button {
+		min-height: 52px;
+		padding: 8px 4px;
+		border: 1px solid #a7d4f0;
+		border-radius: 12px;
+		background: #fff;
+		color: var(--ocu-blue);
+		font: 500 12px/16px var(--font-body, "Manrope", sans-serif);
+	}
+
+	.ocu-room-tabs button.is-active {
+		border-color: var(--ocu-blue);
+		background: #e9f4fb;
+	}
+
+	.ocu-room-panels {
+		margin-top: 24px;
+	}
+
+	.ocu-room-panel {
+		display: none;
+		padding: 16px;
+		min-height: 986px;
+		flex-direction: column;
+		gap: 16px;
+		border: 1px solid #cecece;
+		border-radius: 24px;
+		background: #fff;
+		box-shadow: 0 1px 5px #00000026;
+	}
+
+	.ocu-room-panel.is-active {
+		display: flex;
+	}
+
+	.ocu-room-panel__image {
+		width: 100%;
+		height: 200px;
+		border-radius: 12px;
+		object-fit: cover;
+	}
+
+	.ocu-room-panel__meta {
+		display: flex;
+		justify-content: space-between;
+		color: var(--ocu-pink);
+		font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+	}
+
+	.ocu-room-panel__meta small {
+		color: var(--ocu-muted);
+	}
+
+	.ocu-room-panel p {
+		color: #292929;
+	}
+
+	.ocu-room-panel .ocu-chip-list {
+		margin-top: 0;
+	}
+
+	.ocu-room-panel a {
+		margin-top: auto;
+		text-align: center;
+		align-self: center;
+	}
+
+	.vpc-o-cu .ocu-shared-section.vpc-bao-mau__team,
+	.vpc-o-cu .ocu-shared-section.vpc-bao-mau__faq,
+	.vpc-o-cu .ocu-shared-section.vpc-bao-mau__feedback,
+	.vpc-o-cu .ocu-shared-section.vpc-bao-mau__lead,
+	.vpc-o-cu .ocu-shared-section.vpc-bao-mau__services {
+		min-height: 0;
+	}
+
+	.vpc-o-cu .ocu-shared-section.vpc-bao-mau__team { min-height: 760px; }
+	.vpc-o-cu .ocu-shared-section.vpc-bao-mau__faq { min-height: 1054px; }
+	.vpc-o-cu .ocu-shared-section.vpc-bao-mau__feedback { min-height: 1318px; }
+	.vpc-o-cu .ocu-shared-section.vpc-bao-mau__lead { min-height: 876px; }
+	.vpc-o-cu .ocu-shared-section.vpc-bao-mau__services { min-height: 460px; }
+}
+
+/* Final mobile overrides for the reusable Figma room card. */
+@media (max-width: 767px) {
+	.vpc-o-cu .ocu-room-selector {
+		display: block;
+		margin-top: 32px;
+	}
+
+	.vpc-o-cu .ocu-room-tabs {
+		padding: 4px;
+		display: flex;
+		gap: 4px;
+		border: 1px solid #a3c9e3;
+		border-radius: 16px;
+		background: #fff;
+	}
+
+	.vpc-o-cu .ocu-room-tabs button {
+		flex: 1 1 0;
+		min-width: 0;
+		height: 44px;
+		min-height: 44px;
+		padding: 8px 4px;
+		border: 0;
+		border-radius: 12px;
+		background: transparent;
+		color: #525252;
+		font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+	}
+
+	.vpc-o-cu .ocu-room-tabs button.is-active {
+		border-color: transparent;
+		background: var(--ocu-blue);
+		color: #f8f8f8;
+	}
+
+	.vpc-o-cu .ocu-room-panels {
+		margin-top: 24px;
+	}
+
+	.vpc-o-cu .ocu-room-panel {
+		min-height: 986px;
+		padding: 16px;
+		gap: 16px;
+		border: 0;
+		border-radius: 24px;
+		background: #fafafa;
+		box-shadow: 0 1px 5px rgb(0 0 0 / 15%);
+	}
+
+	.vpc-o-cu .ocu-room-panel__header h3 {
+		font-size: 28px;
+		line-height: 32px;
+	}
+
+	.vpc-o-cu .ocu-room-panel__variants {
+		gap: 8px;
+	}
+
+	.vpc-o-cu .ocu-room-panel__variants button {
+		padding: 8px 16px;
+		white-space: nowrap;
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	.vpc-o-cu .ocu-room-panel__main-image {
+		height: 200px;
+	}
+
+	.vpc-o-cu .ocu-room-panel__description {
+		color: #292929;
+	}
+
+	.vpc-o-cu .ocu-room-panel__features {
+		gap: 8px;
+	}
+
+	.vpc-o-cu .ocu-room-accordion__content ul {
+		margin-top: 0;
+	}
+
+	.vpc-o-cu .ocu-room-panel__consult {
+		width: 100%;
+		margin-top: auto;
+	}
+}

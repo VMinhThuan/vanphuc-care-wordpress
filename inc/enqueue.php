@@ -27,6 +27,8 @@ function vanphuccare_enqueue_assets() {
 	$about_ver     = file_exists( $about_path ) ? (string) filemtime( $about_path ) : $theme_version;
 	$o_cu_path     = get_template_directory() . '/assets/css/o-cu.css';
 	$o_cu_ver      = file_exists( $o_cu_path ) ? (string) filemtime( $o_cu_path ) : $theme_version;
+	$o_cu_js       = get_template_directory() . '/assets/js/o-cu.js';
+	$o_cu_js_ver   = file_exists( $o_cu_js ) ? (string) filemtime( $o_cu_js ) : $theme_version;
 	$bao_mau_path  = get_template_directory() . '/assets/css/bao-mau.css';
 	$bao_mau_ver   = file_exists( $bao_mau_path ) ? (string) filemtime( $bao_mau_path ) : $theme_version;
 	$bao_mau_js    = get_template_directory() . '/assets/js/bao-mau.js';
@@ -41,6 +43,8 @@ function vanphuccare_enqueue_assets() {
 	$bath_js_ver   = file_exists( $bath_js ) ? (string) filemtime( $bath_js ) : $theme_version;
 	$milk_path     = get_template_directory() . '/assets/css/milk.css';
 	$milk_ver      = file_exists( $milk_path ) ? (string) filemtime( $milk_path ) : $theme_version;
+	$services_path = get_template_directory() . '/assets/css/services.css';
+	$services_ver  = file_exists( $services_path ) ? (string) filemtime( $services_path ) : $theme_version;
 	$milk_js       = get_template_directory() . '/assets/js/milk.js';
 	$milk_js_ver   = file_exists( $milk_js ) ? (string) filemtime( $milk_js ) : $theme_version;
 	$about_js      = get_template_directory() . '/assets/js/about.js';
@@ -51,6 +55,7 @@ function vanphuccare_enqueue_assets() {
 	$is_easy_page    = vanphuccare_is_easy_page();
 	$is_bath_page   = vanphuccare_is_tam_be_page();
 	$is_milk_page   = vanphuccare_is_thong_tac_page();
+	$is_services_page = is_post_type_archive( 'vpc_service' ) || is_singular( 'vpc_service' );
 
 	// Enqueue Google Fonts: Fraunces (Heading) & Manrope (Body) - optimized weights, no italic
 	wp_enqueue_style(
@@ -80,10 +85,18 @@ function vanphuccare_enqueue_assets() {
 	}
 
 	if ( $is_o_cu_page && file_exists( $o_cu_path ) ) {
+		if ( file_exists( $bao_mau_path ) ) {
+			wp_enqueue_style(
+				'vanphuccare-bao-mau-shared',
+				get_template_directory_uri() . '/assets/css/bao-mau.css',
+				array( 'vanphuccare-tailwind' ),
+				$bao_mau_ver
+			);
+		}
 		wp_enqueue_style(
 			'vanphuccare-o-cu',
 			get_template_directory_uri() . '/assets/css/o-cu.css',
-			array( 'vanphuccare-tailwind' ),
+			array( 'vanphuccare-tailwind', 'vanphuccare-bao-mau-shared' ),
 			$o_cu_ver
 		);
 	}
@@ -124,6 +137,15 @@ function vanphuccare_enqueue_assets() {
 		);
 	}
 
+	if ( $is_services_page && file_exists( $services_path ) ) {
+		wp_enqueue_style(
+			'vanphuccare-services',
+			get_template_directory_uri() . '/assets/css/services.css',
+			array( 'vanphuccare-tailwind' ),
+			$services_ver
+		);
+	}
+
 	wp_enqueue_script(
 		'vanphuccare-main',
 		get_template_directory_uri() . '/assets/js/main.js',
@@ -138,6 +160,16 @@ function vanphuccare_enqueue_assets() {
 			get_template_directory_uri() . '/assets/js/bao-mau.js',
 			array(),
 			$bao_mau_js_ver,
+			true
+		);
+	}
+
+	if ( $is_o_cu_page && file_exists( $o_cu_js ) ) {
+		wp_enqueue_script(
+			'vanphuccare-o-cu',
+			get_template_directory_uri() . '/assets/js/o-cu.js',
+			array(),
+			$o_cu_js_ver,
 			true
 		);
 	}
