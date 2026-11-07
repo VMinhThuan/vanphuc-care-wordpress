@@ -68,6 +68,20 @@
 		white-space: normal !important;
 	}
 
+	/* Figma node 3207:38766: the bath package CTA is content-sized, not
+	 * stretched to the card width. Keep this scoped to the bath package page. */
+	body:has(.vpc-bath__packages) .vpc-bath__package-button,
+	body:has(.vpc-bath__packages) .vpc-bath__package-card.is-featured .vpc-bath__package-button {
+		width: max-content !important;
+		max-width: 100%;
+		min-height: 48px !important;
+		padding: 12px 24px !important;
+		border: 0 !important;
+		border-radius: 9999px;
+		color: #fafafa;
+		background: var(--bath-blue);
+	}
+
 	/* The final challenge sentence in the screenshot must not split at an
 	 * explicit HTML break before “bé”. */
 	.vpc-bath__challenges .vpc-bath__challenge-last-copy {
