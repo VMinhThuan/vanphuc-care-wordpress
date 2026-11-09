@@ -411,7 +411,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	justify-content: center;
 	gap: 8px;
 	min-height: 210px;
-	padding: 8px 12px;
+	padding: 12px;
 	border-radius: 12px;
 	background: #fff;
 	box-shadow: 0 1px 5px rgba(0, 0, 0, .15);
@@ -1121,8 +1121,17 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	white-space: nowrap;
 }
 
-.about-consultation-field label span {
+.about-consultation-field label > span:first-child {
 	color: #f00;
+}
+
+.about-consultation-shared-select {
+	width: 100%;
+}
+
+.about-consultation-shared-select .vpc-select-trigger {
+	width: 100%;
+	min-height: 50px;
 }
 
 .about-consultation-field input,
@@ -1237,6 +1246,22 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 	.about-team {
 		padding-right: max(var(--about-shell-gutter), calc((100% - var(--about-shell-width)) / 2 + var(--about-shell-gutter)));
 		padding-left: max(var(--about-shell-gutter), calc((100% - var(--about-shell-width)) / 2 + var(--about-shell-gutter)));
+	}
+
+	/* Keep the mission copy close to the image. With space-between, the
+	 * remaining shell width was added on top of the intended 93px gap. */
+	.about-mission {
+		justify-content: flex-start;
+	}
+
+	/* Fill the remaining header-shell width so the intro copy and its two
+	 * cards share the same left/right alignment as the navigation content. */
+	.about-mission__copy {
+		max-width: none;
+	}
+
+	.about-mission__intro {
+		max-width: none;
 	}
 
 	.about-partners__logos {
@@ -1400,7 +1425,7 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 		width: 100%;
 		min-height: 40px;
 		padding: 8px 16px;
-		font-size: 12px;
+		font-size: 16px;
 		line-height: 24px;
 	}
 

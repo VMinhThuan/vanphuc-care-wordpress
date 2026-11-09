@@ -294,16 +294,22 @@ $about_feedback = array(
 				</div>
 
 				<div class="about-consultation-field" data-node-id="2351:6890">
-					<label for="about-consultation-service"><span aria-hidden="true">*</span> Gói dịch vụ quan tâm</label>
-					<div class="about-consultation-select-wrap">
-						<select id="about-consultation-service" class="vpc-form-select" aria-label="Gói dịch vụ quan tâm">
-							<option value="" selected>Gói 20 buổi</option>
-							<option value="trung-tam-o-cu">Trung tâm ở cữ</option>
-							<option value="bao-mau-tai-nha">Bảo mẫu tại nhà</option>
-							<option value="tam-be-so-sinh">Tắm bé sau sinh</option>
-						</select>
-						<img src="<?php echo esc_url( trailingslashit( get_template_directory_uri() ) . 'assets/images/icons/contact-chevron-down.svg' ); ?>" width="20.5" height="12" alt="" aria-hidden="true">
-					</div>
+					<?php
+					get_template_part( 'template-parts/components/custom-select', null, [
+						'id'          => 'about-consultation-service',
+						'name'        => 'service',
+						'label'       => 'Gói dịch vụ quan tâm',
+						'placeholder' => 'Chọn gói dịch vụ',
+						'value'       => 'goi-20-buoi',
+						'options'     => [
+							'goi-20-buoi'       => 'Gói 20 buổi',
+							'trung-tam-o-cu'    => 'Trung tâm ở cữ',
+							'bao-mau-tai-nha'   => 'Bảo mẫu tại nhà',
+							'tam-be-so-sinh'    => 'Tắm bé sau sinh',
+						],
+						'class'       => 'about-consultation-shared-select',
+					] );
+					?>
 				</div>
 
 				<div class="about-consultation-field" data-node-id="2315:21363">

@@ -67,10 +67,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<!-- Right Action: Desktop CTA Button & Mobile Hamburger Toggle -->
 		<div class="flex items-center gap-3 sm:gap-4 shrink-0">
-			<!-- CTA Header: hidden on mobile, display on desktop >= 1280px (Size lg: h-14 / 56px, padding 32 14) -->
+			<!-- CTA Header: hidden on mobile, display on desktop >= 1280px (Size md: h-12 / 48px, padding 24 12) -->
 			<button data-open-modal="vpc-consultation-modal" 
 			        type="button"
-				class="vpc-button vpc-button-lg hidden xl:inline-flex items-center justify-center h-14 px-8 text-base font-semibold rounded-full bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-border-focus-default">
+				class="vpc-button vpc-button-md hidden xl:inline-flex items-center justify-center h-12 px-6 text-base font-medium rounded-full bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-border-focus-default">
 				<span>Tư vấn miễn phí</span>
 			</button>
 

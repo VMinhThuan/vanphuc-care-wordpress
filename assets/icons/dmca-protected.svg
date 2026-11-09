@@ -1,0 +1,9 @@
+<svg width="540" height="116" viewBox="0 0 540 116" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">DMCA Protected</title>
+  <desc id="desc">DMCA Protected badge</desc>
+  <rect width="540" height="116" rx="2" fill="#8CC63F"/>
+  <rect x="184" width="356" height="116" fill="#242122"/>
+  <path d="M180 0H184V116H180V0Z" fill="#F4F4F4"/>
+  <text x="90" y="77" text-anchor="middle" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="700" letter-spacing="-1">DMCA</text>
+  <text x="362" y="77" text-anchor="middle" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="700" letter-spacing="-1">PROTECTED</text>
+</svg>

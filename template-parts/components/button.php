@@ -50,10 +50,10 @@ $base_classes = 'vpc-button inline-flex items-center justify-center font-medium 
 // - md: desktop body button, drawer CTA, sticky CTA (h-12 / 48px, padding 24 12)
 // - lg: header CTA (h-14 / 56px, padding 32 14)
 $size_classes = [
-	'sm' => 'h-10 px-4 text-sm gap-1.5 rounded-full',
+	'sm' => 'h-10 px-4 text-base gap-1.5 rounded-full',
 	'md' => 'h-12 px-6 text-base gap-2 rounded-full',
 	'lg' => 'h-14 px-8 text-base font-semibold gap-2.5 rounded-full',
-	'body' => 'h-10 px-4 text-sm gap-1.5 rounded-full xl:h-12 xl:px-6 xl:text-base xl:gap-2',
+	'body' => 'h-10 px-4 text-base gap-1.5 rounded-full xl:h-12 xl:px-6 xl:text-base xl:gap-2',
 ];
 $current_size = $size_classes[ $size ] ?? $size_classes['md'];
 

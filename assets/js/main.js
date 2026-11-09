@@ -53,6 +53,29 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 	}
 
+	// Shared "Các Dịch Vụ Khác" carousel. Arrow controls stay outside the
+	// linked cards so they never block the card anchors from receiving clicks.
+	document.querySelectorAll('.vpc-bao-mau__services').forEach(function (section) {
+		const viewport = section.querySelector('.vpc-bao-mau__services-viewport');
+		const track = section.querySelector('.vpc-bao-mau__services-track');
+		if (!viewport || !track) return;
+
+		const getStep = function () {
+			const card = track.querySelector('.vpc-bao-mau__service-card');
+			if (!card) return viewport.clientWidth;
+			const trackStyles = window.getComputedStyle(track);
+			const gap = parseFloat(trackStyles.columnGap || trackStyles.gap) || 0;
+			return card.getBoundingClientRect().width + gap;
+		};
+
+		section.querySelectorAll('.vpc-bao-mau__services-arrow').forEach(function (button) {
+			button.addEventListener('click', function () {
+				const direction = button.classList.contains('vpc-bao-mau__services-arrow--next') ? 1 : -1;
+				viewport.scrollBy({ left: direction * getStep(), behavior: 'smooth' });
+			});
+		});
+	});
+
 	// Hide the mobile sticky CTA while any part of the footer is visible so it
 	// cannot cover the footer links or certification badges on small screens.
 	const mobileStickyCta = document.getElementById('mobile-sticky-cta');
@@ -81,6 +104,52 @@ document.addEventListener('DOMContentLoaded', function () {
 			});
 		});
 	}
+
+	// Service navigation: the label links to the overview, while the adjacent
+	// chevron is the only control that opens the related-services dropdown.
+	const serviceMenuItems = document.querySelectorAll('.vpc-service-menu-item');
+	serviceMenuItems.forEach(function (item) {
+		const toggle = item.querySelector(':scope > .vpc-service-menu-control > .vpc-service-menu-toggle');
+		const dropdown = item.querySelector(':scope > .vpc-service-dropdown');
+
+		if (!toggle || !dropdown) return;
+
+		function closeServiceDropdown(restoreFocus) {
+			dropdown.hidden = true;
+			toggle.setAttribute('aria-expanded', 'false');
+			if (restoreFocus) toggle.focus();
+		}
+
+		function closeOtherServiceDropdowns() {
+			document.querySelectorAll('.vpc-service-menu-toggle[aria-expanded="true"]').forEach(function (otherToggle) {
+				if (otherToggle === toggle) return;
+				otherToggle.setAttribute('aria-expanded', 'false');
+				const otherDropdown = document.getElementById(otherToggle.getAttribute('aria-controls'));
+				if (otherDropdown) otherDropdown.hidden = true;
+			});
+		}
+
+		toggle.addEventListener('click', function (event) {
+			event.preventDefault();
+			event.stopPropagation();
+			const shouldOpen = toggle.getAttribute('aria-expanded') !== 'true';
+
+			closeOtherServiceDropdowns();
+			toggle.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+			dropdown.hidden = !shouldOpen;
+		});
+
+		item.addEventListener('keydown', function (event) {
+			if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+				event.preventDefault();
+				closeServiceDropdown(true);
+			}
+		});
+
+		document.addEventListener('click', function (event) {
+			if (!item.contains(event.target)) closeServiceDropdown(false);
+		});
+	});
 
 	// Custom Select Dropdowns
 	const selectComponents = document.querySelectorAll('[data-custom-select]');
@@ -164,12 +233,126 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 	});
 
+	// Homepage consultation selects use the dedicated Figma select-item component.
+	const consultationSelectComponents = document.querySelectorAll('[data-vpc-consultation-select]');
+	consultationSelectComponents.forEach(function (container) {
+		const nativeSelect = container.querySelector('.vpc-consultation-select-native');
+		const trigger = container.querySelector('.vpc-consultation-select-trigger');
+		const menu = container.querySelector('.vpc-consultation-select-menu');
+		const label = container.querySelector('[data-vpc-consultation-select-label]');
+		const options = Array.from(container.querySelectorAll('.vpc-consultation-select-option'));
+
+		if (!nativeSelect || !trigger || !menu || !label || !options.length) return;
+
+		options.forEach(function (option) {
+			option.tabIndex = -1;
+		});
+
+		function getSelectedOption() {
+			return options.find(function (option) {
+				return option.getAttribute('data-value') === nativeSelect.value;
+			});
+		}
+
+		function closeDropdown(restoreFocus) {
+			container.classList.remove('is-open');
+			trigger.setAttribute('aria-expanded', 'false');
+			if (restoreFocus) trigger.focus();
+		}
+
+		function openDropdown() {
+			document.querySelectorAll('[data-vpc-consultation-select].is-open').forEach(function (other) {
+				if (other !== container) {
+					other.classList.remove('is-open');
+					const otherTrigger = other.querySelector('.vpc-consultation-select-trigger');
+					if (otherTrigger) otherTrigger.setAttribute('aria-expanded', 'false');
+				}
+			});
+
+			container.classList.add('is-open');
+			trigger.setAttribute('aria-expanded', 'true');
+			const selectedOption = getSelectedOption() || options[0];
+			if (selectedOption) selectedOption.focus();
+		}
+
+		function updateSelection(option, closeAfterSelect) {
+			const value = option.getAttribute('data-value') || '';
+			const text = option.textContent.trim();
+			nativeSelect.value = value;
+			nativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+			label.textContent = text;
+			trigger.classList.toggle('is-placeholder', !value);
+			options.forEach(function (item) {
+				item.setAttribute('aria-selected', item === option ? 'true' : 'false');
+			});
+			if (closeAfterSelect) closeDropdown(true);
+		}
+
+		trigger.addEventListener('click', function (event) {
+			event.stopPropagation();
+			if (trigger.getAttribute('aria-expanded') === 'true') {
+				closeDropdown(false);
+			} else {
+				openDropdown();
+			}
+		});
+
+		trigger.addEventListener('keydown', function (event) {
+			if (event.key === 'ArrowDown' || event.key === 'Enter' || event.key === ' ') {
+				event.preventDefault();
+				openDropdown();
+			} else if (event.key === 'Escape') {
+				closeDropdown(false);
+			}
+		});
+
+		options.forEach(function (option, index) {
+			option.addEventListener('click', function (event) {
+				event.stopPropagation();
+				updateSelection(option, true);
+			});
+
+			option.addEventListener('keydown', function (event) {
+				let nextIndex = index;
+				if (event.key === 'ArrowDown') nextIndex = (index + 1) % options.length;
+				if (event.key === 'ArrowUp') nextIndex = (index - 1 + options.length) % options.length;
+				if (event.key === 'Home') nextIndex = 0;
+				if (event.key === 'End') nextIndex = options.length - 1;
+				if (nextIndex !== index) {
+					event.preventDefault();
+					options[nextIndex].focus();
+				} else if (event.key === 'Enter' || event.key === ' ') {
+					event.preventDefault();
+					updateSelection(option, true);
+				} else if (event.key === 'Escape') {
+					event.preventDefault();
+					closeDropdown(true);
+				}
+			});
+		});
+
+		nativeSelect.addEventListener('change', function () {
+			const selectedOption = getSelectedOption();
+			if (!selectedOption) return;
+			label.textContent = selectedOption.textContent.trim();
+			trigger.classList.toggle('is-placeholder', !nativeSelect.value);
+			options.forEach(function (option) {
+				option.setAttribute('aria-selected', option === selectedOption ? 'true' : 'false');
+			});
+		});
+	});
+
 	// Global click to close dropdowns
 	document.addEventListener('click', function () {
 		document.querySelectorAll('[data-custom-select] .vpc-select-trigger[aria-expanded="true"]').forEach(function (trigger) {
 			trigger.setAttribute('aria-expanded', 'false');
 			const dropdown = trigger.closest('[data-custom-select]').querySelector('.vpc-select-dropdown');
 			if (dropdown) dropdown.classList.add('hidden');
+		});
+		document.querySelectorAll('[data-vpc-consultation-select].is-open').forEach(function (container) {
+			container.classList.remove('is-open');
+			const trigger = container.querySelector('.vpc-consultation-select-trigger');
+			if (trigger) trigger.setAttribute('aria-expanded', 'false');
 		});
 	});
 

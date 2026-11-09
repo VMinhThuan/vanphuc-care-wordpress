@@ -190,19 +190,19 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 
 					<!-- Checklist points matching Figma with blue check badge -->
 					<ul class="intro-checklist space-y-3 pt-1 text-sm sm:text-base font-body font-medium text-text-body-default">
-						<li class="flex items-start gap-3">
+						<li class="flex items-start gap-2">
 							<svg class="w-5 h-5 shrink-0 mt-0.5" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M23.7581 12.6477C24.0806 12.2768 24.0806 11.725 23.7581 11.3542L21.8639 9.17583C21.6875 8.97297 21.6016 8.70687 21.6261 8.43917L21.8898 5.56056C21.9349 5.06888 21.6092 4.61975 21.1279 4.50979L18.3402 3.87296C18.0754 3.81247 17.8473 3.64541 17.7098 3.41122L16.2496 0.924729C15.9977 0.495784 15.4656 0.321788 15.0089 0.519011L12.3913 1.64949C12.1419 1.75718 11.8591 1.75718 11.6097 1.64949L8.99098 0.518536C8.53478 0.321516 8.00325 0.494934 7.75102 0.923092L6.29208 3.39961C6.154 3.63399 5.92519 3.80088 5.65983 3.86076L2.8757 4.48903C2.3932 4.59791 2.06613 5.04755 2.11114 5.54013L2.3751 8.42906C2.3995 8.69608 2.31405 8.96152 2.13846 9.16416L0.240724 11.3543C-0.0806752 11.7253 -0.0801875 12.2761 0.241868 12.6465L2.13723 14.8261C2.31357 15.0289 2.39946 15.2949 2.375 15.5625L2.11093 18.4527C2.06601 18.9443 2.3917 19.3933 2.87294 19.5033L5.6616 20.1403C5.92591 20.2007 6.15368 20.3673 6.29129 20.6009L7.74991 23.0769C8.00262 23.5058 8.53555 23.679 8.99213 23.4804L11.6088 22.3426C11.8587 22.234 12.1424 22.2336 12.3926 22.3417L15.01 23.472C15.4662 23.6691 15.9978 23.4956 16.25 23.0675L17.7097 20.5896C17.8473 20.356 18.0751 20.1894 18.3394 20.1291L21.1279 19.492C21.6092 19.3821 21.9349 18.933 21.8898 18.4413L21.6261 15.5627C21.6016 15.295 21.6875 15.0289 21.8639 14.826L23.7581 12.6477ZM10.1697 17.0066C9.99977 17.1779 9.72282 17.1779 9.55293 17.0066L6.42685 13.8544C5.97218 13.3959 5.97267 12.6565 6.42793 12.1986C6.88801 11.7359 7.63697 11.7367 8.09604 12.2004L9.6754 13.7956C9.77778 13.899 9.94485 13.8991 10.0473 13.7957L15.5799 8.21239C16.0392 7.74894 16.7881 7.7483 17.2481 8.21097C17.7035 8.66893 17.704 9.40853 17.2492 9.86711L10.1697 17.0066Z" fill="var(--color-icon-primary-default)"/>
 							</svg>
 							<span>Liệu trình chuẩn y khoa, cá nhân hóa theo nhu cầu</span>
 						</li>
-						<li class="flex items-start gap-3">
+						<li class="flex items-start gap-2">
 							<svg class="w-5 h-5 shrink-0 mt-0.5" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M23.7581 12.6477C24.0806 12.2768 24.0806 11.725 23.7581 11.3542L21.8639 9.17583C21.6875 8.97297 21.6016 8.70687 21.6261 8.43917L21.8898 5.56056C21.9349 5.06888 21.6092 4.61975 21.1279 4.50979L18.3402 3.87296C18.0754 3.81247 17.8473 3.64541 17.7098 3.41122L16.2496 0.924729C15.9977 0.495784 15.4656 0.321788 15.0089 0.519011L12.3913 1.64949C12.1419 1.75718 11.8591 1.75718 11.6097 1.64949L8.99098 0.518536C8.53478 0.321516 8.00325 0.494934 7.75102 0.923092L6.29208 3.39961C6.154 3.63399 5.92519 3.80088 5.65983 3.86076L2.8757 4.48903C2.3932 4.59791 2.06613 5.04755 2.11114 5.54013L2.3751 8.42906C2.3995 8.69608 2.31405 8.96152 2.13846 9.16416L0.240724 11.3543C-0.0806752 11.7253 -0.0801875 12.2761 0.241868 12.6465L2.13723 14.8261C2.31357 15.0289 2.39946 15.2949 2.375 15.5625L2.11093 18.4527C2.06601 18.9443 2.3917 19.3933 2.87294 19.5033L5.6616 20.1403C5.92591 20.2007 6.15368 20.3673 6.29129 20.6009L7.74991 23.0769C8.00262 23.5058 8.53555 23.679 8.99213 23.4804L11.6088 22.3426C11.8587 22.234 12.1424 22.2336 12.3926 22.3417L15.01 23.472C15.4662 23.6691 15.9978 23.4956 16.25 23.0675L17.7097 20.5896C17.8473 20.356 18.0751 20.1894 18.3394 20.1291L21.1279 19.492C21.6092 19.3821 21.9349 18.933 21.8898 18.4413L21.6261 15.5627C21.6016 15.295 21.6875 15.0289 21.8639 14.826L23.7581 12.6477ZM10.1697 17.0066C9.99977 17.1779 9.72282 17.1779 9.55293 17.0066L6.42685 13.8544C5.97218 13.3959 5.97267 12.6565 6.42793 12.1986C6.88801 11.7359 7.63697 11.7367 8.09604 12.2004L9.6754 13.7956C9.77778 13.899 9.94485 13.8991 10.0473 13.7957L15.5799 8.21239C16.0392 7.74894 16.7881 7.7483 17.2481 8.21097C17.7035 8.66893 17.704 9.40853 17.2492 9.86711L10.1697 17.0066Z" fill="var(--color-icon-primary-default)"/>
 							</svg>
 							<span>100% đội ngũ điều dưỡng, hộ sinh chuyên môn cao, giàu kinh nghiệm</span>
 						</li>
-						<li class="flex items-start gap-3">
+						<li class="flex items-start gap-2">
 							<svg class="w-5 h-5 shrink-0 mt-0.5" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M23.7581 12.6477C24.0806 12.2768 24.0806 11.725 23.7581 11.3542L21.8639 9.17583C21.6875 8.97297 21.6016 8.70687 21.6261 8.43917L21.8898 5.56056C21.9349 5.06888 21.6092 4.61975 21.1279 4.50979L18.3402 3.87296C18.0754 3.81247 17.8473 3.64541 17.7098 3.41122L16.2496 0.924729C15.9977 0.495784 15.4656 0.321788 15.0089 0.519011L12.3913 1.64949C12.1419 1.75718 11.8591 1.75718 11.6097 1.64949L8.99098 0.518536C8.53478 0.321516 8.00325 0.494934 7.75102 0.923092L6.29208 3.39961C6.154 3.63399 5.92519 3.80088 5.65983 3.86076L2.8757 4.48903C2.3932 4.59791 2.06613 5.04755 2.11114 5.54013L2.3751 8.42906C2.3995 8.69608 2.31405 8.96152 2.13846 9.16416L0.240724 11.3543C-0.0806752 11.7253 -0.0801875 12.2761 0.241868 12.6465L2.13723 14.8261C2.31357 15.0289 2.39946 15.2949 2.375 15.5625L2.11093 18.4527C2.06601 18.9443 2.3917 19.3933 2.87294 19.5033L5.6616 20.1403C5.92591 20.2007 6.15368 20.3673 6.29129 20.6009L7.74991 23.0769C8.00262 23.5058 8.53555 23.679 8.99213 23.4804L11.6088 22.3426C11.8587 22.234 12.1424 22.2336 12.3926 22.3417L15.01 23.472C15.4662 23.6691 15.9978 23.4956 16.25 23.0675L17.7097 20.5896C17.8473 20.356 18.0751 20.1894 18.3394 20.1291L21.1279 19.492C21.6092 19.3821 21.9349 18.933 21.8898 18.4413L21.6261 15.5627C21.6016 15.295 21.6875 15.0289 21.8639 14.826L23.7581 12.6477ZM10.1697 17.0066C9.99977 17.1779 9.72282 17.1779 9.55293 17.0066L6.42685 13.8544C5.97218 13.3959 5.97267 12.6565 6.42793 12.1986C6.88801 11.7359 7.63697 11.7367 8.09604 12.2004L9.6754 13.7956C9.77778 13.899 9.94485 13.8991 10.0473 13.7957L15.5799 8.21239C16.0392 7.74894 16.7881 7.7483 17.2481 8.21097C17.7035 8.66893 17.704 9.40853 17.2492 9.86711L10.1697 17.0066Z" fill="var(--color-icon-primary-default)"/>
 							</svg>
@@ -295,14 +295,14 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 
 				<!-- Right Column (3 checklist items) -->
 				<div class="flex flex-col gap-4 sm:gap-6 shrink-0 w-full lg:w-auto pt-1 lg:pt-3">
-					<div class="flex items-center gap-3">
+					<div class="flex items-center gap-2">
 						<svg class="w-5 h-5 text-text-heading-secondary-default shrink-0" viewBox="0 0 24 24" fill="currentColor">
 							<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
 						</svg>
 						<span class="font-body font-normal sm:font-medium text-base text-text-body-default leading-6">Nâng niu mẹ và thiên thần nhỏ</span>
 					</div>
 
-					<div class="flex items-center gap-3">
+					<div class="flex items-center gap-2">
 						<svg class="w-5 h-5 text-text-heading-secondary-default shrink-0" viewBox="0 0 24 24" fill="currentColor">
 							<path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/>
 							<path d="M9.5 12l2 2 4.5-4.5" stroke="var(--color-neutral-white)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
@@ -310,7 +310,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 						<span class="font-body font-normal sm:font-medium text-base text-text-body-default leading-6">Quy trình chăm sóc khoa học</span>
 					</div>
 
-					<div class="flex items-center gap-3">
+					<div class="flex items-center gap-2">
 						<img src="<?php echo esc_url( $theme_uri . '/assets/images/home/icon-home-care-exact.svg' ); ?>" width="24" height="18" class="w-6 h-[18px] shrink-0" alt="" aria-hidden="true" />
 						<span class="font-body font-normal sm:font-medium text-base text-text-body-default leading-6">Phòng nhi và phòng mẹ riêng biệt</span>
 					</div>
@@ -318,10 +318,10 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 			</div>
 
 			<!-- White Highlights Card (Frame 2147224015) -->
-			<div class="w-full max-w-[1400px] bg-surface-background-default sm:bg-surface-card-default rounded-xl shadow-card p-4 sm:py-6 sm:px-6 lg:px-10">
-				<div class="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-border-divider-default gap-3 sm:gap-0">
+			<div class="vpc-o-cu-highlights w-full max-w-[1400px] bg-surface-card-default rounded-xl shadow-card p-4 sm:py-6 sm:px-6 lg:px-10">
+				<div class="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-border-divider-default gap-0 sm:gap-0">
 					<!-- Card 1 -->
-					<div class="flex items-center gap-4 py-2 sm:py-0 sm:px-6 bg-surface-card-default sm:bg-transparent rounded-lg sm:rounded-none p-3 sm:p-0">
+					<div class="vpc-o-cu-highlight flex items-center gap-4 px-0 py-3 sm:px-6 sm:py-0 bg-transparent rounded-none">
 						<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/postpartum-recovery.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px] shrink-0" alt="" aria-hidden="true" />
 						<div>
 							<h4 class="font-body font-medium text-lg sm:text-2xl text-text-heading-primary-default leading-snug mb-0.5">Phục hồi chuyên sâu</h4>
@@ -330,7 +330,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 					</div>
 
 					<!-- Card 2 -->
-					<div class="flex items-center gap-4 py-2 sm:py-0 sm:px-6 bg-surface-card-default sm:bg-transparent rounded-lg sm:rounded-none p-3 sm:p-0">
+					<div class="vpc-o-cu-highlight flex items-center gap-4 px-0 py-3 sm:px-6 sm:py-0 bg-transparent rounded-none">
 						<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/premium-space.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px] shrink-0" alt="" aria-hidden="true" />
 						<div>
 							<h4 class="font-body font-medium text-lg sm:text-2xl text-text-heading-primary-default leading-snug mb-0.5">Không gian tiện nghi</h4>
@@ -339,7 +339,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 					</div>
 
 					<!-- Card 3 -->
-					<div class="flex items-center gap-4 py-2 sm:py-0 sm:px-6 bg-surface-card-default sm:bg-transparent rounded-lg sm:rounded-none p-3 sm:p-0">
+					<div class="vpc-o-cu-highlight flex items-center gap-4 px-0 py-3 sm:px-6 sm:py-0 bg-transparent rounded-none">
 						<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/nursery-care.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px] shrink-0" alt="" aria-hidden="true" />
 						<div>
 							<h4 class="font-body font-medium text-lg sm:text-2xl text-text-heading-primary-default leading-snug mb-0.5">Phòng dưỡng nhi 24/7</h4>
@@ -503,6 +503,11 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 
 				<!-- Right Content (50% width) -->
 				<div class="homepage-prenatal-copy flex flex-col items-center lg:items-start text-center lg:text-left w-full">
+					<!-- Section badge -->
+					<div class="homepage-prenatal-badge mb-6">
+						<img src="<?php echo esc_url( $theme_uri . '/assets/images/lop-hoc-tien-san/icons/star-light.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true" />
+						<span>LỚP HỌC TIỀN SẢN</span>
+					</div>
 
 					<!-- Heading -->
 					<div class="flex flex-col mb-3">
@@ -525,7 +530,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 							Cha mẹ học được những gì:
 						</p>
 						<div class="w-full flex flex-col gap-3.5 sm:gap-4 lg:gap-6 items-start">
-							<div class="flex items-center gap-3.5 text-left w-full">
+							<div class="flex items-center gap-2 text-left w-full">
 								<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/course-check.svg' ); ?>" width="25" height="24" class="w-[25px] h-6 shrink-0" alt="" aria-hidden="true" />
 								<svg class="hidden" viewBox="0 0 24 24" fill="currentColor">
 									<path d="M12 1L9.27 2.94 6 2.67l-.78 3.24L2.27 7.7l.88 3.19L1 13.56l2.39 2.33-.27 3.32 3.24.78 1.79 2.95 3.19-.88 2.66 2.15 2.33-2.39 3.32.27.78-3.24 2.95-1.79-.88-3.19L23 10.44l-2.39-2.33.27-3.32-3.24-.78L15.85 1.06 12.66 1.94 12 1z"/>
@@ -533,7 +538,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 								</svg>
 								<span class="font-body font-normal sm:font-medium text-base text-text-body-default leading-6">Phần 1: Thai kỳ an toàn &amp; Vượt cạn chủ động</span>
 							</div>
-							<div class="flex items-center gap-3.5 text-left w-full">
+							<div class="flex items-center gap-2 text-left w-full">
 								<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/course-check.svg' ); ?>" width="25" height="24" class="w-[25px] h-6 shrink-0" alt="" aria-hidden="true" />
 								<svg class="hidden" viewBox="0 0 24 24" fill="currentColor">
 									<path d="M12 1L9.27 2.94 6 2.67l-.78 3.24L2.27 7.7l.88 3.19L1 13.56l2.39 2.33-.27 3.32 3.24.78 1.79 2.95 3.19-.88 2.66 2.15 2.33-2.39 3.32.27.78-3.24 2.95-1.79-.88-3.19L23 10.44l-2.39-2.33.27-3.32-3.24-.78L15.85 1.06 12.66 1.94 12 1z"/>
@@ -541,7 +546,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 								</svg>
 								<span class="font-body font-normal sm:font-medium text-base text-text-body-default leading-6">Phần 2: Nền tảng sữa mẹ &amp; Đọc vị nhu cầu của bé</span>
 							</div>
-							<div class="flex items-center gap-3.5 text-left w-full">
+							<div class="flex items-center gap-2 text-left w-full">
 								<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/course-check.svg' ); ?>" width="25" height="24" class="w-[25px] h-6 shrink-0" alt="" aria-hidden="true" />
 								<svg class="hidden" viewBox="0 0 24 24" fill="currentColor">
 									<path d="M12 1L9.27 2.94 6 2.67l-.78 3.24L2.27 7.7l.88 3.19L1 13.56l2.39 2.33-.27 3.32 3.24.78 1.79 2.95 3.19-.88 2.66 2.15 2.33-2.39 3.32.27.78-3.24 2.95-1.79-.88-3.19L23 10.44l-2.39-2.33.27-3.32-3.24-.78L15.85 1.06 12.66 1.94 12 1z"/>
@@ -930,10 +935,10 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 			</div>
 
 			<!-- 3 Press Cards (Mobile horizontal scroll snap, Desktop grid) -->
-			<div class="flex flex-row overflow-x-auto scrollbar-none gap-6 md:gap-4 px-5 -mx-5 pb-2 snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-3 md:mx-0 md:px-0 md:pb-0">
+			<div class="press-cards-track flex flex-row overflow-x-auto scrollbar-none gap-6 md:gap-4 px-5 -mx-5 snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-3 md:mx-0 md:px-0">
 
 				<!-- Card 1 -->
-				<article class="min-w-[300px] w-[300px] md:min-w-0 md:w-auto snap-start bg-surface-card-default rounded-2xl p-4 sm:p-5 border border-neutral-100 hover:shadow-md transition-all duration-300 flex flex-col group shrink-0 md:shrink">
+				<article class="press-card min-w-[300px] w-[300px] md:min-w-0 md:w-auto snap-start bg-surface-card-default rounded-2xl p-4 sm:p-5 border border-neutral-100 hover:shadow-md transition-all duration-300 flex flex-col group shrink-0 md:shrink">
 					<!-- Thumbnail Image -->
 					<div class="relative w-full aspect-[268/208] rounded-xl overflow-hidden bg-neutral-200">
 							<?php $press_featured_image_url = vpc_image_url( 'home/Bai-bao-noi-bat.webp', 'large' ); ?>
@@ -964,7 +969,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 				</article>
 
 				<!-- Card 2 -->
-				<article class="min-w-[300px] w-[300px] md:min-w-0 md:w-auto snap-start bg-surface-card-default rounded-2xl p-4 sm:p-5 border border-neutral-100 hover:shadow-md transition-all duration-300 flex flex-col group shrink-0 md:shrink">
+				<article class="press-card min-w-[300px] w-[300px] md:min-w-0 md:w-auto snap-start bg-surface-card-default rounded-2xl p-4 sm:p-5 border border-neutral-100 hover:shadow-md transition-all duration-300 flex flex-col group shrink-0 md:shrink">
 					<!-- Thumbnail Image -->
 					<div class="relative w-full aspect-[268/208] rounded-xl overflow-hidden bg-neutral-200">
 							<?php $press_event_two_image_url = vpc_image_url( 'press_event_2.webp', 'large' ); ?>
@@ -993,7 +998,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 				</article>
 
 				<!-- Card 3 -->
-				<article class="min-w-[300px] w-[300px] md:min-w-0 md:w-auto snap-start bg-surface-card-default rounded-2xl p-4 sm:p-5 border border-neutral-100 hover:shadow-md transition-all duration-300 flex flex-col group shrink-0 md:shrink">
+				<article class="press-card min-w-[300px] w-[300px] md:min-w-0 md:w-auto snap-start bg-surface-card-default rounded-2xl p-4 sm:p-5 border border-neutral-100 hover:shadow-md transition-all duration-300 flex flex-col group shrink-0 md:shrink">
 					<!-- Thumbnail Image -->
 					<div class="relative w-full aspect-[268/208] rounded-xl overflow-hidden bg-neutral-200">
 							<?php $press_event_three_image_url = vpc_image_url( 'press_event_3.webp', 'large' ); ?>
@@ -1069,17 +1074,17 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 					</div>
 
 					<div class="vpc-consultation-field">
-						<label>
-							<span class="text-text-error-default">*</span> Dịch vụ quan tâm
-						</label>
-						<div class="vpc-consultation-select-wrap">
-						<select name="service" required class="vpc-form-select vpc-consultation-control vpc-consultation-select">
-								<option value="" disabled selected>Trung tâm ở cữ</option>
-								<?php foreach ( $consultation_services as $service_value => $service_label ) : ?>
-									<option value="<?php echo esc_attr( $service_value ); ?>"><?php echo esc_html( $service_label ); ?></option>
-								<?php endforeach; ?>
-							</select>
-						</div>
+						<?php
+						get_template_part( 'template-parts/components/custom-select', null, [
+							'id'          => 'home-section-service',
+							'name'        => 'service',
+							'label'       => 'Dịch vụ quan tâm',
+							'placeholder' => 'Chọn dịch vụ',
+							'required'    => true,
+							'value'       => 'trung-tam-o-cu',
+							'options'     => $consultation_services,
+						] );
+						?>
 					</div>
 
 					<fieldset class="vpc-consultation-field vpc-consultation-stage">
@@ -1092,15 +1097,16 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 					</fieldset>
 
 					<div class="vpc-consultation-field">
-						<label><span class="text-text-error-default">*</span> Tuần thai</label>
-						<div class="vpc-consultation-select-wrap">
-						<select name="gestational_age" required class="vpc-form-select vpc-consultation-control vpc-consultation-select">
-								<option value="" disabled selected>Chọn giai đoạn</option>
-								<?php foreach ( $gestational_age_options as $age_value => $age_label ) : ?>
-									<option value="<?php echo esc_attr( $age_value ); ?>"><?php echo esc_html( $age_label ); ?></option>
-								<?php endforeach; ?>
-							</select>
-						</div>
+						<?php
+						get_template_part( 'template-parts/components/custom-select', null, [
+							'id'          => 'home-section-gestational-age',
+							'name'        => 'gestational_age',
+							'label'       => 'Tuần thai',
+							'placeholder' => 'Chọn giai đoạn',
+							'required'    => true,
+							'options'     => $gestational_age_options,
+						] );
+						?>
 					</div>
 
 					<div class="vpc-consultation-field">
@@ -1140,7 +1146,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 			</div>
 
 			<!-- Existing WordPress posts, preserving the Figma card layout. -->
-			<div class="flex flex-row overflow-x-auto scrollbar-none gap-4 px-5 -mx-5 pb-2 snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-3 md:mx-0 md:px-0 md:pb-0">
+			<div class="knowledge-cards-track flex flex-row overflow-x-auto scrollbar-none gap-4 px-0 mx-0 pb-2 snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-3 md:mx-0 md:px-0 md:pb-0">
 				<?php
 				$featured_posts = new WP_Query( array(
 					'post_type'           => 'post',

@@ -98,12 +98,12 @@
 .vpc-milk__lead-card input,.vpc-milk__lead-card select { width:100%; min-height:48px; padding:12px; border:1px solid var(--milk-border); border-radius:12px; color:var(--milk-muted); background:#fafafa; font:500 16px/24px var(--font-body,"Manrope",sans-serif); }
 .vpc-milk__lead-card button { min-height:48px; cursor:pointer; }
 
-.vpc-milk__services { height:600px; padding:96px 0; background:#f8f8f8; }
+.vpc-milk__services { height:600px; padding:96px 0; background:var(--milk-gray); }
 .vpc-milk__services .vpc-milk__section-heading h2 { color:var(--milk-blue); }
 .vpc-milk__services-viewport { position:relative; width:100%; height:320px; margin-top:24px; overflow:hidden; }
 .vpc-milk__services-track { display:flex; gap:24px; width:max-content; height:320px; margin-left:62px; }
 .vpc-milk__service-card { width:300px; height:320px; flex:0 0 300px; padding:12px; display:flex; flex-direction:column; gap:12px; border:1px solid #cecece; border-radius:12px; background:#fff; box-shadow:0 1px 2.5px #00000026; text-decoration:none; }
-.vpc-milk__service-card img { width:100%; height:248px; border-radius:8px; object-fit:cover; }
+.vpc-milk__service-card img { width:100%; height:248px; border-radius:8px; object-fit:cover; object-position:center top; }
 .vpc-milk__service-card h3 { color:var(--milk-blue); text-align:center; font:500 24px/32px var(--font-body,"Manrope",sans-serif); }
 .vpc-milk__services-arrow { position:absolute; z-index:2; top:135px; width:50px; height:50px; border:0; border-radius:50%; color:var(--milk-blue); background:#fff; font:400 36px/1 Arial,sans-serif; box-shadow:0 1px 4px #0001; cursor:pointer; }
 .vpc-milk__services-arrow--prev { left:0; }

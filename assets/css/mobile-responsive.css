@@ -8,6 +8,12 @@
  */
 
 @media (max-width: 767px) {
+	/* Figma mobile buttons use the 16px body label size across every page. */
+	.vpc-button {
+		font-size: 16px;
+		line-height: 24px;
+	}
+
 	/* Do not reserve the desktop/artboard height on mobile. */
 	.vpc-bath > section,
 	.vpc-easy > section,
@@ -228,5 +234,85 @@
 
 	.vpc-bao-mau > #dang-ky-tu-van {
 		background: linear-gradient(118deg, #f8f8f8 40%, #fde6e6 120%) !important;
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * Shared responsive content rail
+ *
+ * The header uses .vpc-container: 20px side gutters below 1280px and an
+ * 80px inner gutter inside the 1560px desktop shell. Page-specific styles
+ * historically used several different widths, which made their sections
+ * drift away from the header when the viewport changed.
+ * ------------------------------------------------------------------------- */
+@media (min-width: 768px) and (max-width: 1279px) {
+	.vpc-bath__container,
+	.vpc-easy__container,
+	.vpc-milk__container {
+		width: calc(100% - 40px) !important;
+		max-width: none !important;
+	}
+
+	.vpc-services-container {
+		width: calc(100% - 40px) !important;
+		max-width: none !important;
+		padding-inline: 0 !important;
+	}
+
+	.vpc-bao-mau__container,
+	.vpc-o-cu .vpc-bao-mau__container {
+		padding-inline: 20px !important;
+	}
+
+	.about-inner {
+		width: calc(100% - 40px) !important;
+		max-width: none !important;
+	}
+
+	.about-hero__inner,
+	.about-mission,
+	.about-founder__inner,
+	.about-team,
+	.about-tiktok,
+	.about-services {
+		padding-inline: 20px !important;
+	}
+
+	.ocu-experience,
+	.ocu-spaces {
+		padding-inline: 20px !important;
+	}
+}
+
+@media (min-width: 1280px) {
+	.vpc-bath__container,
+	.vpc-easy__container,
+	.vpc-milk__container,
+	.vpc-services-container {
+		width: min(1400px, calc(100% - 160px)) !important;
+		max-width: none !important;
+		padding-inline: 0 !important;
+	}
+
+	/* The prenatal template is nested inside .vpc-section, whose 80px
+	 * desktop padding already supplies the header gutter. */
+	.prenatal-container {
+		width: min(1400px, 100%) !important;
+		max-width: none !important;
+	}
+
+	.about-inner {
+		width: min(1400px, calc(100% - 160px)) !important;
+		max-width: none !important;
+	}
+
+	.vpc-o-cu .vpc-bao-mau__container {
+		max-width: 1560px !important;
+		padding-inline: 80px !important;
+	}
+
+	.ocu-experience__inner {
+		width: min(1400px, 100%) !important;
+		max-width: none !important;
 	}
 }

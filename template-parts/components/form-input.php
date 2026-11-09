@@ -56,6 +56,24 @@ $rows        = $args['rows'] ?? 3;
 
 $has_error = ! empty( $error );
 
+// Select fields use the shared Figma select-item component so every form
+// exposes the same trigger, dropdown, keyboard behavior and hidden value.
+if ( 'select' === $type ) {
+	get_template_part( 'template-parts/components/custom-select', null, [
+		'id'          => $id,
+		'name'        => $name,
+		'label'       => $label,
+		'placeholder' => $placeholder,
+		'required'    => $required,
+		'error'       => $error,
+		'is_disabled' => $is_disabled,
+		'value'       => $value,
+		'options'     => $options,
+		'class'       => $extra_class,
+	] );
+	return;
+}
+
 // Base input styling
 $base_input_classes = 'w-full transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-border-focus-default font-body text-base font-medium text-text-body-default select-none';
 
@@ -85,39 +103,7 @@ $input_classes = trim( "{$base_input_classes} {$box_shape_classes} {$state_input
 	<?php endif; ?>
 
 	<div class="relative w-full">
-		<?php if ( 'select' === $type ) : ?>
-			<select
-				id="<?php echo esc_attr( $id ); ?>"
-				name="<?php echo esc_attr( $name ); ?>"
-				class="vpc-form-select <?php echo esc_attr( $input_classes ); ?> h-[50px] appearance-none pr-10 cursor-pointer"
-				<?php echo $required ? 'required' : ''; ?>
-				<?php echo $is_disabled ? 'disabled' : ''; ?>
-				<?php echo $has_error ? 'aria-invalid="true"' : ''; ?>
-			>
-				<?php if ( ! empty( $placeholder ) ) : ?>
-					<option value="" disabled <?php selected( empty( $value ), true ); ?> class="text-neutral-500">
-						<?php echo esc_html( $placeholder ); ?>
-					</option>
-				<?php endif; ?>
-
-				<?php foreach ( $options as $opt_key => $opt_label ) : ?>
-					<?php
-					$opt_val = is_numeric( $opt_key ) ? $opt_label : $opt_key;
-					?>
-					<option value="<?php echo esc_attr( $opt_val ); ?>" <?php selected( (string) $value, (string) $opt_val ); ?>>
-						<?php echo esc_html( $opt_label ); ?>
-					</option>
-				<?php endforeach; ?>
-			</select>
-
-			<!-- Chevron down arrow matching Figma 1:1 -->
-			<div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-neutral-900">
-				<svg class="w-4.5 h-4.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-				</svg>
-			</div>
-
-		<?php elseif ( 'textarea' === $type ) : ?>
+		<?php if ( 'textarea' === $type ) : ?>
 			<textarea
 				id="<?php echo esc_attr( $id ); ?>"
 				name="<?php echo esc_attr( $name ); ?>"

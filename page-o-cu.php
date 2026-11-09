@@ -13,6 +13,7 @@ get_header();
 
 $asset_uri        = trailingslashit( get_template_directory_uri() ) . 'assets/images/o-cu';
 $shared_asset_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/bao-mau';
+$ocu_hero_video_url = apply_filters( 'vpc_o_cu_hero_video_url', get_theme_mod( 'vpc_o_cu_hero_video_url', '' ) );
 $consultation_services = vpc_get_consultation_services();
 $gestational_age_options = vpc_get_gestational_age_options();
 
@@ -81,7 +82,7 @@ $room_popup_details = array(
 <main class="vpc-o-cu vpc-bao-mau" data-figma-node="3123:33008">
 	<section class="ocu-hero" data-figma-node="3123:33010">
 		<div class="ocu-hero__content">
-			<span class="ocu-badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">TRUNG TÂM Ở CỮ</span>
+			<span class="ocu-badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">Trung tâm ở cữ</span>
 			<h1 class="ocu-hero__title"><span class="ocu-heading--blue">Gói Ở Cữ Sau Sinh</span><span class="ocu-heading--pink">Mẹ Khỏe - Con Ngoan</span></h1>
 			<p class="ocu-hero__description">Trung tâm ở cữ Vạn Phúc Care đem đến dịch vụ chăm sóc sau sinh toàn diện, giúp Mẹ và Bé yêu được nghỉ dưỡng trọn vẹn và nhanh chóng phục hồi sức khỏe.</p>
 			<div class="ocu-highlights" aria-label="Điểm nổi bật của trung tâm">
@@ -89,13 +90,19 @@ $room_popup_details = array(
 				<div class="ocu-highlight"><div class="ocu-highlight__heading"><img src="<?php echo esc_url( $asset_uri . '/dedicated.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true"><h2>Trải nghiệm</h2></div><p>Thoải mái như ở nhà</p></div>
 				<div class="ocu-highlight"><div class="ocu-highlight__heading"><img src="<?php echo esc_url( $asset_uri . '/quality.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true"><h2>Hài lòng</h2></div><p>4.9/5 <span aria-label="5 sao">★★★★★</span></p></div>
 			</div>
-			<img class="ocu-hero__image" src="<?php echo esc_url( $asset_uri . '/figma/hero.png' ); ?>" width="800" height="450" alt="Điều dưỡng Vạn Phúc Care chăm sóc em bé" fetchpriority="high">
-			<div class="ocu-actions"><button type="button" class="ocu-button ocu-button--primary" <?php echo $button_attrs; ?>>Đăng ký tư vấn</button><a class="ocu-button ocu-button--secondary" href="#khong-gian">Xem Không Gian</a></div>
+			<?php if ( $ocu_hero_video_url ) : ?>
+				<video class="ocu-hero__image" width="800" height="450" controls playsinline preload="metadata" poster="<?php echo esc_url( $asset_uri . '/figma/hero.png' ); ?>" aria-label="Video giới thiệu trung tâm ở cữ" src="<?php echo esc_url( $ocu_hero_video_url ); ?>">
+					<img src="<?php echo esc_url( $asset_uri . '/figma/hero.png' ); ?>" width="800" height="450" alt="Điều dưỡng Vạn Phúc Care chăm sóc em bé">
+				</video>
+			<?php else : ?>
+				<img class="ocu-hero__image" src="<?php echo esc_url( $asset_uri . '/figma/hero.png' ); ?>" width="800" height="450" alt="Điều dưỡng Vạn Phúc Care chăm sóc em bé" fetchpriority="high">
+			<?php endif; ?>
+			<div class="ocu-actions"><button type="button" class="ocu-button ocu-button--primary" <?php echo $button_attrs; ?>>Đăng ký tư vấn</button><a class="ocu-button ocu-button--secondary" href="#khong-gian">Xem không gian</a></div>
 		</div>
 	</section>
 
 	<section class="ocu-benefits" data-figma-node="3123:33025">
-		<div class="ocu-section-heading"><span class="ocu-badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">TIỆN ÍCH CHUNG</span><h2><span class="ocu-heading--blue">Đặc Quyền</span> <span class="ocu-heading--pink">Dành Cho Mẹ</span></h2><p>Vượt qua những định kiến kiêng cữ khắt khe, mẹ được thư giãn tối đa để phục hồi sức khỏe,<br class="ocu-desktop-break"> và tận hưởng trọn vẹn hành trình đón thiên thần nhỏ.</p></div>
+		<div class="ocu-section-heading"><span class="ocu-badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">Tiện ích chung</span><h2><span class="ocu-heading--blue">Đặc Quyền</span> <span class="ocu-heading--pink">Dành Cho Mẹ</span></h2><p>Vượt qua những định kiến kiêng cữ khắt khe, mẹ được thư giãn tối đa để phục hồi sức khỏe,<br class="ocu-desktop-break"> và tận hưởng trọn vẹn hành trình đón thiên thần nhỏ.</p></div>
 		<div class="ocu-benefit-grid">
 			<div class="ocu-benefit-row ocu-benefit-row--two"><article class="ocu-benefit-card"><span class="ocu-benefit-card__icon"><img src="<?php echo esc_url( $asset_uri . '/monitoring.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true"></span><h3>Theo dõi sức khỏe 24/7</h3><p>Ekip điều dưỡng trực, giám sát sức khỏe của mẹ và bé liên tục bằng thiết bị tiên tiến. Mọi chỉ số sinh hiệu đều được ghi nhận và phản hồi tức thì.</p></article><article class="ocu-benefit-card"><span class="ocu-benefit-card__icon"><img src="<?php echo esc_url( $asset_uri . '/breast-milk.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true"></span><h3>Nuôi con bằng sữa mẹ</h3><p>Được điều dưỡng trưởng hỗ trợ 1:1, giúp mẹ xây dựng hành trình nuôi con bằng sữa mẹ tự tin, trọn vẹn, đong đầy yêu thương.</p></article></div>
 			<div class="ocu-benefit-row ocu-benefit-row--three"><article class="ocu-benefit-card"><span class="ocu-benefit-card__icon"><img src="<?php echo esc_url( $asset_uri . '/premium-kitchen.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true"></span><h3>Chế độ dinh dưỡng</h3><p>Đảm bảo dinh dưỡng phù hợp với thể trạng người mẹ, để mẹ mau lại sức, về nhiều sữa. Đảm bảo cữ bú phù hợp cho trẻ sơ sinh, loại bỏ hiện tượng no giả, bỏ bữa, chán bú.</p></article><article class="ocu-benefit-card"><span class="ocu-benefit-card__icon"><img src="<?php echo esc_url( $asset_uri . '/spa.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true"></span><h3>Không gian hồi phục riêng tư</h3><p>Phòng nghỉ dưỡng của mẹ được đảm bảo yên tĩnh, mùi hương gỗ thoảng nhẹ và an lành. Tiện nghi đầy đủ, hiện đại, tuỳ biến theo hạng phòng.</p></article><article class="ocu-benefit-card"><span class="ocu-benefit-card__icon"><img src="<?php echo esc_url( $asset_uri . '/nursery-room.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true"></span><h3>Phòng dưỡng nhi</h3><p>Khu vực chăm sóc trẻ sơ sinh riêng biệt với công nghệ giám sát AI thời gian thực. Cho phép mẹ nghỉ ngơi trọn vẹn trong khi bé luôn được theo dõi an toàn.</p></article></div>
@@ -103,15 +110,15 @@ $room_popup_details = array(
 	</section>
 
 	<section id="khong-gian" class="ocu-nursery" data-figma-node="3123:33039">
-		<div class="ocu-section-heading"><span class="ocu-badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">PHÒNG DƯỠNG NHI</span><h2><span class="ocu-heading--blue">Khu Vực Chăm Sóc</span><span class="ocu-heading--pink">Phòng Dưỡng Nhi <br class="ocu-nursery-mobile-break">Riêng Biệt</span></h2><p><span>Khu vực chăm sóc riêng biệt dành cho bé, tách biệt với phòng nghỉ của mẹ.</span><span>Điều dưỡng viên chăm bé suốt ngày đêm, mẹ an tâm nghỉ ngơi phục hồi.</span></p></div>
-			<div class="ocu-room-bento"><div class="ocu-room-bento__hero"><img src="<?php echo esc_url( $asset_uri . '/figma/nursery-hero.png' ); ?>" width="616" height="480" alt="Phòng dưỡng nhi riêng tại Vạn Phúc Care" loading="lazy"><span><strong>30m²</strong> Phòng dưỡng nhi riêng</span></div><div class="ocu-room-bento__side"><article class="ocu-room-card ocu-room-card--feature"><div class="ocu-room-card__top"><span class="ocu-room-card__icon-box"><img src="<?php echo esc_url( $asset_uri . '/figma/shield-check.svg' ); ?>" width="59" height="59" alt="" aria-hidden="true"></span><div><span class="ocu-room-card__eyebrow">MÔI TRƯỜNG VÔ KHUẨN</span><h3>Kiểm soát nhiễm khuẩn</h3></div></div><p>Quy trình kiểm soát nhiễm khuẩn chéo được giám sát nghiêm ngặt.</p><div class="ocu-chip-list"><span class="ocu-chip--desktop">Phòng riêng, tách biệt</span><span class="ocu-chip--mobile">Máy lọc không khí</span><span>Đồ dùng cá nhân riêng</span><span>Thiết bị khử khuẩn hiện đại</span></div></article><div class="ocu-room-bento__stats"><article><img class="ocu-room-card__icon" src="<?php echo esc_url( $asset_uri . '/figma/ring.svg' ); ?>" width="56" height="56" alt="" aria-hidden="true"><div class="ocu-room-stat__value"><strong>24/24</strong><span>Chăm sóc, theo dõi bé</span></div></article><article><img class="ocu-room-card__icon" src="<?php echo esc_url( $asset_uri . '/figma/people.svg' ); ?>" width="57.8" height="56" alt="" aria-hidden="true"><div class="ocu-room-stat__value"><strong>2+</strong><span>Điều dưỡng viên trực tối thiểu</span></div></article></div></div></div>
+		<div class="ocu-section-heading"><span class="ocu-badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">Phòng dưỡng nhi</span><h2><span class="ocu-heading--blue">Khu Vực Chăm Sóc</span><span class="ocu-heading--pink">Phòng Dưỡng Nhi <br class="ocu-nursery-mobile-break">Riêng Biệt</span></h2><p><span>Khu vực chăm sóc riêng biệt dành cho bé, tách biệt với phòng nghỉ của mẹ.</span><span>Điều dưỡng viên chăm bé suốt ngày đêm, mẹ an tâm nghỉ ngơi phục hồi.</span></p></div>
+			<div class="ocu-room-bento"><div class="ocu-room-bento__hero"><img src="<?php echo esc_url( $asset_uri . '/figma/nursery-hero.png' ); ?>" width="616" height="480" alt="Phòng dưỡng nhi riêng tại Vạn Phúc Care" loading="lazy"><span><strong>30m²</strong> Phòng dưỡng nhi riêng</span></div><div class="ocu-room-bento__side"><article class="ocu-room-card ocu-room-card--feature"><div class="ocu-room-card__top"><span class="ocu-room-card__icon-box"><img src="<?php echo esc_url( $asset_uri . '/figma/shield-check.svg' ); ?>" width="59" height="59" alt="" aria-hidden="true"></span><div><span class="ocu-room-card__eyebrow">Môi trường vô khuẩn</span><h3>Kiểm soát nhiễm khuẩn</h3></div></div><p>Quy trình kiểm soát nhiễm khuẩn chéo được giám sát nghiêm ngặt.</p><div class="ocu-chip-list"><span class="ocu-chip--desktop">Phòng riêng, tách biệt</span><span class="ocu-chip--mobile">Máy lọc không khí</span><span>Đồ dùng cá nhân riêng</span><span>Thiết bị khử khuẩn hiện đại</span></div></article><div class="ocu-room-bento__stats"><article><img class="ocu-room-card__icon" src="<?php echo esc_url( $asset_uri . '/figma/ring.svg' ); ?>" width="56" height="56" alt="" aria-hidden="true"><div class="ocu-room-stat__value"><strong>24/24</strong><span>Chăm sóc, theo dõi bé</span></div></article><article><img class="ocu-room-card__icon" src="<?php echo esc_url( $asset_uri . '/figma/people.svg' ); ?>" width="57.8" height="56" alt="" aria-hidden="true"><div class="ocu-room-stat__value"><strong>2+</strong><span>Điều dưỡng viên trực tối thiểu</span></div></article></div></div></div>
 			<div class="ocu-room-points"><article><img src="<?php echo esc_url( $asset_uri . '/figma/pillar-1.png' ); ?>" width="366" height="240" alt="Không gian phòng dưỡng nhi sáng và an lành" loading="lazy"><div class="ocu-room-point__heading"><strong>01</strong><h3>Không gian sáng, an lành</h3></div><p>Môi trường yên tĩnh, thoáng sáng giúp bé thích nghi nhẹ nhàng những ngày đầu đời.</p><ul><li>Cửa sổ lớn, ánh sáng tự nhiên</li><li>Cách Hồ Tây chưa tới 200m</li><li>Trang thiết bị hiện đại</li></ul></article><article><img src="<?php echo esc_url( $asset_uri . '/figma/pillar-2.png' ); ?>" width="366" height="240" alt="Điều dưỡng chăm sóc bé suốt ngày đêm" loading="lazy"><div class="ocu-room-point__heading"><strong>02</strong><h3>Điều dưỡng túc trực suốt ngày đêm</h3></div><p>Tối đa 10 nôi, tối thiểu 2 điều dưỡng viên trực.</p><ul><li>Mỗi bé một nôi riêng</li><li>Vệ sinh và massage cho bé mỗi ngày</li><li>Thiết lập lịch sinh hoạt chuẩn</li><li>Quy chuẩn chăm sóc chất lượng cao</li></ul></article><article><img src="<?php echo esc_url( $asset_uri . '/figma/pillar-3.png' ); ?>" width="366" height="240" alt="Không gian nghỉ dưỡng riêng cho mẹ" loading="lazy"><div class="ocu-room-point__heading"><strong>03</strong><h3>Không gian nghỉ dưỡng cho mẹ</h3></div><p>Mẹ được nghỉ ngơi trong không gian sang trọng và cao cấp. Nhưng vẫn đảm bảo theo sát được sự phát triển của con.</p><ul><li>Camera theo dõi 24/24</li><li>Sổ sức khoẻ điện tử cập nhật hằng ngày</li><li>Nhận biết sớm dấu hiệu bất thường, gia đình luôn được đồng hành kịp thời</li></ul></article></div>
-			<div class="ocu-daily"><img src="<?php echo esc_url( $asset_uri . '/figma/daily.png' ); ?>" width="560" height="480" alt="Điều dưỡng chăm sóc em bé mỗi ngày" loading="lazy"><div><span class="ocu-badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">MỖI NGÀY CỦA BÉ</span><h2><span class="ocu-heading--blue">Mỗi Ngày Của Bé</span><span class="ocu-heading--pink">Tại Phòng Dưỡng Nhi</span></h2><p class="ocu-daily__copy--desktop">Trẻ sơ sinh được chăm sóc theo quy trình tuần hoàn, khép kín. Giúp bé không chỉ ăn ngon, ngủ đủ mà còn phát triển đầy đủ kỹ năng vận động thô:</p><p class="ocu-daily__copy--mobile">Bé không chỉ được trông nom, mà còn được chăm sóc theo quy trình:</p><ul class="ocu-daily__list--desktop"><li>Thiết lập nếp sinh hoạt EASY phù hợp với từng tuổi của bé</li><li>Vệ sinh và massage hằng ngày</li><li>Tập vận động thô cơ bản</li><li>Các hoạt động tương tác cùng bé</li><li>Sổ sức khỏe điện tử chi tiết giao khi về nhà</li></ul><ul class="ocu-daily__list--mobile"><li>Lịch sinh hoạt EAST theo tuần tuổi</li><li>Tắm và massage hằng ngày</li><li>Tập vận động cơ bản</li><li>Trò chuyện, đọc sách, nghe nhạc cùng bé</li><li>Bản ghi nếp sinh hoạt bàn giao khi về nhà</li></ul></div></div>
+			<div class="ocu-daily"><img src="<?php echo esc_url( $asset_uri . '/figma/daily.png' ); ?>" width="560" height="480" alt="Điều dưỡng chăm sóc em bé mỗi ngày" loading="lazy"><div><span class="ocu-badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">Mỗi ngày của bé</span><h2><span class="ocu-heading--blue">Mỗi Ngày Của Bé</span><span class="ocu-heading--pink">Tại Phòng Dưỡng Nhi</span></h2><p>Trẻ sơ sinh được chăm sóc theo quy trình tuần hoàn, khép kín. Giúp bé không chỉ ăn ngon, ngủ đủ mà còn phát triển đầy đủ kỹ năng vận động thô:</p><ul><li>Thiết lập nếp sinh hoạt EASY phù hợp với từng tuổi của bé</li><li>Vệ sinh và massage hằng ngày</li><li>Tập vận động thô cơ bản</li><li>Các hoạt động tương tác cùng bé</li><li>Sổ sức khỏe điện tử chi tiết giao khi về nhà</li></ul></div></div>
 	</section>
 
-	<section class="ocu-experience"><div class="ocu-experience__inner"><img src="<?php echo esc_url( $asset_uri . '/figma/experience.png' ); ?>" width="540" height="456" alt="Trải nghiệm ở cữ tại Vạn Phúc Care" loading="lazy"><div><span class="ocu-badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">TRẢI NGHIỆM</span><h2><span class="ocu-heading--blue">Trải Nghiệm Ở Cữ</span><span class="ocu-heading--pink">Thoải Mái Như Ở Nhà</span></h2><p>Trung tâm ở cữ toạ lạc trên cung đường ven Hồ Tây thơ mộng. Tiện nghi phòng nghỉ và phòng dưỡng nhi hiện đại, cùng đội ngũ điều dưỡng chăm sóc <br class="ocu-experience-mobile-break">mẹ và bé 24/7.</p><h3>Phù hợp với:</h3><ul><li>Mẹ: Cần nghỉ ngơi phục hồi toàn diện sau sinh.</li><li>Bé: Được điều dưỡng theo dõi và chăm sóc mỗi ngày.</li><li>Gia đình: Công việc bận rộn, muốn an tâm gửi gắm nơi có chuyên môn cao.</li></ul></div></div></section>
+	<section class="ocu-experience"><div class="ocu-experience__inner"><img src="<?php echo esc_url( $asset_uri . '/figma/experience.png' ); ?>" width="540" height="456" alt="Trải nghiệm ở cữ tại Vạn Phúc Care" loading="lazy"><div><span class="ocu-badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">Trải nghiệm</span><h2><span class="ocu-heading--blue">Trải Nghiệm Ở Cữ</span><span class="ocu-heading--pink">Thoải Mái Như Ở Nhà</span></h2><p>Trung tâm ở cữ toạ lạc trên cung đường ven Hồ Tây thơ mộng. Tiện nghi phòng nghỉ và phòng dưỡng nhi hiện đại, cùng đội ngũ điều dưỡng chăm sóc <br class="ocu-experience-mobile-break">mẹ và bé 24/7.</p><h3>Phù hợp với:</h3><ul><li>Mẹ: Cần nghỉ ngơi phục hồi toàn diện sau sinh.</li><li>Bé: Được điều dưỡng theo dõi và chăm sóc mỗi ngày.</li><li>Gia đình: Công việc bận rộn, muốn an tâm gửi gắm nơi có chuyên môn cao.</li></ul></div></div></section>
 
-	<section id="ocu-rooms" class="ocu-spaces"><div class="ocu-section-heading"><span class="ocu-badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">KHÔNG GIAN CAO CẤP</span><h2><span class="ocu-heading--blue">Không Gian Nghỉ Dưỡng</span> <span class="ocu-heading--pink">Dành Cho Mẹ</span></h2><p>Không gian tĩnh dưỡng được thiết kế riêng cho mẹ sau sinh, với tiêu chuẩn tiện nghi và sự riêng tư cao nhất.</p></div>
+	<section id="ocu-rooms" class="ocu-spaces"><div class="ocu-section-heading"><span class="ocu-badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">Không gian cao cấp</span><h2><span class="ocu-heading--blue">Không Gian Nghỉ Dưỡng</span> <span class="ocu-heading--pink">Dành Cho Mẹ</span></h2><p>Không gian tĩnh dưỡng được thiết kế riêng cho mẹ sau sinh, với tiêu chuẩn tiện nghi và sự riêng tư cao nhất.</p></div>
 	<?php
 	$rooms = array(
 			'standard' => array( 'image' => 'figma/room-standard.png', 'level' => 'Tiêu chuẩn', 'number' => '01', 'title' => 'Standard - 30m²', 'copy' => 'Gọn gàng và đầy đủ cho mẹ ưu tiên một hành trình hồi phục nhẹ nhàng.', 'items' => array( 'Chăm sóc mẹ và bé hằng ngày', 'Giường lớn và phòng dưỡng nhi', 'Ban công thoáng sáng' ), 'chips' => array( 'Điều dưỡng trực 24/7', 'Nuôi con bằng sữa mẹ', 'Smart TV · Wifi', 'Xe đưa đón 2 chiều' ) ),
@@ -141,11 +148,11 @@ $room_popup_details = array(
 		</div>
 	</div>
 
-	<section class="vpc-bao-mau__team ocu-shared-section" aria-labelledby="ocu-team-title"><div class="vpc-bao-mau__container"><div class="vpc-bao-mau__section-heading"><div class="vpc-bao-mau__badge"><img src="<?php echo esc_url( $shared_asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">ĐIỀU DƯỠNG VIÊN</div><h2 id="ocu-team-title"><span>Đội Ngũ Của Chúng Tôi</span></h2><p>100% điều dưỡng viên được đào tạo chuyên sâu lĩnh vực sản nhi, đảm bảo đem đến dịch vụ an toàn, chuyên nghiệp cho mọi gia đình.</p></div><div class="vpc-bao-mau__team-viewport"><div class="vpc-bao-mau__team-grid"><?php foreach ( $team as $index => $member ) : ?><article class="vpc-bao-mau__team-card"><div class="vpc-bao-mau__team-image"><img src="<?php echo esc_url( $asset_uri . '/figma/team-' . ( $index + 1 ) . '.png' ); ?>" width="223" height="292" alt="<?php echo esc_attr( $member['name'] ); ?>" loading="lazy"></div><div><h3><?php echo esc_html( $member['name'] ); ?></h3><p><?php echo esc_html( $member['role'] ); ?></p></div></article><?php endforeach; ?></div></div></div></section>
+	<section class="vpc-bao-mau__team ocu-shared-section" aria-labelledby="ocu-team-title"><div class="vpc-bao-mau__container"><div class="vpc-bao-mau__section-heading"><div class="vpc-bao-mau__badge"><img src="<?php echo esc_url( $shared_asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">Điều dưỡng viên</div><h2 id="ocu-team-title"><span>Đội Ngũ Của Chúng Tôi</span></h2><p>100% điều dưỡng viên được đào tạo chuyên sâu lĩnh vực sản nhi, đảm bảo đem đến dịch vụ an toàn, chuyên nghiệp cho mọi gia đình.</p></div><div class="vpc-bao-mau__team-viewport"><div class="vpc-bao-mau__team-grid"><?php foreach ( $team as $index => $member ) : ?><article class="vpc-bao-mau__team-card"><div class="vpc-bao-mau__team-image"><img src="<?php echo esc_url( $asset_uri . '/figma/team-' . ( $index + 1 ) . '.png' ); ?>" width="223" height="292" alt="<?php echo esc_attr( $member['name'] ); ?>" loading="lazy"></div><div><h3><?php echo esc_html( $member['name'] ); ?></h3><p><?php echo esc_html( $member['role'] ); ?></p></div></article><?php endforeach; ?></div></div></div></section>
 
 	<section class="vpc-bao-mau__faq ocu-shared-section" aria-labelledby="ocu-faq-title"><div class="vpc-bao-mau__container"><div class="vpc-bao-mau__section-heading"><div class="vpc-bao-mau__badge"><img src="<?php echo esc_url( $shared_asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">FAQ</div><h2 id="ocu-faq-title"><span>Câu Hỏi Thường Gặp</span></h2><p>Vượt qua những kiêng cữ khắt khe, mẹ được thư giãn tối đa để phục hồi sức khỏe, tận hưởng trọn vẹn hành trình đón thiên thần nhỏ cùng dịch vụ ở cữ.</p></div><div class="vpc-bao-mau__faq-list"><details class="is-open" open><summary>Thời điểm nào là thích hợp để đặt phòng ở cữ ?</summary><p>Do số lượng phòng tại trung tâm ở cữ Vạn Phúc Care có giới hạn, kèm nhu cầu đăng ký dài ngày của các mẹ. Chúng tôi khuyến khích khách hàng đặt lịch phòng sớm nhất có thể, nhằm đảm bảo ngày phòng còn trống và chất lượng phục vụ luôn được chu đáo nhất.</p></details><details><summary>Người thân có được ở lại cùng mẹ và bé không ?</summary><p>Người thân có thể ở lại cùng mẹ và bé theo chính sách của từng hạng phòng. Đội ngũ Vạn Phúc Care sẽ hướng dẫn gia đình để đảm bảo sự riêng tư và không gian nghỉ ngơi của mẹ.</p></details><details><summary>Sử dụng dịch vụ ở cữ bé sẽ được chăm sóc ở đâu ?</summary><p>Bé được chăm sóc tại phòng dưỡng nhi riêng biệt, có điều dưỡng theo dõi 24/24, đảm bảo an toàn và hỗ trợ mẹ nghỉ ngơi trọn vẹn.</p></details><details><summary>Các ngày lễ, ngày tết trung tâm ở cữ có phụ thu không?</summary><p>Trung tâm có chính sách phụ thu riêng cho các ngày lễ, ngày Tết. Nhân viên tư vấn sẽ thông tin chi tiết khi mẹ đăng ký phòng.</p></details><details><summary>Trong thời gian lưu trú tại trung tâm ở cữ, nếu mẹ và bé gặp vấn đề về sức khoẻ sẽ xử lí như thế nào ?</summary><p>Mẹ và bé được điều dưỡng theo dõi sát sao trong suốt thời gian lưu trú. Khi phát hiện vấn đề bất thường, trung tâm sẽ xử lý theo quy trình và phối hợp cơ sở y tế phù hợp.</p></details></div></div></section>
 
-	<?php get_template_part( 'template-parts/sections/feedback', null, array( 'items' => $feedback, 'image_prefix' => 'bao-mau', 'badge' => 'KHÁCH HÀNG', 'description' => array( 'Trong hành trình cùng mẹ trải đầy yêu thương, Trung tâm ở cữ Vạn Phúc Care đã nhận được sự tin yêu của hàng ngàn Mẹ bỉm.' ) ) ); ?>
+	<?php get_template_part( 'template-parts/sections/feedback', null, array( 'items' => $feedback, 'image_prefix' => 'bao-mau', 'badge' => 'Khách hàng', 'description' => array( 'Trong hành trình cùng mẹ trải đầy yêu thương, Trung tâm ở cữ Vạn Phúc Care đã nhận được sự tin yêu của hàng ngàn Mẹ bỉm.' ) ) ); ?>
 
 	<section id="dang-ky-tu-van" class="vpc-section vpc-gradient-consultation relative overflow-hidden">
 		<div class="consultation-section-inner vpc-home-container">
@@ -173,16 +180,17 @@ $room_popup_details = array(
 					</div>
 
 					<div class="vpc-consultation-field">
-						<label><span class="text-text-error-default">*</span> Dịch vụ quan tâm</label>
-						<div class="vpc-consultation-select-wrap">
-						<select name="service" required class="vpc-form-select vpc-consultation-control vpc-consultation-select">
-								<option value="trung-tam-o-cu" selected>Trung tâm ở cữ</option>
-								<?php foreach ( $consultation_services as $service_value => $service_label ) : ?>
-									<?php if ( 'trung-tam-o-cu' === $service_value ) : continue; endif; ?>
-									<option value="<?php echo esc_attr( $service_value ); ?>"><?php echo esc_html( $service_label ); ?></option>
-								<?php endforeach; ?>
-							</select>
-						</div>
+						<?php
+						get_template_part( 'template-parts/components/custom-select', null, [
+							'id'          => 'ocu-section-service',
+							'name'        => 'service',
+							'label'       => 'Dịch vụ quan tâm',
+							'placeholder' => 'Chọn dịch vụ',
+							'required'    => true,
+							'value'       => 'trung-tam-o-cu',
+							'options'     => $consultation_services,
+						] );
+						?>
 					</div>
 
 					<fieldset class="vpc-consultation-field vpc-consultation-stage">
@@ -195,15 +203,16 @@ $room_popup_details = array(
 					</fieldset>
 
 					<div class="vpc-consultation-field">
-						<label><span class="text-text-error-default">*</span> Tuần thai</label>
-						<div class="vpc-consultation-select-wrap">
-						<select name="gestational_age" required class="vpc-form-select vpc-consultation-control vpc-consultation-select">
-								<option value="" disabled selected>Chọn giai đoạn</option>
-								<?php foreach ( $gestational_age_options as $age_value => $age_label ) : ?>
-									<option value="<?php echo esc_attr( $age_value ); ?>"><?php echo esc_html( $age_label ); ?></option>
-								<?php endforeach; ?>
-							</select>
-						</div>
+						<?php
+						get_template_part( 'template-parts/components/custom-select', null, [
+							'id'          => 'ocu-section-gestational-age',
+							'name'        => 'gestational_age',
+							'label'       => 'Tuần thai',
+							'placeholder' => 'Chọn giai đoạn',
+							'required'    => true,
+							'options'     => $gestational_age_options,
+						] );
+						?>
 					</div>
 
 					<div class="vpc-consultation-field">
@@ -217,7 +226,7 @@ $room_popup_details = array(
 		</div>
 	</section>
 
-	<section class="vpc-bao-mau__services ocu-shared-section" aria-labelledby="ocu-services-title"><div class="vpc-bao-mau__container"><div class="vpc-bao-mau__section-heading"><h2 id="ocu-services-title"><span>Các Dịch Vụ Khác</span></h2></div><div class="vpc-bao-mau__services-viewport"><div class="vpc-bao-mau__services-track"><?php foreach ( $other_services as $service ) : ?><a class="vpc-bao-mau__service-card" href="<?php echo esc_url( $service['href'] ); ?>"><img src="<?php echo esc_url( $shared_asset_uri . '/' . $service['image'] ); ?>" width="300" height="240" alt="<?php echo esc_attr( $service['title'] ); ?>" loading="lazy"><h3><?php echo esc_html( $service['title'] ); ?></h3></a><?php endforeach; ?></div></div></div></section>
+	<section class="vpc-bao-mau__services ocu-shared-section" aria-labelledby="ocu-services-title"><div class="vpc-bao-mau__container"><div class="vpc-bao-mau__section-heading"><h2 id="ocu-services-title"><span>Các Dịch Vụ Khác</span></h2></div><div class="vpc-bao-mau__services-carousel"><button class="vpc-bao-mau__services-arrow vpc-bao-mau__services-arrow--prev" type="button" aria-label="Dịch vụ trước" aria-controls="ocu-services-viewport"><img src="<?php echo esc_url( $shared_asset_uri . '/chevron-left.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true"></button><div id="ocu-services-viewport" class="vpc-bao-mau__services-viewport"><div class="vpc-bao-mau__services-track"><?php foreach ( $other_services as $service ) : ?><a class="vpc-bao-mau__service-card" href="<?php echo esc_url( $service['href'] ); ?>"><img src="<?php echo esc_url( $shared_asset_uri . '/' . $service['image'] ); ?>" width="300" height="240" alt="<?php echo esc_attr( $service['title'] ); ?>" loading="lazy"><h3><?php echo esc_html( $service['title'] ); ?></h3></a><?php endforeach; ?></div></div><button class="vpc-bao-mau__services-arrow vpc-bao-mau__services-arrow--next" type="button" aria-label="Dịch vụ tiếp theo" aria-controls="ocu-services-viewport"><img src="<?php echo esc_url( $shared_asset_uri . '/chevron-left.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true"></button></div></div></section>
 </main>
 
 <?php get_footer(); ?>

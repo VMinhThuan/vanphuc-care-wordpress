@@ -15,7 +15,6 @@ $asset_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/ba
 $hero_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/bao-mau/hero-figma-3126-39939.jpg';
 $health_book_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/easy/health-book.png';
 $consultation_services = vpc_get_consultation_services();
-$gestational_age_options = vpc_get_gestational_age_options();
 
 $processes = array(
 	array( 'image' => 'process-1.png', 'title' => 'Kiểm tra toàn trạng', 'copy' => 'Vệ sinh phòng, kiểm tra tổng quan sức khỏe của bé. Trường hợp phát hiện vấn đề bất thường, điều dưỡng viên sẽ trao đổi lại với mẹ.' ),
@@ -240,37 +239,17 @@ $button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="bao-mau-
 					</div>
 
 					<div class="vpc-consultation-field">
-						<label><span class="text-text-error-default">*</span> Dịch vụ quan tâm</label>
-						<div class="vpc-consultation-select-wrap">
-							<select name="service" required class="vpc-form-select vpc-consultation-control vpc-consultation-select">
-								<option value="bao-mau-tai-nha" selected>Bảo mẫu tại nhà</option>
-								<?php foreach ( $consultation_services as $service_value => $service_label ) : ?>
-									<?php if ( 'bao-mau-tai-nha' === $service_value ) : continue; endif; ?>
-									<option value="<?php echo esc_attr( $service_value ); ?>"><?php echo esc_html( $service_label ); ?></option>
-								<?php endforeach; ?>
-							</select>
-						</div>
-					</div>
-
-					<fieldset class="vpc-consultation-field vpc-consultation-stage">
-						<legend><span class="text-text-error-default">*</span> Giai đoạn thai kỳ</legend>
-						<div class="vpc-consultation-stage__options" role="radiogroup" aria-label="Giai đoạn thai kỳ">
-							<label><input type="radio" name="pregnancy_stage" value="dang-mang-thai" checked required><span>Đang mang thai</span></label>
-							<label><input type="radio" name="pregnancy_stage" value="chuan-bi-mang-thai" required><span>Chuẩn bị mang thai</span></label>
-							<label><input type="radio" name="pregnancy_stage" value="da-sinh-be" required><span>Đã sinh bé</span></label>
-						</div>
-					</fieldset>
-
-					<div class="vpc-consultation-field">
-						<label><span class="text-text-error-default">*</span> Tuần thai</label>
-						<div class="vpc-consultation-select-wrap">
-							<select name="gestational_age" required class="vpc-form-select vpc-consultation-control vpc-consultation-select">
-								<option value="" disabled selected>Chọn giai đoạn</option>
-								<?php foreach ( $gestational_age_options as $age_value => $age_label ) : ?>
-									<option value="<?php echo esc_attr( $age_value ); ?>"><?php echo esc_html( $age_label ); ?></option>
-								<?php endforeach; ?>
-							</select>
-						</div>
+						<?php
+						get_template_part( 'template-parts/components/custom-select', null, [
+							'id'          => 'bao-mau-section-service',
+							'name'        => 'service',
+							'label'       => 'Dịch vụ quan tâm',
+							'placeholder' => 'Chọn dịch vụ',
+							'required'    => true,
+							'value'       => 'bao-mau-tai-nha',
+							'options'     => $consultation_services,
+						] );
+						?>
 					</div>
 
 					<div class="vpc-consultation-field">
@@ -284,9 +263,18 @@ $button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="bao-mau-
 		</div>
 	</section>
 
-	<section class="vpc-bao-mau__services" aria-labelledby="bao-mau-services-title"><div class="vpc-bao-mau__container"><div class="vpc-bao-mau__section-heading"><h2 id="bao-mau-services-title"><span>Các Dịch Vụ Khác</span></h2></div><div class="vpc-bao-mau__services-viewport"><div class="vpc-bao-mau__services-track">
-		<?php foreach ( $other_services as $service ) : ?><a class="vpc-bao-mau__service-card" href="<?php echo esc_url( $service['href'] ); ?>"><img src="<?php echo esc_url( $asset_uri . '/' . $service['image'] ); ?>" width="300" height="240" alt="<?php echo esc_attr( $service['title'] ); ?>" loading="lazy"><h3><?php echo esc_html( $service['title'] ); ?></h3></a><?php endforeach; ?>
-	</div></div></div></section>
+	<?php
+	get_template_part(
+		'template-parts/sections/other-services',
+		null,
+		array(
+			'services'    => $other_services,
+			'asset_uri'   => $asset_uri,
+			'section_id'  => 'bao-mau-services-title',
+			'viewport_id' => 'bao-mau-services-viewport',
+		)
+	);
+	?>
 </div>
 
 <?php get_footer(); ?>

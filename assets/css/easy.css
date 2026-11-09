@@ -33,6 +33,15 @@
 .vpc-easy__mobile-title-break { display: inline; }
 .vpc-easy__lead-title-break { display: inline; }
 
+/* The shared "Các Dịch Vụ Khác" section lives inside the EASY shell. */
+.vpc-easy .vpc-bao-mau__services {
+	--bm-blue: var(--easy-blue);
+	--bm-bg: var(--easy-gray);
+	background: var(--color-neutral-100, #f8f8f8);
+}
+.vpc-easy .vpc-bao-mau__services .vpc-bao-mau__section-heading h2,
+.vpc-easy .vpc-bao-mau__services .vpc-bao-mau__service-card h3 { color: var(--easy-blue); }
+
 .vpc-easy__hero { height: 757px; padding: 96px 0; background: var(--easy-gray); }
 .vpc-easy__hero-grid { height: 565px; display: grid; grid-template-columns: minmax(0, 642px) 590px; gap: 48px; align-items: center; }
 .vpc-easy__hero-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
@@ -145,12 +154,12 @@
 .vpc-easy__lead-card input, .vpc-easy__lead-card select { width: 100%; min-height: 48px; padding: 12px; border: 1px solid var(--easy-border); border-radius: 12px; color: var(--easy-muted); background: #fafafa; font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
 .vpc-easy__lead-card button { min-height: 48px; border: 0; cursor: pointer; }
 
-.vpc-easy__services { height: 600px; padding: 96px 0; background: #fff; }
+.vpc-easy__services { height: 600px; padding: 96px 0; background: var(--easy-gray); }
 .vpc-easy__services .vpc-easy__section-heading h2 { color: var(--easy-blue); }
 .vpc-easy__services-viewport { position: relative; margin-top: 24px; overflow: hidden; }
 .vpc-easy__services-track { display: flex; gap: 24px; width: max-content; }
 .vpc-easy__service-card { width: 216px; height: 245px; flex: 0 0 216px; overflow: hidden; border: 1px solid #e1e1e1; border-radius: 12px; background: #fafafa; text-decoration: none; }
-.vpc-easy__service-card img { width: 216px; height: 184px; object-fit: cover; }
+.vpc-easy__service-card img { width: 216px; height: 184px; object-fit: cover; object-position: center top; }
 .vpc-easy__service-card h3 { padding: 16px 8px; color: var(--easy-blue); text-align: center; font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
 
 @media (max-width: 1279px) {

@@ -162,11 +162,11 @@ if ( empty( $instagram_url ) ) {
 				   class="dmca-badge inline-flex items-center hover:opacity-90 transition-opacity" 
 				   target="_blank" 
 				   rel="noopener noreferrer">
-					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/dmca.svg' ); ?>"
+					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/dmca-protected.svg' ); ?>"
 					     alt="DMCA.com Protection Status" 
-					     width="120"
-					     height="55"
-					     class="w-[120px] h-[55px] object-contain block"
+					     width="180"
+					     height="39"
+					     class="w-[180px] h-[39px] object-contain block"
 					     loading="lazy">
 				</a>
 

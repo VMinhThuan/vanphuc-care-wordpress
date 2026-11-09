@@ -1078,8 +1078,8 @@ body.ocu-room-modal-open {
 	.ocu-room-modal__variants button {
 		min-height: 40px;
 		padding: 8px 10px;
-		font-size: 13px;
-		line-height: 20px;
+		font-size: 16px;
+		line-height: 24px;
 	}
 
 	.ocu-room-modal__main-image {
@@ -1217,11 +1217,6 @@ body.ocu-room-modal-open {
 	align-items: center;
 }
 
-.ocu-daily__copy--mobile,
-.ocu-daily__list--mobile {
-	display: none;
-}
-
 .ocu-daily > img {
 	width: 560px;
 	height: 480px;
@@ -1307,7 +1302,7 @@ body.ocu-room-modal-open {
 }
 
 .ocu-experience li {
-	padding-left: 28px;
+	padding-left: 32px;
 }
 
 .ocu-spaces {
@@ -1766,12 +1761,7 @@ body.ocu-room-modal-open {
 		text-align: center;
 	}
 
-	.vpc-o-cu .ocu-daily__copy--desktop,
-	.vpc-o-cu .ocu-daily ul.ocu-daily__list--desktop {
-		display: none;
-	}
-
-	.vpc-o-cu .ocu-daily__copy--mobile {
+	.vpc-o-cu .ocu-daily > div > p {
 		display: block;
 		order: 3;
 		width: 100%;
@@ -1785,15 +1775,6 @@ body.ocu-room-modal-open {
 		width: 100%;
 		height: 240px;
 		border-radius: 16px;
-	}
-
-	.vpc-o-cu .ocu-daily__list--mobile {
-		display: flex;
-		order: 5;
-		width: 100%;
-		margin-top: 0;
-		gap: 10px;
-		color: #292929;
 	}
 
 	.vpc-o-cu .ocu-daily > div,
@@ -1823,6 +1804,10 @@ body.ocu-room-modal-open {
 	.vpc-o-cu .ocu-experience ul {
 		width: 100%;
 		text-align: left;
+	}
+
+	.vpc-o-cu .ocu-daily > div > ul {
+		order: 5;
 	}
 
 	.ocu-experience {
@@ -2106,7 +2091,7 @@ body.ocu-room-modal-open {
 }
 
 .vpc-o-cu .ocu-daily {
-	margin-top: 40px;
+	margin-top: 48px;
 }
 
 .vpc-o-cu .vpc-bao-mau__lead-card {
@@ -2129,15 +2114,6 @@ body.ocu-room-modal-open {
 }
 
 @media (max-width: 767px) {
-	.vpc-o-cu .ocu-daily ul.ocu-daily__list--desktop {
-		display: none;
-	}
-
-	.vpc-o-cu .ocu-daily ul.ocu-daily__list--mobile {
-		display: flex;
-		row-gap: 10px;
-	}
-
 	.vpc-o-cu .ocu-room-card--feature {
 		min-height: 264px;
 		height: 264px;

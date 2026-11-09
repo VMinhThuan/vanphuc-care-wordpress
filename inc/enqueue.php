@@ -110,7 +110,7 @@ function vanphuccare_enqueue_assets() {
 		);
 	}
 
-	if ( ( $is_bao_mau_page || $is_prenatal_page ) && file_exists( $bao_mau_path ) ) {
+	if ( ( $is_bao_mau_page || $is_easy_page || $is_bath_page || $is_milk_page || $is_prenatal_page ) && file_exists( $bao_mau_path ) ) {
 		wp_enqueue_style(
 			'vanphuccare-bao-mau',
 			get_template_directory_uri() . '/assets/css/bao-mau.css',

@@ -134,10 +134,12 @@
 .vpc-bath__lead-card label { display: flex; flex-direction: column; gap: 12px; font: 500 20px/28px var(--font-body, "Manrope", sans-serif); }
 .vpc-bath__lead-card label b { margin-right: 4px; color: red; }
 .vpc-bath__lead-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.vpc-bath__lead-card input, .vpc-bath__lead-card select { width: 100%; min-height: 48px; padding: 12px; border: 1px solid var(--bath-border); border-radius: 12px; color: var(--bath-muted); background: #fafafa; font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
+.vpc-bath__lead-card input:not([type="hidden"]), .vpc-bath__lead-card select { width: 100%; min-height: 48px; padding: 12px; border: 1px solid var(--bath-border); border-radius: 12px; color: var(--bath-muted); background: #fafafa; font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
+.vpc-bath__lead-select { width: 100%; }
+.vpc-bath__lead-select .vpc-select-trigger { width: 100%; min-height: 50px; }
 .vpc-bath__lead-card button { min-height: 48px; border: 0; cursor: pointer; }
 
-.vpc-bath__services { height: 600px; padding: 96px 0; background: #fff; }
+.vpc-bath__services { height: 600px; padding: 96px 0; background: var(--bath-gray, #f8f8f8); }
 .vpc-bath__services .vpc-bath__section-heading h2 { color: var(--bath-blue); }
 .vpc-bath__services-carousel { width: 100%; max-width: 1400px; margin: 24px auto 0; display: flex; align-items: center; gap: 16px; }
 .vpc-bath__services-viewport { flex: 1 1 auto; min-width: 0; overflow: hidden; }
@@ -146,7 +148,7 @@
 .vpc-bath__services-arrow img { width: auto; height: auto; max-width: none; object-fit: contain; }
 .vpc-bath__services-arrow:hover { background: #f8f8f8; }
 .vpc-bath__service-card { width: 216px; height: 245px; flex: 0 0 216px; overflow: hidden; border: 1px solid #e1e1e1; border-radius: 12px; background: #fafafa; text-decoration: none; }
-.vpc-bath__service-card img { width: 216px; height: 184px; object-fit: cover; }
+.vpc-bath__service-card img { width: 216px; height: 184px; object-fit: cover; object-position: center top; }
 .vpc-bath__service-card h3 { padding: 16px 8px; color: var(--bath-blue); text-align: center; font: 500 16px/24px var(--font-body, "Manrope", sans-serif); }
 
 /* Keep the shared feedback section centered against the same full content
@@ -550,7 +552,7 @@
 		border-radius: 24px;
 	}
 
-	.vpc-bath__lead-card input,
+	.vpc-bath__lead-card input:not([type="hidden"]),
 	.vpc-bath__lead-card select {
 		min-height: 50px;
 	}
@@ -607,6 +609,7 @@
 		max-width: none;
 		height: 250px;
 		object-fit: cover;
+		object-position: center top;
 		border-radius: 8px;
 	}
 

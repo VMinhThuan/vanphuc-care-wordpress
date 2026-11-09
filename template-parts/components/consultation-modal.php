@@ -152,11 +152,11 @@ $gestational_age_options = vpc_get_gestational_age_options();
 			</div>
 
 			<!-- Row 3: Giai đoạn thai kỳ (cập nhật theo comment Figma) -->
-			<fieldset class="border-0 p-0 m-0">
-				<legend class="block text-base sm:text-xl leading-7 font-medium text-text-body-default mb-3 select-none">
+			<fieldset class="vpc-consultation-field vpc-consultation-stage border-0 p-0 m-0">
+				<legend class="block text-base sm:text-xl leading-7 font-medium text-text-body-default select-none">
 					<span class="text-error-500 font-bold mr-0.5">*</span> Giai đoạn thai kỳ
 				</legend>
-				<div class="flex flex-wrap items-center gap-2" role="radiogroup" aria-label="Giai đoạn thai kỳ">
+				<div class="vpc-consultation-stage__options flex flex-wrap items-center" role="radiogroup" aria-label="Giai đoạn thai kỳ">
 					<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="dang-mang-thai" checked required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 h-10 font-body text-sm font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đang mang thai</span></label>
 					<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="chuan-bi-mang-thai" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 h-10 font-body text-sm font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Chuẩn bị mang thai</span></label>
 					<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="da-sinh-be" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 h-10 font-body text-sm font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đã sinh bé</span></label>

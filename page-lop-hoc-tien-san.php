@@ -441,15 +441,21 @@ $show_prenatal_video = true;
 					</fieldset>
 				</div>
 				<div class="prenatal-form__field">
-					<label for="prenatal-stage-select"><em>*</em> Tuần thai</label>
-					<div class="prenatal-select-wrap">
-						<select id="prenatal-stage-select" name="stage_choice" class="vpc-form-select" required>
-							<option value="" disabled selected>Chọn giai đoạn</option>
-							<option value="1-12-tuan">Dưới 12 tuần</option>
-							<option value="13-27-tuan">13 - 27 tuần</option>
-							<option value="28-40-tuan">Từ 28 tuần trở lên</option>
-						</select>
-					</div>
+					<?php
+					get_template_part( 'template-parts/components/custom-select', null, [
+						'id'          => 'prenatal-stage-select',
+						'name'        => 'stage_choice',
+						'label'       => 'Tuần thai',
+						'placeholder' => 'Chọn giai đoạn',
+						'required'    => true,
+						'options'     => [
+							'1-12-tuan'  => 'Dưới 12 tuần',
+							'13-27-tuan' => '13 - 27 tuần',
+							'28-40-tuan' => 'Từ 28 tuần trở lên',
+						],
+						'class'       => 'prenatal-shared-select',
+					] );
+					?>
 				</div>
 				<div class="prenatal-form__field">
 					<label for="prenatal-note">Ghi chú</label>
@@ -500,7 +506,9 @@ $show_prenatal_video = true;
 		<div class="vpc-bao-mau__section-heading">
 			<h2 id="prenatal-services-title"><span>Các Dịch Vụ Khác</span></h2>
 		</div>
-		<div class="vpc-bao-mau__services-viewport" data-services-viewport>
+		<div class="vpc-bao-mau__services-carousel">
+			<button class="vpc-bao-mau__services-arrow vpc-bao-mau__services-arrow--prev" type="button" aria-label="Dịch vụ trước" aria-controls="prenatal-services-viewport"><img src="<?php echo esc_url( $service_asset_uri . '/chevron-left.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true"></button>
+			<div id="prenatal-services-viewport" class="vpc-bao-mau__services-viewport" data-services-viewport>
 			<div class="vpc-bao-mau__services-track">
 				<a class="vpc-bao-mau__service-card" href="<?php echo esc_url( home_url( '/o-cu/' ) ); ?>">
 					<img src="<?php echo esc_url( $service_asset_uri . '/service-1.jpg' ); ?>" width="300" height="240" alt="Trung tâm ở cữ" loading="lazy">
@@ -527,6 +535,8 @@ $show_prenatal_video = true;
 					<h3>Thông tắc tia sữa</h3>
 				</a>
 			</div>
+			</div>
+			<button class="vpc-bao-mau__services-arrow vpc-bao-mau__services-arrow--next" type="button" aria-label="Dịch vụ tiếp theo" aria-controls="prenatal-services-viewport"><img src="<?php echo esc_url( $service_asset_uri . '/chevron-left.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true"></button>
 		</div>
 	</div>
 </section>
@@ -573,85 +583,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 	}
 
-	// Custom dropdowns retain their native selects for form submission.
-	const selectWraps = document.querySelectorAll('.prenatal-select-wrap');
-	const closeSelects = () => selectWraps.forEach(wrap => {
-		wrap.classList.remove('is-open');
-		const trigger = wrap.querySelector('.prenatal-select__trigger');
-		if (trigger) trigger.setAttribute('aria-expanded', 'false');
-		const menu = wrap.querySelector('.prenatal-select__menu');
-		if (menu) menu.hidden = true;
-	});
-	selectWraps.forEach(wrap => {
-		const select = wrap.querySelector('select');
-		if (!select) return;
-
-		wrap.classList.add('is-enhanced');
-		select.classList.add('prenatal-select__native');
-		const trigger = document.createElement('button');
-		trigger.type = 'button';
-		trigger.className = 'prenatal-select__trigger';
-		trigger.setAttribute('aria-haspopup', 'listbox');
-		trigger.setAttribute('aria-expanded', 'false');
-		const menu = document.createElement('div');
-		menu.className = 'prenatal-select__menu';
-		menu.setAttribute('role', 'listbox');
-		menu.hidden = true;
-		const menuId = `${select.id}-options`;
-		menu.id = menuId;
-		trigger.setAttribute('aria-controls', menuId);
-
-		const sync = () => {
-			const option = select.options[select.selectedIndex];
-			trigger.textContent = option ? option.text : '';
-			trigger.classList.toggle('is-placeholder', !select.value);
-			menu.querySelectorAll('.prenatal-select__option').forEach(button => {
-				button.classList.toggle('is-selected', button.value === select.value);
-				button.setAttribute('aria-selected', button.value === select.value ? 'true' : 'false');
-			});
-		};
-
-		Array.from(select.options).forEach(option => {
-			if (option.disabled) return;
-			const button = document.createElement('button');
-			button.type = 'button';
-			button.className = 'prenatal-select__option';
-			button.value = option.value;
-			button.setAttribute('role', 'option');
-			button.textContent = option.text;
-			button.addEventListener('click', () => {
-				select.value = option.value;
-				select.dispatchEvent(new Event('change', { bubbles: true }));
-				sync();
-				menu.hidden = true;
-				closeSelects();
-				trigger.focus();
-			});
-			menu.appendChild(button);
-		});
-
-		trigger.addEventListener('click', () => {
-			const willOpen = !wrap.classList.contains('is-open');
-			closeSelects();
-			wrap.classList.toggle('is-open', willOpen);
-			menu.hidden = !willOpen;
-			trigger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
-		});
-		trigger.addEventListener('keydown', event => {
-			if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
-				event.preventDefault();
-				trigger.click();
-				menu.querySelector('.prenatal-select__option')?.focus();
-			}
-			if (event.key === 'Escape') closeSelects();
-		});
-		select.addEventListener('change', sync);
-		wrap.append(trigger, menu);
-		sync();
-	});
-	document.addEventListener('click', event => {
-		if (!event.target.closest('.prenatal-select-wrap')) closeSelects();
-	});
 });
 </script>
 
