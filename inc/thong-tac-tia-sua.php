@@ -10,12 +10,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 function vanphuccare_is_thong_tac_page() {
-	if ( is_page_template( 'page-thong-tac-tia-sua.php' ) || is_page( 'thong-tac-tia-sua' ) || is_page( 'thong-tac-sua' ) ) {
+	if ( is_page_template( 'page-thong-tac-tia-sua.php' ) || is_page( 'thong-tac-tia-sua' ) || is_page( 'thong-tac-sua' ) || vanphuccare_is_standalone_route_template( 'page-thong-tac-tia-sua.php' ) ) {
 		return true;
 	}
 
-	$request_path = wp_parse_url( isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '', PHP_URL_PATH );
-	$path         = trim( (string) $request_path, '/' );
+	$path = function_exists( 'vanphuccare_request_path' ) ? vanphuccare_request_path() : '';
 
 	return in_array( $path, array( 'thong-tac-tia-sua', 'thong-tac-sua', 'dich-vu/thong-tac-tia-sua' ), true );
 }

@@ -89,7 +89,7 @@ $input_classes = trim( "{$base_input_classes} {$box_shape_classes} {$state_input
 			<select
 				id="<?php echo esc_attr( $id ); ?>"
 				name="<?php echo esc_attr( $name ); ?>"
-				class="<?php echo esc_attr( $input_classes ); ?> h-[50px] appearance-none pr-10 cursor-pointer"
+				class="vpc-form-select <?php echo esc_attr( $input_classes ); ?> h-[50px] appearance-none pr-10 cursor-pointer"
 				<?php echo $required ? 'required' : ''; ?>
 				<?php echo $is_disabled ? 'disabled' : ''; ?>
 				<?php echo $has_error ? 'aria-invalid="true"' : ''; ?>

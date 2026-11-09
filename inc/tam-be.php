@@ -10,12 +10,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 function vanphuccare_is_tam_be_page() {
-	if ( is_page_template( 'page-tam-be-tai-nha.php' ) || is_page( 'tam-be-tai-nha' ) || is_page( 'tam-tre-so-sinh' ) ) {
+	if ( is_page_template( 'page-tam-be-tai-nha.php' ) || is_page( 'tam-be-tai-nha' ) || is_page( 'tam-tre-so-sinh' ) || vanphuccare_is_standalone_route_template( 'page-tam-be-tai-nha.php' ) ) {
 		return true;
 	}
 
-	$request_path = wp_parse_url( isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '', PHP_URL_PATH );
-	$path         = trim( (string) $request_path, '/' );
+	$path = function_exists( 'vanphuccare_request_path' ) ? vanphuccare_request_path() : '';
 
 	return in_array( $path, array( 'tam-be-tai-nha', 'tam-tre-so-sinh', 'tam-be-so-sinh', 'dich-vu/tam-be-tai-nha' ), true );
 }

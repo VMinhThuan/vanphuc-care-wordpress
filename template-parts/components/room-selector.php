@@ -42,11 +42,13 @@ if ( empty( $rooms ) ) {
 					</div>
 				</div>
 
-				<div class="ocu-room-panel__variants" role="group" aria-label="Kiểu phòng">
-					<?php foreach ( ( isset( $detail['tabs'] ) ? $detail['tabs'] : array() ) as $variant_index => $variant ) : ?>
-						<button type="button" class="<?php echo 0 === $variant_index ? 'is-active' : ''; ?>" data-room-panel-variant><?php echo esc_html( $variant ); ?></button>
-					<?php endforeach; ?>
-				</div>
+				<?php if ( 'suite' !== $room_key ) : ?>
+					<div class="ocu-room-panel__variants" role="group" aria-label="Kiểu phòng">
+						<?php foreach ( ( isset( $detail['tabs'] ) ? $detail['tabs'] : array() ) as $variant_index => $variant ) : ?>
+							<button type="button" class="<?php echo 0 === $variant_index ? 'is-active' : ''; ?>" data-room-panel-variant><?php echo esc_html( $variant ); ?></button>
+						<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
 
 				<div class="ocu-room-panel__gallery" data-room-gallery data-gallery-images="<?php echo esc_attr( wp_json_encode( $gallery_images ) ); ?>">
 					<div class="ocu-room-panel__main-image">

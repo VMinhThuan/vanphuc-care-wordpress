@@ -201,4 +201,32 @@
 	.vpc-bao-mau .vpc-bao-mau__stat + .vpc-bao-mau__stat {
 		border-left: 0 !important;
 	}
+
+	/* Bảo mẫu mobile follows the Figma color rhythm with full-bleed section
+	 * canvases: pink for care stories, blue for digital/service solutions. */
+	.vpc-bao-mau > .vpc-bao-mau__hero {
+		background: linear-gradient(180deg, #f8f8f8 0%, #fde6e6 100%) !important;
+	}
+
+	.vpc-bao-mau > .vpc-bao-mau__intro--challenges {
+		background: linear-gradient(162deg, #f8f8f8 25.572%, #fde6e6 102.47%) !important;
+	}
+
+	.vpc-bao-mau > .vpc-bao-mau__intro--health,
+	.vpc-bao-mau > .vpc-bao-mau__packages,
+	.vpc-bao-mau > .vpc-bao-mau__team {
+		background: linear-gradient(145deg, #f8f8f8 25%, #d1e4f1 108%) !important;
+	}
+
+	.vpc-bao-mau > .vpc-bao-mau__stats,
+	.vpc-bao-mau > .vpc-bao-mau__process,
+	.vpc-bao-mau > .vpc-bao-mau__faq,
+	.vpc-bao-mau > .vpc-bao-mau__services,
+	.vpc-bao-mau #feedback {
+		background: #f8f8f8 !important;
+	}
+
+	.vpc-bao-mau > #dang-ky-tu-van {
+		background: linear-gradient(118deg, #f8f8f8 40%, #fde6e6 120%) !important;
+	}
 }

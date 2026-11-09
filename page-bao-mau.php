@@ -12,8 +12,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 
 $asset_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/bao-mau';
-$hero_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/home/bao-mau-tai-nha-1.jpg';
+$hero_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/bao-mau/hero-figma-3126-39939.jpg';
 $health_book_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/easy/health-book.png';
+$consultation_services = vpc_get_consultation_services();
+$gestational_age_options = vpc_get_gestational_age_options();
 
 $processes = array(
 	array( 'image' => 'process-1.png', 'title' => 'Kiểm tra toàn trạng', 'copy' => 'Vệ sinh phòng, kiểm tra tổng quan sức khỏe của bé. Trường hợp phát hiện vấn đề bất thường, điều dưỡng viên sẽ trao đổi lại với mẹ.' ),
@@ -106,7 +108,9 @@ $button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="bao-mau-
 
 	<section class="vpc-bao-mau__intro vpc-bao-mau__intro--challenges">
 		<div class="vpc-bao-mau__container vpc-bao-mau__intro-grid">
-			<img class="vpc-bao-mau__intro-image" src="<?php echo esc_url( $asset_uri . '/challenges.png' ); ?>" width="540" height="456" alt="Mẹ chăm sóc em bé sau sinh" loading="lazy">
+			<div class="vpc-bao-mau__intro-image-frame">
+				<img class="vpc-bao-mau__intro-image" src="<?php echo esc_url( $asset_uri . '/challenges.png' ); ?>" width="540" height="456" alt="Mẹ chăm sóc em bé sau sinh" loading="lazy">
+			</div>
 			<div class="vpc-bao-mau__intro-copy">
 				<div class="vpc-bao-mau__badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">KHÓ KHĂN</div>
 				<h2><span>Những Điều Khó Khăn</span><em>Mẹ Thường Gặp</em></h2>
@@ -123,7 +127,9 @@ $button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="bao-mau-
 
 	<section class="vpc-bao-mau__intro vpc-bao-mau__intro--health">
 		<div class="vpc-bao-mau__container vpc-bao-mau__intro-grid">
-			<img class="vpc-bao-mau__intro-image" src="<?php echo esc_url( $health_book_uri ); ?>" width="540" height="456" alt="Sổ sức khỏe điện tử cho trẻ sơ sinh" loading="lazy">
+			<div class="vpc-bao-mau__intro-image-frame vpc-bao-mau__intro-image-frame--health">
+				<img class="vpc-bao-mau__intro-image" src="<?php echo esc_url( $health_book_uri ); ?>" width="540" height="456" alt="Sổ sức khỏe điện tử cho trẻ sơ sinh" loading="lazy">
+			</div>
 			<div class="vpc-bao-mau__intro-copy">
 				<div class="vpc-bao-mau__badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">SỔ SỨC KHỎE ĐIỆN TỬ</div>
 				<h2><span>Sổ Sức Khỏe Điện Tử - <span class="vpc-health-title-assistant">Trợ Lý</span></span><em>Giúp Mẹ Nuôi Con Easy</em></h2>
@@ -181,7 +187,7 @@ $button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="bao-mau-
 	<section class="vpc-bao-mau__team" aria-labelledby="bao-mau-team-title">
 		<div class="vpc-bao-mau__container">
 			<div class="vpc-bao-mau__section-heading">
-				<div class="vpc-bao-mau__badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">ĐỘI NGŨ</div>
+				<div class="vpc-bao-mau__badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">ĐIỀU DƯỠNG VIÊN</div>
 				<h2 id="bao-mau-team-title"><span>Đội Ngũ Của Chúng Tôi</span></h2>
 				<p>Đội ngũ điều dưỡng viên với nền tảng y tế, được đào tạo chuyên môn về chăm sóc sức khỏe Mẹ&amp;Bé, đảm bảo đem đến dịch vụ an toàn, chuyên nghiệp cho các gia đình.</p>
 			</div>
@@ -195,7 +201,7 @@ $button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="bao-mau-
 
 	<section class="vpc-bao-mau__faq" aria-labelledby="bao-mau-faq-title">
 		<div class="vpc-bao-mau__container">
-			<div class="vpc-bao-mau__section-heading"><div class="vpc-bao-mau__badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">HỎI ĐÁP</div><h2 id="bao-mau-faq-title"><span>Câu Hỏi Thường Gặp</span></h2><p>Chặng đường nuôi con trong lần đầu làm mẹ không tránh khỏi những nỗi niềm băn khoăn, lo lắng riêng của mẹ.<br>Với kênh hỗ trợ hoạt động 24/7, chúng tôi luôn sẵn sàng đồng hành cùng gia đình mọi lúc.</p></div>
+			<div class="vpc-bao-mau__section-heading"><div class="vpc-bao-mau__badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">FAQ</div><h2 id="bao-mau-faq-title"><span>Câu Hỏi Thường Gặp</span></h2><p>Chặng đường nuôi con trong lần đầu làm mẹ không tránh khỏi những nỗi niềm băn khoăn, lo lắng riêng của mẹ.<br>Với kênh hỗ trợ hoạt động 24/7, chúng tôi luôn sẵn sàng đồng hành cùng gia đình mọi lúc.</p></div>
 			<div class="vpc-bao-mau__faq-list">
 				<details class="is-open" open><summary>Vì sao nhiều cha mẹ lựa chọn sử dụng dịch vụ của Vạn Phúc Care?</summary><p>– Vạn Phúc Care là đơn vị đầu tiên hệ thống hóa thông tin sức khỏe của trẻ qua Sổ sức khỏe điện tử và phổ cập phương pháp chăm sóc sức khỏe trẻ sơ sinh từ 0 – 12 tháng tuổi khoa học nhất.<br><br>– Đội ngũ điều dưỡng viên tận tâm, tay nghề cao, cam kết 100% được đào tạo có bằng cấp chính quy với các chuyên ngành: Điều dưỡng, hộ sinh, giáo viên mầm non,….<br><br>– Các dịch vụ đa dạng phù hợp với từng đặc điểm và nhu cầu của mọi gia đình với các gói ca ngày, ca đêm hoặc ca 24/24 giúp cha mẹ giảm bớt gánh nặng công việc chăm sóc con, có thể dành thời gian nghỉ ngơi hoặc tập trung vào công việc khác.<br><br>Vạn Phúc Care mang lại sự yên tâm và tiện lợi cho cha mẹ bất kể thời gian nào, vì sức khỏe, hạnh phúc của mẹ và bé yêu!</p></details>
 				<details><summary>Điều gì làm nên sự đặc biệt của Vạn Phúc Care so với các đơn vị khác cùng ngành?</summary><p>Đội ngũ điều dưỡng chuyên môn cao, quy trình chăm sóc chuẩn hóa và hệ thống hỗ trợ gia đình xuyên suốt hành trình nuôi con.</p></details>
@@ -206,28 +212,74 @@ $button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="bao-mau-
 		</div>
 	</section>
 
-	<?php
-	get_template_part(
-		'template-parts/sections/feedback',
-		null,
-		array(
-			'items'        => $feedback,
-			'image_prefix' => 'bao-mau',
-			'badge'        => 'KHÁCH HÀNG',
-			'description'  => array(
-				'Trong hành trình cùng mẹ trải đầy yêu thương, Vạn Phúc Care đã nhận được sự tin yêu của hàng ngàn mẹ bỉm.',
-				'Chúng tôi cam kết đồng hành, mang đến giải pháp chăm sóc sức khoẻ phù hợp cho mọi gia đình.',
-			),
-		)
-	); ?>
+	<?php get_template_part( 'template-parts/sections/feedback' ); ?>
 
-	<section class="vpc-bao-mau__lead" aria-labelledby="bao-mau-lead-title">
-		<div class="vpc-bao-mau__container"><div class="vpc-bao-mau__section-heading"><h2 id="bao-mau-lead-title"><span>Sẵn Sàng Bắt Đầu</span><em>Hành Trình Làm Mẹ <span class="vpc-bao-mau__lead-title-break vpc-lead-title-happiness">Hạnh Phúc</span></em></h2></div>
-			<div class="vpc-bao-mau__lead-card">
-				<div class="vpc-bao-mau__lead-row"><label><span class="vpc-bao-mau__label-text"><b>*</b>Họ và tên</span><input type="text" placeholder="Nguyễn Như Linh" aria-label="Họ và tên"></label><label><span class="vpc-bao-mau__label-text"><b>*</b>Số điện thoại</span><input type="tel" placeholder="0345678***" aria-label="Số điện thoại"></label></div>
-				<label><span class="vpc-bao-mau__label-text"><b>*</b>Gói dịch vụ quan tâm</span><select aria-label="Gói dịch vụ quan tâm"><option>Gói Thảnh Thơi</option><option>Gói Linh Hoạt</option><option>Gói An Tâm</option></select></label>
-				<label><span class="vpc-bao-mau__label-text">Ghi chú</span><input type="text" placeholder="Cho chúng tôi biết thêm về nhu cầu của bạn!" aria-label="Ghi chú"></label>
-				<button type="button" class="vpc-bao-mau__button vpc-bao-mau__button--primary" <?php echo $button_attrs; ?>>Gửi yêu cầu tư vấn</button>
+	<section id="dang-ky-tu-van" class="vpc-section vpc-gradient-consultation relative overflow-hidden">
+		<div class="consultation-section-inner vpc-home-container">
+			<div class="vpc-consultation-heading">
+				<h2>
+					<span class="vpc-consultation-heading__blue">Sẵn Sàng Bắt Đầu</span>
+					<span class="vpc-consultation-heading__pink">Hành Trình Làm Mẹ <span class="vpc-lead-title-happiness">Hạnh Phúc</span></span>
+				</h2>
+			</div>
+
+			<div class="vpc-consultation-card">
+				<form id="vpc-section-consultation-form" class="vpc-consultation-form">
+					<?php wp_nonce_field( 'vpc_consultation_nonce', 'vpc_consultation_nonce' ); ?>
+					<input type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
+
+					<div class="vpc-consultation-form__identity">
+						<div class="vpc-consultation-field">
+							<label><span class="text-text-error-default">*</span> Họ và tên</label>
+							<input type="text" name="customer_name" required placeholder="Nguyễn Như Linh" class="vpc-consultation-control">
+						</div>
+						<div class="vpc-consultation-field">
+							<label><span class="text-text-error-default">*</span> Số điện thoại</label>
+							<input type="tel" name="customer_phone" required placeholder="0345678***" class="vpc-consultation-control">
+						</div>
+					</div>
+
+					<div class="vpc-consultation-field">
+						<label><span class="text-text-error-default">*</span> Dịch vụ quan tâm</label>
+						<div class="vpc-consultation-select-wrap">
+							<select name="service" required class="vpc-form-select vpc-consultation-control vpc-consultation-select">
+								<option value="bao-mau-tai-nha" selected>Bảo mẫu tại nhà</option>
+								<?php foreach ( $consultation_services as $service_value => $service_label ) : ?>
+									<?php if ( 'bao-mau-tai-nha' === $service_value ) : continue; endif; ?>
+									<option value="<?php echo esc_attr( $service_value ); ?>"><?php echo esc_html( $service_label ); ?></option>
+								<?php endforeach; ?>
+							</select>
+						</div>
+					</div>
+
+					<fieldset class="vpc-consultation-field vpc-consultation-stage">
+						<legend><span class="text-text-error-default">*</span> Giai đoạn thai kỳ</legend>
+						<div class="vpc-consultation-stage__options" role="radiogroup" aria-label="Giai đoạn thai kỳ">
+							<label><input type="radio" name="pregnancy_stage" value="dang-mang-thai" checked required><span>Đang mang thai</span></label>
+							<label><input type="radio" name="pregnancy_stage" value="chuan-bi-mang-thai" required><span>Chuẩn bị mang thai</span></label>
+							<label><input type="radio" name="pregnancy_stage" value="da-sinh-be" required><span>Đã sinh bé</span></label>
+						</div>
+					</fieldset>
+
+					<div class="vpc-consultation-field">
+						<label><span class="text-text-error-default">*</span> Tuần thai</label>
+						<div class="vpc-consultation-select-wrap">
+							<select name="gestational_age" required class="vpc-form-select vpc-consultation-control vpc-consultation-select">
+								<option value="" disabled selected>Chọn giai đoạn</option>
+								<?php foreach ( $gestational_age_options as $age_value => $age_label ) : ?>
+									<option value="<?php echo esc_attr( $age_value ); ?>"><?php echo esc_html( $age_label ); ?></option>
+								<?php endforeach; ?>
+							</select>
+						</div>
+					</div>
+
+					<div class="vpc-consultation-field">
+						<label>Ghi chú</label>
+						<input type="text" name="customer_note" placeholder="Cho chúng tôi biết thêm về nhu cầu của bạn!" class="vpc-consultation-control">
+					</div>
+
+					<div class="vpc-consultation-submit"><button type="submit" class="vpc-button">Gửi yêu cầu tư vấn</button></div>
+				</form>
 			</div>
 		</div>
 	</section>

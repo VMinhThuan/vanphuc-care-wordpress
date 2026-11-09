@@ -1,0 +1,191 @@
+
+name: VPC WordPress Theme CI/CD
+
+on:
+  pull_request:
+    branches: [staging]
+  push:
+    branches: [staging]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vpc-theme-staging
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout private repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Tailwind CSS
+        run: npm run build
+
+      - name: Validate WordPress theme
+        run: |
+          set -euo pipefail
+          test -s style.css
+          test -s functions.php
+          test -s header.php
+          test -s footer.php
+          test -s index.php
+          test -s assets/css/theme.css
+
+          find . \
+            -path './node_modules' -prune -o \
+            -path './.git' -prune -o \
+            -type f -name '*.php' -print0 \
+            | xargs -0 -r -n1 php -l
+
+      - name: Package theme
+        if: github.event_name == 'push' && github.ref == 'refs/heads/staging'
+        run: |
+          set -euo pipefail
+          mkdir -p deploy-package
+
+          rsync -a \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='node_modules/' \
+            --exclude='deploy-package/' \
+            --exclude='src/' \
+            --exclude='.env*' \
+            --exclude='*.zip' \
+            --exclude='/package*.json' \
+            --exclude='/README.md' \
+            --exclude='/.gitignore' \
+            ./ deploy-package/
+
+          test -s deploy-package/style.css
+          test -s deploy-package/functions.php
+          test -s deploy-package/assets/css/theme.css
+
+          if find deploy-package -type l -print -quit | grep -q .; then
+            echo "ERROR: Unexpected symlink in package"
+            exit 1
+          fi
+
+      - name: Configure SSH
+        if: github.event_name == 'push' && github.ref == 'refs/heads/staging'
+        env:
+          DEPLOY_KEY: ${{ secrets.STAGING_SSH_PRIVATE_KEY }}
+          KNOWN_HOSTS: ${{ secrets.STAGING_SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$DEPLOY_KEY"
+          test -n "$KNOWN_HOSTS"
+
+          umask 077
+          mkdir -p "$HOME/.ssh"
+
+          printf '%s\n' "$DEPLOY_KEY" > "$HOME/.ssh/id_vpc_staging"
+          printf '%s\n' "$KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
+
+          cat > "$HOME/.ssh/config" <<'SSHCONFIG'
+          Host vpc-stage
+            HostName 103.216.119.114
+            Port 24700
+            User vpc-theme-deploy
+            IdentityFile ~/.ssh/id_vpc_staging
+            IdentitiesOnly yes
+            BatchMode yes
+            StrictHostKeyChecking yes
+            UserKnownHostsFile ~/.ssh/known_hosts
+          SSHCONFIG
+
+          chmod 600 "$HOME/.ssh/id_vpc_staging"
+          chmod 600 "$HOME/.ssh/known_hosts"
+          chmod 600 "$HOME/.ssh/config"
+
+          ssh-keygen -y -f "$HOME/.ssh/id_vpc_staging" > /dev/null
+
+      - name: Verify deployment destination
+        if: github.event_name == 'push' && github.ref == 'refs/heads/staging'
+        run: |
+          ssh vpc-stage '
+            set -eu
+            dir=/opt/vanphuccare-wp-staging/wordpress/wp-content/themes/vanphuccare
+
+            test "$(id -un)" = "vpc-theme-deploy"
+            test -d "$dir"
+            test ! -L "$dir"
+            test -w "$dir"
+
+            echo "DEPLOY_TARGET_READY"
+          '
+
+      - name: Backup previous theme files
+        if: github.event_name == 'push' && github.ref == 'refs/heads/staging'
+        run: |
+          ssh vpc-stage '
+            set -eu
+            dir=/opt/vanphuccare-wp-staging/wordpress/wp-content/themes/vanphuccare
+
+            if test -s "$dir/style.css"; then
+              mkdir -p "$HOME/theme-backups"
+
+              tar -czf \
+                "$HOME/theme-backups/vanphuccare-$(date -u +%Y%m%d-%H%M%S).tgz" \
+                -C "$dir" .
+
+              echo "PREVIOUS_THEME_BACKED_UP"
+            else
+              echo "FIRST_DEPLOY_NO_BACKUP_NEEDED"
+            fi
+          '
+
+      - name: Deploy theme using rsync
+        if: github.event_name == 'push' && github.ref == 'refs/heads/staging'
+        run: |
+          set -euo pipefail
+
+          rsync -az \
+            --no-owner \
+            --no-group \
+            --chmod=D755,F644 \
+            --delay-updates \
+            -e ssh \
+            deploy-package/ \
+            vpc-stage:/opt/vanphuccare-wp-staging/wordpress/wp-content/themes/vanphuccare/
+
+      - name: Verify deployed theme
+        if: github.event_name == 'push' && github.ref == 'refs/heads/staging'
+        run: |
+          ssh vpc-stage '
+            set -eu
+            dir=/opt/vanphuccare-wp-staging/wordpress/wp-content/themes/vanphuccare
+
+            test -s "$dir/style.css"
+            test -s "$dir/functions.php"
+            test -s "$dir/header.php"
+            test -s "$dir/footer.php"
+            test -s "$dir/assets/css/theme.css"
+
+            echo "THEME_DEPLOYED_SUCCESSFULLY"
+          '
+
+      - name: Deployment summary
+        if: github.event_name == 'push' && github.ref == 'refs/heads/staging'
+        run: |
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Branch: staging"
+          echo "Commit: $GITHUB_SHA"
+          echo "Target: WordPress Staging"
+          echo "Theme: vanphuccare"
+          echo "Database: unchanged"
+          echo "Theme activation: manual"

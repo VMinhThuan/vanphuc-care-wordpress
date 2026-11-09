@@ -465,21 +465,21 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 	<!-- =========================================================================
 	     5. LỚP HỌC TIỀN SẢN (Chưa Sẵn Sàng Làm Mẹ ? Hãy Bắt Đầu Từ Lớp Tiền Sản)
 	     ========================================================================= -->
-	<section id="lop-hoc-tien-san" class="vpc-section vpc-gradient-blue-reverse relative overflow-hidden">
+	<section id="lop-hoc-tien-san" class="vpc-section vpc-gradient-blue-reverse homepage-prenatal-section relative overflow-hidden">
 		<div class="vpc-home-container">
-			<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
+			<div class="homepage-prenatal-grid grid grid-cols-1 items-start">
 
 				<!-- Left 2-Photo Composition (50% width, staggered 2-column layout matching Figma) -->
-				<div class="relative flex items-center justify-center w-full">
-					<div class="grid grid-cols-2 gap-4 sm:gap-5 items-start w-full max-w-[350px] sm:max-w-[540px] mx-auto lg:max-w-none">
+				<div class="homepage-prenatal-visual relative flex items-center justify-center w-full">
+					<div class="homepage-prenatal-gallery grid grid-cols-2 gap-4 sm:gap-5 items-start w-full max-w-[350px] sm:max-w-[540px] mx-auto lg:max-w-none">
 						<!-- Left Photo (Top-aligned) -->
 						<?php $prenatal_home_image_url = vpc_image_url( 'home/lop-hoc-tien-san-1.webp', 'large' ); ?>
 						<?php if ( $prenatal_home_image_url ) : ?>
-							<div class="relative w-full">
-								<picture>
+							<div class="homepage-prenatal-gallery__item homepage-prenatal-gallery__item--primary relative w-full aspect-[316/388] overflow-hidden rounded-xl bg-neutral-100">
+								<picture class="block w-full h-full">
 									<img src="<?php echo esc_url( $prenatal_home_image_url ); ?>"
 									     alt="Chăm sóc bé sơ sinh tại lớp học tiền sản Vạn Phúc Care"
-									     class="w-full h-full aspect-[316/388] object-cover rounded-xl block"
+									     class="w-full h-full object-cover block"
 									     loading="lazy" />
 								</picture>
 							</div>
@@ -487,25 +487,22 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 						<!-- Right Photo (Staggered down) -->
 						<?php $prenatal_home_second_image_url = vpc_image_url( 'home/lop-hoc-tien-san-2.webp', 'large' ); ?>
 						<?php if ( $prenatal_home_second_image_url ) : ?>
-							<div class="relative w-full pt-8 sm:pt-12 lg:pt-20">
-								<picture>
+							<div class="homepage-prenatal-gallery__item homepage-prenatal-gallery__item--secondary relative w-full pt-8 sm:pt-12 lg:pt-20">
+								<div class="homepage-prenatal-gallery__image-frame w-full aspect-[314/504] overflow-hidden rounded-xl bg-neutral-100">
+									<picture class="block w-full h-full">
 									<img src="<?php echo esc_url( $prenatal_home_second_image_url ); ?>"
 									     alt="Tư vấn và giải đáp thắc mắc cùng điều dưỡng Vạn Phúc Care"
-									     class="w-full h-full aspect-[314/521] object-cover rounded-xl block"
+									     class="w-full h-full object-cover block"
 									     loading="lazy" />
-								</picture>
+									</picture>
+								</div>
 							</div>
 						<?php endif; ?>
 					</div>
 				</div>
 
 				<!-- Right Content (50% width) -->
-				<div class="flex flex-col items-center lg:items-start text-center lg:text-left w-full">
-					<!-- Badge -->
-					<div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-surface-badge-secondary border border-border-secondary-default rounded-full mb-2.5 sm:mb-3">
-						<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/sparkle-pink.svg' ); ?>" width="24" height="24" class="w-4 h-4 shrink-0" alt="" aria-hidden="true" />
-						<span class="font-body font-medium text-xs sm:text-sm text-text-link-hover tracking-wider uppercase">LỚP HỌC TIỀN SẢN</span>
-					</div>
+				<div class="homepage-prenatal-copy flex flex-col items-center lg:items-start text-center lg:text-left w-full">
 
 					<!-- Heading -->
 					<div class="flex flex-col mb-3">
@@ -562,11 +559,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 							<!-- Card 1 -->
 							<div class="bg-surface-card-default rounded-xl border border-border-divider-default shadow-card p-3 sm:px-3.5 sm:py-2.5 sm:min-h-[73px] flex items-center gap-3">
 								<div class="w-[50px] h-[50px] rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0">
-									<svg class="w-6 h-6 text-text-heading-secondary-default shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-										<path d="M12 3a9 9 0 0 0-7.7 4.3L3 6v4h4L5.6 8.6A7.2 7.2 0 1 1 4.8 12h-1.8A9 9 0 1 0 12 3z" fill="var(--color-secondary-500)"/>
-										<circle cx="12" cy="12" r="5" fill="var(--color-secondary-500)"/>
-										<path d="M12 9.5V12l1.8 1.1" stroke="var(--color-neutral-white)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-									</svg>
+									<img src="<?php echo esc_url( $theme_uri . '/assets/images/lop-hoc-tien-san/icons/duration.svg' ); ?>" width="24" height="24" class="shrink-0" alt="" aria-hidden="true" />
 								</div>
 								<div>
 									<h4 class="font-body font-medium text-base sm:text-lg text-text-heading-primary-default leading-snug">Thời gian</h4>
@@ -577,10 +570,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 							<!-- Card 2 -->
 							<div class="bg-surface-card-default rounded-xl border border-border-divider-default shadow-card p-3 sm:px-3.5 sm:py-2.5 sm:min-h-[73px] flex items-center gap-3">
 								<div class="w-[50px] h-[50px] rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0">
-									<svg class="w-6 h-6 text-text-heading-secondary-default shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-										<path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7.1c-.1-.3-.1-.7-.1-1 0-3.3 2.7-6 6-6 .3 0 .7 0 1 .1V6c0-1.1-.9-2-2-2zm0 6H5V7h14v3z"/>
-										<path d="M18 13c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm1.5 6.5l-2-1.5V15h1v2.5l1.5 1.1-.5.9z"/>
-									</svg>
+									<img src="<?php echo esc_url( $theme_uri . '/assets/images/lop-hoc-tien-san/icons/schedule.svg' ); ?>" width="22" height="22" class="shrink-0" alt="" aria-hidden="true" />
 								</div>
 								<div>
 									<h4 class="font-body font-medium text-base sm:text-lg text-text-heading-primary-default leading-snug">Thời lượng</h4>
@@ -592,9 +582,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 						<!-- Card 3 -->
 						<div class="bg-surface-card-default rounded-xl border border-border-divider-default shadow-card p-3 sm:px-3.5 sm:py-2.5 sm:min-h-[73px] flex items-center gap-3 w-full">
 							<div class="w-[50px] h-[50px] rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0">
-								<svg class="w-6 h-6 text-text-heading-secondary-default shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-									<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-								</svg>
+									<img src="<?php echo esc_url( $theme_uri . '/assets/images/lop-hoc-tien-san/icons/map.svg' ); ?>" width="22" height="30.4051" class="shrink-0" alt="" aria-hidden="true" />
 							</div>
 							<div>
 								<h4 class="font-body font-medium text-base sm:text-lg text-text-heading-primary-default leading-snug">Hình thức</h4>
@@ -654,15 +642,15 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 			<!-- Heading -->
 			<h2 class="font-heading font-semibold text-h1-mobile xl:text-h1 text-center mb-8 sm:mb-10 lg:mb-12">
 				<span class="text-text-heading-primary-default block font-semibold">Khoá Học Làm Mẹ,</span>
-				<span class="text-text-heading-secondary-default block font-semibold mt-1">Nuôi Con Không Áp Lực</span>
+				<span class="text-text-heading-secondary-default block font-semibold">Nuôi Con Không Áp Lực</span>
 			</h2>
 
 			<!-- 4 Cards Grid -->
 			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 w-full mb-8 sm:mb-12">
 
 				<!-- Card 1 -->
-				<div class="bg-surface-card-default rounded-xl p-5 sm:p-6 lg:p-7 shadow-card border border-border-divider-default flex flex-col items-center text-center h-full transition-all duration-300 hover:shadow-[0_12px_32px_rgba(26,119,186,0.08)] hover:-translate-y-1">
-					<div class="w-12 h-12 rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0 mb-3 sm:mb-4">
+				<div class="bg-surface-card-default rounded-xl p-5 sm:p-6 lg:p-7 shadow-card border border-border-divider-default flex flex-col items-center text-center h-full">
+					<div class="w-[50px] h-[50px] rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0 mb-3 sm:mb-4">
 						<svg class="w-6 h-6 text-text-heading-secondary-default" viewBox="216 334 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M239.534 335.333H218.489C217.673 335.333 217 336.001 217 336.811V340.244V355.189C217 355.999 217.673 356.667 218.489 356.667H239.51C240.327 356.667 240.999 355.999 240.999 355.189V338.742V336.811C241.023 336.001 240.351 335.333 239.534 335.333ZM226.225 338.075C226.225 338.408 225.961 338.671 225.624 338.671H225C224.663 338.671 224.399 338.408 224.399 338.075C224.399 337.741 224.663 337.479 225 337.479H225.624C225.961 337.479 226.225 337.741 226.225 338.075ZM223.582 338.075C223.582 338.408 223.318 338.671 222.982 338.671H222.357C222.021 338.671 221.757 338.408 221.757 338.075C221.757 337.741 222.021 337.479 222.357 337.479H222.982C223.318 337.479 223.582 337.741 223.582 338.075ZM220.94 338.075C220.94 338.408 220.676 338.671 220.339 338.671H219.715C219.378 338.671 219.114 338.408 219.114 338.075C219.114 337.741 219.378 337.479 219.715 337.479H220.339C220.676 337.479 220.94 337.741 220.94 338.075ZM239.534 355.475H218.489C218.321 355.475 218.201 355.332 218.201 355.189V340.84H226.297C226.681 340.84 227.066 340.697 227.33 340.434L228.483 339.409C228.555 339.362 228.627 339.314 228.723 339.314H239.822V355.165C239.822 355.356 239.678 355.475 239.534 355.475ZM237.084 346.56C237.084 346.87 236.891 347.132 236.603 347.252L229.252 349.731C229.18 349.754 229.084 349.778 229.012 349.778C228.94 349.778 228.844 349.778 228.771 349.731L221.444 347.252C221.156 347.156 220.964 346.87 220.964 346.56C220.964 346.25 221.156 345.988 221.444 345.869L228.771 343.414C228.916 343.366 229.084 343.366 229.228 343.414L236.579 345.893C236.867 345.988 237.084 346.25 237.084 346.56ZM229.612 350.851L235.378 348.92V351.161C235.378 352.615 231.919 352.925 229.012 352.925C227.642 352.948 226.273 352.829 224.928 352.639C223.847 352.448 222.621 352.114 222.621 351.185V348.92L228.387 350.875C228.579 350.946 228.771 350.97 228.988 350.97C229.204 350.97 229.42 350.922 229.612 350.851Z" fill="currentColor"/>
 						</svg>
@@ -676,8 +664,8 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 				</div>
 
 				<!-- Card 2 -->
-				<div class="bg-surface-card-default rounded-xl p-5 sm:p-6 lg:p-7 shadow-card border border-border-divider-default flex flex-col items-center text-center h-full transition-all duration-300 hover:shadow-[0_12px_32px_rgba(26,119,186,0.08)] hover:-translate-y-1">
-					<div class="w-12 h-12 rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0 mb-3 sm:mb-4">
+				<div class="bg-surface-card-default rounded-xl p-5 sm:p-6 lg:p-7 shadow-card border border-border-divider-default flex flex-col items-center text-center h-full">
+					<div class="w-[50px] h-[50px] rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0 mb-3 sm:mb-4">
 						<svg class="w-6 h-6 text-text-heading-secondary-default" viewBox="543 336 26 21" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M544.876 351.444V339.625C544.465 339.735 544.054 339.87 543.667 339.992V354.913C546.914 354.004 550.364 354.184 553.501 355.428C551.369 353.243 548.465 352.012 545.433 352.008C545.128 352.001 544.883 351.752 544.876 351.444Z" fill="currentColor"/>
 							<path d="M546.014 336.4L545.977 350.941C549.538 351.128 552.859 352.817 555.135 355.6V341.733C553.057 338.637 549.698 336.673 546.014 336.4Z" fill="currentColor"/>
@@ -694,9 +682,9 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 				</div>
 
 				<!-- Card 3 -->
-				<div class="bg-surface-card-default rounded-xl p-5 sm:p-6 lg:p-7 shadow-card border border-border-divider-default flex flex-col items-center text-center h-full transition-all duration-300 hover:shadow-[0_12px_32px_rgba(26,119,186,0.08)] hover:-translate-y-1">
-					<div class="w-12 h-12 rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0 mb-3 sm:mb-4">
-						<img src="<?php echo esc_url( $theme_uri . '/assets/images/home/lightbulb-hand-icon-transparent-50x50.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px]" alt="" aria-hidden="true" />
+				<div class="bg-surface-card-default rounded-xl p-5 sm:p-6 lg:p-7 shadow-card border border-border-divider-default flex flex-col items-center text-center h-full">
+					<div class="w-[50px] h-[50px] rounded-full flex items-center justify-center shrink-0 mb-3 sm:mb-4">
+						<img src="<?php echo esc_url( $theme_uri . '/assets/images/home/lightbulb-hand-icon-transparent-50x50.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px] object-contain block" alt="" aria-hidden="true" />
 						<svg class="hidden" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 							<path d="M12 1.5a.9.9 0 0 1 .9.9v1.2a.9.9 0 1 1-1.8 0V2.4a.9.9 0 0 1 .9-.9zm-6.2 3.8a.9.9 0 0 1 1.27 0l.85.85a.9.9 0 1 1-1.27 1.27l-.85-.85a.9.9 0 0 1 0-1.27zm12.4 0a.9.9 0 0 1 0 1.27l-.85.85a.9.9 0 1 1-1.27-1.27l.85-.85a.9.9 0 0 1 1.27 0zM3 11a.9.9 0 0 1 .9-.9h1.2a.9.9 0 1 1 0 1.8H3.9A.9.9 0 0 1 3 11zm15 0a.9.9 0 0 1 .9-.9h1.2a.9.9 0 1 1 0 1.8h-1.2a.9.9 0 0 1-.9-.9z"/>
 							<path d="M12 4.5a4.2 4.2 0 0 0-3.08 7.07c.45.48.75 1.08.75 1.83h4.66c0-.75.3-1.35.75-1.83A4.2 4.2 0 0 0 12 4.5zm-1.4 10.4h2.8v.9h-2.8v-.9z"/>
@@ -712,9 +700,9 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 				</div>
 
 				<!-- Card 4 -->
-				<div class="bg-surface-card-default rounded-xl p-5 sm:p-6 lg:p-7 shadow-card border border-border-divider-default flex flex-col items-center text-center h-full transition-all duration-300 hover:shadow-[0_12px_32px_rgba(26,119,186,0.08)] hover:-translate-y-1">
-					<div class="w-12 h-12 rounded-full bg-surface-badge-secondary flex items-center justify-center shrink-0 mb-3 sm:mb-4">
-						<img src="<?php echo esc_url( $theme_uri . '/assets/images/home/teaching-icon-50x50.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px]" alt="" aria-hidden="true" />
+				<div class="bg-surface-card-default rounded-xl p-5 sm:p-6 lg:p-7 shadow-card border border-border-divider-default flex flex-col items-center text-center h-full">
+					<div class="w-[50px] h-[50px] rounded-full flex items-center justify-center shrink-0 mb-3 sm:mb-4">
+						<img src="<?php echo esc_url( $theme_uri . '/assets/images/home/teaching-icon-50x50.svg' ); ?>" width="50" height="50" class="w-[50px] h-[50px] object-contain block" alt="" aria-hidden="true" />
 						<svg class="hidden" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 							<path d="M9.5 3h12a1 1 0 0 1 1 1v9.5a1 1 0 0 1-1 1h-12a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1.5 2.5h8v1.5h-8V5.5zm0 3h5.5V10H11V8.5z"/>
 							<circle cx="5.5" cy="6" r="2.5"/>
@@ -1037,7 +1025,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 
 			<!-- Bottom CTA Button -->
 			<div class="w-full flex justify-center mt-8 sm:mt-12">
-				<span class="vpc-button w-full sm:w-auto max-w-[350px] h-10 xl:h-12 px-4 xl:px-6 rounded-full border border-border-secondary-default bg-transparent text-text-heading-secondary-default hover:bg-surface-badge-secondary transition-colors flex items-center justify-center shadow-xs" aria-disabled="true">
+				<span class="vpc-button w-full sm:w-auto max-w-[350px] h-10 xl:h-12 px-4 xl:px-6 rounded-full border border-border-secondary-default bg-transparent text-text-heading-secondary-default hover:bg-surface-badge-secondary transition-colors flex items-center justify-center" aria-disabled="true">
 					Xem tất cả
 				</span>
 			</div>
@@ -1085,7 +1073,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 							<span class="text-text-error-default">*</span> Dịch vụ quan tâm
 						</label>
 						<div class="vpc-consultation-select-wrap">
-							<select name="service" required class="vpc-consultation-control vpc-consultation-select">
+						<select name="service" required class="vpc-form-select vpc-consultation-control vpc-consultation-select">
 								<option value="" disabled selected>Trung tâm ở cữ</option>
 								<?php foreach ( $consultation_services as $service_value => $service_label ) : ?>
 									<option value="<?php echo esc_attr( $service_value ); ?>"><?php echo esc_html( $service_label ); ?></option>
@@ -1106,7 +1094,7 @@ foreach ( $hero_slide_specs as $slide_spec ) {
 					<div class="vpc-consultation-field">
 						<label><span class="text-text-error-default">*</span> Tuần thai</label>
 						<div class="vpc-consultation-select-wrap">
-							<select name="gestational_age" required class="vpc-consultation-control vpc-consultation-select">
+						<select name="gestational_age" required class="vpc-form-select vpc-consultation-control vpc-consultation-select">
 								<option value="" disabled selected>Chọn giai đoạn</option>
 								<?php foreach ( $gestational_age_options as $age_value => $age_label ) : ?>
 									<option value="<?php echo esc_attr( $age_value ); ?>"><?php echo esc_html( $age_label ); ?></option>

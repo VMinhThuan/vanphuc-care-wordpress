@@ -296,7 +296,7 @@ $about_feedback = array(
 				<div class="about-consultation-field" data-node-id="2351:6890">
 					<label for="about-consultation-service"><span aria-hidden="true">*</span> Gói dịch vụ quan tâm</label>
 					<div class="about-consultation-select-wrap">
-						<select id="about-consultation-service" aria-label="Gói dịch vụ quan tâm">
+						<select id="about-consultation-service" class="vpc-form-select" aria-label="Gói dịch vụ quan tâm">
 							<option value="" selected>Gói 20 buổi</option>
 							<option value="trung-tam-o-cu">Trung tâm ở cữ</option>
 							<option value="bao-mau-tai-nha">Bảo mẫu tại nhà</option>

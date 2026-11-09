@@ -94,9 +94,10 @@
 	width: 100%;
 	height: 108px;
 	padding: 12px 24px;
-	display: grid;
-	grid-template-columns: 1.37fr 1fr .78fr;
-	align-items: stretch;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 24px;
 	background: #fff;
 	border-radius: 12px;
 	box-shadow: 0 1px 5px #00000026;
@@ -104,28 +105,44 @@
 
 .ocu-highlight {
 	min-width: 0;
+	flex: 0 0 auto;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
+	padding: 12px;
 	gap: 8px;
-	text-align: center;
+	text-align: left;
 }
 
-.ocu-highlight + .ocu-highlight {
-	border-left: 1px solid #d8d8d8;
+.ocu-highlight:nth-child(1) {
+	width: 258px;
+}
+
+.ocu-highlight:nth-child(2) {
+	width: 189px;
+}
+
+.ocu-highlight:nth-child(3) {
+	width: 144px;
+}
+
+.ocu-highlight:not(:last-child) {
+	padding-right: 28px;
+	border-right: 1px solid #d8d8d8;
 }
 
 .ocu-highlight__heading {
+	width: auto;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 	gap: 12px;
 }
 
 .ocu-highlight__heading img {
-	width: 24px;
-	height: 24px;
+	width: 22px;
+	height: 22px;
 	object-fit: contain;
 }
 
@@ -135,13 +152,16 @@
 }
 
 .ocu-highlight p {
+	width: auto;
 	color: var(--ocu-muted);
 	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+	text-align: left;
+	white-space: nowrap;
 }
 
 .ocu-highlight:last-child p span {
 	color: var(--ocu-blue);
-	letter-spacing: 1px;
+	letter-spacing: 0;
 }
 
 .ocu-hero__image {
@@ -155,7 +175,7 @@
 .ocu-actions {
 	width: 100%;
 	display: flex;
-	justify-content: flex-end;
+	justify-content: center;
 	gap: 24px;
 	margin-top: 16px;
 }
@@ -339,6 +359,14 @@
 	display: block;
 }
 
+.ocu-nursery-mobile-break {
+	display: none;
+}
+
+.ocu-experience-mobile-break {
+	display: none;
+}
+
 .ocu-room-bento {
 	width: min(1248px, 100%);
 	height: 480px;
@@ -404,6 +432,27 @@
 	flex: 1;
 }
 
+.ocu-room-card__top {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.ocu-room-card__icon-box {
+	width: 56px;
+	height: 56px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 56px;
+}
+
+.ocu-room-card__icon {
+	display: block;
+	flex: 0 0 auto;
+}
+
 .ocu-room-card__eyebrow {
 	color: var(--ocu-pink);
 	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
@@ -429,11 +478,27 @@
 }
 
 .ocu-chip-list span {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
 	padding: 7px 14px 7px 12px;
 	border-radius: 999px;
 	background: #a3c9e34d;
 	color: var(--ocu-blue);
 	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-room-card--feature .ocu-chip-list span::before {
+	width: 6px;
+	height: 6px;
+	flex: 0 0 6px;
+	border-radius: 50%;
+	background: url("../images/o-cu/figma/ellipse.svg") center / contain no-repeat;
+	content: "";
+}
+
+.ocu-chip--mobile {
+	display: none;
 }
 
 .ocu-room-bento__thumbs {
@@ -559,18 +624,22 @@
 		background: transparent;
 	}
 
-	.ocu-highlight {
+	.ocu-highlights .ocu-highlight {
 		min-height: 0;
+		width: 100%;
 		height: 76px;
+		align-items: center;
 		padding: 12px;
 		gap: 4px;
 		border-radius: 12px;
 		background: #fff;
 		box-shadow: 0 1px 5px #00000026;
+		text-align: center;
 	}
 
-	.ocu-highlight + .ocu-highlight {
-		border-left: 0;
+	.ocu-highlight:not(:last-child) {
+		padding-right: 12px;
+		border-right: 0;
 	}
 
 	.ocu-highlight:last-child {
@@ -578,6 +647,7 @@
 	}
 
 	.ocu-highlight__heading {
+		justify-content: center;
 		gap: 8px;
 	}
 
@@ -585,6 +655,10 @@
 	.ocu-highlight p {
 		font-size: 16px;
 		line-height: 24px;
+	}
+
+	.ocu-highlight p {
+		text-align: center;
 	}
 
 	.ocu-hero__image {
@@ -613,6 +687,10 @@
 
 	.ocu-section-heading {
 		gap: 24px;
+	}
+
+	.ocu-benefits .ocu-section-heading h2 .ocu-heading--pink {
+		display: block;
 	}
 
 	.ocu-section-heading p {
@@ -689,6 +767,11 @@
 		border-radius: 16px;
 		align-items: center;
 		text-align: center;
+	}
+
+	.ocu-room-card__top {
+		flex-direction: column;
+		gap: 12px;
 	}
 
 	.ocu-room-card h3 {
@@ -1067,6 +1150,12 @@ body.ocu-room-modal-open {
 	box-shadow: 0 1px 2.5px #00000026;
 }
 
+.ocu-room-stat__value {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
 .ocu-room-bento__stats strong {
 	color: var(--ocu-blue);
 	font: 600 40px/52px var(--font-heading, "Fraunces", serif);
@@ -1087,6 +1176,12 @@ body.ocu-room-modal-open {
 	margin: 16px 0 0;
 	padding: 0;
 	list-style: none;
+}
+
+.ocu-room-points ul {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
 }
 
 .ocu-room-points li,
@@ -1122,6 +1217,11 @@ body.ocu-room-modal-open {
 	align-items: center;
 }
 
+.ocu-daily__copy--mobile,
+.ocu-daily__list--mobile {
+	display: none;
+}
+
 .ocu-daily > img {
 	width: 560px;
 	height: 480px;
@@ -1149,10 +1249,13 @@ body.ocu-room-modal-open {
 }
 
 .ocu-daily p,
-.ocu-daily li,
+.ocu-daily li {
+	color: var(--ocu-muted);
+}
+
 .ocu-experience p,
 .ocu-experience li {
-	color: var(--ocu-muted);
+	color: #292929;
 }
 
 .ocu-experience {
@@ -1178,8 +1281,33 @@ body.ocu-room-modal-open {
 }
 
 .ocu-experience h3 {
-	color: var(--ocu-pink);
-	font: 500 20px/28px var(--font-body, "Manrope", sans-serif);
+	color: #292929;
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-experience .ocu-badge {
+	gap: 10px;
+}
+
+.ocu-experience .ocu-badge img {
+	width: 25.44px;
+	height: 25.36px;
+	flex-basis: 25.44px;
+}
+
+.ocu-experience ul {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	margin-top: 0;
+}
+
+.ocu-experience p {
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-experience li {
+	padding-left: 28px;
 }
 
 .ocu-spaces {
@@ -1258,11 +1386,38 @@ body.ocu-room-modal-open {
 	margin-top: auto;
 }
 
+.ocu-room-card-large__services {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin-top: auto;
+}
+
+.ocu-room-card-large__services-label {
+	color: var(--ocu-pink);
+	font: 500 14px/normal var(--font-body, "Manrope", sans-serif);
+}
+
+.ocu-room-card-large__services .ocu-chip-list {
+	margin-top: 0;
+}
+
+.ocu-room-card-large__services .ocu-chip-list span {
+	padding: 6px 12px;
+	background: rgba(26, 119, 186, 0.1);
+	font: 500 14px/normal var(--font-body, "Manrope", sans-serif);
+}
+
 .ocu-room-card-large a,
 .ocu-room-panel a {
 	color: var(--ocu-blue);
 	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
 	text-decoration: underline;
+}
+
+.ocu-room-card-large a {
+	text-decoration: none;
 }
 
 .ocu-room-card-large a span,
@@ -1525,6 +1680,18 @@ body.ocu-room-modal-open {
 		line-height: 36px;
 	}
 
+	.vpc-o-cu .ocu-nursery-mobile-break {
+		display: block;
+	}
+
+	.vpc-o-cu .ocu-experience-mobile-break {
+		display: block;
+	}
+
+	.vpc-o-cu .ocu-nursery .ocu-section-heading p span {
+		display: block;
+	}
+
 	.vpc-o-cu .ocu-room-bento {
 		margin-top: 32px;
 	}
@@ -1552,6 +1719,15 @@ body.ocu-room-modal-open {
 		line-height: 40px;
 	}
 
+	.vpc-o-cu .ocu-room-bento__stats .ocu-room-card__icon {
+		width: 40.32px;
+		height: 40.32px;
+	}
+
+	.vpc-o-cu .ocu-room-bento__stats article:nth-child(2) .ocu-room-card__icon {
+		width: 41.616px;
+	}
+
 	.vpc-o-cu .ocu-room-points {
 		width: calc(100vw - 20px);
 		margin-left: 0;
@@ -1573,14 +1749,51 @@ body.ocu-room-modal-open {
 		margin-top: 48px;
 		display: flex;
 		flex-direction: column;
-		gap: 24px;
-		align-items: stretch;
+		gap: 16px;
+		align-items: center;
+	}
+
+	.vpc-o-cu .ocu-daily > div {
+		display: contents;
+	}
+
+	.vpc-o-cu .ocu-daily > div > .ocu-badge {
+		order: 1;
+	}
+
+	.vpc-o-cu .ocu-daily > div > h2 {
+		order: 2;
+		text-align: center;
+	}
+
+	.vpc-o-cu .ocu-daily__copy--desktop,
+	.vpc-o-cu .ocu-daily ul.ocu-daily__list--desktop {
+		display: none;
+	}
+
+	.vpc-o-cu .ocu-daily__copy--mobile {
+		display: block;
+		order: 3;
+		width: 100%;
+		color: #292929;
+		font: 500 14px/normal var(--font-body, "Manrope", sans-serif);
+		text-align: center;
 	}
 
 	.vpc-o-cu .ocu-daily > img {
+		order: 4;
 		width: 100%;
 		height: 240px;
 		border-radius: 16px;
+	}
+
+	.vpc-o-cu .ocu-daily__list--mobile {
+		display: flex;
+		order: 5;
+		width: 100%;
+		margin-top: 0;
+		gap: 10px;
+		color: #292929;
 	}
 
 	.vpc-o-cu .ocu-daily > div,
@@ -1588,6 +1801,16 @@ body.ocu-room-modal-open {
 		gap: 24px;
 		align-items: center;
 		text-align: center;
+	}
+
+	.vpc-o-cu .ocu-experience .ocu-badge {
+		gap: 8px;
+	}
+
+	.vpc-o-cu .ocu-experience .ocu-badge img {
+		width: 24px;
+		height: 24px;
+		flex-basis: 24px;
 	}
 
 	.vpc-o-cu .ocu-daily h2,
@@ -1781,10 +2004,15 @@ body.ocu-room-modal-open {
 	}
 
 	.vpc-o-cu .ocu-room-panel__variants {
+		width: 100%;
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: 8px;
 	}
 
 	.vpc-o-cu .ocu-room-panel__variants button {
+		width: 100%;
+		min-width: 0;
 		padding: 8px 16px;
 		white-space: nowrap;
 		font-size: 16px;
@@ -1810,5 +2038,181 @@ body.ocu-room-modal-open {
 	.vpc-o-cu .ocu-room-panel__consult {
 		width: 100%;
 		margin-top: auto;
+	}
+}
+
+/* Final alignment with the current Figma frame 3123:33008. */
+.vpc-o-cu .ocu-room-bento {
+	margin-top: 24px;
+}
+
+.vpc-o-cu .ocu-room-card--feature {
+	min-height: 270px;
+	flex: 0 0 270px;
+}
+
+.vpc-o-cu .ocu-room-points {
+	margin-top: 24px;
+}
+
+.vpc-o-cu .ocu-room-points article {
+	min-height: 534px;
+	padding: 16px;
+	gap: 0;
+}
+
+.vpc-o-cu .ocu-room-points article > img {
+	width: 100%;
+	height: 240px;
+	margin-bottom: 24px;
+	display: block;
+	border-radius: 12px;
+	object-fit: cover;
+}
+
+.vpc-o-cu .ocu-room-point__heading {
+	width: 100%;
+	min-height: 28px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 12px;
+}
+
+.vpc-o-cu .ocu-room-point__heading strong {
+	flex: 0 0 auto;
+}
+
+.vpc-o-cu .ocu-room-point__heading h3 {
+	margin: 0;
+	flex: 1 1 auto;
+}
+
+.vpc-o-cu .ocu-room-points article > p {
+	margin: 0;
+}
+
+.vpc-o-cu .ocu-room-points article > ul {
+	margin-top: 12px;
+	display: flex;
+	flex-direction: column;
+	row-gap: 8px;
+}
+
+.vpc-o-cu .ocu-daily ul {
+	display: flex;
+	flex-direction: column;
+	row-gap: 8px;
+}
+
+.vpc-o-cu .ocu-daily {
+	margin-top: 40px;
+}
+
+.vpc-o-cu .vpc-bao-mau__lead-card {
+	width: 658px;
+	height: 554px;
+	min-height: 554px;
+	margin-top: 48px;
+	padding: 32px 24px;
+	gap: 20px;
+}
+
+.vpc-o-cu .vpc-bao-mau__lead-row {
+	gap: 8px;
+}
+
+@media (max-width: 1279px) and (min-width: 768px) {
+	.vpc-o-cu .vpc-bao-mau__lead-card {
+		width: min(658px, 100%);
+	}
+}
+
+@media (max-width: 767px) {
+	.vpc-o-cu .ocu-daily ul.ocu-daily__list--desktop {
+		display: none;
+	}
+
+	.vpc-o-cu .ocu-daily ul.ocu-daily__list--mobile {
+		display: flex;
+		row-gap: 10px;
+	}
+
+	.vpc-o-cu .ocu-room-card--feature {
+		min-height: 264px;
+		height: 264px;
+		padding: 20px;
+		align-items: flex-start;
+		text-align: left;
+		gap: 12px;
+		border-radius: 18px;
+		flex: 0 0 264px;
+	}
+
+	.vpc-o-cu .ocu-room-card--feature .ocu-room-card__top {
+		width: 100%;
+		flex-direction: row;
+		align-items: center;
+		gap: 14px;
+	}
+
+	.vpc-o-cu .ocu-room-card--feature .ocu-room-card__icon-box {
+		width: 43.68px;
+		height: 43.68px;
+		flex-basis: 43.68px;
+	}
+
+	.vpc-o-cu .ocu-room-card--feature .ocu-room-card__icon-box img {
+		width: 43.68px;
+		height: 43.68px;
+	}
+
+	.vpc-o-cu .ocu-room-card--feature .ocu-room-card__eyebrow {
+		font: 400 12px/16px var(--font-body, "Manrope", sans-serif);
+	}
+
+	.vpc-o-cu .ocu-room-card--feature h3 {
+		margin-top: 4px;
+		font: 400 20px/24px var(--font-heading, "Fraunces", serif);
+		font-variation-settings: "SOFT" 0, "WONK" 1;
+	}
+
+	.vpc-o-cu .ocu-room-card--feature p {
+		width: 100%;
+		text-align: left;
+	}
+
+	.vpc-o-cu .ocu-room-card--feature .ocu-chip-list {
+		width: 100%;
+		align-content: flex-start;
+		gap: 8px;
+	}
+
+	.vpc-o-cu .ocu-room-card--feature .ocu-chip-list span {
+		font: 400 12px/16px var(--font-body, "Manrope", sans-serif);
+	}
+
+	.vpc-o-cu .ocu-room-card--feature .ocu-chip--desktop {
+		display: inline-flex;
+	}
+
+	.vpc-o-cu .ocu-room-card--feature .ocu-chip--mobile {
+		display: inline-flex;
+	}
+
+	.vpc-o-cu .ocu-room-points article {
+		min-height: 0;
+	}
+
+	.vpc-o-cu .ocu-room-points article > img {
+		height: 200px;
+	}
+
+	.vpc-o-cu .vpc-bao-mau__lead-card {
+		width: 100%;
+		height: auto;
+		min-height: 554px;
+		margin-top: 24px;
+		padding: 24px;
 	}
 }

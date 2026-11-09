@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	const menuToggle = document.getElementById('mobile-menu-toggle');
 	const menuClose = document.getElementById('mobile-menu-close');
 	const menuDrawer = document.getElementById('mobile-menu-drawer');
+	let lastMenuTrigger = null;
 
 	function toggleMenu(show) {
 		if (!menuDrawer) return;
@@ -13,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		const shouldShow = typeof show === 'boolean' ? show : isCurrentlyHidden;
 
 		if (shouldShow) {
+			lastMenuTrigger = document.activeElement;
 			menuDrawer.classList.remove('hidden');
 			menuDrawer.setAttribute('aria-hidden', 'false');
 			document.body.classList.add('overflow-hidden');
@@ -23,7 +25,11 @@ document.addEventListener('DOMContentLoaded', function () {
 			menuDrawer.setAttribute('aria-hidden', 'true');
 			document.body.classList.remove('overflow-hidden');
 			if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
-			if (menuToggle) menuToggle.focus();
+			if (lastMenuTrigger && typeof lastMenuTrigger.focus === 'function') {
+				lastMenuTrigger.focus();
+			} else if (menuToggle) {
+				menuToggle.focus();
+			}
 		}
 	}
 
@@ -36,6 +42,14 @@ document.addEventListener('DOMContentLoaded', function () {
 	if (menuClose) {
 		menuClose.addEventListener('click', function () {
 			toggleMenu(false);
+		});
+	}
+
+	if (menuDrawer) {
+		document.addEventListener('keydown', function (event) {
+			if (event.key === 'Escape' && !menuDrawer.classList.contains('hidden')) {
+				toggleMenu(false);
+			}
 		});
 	}
 

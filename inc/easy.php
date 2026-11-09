@@ -15,12 +15,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return bool
  */
 function vanphuccare_is_easy_page() {
-	if ( is_page_template( 'page-tu-van-nuoi-con-easy.php' ) || is_page( 'tu-van-nuoi-con-easy' ) || is_page( 'tu-van-easy' ) ) {
+	if ( is_page_template( 'page-tu-van-nuoi-con-easy.php' ) || is_page( 'tu-van-nuoi-con-easy' ) || is_page( 'tu-van-easy' ) || vanphuccare_is_standalone_route_template( 'page-tu-van-nuoi-con-easy.php' ) ) {
 		return true;
 	}
 
-	$request_path = wp_parse_url( isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '', PHP_URL_PATH );
-	$path         = trim( (string) $request_path, '/' );
+	$path = function_exists( 'vanphuccare_request_path' ) ? vanphuccare_request_path() : '';
 
 	return in_array( $path, array( 'tu-van-nuoi-con-easy', 'tu-van-easy', 'kien-thuc/tu-van-nuoi-con-easy' ), true );
 }

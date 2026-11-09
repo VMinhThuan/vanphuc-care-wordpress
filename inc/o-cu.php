@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return bool
  */
 function vanphuccare_is_o_cu_page() {
-	if ( is_page_template( 'page-o-cu.php' ) || is_page( 'o-cu' ) ) {
+	if ( is_page_template( 'page-o-cu.php' ) || is_page( 'o-cu' ) || vanphuccare_is_standalone_route_template( 'page-o-cu.php' ) ) {
 		return true;
 	}
 
@@ -31,9 +31,7 @@ function vanphuccare_is_o_cu_page() {
  * @return string
  */
 function vanphuccare_o_cu_request_path() {
-	$request_path = wp_parse_url( isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '', PHP_URL_PATH );
-
-	return trim( (string) $request_path, '/' );
+	return function_exists( 'vanphuccare_request_path' ) ? vanphuccare_request_path() : '';
 }
 
 /**

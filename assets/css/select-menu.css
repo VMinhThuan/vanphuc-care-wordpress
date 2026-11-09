@@ -1,0 +1,222 @@
+/**
+ * Shared select/menu states.
+ *
+ * Default: #FAFAFA / #CECECE
+ * Hover: #EBEBEB / #1A77BA
+ * Active/open: #4892C8
+ * Selected: #A3C9E3
+ */
+
+:root {
+	--vpc-select-surface-default: #fafafa;
+	--vpc-select-surface-hover: #ebebeb;
+	--vpc-select-surface-selected: #a3c9e3;
+	--vpc-select-border-default: #cecece;
+	--vpc-select-border-hover: #1a77ba;
+	--vpc-select-border-active: #4892c8;
+	--vpc-select-border-disabled: #d8d8d8;
+	--vpc-select-text: #292929;
+	--vpc-select-text-placeholder: #cecece;
+	--vpc-select-text-disabled: #a5a5a5;
+}
+
+/* Native select fields used by all page forms. */
+.vpc-form-select,
+.vpc-consultation-select,
+.about-consultation-select-wrap select,
+.vpc-bao-mau__lead-card select,
+.vpc-bath__lead-card select,
+.vpc-easy__lead-card select,
+.vpc-milk__lead-card select {
+	border-color: var(--vpc-select-border-default) !important;
+	background-color: var(--vpc-select-surface-default) !important;
+	color: var(--vpc-select-text) !important;
+	outline: none;
+	transition: border-color .2s ease, background-color .2s ease, color .2s ease;
+}
+
+.vpc-form-select:hover:not(:disabled),
+.vpc-consultation-select:hover:not(:disabled),
+.about-consultation-select-wrap select:hover:not(:disabled),
+.vpc-bao-mau__lead-card select:hover:not(:disabled),
+.vpc-bath__lead-card select:hover:not(:disabled),
+.vpc-easy__lead-card select:hover:not(:disabled),
+.vpc-milk__lead-card select:hover:not(:disabled) {
+	border-color: var(--vpc-select-border-hover) !important;
+}
+
+.vpc-form-select:focus,
+.vpc-form-select:focus-visible,
+.vpc-consultation-select:focus,
+.vpc-consultation-select:focus-visible,
+.about-consultation-select-wrap select:focus,
+.about-consultation-select-wrap select:focus-visible,
+.vpc-bao-mau__lead-card select:focus,
+.vpc-bath__lead-card select:focus,
+.vpc-easy__lead-card select:focus,
+.vpc-milk__lead-card select:focus {
+	border-color: var(--vpc-select-border-active) !important;
+	box-shadow: none !important;
+}
+
+.vpc-form-select:disabled,
+.vpc-consultation-select:disabled,
+.about-consultation-select-wrap select:disabled,
+.vpc-bao-mau__lead-card select:disabled,
+.vpc-bath__lead-card select:disabled,
+.vpc-easy__lead-card select:disabled,
+.vpc-milk__lead-card select:disabled {
+	border-color: var(--vpc-select-border-disabled) !important;
+	background-color: var(--vpc-select-border-default) !important;
+	color: var(--vpc-select-text-disabled) !important;
+	cursor: not-allowed;
+}
+
+.vpc-form-select:invalid,
+.vpc-form-select:has(option:checked[value=""]),
+.vpc-consultation-select:invalid,
+.vpc-consultation-select:has(option:checked[value=""]),
+.about-consultation-select-wrap select:has(option:checked[value=""]) {
+	color: var(--vpc-select-text-placeholder) !important;
+}
+
+/* Custom dropdown trigger and popover. */
+.vpc-select-trigger {
+	border-color: var(--vpc-select-border-default) !important;
+	background-color: var(--vpc-select-surface-default) !important;
+	color: var(--vpc-select-text) !important;
+	transition: border-color .2s ease, background-color .2s ease, color .2s ease;
+}
+
+.vpc-select-trigger:hover:not(:disabled):not([aria-expanded="true"]) {
+	border-color: var(--vpc-select-border-hover) !important;
+}
+
+.vpc-select-trigger[aria-expanded="true"],
+.vpc-select-trigger:focus-visible {
+	border-color: var(--vpc-select-border-active) !important;
+}
+
+.vpc-select-trigger:focus-visible {
+	outline: 2px solid color-mix(in srgb, var(--vpc-select-border-active) 24%, transparent);
+	outline-offset: 1px;
+	box-shadow: none !important;
+}
+
+.vpc-select-trigger:disabled {
+	border-color: var(--vpc-select-border-disabled) !important;
+	background-color: var(--vpc-select-border-default) !important;
+	color: var(--vpc-select-text-disabled) !important;
+	cursor: not-allowed;
+}
+
+.vpc-select-trigger [data-select-label] { color: var(--vpc-select-text) !important; }
+.vpc-select-trigger [data-select-label].text-neutral-500 { color: var(--vpc-select-text-placeholder) !important; }
+
+.vpc-select-dropdown {
+	border-color: var(--vpc-select-border-disabled) !important;
+	background-color: var(--vpc-select-surface-default) !important;
+}
+
+.vpc-select-option {
+	color: var(--vpc-select-text) !important;
+	background-color: transparent !important;
+}
+
+.vpc-select-option:hover:not([aria-disabled="true"]),
+.vpc-select-option:focus-visible:not([aria-disabled="true"]) {
+	color: var(--vpc-select-text) !important;
+	background-color: var(--vpc-select-surface-hover) !important;
+	outline: none;
+}
+
+.vpc-select-option[aria-selected="true"] {
+	color: var(--vpc-select-text) !important;
+	background-color: var(--vpc-select-surface-selected) !important;
+}
+
+.vpc-select-option[aria-selected="true"]:hover,
+.vpc-select-option[aria-selected="true"]:focus-visible {
+	background-color: var(--vpc-select-surface-selected) !important;
+}
+
+.vpc-select-option[aria-disabled="true"] {
+	color: var(--vpc-select-text-disabled) !important;
+	background-color: transparent !important;
+	cursor: not-allowed;
+}
+
+/* Prenatal's progressive-enhancement select uses the same menu tokens. */
+.prenatal-select-wrap select,
+.prenatal-select__trigger {
+	border-color: var(--vpc-select-border-default) !important;
+	background-color: var(--vpc-select-surface-default) !important;
+	color: var(--vpc-select-text) !important;
+}
+
+.prenatal-select-wrap select:hover:not(:disabled),
+.prenatal-select__trigger:hover:not(:disabled):not([aria-expanded="true"]) {
+	border-color: var(--vpc-select-border-hover) !important;
+}
+
+.prenatal-select-wrap select:focus,
+.prenatal-select-wrap select:focus-visible,
+.prenatal-select-wrap.is-open select,
+.prenatal-select-wrap.is-open .prenatal-select__trigger,
+.prenatal-select__trigger[aria-expanded="true"] {
+	border-color: var(--vpc-select-border-active) !important;
+	box-shadow: none !important;
+}
+
+.prenatal-select__trigger:focus-visible {
+	outline: 2px solid color-mix(in srgb, var(--vpc-select-border-active) 24%, transparent);
+	outline-offset: 1px;
+}
+
+.prenatal-select__trigger.is-placeholder { color: var(--vpc-select-text-placeholder) !important; }
+
+.prenatal-select__menu {
+	border-color: var(--vpc-select-border-disabled) !important;
+	background-color: var(--vpc-select-surface-default) !important;
+}
+
+.prenatal-select__option {
+	color: var(--vpc-select-text) !important;
+	background-color: transparent !important;
+}
+
+.prenatal-select__option:hover,
+.prenatal-select__option:focus-visible {
+	color: var(--vpc-select-text) !important;
+	background-color: var(--vpc-select-surface-hover) !important;
+	outline: none;
+}
+
+.prenatal-select__option.is-selected,
+.prenatal-select__option.is-selected:hover,
+.prenatal-select__option.is-selected:focus-visible {
+	color: var(--vpc-select-text) !important;
+	background-color: var(--vpc-select-surface-selected) !important;
+}
+
+/* Static preview forms use IDs instead of the PHP field classes. */
+#dang-ky-tu-van select,
+#vpc-contact-preview-form select,
+#vpc-consultation-modal select {
+	border-color: var(--vpc-select-border-default) !important;
+	background-color: var(--vpc-select-surface-default) !important;
+	color: var(--vpc-select-text) !important;
+}
+
+#dang-ky-tu-van select:hover:not(:disabled),
+#vpc-contact-preview-form select:hover:not(:disabled),
+#vpc-consultation-modal select:hover:not(:disabled) {
+	border-color: var(--vpc-select-border-hover) !important;
+}
+
+#dang-ky-tu-van select:focus,
+#vpc-contact-preview-form select:focus,
+#vpc-consultation-modal select:focus {
+	border-color: var(--vpc-select-border-active) !important;
+	box-shadow: none !important;
+}

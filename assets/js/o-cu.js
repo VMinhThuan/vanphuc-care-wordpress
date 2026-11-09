@@ -86,6 +86,7 @@
 	var mother = modal.querySelector('[data-room-mother]');
 	var baby = modal.querySelector('[data-room-baby]');
 	var amenities = modal.querySelector('[data-room-amenities]');
+	var variantContainer = modal.querySelector('.ocu-room-modal__variants');
 	var variants = modal.querySelectorAll('[data-room-variant]');
 	var currentImages = [];
 	var currentIndex = 0;
@@ -116,8 +117,11 @@
 		level.textContent = data.level;
 		title.textContent = data.title;
 		description.textContent = data.description;
+		var tabLabels = data.tabs || [];
+		variantContainer.hidden = !tabLabels.length;
 		variants.forEach(function (variant, index) {
-			variant.textContent = (data.tabs || [])[index] || '';
+			variant.textContent = tabLabels[index] || '';
+			variant.hidden = !tabLabels[index];
 			variant.classList.toggle('is-active', index === 0);
 		});
 		currentImages = data.images || [];

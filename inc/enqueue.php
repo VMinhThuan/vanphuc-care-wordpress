@@ -27,6 +27,10 @@ function vanphuccare_enqueue_assets() {
 	$footer_ver    = file_exists( $footer_path ) ? (string) filemtime( $footer_path ) : $theme_version;
 	$mobile_path   = get_template_directory() . '/assets/css/mobile-responsive.css';
 	$mobile_ver    = file_exists( $mobile_path ) ? (string) filemtime( $mobile_path ) : $theme_version;
+	$select_menu_path = get_template_directory() . '/assets/css/select-menu.css';
+	$select_menu_ver  = file_exists( $select_menu_path ) ? (string) filemtime( $select_menu_path ) : $theme_version;
+	$mobile_menu_path = get_template_directory() . '/assets/css/mobile-menu.css';
+	$mobile_menu_ver  = file_exists( $mobile_menu_path ) ? (string) filemtime( $mobile_menu_path ) : $theme_version;
 	$about_path    = get_template_directory() . '/assets/css/about.css';
 	$about_ver     = file_exists( $about_path ) ? (string) filemtime( $about_path ) : $theme_version;
 	$o_cu_path     = get_template_directory() . '/assets/css/o-cu.css';
@@ -59,6 +63,7 @@ function vanphuccare_enqueue_assets() {
 	$is_easy_page    = vanphuccare_is_easy_page();
 	$is_bath_page   = vanphuccare_is_tam_be_page();
 	$is_milk_page   = vanphuccare_is_thong_tac_page();
+	$is_prenatal_page = is_page_template( 'page-lop-hoc-tien-san.php' ) || is_page( 'lop-hoc-tien-san' ) || is_post_type_archive( 'vpc_prenatal_class' );
 	$is_services_page = is_post_type_archive( 'vpc_service' ) || is_singular( 'vpc_service' );
 
 	// Enqueue Google Fonts: Fraunces (Heading) & Manrope (Body) - optimized weights, no italic
@@ -105,7 +110,7 @@ function vanphuccare_enqueue_assets() {
 		);
 	}
 
-	if ( $is_bao_mau_page && file_exists( $bao_mau_path ) ) {
+	if ( ( $is_bao_mau_page || $is_prenatal_page ) && file_exists( $bao_mau_path ) ) {
 		wp_enqueue_style(
 			'vanphuccare-bao-mau',
 			get_template_directory_uri() . '/assets/css/bao-mau.css',
@@ -167,6 +172,24 @@ function vanphuccare_enqueue_assets() {
 			get_template_directory_uri() . '/assets/css/mobile-responsive.css',
 			array( 'vanphuccare-footer' ),
 			$mobile_ver
+		);
+	}
+
+	if ( file_exists( $select_menu_path ) ) {
+		wp_enqueue_style(
+			'vanphuccare-select-menu',
+			get_template_directory_uri() . '/assets/css/select-menu.css',
+			array( 'vanphuccare-mobile-responsive' ),
+			$select_menu_ver
+		);
+	}
+
+	if ( file_exists( $mobile_menu_path ) ) {
+		wp_enqueue_style(
+			'vanphuccare-mobile-menu',
+			get_template_directory_uri() . '/assets/css/mobile-menu.css',
+			array( 'vanphuccare-select-menu' ),
+			$mobile_menu_ver
 		);
 	}
 

@@ -34,7 +34,7 @@ Khi Attachment ID được resolve trên WordPress, URL được tạo bằng `w
 | Trang Lớp học tiền sản / hero | `page-lop-hoc-tien-san.php:44-53` | Runtime, basenames `hero-class-actual.png`, `hero-mother-baby.png` | Resolve khi chạy staging; chưa thể đọc API | Hard-code `$image` | Đã sửa resolver, giữ mobile `<picture>` |
 | Trang Lớp học tiền sản / intro | `page-lop-hoc-tien-san.php:93-102` | Runtime, basenames `intro-class-actual.png`, `intro-family.png` | Resolve khi chạy staging; chưa thể đọc API | Hard-code `$image` | Đã sửa resolver, giữ mobile `<picture>` |
 | Trang Lớp học tiền sản / video + giảng viên | `page-lop-hoc-tien-san.php:166,367-369` | Runtime, basenames `class-video.png`, `teacher-thanh-thuy-card.png`, `teacher-thanh-thuy-card@2x.png` | Resolve khi chạy staging; chưa thể đọc API | Hard-code `$image`, srcset 2x cũ | Đã sửa resolver |
-| Trang Lớp học tiền sản / dịch vụ | `page-lop-hoc-tien-san.php:507-523` | Runtime, basenames `service-homecare.png`, `service-newborn.png`, `service-massage.png`, `service-online-course.png` | Resolve khi chạy staging; chưa thể đọc API | Hard-code `$image` | Đã sửa resolver |
+| Trang Lớp học tiền sản / dịch vụ | `page-lop-hoc-tien-san.php:507-528` | Runtime, basenames `bao-mau/service-1.jpg` đến `bao-mau/service-6.jpg` | Resolve khi chạy staging; chưa thể đọc API | Dùng chung UI/tài sản section dịch vụ của Bảo mẫu | Đã đồng bộ responsive mobile/desktop |
 | Policy pages / banner | `page-*.php` policy templates | Runtime, basename `hero_bg.jpg` | Resolve khi chạy staging; chưa thể đọc API | Inline background URL từ theme | Đã sửa resolver |
 
 ## Danh sách cần đối chiếu thủ công khi staging/API hoạt động

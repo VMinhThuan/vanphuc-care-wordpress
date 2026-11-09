@@ -15,12 +15,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return bool
  */
 function vanphuccare_is_bao_mau_page() {
-	if ( is_page_template( 'page-bao-mau.php' ) || is_page( 'bao-mau' ) || is_page( 'bao-mau-tai-nha' ) ) {
+	if ( is_page_template( 'page-bao-mau.php' ) || is_page( 'bao-mau' ) || is_page( 'bao-mau-tai-nha' ) || vanphuccare_is_standalone_route_template( 'page-bao-mau.php' ) ) {
 		return true;
 	}
 
-	$request_path = wp_parse_url( isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '', PHP_URL_PATH );
-	$path         = trim( (string) $request_path, '/' );
+	$path = function_exists( 'vanphuccare_request_path' ) ? vanphuccare_request_path() : '';
 
 	return in_array( $path, array( 'bao-mau', 'bao-mau-tai-nha', 'dich-vu/bao-mau-tai-nha' ), true );
 }

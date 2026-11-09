@@ -65,7 +65,7 @@ $row_two = array_merge( array_reverse( $items ), array_reverse( $items ) );
 			<span class="text-text-heading-primary-default">Cảm Nhận </span><br class="sm:hidden">
 			<span class="text-text-heading-secondary-default">Của Khách Hàng</span>
 		</h2>
-		<p class="w-full max-w-4xl mx-auto mt-3 text-center font-body font-medium text-sm sm:text-base text-text-body-default leading-6">
+		<p class="vpc-feedback-description w-full max-w-4xl mx-auto mt-3 text-center font-body font-medium text-sm sm:text-base text-text-body-default leading-6">
 			<?php foreach ( $description as $description_line ) : ?>
 				<span class="block text-center"><?php echo esc_html( $description_line ); ?></span>
 			<?php endforeach; ?>
