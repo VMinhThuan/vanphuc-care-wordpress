@@ -102,11 +102,11 @@ function vpc_register_content_types() {
 			'public'             => true,
 			'show_in_rest'       => true,
 			'menu_icon'          => 'dashicons-heart',
-			'has_archive'        => true,
-			'rewrite'            => array( 'slug' => 'dich-vu', 'with_front' => false ),
+			'has_archive'        => false,
+			'rewrite'            => false,
 			'supports'           => array( 'title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'page-attributes' ),
 			'menu_position'      => 21,
-			'publicly_queryable' => true,
+			'publicly_queryable' => false,
 		)
 	);
 

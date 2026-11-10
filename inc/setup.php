@@ -101,3 +101,26 @@ function vanphuccare_customize_contact_settings( $wp_customize ) {
 }
 add_action( 'customize_register', 'vanphuccare_customize_contact_settings' );
 
+/**
+ * 301 Redirect for external courses route:
+ * Redirects any direct requests for /khoa-hoc-truc-tuyen/ or /dich-vu/khoa-hoc-truc-tuyen/
+ * to the dedicated e-learning platform https://edu.vanphuccare.vn.
+ *
+ * @return void
+ */
+function vanphuccare_redirect_online_courses() {
+	if ( is_admin() || wp_doing_ajax() ) {
+		return;
+	}
+
+	$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+	$path        = trim( (string) wp_parse_url( $request_uri, PHP_URL_PATH ), '/' );
+
+	if ( 'dich-vu/khoa-hoc-truc-tuyen' === $path || 'khoa-hoc-truc-tuyen' === $path || 'dich-vu/khoa-hoc' === $path ) {
+		wp_redirect( 'https://edu.vanphuccare.vn', 301 );
+		exit;
+	}
+}
+add_action( 'template_redirect', 'vanphuccare_redirect_online_courses' );
+
+

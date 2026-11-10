@@ -29,7 +29,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 $hero_slide_specs = array(
 	array(
 		'image'    => 'home/hero-banner.webp',
-		'href'     => 'https://www.edu.vanphuccare.vn',
+		'href'     => 'https://edu.vanphuccare.vn',
 		'target'   => true,
 		'title'    => 'Khóa học Chăm sóc bé yêu KHOA HỌC từ con số 0 - Vạn Phúc Care',
 		'alt'      => 'Chăm sóc bé yêu KHOA HỌC từ con số 0 - Hệ thống khóa học online chuẩn y khoa dành cho cha mẹ hiện đại - Vạn Phúc Care',

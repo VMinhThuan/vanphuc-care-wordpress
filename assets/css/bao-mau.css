@@ -172,6 +172,22 @@
 .vpc-bao-mau__service-card img { width: 300px; height: 240px; object-fit: cover; object-position: center top; display: block; }
 .vpc-bao-mau__service-card h3 { padding: 20px 12px; text-align: center; color: var(--bm-blue, var(--color-primary-500, #1a77ba)); font: 500 24px/32px var(--font-body, "Manrope", sans-serif); }
 
+/* Keep the shared desktop carousel at the approved 3.5-card composition. */
+@media (min-width: 1280px) {
+	.vpc-bao-mau__services .vpc-bao-mau__service-card {
+		width: calc((min(1400px, calc(100vw - 160px)) - 168px) / 3.5);
+		flex-basis: calc((min(1400px, calc(100vw - 160px)) - 168px) / 3.5);
+		height: auto;
+	}
+
+	.vpc-bao-mau__services .vpc-bao-mau__service-card img {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 216 / 184;
+		max-width: none;
+	}
+}
+
 @media (max-width: 1279px) {
 	.vpc-bao-mau__container { width: 100%; max-width: none; padding-inline: 40px; }
 	.vpc-bao-mau__hero { height: auto; padding: 40px 0 120px; }

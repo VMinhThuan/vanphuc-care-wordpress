@@ -1,5 +1,8 @@
 <?php
 /**
+ * Template Name: Giới thiệu
+ * Template Post Type: page
+ *
  * Page template — Vạn Phúc Care introduction page.
  *
  * The composition follows Figma node 3131:44914 and keeps the shared

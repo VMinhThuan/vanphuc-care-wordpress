@@ -40,8 +40,11 @@ if ( '' === $asset_uri || empty( $services ) ) {
 						if ( '' === $service_image || '' === $service_title || '' === $service_href ) {
 							continue;
 						}
+
+						$is_external = ! empty( $service['target'] ) || ( strpos( $service_href, 'http' ) === 0 && strpos( $service_href, home_url() ) === false );
+						$target_attr = $is_external ? ' target="_blank" rel="noopener noreferrer"' : '';
 						?>
-						<a class="vpc-bao-mau__service-card" href="<?php echo esc_url( $service_href ); ?>">
+						<a class="vpc-bao-mau__service-card" href="<?php echo esc_url( $service_href ); ?>"<?php echo $target_attr; ?>>
 							<img src="<?php echo esc_url( $asset_uri . $service_image ); ?>" width="300" height="240" alt="<?php echo esc_attr( $service_title ); ?>" loading="lazy">
 							<h3><?php echo esc_html( $service_title ); ?></h3>
 						</a>

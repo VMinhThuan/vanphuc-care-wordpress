@@ -64,7 +64,7 @@ function vanphuccare_enqueue_assets() {
 	$is_bath_page   = vanphuccare_is_tam_be_page();
 	$is_milk_page   = vanphuccare_is_thong_tac_page();
 	$is_prenatal_page = is_page_template( 'page-lop-hoc-tien-san.php' ) || is_page( 'lop-hoc-tien-san' ) || is_post_type_archive( 'vpc_prenatal_class' );
-	$is_services_page = is_post_type_archive( 'vpc_service' ) || is_singular( 'vpc_service' );
+	$is_services_page = is_page( 'dich-vu' ) || is_page_template( 'page-dich-vu.php' ) || is_post_type_archive( 'vpc_service' ) || is_singular( 'vpc_service' );
 
 	// Enqueue Google Fonts: Fraunces (Heading) & Manrope (Body) - optimized weights, no italic
 	wp_enqueue_style(

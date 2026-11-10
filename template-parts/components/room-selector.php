@@ -28,7 +28,8 @@ if ( empty( $rooms ) ) {
 	<div class="ocu-room-panels">
 		<?php foreach ( $rooms as $room_key => $room ) :
 			$detail         = isset( $room_popup_details[ $room_key ] ) ? $room_popup_details[ $room_key ] : array();
-			$gallery_images = isset( $detail['images'] ) ? $detail['images'] : array( $asset_uri . '/' . $room['image'] );
+			$variant_images = isset( $detail['variant_images'] ) ? $detail['variant_images'] : array();
+			$gallery_images = ! empty( $variant_images[0] ) ? $variant_images[0] : ( isset( $detail['images'] ) ? $detail['images'] : array( $asset_uri . '/' . $room['image'] ) );
 			$features       = isset( $room['items'] ) ? $room['items'] : array();
 			$mother         = isset( $detail['mother'] ) ? $detail['mother'] : array();
 			$baby           = isset( $detail['baby'] ) ? $detail['baby'] : array();
@@ -45,7 +46,7 @@ if ( empty( $rooms ) ) {
 				<?php if ( 'suite' !== $room_key ) : ?>
 					<div class="ocu-room-panel__variants" role="group" aria-label="Kiểu phòng">
 						<?php foreach ( ( isset( $detail['tabs'] ) ? $detail['tabs'] : array() ) as $variant_index => $variant ) : ?>
-							<button type="button" class="<?php echo 0 === $variant_index ? 'is-active' : ''; ?>" data-room-panel-variant><?php echo esc_html( $variant ); ?></button>
+							<button type="button" class="<?php echo 0 === $variant_index ? 'is-active' : ''; ?>" data-room-panel-variant="<?php echo esc_attr( $variant_index ); ?>" data-room-panel-images="<?php echo esc_attr( wp_json_encode( $variant_images[ $variant_index ] ?? $gallery_images ) ); ?>"><?php echo esc_html( $variant ); ?></button>
 						<?php endforeach; ?>
 					</div>
 				<?php endif; ?>
@@ -55,7 +56,7 @@ if ( empty( $rooms ) ) {
 						<img data-room-gallery-main src="<?php echo esc_url( $gallery_images[0] ?? $asset_uri . '/' . $room['image'] ); ?>" width="480" height="407" alt="<?php echo esc_attr( $room['title'] ); ?>">
 						<span data-room-gallery-counter>1 / <?php echo count( $gallery_images ); ?></span>
 					</div>
-					<div class="ocu-room-panel__thumbs" role="list" aria-label="Ảnh <?php echo esc_attr( $room['title'] ); ?>">
+					<div class="ocu-room-panel__thumbs" data-room-gallery-thumbs role="list" aria-label="Ảnh <?php echo esc_attr( $room['title'] ); ?>">
 						<?php foreach ( $gallery_images as $image_index => $image ) : ?>
 							<button type="button" class="<?php echo 0 === $image_index ? 'is-active' : ''; ?>" data-room-gallery-thumb="<?php echo esc_attr( $image_index ); ?>" aria-label="Xem ảnh <?php echo esc_attr( $image_index + 1 ); ?>"><img src="<?php echo esc_url( $image ); ?>" width="96" height="60" alt=""></button>
 						<?php endforeach; ?>

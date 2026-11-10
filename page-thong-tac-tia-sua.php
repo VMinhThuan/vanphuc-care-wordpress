@@ -1,6 +1,8 @@
 <?php
 /**
- * Template Name: Thông tắc tia sữa
+ * Template Name: Dịch vụ - Thông tắc tia sữa
+ * Template Post Type: page
+ *
  * Page template — Thông tắc tia sữa tại nhà.
  *
  * @package VanPhucCare
@@ -34,12 +36,12 @@ $feedback = array(
 );
 
 $other_services = array(
-	array( 'image' => 'service-1.jpg', 'title' => 'Trung tâm ở cữ', 'href' => home_url( '/o-cu/' ) ),
-	array( 'image' => 'service-2.jpg', 'title' => 'Bảo mẫu tại nhà', 'href' => home_url( '/bao-mau-tai-nha/' ) ),
-	array( 'image' => 'service-3.jpg', 'title' => 'Khóa học trực tuyến', 'href' => home_url( '/kien-thuc/' ) ),
-	array( 'image' => 'service-4.jpg', 'title' => 'Lớp học tiền sản', 'href' => home_url( '/lop-hoc-tien-san/' ) ),
-	array( 'image' => 'service-5.jpg', 'title' => 'Tắm bé sơ sinh', 'href' => home_url( '/tam-be-tai-nha/' ) ),
-	array( 'image' => 'service-6.jpg', 'title' => 'Thông tắc tia sữa', 'href' => home_url( '/thong-tac-tia-sua/' ) ),
+	array( 'image' => 'service-1.jpg', 'title' => 'Trung tâm ở cữ', 'href' => home_url( '/dich-vu/trung-tam-o-cu/' ) ),
+	array( 'image' => 'service-2.jpg', 'title' => 'Bảo mẫu tại nhà', 'href' => home_url( '/dich-vu/bao-mau-tai-nha/' ) ),
+	array( 'image' => 'service-3.jpg', 'title' => 'Khóa học trực tuyến', 'href' => 'https://edu.vanphuccare.vn' ),
+	array( 'image' => 'service-4.jpg', 'title' => 'Lớp học tiền sản', 'href' => home_url( '/dich-vu/lop-hoc-tien-san/' ) ),
+	array( 'image' => 'service-5.jpg', 'title' => 'Tắm bé sơ sinh', 'href' => home_url( '/dich-vu/tam-tre-so-sinh/' ) ),
+	array( 'image' => 'service-6.jpg', 'title' => 'Tư vấn nuôi con Easy', 'href' => home_url( '/dich-vu/dich-vu-tu-van-nuoi-con-easy-truc-tuyen/' ) ),
 );
 
 $button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="thong-tac-tia-sua"';

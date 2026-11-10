@@ -12,16 +12,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 $asset_uri = get_template_directory_uri() . '/assets/images/services';
 
 $featured_services = array(
-	array( 'title' => 'Trung tâm ở cữ', 'tag' => 'Sau sinh', 'copy' => 'Không gian nghỉ dưỡng, chăm sóc trọn vẹn mẹ và bé sau sinh.', 'image' => 'featured-1.png', 'href' => home_url( '/o-cu/' ) ),
-	array( 'title' => 'Bảo mẫu tại nhà', 'tag' => 'Sau sinh', 'copy' => 'Người đồng hành chăm sóc mẹ và bé ngay tại nhà.', 'image' => 'featured-2.png', 'href' => home_url( '/bao-mau-tai-nha/' ) ),
-	array( 'title' => 'Lớp học tiền sản', 'tag' => 'Trước sinh', 'copy' => 'Chuẩn bị kiến thức và tâm thế cho hành trình trước sinh.', 'image' => 'featured-3.png', 'href' => home_url( '/lop-hoc-tien-san/' ) ),
-	array( 'title' => 'Khóa học trực tuyến', 'tag' => 'Mọi giai đoạn', 'copy' => 'Học kiến thức nuôi con mọi lúc, mọi nơi.', 'image' => 'featured-4.png', 'href' => home_url( '/kien-thuc/' ) ),
+	array( 'title' => 'Trung tâm ở cữ', 'tag' => 'Sau sinh', 'copy' => 'Không gian nghỉ dưỡng, chăm sóc trọn vẹn mẹ và bé sau sinh.', 'image' => 'featured-1.png', 'href' => home_url( '/dich-vu/trung-tam-o-cu/' ) ),
+	array( 'title' => 'Bảo mẫu tại nhà', 'tag' => 'Sau sinh', 'copy' => 'Người đồng hành chăm sóc mẹ và bé ngay tại nhà.', 'image' => 'featured-2.png', 'href' => home_url( '/dich-vu/bao-mau-tai-nha/' ) ),
+	array( 'title' => 'Lớp học tiền sản', 'tag' => 'Trước sinh', 'copy' => 'Chuẩn bị kiến thức và tâm thế cho hành trình trước sinh.', 'image' => 'featured-3.png', 'href' => home_url( '/dich-vu/lop-hoc-tien-san/' ) ),
+	array( 'title' => 'Khóa học trực tuyến', 'tag' => 'Mọi giai đoạn', 'copy' => 'Học kiến thức nuôi con mọi lúc, mọi nơi.', 'image' => 'featured-4.png', 'href' => 'https://edu.vanphuccare.vn', 'target' => '_blank' ),
 );
 
 $other_services = array(
-	array( 'title' => 'Tư vấn nuôi con EASY', 'tag' => 'Nuôi con', 'copy' => '', 'image' => 'other-1.png', 'href' => home_url( '/tu-van-nuoi-con-easy/' ) ),
-	array( 'title' => 'Tắm bé sơ sinh', 'tag' => 'Sau sinh', 'copy' => '', 'image' => 'other-2.png', 'href' => home_url( '/tam-be-tai-nha/' ) ),
-	array( 'title' => 'Thông tắc tia sữa', 'tag' => 'Sau sinh', 'copy' => '', 'image' => 'other-3.png', 'href' => home_url( '/thong-tac-tia-sua/' ) ),
+	array( 'title' => 'Tư vấn nuôi con EASY', 'tag' => 'Nuôi con', 'copy' => '', 'image' => 'other-1.png', 'href' => home_url( '/dich-vu/dich-vu-tu-van-nuoi-con-easy-truc-tuyen/' ) ),
+	array( 'title' => 'Tắm bé sơ sinh', 'tag' => 'Sau sinh', 'copy' => '', 'image' => 'other-2.png', 'href' => home_url( '/dich-vu/tam-tre-so-sinh/' ) ),
+	array( 'title' => 'Thông tắc tia sữa', 'tag' => 'Sau sinh', 'copy' => '', 'image' => 'other-3.png', 'href' => home_url( '/dich-vu/thong-tac-tia-sua/' ) ),
 );
 
 $features = array(
@@ -56,16 +56,20 @@ get_header();
 
 			<div class="vpc-services-featured">
 				<?php foreach ( $featured_services as $service ) : ?>
+					<?php
+					$is_external = ! empty( $service['target'] ) || ( isset( $service['href'] ) && strpos( $service['href'], 'http' ) === 0 && strpos( $service['href'], home_url() ) === false );
+					$target_attr = $is_external ? ' target="_blank" rel="noopener noreferrer"' : '';
+					?>
 					<article class="vpc-service-card vpc-service-card--featured">
-						<a class="vpc-service-card__image" href="<?php echo esc_url( $service['href'] ); ?>"><img src="<?php echo esc_url( vpc_theme_asset_url( 'services/' . $service['image'] ) ); ?>" width="200" height="200" alt="<?php echo esc_attr( $service['title'] ); ?>" loading="lazy"></a>
+						<a class="vpc-service-card__image" href="<?php echo esc_url( $service['href'] ); ?>"<?php echo $target_attr; ?>><img src="<?php echo esc_url( vpc_theme_asset_url( 'services/' . $service['image'] ) ); ?>" width="200" height="200" alt="<?php echo esc_attr( $service['title'] ); ?>" loading="lazy"></a>
 						<div class="vpc-service-card__body">
 							<div class="vpc-service-card__meta">
 								<span class="vpc-service-card__tag"><?php echo esc_html( $service['tag'] ); ?></span>
 								<img class="vpc-service-card__service-icon" src="<?php echo esc_url( $asset_uri . '/feature-dedicated.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">
 							</div>
-							<h2><a href="<?php echo esc_url( $service['href'] ); ?>"><?php echo esc_html( $service['title'] ); ?></a></h2>
+							<h2><a href="<?php echo esc_url( $service['href'] ); ?>"<?php echo $target_attr; ?>><?php echo esc_html( $service['title'] ); ?></a></h2>
 							<p><?php echo esc_html( $service['copy'] ); ?></p>
-							<a class="vpc-services-detail" href="<?php echo esc_url( $service['href'] ); ?>">Xem chi tiết</a>
+							<a class="vpc-services-detail" href="<?php echo esc_url( $service['href'] ); ?>"<?php echo $target_attr; ?>>Xem chi tiết</a>
 						</div>
 					</article>
 				<?php endforeach; ?>
