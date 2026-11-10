@@ -211,3 +211,49 @@ function vpc_normalize_vietnamese_phone( $phone ) {
 
 	return preg_match( '/^0[35789][0-9]{8}$/', $phone ) ? $phone : '';
 }
+
+/**
+ * Whether the current request is the Ở cữ landing page.
+ *
+ * @return bool
+ */
+function vanphuccare_is_o_cu_page() {
+	return is_page( 'trung-tam-o-cu' ) || is_page_template( 'page-trung-tam-o-cu.php' );
+}
+
+/**
+ * Whether the current request is the Bảo mẫu tại nhà landing page.
+ *
+ * @return bool
+ */
+function vanphuccare_is_bao_mau_page() {
+	return is_page( 'bao-mau-tai-nha' ) || is_page_template( 'page-bao-mau-tai-nha.php' );
+}
+
+/**
+ * Whether the current request is the Tư vấn nuôi con EASY landing page.
+ *
+ * @return bool
+ */
+function vanphuccare_is_easy_page() {
+	return is_page( 'dich-vu-tu-van-nuoi-con-easy-truc-tuyen' ) || is_page_template( 'page-dich-vu-tu-van-nuoi-con-easy-truc-tuyen.php' );
+}
+
+/**
+ * Whether the current request is the Tắm bé sơ sinh landing page.
+ *
+ * @return bool
+ */
+function vanphuccare_is_tam_be_page() {
+	return is_page( 'tam-tre-so-sinh' ) || is_page_template( 'page-tam-tre-so-sinh.php' );
+}
+
+/**
+ * Whether the current request is the Thông tắc tia sữa landing page.
+ *
+ * @return bool
+ */
+function vanphuccare_is_thong_tac_page() {
+	return is_page( 'thong-tac-tia-sua' ) || is_page_template( 'page-thong-tac-tia-sua.php' );
+}
+
