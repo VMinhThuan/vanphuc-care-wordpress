@@ -14,7 +14,17 @@ $wp_options = array();
 $wp_theme_mods = array();
 $wp_transients = array();
 $wp_last_json_response = null;
-$wp_remote_post_return = array( 'response' => array( 'code' => 201 ) );
+$wp_remote_post_return = array(
+	'response' => array( 'code' => 201 ),
+	'body'     => json_encode( array(
+		'status'  => true,
+		'message' => 'Đã tiếp nhận yêu cầu.',
+		'data'    => array(
+			'leadId'  => '673f8e9102ab3c4d5e6f7a8b',
+			'eventId' => 'website-lead-673f8e9102ab3c4d5e6f7a8b',
+		),
+	) ),
+);
 $wp_remote_post_log = array();
 
 function add_action( $hook, $callback, $priority = 10, $accepted_args = 1 ) {
@@ -91,6 +101,10 @@ function wp_remote_retrieve_response_code( $response ) {
 	return (int) ( $response['response']['code'] ?? 0 );
 }
 
+function wp_remote_retrieve_body( $response ) {
+	return is_array( $response ) ? ( $response['body'] ?? '' ) : '';
+}
+
 function is_email( $email ) {
 	return (bool) filter_var( $email, FILTER_VALIDATE_EMAIL );
 }
@@ -114,8 +128,22 @@ function set_transient( $key, $value, $expiration = 0 ) {
 	return true;
 }
 
+function delete_transient( $key ) {
+	global $wp_transients;
+	unset( $wp_transients[ $key ] );
+	return true;
+}
+
 function current_time( $format ) {
 	return date( $format );
+}
+
+function wp_generate_uuid4() {
+	return 'c2a5e921-6677-4b44-9344-96696b996bb9';
+}
+
+function untrailingslashit( $string ) {
+	return rtrim( (string) $string, '/\\' );
 }
 
 class JsonResponseException extends Exception {
@@ -270,7 +298,11 @@ try {
 	assert_test( count( $wp_remote_post_log ) > 0, 'External lead API was called' );
 	$payload = json_decode( $wp_remote_post_log[0]['args']['body'], true );
 	assert_test( $wp_remote_post_log[0]['url'] === 'https://crm.example.test/leads', 'Lead API uses configured endpoint' );
-	assert_test( $payload['email'] === 'linh@example.test' && $payload['phone'] === '0345678999', 'Lead API receives normalized contact data' );
+	assert_test( $payload['email'] === 'linh@example.test' && $payload['phone'] === '0345678999' && $payload['fullName'] === 'Nguyễn Như Linh', 'Lead API receives normalized contact data' );
+	assert_test( isset( $wp_remote_post_log[0]['args']['headers']['Idempotency-Key'] ), 'Lead API request includes Idempotency-Key header' );
+	assert_test( isset( $wp_remote_post_log[0]['args']['headers']['Origin'] ), 'Lead API request includes Origin header' );
+	assert_test( ( $e->response['data']['leadId'] ?? '' ) === '673f8e9102ab3c4d5e6f7a8b', 'Response forwards leadId to client' );
+	assert_test( ( $e->response['data']['eventId'] ?? '' ) === 'website-lead-673f8e9102ab3c4d5e6f7a8b', 'Response forwards eventId for Meta CAPI tracking' );
 }
 
 // 10. Test Rate Limiting (Transient set after first submission)
@@ -279,6 +311,83 @@ try {
 	assert_test( false, 'Submitting immediately again should be rate limited' );
 } catch ( JsonResponseException $e ) {
 	assert_test( $e->response['success'] === false && $e->response['status_code'] === 429, 'Rate limiting transient rejected with 429 status' );
+}
+
+// 11. Test Form Bảo Mẫu (Figma Hình 1: Có servicePackage, Không Thai Kỳ, Không Email)
+delete_transient( 'vpc_consultation_' . md5( '127.0.0.2' ) );
+$_POST = array(
+	'nonce'           => 'valid_test_nonce',
+	'customer_name'   => 'Trần Thu Hà',
+	'customer_phone'  => '0988776655',
+	'service'         => 'bao-mau-tai-nha',
+	'service_package' => 'Gói Thảnh Thơi',
+	'customer_note'   => 'Cần tìm bảo mẫu chăm sóc bé ban đêm',
+);
+$_SERVER['REMOTE_ADDR'] = '127.0.0.2';
+try {
+	vpc_handle_consultation_submission();
+	assert_test( false, 'Bảo mẫu submission should succeed' );
+} catch ( JsonResponseException $e ) {
+	assert_test( $e->response['success'] === true, 'Bảo mẫu form (Hình 1) succeeds' );
+	$last_call = end( $wp_remote_post_log );
+	$payload   = json_decode( $last_call['args']['body'], true );
+	assert_test( $payload['serviceInterest'] === 'Bảo mẫu tại nhà', 'Bảo mẫu serviceInterest mapped correctly' );
+	assert_test( $payload['servicePackage'] === 'Gói Thảnh Thơi', 'Bảo mẫu servicePackage forwarded correctly' );
+	assert_test( ! isset( $payload['pregnancyWeek'] ), 'pregnancyWeek omitted when not provided' );
+	assert_test( ! isset( $payload['email'] ), 'email omitted when not in form' );
+	assert_test( ( $e->response['data']['eventId'] ?? '' ) === 'website-lead-673f8e9102ab3c4d5e6f7a8b', 'EventId returned for tracking' );
+}
+
+// 12. Test Form Ở Cữ (Figma Hình 2: Có roomTier, expectedDueDate, Không Email, Không Thai Kỳ)
+delete_transient( 'vpc_consultation_' . md5( '127.0.0.3' ) );
+$_POST = array(
+	'nonce'              => 'valid_test_nonce',
+	'customer_name'      => 'Lê Mỹ Duyên',
+	'customer_phone'     => '0912345678',
+	'service'            => 'trung-tam-o-cu',
+	'room_tier'          => 'Standard Balcony',
+	'expected_due_date'  => '2026-12-12',
+	'customer_note'      => 'Tư vấn phòng Standard Balcony và dịch vụ chăm sóc mẹ',
+);
+$_SERVER['REMOTE_ADDR'] = '127.0.0.3';
+try {
+	vpc_handle_consultation_submission();
+	assert_test( false, 'Ở Cữ submission should succeed' );
+} catch ( JsonResponseException $e ) {
+	assert_test( $e->response['success'] === true, 'Ở Cữ form (Hình 2) succeeds' );
+	$last_call = end( $wp_remote_post_log );
+	$payload   = json_decode( $last_call['args']['body'], true );
+	assert_test( $payload['serviceInterest'] === 'Trung tâm ở cữ', 'Ở Cữ serviceInterest mapped correctly' );
+	assert_test( $payload['roomTier'] === 'Standard Balcony', 'roomTier forwarded correctly' );
+	assert_test( $payload['expectedDueDate'] === '2026-12-12', 'expectedDueDate sent correctly' );
+	assert_test( ! isset( $payload['email'] ), 'email omitted when not in form' );
+	assert_test( ( $e->response['data']['eventId'] ?? '' ) === 'website-lead-673f8e9102ab3c4d5e6f7a8b', 'EventId returned for tracking' );
+}
+
+// 13. Test Form Lớp Tiền Sản (Figma Hình 4: 2 pills thai kỳ, stage_choice, Không Email)
+delete_transient( 'vpc_consultation_' . md5( '127.0.0.4' ) );
+$_POST = array(
+	'nonce'           => 'valid_test_nonce',
+	'full_name'       => 'Nguyễn Ngọc Anh',
+	'phone'           => '0977112233',
+	'service'         => 'lop-hoc-tien-san',
+	'pregnancy_stage' => 'dang-mang-thai',
+	'stage_choice'    => '13-27-tuan',
+	'question'        => 'Đăng ký 2 vợ chồng cùng tham gia',
+);
+$_SERVER['REMOTE_ADDR'] = '127.0.0.4';
+try {
+	vpc_handle_consultation_submission();
+	assert_test( false, 'Lớp tiền sản submission should succeed' );
+} catch ( JsonResponseException $e ) {
+	assert_test( $e->response['success'] === true, 'Lớp tiền sản form (Hình 4) succeeds without email' );
+	$last_call = end( $wp_remote_post_log );
+	$payload   = json_decode( $last_call['args']['body'], true );
+	assert_test( $payload['serviceInterest'] === 'Lớp học tiền sản', 'Tiền sản serviceInterest mapped correctly' );
+	assert_test( $payload['pregnancyStage'] === 'Đang mang thai', 'pregnancyStage mapped correctly' );
+	assert_test( $payload['pregnancyWeek'] === 'Mang thai 13 - 27 tuần', 'stage_choice mapped to pregnancyWeek' );
+	assert_test( ! isset( $payload['email'] ), 'email omitted when not in form' );
+	assert_test( ( $e->response['data']['eventId'] ?? '' ) === 'website-lead-673f8e9102ab3c4d5e6f7a8b', 'EventId returned for tracking' );
 }
 
 echo "\nSummary: $tests_passed passed, $tests_failed failed.\n";

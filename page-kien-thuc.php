@@ -57,65 +57,75 @@ if ( ! function_exists( 'vpc_format_knowledge_card' ) ) {
 	}
 }
 
-// 1. Query Featured Articles (1 large hero card + 3 top cards = 4 posts).
-$featured_args = array(
-	'post_type'           => 'post',
-	'post_status'         => 'publish',
-	'posts_per_page'      => 4,
-	'ignore_sticky_posts' => false,
-	'orderby'             => array( 'sticky' => 'DESC', 'date' => 'DESC' ),
-);
+// 1. Resolve knowledge category and defensively isolate queries.
+$kt_cat         = get_category_by_slug( 'kien-thuc' );
+$featured_posts = array();
+$category_posts = array();
 
-$kt_cat = get_category_by_slug( 'kien-thuc' );
-if ( $kt_cat ) {
-	$featured_args['cat'] = $kt_cat->term_id;
-}
+if ( $kt_cat instanceof WP_Term ) {
+	$kt_cat_id = (int) $kt_cat->term_id;
 
-$featured_query = new WP_Query( $featured_args );
-$featured_posts = $featured_query->posts;
+	// Read sticky post IDs from WordPress Core.
+	$sticky_ids = array_filter( array_map( 'absint', (array) get_option( 'sticky_posts', array() ) ) );
 
-// If 'kien-thuc' category has fewer than 4 posts, query general posts to fill.
-if ( count( $featured_posts ) < 4 ) {
-	$exclude_ids = wp_list_pluck( $featured_posts, 'ID' );
-	$fill_args   = array(
+	// Step 1: Query sticky posts that belong strictly to 'kien-thuc' category (up to 4).
+	if ( ! empty( $sticky_ids ) ) {
+		$sticky_query = new WP_Query( array(
+			'post_type'           => 'post',
+			'post_status'         => 'publish',
+			'cat'                 => $kt_cat_id,
+			'post__in'            => $sticky_ids,
+			'posts_per_page'      => 4,
+			'ignore_sticky_posts' => true,
+			'orderby'             => 'date',
+			'order'               => 'DESC',
+		) );
+		$featured_posts = $sticky_query->posts;
+	}
+
+	// Step 2: If fewer than 4 sticky posts, fill remaining slots with the latest posts in 'kien-thuc'.
+	$needed = 4 - count( $featured_posts );
+	if ( $needed > 0 ) {
+		$exclude_ids = wp_list_pluck( $featured_posts, 'ID' );
+		$fill_args   = array(
+			'post_type'           => 'post',
+			'post_status'         => 'publish',
+			'cat'                 => $kt_cat_id,
+			'posts_per_page'      => $needed,
+			'ignore_sticky_posts' => true,
+			'orderby'             => 'date',
+			'order'               => 'DESC',
+		);
+		if ( ! empty( $exclude_ids ) ) {
+			$fill_args['post__not_in'] = $exclude_ids;
+		}
+		$fill_query = new WP_Query( $fill_args );
+		if ( ! empty( $fill_query->posts ) ) {
+			$featured_posts = array_merge( $featured_posts, $fill_query->posts );
+		}
+	}
+
+	// 2. Query Category Preview Articles (6 horizontal cards, strictly excluding featured posts).
+	$featured_ids  = wp_list_pluck( $featured_posts, 'ID' );
+	$category_args = array(
 		'post_type'           => 'post',
 		'post_status'         => 'publish',
-		'posts_per_page'      => 4 - count( $featured_posts ),
-		'post__not_in'        => $exclude_ids,
+		'cat'                 => $kt_cat_id,
+		'posts_per_page'      => 6,
 		'ignore_sticky_posts' => true,
 		'orderby'             => 'date',
 		'order'               => 'DESC',
 	);
-	if ( $kt_cat ) {
-		$fill_args['cat'] = $kt_cat->term_id;
+	if ( ! empty( $featured_ids ) ) {
+		$category_args['post__not_in'] = $featured_ids;
 	}
-	$fill_query = new WP_Query( $fill_args );
-	if ( ! empty( $fill_query->posts ) ) {
-		$featured_posts = array_merge( $featured_posts, $fill_query->posts );
+	$category_query = new WP_Query( $category_args );
+	$category_posts = $category_query->posts;
+
+	// If total posts is small, allow previewing available posts.
+	if ( empty( $category_posts ) && ! empty( $featured_posts ) ) {
+		$category_posts = $featured_posts;
 	}
-}
-
-// 2. Query Category Preview Articles (6 horizontal cards, excluding featured posts).
-// Strictly scoped to 'kien-thuc' category and its children to exclude recruitment/news posts.
-$featured_ids  = wp_list_pluck( $featured_posts, 'ID' );
-$category_args = array(
-	'post_type'           => 'post',
-	'post_status'         => 'publish',
-	'posts_per_page'      => 6,
-	'post__not_in'        => $featured_ids,
-	'ignore_sticky_posts' => true,
-	'orderby'             => 'date',
-	'order'               => 'DESC',
-);
-if ( $kt_cat ) {
-	$category_args['cat'] = $kt_cat->term_id;
-}
-$category_query = new WP_Query( $category_args );
-$category_posts = $category_query->posts;
-
-// If total posts is small, allow previewing available posts.
-if ( empty( $category_posts ) && ! empty( $featured_posts ) ) {
-	$category_posts = $featured_posts;
 }
 
 // Format articles into card data arrays.

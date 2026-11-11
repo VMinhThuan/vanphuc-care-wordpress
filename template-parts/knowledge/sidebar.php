@@ -14,20 +14,23 @@ $asset = static function ( $name ) use ( $knowledge_uri ) {
 	return esc_url( $knowledge_uri . '/' . $name );
 };
 
-// 1. Featured sidebar articles (up to 3 posts, scoped to knowledge categories).
-$kt_cat       = get_category_by_slug( 'kien-thuc' );
-$sidebar_args = array(
-	'post_type'           => 'post',
-	'post_status'         => 'publish',
-	'posts_per_page'      => 3,
-	'ignore_sticky_posts' => true,
-	'orderby'             => 'comment_count date',
-	'order'               => 'DESC',
-);
-if ( $kt_cat ) {
-	$sidebar_args['cat'] = $kt_cat->term_id;
+// 1. Featured sidebar articles (up to 3 posts, scoped strictly to knowledge categories).
+$kt_cat = get_category_by_slug( 'kien-thuc' );
+if ( $kt_cat instanceof WP_Term ) {
+	$sidebar_args = array(
+		'post_type'           => 'post',
+		'post_status'         => 'publish',
+		'cat'                 => (int) $kt_cat->term_id,
+		'posts_per_page'      => 3,
+		'ignore_sticky_posts' => true,
+		'orderby'             => 'comment_count date',
+		'order'               => 'DESC',
+	);
+	$sidebar_featured = new WP_Query( $sidebar_args );
+} else {
+	// Defensive guard: prevent leaking recruitment/news posts if category is missing.
+	$sidebar_featured = new WP_Query();
 }
-$sidebar_featured = new WP_Query( $sidebar_args );
 
 // 2. Popular tags.
 $popular_tags = get_tags( array(

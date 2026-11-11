@@ -363,11 +363,72 @@ document.addEventListener('DOMContentLoaded', function () {
 			.filter(function (element) { return !element.closest('.hidden'); });
 	}
 
-	function openModal(modalId, serviceValue) {
+	function openModal(modalId, serviceValue, triggerBtn) {
 		const modal = document.getElementById(modalId);
 		if (!modal) return;
 		if (!modal.contains(document.activeElement)) {
 			modal.vpcTrigger = document.activeElement;
+		}
+
+		// Auto copy data from source form / teaser card if present
+		let sourceContainer = null;
+		if (triggerBtn) {
+			sourceContainer = triggerBtn.closest('form, .vpc-bath__lead-card, .about-consultation-card, .vpc-consultation-card');
+		}
+		if (!sourceContainer) {
+			// Find any active teaser or consultation card on page that has user-entered inputs
+			const candidateForms = document.querySelectorAll('.vpc-bath__lead-card, .about-consultation-card, #about-consultation-form, .vpc-consultation-form');
+			for (let i = 0; i < candidateForms.length; i++) {
+				const candidate = candidateForms[i];
+				if (candidate.closest('[data-modal]')) continue; // skip inputs inside modals
+				const nameVal = candidate.querySelector('input[name="customer_name"], input[name="full_name"]')?.value?.trim();
+				const phoneVal = candidate.querySelector('input[name="customer_phone"], input[name="phone"]')?.value?.trim();
+				if (nameVal || phoneVal) {
+					sourceContainer = candidate;
+					break;
+				}
+			}
+		}
+
+		if (sourceContainer) {
+			const srcName = (sourceContainer.querySelector('input[name="customer_name"], input[name="full_name"], input[aria-label="Họ và tên"], input[placeholder*="Linh"]') || {}).value?.trim();
+			const srcPhone = (sourceContainer.querySelector('input[name="customer_phone"], input[name="phone"], input[type="tel"], input[aria-label="Số điện thoại"], input[placeholder*="03"]') || {}).value?.trim();
+			const srcEmail = (sourceContainer.querySelector('input[name="email"], input[type="email"]') || {}).value?.trim();
+			const srcNote = (sourceContainer.querySelector('input[name="customer_note"], input[name="question"], textarea[name="question"], input[aria-label="Ghi chú"], input[placeholder*="nhu cầu"]') || {}).value?.trim();
+			const packageTrigger = sourceContainer.querySelector('.vpc-bath__lead-select [data-select-label], .about-consultation-shared-select [data-select-label], [data-select-trigger] [data-select-label]');
+			const srcPackage = (packageTrigger ? packageTrigger.textContent?.trim() : '') || (sourceContainer.querySelector('select[name="service_package"], input[name="service_package"]') || {}).value?.trim();
+			const srcService = (sourceContainer.querySelector('select[name="service"], input[name="service"]') || {}).value?.trim();
+
+			if (!serviceValue && srcService) {
+				serviceValue = srcService;
+			}
+
+			const modalName = modal.querySelector('input[name="full_name"], input[name="customer_name"]');
+			if (modalName && srcName && !modalName.value) {
+				modalName.value = srcName;
+			}
+
+			const modalPhone = modal.querySelector('input[name="phone"], input[name="customer_phone"]');
+			if (modalPhone && srcPhone && !modalPhone.value) {
+				modalPhone.value = srcPhone;
+			}
+
+			const modalEmail = modal.querySelector('input[name="email"]');
+			if (modalEmail && srcEmail && !modalEmail.value) {
+				modalEmail.value = srcEmail;
+			}
+
+			const modalNote = modal.querySelector('input[name="question"], textarea[name="question"], input[name="customer_note"]');
+			if (modalNote && !modalNote.value) {
+				let combinedNote = srcNote || '';
+				if (srcPackage && srcPackage !== 'Chọn gói dịch vụ') {
+					const pkgText = 'Gói quan tâm: ' + srcPackage;
+					combinedNote = combinedNote ? pkgText + ' - ' + combinedNote : pkgText;
+				}
+				if (combinedNote) {
+					modalNote.value = combinedNote;
+				}
+			}
 		}
 
 		// Pre-select service in modal if provided
@@ -432,7 +493,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			e.preventDefault();
 			const targetId = btn.getAttribute('data-open-modal');
 			const targetService = btn.getAttribute('data-service') || '';
-			openModal(targetId, targetService);
+			openModal(targetId, targetService, btn);
 		});
 	});
 
@@ -532,7 +593,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				formData.set('nonce', window.vpcData.nonce);
 			}
 
-			function onSubmissionSuccess(msg) {
+			function onSubmissionSuccess(msg, leadData) {
 				try { sessionStorage.removeItem('vpcConsultationRetry'); } catch (ignore) {}
 				form.reset();
 				// Reset custom select label if exists
@@ -547,6 +608,18 @@ document.addEventListener('DOMContentLoaded', function () {
 					successMessage.textContent = msg;
 				}
 				showStatus(msg || 'Thông tin đã được gửi thành công.', false);
+
+				// Meta Pixel CAPI Deduplication Event Trigger
+				if (typeof window !== 'undefined' && window.fbq && leadData?.eventId) {
+					try {
+						window.fbq('track', 'Lead', {
+							content_name: form.querySelector('[name="service"]')?.value || 'Tu van website',
+						}, { eventID: leadData.eventId });
+					} catch (e) {
+						console.warn('Meta Pixel tracking error:', e);
+					}
+				}
+
 				// Close consultation modal if open
 				const parentModal = form.closest('[data-modal]');
 				if (parentModal) {
@@ -573,7 +646,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				.then(function (res) { return res.json(); })
 				.then(function (data) {
 					if (data.success) {
-						onSubmissionSuccess(data.data?.message);
+						onSubmissionSuccess(data.data?.message, data.data);
 					} else {
 						showStatus(data.data?.message || 'Có lỗi xảy ra khi gửi thông tin. Vui lòng thử lại!', true);
 					}
@@ -595,17 +668,21 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 	}
 
-	const modalForm = document.querySelector('.vpc-consultation-modal form');
-	if (modalForm) handleFormSubmission(modalForm);
+	const formSelectors = [
+		'.vpc-consultation-modal form',
+		'#vpc-section-consultation-form',
+		'.vpc-consultation-form',
+		'#vpc-contact-page-form',
+		'#vpc-prenatal-form',
+		'#about-consultation-form',
+	].join(', ');
 
-	const sectionForm = document.getElementById('vpc-section-consultation-form');
-	if (sectionForm) handleFormSubmission(sectionForm);
-
-	const contactPageForm = document.getElementById('vpc-contact-page-form');
-	if (contactPageForm) handleFormSubmission(contactPageForm);
-
-	const prenatalForm = document.getElementById('vpc-prenatal-form');
-	if (prenatalForm) handleFormSubmission(prenatalForm);
+	document.querySelectorAll(formSelectors).forEach(function (f) {
+		if (f && !f.dataset.vpcBound) {
+			f.dataset.vpcBound = 'true';
+			handleFormSubmission(f);
+		}
+	});
 
 	// Hero Banner Slider
 	const heroSlider = document.getElementById('vpc-hero-slider');

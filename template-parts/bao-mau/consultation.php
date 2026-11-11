@@ -9,7 +9,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$consultation_services = vpc_get_consultation_services();
+$bao_mau_packages = array(
+	'Gói Thảnh Thơi' => 'Gói Thảnh Thơi',
+	'Gói Linh Hoạt'  => 'Gói Linh Hoạt',
+	'Gói An Tâm'     => 'Gói An Tâm',
+);
 ?>
 <section id="dang-ky-tu-van" class="vpc-section vpc-gradient-consultation relative overflow-hidden">
 	<div class="consultation-section-inner vpc-home-container">
@@ -24,6 +28,7 @@ $consultation_services = vpc_get_consultation_services();
 			<form id="vpc-section-consultation-form" class="vpc-consultation-form">
 				<?php wp_nonce_field( 'vpc_consultation_nonce', 'vpc_consultation_nonce' ); ?>
 				<input type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
+				<input type="hidden" name="service" value="bao-mau-tai-nha">
 
 				<div class="vpc-consultation-form__identity">
 					<div class="vpc-consultation-field">
@@ -39,13 +44,13 @@ $consultation_services = vpc_get_consultation_services();
 				<div class="vpc-consultation-field">
 					<?php
 					get_template_part( 'template-parts/components/custom-select', null, array(
-						'id'          => 'bao-mau-section-service',
-						'name'        => 'service',
-						'label'       => 'Dịch vụ quan tâm',
-						'placeholder' => 'Chọn dịch vụ',
+						'id'          => 'bao-mau-section-service-package',
+						'name'        => 'service_package',
+						'label'       => 'Gói dịch vụ quan tâm',
+						'placeholder' => 'Gói Thảnh Thơi',
+						'value'       => 'Gói Thảnh Thơi',
 						'required'    => true,
-						'value'       => 'bao-mau-tai-nha',
-						'options'     => $consultation_services,
+						'options'     => $bao_mau_packages,
 					) );
 					?>
 				</div>

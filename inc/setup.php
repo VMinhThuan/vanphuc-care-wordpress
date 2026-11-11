@@ -188,7 +188,28 @@ add_filter( 'query_vars', 'vanphuccare_knowledge_query_vars' );
  * @return void
  */
 function vanphuccare_maybe_flush_rewrite_rules() {
-	$version = defined( 'VANPHUCCARE_VERSION' ) ? VANPHUCCARE_VERSION : '1.0';
+	$version = defined( 'VANPHUCCARE_VERSION' ) ? (string) VANPHUCCARE_VERSION : '';
+
+	// Fallback to local Git commit hash if version.php is not present (e.g. local dev).
+	if ( empty( $version ) ) {
+		$git_head = get_template_directory() . '/.git/HEAD';
+		if ( file_exists( $git_head ) && is_readable( $git_head ) ) {
+			$head_content = trim( (string) @file_get_contents( $git_head ) );
+			if ( strpos( $head_content, 'ref: ' ) === 0 ) {
+				$ref_file = get_template_directory() . '/.git/' . substr( $head_content, 5 );
+				if ( file_exists( $ref_file ) && is_readable( $ref_file ) ) {
+					$version = substr( trim( (string) @file_get_contents( $ref_file ) ), 0, 7 );
+				}
+			} elseif ( ! empty( $head_content ) ) {
+				$version = substr( $head_content, 0, 7 );
+			}
+		}
+	}
+
+	if ( empty( $version ) ) {
+		$version = '1.0';
+	}
+
 	if ( get_option( 'vpc_rewrite_version' ) !== $version ) {
 		flush_rewrite_rules( false );
 		update_option( 'vpc_rewrite_version', $version );
@@ -271,13 +292,24 @@ function vanphuccare_knowledge_pre_get_posts( $query ) {
 		'cam-nang',
 	);
 
-	if ( $query->is_category() && in_array( (string) $query->get( 'category_name' ), $knowledge_category_slugs, true ) ) {
-		$query->set( 'posts_per_page', wp_is_mobile() ? 7 : 8 );
+	$raw_cat_slug = (string) $query->get( 'category_name' );
+	$leaf_slug    = $raw_cat_slug;
+	if ( strpos( $leaf_slug, '/' ) !== false ) {
+		$slug_parts = explode( '/', trim( $leaf_slug, '/' ) );
+		$leaf_slug  = end( $slug_parts );
+	}
+
+	$is_knowledge_category = in_array( $raw_cat_slug, $knowledge_category_slugs, true )
+		|| in_array( $leaf_slug, $knowledge_category_slugs, true );
+
+	if ( $query->is_category() && $is_knowledge_category ) {
+		$query->set( 'posts_per_page', 8 );
 	}
 
 	if ( ! empty( $query->get( 'vpc_is_all' ) ) ) {
 		$query->set( 'name', '' );
 		$query->set( 'category_name', 'kien-thuc' );
+		$query->set( 'posts_per_page', 8 );
 		$query->is_single   = false;
 		$query->is_page     = false;
 		$query->is_singular = false;

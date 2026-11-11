@@ -79,10 +79,6 @@ $map_url   = 'https://www.google.com/maps/place/V%E1%BA%A1n+Ph%C3%BAc+Care/@21.0
 					</div>
 				</div>
 				<div class="prenatal-form__field">
-					<label for="prenatal-email"><em>*</em> Email</label>
-					<input id="prenatal-email" name="email" required type="email" autocomplete="email" placeholder="email@example.com" />
-				</div>
-				<div class="prenatal-form__field">
 					<fieldset>
 						<legend><em>*</em> Giai đoạn thai kỳ</legend>
 						<div class="prenatal-chips">

@@ -11,14 +11,46 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+$current_cat  = get_queried_object();
+$current_id   = $current_cat instanceof WP_Term ? (int) $current_cat->term_id : 0;
+$current_slug = $current_cat instanceof WP_Term ? $current_cat->slug : '';
+
+// 1. Guard clause: Ensure this template only renders for Knowledge categories.
+$knowledge_slugs = array(
+	'kien-thuc',
+	'mang-thai',
+	'phuong-phap-easy',
+	'easy',
+	'an-dam',
+	'hoi-chung-bieng-an',
+	'tre-so-sinh-bieng-an-toan-tap',
+	'bieng-an',
+	'cam-nang-cho-me',
+	'cam-nang',
+);
+
+$kt_parent_term = get_category_by_slug( 'kien-thuc' );
+$is_child_of_kt = false;
+if ( $kt_parent_term instanceof WP_Term && $current_id ) {
+	$is_child_of_kt = cat_is_ancestor_of( $kt_parent_term->term_id, $current_id )
+		|| ( (int) $kt_parent_term->term_id === $current_id );
+}
+
+$is_knowledge = ! empty( get_query_var( 'vpc_is_all' ) )
+	|| in_array( $current_slug, $knowledge_slugs, true )
+	|| $is_child_of_kt;
+
+if ( ! $is_knowledge ) {
+	// Delegate to standard generic archive template for non-knowledge categories (e.g. tin-tuc, tuyen-dung).
+	require get_template_directory() . '/archive.php';
+	return;
+}
+
 get_header();
 
-$current_cat  = get_queried_object();
-$current_id   = $current_cat instanceof WP_Term ? $current_cat->term_id : 0;
-$current_slug = $current_cat instanceof WP_Term ? $current_cat->slug : '';
-$current_name = single_cat_title( '', false );
-$current_desc = $current_id ? category_description( $current_id ) : category_description();
-$current_desc_mobile = $current_desc;
+$current_name             = single_cat_title( '', false );
+$current_desc             = $current_id ? category_description( $current_id ) : category_description();
+$current_desc_mobile      = $current_desc;
 $is_all_knowledge_archive = 'kien-thuc' === $current_slug || ! empty( get_query_var( 'vpc_is_all' ) );
 
 $knowledge_uri = get_template_directory_uri() . '/assets/images/knowledge';

@@ -43,22 +43,28 @@ function vpc_handle_consultation_submission() {
 	$full_name = isset( $_POST['full_name'] ) ? sanitize_text_field( wp_unslash( $_POST['full_name'] ) ) : ( isset( $_POST['customer_name'] ) ? sanitize_text_field( wp_unslash( $_POST['customer_name'] ) ) : '' );
 	$phone     = isset( $_POST['phone'] ) ? sanitize_text_field( wp_unslash( $_POST['phone'] ) ) : ( isset( $_POST['customer_phone'] ) ? sanitize_text_field( wp_unslash( $_POST['customer_phone'] ) ) : '' );
 	$email     = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
-	$service   = isset( $_POST['service'] ) ? sanitize_text_field( wp_unslash( $_POST['service'] ) ) : '';
-	$pregnancy_stage = isset( $_POST['pregnancy_stage'] ) ? sanitize_text_field( wp_unslash( $_POST['pregnancy_stage'] ) ) : '';
-	$gestational_age = isset( $_POST['gestational_age'] ) ? sanitize_text_field( wp_unslash( $_POST['gestational_age'] ) ) : '';
-	$question  = isset( $_POST['question'] ) ? sanitize_textarea_field( wp_unslash( $_POST['question'] ) ) : ( isset( $_POST['customer_note'] ) ? sanitize_textarea_field( wp_unslash( $_POST['customer_note'] ) ) : '' );
+	$service   = isset( $_POST['service'] ) ? sanitize_text_field( wp_unslash( $_POST['service'] ) ) : ( isset( $_POST['service_interest'] ) ? sanitize_text_field( wp_unslash( $_POST['service_interest'] ) ) : '' );
+	$service_package   = isset( $_POST['service_package'] ) ? sanitize_text_field( wp_unslash( $_POST['service_package'] ) ) : ( isset( $_POST['package'] ) ? sanitize_text_field( wp_unslash( $_POST['package'] ) ) : '' );
+	$room_tier         = isset( $_POST['room_tier'] ) ? sanitize_text_field( wp_unslash( $_POST['room_tier'] ) ) : ( isset( $_POST['room'] ) ? sanitize_text_field( wp_unslash( $_POST['room'] ) ) : '' );
+	$pregnancy_stage   = isset( $_POST['pregnancy_stage'] ) ? sanitize_text_field( wp_unslash( $_POST['pregnancy_stage'] ) ) : '';
+	$gestational_age   = isset( $_POST['gestational_age'] ) ? sanitize_text_field( wp_unslash( $_POST['gestational_age'] ) ) : ( isset( $_POST['stage_choice'] ) ? sanitize_text_field( wp_unslash( $_POST['stage_choice'] ) ) : ( isset( $_POST['pregnancy_week'] ) ? sanitize_text_field( wp_unslash( $_POST['pregnancy_week'] ) ) : '' ) );
+	$expected_due_date = isset( $_POST['expected_due_date'] ) ? sanitize_text_field( wp_unslash( $_POST['expected_due_date'] ) ) : ( isset( $_POST['due_date'] ) ? sanitize_text_field( wp_unslash( $_POST['due_date'] ) ) : '' );
+	$address           = isset( $_POST['address'] ) ? sanitize_text_field( wp_unslash( $_POST['address'] ) ) : '';
+	$question  = isset( $_POST['question'] ) ? sanitize_textarea_field( wp_unslash( $_POST['question'] ) ) : ( isset( $_POST['customer_note'] ) ? sanitize_textarea_field( wp_unslash( $_POST['customer_note'] ) ) : ( isset( $_POST['note'] ) ? sanitize_textarea_field( wp_unslash( $_POST['note'] ) ) : '' ) );
+	$captcha_token     = isset( $_POST['captcha_token'] ) ? sanitize_text_field( wp_unslash( $_POST['captcha_token'] ) ) : ( isset( $_POST['cf-turnstile-response'] ) ? sanitize_text_field( wp_unslash( $_POST['cf-turnstile-response'] ) ) : ( isset( $_POST['captchaToken'] ) ? sanitize_text_field( wp_unslash( $_POST['captchaToken'] ) ) : '' ) );
 
-	if ( empty( $full_name ) || empty( $phone ) || empty( $email ) ) {
+	if ( empty( $full_name ) || empty( $phone ) ) {
 		wp_send_json_error( array(
-			'message' => 'Vui lòng nhập đầy đủ họ tên, email và số điện thoại liên hệ.',
+			'message' => 'Vui lòng nhập đầy đủ họ tên và số điện thoại liên hệ.',
 		), 400 );
 	}
-	if ( ! is_email( $email ) ) {
+	if ( ! empty( $email ) && ! is_email( $email ) ) {
 		wp_send_json_error( array( 'message' => 'Email không hợp lệ. Vui lòng kiểm tra lại.' ), 400 );
 	}
 
 	$services = vpc_get_consultation_services() + array(
 		'tam-be-so-sinh'       => 'Tắm bé sau sinh',
+		'tam-be-tai-nha'       => 'Tắm bé sau sinh',
 		'cham-soc-me-sau-sinh' => 'Chăm mẹ sau sinh',
 		'dieu-duong-tai-nha'   => 'Điều dưỡng y tế tại nhà',
 	);
@@ -74,22 +80,27 @@ function vpc_handle_consultation_submission() {
 		'chuan-bi-mang-thai' => 'Chuẩn bị mang thai',
 		'da-sinh-be'         => 'Đã sinh bé',
 	);
-	$gestational_age_label = $gestational_age_options[ $gestational_age ] ?? 'Chưa cung cấp';
-	if ( empty( $service ) || ! isset( $services[ $service ] ) ) {
+
+	if ( ! empty( $service ) && ! isset( $services[ $service ] ) ) {
 		wp_send_json_error( array(
 			'message' => 'Vui lòng chọn dịch vụ bạn quan tâm.',
 		), 400 );
 	}
+	$service_label = ! empty( $service ) ? ( $services[ $service ] ?? $service ) : '';
+
 	if ( ! empty( $pregnancy_stage ) && ! isset( $pregnancy_stages[ $pregnancy_stage ] ) ) {
 		wp_send_json_error( array(
 			'message' => 'Vui lòng chọn đúng giai đoạn thai kỳ.',
 		), 400 );
 	}
-	if ( empty( $gestational_age ) || ! isset( $gestational_age_options[ $gestational_age ] ) ) {
+	$pregnancy_stage_label = ! empty( $pregnancy_stage ) ? ( $pregnancy_stages[ $pregnancy_stage ] ?? $pregnancy_stage ) : '';
+
+	if ( ! empty( $gestational_age ) && ! isset( $gestational_age_options[ $gestational_age ] ) ) {
 		wp_send_json_error( array(
 			'message' => 'Vui lòng chọn giai đoạn hoặc tuần thai phù hợp.',
 		), 400 );
 	}
+	$gestational_age_label = ! empty( $gestational_age ) ? ( $gestational_age_options[ $gestational_age ] ?? $gestational_age ) : '';
 
 	$clean_phone = vpc_normalize_vietnamese_phone( $phone );
 	if ( empty( $clean_phone ) ) {
@@ -106,32 +117,77 @@ function vpc_handle_consultation_submission() {
 	}
 
 	$payload = array(
-		'full_name'          => $full_name,
-		'email'              => $email,
-		'phone'              => $clean_phone,
-		'service'            => $service,
-		'service_label'      => $services[ $service ],
-		'pregnancy_stage'    => $pregnancy_stage,
-		'pregnancy_stage_label' => $pregnancy_stages[ $pregnancy_stage ] ?? '',
-		'gestational_age'    => $gestational_age,
-		'gestational_age_label' => $gestational_age_label,
-		'question'           => $question,
-		'source'             => home_url( '/' ),
-		'submitted_at'       => current_time( 'c' ),
+		'fullName' => $full_name,
+		'phone'    => $clean_phone,
 	);
+	if ( ! empty( $service_label ) ) {
+		$payload['serviceInterest'] = $service_label;
+	}
+	if ( ! empty( $service_package ) ) {
+		$payload['servicePackage'] = $service_package;
+	}
+	if ( ! empty( $room_tier ) ) {
+		$payload['roomTier'] = $room_tier;
+	}
+	if ( ! empty( $pregnancy_stage_label ) ) {
+		$payload['pregnancyStage'] = $pregnancy_stage_label;
+	}
+	if ( ! empty( $gestational_age_label ) ) {
+		$payload['pregnancyWeek'] = $gestational_age_label;
+	}
+	if ( ! empty( $expected_due_date ) ) {
+		$payload['expectedDueDate'] = $expected_due_date;
+	}
+	if ( ! empty( $email ) ) {
+		$payload['email'] = $email;
+	}
+	if ( ! empty( $address ) ) {
+		$payload['address'] = $address;
+	}
+	if ( ! empty( $question ) ) {
+		$payload['note'] = $question;
+	}
+	if ( ! empty( $captcha_token ) ) {
+		$payload['captchaToken'] = $captcha_token;
+	}
+
+	$uuid = function_exists( 'wp_generate_uuid4' ) ? wp_generate_uuid4() : sprintf( '%04x%04x-%04x-4%03x-%04x-%04x%04x%04x', mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0x0fff ), mt_rand( 0x8000, 0xbfff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ) );
+	$origin = function_exists( 'untrailingslashit' ) ? untrailingslashit( home_url() ) : rtrim( home_url(), '/' );
+
+	$default_headers = array(
+		'Content-Type'    => 'application/json',
+		'Accept'          => 'application/json',
+		'Idempotency-Key' => $uuid,
+		'Origin'          => $origin,
+	);
+
 	$response = wp_remote_post( $endpoint, array(
 		'timeout' => 12,
-		'headers' => apply_filters( 'vpc_consultation_api_headers', array( 'Content-Type' => 'application/json', 'Accept' => 'application/json' ) ),
-		'body'    => wp_json_encode( $payload ),
+		'headers' => apply_filters( 'vpc_consultation_api_headers', $default_headers ),
+		'body'    => wp_json_encode( apply_filters( 'vpc_consultation_api_payload', $payload, compact( 'full_name', 'clean_phone', 'email', 'service', 'pregnancy_stage', 'gestational_age', 'question' ) ) ),
 	) );
-	if ( is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) < 200 || wp_remote_retrieve_response_code( $response ) >= 300 ) {
-		error_log( 'VPC consultation lead API delivery failed.' ); // No personally identifiable data in logs.
-		wp_send_json_error( array( 'message' => 'Chưa thể gửi thông tin đến bộ phận tư vấn. Vui lòng thử lại hoặc gọi hotline.' ), 502 );
+
+	$response_code = wp_remote_retrieve_response_code( $response );
+	$response_body = wp_remote_retrieve_body( $response );
+	$decoded_res   = json_decode( $response_body, true );
+
+	if ( is_wp_error( $response ) || $response_code < 200 || $response_code >= 300 ) {
+		error_log( 'VPC consultation lead API delivery failed. HTTP: ' . $response_code ); // No personally identifiable data in logs.
+		$error_message = $decoded_res['message'] ?? ( $decoded_res['error']['message'] ?? 'Chưa thể gửi thông tin đến bộ phận tư vấn. Vui lòng thử lại hoặc gọi hotline.' );
+		wp_send_json_error( array(
+			'message' => $error_message,
+			'code'    => $decoded_res['error']['code'] ?? 'API_DELIVERY_FAILED',
+		), ( $response_code >= 400 && $response_code < 600 ) ? $response_code : 502 );
 	}
 	set_transient( $rate_key, 1, MINUTE_IN_SECONDS );
 
+	$lead_id  = $decoded_res['data']['leadId'] ?? '';
+	$event_id = $decoded_res['data']['eventId'] ?? '';
+
 	wp_send_json_success( array(
 		'message' => 'Cảm ơn Ba/Mẹ đã gửi thông tin. Đội ngũ chuyên gia y tế của Vạn Phúc Care sẽ liên hệ tư vấn chi tiết trong thời gian sớm nhất.',
+		'leadId'  => $lead_id,
+		'eventId' => $event_id,
 	) );
 }
 

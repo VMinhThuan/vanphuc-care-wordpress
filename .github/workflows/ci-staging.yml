@@ -160,6 +160,7 @@ jobs:
           set -euo pipefail
 
           rsync -az \
+            --delete \
             --no-owner \
             --no-group \
             --chmod=D755,F644 \
