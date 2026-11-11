@@ -252,3 +252,133 @@ function vpc_save_content_meta( $post_id ) {
 	}
 }
 add_action( 'save_post', 'vpc_save_content_meta' );
+
+/**
+ * Renders custom term meta fields for the 'kien-thuc' category edit screen.
+ *
+ * Provides Content editors with 4 curated slots for featured articles (Hero + 3 sub cards).
+ *
+ * @param WP_Term $term Current taxonomy term object.
+ * @return void
+ */
+function vpc_category_featured_fields( $term ) {
+	if ( ! ( $term instanceof WP_Term ) || 'kien-thuc' !== $term->slug ) {
+		return;
+	}
+
+	$saved_slots = get_term_meta( $term->term_id, 'vpc_featured_post_ids', true );
+	if ( ! is_array( $saved_slots ) ) {
+		$saved_slots = array();
+	}
+
+	// Fetch up to 100 published posts in category 'kien-thuc' for selection.
+	$knowledge_posts = get_posts( array(
+		'post_type'      => 'post',
+		'post_status'    => 'publish',
+		'cat'            => (int) $term->term_id,
+		'posts_per_page' => 100,
+		'orderby'        => 'date',
+		'order'          => 'DESC',
+	) );
+
+	// Slot definitions matching Figma layout.
+	$slots = array(
+		1 => array(
+			'label' => __( 'Vị trí 1 (Hero lớn)', 'vanphuccare' ),
+			'desc'  => __( 'Hiển thị thẻ bài viết lớn nhất ở hàng trên cùng của mục Bài viết nổi bật.', 'vanphuccare' ),
+		),
+		2 => array(
+			'label' => __( 'Vị trí 2 (Card nhỏ thứ nhất)', 'vanphuccare' ),
+			'desc'  => __( 'Thẻ nhỏ bên trái ở hàng 3 bài bên dưới.', 'vanphuccare' ),
+		),
+		3 => array(
+			'label' => __( 'Vị trí 3 (Card nhỏ thứ hai)', 'vanphuccare' ),
+			'desc'  => __( 'Thẻ nhỏ ở giữa ở hàng 3 bài bên dưới.', 'vanphuccare' ),
+		),
+		4 => array(
+			'label' => __( 'Vị trí 4 (Card nhỏ thứ ba)', 'vanphuccare' ),
+			'desc'  => __( 'Thẻ nhỏ bên phải ở hàng 3 bài bên dưới.', 'vanphuccare' ),
+		),
+	);
+
+	wp_nonce_field( 'vpc_save_category_featured', 'vpc_category_featured_nonce' );
+	?>
+	<tr class="form-field">
+		<th scope="row" colspan="2" style="padding-top: 24px; padding-bottom: 8px;">
+			<div style="background: #eef6fb; border-left: 4px solid #1a77ba; padding: 12px 16px; border-radius: 4px;">
+				<h3 style="margin: 0 0 6px 0; color: #1a77ba; font-size: 15px; font-weight: 700;">
+					⭐ <?php esc_html_e( 'Cấu hình 4 bài viết nổi bật (Knowledge Featured Articles)', 'vanphuccare' ); ?>
+				</h3>
+				<p style="margin: 0; color: #444; font-size: 13px;">
+					<?php esc_html_e( 'Chủ động chọn chính xác bài viết xuất hiện tại 4 vị trí Hero trang Kiến thức. Vị trí nào để trống sẽ tự động lấy bài mới nhất trong chuyên mục.', 'vanphuccare' ); ?>
+				</p>
+			</div>
+		</th>
+	</tr>
+	<?php
+	foreach ( $slots as $slot_num => $slot_info ) :
+		$field_name  = 'vpc_featured_slot_' . $slot_num;
+		$selected_id = isset( $saved_slots[ $slot_num ] ) ? absint( $saved_slots[ $slot_num ] ) : 0;
+
+		// Ensure currently selected post is in the dropdown even if older than 100 posts.
+		$options_posts = $knowledge_posts;
+		if ( $selected_id > 0 && ! in_array( $selected_id, wp_list_pluck( $options_posts, 'ID' ), true ) ) {
+			$custom_selected_post = get_post( $selected_id );
+			if ( $custom_selected_post ) {
+				array_unshift( $options_posts, $custom_selected_post );
+			}
+		}
+		?>
+		<tr class="form-field term-featured-slot-wrap">
+			<th scope="row">
+				<label for="<?php echo esc_attr( $field_name ); ?>">
+					<strong><?php echo esc_html( $slot_info['label'] ); ?></strong>
+				</label>
+			</th>
+			<td>
+				<select id="<?php echo esc_attr( $field_name ); ?>" name="<?php echo esc_attr( $field_name ); ?>" style="max-width: 520px; width: 100%;">
+					<option value="0"><?php esc_html_e( '-- Tự động lấy bài mới nhất --', 'vanphuccare' ); ?></option>
+					<?php foreach ( $options_posts as $p ) : ?>
+						<option value="<?php echo esc_attr( $p->ID ); ?>" <?php selected( $selected_id, $p->ID ); ?>>
+							[#<?php echo esc_html( $p->ID ); ?>] <?php echo esc_html( wp_trim_words( $p->post_title, 14, '...' ) ); ?> (<?php echo esc_html( get_the_date( 'd/m/Y', $p ) ); ?>)
+						</option>
+					<?php endforeach; ?>
+				</select>
+				<p class="description"><?php echo esc_html( $slot_info['desc'] ); ?></p>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+	<?php
+}
+add_action( 'category_edit_form_fields', 'vpc_category_featured_fields', 10, 1 );
+
+/**
+ * Saves custom term meta fields for the 'kien-thuc' category.
+ *
+ * @param int $term_id Current term ID.
+ * @return void
+ */
+function vpc_save_category_featured_fields( $term_id ) {
+	if ( ! isset( $_POST['vpc_category_featured_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['vpc_category_featured_nonce'] ) ), 'vpc_save_category_featured' ) ) {
+		return;
+	}
+
+	if ( ! current_user_can( 'edit_term', $term_id ) ) {
+		return;
+	}
+
+	$term = get_term( $term_id, 'category' );
+	if ( ! ( $term instanceof WP_Term ) || 'kien-thuc' !== $term->slug ) {
+		return;
+	}
+
+	$featured_ids = array();
+	for ( $i = 1; $i <= 4; $i++ ) {
+		$key = 'vpc_featured_slot_' . $i;
+		$val = isset( $_POST[ $key ] ) ? absint( $_POST[ $key ] ) : 0;
+		$featured_ids[ $i ] = $val;
+	}
+
+	update_term_meta( $term_id, 'vpc_featured_post_ids', $featured_ids );
+}
+add_action( 'edited_category', 'vpc_save_category_featured_fields', 10, 1 );

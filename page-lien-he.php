@@ -92,7 +92,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 							<input type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
 							
 							<!-- Row 1: Họ và tên & Số điện thoại (2 columns on sm+ matching Figma) -->
-							<div class="order-1 grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-4">
+							<div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-4">
 								<!-- Họ và tên -->
 								<div class="flex flex-col gap-3">
 									<label class="font-body font-medium text-xl leading-7 text-text-body-default flex items-center gap-1">
@@ -118,21 +118,21 @@ $gestational_age_options = vpc_get_gestational_age_options();
 								</div>
 							</div>
 
-							<!-- Email -->
-							<div class="order-1 flex flex-col gap-3">
-								<label class="font-body font-medium text-xl leading-7 text-text-body-default flex items-center gap-1">
-									<span class="text-text-error-default">*</span> Email
-								</label>
-								<input type="email"
-								       name="email"
-								       required
-								       autocomplete="email"
-								       placeholder="email@example.com"
-								       class="w-full h-12 px-3 sm:px-4 rounded-xl border border-border-disabled-default bg-surface-background-default text-text-body-default placeholder:text-text-disabled-light font-body font-medium text-base focus:border-border-primary-default focus:ring-1 focus:ring-border-primary-default focus:outline-none transition-all">
-							</div>
+							<!-- Dịch vụ quan tâm -->
+						<?php
+						get_template_part( 'template-parts/components/custom-select', null, array(
+							'id'          => 'contact-service',
+							'name'        => 'service',
+							'label'       => 'Dịch vụ quan tâm',
+							'placeholder' => 'Chọn dịch vụ',
+							'required'    => true,
+							'value'       => 'trung-tam-o-cu',
+							'options'     => $consultation_services,
+						) );
+						?>
 
-							<!-- Giai đoạn thai kỳ (Mobile: order-2 trên Dịch vụ quan tâm, Web: sm:order-3 dưới Dịch vụ quan tâm) -->
-							<fieldset class="order-2 sm:order-3 flex flex-col gap-4 border-0 p-0 m-0">
+							<!-- Giai đoạn thai kỳ -->
+							<fieldset class="flex flex-col gap-4 border-0 p-0 m-0">
 								<legend class="mb-0 font-body font-medium text-xl leading-7 text-text-body-default flex items-center gap-1">
 									<span class="text-text-error-default">*</span> Giai đoạn thai kỳ
 								</legend>
@@ -143,20 +143,6 @@ $gestational_age_options = vpc_get_gestational_age_options();
 								</div>
 							</fieldset>
 
-							<!-- Dịch vụ quan tâm (Mobile: order-3 dưới Giai đoạn thai kỳ, Web: sm:order-2 trên Giai đoạn thai kỳ) -->
-						<?php
-						get_template_part( 'template-parts/components/custom-select', null, array(
-							'id'          => 'contact-service',
-							'name'        => 'service',
-							'label'       => 'Dịch vụ quan tâm',
-							'placeholder' => 'Chọn dịch vụ',
-							'required'    => true,
-							'value'       => 'trung-tam-o-cu',
-							'options'     => $consultation_services,
-							'class'       => 'order-3 sm:order-2',
-						) );
-						?>
-
 							<!-- Tuần thai -->
 						<?php
 						get_template_part( 'template-parts/components/custom-select', null, array(
@@ -166,12 +152,11 @@ $gestational_age_options = vpc_get_gestational_age_options();
 							'placeholder' => 'Chọn giai đoạn',
 							'required'    => true,
 							'options'     => $gestational_age_options,
-							'class'       => 'order-4',
 						) );
 						?>
 
 							<!-- Ghi chú (No asterisk matching Figma) -->
-							<div class="order-5 flex flex-col gap-3">
+							<div class="flex flex-col gap-3">
 								<label class="font-body font-medium text-xl leading-7 text-text-body-default">
 									Ghi chú
 								</label>
@@ -182,7 +167,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 							</div>
 
 							<!-- Submit Button: Pill button matching Figma -->
-							<div class="order-6 pt-0">
+							<div class="pt-0">
 								<button type="submit" class="vpc-button w-full xl:w-auto px-6 h-10 sm:h-12 bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default rounded-full flex items-center justify-center transition-all cursor-pointer font-body font-medium text-base">
 									Gửi yêu cầu tư vấn
 								</button>

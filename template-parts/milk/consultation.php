@@ -9,36 +9,59 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="thong-tac-tia-sua"';
+$milk_packages = array(
+	'Gói 3 buổi'   => 'Gói 3 buổi',
+	'Gói buổi lẻ'  => 'Gói buổi lẻ',
+	'Gói 5 buổi'   => 'Gói 5 buổi',
+);
 ?>
-<section class="vpc-bath__lead" aria-labelledby="milk-lead-title">
-	<div class="vpc-bath__container">
-		<div class="vpc-bath__section-heading">
-			<h2 id="milk-lead-title"><span>Sẵn Sàng Bắt Đầu</span><em>Hành Trình Làm Mẹ <span class="vpc-bath__lead-title-break vpc-lead-title-happiness">Hạnh Phúc</span></em></h2>
+<section id="dang-ky-tu-van" class="vpc-section vpc-gradient-consultation relative overflow-hidden">
+	<div class="consultation-section-inner vpc-home-container">
+		<div class="vpc-consultation-heading">
+			<h2>
+				<span class="vpc-consultation-heading__blue">Sẵn Sàng Bắt Đầu</span>
+				<span class="vpc-consultation-heading__pink">Hành Trình Làm Mẹ <span class="vpc-lead-title-happiness">Hạnh Phúc</span></span>
+			</h2>
 		</div>
-		<div class="vpc-bath__lead-card">
-			<div class="vpc-bath__lead-row">
-				<label><span><b>*</b>Họ và tên</span><input type="text" placeholder="Nguyễn Như Linh" aria-label="Họ và tên"></label>
-				<label><span><b>*</b>Số điện thoại</span><input type="tel" placeholder="0345678***" aria-label="Số điện thoại"></label>
-			</div>
-			<?php
-			get_template_part( 'template-parts/components/custom-select', null, array(
-				'id'          => 'milk-lead-package',
-				'name'        => 'service_package',
-				'label'       => 'Gói dịch vụ quan tâm',
-				'placeholder' => 'Chọn gói dịch vụ',
-				'value'       => 'goi-3-buoi',
-				'options'     => array(
-					'goi-3-buoi'   => 'Gói 3 buổi',
-					'goi-buoi-le'  => 'Gói buổi lẻ',
-					'goi-5-buoi'   => 'Gói 5 buổi',
-				),
-				'class'       => 'vpc-bath__lead-select',
-			) );
-			?>
-			<label><span>Ghi chú</span><input type="text" placeholder="Cho chúng tôi biết thêm về nhu cầu của bạn!" aria-label="Ghi chú"></label>
-			<button type="button" class="vpc-bath__button vpc-bath__button--primary" <?php echo $button_attrs; ?>>Gửi yêu cầu tư vấn</button>
+
+		<div class="vpc-consultation-card">
+			<form id="vpc-section-consultation-form" class="vpc-consultation-form">
+				<?php wp_nonce_field( 'vpc_consultation_nonce', 'vpc_consultation_nonce' ); ?>
+				<input type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
+				<input type="hidden" name="service" value="thong-tac-tia-sua">
+
+				<div class="vpc-consultation-form__identity">
+					<div class="vpc-consultation-field">
+						<label><span class="text-text-error-default">*</span> Họ và tên</label>
+						<input type="text" name="customer_name" required placeholder="Nguyễn Như Linh" class="vpc-consultation-control">
+					</div>
+					<div class="vpc-consultation-field">
+						<label><span class="text-text-error-default">*</span> Số điện thoại</label>
+						<input type="tel" name="customer_phone" required placeholder="0345678***" class="vpc-consultation-control">
+					</div>
+				</div>
+
+				<div class="vpc-consultation-field">
+					<?php
+					get_template_part( 'template-parts/components/custom-select', null, array(
+						'id'          => 'milk-section-service-package',
+						'name'        => 'service_package',
+						'label'       => 'Gói dịch vụ quan tâm',
+						'placeholder' => 'Gói 3 buổi',
+						'value'       => 'Gói 3 buổi',
+						'required'    => true,
+						'options'     => $milk_packages,
+					) );
+					?>
+				</div>
+
+				<div class="vpc-consultation-field">
+					<label>Ghi chú</label>
+					<input type="text" name="customer_note" placeholder="Cho chúng tôi biết thêm về nhu cầu của bạn!" class="vpc-consultation-control">
+				</div>
+
+				<div class="vpc-consultation-submit"><button type="submit" class="vpc-button">Gửi yêu cầu tư vấn</button></div>
+			</form>
 		</div>
 	</div>
 </section>
-

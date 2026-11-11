@@ -65,48 +65,92 @@ $category_posts = array();
 if ( $kt_cat instanceof WP_Term ) {
 	$kt_cat_id = (int) $kt_cat->term_id;
 
-	// Read sticky post IDs from WordPress Core.
-	$sticky_ids = array_filter( array_map( 'absint', (array) get_option( 'sticky_posts', array() ) ) );
-
-	// Step 1: Query sticky posts that belong strictly to 'kien-thuc' category (up to 4).
-	if ( ! empty( $sticky_ids ) ) {
-		$sticky_query = new WP_Query( array(
-			'post_type'           => 'post',
-			'post_status'         => 'publish',
-			'cat'                 => $kt_cat_id,
-			'post__in'            => $sticky_ids,
-			'posts_per_page'      => 4,
-			'ignore_sticky_posts' => true,
-			'orderby'             => 'date',
-			'order'               => 'DESC',
-		) );
-		$featured_posts = $sticky_query->posts;
+	// Read curated slots from Term Meta (Phương án B).
+	$saved_slots = get_term_meta( $kt_cat_id, 'vpc_featured_post_ids', true );
+	if ( ! is_array( $saved_slots ) ) {
+		$saved_slots = array();
 	}
 
-	// Step 2: If fewer than 4 sticky posts, fill remaining slots with the latest posts in 'kien-thuc'.
-	$needed = 4 - count( $featured_posts );
-	if ( $needed > 0 ) {
-		$exclude_ids = wp_list_pluck( $featured_posts, 'ID' );
-		$fill_args   = array(
+	$slot_posts = array();
+	$used_ids   = array();
+
+	// Step 1: Assign curated posts to their respective slots (1..4).
+	for ( $slot = 1; $slot <= 4; $slot++ ) {
+		$target_id = isset( $saved_slots[ $slot ] ) ? absint( $saved_slots[ $slot ] ) : 0;
+		if ( $target_id > 0 && ! in_array( $target_id, $used_ids, true ) ) {
+			$post_obj = get_post( $target_id );
+			if ( $post_obj instanceof WP_Post && 'publish' === $post_obj->post_status && has_category( $kt_cat_id, $post_obj ) ) {
+				$slot_posts[ $slot ] = $post_obj;
+				$used_ids[]          = $target_id;
+			}
+		}
+	}
+
+	// Step 2: Determine which slots still need posts.
+	$empty_slots = array();
+	for ( $slot = 1; $slot <= 4; $slot++ ) {
+		if ( ! isset( $slot_posts[ $slot ] ) ) {
+			$empty_slots[] = $slot;
+		}
+	}
+
+	// Step 3: Prioritize native sticky posts for empty slots.
+	if ( ! empty( $empty_slots ) ) {
+		$sticky_ids        = array_filter( array_map( 'absint', (array) get_option( 'sticky_posts', array() ) ) );
+		$sticky_candidates = array_diff( $sticky_ids, $used_ids );
+
+		if ( ! empty( $sticky_candidates ) ) {
+			$sticky_query = new WP_Query( array(
+				'post_type'           => 'post',
+				'post_status'         => 'publish',
+				'cat'                 => $kt_cat_id,
+				'post__in'            => $sticky_candidates,
+				'posts_per_page'      => count( $empty_slots ),
+				'ignore_sticky_posts' => true,
+				'orderby'             => 'date',
+				'order'               => 'DESC',
+			) );
+			foreach ( $sticky_query->posts as $sp ) {
+				$slot = array_shift( $empty_slots );
+				$slot_posts[ $slot ] = $sp;
+				$used_ids[]          = (int) $sp->ID;
+				if ( empty( $empty_slots ) ) {
+					break;
+				}
+			}
+		}
+	}
+
+	// Step 4: Fill any remaining empty slots with the latest posts in 'kien-thuc'.
+	if ( ! empty( $empty_slots ) ) {
+		$fill_args = array(
 			'post_type'           => 'post',
 			'post_status'         => 'publish',
 			'cat'                 => $kt_cat_id,
-			'posts_per_page'      => $needed,
+			'posts_per_page'      => count( $empty_slots ),
 			'ignore_sticky_posts' => true,
 			'orderby'             => 'date',
 			'order'               => 'DESC',
 		);
-		if ( ! empty( $exclude_ids ) ) {
-			$fill_args['post__not_in'] = $exclude_ids;
+		if ( ! empty( $used_ids ) ) {
+			$fill_args['post__not_in'] = $used_ids;
 		}
 		$fill_query = new WP_Query( $fill_args );
-		if ( ! empty( $fill_query->posts ) ) {
-			$featured_posts = array_merge( $featured_posts, $fill_query->posts );
+		foreach ( $fill_query->posts as $fp ) {
+			$slot = array_shift( $empty_slots );
+			$slot_posts[ $slot ] = $fp;
+			$used_ids[]          = (int) $fp->ID;
+			if ( empty( $empty_slots ) ) {
+				break;
+			}
 		}
 	}
 
+	// Sort slots in natural order 1..4.
+	ksort( $slot_posts );
+	$featured_posts = array_values( $slot_posts );
+
 	// 2. Query Category Preview Articles (6 horizontal cards, strictly excluding featured posts).
-	$featured_ids  = wp_list_pluck( $featured_posts, 'ID' );
 	$category_args = array(
 		'post_type'           => 'post',
 		'post_status'         => 'publish',
@@ -116,8 +160,8 @@ if ( $kt_cat instanceof WP_Term ) {
 		'orderby'             => 'date',
 		'order'               => 'DESC',
 	);
-	if ( ! empty( $featured_ids ) ) {
-		$category_args['post__not_in'] = $featured_ids;
+	if ( ! empty( $used_ids ) ) {
+		$category_args['post__not_in'] = $used_ids;
 	}
 	$category_query = new WP_Query( $category_args );
 	$category_posts = $category_query->posts;
