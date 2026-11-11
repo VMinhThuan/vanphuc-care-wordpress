@@ -257,3 +257,50 @@ function vanphuccare_is_thong_tac_page() {
 	return is_page( 'thong-tac-tia-sua' ) || is_page_template( 'page-thong-tac-tia-sua.php' );
 }
 
+/**
+ * Retrieves the primary category for a post.
+ *
+ * Resolves the primary category selected by editor via Yoast SEO or Rank Math.
+ * Fallbacks gracefully to the first specific child category (skipping 'kien-thuc').
+ *
+ * @param WP_Post|int|null $post_obj Post object or ID.
+ * @return WP_Term|null Primary category term object or null.
+ */
+function vanphuccare_get_primary_category( $post_obj = null ) {
+	$post = get_post( $post_obj );
+	if ( ! $post ) {
+		return null;
+	}
+
+	// 1. Check Yoast SEO primary category meta
+	$yoast_primary_id = get_post_meta( $post->ID, '_yoast_wpseo_primary_category', true );
+	if ( ! empty( $yoast_primary_id ) ) {
+		$term = get_term( (int) $yoast_primary_id, 'category' );
+		if ( $term instanceof WP_Term && ! is_wp_error( $term ) ) {
+			return $term;
+		}
+	}
+
+	// 2. Check Rank Math primary category meta
+	$rank_math_primary_id = get_post_meta( $post->ID, 'rank_math_primary_category', true );
+	if ( ! empty( $rank_math_primary_id ) ) {
+		$term = get_term( (int) $rank_math_primary_id, 'category' );
+		if ( $term instanceof WP_Term && ! is_wp_error( $term ) ) {
+			return $term;
+		}
+	}
+
+	// 3. Fallback: First child category, skipping generic parent 'kien-thuc'
+	$categories = get_the_category( $post->ID );
+	if ( ! empty( $categories ) ) {
+		foreach ( $categories as $cat ) {
+			if ( 'kien-thuc' !== $cat->slug && ! empty( $cat->name ) ) {
+				return $cat;
+			}
+		}
+		return $categories[0];
+	}
+
+	return null;
+}
+

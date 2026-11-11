@@ -638,3 +638,529 @@
 		line-height: 16px;
 	}
 }
+
+
+/* ==========================================================================
+   Sub-Category Knowledge Hub & Sidebar Layout — Figma Reference
+   ========================================================================== */
+
+.vpc-knowledge-container {
+	width: min(1280px, calc(100% - 40px));
+	margin-inline: auto;
+}
+
+/* 1. Breadcrumbs */
+.vpc-knowledge-breadcrumbs {
+	background: #f8f8f8;
+	padding: 16px 0;
+	font-size: 14px;
+	line-height: 20px;
+	color: var(--knowledge-muted, #525252);
+	border-bottom: 1px solid #ededed;
+}
+
+.vpc-knowledge-breadcrumbs a {
+	color: var(--knowledge-muted, #525252);
+	text-decoration: none;
+	transition: color .2s ease;
+}
+
+.vpc-knowledge-breadcrumbs a:hover {
+	color: var(--knowledge-blue, #1a77ba);
+}
+
+.vpc-knowledge-breadcrumbs__sep {
+	margin: 0 8px;
+	color: #999;
+}
+
+.vpc-knowledge-breadcrumbs__current {
+	color: var(--knowledge-blue, #1a77ba);
+	font-weight: 600;
+}
+
+/* 2. Sub-Category Hero */
+.vpc-knowledge-subcat-hero {
+	background: linear-gradient(180deg, #f8f8f8 0%, #fde6e6 125%);
+	padding: 40px 0 32px;
+	border-bottom: 1px solid #f0e0e0;
+}
+
+.vpc-knowledge-subcat-hero__inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 40px;
+}
+
+.vpc-knowledge-subcat-hero__copy {
+	max-width: 650px;
+}
+
+.vpc-knowledge-subcat-hero__copy h1 {
+	margin: 0 0 16px;
+	font: 600 44px/56px var(--font-heading, "Fraunces", serif);
+	color: var(--knowledge-blue, #1a77ba);
+}
+
+.vpc-knowledge-subcat-hero__desc {
+	font-size: 15px;
+	line-height: 24px;
+	color: var(--knowledge-muted, #525252);
+}
+
+.vpc-knowledge-subcat-hero__visual {
+	position: relative;
+	flex: 0 0 280px;
+	height: 280px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.vpc-knowledge-subcat-hero__circle {
+	width: 220px;
+	height: 220px;
+	border-radius: 50%;
+	overflow: hidden;
+	border: 4px solid #fff;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
+}
+
+.vpc-knowledge-subcat-hero__circle img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.vpc-knowledge-subcat-hero__mascot-wrap {
+	position: absolute;
+	bottom: 0;
+	right: -10px;
+	display: flex;
+	align-items: flex-end;
+	gap: 8px;
+}
+
+.vpc-knowledge-subcat-hero__mascot {
+	width: 90px;
+	height: 90px;
+	object-fit: contain;
+}
+
+.vpc-knowledge-subcat-hero__badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 4px 10px;
+	background: #fff;
+	border: 1px solid var(--knowledge-pink, #f48283);
+	border-radius: 999px;
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--knowledge-blue-dark, #155f95);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, .08);
+	white-space: nowrap;
+}
+
+/* 3. Category Pills Bar */
+.vpc-knowledge-subcat-pills-wrap {
+	padding: 24px 0 8px;
+	background: #fff;
+}
+
+/* 4. Main 2-Column Content Layout (Articles + Sidebar) */
+.vpc-knowledge-content--subcat {
+	background: #fff;
+	padding: 32px 0 80px;
+}
+
+.vpc-knowledge-layout {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 360px;
+	gap: 40px;
+	align-items: start;
+}
+
+.vpc-knowledge-main__title {
+	margin: 0 0 24px;
+	font: 600 32px/40px var(--font-heading, "Fraunces", serif);
+	color: var(--knowledge-blue, #1a77ba);
+}
+
+.vpc-knowledge-article-stack {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+/* 5. Numeric Pagination (< 1 2 3 4 5 >) */
+.vpc-knowledge-pagination-wrap {
+	margin-top: 48px;
+	display: flex;
+	justify-content: center;
+}
+
+.vpc-knowledge-pagination-wrap .pagination {
+	display: flex;
+	justify-content: center;
+}
+
+.vpc-knowledge-pagination-wrap .nav-links {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.vpc-knowledge-pagination-wrap .page-numbers {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 40px;
+	height: 40px;
+	padding: 0 12px;
+	border-radius: 8px;
+	border: 1px solid #e1e1e1;
+	background: #fff;
+	color: var(--knowledge-ink, #292929);
+	font: 500 15px/20px var(--font-body, "Manrope", sans-serif);
+	text-decoration: none;
+	transition: all .2s ease;
+}
+
+.vpc-knowledge-pagination-wrap .page-numbers:hover {
+	border-color: var(--knowledge-blue, #1a77ba);
+	color: var(--knowledge-blue, #1a77ba);
+}
+
+.vpc-knowledge-pagination-wrap .page-numbers.current {
+	background: var(--knowledge-blue, #1a77ba);
+	border-color: var(--knowledge-blue, #1a77ba);
+	color: #fff;
+	font-weight: 600;
+}
+
+.vpc-knowledge-pagination-wrap .prev,
+.vpc-knowledge-pagination-wrap .next {
+	background: #f0f0f0;
+	border-color: transparent;
+	color: var(--knowledge-ink, #292929);
+}
+
+.vpc-knowledge-empty {
+	padding: 48px 24px;
+	text-align: center;
+	background: #fafafa;
+	border-radius: 16px;
+	border: 1px dashed #ddd;
+}
+
+.vpc-knowledge-empty p {
+	font-size: 16px;
+	color: #666;
+	margin-bottom: 16px;
+}
+
+.vpc-knowledge-empty__btn {
+	display: inline-block;
+	padding: 8px 20px;
+	background: var(--knowledge-blue, #1a77ba);
+	color: #fff;
+	border-radius: 999px;
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 14px;
+}
+
+/* 6. Sidebar Widgets */
+.vpc-knowledge-sidebar {
+	display: flex;
+	flex-direction: column;
+	gap: 28px;
+}
+
+.vpc-knowledge-widget {
+	background: #fff;
+	border: 1px solid #e5e5e5;
+	border-radius: 16px;
+	padding: 24px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+}
+
+.vpc-knowledge-widget--search {
+	padding: 16px;
+}
+
+.vpc-knowledge-sidebar-search {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: #f8f8f8;
+	border: 1px solid #e1e1e1;
+	border-radius: 12px;
+	padding: 8px 12px;
+}
+
+.vpc-knowledge-sidebar-search input {
+	flex: 1 1 auto;
+	border: 0;
+	background: transparent;
+	font-size: 14px;
+	outline: none;
+}
+
+.vpc-knowledge-sidebar-search button {
+	padding: 6px 14px;
+	background: var(--knowledge-blue, #1a77ba);
+	color: #fff;
+	border: 0;
+	border-radius: 8px;
+	font-size: 13px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.vpc-knowledge-widget__title {
+	margin: 0 0 16px;
+	font: 600 20px/28px var(--font-heading, "Fraunces", serif);
+	color: var(--knowledge-blue, #1a77ba);
+	padding-bottom: 12px;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.vpc-knowledge-sidebar-featured-list {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.vpc-knowledge-sidebar-post {
+	display: flex;
+	gap: 12px;
+	text-decoration: none;
+	color: inherit;
+	transition: opacity .2s;
+}
+
+.vpc-knowledge-sidebar-post:hover {
+	opacity: .85;
+}
+
+.vpc-knowledge-sidebar-post__thumb {
+	width: 72px;
+	height: 72px;
+	flex: 0 0 72px;
+	border-radius: 10px;
+	overflow: hidden;
+	background: #f0f0f0;
+}
+
+.vpc-knowledge-sidebar-post__thumb img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.vpc-knowledge-sidebar-post__info time {
+	display: block;
+	font-size: 12px;
+	color: #888;
+	margin-bottom: 4px;
+}
+
+.vpc-knowledge-sidebar-post__info h4 {
+	margin: 0;
+	font: 600 14px/20px var(--font-body, "Manrope", sans-serif);
+	color: var(--knowledge-ink, #292929);
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+/* Tags Cloud */
+.vpc-knowledge-tag-cloud {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.vpc-knowledge-tag {
+	display: inline-block;
+	padding: 6px 14px;
+	background: #f5f5f5;
+	border: 1px solid #e5e5e5;
+	border-radius: 999px;
+	font-size: 13px;
+	color: var(--knowledge-muted, #525252);
+	text-decoration: none;
+	transition: all .2s;
+}
+
+.vpc-knowledge-tag:hover {
+	background: var(--knowledge-pink-soft, #fde6e6);
+	border-color: var(--knowledge-pink, #f48283);
+	color: var(--knowledge-blue, #1a77ba);
+}
+
+/* Promo Banner */
+.vpc-knowledge-widget--banner {
+	padding: 0;
+	overflow: hidden;
+	border: 0;
+	background: linear-gradient(135deg, #1a77ba 0%, #155f95 100%);
+}
+
+.vpc-knowledge-banner-card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	padding: 24px;
+	color: #fff;
+	text-decoration: none;
+	min-height: 240px;
+}
+
+.vpc-knowledge-banner-badge {
+	display: inline-block;
+	align-self: flex-start;
+	padding: 4px 10px;
+	background: rgba(255, 255, 255, .2);
+	border-radius: 6px;
+	font-size: 12px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: .5px;
+	margin-bottom: 8px;
+}
+
+.vpc-knowledge-banner-sub {
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 24px;
+	margin: 0 0 20px;
+	max-width: 200px;
+}
+
+.vpc-knowledge-banner-btn {
+	display: inline-flex;
+	align-self: flex-start;
+	padding: 8px 16px;
+	background: #f48283;
+	color: #fff;
+	font-weight: 700;
+	font-size: 12px;
+	border-radius: 999px;
+	box-shadow: 0 2px 8px rgba(244, 130, 131, .4);
+}
+
+.vpc-knowledge-banner-mascot {
+	position: absolute;
+	bottom: 12px;
+	right: 12px;
+	width: 90px;
+	height: 90px;
+	object-fit: contain;
+}
+
+/* Hotline */
+.vpc-knowledge-widget--hotline {
+	padding: 0;
+	overflow: hidden;
+}
+
+.vpc-knowledge-hotline-image {
+	height: 160px;
+	overflow: hidden;
+}
+
+.vpc-knowledge-hotline-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.vpc-knowledge-hotline-body {
+	padding: 20px;
+	text-align: center;
+}
+
+.vpc-knowledge-hotline-label {
+	display: block;
+	font-size: 12px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	color: #888;
+	margin-bottom: 4px;
+}
+
+.vpc-knowledge-hotline-number {
+	display: block;
+	font: 700 24px/32px var(--font-heading, "Fraunces", serif);
+	color: var(--knowledge-blue, #1a77ba);
+	text-decoration: none;
+	margin-bottom: 8px;
+}
+
+.vpc-knowledge-hotline-body p {
+	font-size: 13px;
+	line-height: 20px;
+	color: var(--knowledge-muted, #525252);
+	margin: 0 0 16px;
+}
+
+.vpc-knowledge-hotline-btn {
+	display: inline-block;
+	width: 100%;
+	padding: 10px 20px;
+	background: var(--knowledge-blue, #1a77ba);
+	color: #fff;
+	border-radius: 999px;
+	font-weight: 600;
+	font-size: 14px;
+	text-decoration: none;
+	transition: opacity .2s;
+}
+
+.vpc-knowledge-hotline-btn:hover {
+	opacity: .9;
+}
+
+/* Responsive Tablet & Mobile */
+@media (max-width: 1023px) {
+	.vpc-knowledge-layout {
+		grid-template-columns: 1fr;
+	}
+
+	.vpc-knowledge-subcat-hero__inner {
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.vpc-knowledge-subcat-hero__copy h1 {
+		font-size: 32px;
+		line-height: 40px;
+	}
+
+	.vpc-knowledge-subcat-hero__desc {
+		font-size: 14px;
+	}
+
+	.vpc-knowledge-subcat-hero__visual {
+		flex: 0 0 220px;
+		height: 220px;
+	}
+
+	.vpc-knowledge-subcat-hero__circle {
+		width: 180px;
+		height: 180px;
+	}
+
+	.vpc-knowledge-subcat-hero__mascot {
+		width: 70px;
+		height: 70px;
+	}
+}
