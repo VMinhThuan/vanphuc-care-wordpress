@@ -25,7 +25,8 @@ function vanphuccare_register_menus() {
 add_action( 'after_setup_theme', 'vanphuccare_register_menus' );
 
 // Menus are managed standardly via Appearance -> Menus in WP-Admin.
-// Custom link override filters removed to allow Admin menu configuration without theme interference.
+// The Kiến thức item is normalized below so an old custom-menu URL cannot
+// prevent the primary navigation from opening the canonical hub page.
 
 /**
  * Returns whether the current page belongs to the Dịch vụ content group.
@@ -41,6 +42,74 @@ function vanphuccare_is_service_group_page() {
 		|| ( function_exists( 'vanphuccare_is_tam_be_page' ) && vanphuccare_is_tam_be_page() )
 		|| ( function_exists( 'vanphuccare_is_thong_tac_page' ) && vanphuccare_is_thong_tac_page() );
 }
+
+/**
+ * Returns whether the current request belongs to the Kiến thức hub.
+ *
+ * This is intentionally shared by the fallback menu and assigned WordPress
+ * menus so the active state stays consistent on the hub, category archives,
+ * tags, and the clean "Tất cả bài viết" route.
+ *
+ * @return bool
+ */
+function vanphuccare_is_knowledge_group_page() {
+	return is_page( 'kien-thuc' )
+		|| is_page_template( 'page-kien-thuc.php' )
+		|| is_category()
+		|| is_tag()
+		|| ! empty( get_query_var( 'vpc_is_all' ) );
+}
+
+/**
+ * Identifies the Kiến thức item even when the administrator has assigned a
+ * custom menu item with a stale URL.
+ *
+ * @param WP_Post $item Menu item.
+ * @return bool
+ */
+function vanphuccare_is_knowledge_menu_item( $item ) {
+	$menu_title = isset( $item->title ) ? trim( wp_strip_all_tags( $item->title ) ) : '';
+	$menu_url   = isset( $item->url ) ? (string) $item->url : '';
+
+	return 'Kiến thức' === $menu_title || false !== strpos( $menu_url, '/kien-thuc' );
+}
+
+/**
+ * Keeps assigned primary/mobile menu items wired to the canonical hub URL.
+ *
+ * @param array   $atts Link attributes.
+ * @param WP_Post $item Menu item.
+ * @param object  $args Menu args.
+ * @return array
+ */
+function vanphuccare_knowledge_menu_link_attributes( $atts, $item, $args ) {
+	$theme_location = isset( $args->theme_location ) ? (string) $args->theme_location : '';
+
+	if ( 0 === (int) ( $item->menu_item_parent ?? 0 )
+		&& in_array( $theme_location, array( 'primary', '' ), true )
+		&& vanphuccare_is_knowledge_menu_item( $item ) ) {
+		$atts['href'] = home_url( '/kien-thuc/' );
+	}
+
+	return $atts;
+}
+add_filter( 'nav_menu_link_attributes', 'vanphuccare_knowledge_menu_link_attributes', 10, 3 );
+
+/**
+ * Adds the active class to assigned Kiến thức menu items.
+ *
+ * @param array   $classes Menu classes.
+ * @param WP_Post $item Menu item.
+ * @return array
+ */
+function vanphuccare_knowledge_menu_class( $classes, $item ) {
+	if ( vanphuccare_is_knowledge_group_page() && vanphuccare_is_knowledge_menu_item( $item ) ) {
+		$classes[] = 'current-menu-item';
+	}
+
+	return array_unique( $classes );
+}
+add_filter( 'nav_menu_css_class', 'vanphuccare_knowledge_menu_class', 10, 2 );
 
 /**
  * Returns the service links shown in the Dịch vụ dropdown.
@@ -257,6 +326,7 @@ function vanphuccare_primary_menu_fallback() {
 	$is_o_cu     = vanphuccare_is_o_cu_page();
 	$is_bao_mau  = vanphuccare_is_bao_mau_page();
 	$is_service  = vanphuccare_is_service_group_page();
+	$is_knowledge = vanphuccare_is_knowledge_group_page();
 	$nav_active  = 'text-text-nav-active';
 	$nav_default = 'text-text-nav-default hover:text-text-nav-hover';
 
@@ -267,7 +337,7 @@ function vanphuccare_primary_menu_fallback() {
 	printf( '<li class="%s"><a href="%s" class="%s">%s</a></li>', $is_bao_mau ? 'current-menu-item' : '', esc_url( home_url( '/dich-vu/bao-mau-tai-nha/' ) ), $is_bao_mau ? $nav_active : $nav_default, esc_html__( 'Bảo mẫu', 'vanphuccare' ) );
 	vanphuccare_primary_service_fallback_item( $is_service, 'desktop' );
 	printf( '<li class="%s"><a href="%s" class="%s">%s</a></li>', $is_prenatal ? 'current-menu-item' : '', esc_url( home_url( '/dich-vu/lop-hoc-tien-san/' ) ), $is_prenatal ? $nav_active : $nav_default, esc_html__( 'Lớp học tiền sản', 'vanphuccare' ) );
-	printf( '<li><a href="%s" class="%s">%s</a></li>', esc_url( home_url( '/kien-thuc/' ) ), $nav_default, esc_html__( 'Kiến thức', 'vanphuccare' ) );
+	printf( '<li class="%s"><a href="%s" class="%s">%s</a></li>', $is_knowledge ? 'current-menu-item' : '', esc_url( home_url( '/kien-thuc/' ) ), $is_knowledge ? $nav_active : $nav_default, esc_html__( 'Kiến thức', 'vanphuccare' ) );
 	echo '</ul>';
 }
 
@@ -311,6 +381,7 @@ function vanphuccare_mobile_menu_fallback() {
 	$is_o_cu     = vanphuccare_is_o_cu_page();
 	$is_bao_mau  = vanphuccare_is_bao_mau_page();
 	$is_service  = vanphuccare_is_service_group_page();
+	$is_knowledge = vanphuccare_is_knowledge_group_page();
 	$chevron     = '<svg class="w-4 h-4 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>';
 
 	$items = array(
@@ -320,7 +391,7 @@ function vanphuccare_mobile_menu_fallback() {
 		array( 'url' => home_url( '/dich-vu/bao-mau-tai-nha/' ), 'title' => 'Bảo mẫu', 'active' => $is_bao_mau ),
 		array( 'url' => home_url( '/dich-vu/' ), 'title' => 'Dịch vụ', 'active' => $is_service ),
 		array( 'url' => home_url( '/dich-vu/lop-hoc-tien-san/' ), 'title' => 'Lớp học tiền sản', 'active' => $is_prenatal ),
-		array( 'url' => home_url( '/kien-thuc/' ), 'title' => 'Kiến thức', 'active' => false ),
+		array( 'url' => home_url( '/kien-thuc/' ), 'title' => 'Kiến thức', 'active' => $is_knowledge ),
 	);
 
 	echo '<ul class="vpc-mobile-nav">';

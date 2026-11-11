@@ -53,7 +53,7 @@ if ( empty( $popular_tags ) ) {
 
 	<!-- 2. Featured Posts Widget -->
 	<div class="vpc-knowledge-widget vpc-knowledge-widget--featured">
-		<h3 class="vpc-knowledge-widget__title"><?php esc_html_e( 'Bài viết nổi bật', 'vanphuccare' ); ?></h3>
+		<h3 class="vpc-knowledge-widget__title"><span class="vpc-knowledge-widget__title-desktop"><?php esc_html_e( 'Bài viết nổi bật', 'vanphuccare' ); ?></span><span class="vpc-knowledge-widget__title-mobile"><?php esc_html_e( 'Bài nổi bật', 'vanphuccare' ); ?></span></h3>
 		<div class="vpc-knowledge-sidebar-featured-list">
 			<?php if ( $sidebar_featured->have_posts() ) : ?>
 				<?php while ( $sidebar_featured->have_posts() ) : $sidebar_featured->the_post(); ?>
@@ -97,10 +97,7 @@ if ( empty( $popular_tags ) ) {
 	<!-- 4. Promo Banner Widget -->
 	<div class="vpc-knowledge-widget vpc-knowledge-widget--banner">
 		<a class="vpc-knowledge-banner-card" href="https://edu.vanphuccare.vn" target="_blank" rel="noopener noreferrer">
-			<div class="vpc-knowledge-banner-badge"><?php esc_html_e( 'Bé Ăn Ngon - Ngủ Xuyên Đêm', 'vanphuccare' ); ?></div>
-			<p class="vpc-knowledge-banner-sub"><?php esc_html_e( 'Phương pháp rèn EASY khoa học cho trẻ', 'vanphuccare' ); ?></p>
-			<span class="vpc-knowledge-banner-btn"><?php esc_html_e( 'TÌM HIỂU TẠI ĐÂY', 'vanphuccare' ); ?></span>
-			<img class="vpc-knowledge-banner-mascot" src="<?php echo $asset( 'hero-mascot.png' ); ?>" alt="" width="80" height="80" aria-hidden="true">
+			<img src="<?php echo $asset( 'mang-thai-banner.png' ); ?>" alt="<?php esc_attr_e( 'Bé ăn ngon - ngủ xuyên đêm', 'vanphuccare' ); ?>" width="365" height="411" loading="lazy">
 		</a>
 	</div>
 
@@ -108,12 +105,14 @@ if ( empty( $popular_tags ) ) {
 	<div class="vpc-knowledge-widget vpc-knowledge-widget--hotline">
 		<div class="vpc-knowledge-hotline-card">
 			<div class="vpc-knowledge-hotline-image">
-				<img src="<?php echo $asset( 'nurse-baby.jpeg' ); ?>" alt="<?php esc_attr_e( 'Tư vấn Vạn Phúc Care', 'vanphuccare' ); ?>" width="300" height="180" loading="lazy">
+				<img src="<?php echo $asset( 'mang-thai-hotline.png' ); ?>" alt="<?php esc_attr_e( 'Tư vấn Vạn Phúc Care', 'vanphuccare' ); ?>" width="341" height="200" loading="lazy">
 			</div>
 			<div class="vpc-knowledge-hotline-body">
-				<span class="vpc-knowledge-hotline-label"><?php esc_html_e( 'Hotline', 'vanphuccare' ); ?></span>
-				<a class="vpc-knowledge-hotline-number" href="tel:0376246673">037 624 6673</a>
-				<p><?php esc_html_e( 'Liên hệ ngay để được tư vấn trực tiếp cùng các cô điều dưỡng của Vạn Phúc Care ba mẹ nhé!', 'vanphuccare' ); ?></p>
+				<div class="vpc-knowledge-hotline-heading">
+					<img src="<?php echo $asset( 'mang-thai-hotline-icon.svg' ); ?>" alt="" width="24" height="24" aria-hidden="true">
+					<div><span class="vpc-knowledge-hotline-label"><?php esc_html_e( 'Hotline', 'vanphuccare' ); ?></span><a class="vpc-knowledge-hotline-number" href="tel:0376246673">037 624 6673</a></div>
+				</div>
+				<p><?php esc_html_e( 'Liên hệ ngay để được tư vấn trực tiếp cùng các cô Điều dưỡng của Vạn Phúc Care ba mẹ nhé!', 'vanphuccare' ); ?></p>
 				<a class="vpc-knowledge-hotline-btn" href="<?php echo esc_url( home_url( '/lien-he/' ) ); ?>"><?php esc_html_e( 'Đăng Ký Tư Vấn', 'vanphuccare' ); ?></a>
 			</div>
 		</div>

@@ -17,15 +17,9 @@ $current_cat  = get_queried_object();
 $current_id   = $current_cat instanceof WP_Term ? $current_cat->term_id : 0;
 $current_slug = $current_cat instanceof WP_Term ? $current_cat->slug : '';
 $current_name = single_cat_title( '', false );
-$current_desc = category_description();
-
-if ( empty( $current_desc ) ) {
-	$current_desc = sprintf(
-		/* translators: %s: category name */
-		__( 'Thông tin bổ ích và hướng dẫn chăm sóc %s an toàn, khoa học, được biên tập bởi đội ngũ điều dưỡng và chuyên gia Vạn Phúc Care.', 'vanphuccare' ),
-		mb_strtolower( $current_name )
-	);
-}
+$current_desc = $current_id ? category_description( $current_id ) : category_description();
+$current_desc_mobile = $current_desc;
+$is_all_knowledge_archive = 'kien-thuc' === $current_slug || ! empty( get_query_var( 'vpc_is_all' ) );
 
 $knowledge_uri = get_template_directory_uri() . '/assets/images/knowledge';
 $asset = static function ( $name ) use ( $knowledge_uri ) {
@@ -34,12 +28,12 @@ $asset = static function ( $name ) use ( $knowledge_uri ) {
 
 // Category pills definition.
 $categories_defs = array(
-	array( 'slug' => '', 'label' => __( 'Tất cả', 'vanphuccare' ), 'icon' => 'category-1.svg' ),
-	array( 'slug' => 'mang-thai', 'label' => __( 'Mang thai', 'vanphuccare' ), 'icon' => 'category-2.svg' ),
-	array( 'slug' => 'phuong-phap-easy', 'label' => __( 'Phương pháp EASY', 'vanphuccare' ), 'icon' => 'category-3.svg' ),
-	array( 'slug' => 'an-dam', 'label' => __( 'Ăn dặm', 'vanphuccare' ), 'icon' => 'category-4.svg' ),
-	array( 'slug' => 'hoi-chung-bieng-an', 'label' => __( 'Hội chứng biếng ăn', 'vanphuccare' ), 'icon' => 'category-5.svg' ),
-	array( 'slug' => 'cam-nang-cho-me', 'label' => __( 'Cẩm nang cho mẹ', 'vanphuccare' ), 'icon' => 'category-6.svg' ),
+	array( 'slug' => '', 'label' => __( 'Tất cả', 'vanphuccare' ), 'description' => __( 'Toàn bộ bài viết', 'vanphuccare' ), 'icon' => 'category-1.svg' ),
+	array( 'slug' => 'mang-thai', 'label' => __( 'Mang thai', 'vanphuccare' ), 'description' => __( 'Thai kỳ từng tuần', 'vanphuccare' ), 'icon' => 'category-2.svg' ),
+	array( 'slug' => 'phuong-phap-easy', 'label' => __( 'Phương pháp EASY', 'vanphuccare' ), 'description' => __( 'Nuôi con khoa học', 'vanphuccare' ), 'icon' => 'category-3.svg' ),
+	array( 'slug' => 'an-dam', 'label' => __( 'Ăn dặm', 'vanphuccare' ), 'description' => __( 'Thực đơn cho bé', 'vanphuccare' ), 'icon' => 'category-4.svg' ),
+	array( 'slug' => 'hoi-chung-bieng-an', 'label' => __( 'Hội chứng biếng ăn', 'vanphuccare' ), 'description' => __( 'Toàn bộ bài viết', 'vanphuccare' ), 'icon' => 'category-5.svg' ),
+	array( 'slug' => 'cam-nang-cho-me', 'label' => __( 'Cẩm nang cho mẹ', 'vanphuccare' ), 'description' => __( 'Kinh nghiệm cho mẹ', 'vanphuccare' ), 'icon' => 'category-6.svg' ),
 );
 
 $categories = array();
@@ -71,57 +65,63 @@ foreach ( $categories_defs as $cat_def ) {
 	}
 
 	$categories[] = array(
-		'slug'   => $cat_def['slug'],
-		'label'  => $cat_def['label'],
-		'icon'   => $cat_def['icon'],
-		'url'    => $url,
-		'active' => $active,
+		'slug'        => $cat_def['slug'],
+		'label'       => $cat_def['label'],
+		'description' => $cat_def['description'],
+		'icon'        => $cat_def['icon'],
+		'url'         => $url,
+		'active'      => $active,
 	);
 }
 
 $is_all_archive = ( 'kien-thuc' === $current_slug || ! empty( get_query_var( 'vpc_is_all' ) ) );
-$hero_title     = $is_all_archive ? __( 'Tất Cả Kiến Thức', 'vanphuccare' ) : $current_name;
+$display_name   = 'mang-thai' === $current_slug ? __( 'Mang Thai', 'vanphuccare' ) : $current_name;
+$hero_title     = $is_all_archive ? __( 'Tất Cả Kiến Thức', 'vanphuccare' ) : $display_name;
 $main_title     = $is_all_archive ? __( 'Tất cả bài viết', 'vanphuccare' ) : sprintf( __( 'Bài viết %s', 'vanphuccare' ), $current_name );
 ?>
 
 <div class="vpc-knowledge vpc-knowledge--subcategory">
-	<!-- 1. Breadcrumbs -->
-	<nav class="vpc-knowledge-breadcrumbs" aria-label="<?php esc_attr_e( 'Đường dẫn trang', 'vanphuccare' ); ?>">
-		<div class="vpc-knowledge-container">
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Trang chủ', 'vanphuccare' ); ?></a>
-			<span class="vpc-knowledge-breadcrumbs__sep">&gt;</span>
-			<a href="<?php echo esc_url( home_url( '/kien-thuc/' ) ); ?>"><?php esc_html_e( 'Kiến thức', 'vanphuccare' ); ?></a>
-			<span class="vpc-knowledge-breadcrumbs__sep">&gt;</span>
-			<span class="vpc-knowledge-breadcrumbs__current"><?php echo esc_html( $is_all_archive ? __( 'Tất cả bài viết', 'vanphuccare' ) : $current_name ); ?></span>
-		</div>
-	</nav>
-
-	<!-- 2. Sub-Category Hero -->
+	<!-- 1. Sub-Category Hero -->
 	<section class="vpc-knowledge-subcat-hero">
 		<div class="vpc-knowledge-container vpc-knowledge-subcat-hero__inner">
 			<div class="vpc-knowledge-subcat-hero__copy">
+				<nav class="vpc-knowledge-breadcrumbs" aria-label="<?php esc_attr_e( 'Đường dẫn trang', 'vanphuccare' ); ?>">
+					<div class="vpc-knowledge-breadcrumbs__desktop">
+						<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Trang chủ', 'vanphuccare' ); ?></a>
+						<span class="vpc-knowledge-breadcrumbs__sep" aria-hidden="true"><img src="<?php echo $asset( 'chevron-right.svg' ); ?>" alt="" width="16" height="16"></span>
+						<a href="<?php echo esc_url( home_url( '/kien-thuc/' ) ); ?>"><?php esc_html_e( 'Kiến thức', 'vanphuccare' ); ?></a>
+						<span class="vpc-knowledge-breadcrumbs__sep" aria-hidden="true"><img src="<?php echo $asset( 'chevron-right.svg' ); ?>" alt="" width="16" height="16"></span>
+						<span class="vpc-knowledge-breadcrumbs__current"><?php echo esc_html( $is_all_archive ? __( 'Tất cả bài viết', 'vanphuccare' ) : $display_name ); ?></span>
+					</div>
+					<a class="vpc-knowledge-breadcrumbs__mobile" href="<?php echo esc_url( home_url( '/kien-thuc/' ) ); ?>"><span aria-hidden="true">‹</span> <?php esc_html_e( 'Kiến thức', 'vanphuccare' ); ?></a>
+				</nav>
 				<h1><?php echo esc_html( $hero_title ); ?></h1>
-				<div class="vpc-knowledge-subcat-hero__desc">
+				<div class="vpc-knowledge-subcat-hero__desc vpc-knowledge-subcat-hero__desc--desktop">
 					<?php echo wp_kses_post( $current_desc ); ?>
+				</div>
+				<div class="vpc-knowledge-subcat-hero__desc vpc-knowledge-subcat-hero__desc--mobile">
+					<?php echo wp_kses_post( $current_desc_mobile ); ?>
 				</div>
 			</div>
 
 			<div class="vpc-knowledge-subcat-hero__visual" aria-hidden="true">
-				<div class="vpc-knowledge-subcat-hero__circle">
-					<img src="<?php echo $asset( 'ultrasound.png' ); ?>" alt="" width="260" height="260">
+				<img class="vpc-knowledge-subcat-hero__blob" src="<?php echo $asset( 'mang-thai-blob.svg' ); ?>" alt="" width="300" height="300">
+				<div class="vpc-knowledge-subcat-hero__photo">
+					<img src="<?php echo $asset( 'mang-thai-photo-2.png' ); ?>" alt="" width="230" height="301">
 				</div>
-				<div class="vpc-knowledge-subcat-hero__mascot-wrap">
-					<img class="vpc-knowledge-subcat-hero__mascot" src="<?php echo $asset( 'hero-mascot.png' ); ?>" alt="" width="120" height="120">
-					<span class="vpc-knowledge-subcat-hero__badge">
-						<img src="<?php echo $asset( 'star-light.svg' ); ?>" alt="" width="16" height="16">
-						<span><?php echo esc_html( $hero_title ); ?></span>
-					</span>
-				</div>
+				<img class="vpc-knowledge-subcat-hero__sticker" src="<?php echo $asset( 'mang-thai-sticker.svg' ); ?>" alt="" width="130" height="130">
+				<img class="vpc-knowledge-subcat-hero__mascot" src="<?php echo $asset( 'hero-mascot.png' ); ?>" alt="" width="114" height="114">
+				<span class="vpc-knowledge-subcat-hero__badge"><img src="<?php echo $asset( 'mang-thai-dot.svg' ); ?>" alt="" width="10" height="10"><span><?php esc_html_e( 'Thai kỳ khoẻ mạnh', 'vanphuccare' ); ?></span></span>
+				<img class="vpc-knowledge-subcat-hero__heart" src="<?php echo $asset( 'mang-thai-heart.svg' ); ?>" alt="" width="26" height="26">
+				<img class="vpc-knowledge-subcat-hero__heart-small" src="<?php echo $asset( 'mang-thai-heart-small.svg' ); ?>" alt="" width="16" height="16">
+				<img class="vpc-knowledge-subcat-hero__sparkle" src="<?php echo $asset( 'mang-thai-sparkle.svg' ); ?>" alt="" width="20" height="20">
+				<img class="vpc-knowledge-subcat-hero__dot-blue" src="<?php echo $asset( 'mang-thai-dot-blue.svg' ); ?>" alt="" width="8" height="8">
+				<img class="vpc-knowledge-subcat-hero__dot-pink" src="<?php echo $asset( 'mang-thai-dot-pink.svg' ); ?>" alt="" width="8" height="8">
 			</div>
 		</div>
 	</section>
 
-	<!-- 3. Category Pills Bar -->
+	<!-- 2. Category Cards -->
 	<section class="vpc-knowledge-subcat-pills-wrap">
 		<div class="vpc-knowledge-container">
 			<div class="vpc-knowledge-category-list" role="list">
@@ -129,6 +129,7 @@ $main_title     = $is_all_archive ? __( 'Tất cả bài viết', 'vanphuccare' 
 					<a class="vpc-knowledge-category<?php echo ! empty( $category['active'] ) ? ' is-active' : ''; ?>" href="<?php echo esc_url( $category['url'] ); ?>" role="listitem">
 						<span class="vpc-knowledge-category__icon"><img src="<?php echo $asset( $category['icon'] ); ?>" alt="" width="24" height="24" aria-hidden="true"></span>
 						<span><?php echo esc_html( $category['label'] ); ?></span>
+						<small><?php echo esc_html( $category['description'] ); ?></small>
 					</a>
 				<?php endforeach; ?>
 			</div>
@@ -184,13 +185,41 @@ $main_title     = $is_all_archive ? __( 'Tất cả bài viết', 'vanphuccare' 
 					<!-- WordPress Numeric Pagination matching Figma < 1 2 3 4 5 > -->
 					<div class="vpc-knowledge-pagination-wrap">
 						<?php
-						the_posts_pagination( array(
+						global $wp_query;
+						$current_page = max( 1, (int) get_query_var( 'paged' ) );
+						$total_pages  = max( 1, (int) $wp_query->max_num_pages );
+						$page_links   = paginate_links( array(
+							'base'      => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
+							'format'    => '?paged=%#%',
+							'current'   => $current_page,
+							'total'     => $total_pages,
 							'mid_size'  => 2,
-							'prev_text' => '<span aria-hidden="true">&lsaquo;</span><span class="screen-reader-text">' . __( 'Trang trước', 'vanphuccare' ) . '</span>',
-							'next_text' => '<span aria-hidden="true">&rsaquo;</span><span class="screen-reader-text">' . __( 'Trang sau', 'vanphuccare' ) . '</span>',
-							'type'      => 'list',
+							'end_size'  => 1,
+							'prev_next' => false,
+							'type'      => 'array',
 						) );
 						?>
+						<?php if ( $page_links ) : ?>
+							<nav class="pagination" aria-label="<?php esc_attr_e( 'Phân trang bài viết', 'vanphuccare' ); ?>">
+								<div class="nav-links">
+									<?php if ( $current_page > 1 ) : ?>
+										<a class="page-numbers prev" href="<?php echo esc_url( get_pagenum_link( $current_page - 1 ) ); ?>" aria-label="<?php esc_attr_e( 'Trang trước', 'vanphuccare' ); ?>"><img src="<?php echo $asset( 'chevron-prev.svg' ); ?>" alt="" width="24" height="24" aria-hidden="true"></a>
+									<?php else : ?>
+										<span class="page-numbers prev is-disabled" aria-disabled="true"><img src="<?php echo $asset( 'chevron-prev.svg' ); ?>" alt="" width="24" height="24" aria-hidden="true"><span class="screen-reader-text"><?php esc_html_e( 'Trang trước', 'vanphuccare' ); ?></span></span>
+									<?php endif; ?>
+
+									<?php foreach ( $page_links as $page_link ) : ?>
+										<?php echo wp_kses_post( $page_link ); ?>
+									<?php endforeach; ?>
+
+									<?php if ( $current_page < $total_pages ) : ?>
+										<a class="page-numbers next" href="<?php echo esc_url( get_pagenum_link( $current_page + 1 ) ); ?>" aria-label="<?php esc_attr_e( 'Trang sau', 'vanphuccare' ); ?>"><img src="<?php echo $asset( 'chevron-next.svg' ); ?>" alt="" width="24" height="24" aria-hidden="true"></a>
+									<?php else : ?>
+										<span class="page-numbers next is-disabled" aria-disabled="true"><img src="<?php echo $asset( 'chevron-next.svg' ); ?>" alt="" width="24" height="24" aria-hidden="true"><span class="screen-reader-text"><?php esc_html_e( 'Trang sau', 'vanphuccare' ); ?></span></span>
+									<?php endif; ?>
+								</div>
+							</nav>
+						<?php endif; ?>
 					</div>
 				<?php else : ?>
 					<div class="vpc-knowledge-empty">

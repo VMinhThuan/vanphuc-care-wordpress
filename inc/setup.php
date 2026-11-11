@@ -254,7 +254,28 @@ add_action( 'parse_request', 'vanphuccare_knowledge_parse_request' );
  * @return void
  */
 function vanphuccare_knowledge_pre_get_posts( $query ) {
-	if ( ! is_admin() && $query->is_main_query() && ! empty( $query->get( 'vpc_is_all' ) ) ) {
+	if ( is_admin() || ! $query->is_main_query() ) {
+		return;
+	}
+
+	$knowledge_category_slugs = array(
+		'kien-thuc',
+		'mang-thai',
+		'phuong-phap-easy',
+		'easy',
+		'an-dam',
+		'hoi-chung-bieng-an',
+		'tre-so-sinh-bieng-an-toan-tap',
+		'bieng-an',
+		'cam-nang-cho-me',
+		'cam-nang',
+	);
+
+	if ( $query->is_category() && in_array( (string) $query->get( 'category_name' ), $knowledge_category_slugs, true ) ) {
+		$query->set( 'posts_per_page', wp_is_mobile() ? 7 : 8 );
+	}
+
+	if ( ! empty( $query->get( 'vpc_is_all' ) ) ) {
 		$query->set( 'name', '' );
 		$query->set( 'category_name', 'kien-thuc' );
 		$query->is_single   = false;

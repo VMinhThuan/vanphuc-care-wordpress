@@ -123,8 +123,8 @@ if ( empty( $instagram_url ) ) {
 					TIN TỨC & SỰ KIỆN
 				</h3>
 				<ul class="space-y-2 text-sm md:text-base font-medium text-text-body-default">
-					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#kien-thuc-nuoi-con' ) ); ?>" class="hover:text-text-body-muted transition-colors">Mẹ và bé</a></li>
-					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#kien-thuc-nuoi-con' ) ); ?>" class="hover:text-text-body-muted transition-colors">Tin tức & sự kiện</a></li>
+					<li class="footer-news-mother-baby h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#kien-thuc-nuoi-con' ) ); ?>" class="hover:text-text-body-muted transition-colors">Mẹ và bé</a></li>
+					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#kien-thuc-nuoi-con' ) ); ?>" class="hover:text-text-body-muted transition-colors"><span class="footer-news-label-desktop">Tin tức & sự kiện</span><span class="footer-news-label-mobile">Tin mới & sự kiện nổi bật</span></a></li>
 				</ul>
 			</div>
 

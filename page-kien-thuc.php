@@ -200,9 +200,26 @@ $view_all_url = home_url( '/kien-thuc/tat-ca/' );
 			<form class="vpc-knowledge-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 				<img src="<?php echo $asset( 'search.svg' ); ?>" alt="" width="24" height="24" aria-hidden="true">
 				<label class="screen-reader-text" for="knowledge-search-input"><?php esc_html_e( 'Tìm bài viết', 'vanphuccare' ); ?></label>
-				<input id="knowledge-search-input" type="search" name="s" placeholder="<?php esc_attr_e( 'Tìm bài viết: ăn dặm, EASY, thai giáo...', 'vanphuccare' ); ?>">
-				<button type="submit"><?php esc_html_e( 'Tìm kiếm', 'vanphuccare' ); ?></button>
+				<input id="knowledge-search-input" type="search" name="s" placeholder="<?php esc_attr_e( 'Tìm bài viết: ăn dặm, EASY, thai giáo...', 'vanphuccare' ); ?>" data-mobile-placeholder="<?php esc_attr_e( 'Tìm bài viết...', 'vanphuccare' ); ?>">
+				<button type="submit">
+					<span class="vpc-knowledge-search-label-desktop"><?php esc_html_e( 'Tìm kiếm', 'vanphuccare' ); ?></span>
+					<span class="vpc-knowledge-search-label-mobile"><?php esc_html_e( 'Tìm', 'vanphuccare' ); ?></span>
+				</button>
 			</form>
+			<script>
+				(function () {
+					var input = document.getElementById('knowledge-search-input');
+					if (!input || !window.matchMedia) return;
+					var mobileQuery = window.matchMedia('(max-width: 767px)');
+					var syncPlaceholder = function () {
+						input.placeholder = mobileQuery.matches ? input.dataset.mobilePlaceholder : input.getAttribute('data-desktop-placeholder') || input.defaultValue;
+					};
+					input.setAttribute('data-desktop-placeholder', input.placeholder);
+					syncPlaceholder();
+					if (mobileQuery.addEventListener) mobileQuery.addEventListener('change', syncPlaceholder);
+					else if (mobileQuery.addListener) mobileQuery.addListener(syncPlaceholder);
+				})();
+			</script>
 		</div>
 
 		<div class="vpc-knowledge-hero__visual" aria-hidden="true">

@@ -6,7 +6,19 @@
  * below the mobile breakpoint.
  */
 
+.site-footer .footer-news-label-mobile {
+	display: none;
+}
+
 @media (max-width: 767px) {
+	.site-footer .footer-news-label-desktop {
+		display: none;
+	}
+
+	.site-footer .footer-news-label-mobile {
+		display: inline;
+	}
+
 	.site-footer {
 		background: var(--footer-background) !important;
 		padding-top: 32px !important;
@@ -62,14 +74,18 @@
 		margin-bottom: 12px;
 	}
 
+	.site-footer .footer-news-mother-baby {
+		display: none !important;
+	}
+
 	.site-footer .vpc-footer-company-name {
-		font-size: 24px;
-		font-weight: 700;
-		line-height: 32px;
+		font-size: 20px;
+		font-weight: 500;
+		line-height: 28px;
 	}
 
 	.site-footer .vpc-footer-about-company > .flex.flex-col > p {
-		font-weight: 700;
+		font-weight: 500;
 	}
 
 	.site-footer .vpc-footer-about-services,
@@ -101,7 +117,7 @@
 	}
 
 	.site-footer .vpc-footer-social {
-		order: 2;
+		order: 3;
 		width: 100%;
 		gap: 32px;
 		padding-top: 0 !important;
@@ -109,14 +125,31 @@
 		border-bottom: 1px solid var(--color-neutral-300);
 	}
 
-	.site-footer .vpc-footer-social > div:first-child a,
+	.site-footer .vpc-footer-social > div:first-child a {
+		width: 52px;
+		height: 44px;
+	}
+
+	.site-footer .vpc-footer-social > div:first-child {
+		gap: 12px;
+	}
+
 	.site-footer .vpc-footer-social > div:first-child a img {
-		width: 36px;
-		height: 36px;
+		width: 40px;
+		height: 40px;
+	}
+
+	.site-footer .vpc-footer-social > div:last-child {
+		gap: 24px;
+	}
+
+	.site-footer .vpc-footer-social .dmca-badge img {
+		width: 120px;
+		height: 55px;
 	}
 
 	.site-footer .vpc-footer-legal {
-		order: 3;
+		order: 2;
 		gap: 8px;
 		margin-top: 0;
 		padding-top: 0;
