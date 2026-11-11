@@ -1,0 +1,204 @@
+/*
+ * Shared Consultation Lead Form ("Sẵn Sàng Bắt Đầu Hành Trình Làm Mẹ Hạnh Phúc")
+ * Scoped to .vpc-bath__lead across service landing pages.
+ * Extracted for architectural optimization without changing any visual styling.
+ */
+
+:root,
+.vpc-bath__lead {
+	--bath-blue: #1a77ba;
+	--bath-blue-dark: #155f95;
+	--bath-pink: #f48283;
+	--bath-pink-soft: #fde6e6;
+	--bath-ink: #292929;
+	--bath-muted: #525252;
+	--bath-border: #cecece;
+	--bath-light-blue: #d1e4f1;
+	--bath-gray: #f8f8f8;
+}
+
+.vpc-bath__lead {
+	height: 797px;
+	padding: 96px 0;
+	background: linear-gradient(118deg, #f8f8f8 40%, #fde6e6 120%);
+	font-family: var(--font-body, "Manrope", sans-serif);
+	color: var(--bath-ink, #292929);
+	box-sizing: border-box;
+}
+
+.vpc-bath__lead *,
+.vpc-bath__lead *::before,
+.vpc-bath__lead *::after {
+	box-sizing: border-box;
+}
+
+.vpc-bath__lead .vpc-bath__container {
+	width: min(1280px, calc(100% - 40px));
+	margin-inline: auto;
+}
+
+.vpc-bath__lead .vpc-bath__section-heading {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 24px;
+	text-align: center;
+}
+
+.vpc-bath__lead .vpc-bath__section-heading h2,
+.vpc-bath__lead h2 {
+	margin: 0;
+	color: var(--bath-blue, #1a77ba);
+	font: 600 48px/64px var(--font-heading, "Fraunces", serif);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.vpc-bath__lead .vpc-bath__section-heading h2 span,
+.vpc-bath__lead h2 span {
+	color: var(--bath-blue, #1a77ba);
+}
+
+.vpc-bath__lead .vpc-bath__section-heading h2 em,
+.vpc-bath__lead h2 em {
+	display: inline;
+	color: var(--bath-pink, #f48283);
+	font-style: normal;
+}
+
+.vpc-bath__lead-title-break {
+	display: inline;
+}
+
+.vpc-bath__lead-card {
+	width: 658px;
+	min-height: 444px;
+	margin: 48px auto 0;
+	padding: 32px 24px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	border: 1px solid var(--bath-border, #cecece);
+	border-radius: 24px;
+	background: #fafafa;
+}
+
+.vpc-bath__lead-card label {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	font: 500 20px/28px var(--font-body, "Manrope", sans-serif);
+	color: var(--bath-ink, #292929);
+}
+
+.vpc-bath__lead-card label b {
+	margin-right: 4px;
+	color: red;
+}
+
+.vpc-bath__lead-row {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 12px;
+}
+
+.vpc-bath__lead-card input:not([type="hidden"]),
+.vpc-bath__lead-card select {
+	width: 100%;
+	min-height: 48px;
+	padding: 12px;
+	border: 1px solid var(--bath-border, #cecece);
+	border-radius: 12px;
+	color: var(--bath-muted, #525252);
+	background: #fafafa;
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.vpc-bath__lead-select {
+	width: 100%;
+}
+
+.vpc-bath__lead-select .vpc-select-trigger {
+	width: 100%;
+	min-height: 50px;
+}
+
+.vpc-bath__lead-card button,
+.vpc-bath__lead .vpc-bath__button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 48px;
+	padding: 12px 24px;
+	border: 0;
+	border-radius: 999px;
+	text-decoration: none;
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+	cursor: pointer;
+	color: #fff;
+	background: var(--bath-blue, #1a77ba);
+	transition: transform .2s ease, opacity .2s ease;
+}
+
+.vpc-bath__lead-card button:hover,
+.vpc-bath__lead .vpc-bath__button:hover {
+	transform: translateY(-1px);
+	opacity: .9;
+}
+
+/* Responsive tablet & mobile (Figma reference) */
+@media (max-width: 1279px) {
+	.vpc-bath__lead .vpc-bath__section-heading h2,
+	.vpc-bath__lead h2 {
+		font-size: 32px;
+		line-height: 36px;
+		text-align: center;
+	}
+
+	.vpc-bath__lead {
+		height: 766px;
+		padding: 40px 0;
+	}
+
+	.vpc-bath__lead-card {
+		width: 100%;
+		min-height: 554px;
+		margin-top: 24px;
+		padding: 24px;
+		border-radius: 16px;
+	}
+
+	.vpc-bath__lead-row {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 767px) {
+	.vpc-bath__lead-title-break {
+		display: block;
+		white-space: nowrap;
+	}
+
+	.vpc-bath__lead {
+		height: auto;
+		min-height: 766px;
+		background: linear-gradient(180deg, #fde6e6 0%, #f8f8f8 65.209%);
+	}
+
+	.vpc-bath__lead-card {
+		min-height: 554px;
+		padding: 24px 16px;
+		border-radius: 24px;
+	}
+
+	.vpc-bath__lead-card input:not([type="hidden"]),
+	.vpc-bath__lead-card select {
+		min-height: 50px;
+	}
+
+	.vpc-bath__lead-card button {
+		min-height: 40px;
+	}
+}
+

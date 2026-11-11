@@ -12,26 +12,74 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Resolves the cache-busting version for a theme asset.
  *
- * When WP_DEBUG is enabled (development), returns the file's modification timestamp
+ * In development (WP_DEBUG = true), returns the specific asset's file modification timestamp
  * so local edits reflect immediately without manual cache flushing.
- * In production/staging (WP_DEBUG disabled), returns the static theme release version,
- * avoiding expensive disk I/O stat() calls on high-concurrency requests.
+ *
+ * In production/staging (WP_DEBUG = false), automatically resolves a single release version
+ * across the entire theme (via Git commit hash or theme deployment timestamp) and caches it
+ * in memory for the lifecycle of the request.
+ *
+ * This ensures:
+ * 1. Zero manual work: Developer NEVER has to manually bump version numbers on deploy.
+ * 2. Instant cache-busting: Browsers & CDNs automatically fetch fresh assets on every deploy.
+ * 3. Zero I/O bottleneck: Only a single lightweight resolution per request, shared by all assets.
  *
  * @param string $full_path Absolute path to the asset file.
  * @return string Asset version.
  */
 function vanphuccare_get_asset_version( $full_path ) {
-	static $theme_version = null;
-
-	if ( null === $theme_version ) {
-		$theme_version = wp_get_theme()->get( 'Version' ) ?: '1.0.0';
-	}
-
+	// Development mode: hot reload per file.
 	if ( defined( 'WP_DEBUG' ) && WP_DEBUG && file_exists( $full_path ) ) {
 		return (string) filemtime( $full_path );
 	}
 
-	return $theme_version;
+	static $release_version = null;
+	if ( null !== $release_version ) {
+		return $release_version;
+	}
+
+	// 1. Explicit release constant (if defined in wp-config.php or CI/CD).
+	if ( defined( 'VANPHUCCARE_VERSION' ) && VANPHUCCARE_VERSION ) {
+		$release_version = (string) VANPHUCCARE_VERSION;
+		return $release_version;
+	}
+
+	// 2. Auto-detect Git Commit Hash (zero friction, auto-updates on every git commit/deploy).
+	$git_dir = get_template_directory() . '/.git';
+	if ( is_dir( $git_dir ) && is_readable( $git_dir . '/HEAD' ) ) {
+		$head = trim( (string) @file_get_contents( $git_dir . '/HEAD' ) );
+		if ( strpos( $head, 'ref: ' ) === 0 ) {
+			$ref_name = substr( $head, 5 );
+			$ref_file = $git_dir . '/' . $ref_name;
+			if ( is_readable( $ref_file ) ) {
+				$hash = substr( trim( (string) @file_get_contents( $ref_file ) ), 0, 7 );
+				if ( $hash ) {
+					$release_version = $hash;
+					return $release_version;
+				}
+			} elseif ( is_readable( $git_dir . '/packed-refs' ) ) {
+				$packed = (string) @file_get_contents( $git_dir . '/packed-refs' );
+				if ( preg_match( '/^([a-f0-9]{7})[a-f0-9]*\s+' . preg_quote( $ref_name, '/' ) . '/m', $packed, $matches ) ) {
+					$release_version = $matches[1];
+					return $release_version;
+				}
+			}
+		} elseif ( strlen( $head ) >= 7 ) {
+			$release_version = substr( $head, 0, 7 );
+			return $release_version;
+		}
+	}
+
+	// 3. Auto-detect theme deploy timestamp from style.css (single I/O read, cached in memory).
+	$style_path = get_template_directory() . '/style.css';
+	if ( file_exists( $style_path ) ) {
+		$release_version = (string) filemtime( $style_path );
+		return $release_version;
+	}
+
+	// 4. Safe fallback to theme header version.
+	$release_version = wp_get_theme()->get( 'Version' ) ?: '1.0.0';
+	return $release_version;
 }
 
 /**
@@ -90,6 +138,7 @@ function vanphuccare_enqueue_assets() {
 	$is_milk_page     = vanphuccare_is_thong_tac_page();
 	$is_prenatal_page = is_page_template( 'page-lop-hoc-tien-san.php' ) || is_page( 'lop-hoc-tien-san' ) || is_post_type_archive( 'vpc_prenatal_class' );
 	$is_services_page = is_page( 'dich-vu' ) || is_page_template( 'page-dich-vu.php' ) || is_post_type_archive( 'vpc_service' ) || is_singular( 'vpc_service' );
+	$is_knowledge_page = is_page( 'kien-thuc' ) || is_page_template( 'page-kien-thuc.php' ) || is_category( 'kien-thuc' );
 
 	// Enqueue Google Fonts: Fraunces (Heading) & Manrope (Body) - optimized weights, no italic.
 	wp_enqueue_style(
@@ -111,24 +160,38 @@ function vanphuccare_enqueue_assets() {
 		vanphuccare_enqueue_theme_style( 'vanphuccare-o-cu', 'assets/css/o-cu.css', array( 'vanphuccare-tailwind', 'vanphuccare-bao-mau-shared' ) );
 	}
 
-	if ( $is_bao_mau_page || $is_easy_page || $is_bath_page || $is_milk_page || $is_prenatal_page ) {
+	if ( $is_bao_mau_page ) {
 		vanphuccare_enqueue_theme_style( 'vanphuccare-bao-mau', 'assets/css/bao-mau.css', array( 'vanphuccare-tailwind' ) );
 	}
 
-	if ( $is_easy_page ) {
-		vanphuccare_enqueue_theme_style( 'vanphuccare-easy', 'assets/css/easy.css', array( 'vanphuccare-tailwind' ) );
+	// Shared carousel ("Các Dịch Vụ Khác") on service landing pages.
+	if ( $is_bath_page || $is_easy_page || $is_milk_page || $is_prenatal_page ) {
+		vanphuccare_enqueue_theme_style( 'vanphuccare-shared-services', 'assets/css/shared-services.css', array( 'vanphuccare-tailwind' ) );
 	}
 
+	// Shared lead consultation form on bath, easy, milk pages.
 	if ( $is_bath_page || $is_easy_page || $is_milk_page ) {
-		vanphuccare_enqueue_theme_style( 'vanphuccare-bath', 'assets/css/bath.css', array( 'vanphuccare-tailwind' ) );
+		vanphuccare_enqueue_theme_style( 'vanphuccare-shared-lead-form', 'assets/css/shared-lead-form.css', array( 'vanphuccare-tailwind' ) );
+	}
+
+	if ( $is_easy_page ) {
+		vanphuccare_enqueue_theme_style( 'vanphuccare-easy', 'assets/css/easy.css', array( 'vanphuccare-tailwind', 'vanphuccare-shared-services', 'vanphuccare-shared-lead-form' ) );
+	}
+
+	if ( $is_bath_page ) {
+		vanphuccare_enqueue_theme_style( 'vanphuccare-bath', 'assets/css/bath.css', array( 'vanphuccare-tailwind', 'vanphuccare-shared-services', 'vanphuccare-shared-lead-form' ) );
 	}
 
 	if ( $is_milk_page ) {
-		vanphuccare_enqueue_theme_style( 'vanphuccare-milk', 'assets/css/milk.css', array( 'vanphuccare-tailwind' ) );
+		vanphuccare_enqueue_theme_style( 'vanphuccare-milk', 'assets/css/milk.css', array( 'vanphuccare-tailwind', 'vanphuccare-shared-services', 'vanphuccare-shared-lead-form' ) );
 	}
 
 	if ( $is_services_page ) {
 		vanphuccare_enqueue_theme_style( 'vanphuccare-services', 'assets/css/services.css', array( 'vanphuccare-tailwind' ) );
+	}
+
+	if ( $is_knowledge_page ) {
+		vanphuccare_enqueue_theme_style( 'vanphuccare-knowledge', 'assets/css/knowledge.css', array( 'vanphuccare-tailwind' ) );
 	}
 
 	/* Shared footer overrides must load after page-specific styles. */
@@ -158,7 +221,7 @@ function vanphuccare_enqueue_assets() {
 		vanphuccare_enqueue_theme_script( 'vanphuccare-easy', 'assets/js/easy.js', array(), true );
 	}
 
-	if ( $is_bath_page || $is_easy_page || $is_milk_page ) {
+	if ( $is_bath_page ) {
 		vanphuccare_enqueue_theme_script( 'vanphuccare-bath', 'assets/js/bath.js', array(), true );
 	}
 

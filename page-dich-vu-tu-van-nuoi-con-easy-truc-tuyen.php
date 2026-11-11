@@ -14,17 +14,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 
-$asset_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/easy';
-
-$processes = array(
-	array( 'image' => 'process-1.png', 'title' => 'Tiếp nhận & đánh giá', 'copy' => 'Tư vấn viên lập bảng đánh giá tình trạng sức khỏe hiện tại của bé, nhập liệu lịch sử bệnh lý nếu có.' ),
-	array( 'image' => 'process-2.png', 'title' => 'Sổ sức khỏe điện tử', 'copy' => 'Bàn giao sổ sức khỏe điện tử, hướng dẫn cha mẹ sử dụng.' ),
-	array( 'image' => 'process-3.png', 'title' => 'Tư vấn 1:1', 'copy' => 'Hướng dẫn trực tuyến hoặc trực tiếp theo gói dịch vụ tư vấn nuôi con EASY cha mẹ đã lựa chọn.' ),
-	array( 'image' => 'process-4.png', 'title' => 'Cá nhân hóa lịch trình sinh hoạt của bé', 'copy' => 'Thiết lập và hướng dẫn cha mẹ thực hành lịch sinh hoạt phù hợp với đặc điểm riêng của con.' ),
-	array( 'image' => 'process-5.png', 'title' => 'Xử lý các vấn đề của trẻ theo tuần tuổi', 'copy' => 'Đồng hành và hỗ trợ mẹ, bám sát sự phát triển, thay đổi theo từng tuần tuổi của con.' ),
-	array( 'image' => 'process-6.png', 'title' => 'Đánh giá tổng kết', 'copy' => 'Đánh giá kết thúc dịch vụ tư vấn nuôi con EASY.' ),
-);
-
 $feedback = array(
 	array( 'image' => 'feedback-1.png', 'name' => 'Mẹ bé Kami', 'copy' => 'Mình thực sự thấy quyết định chọn ở cữ ở Vạn Phúc Care là sáng suốt nhất trong hành trình đi đẻ. Phòng hạng có view hồ Tây, rộng rãi, sang trọng và đầy đủ tiện nghi. Trọn vẹn 30 ngày ở cữ rất nhẹ nhàng, 2 mẹ con được chăm sóc sức khỏe chu đáo mỗi ngày và nhàn nhất là không bị áp lực đêm hôm chăm con. Bé Kami trộm vía về nhà vẫn ăn ngoan ngủ ngon. Cảm ơn Vạn Phúc Care và đội ngũ điều dưỡng đã mang đến cho gia đình trải nghiệm ở cữ tuyệt vời!' ),
 	array( 'image' => 'feedback-2.png', 'name' => 'Mẹ bé Mandu', 'copy' => 'Mình rất hài lòng với dịch vụ Bảo mẫu tại nhà của Vạn Phúc Care, đặc biệt cảm ơn cô Phương Anh rất nhiều. Cô chăm bé vô cùng cẩn thận và khéo léo. Bé nhà mình được cô rèn theo phương pháp EASY, trộm vía bé khỏe mạnh, ngủ ngoan hơn và có lịch trình sinh hoạt ổn định. Điều này giúp mình có nhiều thời gian chăm sóc bản thân và sắp xếp các công việc khác. Vạn Phúc Care đúng là người bạn đồng hành hỗ trợ tuyệt vời cho các chị em sau sinh!' ),
@@ -44,65 +33,28 @@ $other_services = array(
 	array( 'image' => 'service-5.jpg', 'title' => 'Tắm bé sơ sinh', 'href' => home_url( '/dich-vu/tam-tre-so-sinh/' ) ),
 	array( 'image' => 'service-6.jpg', 'title' => 'Thông tắc tia sữa', 'href' => home_url( '/dich-vu/thong-tac-tia-sua/' ) ),
 );
-
-$button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="tu-van-nuoi-con-easy"';
 ?>
 
 <div class="vpc-easy" data-figma-node="3126:42682">
-	<section class="vpc-easy__hero" aria-labelledby="easy-title">
-		<div class="vpc-easy__container vpc-easy__hero-grid">
-			<div class="vpc-easy__hero-copy">
-				<div class="vpc-easy__badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">DÀNH CHO BÉ TỪ 0-12 THÁNG</div>
-				<h1 id="easy-title">Tư Vấn Nuôi Con EASY</h1>
-				<p>Đồng hành cùng cha mẹ trên chặng đường nuôi con theo phương pháp EASY. Xây dựng lộ trình cá nhân hoá theo đặc điểm, nhu cầu riêng biệt của trẻ.</p>
-				<ul class="vpc-easy__hero-benefits">
-					<li><img src="<?php echo esc_url( $asset_uri . '/check-badge.svg' ); ?>" width="24" height="24" alt="">Giúp mẹ giải quyết những vấn đề khó nhằn trên chặng đường nuôi con</li>
-					<li><img src="<?php echo esc_url( $asset_uri . '/check-badge.svg' ); ?>" width="24" height="24" alt="">Giúp con hình thành nhịp sinh hoạt khoa học, mẹ có thêm thời gian cho bản thân</li>
-				</ul>
-				<div class="vpc-easy__actions"><a class="vpc-easy__button vpc-easy__button--primary" href="#easy-choices">Chọn hình thức</a><a class="vpc-easy__button vpc-easy__button--secondary" href="#easy-packages">Xem gói dịch vụ</a></div>
-				<div class="vpc-easy__hero-highlights">
-					<div><img src="<?php echo esc_url( $asset_uri . '/personalized.svg' ); ?>" width="24" height="24" alt=""><span>Cá nhân hóa theo từng bé</span></div>
-					<div><img src="<?php echo esc_url( $asset_uri . '/pediatric-nursing.svg' ); ?>" width="24" height="24" alt=""><span>Điều dưỡng sản nhi</span></div>
-					<div><img src="<?php echo esc_url( $asset_uri . '/service-signup.svg' ); ?>" width="24" height="24" alt=""><span>Theo dõi sát hành trình</span></div>
-				</div>
-			</div>
-			<div class="vpc-easy__hero-image"><img src="<?php echo esc_url( $asset_uri . '/hero.jpg' ); ?>" width="590" height="565" alt="Điều dưỡng hướng dẫn mẹ chăm sóc em bé" fetchpriority="high"></div>
-		</div>
-	</section>
-
-	<section class="vpc-easy__challenges" aria-labelledby="easy-challenges-title">
-		<div class="vpc-easy__container vpc-easy__split-grid">
-			<div class="vpc-easy__split-image"><img src="<?php echo esc_url( $asset_uri . '/challenges.png' ); ?>" width="581" height="532" alt="Mẹ chăm sóc em bé" loading="lazy"></div>
-			<div class="vpc-easy__split-copy"><div class="vpc-easy__badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">NỖI LO CỦA MẸ</div><h2 id="easy-challenges-title"><span>Những Điều Khó Khăn</span><em>Mẹ Thường Gặp</em></h2><p>Nuôi con theo phương pháp EASY đem lại nhiều lợi ích thiết thực cho cả bé cùng gia đình, tuy nhiên không tránh khỏi những khó khăn ban đầu khiến cha mẹ dễ nản lòng.</p><ul class="vpc-easy__icon-list vpc-easy__icon-list--negative"><li><img src="<?php echo esc_url( $asset_uri . '/x-circle.svg' ); ?>" width="24" height="24" alt="">Lịch sinh hoạt của con thiếu ổn định, ngủ ngày cày đêm.</li><li><img src="<?php echo esc_url( $asset_uri . '/x-circle.svg' ); ?>" width="24" height="24" alt="">Không quản lý được cữ ăn, cữ bú, cữ ngủ của con.</li><li><img src="<?php echo esc_url( $asset_uri . '/x-circle.svg' ); ?>" width="24" height="24" alt="">Bé gặp tình trạng khó vào giấc, không tự chuyển giấc, nối giấc được.</li><li><img src="<?php echo esc_url( $asset_uri . '/x-circle.svg' ); ?>" width="24" height="24" alt="">Không nhận biết được dấu hiệu đói no của trẻ.</li></ul></div>
-		</div>
-	</section>
-
-	<section id="easy-choices" class="vpc-easy__choices" aria-labelledby="easy-choices-title">
-		<div class="vpc-easy__container"><div class="vpc-easy__section-heading"><div class="vpc-easy__badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">HAI CÁCH ĐỒNG HÀNH</div><h2 id="easy-choices-title">Mẹ Lựa Chọn Gói Dịch Vụ Phù Hợp</h2><p>Đối với mỗi gói dịch vụ tư vấn nuôi con EASY, cha mẹ đều nhận được sự hỗ trợ sát sao nhất<br>Bảo chứng với kinh nghiệm hơn 5 năm huấn luyện và tổ chức các lớp học tiền sản, được nhiều cha mẹ tin yêu tại Trung tâm ở cữ Vạn Phúc Care.</p></div>
-			<div class="vpc-easy__choice-grid">
-				<article class="vpc-easy__choice-card"><img class="vpc-easy__choice-image" src="<?php echo esc_url( $asset_uri . '/online.jpg' ); ?>" width="568" height="366" alt="Tư vấn nuôi con EASY trực tuyến" loading="lazy"><div class="vpc-easy__choice-title"><span>Linh hoạt mọi nơi</span><b>01</b></div><h3>Tư vấn trực tuyến</h3><p>Chuyên viên quan sát và hướng dẫn cha mẹ qua ứng dụng GG Meeting, kết hợp ứng dụng sổ sức khoẻ điện tử, ticketbox.</p><img class="vpc-easy__line" src="<?php echo esc_url( $asset_uri . '/line.svg' ); ?>" width="568" height="1" alt=""><ul><li><img class="vpc-easy__choice-check" src="<?php echo esc_url( $asset_uri . '/check-badge.svg' ); ?>" width="24" height="24" alt="">Không giới hạn vị trí địa lý</li><li><img class="vpc-easy__choice-check" src="<?php echo esc_url( $asset_uri . '/check-badge.svg' ); ?>" width="24" height="24" alt="">Không cần di chuyển trong thời gian ở cữ</li><li><img class="vpc-easy__choice-check" src="<?php echo esc_url( $asset_uri . '/check-badge.svg' ); ?>" width="24" height="24" alt="">Video call, chatbox và tài liệu thực hành</li></ul><a href="#easy-packages">Xem gói trực tuyến <img src="<?php echo esc_url( $asset_uri . '/chevron-right.svg' ); ?>" width="9" height="15" alt=""></a></article>
-				<article class="vpc-easy__choice-card"><img class="vpc-easy__choice-image" src="<?php echo esc_url( $asset_uri . '/direct.jpg' ); ?>" width="568" height="366" alt="Tư vấn nuôi con EASY trực tiếp" loading="lazy"><div class="vpc-easy__choice-title"><span>Trực quan tại nhà</span><b>02</b></div><h3>Hướng dẫn trực tiếp</h3><p>Điều dưỡng sản nhi đến tận nhà, quan sát thói quen của bé và trực tiếp hướng dẫn cha mẹ thực hành</p><img class="vpc-easy__line" src="<?php echo esc_url( $asset_uri . '/line.svg' ); ?>" width="568" height="1" alt=""><ul><li><img class="vpc-easy__choice-check" src="<?php echo esc_url( $asset_uri . '/check-badge.svg' ); ?>" width="24" height="24" alt="">Đánh giá thực tế môi trường sinh hoạt</li><li><img class="vpc-easy__choice-check" src="<?php echo esc_url( $asset_uri . '/check-badge.svg' ); ?>" width="24" height="24" alt="">Điều chỉnh thao tác ngay tại chỗ</li><li><img class="vpc-easy__choice-check" src="<?php echo esc_url( $asset_uri . '/check-badge.svg' ); ?>" width="24" height="24" alt="">Linh hoạt theo lịch trình riêng của bé</li></ul><a href="#easy-packages">Xem gói tại nhà <img src="<?php echo esc_url( $asset_uri . '/chevron-right.svg' ); ?>" width="9" height="15" alt=""></a></article>
-			</div>
-		</div>
-	</section>
-
-	<section class="vpc-easy__health" aria-labelledby="easy-health-title"><div class="vpc-easy__container vpc-easy__split-grid"><div class="vpc-easy__split-image"><img src="<?php echo esc_url( $asset_uri . '/health-book.png' ); ?>" width="540" height="456" alt="Sổ sức khỏe điện tử" loading="lazy"></div><div class="vpc-easy__split-copy"><div class="vpc-easy__badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">SỔ SỨC KHỎE ĐIỆN TỬ</div><h2 id="easy-health-title"><span>Sổ Sức Khỏe Điện Tử - <span class="vpc-easy__mobile-title-break vpc-health-title-assistant">Trợ Lý</span></span><em>Giúp Mẹ Nuôi Con Easy</em></h2><p>Tích hợp ứng dụng theo dõi sức khoẻ của bé ngay trên điện thoại cha mẹ:</p><ul class="vpc-easy__icon-list"><li><img src="<?php echo esc_url( $asset_uri . '/check-badge.svg' ); ?>" width="24" height="24" alt="">Dễ dàng truy vấn lịch sử sức khỏe của con mọi lúc, mọi nơi</li><li><img src="<?php echo esc_url( $asset_uri . '/check-badge.svg' ); ?>" width="24" height="24" alt="">Lưu trữ mọi thông tin về sức khỏe của bé</li><li><img src="<?php echo esc_url( $asset_uri . '/check-badge.svg' ); ?>" width="24" height="24" alt="">Tạo ticket yêu cầu hỗ trợ ngay khi cha mẹ cần sự trợ giúp.</li><li><img src="<?php echo esc_url( $asset_uri . '/check-badge.svg' ); ?>" width="24" height="24" alt="">Liên kết khóa học trực tuyến, dễ tiếp nhận kiến thức nuôi con chuẩn xác.</li></ul></div></div></section>
-
-	<section class="vpc-easy__process" aria-labelledby="easy-process-title"><div class="vpc-easy__container"><div class="vpc-easy__section-heading"><div class="vpc-easy__badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">QUY TRÌNH</div><h2 id="easy-process-title"><span>Quy Trình Dịch Vụ</span><em>Tư Vấn Nuôi Con EASY</em></h2></div><div class="vpc-easy__process-grid"><?php foreach ( $processes as $index => $process ) : ?><article class="vpc-easy__process-card"><div class="vpc-easy__process-image"><img src="<?php echo esc_url( $asset_uri . '/' . $process['image'] ); ?>" width="189" height="189" alt="" loading="lazy"><span><?php echo esc_html( str_pad( (string) ( $index + 1 ), 2, '0', STR_PAD_LEFT ) ); ?></span></div><h3><?php echo esc_html( $process['title'] ); ?></h3><p><?php echo esc_html( $process['copy'] ); ?></p></article><?php endforeach; ?></div></div></section>
-
-	<section id="easy-packages" class="vpc-easy__packages" aria-labelledby="easy-packages-title"><div class="vpc-easy__container"><div class="vpc-easy__section-heading"><h2 id="easy-packages-title">Gói Dịch Vụ</h2><p>Giải pháp linh hoạt giúp cha mẹ loại bỏ những khúc mắc trong hành trình chăm sóc con nhỏ,<br>Để mỗi giờ bên con đều trở thành trải nghiệm tuyệt vời nhất!</p></div><div class="vpc-easy__package-grid">
-		<article class="vpc-easy__package-card"><div class="vpc-easy__package-heading"><h3>Tư vấn trực tuyến</h3><strong>500.000 VNĐ</strong></div><div class="vpc-easy__facts"><div><span>Thời lượng</span><b>30 phút/buổi</b></div><div><span>Hình thức</span><b>1:1 qua Google Meet</b></div><div><span>Theo dõi</span><b>07 ngày</b></div></div><h4>Quyền lợi</h4><ul><?php foreach ( array( 'Tiếp nhận & đánh giá tình trạng ban đầu của trẻ', 'Lộ trình lịch sinh hoạt mẫu thiết lập riêng theo đặc điểm của trẻ', 'Thiết lập sổ sức khỏe điện tử cho bé', 'Tài liệu & quà tặng' ) as $benefit ) : ?><li><img src="<?php echo esc_url( $asset_uri . '/check-badge.svg' ); ?>" width="24" height="24" alt=""><?php echo esc_html( $benefit ); ?></li><?php endforeach; ?></ul><button type="button" class="vpc-easy__package-button" <?php echo $button_attrs; ?>>Tư vấn gói này</button></article>
-		<article class="vpc-easy__package-card is-featured"><span class="vpc-easy__featured">★ Được lựa chọn nhiều</span><div class="vpc-easy__package-heading"><h3>Tư vấn trực tiếp</h3><strong>800.000 VNĐ</strong></div><div class="vpc-easy__facts"><div><span>Thời lượng</span><b>30 phút/buổi</b></div><div><span>Hình thức</span><b>Tại nhà khách hàng hoặc tại trung tâm ở cữ</b></div><div><span>Theo dõi</span><b>10 ngày</b></div></div><h4>Quyền lợi</h4><ul><?php foreach ( array( 'Quan sát và đánh giá thói quen sinh hoạt của bé trực tiếp', 'Lộ trình lịch sinh hoạt mẫu thiết lập riêng theo đặc điểm của trẻ', 'Thiết lập sổ sức khỏe điện tử cho bé', 'Tài liệu & quà tặng' ) as $benefit ) : ?><li><img src="<?php echo esc_url( $asset_uri . '/check-badge.svg' ); ?>" width="24" height="24" alt=""><?php echo esc_html( $benefit ); ?></li><?php endforeach; ?></ul><button type="button" class="vpc-easy__package-button" <?php echo $button_attrs; ?>>Tư vấn gói này</button></article>
-	</div></div></section>
-
-	<section class="vpc-easy__faq" aria-labelledby="easy-faq-title"><div class="vpc-easy__container"><div class="vpc-easy__section-heading"><div class="vpc-easy__badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">FAQ</div><h2 id="easy-faq-title">Câu Hỏi Thường Gặp</h2><p>Chặng đường nuôi con trong lần đầu làm mẹ không tránh khỏi những nỗi niềm băn khoăn, lo lắng riêng của mẹ.<br>Với kênh hỗ trợ hoạt động 24/7, chúng tôi luôn sẵn sàng đồng hành cùng gia đình mọi lúc.</p></div><div class="vpc-easy__faq-list"><details open><summary>Vì sao nhiều cha mẹ lựa chọn sử dụng dịch vụ của Vạn Phúc Care?<span class="vpc-easy__faq-chevron"><img class="is-down" src="<?php echo esc_url( $asset_uri . '/chevron-down.svg' ); ?>" width="20" height="12" alt=""><img class="is-up" src="<?php echo esc_url( $asset_uri . '/chevron-up.svg' ); ?>" width="20" height="12" alt=""></span></summary><p>– Vạn Phúc Care là đơn vị đầu tiên hệ thống hóa thông tin sức khỏe của trẻ qua Sổ sức khỏe điện tử và phổ cập phương pháp chăm sóc sức khỏe trẻ sơ sinh từ 0 – 12 tháng tuổi khoa học nhất.<br><br>– Đội ngũ điều dưỡng viên tận tâm, tay nghề cao, cam kết 100% được đào tạo có bằng cấp chính quy với các chuyên ngành: Điều dưỡng, hộ sinh, giáo viên mầm non,….<br><br>– Các dịch vụ đa dạng phù hợp với từng đặc điểm và nhu cầu của mọi gia đình với các gói ca ngày, ca đêm hoặc ca 24/24 giúp cha mẹ giảm bớt gánh nặng công việc chăm sóc con, có thể dành thời gian nghỉ ngơi hoặc tập trung vào công việc khác.<br><br>Vạn Phúc Care mang lại sự yên tâm và tiện lợi cho cha mẹ bất kể thời gian nào, vì sức khỏe, hạnh phúc của mẹ và bé yêu!</p></details><details><summary>Điều gì làm nên sự đặc biệt của Vạn Phúc Care so với các đơn vị khác cùng ngành?<span class="vpc-easy__faq-chevron"><img class="is-down" src="<?php echo esc_url( $asset_uri . '/chevron-down.svg' ); ?>" width="20" height="12" alt=""><img class="is-up" src="<?php echo esc_url( $asset_uri . '/chevron-up.svg' ); ?>" width="20" height="12" alt=""></span></summary><p>Đội ngũ điều dưỡng chuyên môn cao, quy trình chăm sóc chuẩn hóa và hệ thống hỗ trợ gia đình xuyên suốt hành trình nuôi con.</p></details><details><summary>Sổ sức khỏe điện tử của Vạn Phúc Care là gì?<span class="vpc-easy__faq-chevron"><img class="is-down" src="<?php echo esc_url( $asset_uri . '/chevron-down.svg' ); ?>" width="20" height="12" alt=""><img class="is-up" src="<?php echo esc_url( $asset_uri . '/chevron-up.svg' ); ?>" width="20" height="12" alt=""></span></summary><p>Là nơi lưu trữ và theo dõi các thông tin sức khỏe, lịch chăm sóc và hỗ trợ của bé một cách thuận tiện.</p></details><details><summary>Một ngày chăm bé của các bảo mẫu ở Vạn Phúc Care làm những công việc gì?<span class="vpc-easy__faq-chevron"><img class="is-down" src="<?php echo esc_url( $asset_uri . '/chevron-down.svg' ); ?>" width="20" height="12" alt=""><img class="is-up" src="<?php echo esc_url( $asset_uri . '/chevron-up.svg' ); ?>" width="20" height="12" alt=""></span></summary><p>Điều dưỡng vệ sinh, theo dõi sức khỏe, tắm massage, hỗ trợ cữ bú, giấc ngủ và các kỹ năng phát triển của bé.</p></details><details><summary>Buổi trải nghiệm bảo mẫu tại nhà có được miễn phí không?<span class="vpc-easy__faq-chevron"><img class="is-down" src="<?php echo esc_url( $asset_uri . '/chevron-down.svg' ); ?>" width="20" height="12" alt=""><img class="is-up" src="<?php echo esc_url( $asset_uri . '/chevron-up.svg' ); ?>" width="20" height="12" alt=""></span></summary><p>Vui lòng để lại thông tin để đội ngũ tư vấn gói phù hợp nhất với gia đình.</p></details></div></div></section>
+	<?php
+	get_template_part( 'template-parts/easy/hero' );
+	get_template_part( 'template-parts/easy/challenges' );
+	get_template_part( 'template-parts/easy/choices' );
+	get_template_part( 'template-parts/easy/health' );
+	get_template_part( 'template-parts/easy/process' );
+	get_template_part( 'template-parts/easy/packages' );
+	get_template_part( 'template-parts/easy/faq' );
+	?>
 
 	<div class="vpc-bath vpc-easy__shared-lower-sections">
-		<?php get_template_part( 'template-parts/sections/feedback', null, array( 'items' => $feedback, 'image_prefix' => 'easy' ) ); ?>
-
-		<section class="vpc-bath__lead" aria-labelledby="easy-lead-title"><div class="vpc-bath__container"><div class="vpc-bath__section-heading"><h2 id="easy-lead-title"><span>Sẵn Sàng Bắt Đầu</span><em>Hành Trình Làm Mẹ <span class="vpc-easy__lead-title-break vpc-lead-title-happiness">Hạnh Phúc</span></em></h2></div><div class="vpc-bath__lead-card"><div class="vpc-bath__lead-row"><label><span><b>*</b>Họ và tên</span><input type="text" placeholder="Nguyễn Như Linh" aria-label="Họ và tên"></label><label><span><b>*</b>Số điện thoại</span><input type="tel" placeholder="0345678***" aria-label="Số điện thoại"></label></div><?php get_template_part( 'template-parts/components/custom-select', null, array( 'id' => 'easy-lead-package', 'name' => 'service_package', 'label' => 'Gói dịch vụ quan tâm', 'placeholder' => 'Chọn gói dịch vụ', 'value' => 'tu-van-truc-tiep', 'options' => array( 'tu-van-truc-tiep' => 'Gói tư vấn trực tiếp', 'tu-van-truc-tuyen' => 'Gói tư vấn trực tuyến' ), 'class' => 'vpc-bath__lead-select' ) ); ?><label><span>Ghi chú</span><input type="text" placeholder="Cho chúng tôi biết thêm về nhu cầu của bạn!" aria-label="Ghi chú"></label><button type="button" class="vpc-bath__button vpc-bath__button--primary" <?php echo $button_attrs; ?>>Gửi yêu cầu tư vấn</button></div></div></section>
-
 		<?php
+		get_template_part( 'template-parts/sections/feedback', null, array(
+			'items'        => $feedback,
+			'image_prefix' => 'easy',
+		) );
+
+		get_template_part( 'template-parts/easy/consultation' );
+
 		get_template_part(
 			'template-parts/sections/other-services',
 			null,

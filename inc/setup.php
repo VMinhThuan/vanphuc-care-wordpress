@@ -102,13 +102,13 @@ function vanphuccare_customize_contact_settings( $wp_customize ) {
 add_action( 'customize_register', 'vanphuccare_customize_contact_settings' );
 
 /**
- * 301 Redirect for external courses route:
- * Redirects any direct requests for /khoa-hoc-truc-tuyen/ or /dich-vu/khoa-hoc-truc-tuyen/
- * to the dedicated e-learning platform https://edu.vanphuccare.vn.
+ * 301 Redirects for external and deprecated legacy routes:
+ * 1. Online courses: redirects direct requests for /khoa-hoc-truc-tuyen/ to https://edu.vanphuccare.vn.
+ * 2. Deprecated legacy services (from old database) redirected safely to relevant Figma active services.
  *
  * @return void
  */
-function vanphuccare_redirect_online_courses() {
+function vanphuccare_redirect_legacy_and_external_routes() {
 	if ( is_admin() || wp_doing_ajax() ) {
 		return;
 	}
@@ -116,11 +116,24 @@ function vanphuccare_redirect_online_courses() {
 	$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
 	$path        = trim( (string) wp_parse_url( $request_uri, PHP_URL_PATH ), '/' );
 
+	// 1. External Courses to E-learning platform.
 	if ( 'dich-vu/khoa-hoc-truc-tuyen' === $path || 'khoa-hoc-truc-tuyen' === $path || 'dich-vu/khoa-hoc' === $path ) {
 		wp_redirect( 'https://edu.vanphuccare.vn', 301 );
 		exit;
 	}
+
+	// 2. Deprecated "Chăm sóc mẹ sau sinh" -> redirect to Postnatal Care Center (Ở cữ).
+	if ( 'dich-vu/cham-soc-me-sau-sinh' === $path || 'cham-soc-me-sau-sinh' === $path ) {
+		wp_redirect( home_url( '/dich-vu/trung-tam-o-cu/' ), 301 );
+		exit;
+	}
+
+	// 3. Deprecated "Hướng dẫn nuôi con EASY tại nhà" -> redirect to canonical online EASY consultation.
+	if ( 'dich-vu/huong-dan-nuoi-con-easy-truc-tiep-tai-nha' === $path || 'huong-dan-nuoi-con-easy-truc-tiep-tai-nha' === $path ) {
+		wp_redirect( home_url( '/dich-vu/dich-vu-tu-van-nuoi-con-easy-truc-tuyen/' ), 301 );
+		exit;
+	}
 }
-add_action( 'template_redirect', 'vanphuccare_redirect_online_courses' );
+add_action( 'template_redirect', 'vanphuccare_redirect_legacy_and_external_routes' );
 
 

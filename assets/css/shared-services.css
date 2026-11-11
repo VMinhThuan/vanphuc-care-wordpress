@@ -1,0 +1,208 @@
+/*
+ * Shared Services Carousel ("Các Dịch Vụ Khác")
+ * Scoped to .vpc-bao-mau__services across all service landing pages.
+ * Extracted for architectural optimization without changing any visual styling.
+ */
+
+:root,
+.vpc-bao-mau__services {
+	--bm-blue: #1a77ba;
+	--bm-blue-dark: #155f95;
+	--bm-pink: #f48283;
+	--bm-pink-light: #fde6e6;
+	--bm-ink: #292929;
+	--bm-muted: #525252;
+	--bm-bg: #f8f8f8;
+	--bm-border: #cecece;
+	--bm-shell-width: 1560px;
+	--bm-shell-gutter: 80px;
+}
+
+.vpc-bao-mau__services {
+	min-height: 600px;
+	padding: 96px 0;
+	background: var(--bm-bg, var(--color-neutral-100, #f8f8f8));
+}
+
+.vpc-bao-mau__services .vpc-bao-mau__container {
+	width: 100%;
+	max-width: var(--bm-shell-width, 1560px);
+	margin-inline: auto;
+	padding-inline: var(--bm-shell-gutter, 80px);
+}
+
+.vpc-bao-mau__services .vpc-bao-mau__section-heading {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0;
+	text-align: center;
+}
+
+.vpc-bao-mau__services .vpc-bao-mau__section-heading h2 {
+	margin: 0;
+	font: 600 48px/64px var(--font-heading, "Fraunces", serif);
+	font-variation-settings: "SOFT" 0, "WONK" 1;
+}
+
+.vpc-bao-mau__services .vpc-bao-mau__section-heading h2 span {
+	color: var(--bm-blue, var(--color-primary-500, #1a77ba));
+	display: block;
+}
+
+.vpc-bao-mau__services .vpc-bao-mau__section-heading h2 em {
+	color: var(--bm-pink, #f48283);
+	font-style: normal;
+	display: block;
+}
+
+.vpc-bao-mau__services-carousel {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	margin-top: 24px;
+}
+
+.vpc-bao-mau__services-arrow {
+	width: 50px;
+	height: 50px;
+	flex: 0 0 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	border: 0;
+	border-radius: 50%;
+	background: #fff;
+	box-shadow: 0 1px 2px #0001;
+	cursor: pointer;
+}
+
+.vpc-bao-mau__services-arrow img {
+	width: 24px;
+	height: 24px;
+	object-fit: contain;
+}
+
+.vpc-bao-mau__services-arrow--next img {
+	transform: rotate(180deg);
+}
+
+.vpc-bao-mau__services-arrow:hover {
+	background: #f8f8f8;
+}
+
+.vpc-bao-mau__services-viewport {
+	flex: 1 1 auto;
+	min-width: 0;
+	overflow-x: auto;
+	scrollbar-width: none;
+	scroll-behavior: smooth;
+	scroll-snap-type: x proximity;
+	position: relative;
+}
+
+.vpc-bao-mau__services-viewport::-webkit-scrollbar {
+	display: none;
+}
+
+.vpc-bao-mau__services-track {
+	display: flex;
+	gap: 24px;
+	width: max-content;
+}
+
+.vpc-bao-mau__service-card {
+	width: 300px;
+	height: 320px;
+	flex: 0 0 300px;
+	border: 1px solid #e1e1e1;
+	border-radius: 12px;
+	overflow: hidden;
+	background: #fafafa;
+	text-decoration: none;
+	display: block;
+}
+
+.vpc-bao-mau__service-card img {
+	width: 300px;
+	height: 240px;
+	object-fit: cover;
+	object-position: center top;
+	display: block;
+}
+
+.vpc-bao-mau__service-card h3 {
+	margin: 0;
+	padding: 20px 12px;
+	text-align: center;
+	color: var(--bm-blue, var(--color-primary-500, #1a77ba));
+	font: 500 24px/32px var(--font-body, "Manrope", sans-serif);
+}
+
+/* Keep the shared desktop carousel at the approved 3.5-card composition */
+@media (min-width: 1280px) {
+	.vpc-bao-mau__services .vpc-bao-mau__service-card {
+		width: calc((min(1400px, calc(100vw - 160px)) - 168px) / 3.5);
+		flex-basis: calc((min(1400px, calc(100vw - 160px)) - 168px) / 3.5);
+		height: auto;
+	}
+
+	.vpc-bao-mau__services .vpc-bao-mau__service-card img {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 216 / 184;
+		max-width: none;
+	}
+}
+
+/* Responsive tablet & mobile (Figma reference) */
+@media (max-width: 1279px) {
+	.vpc-bao-mau__services .vpc-bao-mau__container {
+		width: 100%;
+		max-width: none;
+		padding-inline: 40px;
+	}
+
+	.vpc-bao-mau__services .vpc-bao-mau__section-heading h2 {
+		font-size: 32px;
+		line-height: 36px;
+	}
+
+	.vpc-bao-mau__services {
+		min-height: 0;
+		padding: 40px 0;
+	}
+
+	.vpc-bao-mau__services-carousel {
+		display: block;
+		margin-top: 24px;
+	}
+
+	.vpc-bao-mau__services-arrow {
+		display: none;
+	}
+
+	.vpc-bao-mau__services-viewport {
+		width: calc(100vw - 40px);
+		margin-inline: auto;
+		-webkit-overflow-scrolling: touch;
+		overscroll-behavior-x: contain;
+	}
+
+	.vpc-bao-mau__services-track {
+		gap: 24px;
+		padding-left: 0;
+	}
+
+	.vpc-bao-mau__service-card {
+		width: 306.4px;
+		flex-basis: 306.4px;
+		scroll-snap-align: start;
+	}
+
+	.vpc-bao-mau__service-card img {
+		width: 306.4px;
+	}
+}
+
