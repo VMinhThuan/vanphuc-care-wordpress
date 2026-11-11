@@ -29,7 +29,7 @@
 }
 .vpc-bao-mau__badge { min-height: 42px; padding: 8px 16px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--bm-pink); border-radius: 999px; background: var(--bm-pink-light); color: var(--bm-blue-dark); font: 500 16px/24px var(--font-body, "Manrope", sans-serif); white-space: nowrap; }
 .vpc-bao-mau__badge img { width: 24px; height: 24px; flex: 0 0 24px; }
-.vpc-bao-mau__hero, .vpc-bao-mau__stats, .vpc-bao-mau__process, .vpc-bao-mau__feedback, .vpc-bao-mau__services { background: var(--bm-bg, var(--color-neutral-100, #f8f8f8)); }
+.vpc-bao-mau__hero, .vpc-bao-mau__stats, .vpc-bao-mau__process, .vpc-bao-mau__feedback { background: var(--bm-bg, var(--color-neutral-100, #f8f8f8)); }
 .vpc-bao-mau__hero { height: 570px; padding: 96px 0; }
 .vpc-bao-mau__hero { background: linear-gradient(162.073685deg, #f8f8f8 25.572%, #fde6e6 102.47%); }
 .vpc-bao-mau__hero-grid { height: 100%; display: grid; grid-template-columns: 520px 650px; align-items: start; justify-content: space-between; }
@@ -157,36 +157,6 @@
 .vpc-bao-mau__lead-card > .vpc-bao-mau__button { width: 100%; }
 .vpc-bao-mau > #dang-ky-tu-van { background: linear-gradient(118deg, #f8f8f8 40%, #fde6e6 120%); }
 
-.vpc-bao-mau__services { min-height: 600px; padding: 96px 0; background: var(--bm-bg, var(--color-neutral-100, #f8f8f8)); }
-.vpc-bao-mau__services .vpc-bao-mau__section-heading { gap: 0; }
-.vpc-bao-mau__services-carousel { display: flex; align-items: center; gap: 16px; margin-top: 24px; }
-.vpc-bao-mau__services-arrow { width: 50px; height: 50px; flex: 0 0 50px; display: flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px #0001; cursor: pointer; }
-.vpc-bao-mau__services-arrow img { width: 24px; height: 24px; object-fit: contain; }
-.vpc-bao-mau__services-arrow--next img { transform: rotate(180deg); }
-.vpc-bao-mau__services-arrow:hover { background: #f8f8f8; }
-.vpc-bao-mau__services-viewport { flex: 1 1 auto; min-width: 0; overflow-x: auto; scrollbar-width: none; scroll-behavior: smooth; scroll-snap-type: x proximity; }
-.vpc-bao-mau__services-viewport::-webkit-scrollbar { display: none; }
-.vpc-bao-mau__services-viewport { position: relative; }
-.vpc-bao-mau__services-track { display: flex; gap: 24px; width: max-content; }
-.vpc-bao-mau__service-card { width: 300px; height: 320px; flex: 0 0 300px; border: 1px solid #e1e1e1; border-radius: 12px; overflow: hidden; background: #fafafa; text-decoration: none; }
-.vpc-bao-mau__service-card img { width: 300px; height: 240px; object-fit: cover; object-position: center top; display: block; }
-.vpc-bao-mau__service-card h3 { padding: 20px 12px; text-align: center; color: var(--bm-blue, var(--color-primary-500, #1a77ba)); font: 500 24px/32px var(--font-body, "Manrope", sans-serif); }
-
-/* Keep the shared desktop carousel at the approved 3.5-card composition. */
-@media (min-width: 1280px) {
-	.vpc-bao-mau__services .vpc-bao-mau__service-card {
-		width: calc((min(1400px, calc(100vw - 160px)) - 168px) / 3.5);
-		flex-basis: calc((min(1400px, calc(100vw - 160px)) - 168px) / 3.5);
-		height: auto;
-	}
-
-	.vpc-bao-mau__services .vpc-bao-mau__service-card img {
-		width: 100%;
-		height: auto;
-		aspect-ratio: 216 / 184;
-		max-width: none;
-	}
-}
 
 @media (max-width: 1279px) {
 	.vpc-bao-mau__container { width: 100%; max-width: none; padding-inline: 40px; }
@@ -216,7 +186,7 @@
 	.vpc-bao-mau__intro-copy { align-items: center; text-align: center; }
 	.vpc-bao-mau__intro-copy h2 { width: 100%; }
 	.vpc-bao-mau__check-list { width: 100%; gap: 16px; text-align: left; }
-	.vpc-bao-mau__process, .vpc-bao-mau__packages, .vpc-bao-mau__team, .vpc-bao-mau__faq, .vpc-bao-mau__feedback, .vpc-bao-mau__lead, .vpc-bao-mau__services { min-height: 0; padding: 48px 0; }
+	.vpc-bao-mau__process, .vpc-bao-mau__packages, .vpc-bao-mau__team, .vpc-bao-mau__faq, .vpc-bao-mau__feedback, .vpc-bao-mau__lead { min-height: 0; padding: 48px 0; }
 	.vpc-bao-mau__process { padding-top: 40px; padding-bottom: 40px; }
 	.vpc-bao-mau__badge { min-height: 34px; padding: 5px 12px; gap: 6px; font-size: 14px; line-height: 22px; }
 	.vpc-bao-mau__badge img { width: 20px; height: 20px; flex-basis: 20px; }
@@ -249,13 +219,6 @@
 	.vpc-bao-mau__lead { padding-top: 40px; padding-bottom: 40px; }
 	.vpc-bao-mau__lead-card { width: 100%; min-height: 554px; margin-top: 24px; padding: 24px; border-radius: 16px; }
 	.vpc-bao-mau__lead-row { grid-template-columns: 1fr; }
-	.vpc-bao-mau__services { padding-top: 40px; padding-bottom: 40px; }
-	.vpc-bao-mau__services-carousel { display: block; margin-top: 24px; }
-	.vpc-bao-mau__services-arrow { display: none; }
-	.vpc-bao-mau__services-viewport { width: calc(100vw - 40px); margin-inline: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
-	.vpc-bao-mau__services-track { gap: 24px; padding-left: 0; }
-	.vpc-bao-mau__service-card { width: 306.4px; flex-basis: 306.4px; scroll-snap-align: start; }
-	.vpc-bao-mau__service-card img { width: 306.4px; }
 }
 
 @media (min-width: 1280px) and (max-width: 1439px) {
