@@ -17,13 +17,18 @@
 
 .vpc-knowledge-hero {
 	position: relative;
+	min-height: 504px;
+	padding: 40px 0 96px;
+	overflow: hidden;
+	background: linear-gradient(180deg, #f8f8f8 0%, #fde6e6 125.06%);
+}
+
+.vpc-knowledge-hero__inner {
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	min-height: 504px;
-	padding: 40px 80px 96px;
-	overflow: hidden;
-	background: linear-gradient(180deg, #f8f8f8 0%, #fde6e6 125.06%);
+	gap: 40px;
 }
 
 .vpc-knowledge-hero__copy {
@@ -287,15 +292,38 @@
 	white-space: nowrap;
 }
 
+.vpc-knowledge-featured-card h3,
 .vpc-knowledge-card h3 {
+	display: -webkit-box;
 	width: 100%;
 	margin: 0;
+	overflow: hidden;
 	font: 500 24px/32px var(--font-body, "Manrope", sans-serif);
+	text-overflow: ellipsis;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
 }
 
+.vpc-knowledge-featured-card h3 a,
 .vpc-knowledge-card h3 a {
 	color: inherit;
 	text-decoration: none;
+}
+
+.vpc-knowledge-card:not(.vpc-knowledge-card--horizontal) h3 {
+	min-height: 64px;
+}
+
+/* Hero card description: allow up to 5 lines so rich text gracefully fills the 350px tall card */
+.vpc-knowledge-featured-card p {
+	display: -webkit-box;
+	width: 100%;
+	margin: 0;
+	overflow: hidden;
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+	text-overflow: ellipsis;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 5;
 }
 
 .vpc-knowledge-card p {
@@ -304,6 +332,7 @@
 	margin: 0;
 	overflow: hidden;
 	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+	text-overflow: ellipsis;
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 3;
 }
@@ -487,6 +516,16 @@
 	padding-top: 0;
 }
 
+.vpc-knowledge-card--horizontal h3 {
+	font: 500 20px/28px var(--font-body, "Manrope", sans-serif);
+	-webkit-line-clamp: 3;
+}
+
+.vpc-knowledge-card--horizontal p {
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+	-webkit-line-clamp: 2;
+}
+
 .vpc-knowledge-card--horizontal .vpc-knowledge-card__footer {
 	margin-top: auto;
 }
@@ -519,7 +558,10 @@
 @media (max-width: 1279px) {
 	.vpc-knowledge-hero {
 		min-height: 0;
-		padding: 40px 20px 64px;
+		padding: 40px 0 64px;
+	}
+
+	.vpc-knowledge-hero__inner {
 		flex-direction: column;
 		align-items: stretch;
 		gap: 48px;
@@ -572,6 +614,11 @@
 		min-height: 485px;
 		height: 485px;
 		padding: 40px 20px;
+		padding-inline: 0;
+	}
+
+	.vpc-knowledge-hero__inner {
+		height: 100%;
 		gap: 24px;
 		align-items: center;
 		justify-content: flex-start;
@@ -693,6 +740,10 @@
 		padding: 12px;
 	}
 
+	.vpc-knowledge-featured-card p {
+		-webkit-line-clamp: 3;
+	}
+
 	.vpc-knowledge-featured-card__image {
 		height: 219.425px;
 	}
@@ -705,6 +756,10 @@
 
 	.vpc-knowledge-card:not(.vpc-knowledge-card--horizontal) {
 		min-height: 0;
+	}
+
+	.vpc-knowledge-card:not(.vpc-knowledge-card--horizontal) h3 {
+		min-height: auto;
 	}
 
 	.vpc-knowledge-card:not(.vpc-knowledge-card--horizontal) .vpc-knowledge-card__image {
@@ -804,14 +859,15 @@
 	}
 
 	.vpc-knowledge-card--horizontal h3 {
-		font-size: 24px;
-		line-height: 32px;
+		font-size: 20px;
+		line-height: 28px;
+		-webkit-line-clamp: 3;
 	}
 
 	.vpc-knowledge-card--horizontal p {
 		font-size: 16px;
 		line-height: 24px;
-		-webkit-line-clamp: 3;
+		-webkit-line-clamp: 2;
 	}
 
 	.vpc-knowledge-card__category {

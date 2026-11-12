@@ -316,3 +316,10 @@
 		max-width: none !important;
 	}
 }
+
+/* The knowledge sidebar's tag cloud is desktop-only. */
+@media (max-width: 767px) {
+	.vpc-knowledge-widget--tags {
+		display: none !important;
+	}
+}

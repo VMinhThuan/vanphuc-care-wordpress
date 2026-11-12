@@ -288,15 +288,15 @@ function vpc_category_featured_fields( $term ) {
 			'desc'  => __( 'Hiển thị thẻ bài viết lớn nhất ở hàng trên cùng của mục Bài viết nổi bật.', 'vanphuccare' ),
 		),
 		2 => array(
-			'label' => __( 'Vị trí 2 (Card nhỏ thứ nhất)', 'vanphuccare' ),
+			'label' => __( 'Vị trí 2', 'vanphuccare' ),
 			'desc'  => __( 'Thẻ nhỏ bên trái ở hàng 3 bài bên dưới.', 'vanphuccare' ),
 		),
 		3 => array(
-			'label' => __( 'Vị trí 3 (Card nhỏ thứ hai)', 'vanphuccare' ),
+			'label' => __( 'Vị trí 3', 'vanphuccare' ),
 			'desc'  => __( 'Thẻ nhỏ ở giữa ở hàng 3 bài bên dưới.', 'vanphuccare' ),
 		),
 		4 => array(
-			'label' => __( 'Vị trí 4 (Card nhỏ thứ ba)', 'vanphuccare' ),
+			'label' => __( 'Vị trí 4', 'vanphuccare' ),
 			'desc'  => __( 'Thẻ nhỏ bên phải ở hàng 3 bài bên dưới.', 'vanphuccare' ),
 		),
 	);
@@ -318,6 +318,7 @@ function vpc_category_featured_fields( $term ) {
 	<?php
 	foreach ( $slots as $slot_num => $slot_info ) :
 		$field_name  = 'vpc_featured_slot_' . $slot_num;
+		$custom_name = 'vpc_featured_custom_id_' . $slot_num;
 		$selected_id = isset( $saved_slots[ $slot_num ] ) ? absint( $saved_slots[ $slot_num ] ) : 0;
 
 		// Ensure currently selected post is in the dropdown even if older than 100 posts.
@@ -336,15 +337,21 @@ function vpc_category_featured_fields( $term ) {
 				</label>
 			</th>
 			<td>
-				<select id="<?php echo esc_attr( $field_name ); ?>" name="<?php echo esc_attr( $field_name ); ?>" style="max-width: 520px; width: 100%;">
-					<option value="0"><?php esc_html_e( '-- Tự động lấy bài mới nhất --', 'vanphuccare' ); ?></option>
-					<?php foreach ( $options_posts as $p ) : ?>
-						<option value="<?php echo esc_attr( $p->ID ); ?>" <?php selected( $selected_id, $p->ID ); ?>>
-							[#<?php echo esc_html( $p->ID ); ?>] <?php echo esc_html( wp_trim_words( $p->post_title, 14, '...' ) ); ?> (<?php echo esc_html( get_the_date( 'd/m/Y', $p ) ); ?>)
-						</option>
-					<?php endforeach; ?>
-				</select>
-				<p class="description"><?php echo esc_html( $slot_info['desc'] ); ?></p>
+				<div style="display: flex; gap: 10px; align-items: center; max-width: 680px; flex-wrap: wrap;">
+					<select id="<?php echo esc_attr( $field_name ); ?>" name="<?php echo esc_attr( $field_name ); ?>" style="flex: 1 1 360px; min-width: 280px;" onchange="var inp = document.getElementById('<?php echo esc_attr( $custom_name ); ?>'); if (inp) { inp.value = this.value > 0 ? this.value : ''; }">
+						<option value="0"><?php esc_html_e( '-- Tự động lấy bài mới nhất --', 'vanphuccare' ); ?></option>
+						<?php foreach ( $options_posts as $p ) : ?>
+							<option value="<?php echo esc_attr( $p->ID ); ?>" <?php selected( $selected_id, $p->ID ); ?>>
+								[#<?php echo esc_html( $p->ID ); ?>] <?php echo esc_html( wp_trim_words( $p->post_title, 14, '...' ) ); ?> (<?php echo esc_html( get_the_date( 'd/m/Y', $p ) ); ?>)
+							</option>
+						<?php endforeach; ?>
+					</select>
+					<div style="display: flex; align-items: center; gap: 4px;">
+						<span style="color: #666; font-size: 12px;"><?php esc_html_e( 'Hoặc ID:', 'vanphuccare' ); ?></span>
+						<input type="number" id="<?php echo esc_attr( $custom_name ); ?>" name="<?php echo esc_attr( $custom_name ); ?>" value="<?php echo $selected_id > 0 ? esc_attr( $selected_id ) : ''; ?>" placeholder="<?php esc_attr_e( 'Post ID', 'vanphuccare' ); ?>" style="width: 100px;" min="1" oninput="var sel = document.getElementById('<?php echo esc_attr( $field_name ); ?>'); if (sel) { sel.value = this.value; }">
+					</div>
+				</div>
+				<p class="description" style="margin-top: 4px;"><?php echo esc_html( $slot_info['desc'] ); ?></p>
 			</td>
 		</tr>
 	<?php endforeach; ?>
@@ -353,7 +360,12 @@ function vpc_category_featured_fields( $term ) {
 add_action( 'category_edit_form_fields', 'vpc_category_featured_fields', 10, 1 );
 
 /**
- * Saves custom term meta fields for the 'kien-thuc' category.
+ * Saves and validates custom term meta fields for the 'kien-thuc' category.
+ *
+ * Enforces server-side validation:
+ * 1. Post must exist and be in 'publish' status.
+ * 2. Post must belong to category 'kien-thuc' or any of its descendant subcategories.
+ * 3. Prevents duplicate posts across slots.
  *
  * @param int $term_id Current term ID.
  * @return void
@@ -373,10 +385,38 @@ function vpc_save_category_featured_fields( $term_id ) {
 	}
 
 	$featured_ids = array();
+	$used_ids     = array();
+
 	for ( $i = 1; $i <= 4; $i++ ) {
-		$key = 'vpc_featured_slot_' . $i;
-		$val = isset( $_POST[ $key ] ) ? absint( $_POST[ $key ] ) : 0;
-		$featured_ids[ $i ] = $val;
+		$select_key = 'vpc_featured_slot_' . $i;
+		$custom_key = 'vpc_featured_custom_id_' . $i;
+
+		$val = 0;
+		// Prioritize custom ID input if explicitly provided, otherwise use select value.
+		if ( isset( $_POST[ $custom_key ] ) && '' !== trim( (string) $_POST[ $custom_key ] ) ) {
+			$val = absint( $_POST[ $custom_key ] );
+		} elseif ( isset( $_POST[ $select_key ] ) ) {
+			$val = absint( $_POST[ $select_key ] );
+		}
+
+		// Server-side validation: must be an existing, published Knowledge post and not duplicate.
+		if ( $val > 0 ) {
+			$post_obj = get_post( $val );
+			$is_valid = ( $post_obj instanceof WP_Post )
+				&& 'publish' === $post_obj->post_status
+				&& ( function_exists( 'vanphuccare_is_knowledge_post' ) ? vanphuccare_is_knowledge_post( $post_obj ) : false )
+				&& ! in_array( $val, $used_ids, true );
+
+			if ( $is_valid ) {
+				$featured_ids[ $i ] = $val;
+				$used_ids[]         = $val;
+			} else {
+				// Reset invalid or duplicate slot to 0 (auto-fallback).
+				$featured_ids[ $i ] = 0;
+			}
+		} else {
+			$featured_ids[ $i ] = 0;
+		}
 	}
 
 	update_term_meta( $term_id, 'vpc_featured_post_ids', $featured_ids );

@@ -11,11 +11,23 @@ get_header();
 	<header class="page-header mb-8">
 		<h1 class="page-title text-3xl md:text-4xl font-bold font-heading text-neutral-900 mb-3">
 			<?php
-			printf(
-				/* translators: %s: search query. */
-				esc_html__( 'Search results for: %s', 'vanphuccare' ),
-				esc_html( get_search_query() )
-			);
+			$search_cat_id       = (int) get_query_var( 'cat' );
+			$kt_cat              = get_category_by_slug( 'kien-thuc' );
+			$is_knowledge_search = ( $kt_cat instanceof WP_Term && $search_cat_id === (int) $kt_cat->term_id );
+
+			if ( $is_knowledge_search ) {
+				printf(
+					/* translators: %s: search query. */
+					esc_html__( 'Kết quả tìm kiếm kiến thức cho: "%s"', 'vanphuccare' ),
+					esc_html( get_search_query() )
+				);
+			} else {
+				printf(
+					/* translators: %s: search query. */
+					esc_html__( 'Kết quả tìm kiếm cho: "%s"', 'vanphuccare' ),
+					esc_html( get_search_query() )
+				);
+			}
 			?>
 		</h1>
 	</header>

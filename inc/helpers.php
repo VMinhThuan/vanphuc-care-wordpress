@@ -304,3 +304,171 @@ function vanphuccare_get_primary_category( $post_obj = null ) {
 	return null;
 }
 
+/**
+ * Checks whether a post belongs to the Knowledge category hierarchy (parent 'kien-thuc' or any descendant).
+ *
+ * Resolves the discrepancy where WP_Query includes child categories by default,
+ * but core has_category() only checks directly assigned terms unless provided
+ * with an array of all descendant category IDs.
+ *
+ * @param int|WP_Post|null $post_obj Post object or ID.
+ * @return bool
+ */
+function vanphuccare_is_knowledge_post( $post_obj = null ) {
+	$kt_cat = get_category_by_slug( 'kien-thuc' );
+	if ( ! ( $kt_cat instanceof WP_Term ) ) {
+		return false;
+	}
+
+	$kt_cat_id   = (int) $kt_cat->term_id;
+	$allowed_ids = array( $kt_cat_id );
+
+	$child_ids = get_term_children( $kt_cat_id, 'category' );
+	if ( ! is_wp_error( $child_ids ) && ! empty( $child_ids ) ) {
+		$allowed_ids = array_merge( $allowed_ids, array_map( 'intval', $child_ids ) );
+	}
+
+	return has_category( $allowed_ids, $post_obj );
+}
+
+/**
+ * Returns canonical definitions of knowledge sub-categories.
+ *
+ * Single Source of Truth for icons, labels, descriptions, and alias slugs.
+ *
+ * @return array<int, array<string, mixed>>
+ */
+function vpc_get_knowledge_category_definitions() {
+	return array(
+		array(
+			'slug'        => '',
+			'aliases'     => array( 'tat-ca' ),
+			'label'       => __( 'Tất cả', 'vanphuccare' ),
+			'description' => __( 'Toàn bộ bài viết', 'vanphuccare' ),
+			'icon'        => 'category-1.svg',
+		),
+		array(
+			'slug'        => 'mang-thai',
+			'aliases'     => array(),
+			'label'       => __( 'Mang thai', 'vanphuccare' ),
+			'description' => __( 'Thai kỳ từng tuần', 'vanphuccare' ),
+			'icon'        => 'category-2.svg',
+		),
+		array(
+			'slug'        => 'phuong-phap-easy',
+			'aliases'     => array( 'easy' ),
+			'label'       => __( 'Phương pháp EASY', 'vanphuccare' ),
+			'description' => __( 'Nuôi con khoa học', 'vanphuccare' ),
+			'icon'        => 'category-3.svg',
+		),
+		array(
+			'slug'        => 'an-dam',
+			'aliases'     => array(),
+			'label'       => __( 'Ăn dặm', 'vanphuccare' ),
+			'description' => __( 'Thực đơn cho bé', 'vanphuccare' ),
+			'icon'        => 'category-4.svg',
+		),
+		array(
+			'slug'        => 'hoi-chung-bieng-an',
+			'aliases'     => array( 'tre-so-sinh-bieng-an-toan-tap', 'bieng-an' ),
+			'label'       => __( 'Hội chứng biếng ăn', 'vanphuccare' ),
+			'description' => __( 'Toàn bộ bài viết', 'vanphuccare' ),
+			'icon'        => 'category-5.svg',
+		),
+		array(
+			'slug'        => 'cam-nang-cho-me',
+			'aliases'     => array( 'cam-nang' ),
+			'label'       => __( 'Cẩm nang cho mẹ', 'vanphuccare' ),
+			'description' => __( 'Kinh nghiệm cho mẹ', 'vanphuccare' ),
+			'icon'        => 'category-6.svg',
+		),
+	);
+}
+
+/**
+ * Returns a flat array of all recognized knowledge slugs (including aliases).
+ *
+ * @return array<int, string>
+ */
+function vpc_get_knowledge_category_slugs() {
+	$slugs = array( 'kien-thuc' );
+	foreach ( vpc_get_knowledge_category_definitions() as $def ) {
+		if ( ! empty( $def['slug'] ) ) {
+			$slugs[] = $def['slug'];
+		}
+		if ( ! empty( $def['aliases'] ) ) {
+			foreach ( $def['aliases'] as $alias ) {
+				$slugs[] = $alias;
+			}
+		}
+	}
+	return array_values( array_unique( $slugs ) );
+}
+
+/**
+ * Resolves knowledge category navigation pills with live URLs and active states.
+ *
+ * Defensively prevents generating broken 404 links if a category has not yet
+ * been created in the database.
+ *
+ * @param string $current_slug Current active slug.
+ * @param int    $current_id   Current category term ID.
+ * @return array<int, array<string, mixed>>
+ */
+function vpc_get_knowledge_category_pills( $current_slug = '', $current_id = 0 ) {
+	$definitions = vpc_get_knowledge_category_definitions();
+	$pills       = array();
+
+	foreach ( $definitions as $cat_def ) {
+		$is_all = empty( $cat_def['slug'] );
+
+		if ( $is_all ) {
+			$url    = home_url( '/kien-thuc/tat-ca/' );
+			$active = ( 'kien-thuc' === $current_slug || ! empty( get_query_var( 'vpc_is_all' ) ) || empty( $current_slug ) );
+
+			$pills[] = array(
+				'slug'        => '',
+				'label'       => $cat_def['label'],
+				'description' => $cat_def['description'],
+				'icon'        => $cat_def['icon'],
+				'url'         => $url,
+				'active'      => $active,
+			);
+			continue;
+		}
+
+		// Try resolving the category object (checking primary slug first, then aliases).
+		$cat_obj = get_category_by_slug( $cat_def['slug'] );
+		if ( ! ( $cat_obj instanceof WP_Term ) && ! empty( $cat_def['aliases'] ) ) {
+			foreach ( $cat_def['aliases'] as $alias ) {
+				$cat_obj = get_category_by_slug( $alias );
+				if ( $cat_obj instanceof WP_Term ) {
+					break;
+				}
+			}
+		}
+
+		// 404 prevention: If category does not exist in DB, fallback safely to knowledge hub instead of a dead /category/.../ link.
+		if ( $cat_obj instanceof WP_Term ) {
+			$url    = get_category_link( $cat_obj->term_id );
+			$active = ( (int) $cat_obj->term_id === (int) $current_id )
+				|| ( $cat_def['slug'] === $current_slug )
+				|| in_array( $current_slug, $cat_def['aliases'], true );
+		} else {
+			$url    = home_url( '/kien-thuc/' );
+			$active = false;
+		}
+
+		$pills[] = array(
+			'slug'        => $cat_def['slug'],
+			'label'       => $cat_def['label'],
+			'description' => $cat_def['description'],
+			'icon'        => $cat_def['icon'],
+			'url'         => $url,
+			'active'      => $active,
+		);
+	}
+
+	return $pills;
+}
+

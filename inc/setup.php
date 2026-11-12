@@ -279,18 +279,9 @@ function vanphuccare_knowledge_pre_get_posts( $query ) {
 		return;
 	}
 
-	$knowledge_category_slugs = array(
-		'kien-thuc',
-		'mang-thai',
-		'phuong-phap-easy',
-		'easy',
-		'an-dam',
-		'hoi-chung-bieng-an',
-		'tre-so-sinh-bieng-an-toan-tap',
-		'bieng-an',
-		'cam-nang-cho-me',
-		'cam-nang',
-	);
+	$knowledge_category_slugs = function_exists( 'vpc_get_knowledge_category_slugs' )
+		? vpc_get_knowledge_category_slugs()
+		: array( 'kien-thuc', 'mang-thai', 'phuong-phap-easy', 'an-dam', 'hoi-chung-bieng-an', 'cam-nang-cho-me' );
 
 	$raw_cat_slug = (string) $query->get( 'category_name' );
 	$leaf_slug    = $raw_cat_slug;

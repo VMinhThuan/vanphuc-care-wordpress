@@ -145,6 +145,14 @@ function vanphuccare_enqueue_assets() {
 	$is_prenatal_page = is_page_template( 'page-lop-hoc-tien-san.php' ) || is_page( 'lop-hoc-tien-san' ) || is_post_type_archive( 'vpc_prenatal_class' );
 	$is_services_page = is_page( 'dich-vu' ) || is_page_template( 'page-dich-vu.php' ) || is_post_type_archive( 'vpc_service' ) || is_singular( 'vpc_service' );
 	$is_knowledge_page = is_page( 'kien-thuc' ) || is_page_template( 'page-kien-thuc.php' ) || is_category() || is_tag() || ! empty( get_query_var( 'vpc_is_all' ) );
+	$is_policy_page    = is_page( 'dieu-khoan-su-dung' )
+		|| is_page( 'chinh-sach-bao-mat' )
+		|| is_page( 'chinh-sach-bien-tap-va-chinh-sua' )
+		|| is_page( 'quy-trinh-tiep-nhan-va-giai-quyet-khieu-nai' )
+		|| is_page_template( 'page-dieu-khoan-su-dung.php' )
+		|| is_page_template( 'page-chinh-sach-bao-mat.php' )
+		|| is_page_template( 'page-chinh-sach-bien-tap.php' )
+		|| is_page_template( 'page-quy-trinh-khieu-nai.php' );
 
 	// Enqueue Google Fonts: Fraunces (Heading) & Manrope (Body) - optimized weights, no italic.
 	wp_enqueue_style(
@@ -198,6 +206,10 @@ function vanphuccare_enqueue_assets() {
 
 	if ( $is_knowledge_page ) {
 		vanphuccare_enqueue_theme_style( 'vanphuccare-knowledge', 'assets/css/knowledge.css', array( 'vanphuccare-tailwind' ) );
+	}
+
+	if ( $is_policy_page ) {
+		vanphuccare_enqueue_theme_style( 'vanphuccare-policy', 'assets/css/policy.css', array( 'vanphuccare-tailwind' ) );
 	}
 
 	/* Shared footer overrides must load after page-specific styles. */

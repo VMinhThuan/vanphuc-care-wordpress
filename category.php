@@ -16,18 +16,9 @@ $current_id   = $current_cat instanceof WP_Term ? (int) $current_cat->term_id : 
 $current_slug = $current_cat instanceof WP_Term ? $current_cat->slug : '';
 
 // 1. Guard clause: Ensure this template only renders for Knowledge categories.
-$knowledge_slugs = array(
-	'kien-thuc',
-	'mang-thai',
-	'phuong-phap-easy',
-	'easy',
-	'an-dam',
-	'hoi-chung-bieng-an',
-	'tre-so-sinh-bieng-an-toan-tap',
-	'bieng-an',
-	'cam-nang-cho-me',
-	'cam-nang',
-);
+$knowledge_slugs = function_exists( 'vpc_get_knowledge_category_slugs' )
+	? vpc_get_knowledge_category_slugs()
+	: array( 'kien-thuc', 'mang-thai', 'phuong-phap-easy', 'easy', 'an-dam', 'hoi-chung-bieng-an', 'cam-nang-cho-me' );
 
 $kt_parent_term = get_category_by_slug( 'kien-thuc' );
 $is_child_of_kt = false;
@@ -58,53 +49,10 @@ $asset = static function ( $name ) use ( $knowledge_uri ) {
 	return esc_url( $knowledge_uri . '/' . $name );
 };
 
-// Category pills definition.
-$categories_defs = array(
-	array( 'slug' => '', 'label' => __( 'Tất cả', 'vanphuccare' ), 'description' => __( 'Toàn bộ bài viết', 'vanphuccare' ), 'icon' => 'category-1.svg' ),
-	array( 'slug' => 'mang-thai', 'label' => __( 'Mang thai', 'vanphuccare' ), 'description' => __( 'Thai kỳ từng tuần', 'vanphuccare' ), 'icon' => 'category-2.svg' ),
-	array( 'slug' => 'phuong-phap-easy', 'label' => __( 'Phương pháp EASY', 'vanphuccare' ), 'description' => __( 'Nuôi con khoa học', 'vanphuccare' ), 'icon' => 'category-3.svg' ),
-	array( 'slug' => 'an-dam', 'label' => __( 'Ăn dặm', 'vanphuccare' ), 'description' => __( 'Thực đơn cho bé', 'vanphuccare' ), 'icon' => 'category-4.svg' ),
-	array( 'slug' => 'hoi-chung-bieng-an', 'label' => __( 'Hội chứng biếng ăn', 'vanphuccare' ), 'description' => __( 'Toàn bộ bài viết', 'vanphuccare' ), 'icon' => 'category-5.svg' ),
-	array( 'slug' => 'cam-nang-cho-me', 'label' => __( 'Cẩm nang cho mẹ', 'vanphuccare' ), 'description' => __( 'Kinh nghiệm cho mẹ', 'vanphuccare' ), 'icon' => 'category-6.svg' ),
-);
-
-$categories = array();
-foreach ( $categories_defs as $cat_def ) {
-	$is_all = empty( $cat_def['slug'] );
-	$url    = home_url( '/kien-thuc/' );
-	$active = false;
-
-	if ( ! $is_all ) {
-		$cat_obj = get_category_by_slug( $cat_def['slug'] );
-		if ( ! $cat_obj && 'phuong-phap-easy' === $cat_def['slug'] ) {
-			$cat_obj = get_category_by_slug( 'easy' );
-		} elseif ( ! $cat_obj && 'hoi-chung-bieng-an' === $cat_def['slug'] ) {
-			$cat_obj = get_category_by_slug( 'tre-so-sinh-bieng-an-toan-tap' ) ?: get_category_by_slug( 'bieng-an' );
-		} elseif ( ! $cat_obj && 'cam-nang-cho-me' === $cat_def['slug'] ) {
-			$cat_obj = get_category_by_slug( 'cam-nang' );
-		}
-
-		if ( $cat_obj ) {
-			$url    = get_category_link( $cat_obj->term_id );
-			$active = ( (int) $cat_obj->term_id === (int) $current_id ) || ( $cat_def['slug'] === $current_slug ) || ( 'hoi-chung-bieng-an' === $cat_def['slug'] && 'tre-so-sinh-bieng-an-toan-tap' === $current_slug );
-		} else {
-			$url    = home_url( '/category/' . $cat_def['slug'] . '/' );
-			$active = ( $cat_def['slug'] === $current_slug );
-		}
-	} else {
-		$url    = home_url( '/kien-thuc/tat-ca/' );
-		$active = ( 'kien-thuc' === $current_slug || ! empty( get_query_var( 'vpc_is_all' ) ) );
-	}
-
-	$categories[] = array(
-		'slug'        => $cat_def['slug'],
-		'label'       => $cat_def['label'],
-		'description' => $cat_def['description'],
-		'icon'        => $cat_def['icon'],
-		'url'         => $url,
-		'active'      => $active,
-	);
-}
+// Category pills resolved dynamically from Single Source of Truth (DRY & 404 safe).
+$categories = function_exists( 'vpc_get_knowledge_category_pills' )
+	? vpc_get_knowledge_category_pills( $current_slug, $current_id )
+	: array();
 
 $is_all_archive = ( 'kien-thuc' === $current_slug || ! empty( get_query_var( 'vpc_is_all' ) ) );
 $display_name   = 'mang-thai' === $current_slug ? __( 'Mang Thai', 'vanphuccare' ) : $current_name;
@@ -201,7 +149,7 @@ $main_title     = $is_all_archive ? __( 'Tất cả bài viết', 'vanphuccare' 
 							$article_data = array(
 								'id'       => get_the_ID(),
 								'title'    => get_the_title(),
-								'excerpt'  => wp_trim_words( get_the_excerpt(), 28, '...' ),
+								'excerpt'  => wp_trim_words( get_the_excerpt(), 32, '...' ),
 								'url'      => get_permalink(),
 								'image'    => $thumb_url,
 								'category' => $cat_display,

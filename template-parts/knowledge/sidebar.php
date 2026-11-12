@@ -50,6 +50,9 @@ if ( empty( $popular_tags ) ) {
 			<img src="<?php echo $asset( 'search.svg' ); ?>" alt="" width="20" height="20" aria-hidden="true">
 			<label class="screen-reader-text" for="sidebar-search-input"><?php esc_html_e( 'Tìm bài viết', 'vanphuccare' ); ?></label>
 			<input id="sidebar-search-input" type="search" name="s" placeholder="<?php esc_attr_e( 'Tìm bài viết...', 'vanphuccare' ); ?>">
+			<?php if ( $kt_cat instanceof WP_Term ) : ?>
+				<input type="hidden" name="cat" value="<?php echo esc_attr( $kt_cat->term_id ); ?>">
+			<?php endif; ?>
 			<button type="submit"><?php esc_html_e( 'Tìm', 'vanphuccare' ); ?></button>
 		</form>
 	</div>

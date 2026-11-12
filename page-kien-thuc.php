@@ -22,9 +22,10 @@ if ( ! function_exists( 'vpc_format_knowledge_card' ) ) {
 	 *
 	 * @param WP_Post|int|null $post_obj Post object or ID.
 	 * @param string           $default_image Fallback image URL.
+	 * @param int              $excerpt_words Number of words to trim excerpt.
 	 * @return array<string, mixed> Structured article data.
 	 */
-	function vpc_format_knowledge_card( $post_obj, $default_image = '' ) {
+	function vpc_format_knowledge_card( $post_obj, $default_image = '', $excerpt_words = 32 ) {
 		$post = get_post( $post_obj );
 		if ( ! $post ) {
 			return array();
@@ -47,7 +48,7 @@ if ( ! function_exists( 'vpc_format_knowledge_card' ) ) {
 		return array(
 			'id'       => $post->ID,
 			'title'    => get_the_title( $post ),
-			'excerpt'  => wp_trim_words( get_the_excerpt( $post ), 28, '...' ),
+			'excerpt'  => wp_trim_words( get_the_excerpt( $post ), $excerpt_words, '...' ),
 			'url'      => get_permalink( $post ),
 			'image'    => $image_url,
 			'category' => $category_name,
@@ -65,6 +66,13 @@ $category_posts = array();
 if ( $kt_cat instanceof WP_Term ) {
 	$kt_cat_id = (int) $kt_cat->term_id;
 
+	// Resolve all valid category IDs (parent 'kien-thuc' + all recursive child categories).
+	$child_cat_ids   = get_term_children( $kt_cat_id, 'category' );
+	$allowed_cat_ids = array( $kt_cat_id );
+	if ( ! is_wp_error( $child_cat_ids ) && ! empty( $child_cat_ids ) ) {
+		$allowed_cat_ids = array_merge( $allowed_cat_ids, array_map( 'intval', $child_cat_ids ) );
+	}
+
 	// Read curated slots from Term Meta (Phương án B).
 	$saved_slots = get_term_meta( $kt_cat_id, 'vpc_featured_post_ids', true );
 	if ( ! is_array( $saved_slots ) ) {
@@ -79,7 +87,11 @@ if ( $kt_cat instanceof WP_Term ) {
 		$target_id = isset( $saved_slots[ $slot ] ) ? absint( $saved_slots[ $slot ] ) : 0;
 		if ( $target_id > 0 && ! in_array( $target_id, $used_ids, true ) ) {
 			$post_obj = get_post( $target_id );
-			if ( $post_obj instanceof WP_Post && 'publish' === $post_obj->post_status && has_category( $kt_cat_id, $post_obj ) ) {
+			$is_valid_knowledge = function_exists( 'vanphuccare_is_knowledge_post' )
+				? vanphuccare_is_knowledge_post( $post_obj )
+				: has_category( $allowed_cat_ids, $post_obj );
+
+			if ( $post_obj instanceof WP_Post && 'publish' === $post_obj->post_status && $is_valid_knowledge ) {
 				$slot_posts[ $slot ] = $post_obj;
 				$used_ids[]          = $target_id;
 			}
@@ -165,11 +177,6 @@ if ( $kt_cat instanceof WP_Term ) {
 	}
 	$category_query = new WP_Query( $category_args );
 	$category_posts = $category_query->posts;
-
-	// If total posts is small, allow previewing available posts.
-	if ( empty( $category_posts ) && ! empty( $featured_posts ) ) {
-		$category_posts = $featured_posts;
-	}
 }
 
 // Format articles into card data arrays.
@@ -187,8 +194,10 @@ $sample_images = array(
 
 $featured_articles = array();
 foreach ( $featured_posts as $idx => $p ) {
-	$fallback_img = $sample_images[ $idx % count( $sample_images ) ];
-	$featured_articles[] = vpc_format_knowledge_card( $p, $fallback_img );
+	$fallback_img   = $sample_images[ $idx % count( $sample_images ) ];
+	// Hero card (slot 0) has a wide column (580px) and 350px height: provide 65 words for a rich summary.
+	$excerpt_words  = ( 0 === $idx ) ? 65 : 32;
+	$featured_articles[] = vpc_format_knowledge_card( $p, $fallback_img, $excerpt_words );
 }
 
 $category_articles = array();
@@ -197,46 +206,10 @@ foreach ( $category_posts as $idx => $p ) {
 	$category_articles[] = vpc_format_knowledge_card( $p, $fallback_img );
 }
 
-// 3. Categories definition matching Figma icons & slugs.
-$categories_defs = array(
-	array( 'slug' => '', 'label' => __( 'Tất cả', 'vanphuccare' ), 'icon' => 'category-1.svg' ),
-	array( 'slug' => 'mang-thai', 'label' => __( 'Mang thai', 'vanphuccare' ), 'icon' => 'category-2.svg' ),
-	array( 'slug' => 'phuong-phap-easy', 'label' => __( 'Phương pháp EASY', 'vanphuccare' ), 'icon' => 'category-3.svg' ),
-	array( 'slug' => 'an-dam', 'label' => __( 'Ăn dặm', 'vanphuccare' ), 'icon' => 'category-4.svg' ),
-	array( 'slug' => 'hoi-chung-bieng-an', 'label' => __( 'Hội chứng biếng ăn', 'vanphuccare' ), 'icon' => 'category-5.svg' ),
-	array( 'slug' => 'cam-nang-cho-me', 'label' => __( 'Cẩm nang cho mẹ', 'vanphuccare' ), 'icon' => 'category-6.svg' ),
-);
-
-$categories = array();
-foreach ( $categories_defs as $cat_def ) {
-	$is_all = empty( $cat_def['slug'] );
-	$url    = home_url( '/kien-thuc/' );
-
-	if ( ! $is_all ) {
-		$cat_obj = get_category_by_slug( $cat_def['slug'] );
-		if ( ! $cat_obj && 'phuong-phap-easy' === $cat_def['slug'] ) {
-			$cat_obj = get_category_by_slug( 'easy' );
-		} elseif ( ! $cat_obj && 'hoi-chung-bieng-an' === $cat_def['slug'] ) {
-			$cat_obj = get_category_by_slug( 'tre-so-sinh-bieng-an-toan-tap' ) ?: get_category_by_slug( 'bieng-an' );
-		} elseif ( ! $cat_obj && 'cam-nang-cho-me' === $cat_def['slug'] ) {
-			$cat_obj = get_category_by_slug( 'cam-nang' );
-		}
-
-		if ( $cat_obj ) {
-			$url = get_category_link( $cat_obj->term_id );
-		} else {
-			$url = home_url( '/category/' . $cat_def['slug'] . '/' );
-		}
-	}
-
-	$categories[] = array(
-		'slug'   => $cat_def['slug'],
-		'label'  => $cat_def['label'],
-		'icon'   => $cat_def['icon'],
-		'url'    => $url,
-		'active' => $is_all,
-	);
-}
+// 3. Category pills resolved from Single Source of Truth (DRY & 404 safe).
+$categories = function_exists( 'vpc_get_knowledge_category_pills' )
+	? vpc_get_knowledge_category_pills( '', ! empty( $kt_cat_id ) ? $kt_cat_id : 0 )
+	: array();
 
 // "Xem tất cả" button target URL: leads to full clean archive listing of all posts (Figma Image 2).
 $view_all_url = home_url( '/kien-thuc/tat-ca/' );
@@ -244,6 +217,7 @@ $view_all_url = home_url( '/kien-thuc/tat-ca/' );
 
 <div class="vpc-knowledge" id="kien-thuc">
 	<section class="vpc-knowledge-hero" aria-labelledby="knowledge-title">
+		<div class="vpc-container vpc-knowledge-hero__inner">
 		<div class="vpc-knowledge-hero__copy">
 			<div class="vpc-knowledge-badge">
 				<img src="<?php echo $asset( 'star-light.svg' ); ?>" alt="" width="24" height="24" aria-hidden="true">
@@ -255,6 +229,9 @@ $view_all_url = home_url( '/kien-thuc/tat-ca/' );
 				<img src="<?php echo $asset( 'search.svg' ); ?>" alt="" width="24" height="24" aria-hidden="true">
 				<label class="screen-reader-text" for="knowledge-search-input"><?php esc_html_e( 'Tìm bài viết', 'vanphuccare' ); ?></label>
 				<input id="knowledge-search-input" type="search" name="s" placeholder="<?php esc_attr_e( 'Tìm bài viết: ăn dặm, EASY, thai giáo...', 'vanphuccare' ); ?>" data-mobile-placeholder="<?php esc_attr_e( 'Tìm bài viết...', 'vanphuccare' ); ?>">
+				<?php if ( ! empty( $kt_cat_id ) ) : ?>
+					<input type="hidden" name="cat" value="<?php echo esc_attr( $kt_cat_id ); ?>">
+				<?php endif; ?>
 				<button type="submit">
 					<span class="vpc-knowledge-search-label-desktop"><?php esc_html_e( 'Tìm kiếm', 'vanphuccare' ); ?></span>
 					<span class="vpc-knowledge-search-label-mobile"><?php esc_html_e( 'Tìm', 'vanphuccare' ); ?></span>
@@ -283,6 +260,7 @@ $view_all_url = home_url( '/kien-thuc/tat-ca/' );
 			<span class="vpc-knowledge-chip vpc-knowledge-chip--left"><?php esc_html_e( 'Mang thai', 'vanphuccare' ); ?></span>
 			<span class="vpc-knowledge-chip vpc-knowledge-chip--top"><?php esc_html_e( 'Phương pháp EASY', 'vanphuccare' ); ?></span>
 			<span class="vpc-knowledge-chip vpc-knowledge-chip--bottom"><?php esc_html_e( 'Ăn dặm', 'vanphuccare' ); ?></span>
+		</div>
 		</div>
 	</section>
 

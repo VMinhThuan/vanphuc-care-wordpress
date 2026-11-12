@@ -1,0 +1,301 @@
+/* Figma policy page: 3388:50961 */
+.vpc-policy-page {
+	background: #ffffff;
+	color: #292929;
+}
+
+.vpc-policy-tabs {
+	width: 100%;
+	background: #ffffff;
+}
+
+.vpc-policy-tabs__inner {
+	display: flex;
+	width: 100%;
+	min-height: 72px;
+	padding: 0 16px;
+}
+
+.vpc-policy-tab {
+	display: flex;
+	flex: 1 1 50%;
+	min-width: 0;
+	align-items: center;
+	justify-content: center;
+	min-height: 72px;
+	padding: 12px 8px;
+	border-right: 1px solid #ebebeb;
+	color: #292929;
+	font: 500 14px/20px var(--font-body, "Manrope", sans-serif);
+	text-align: center;
+	text-decoration: none;
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.vpc-policy-tab:hover,
+.vpc-policy-tab:focus-visible {
+	background: #e6f2fa;
+	color: #155f95;
+}
+
+.vpc-policy-tab.is-active {
+	background: #1a77ba;
+	color: #f8f8f8;
+}
+
+.vpc-policy-content {
+	background: #ffffff;
+}
+
+.vpc-policy-content__inner {
+	width: 100%;
+	padding: 48px 16px 64px;
+}
+
+.vpc-policy-title {
+	margin: 0 0 24px;
+	color: #292929;
+	font: 600 32px/40px var(--font-heading, "Fraunces", serif);
+	font-variation-settings: "SOFT" 0, "WONK" 1;
+	text-align: center;
+}
+
+.vpc-policy-body {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	width: 100%;
+}
+
+.vpc-policy-body > p,
+.vpc-policy-body > .wp-block-paragraph {
+	margin: 0;
+	color: #292929;
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.vpc-policy-body > h2,
+.vpc-policy-body > .wp-block-heading {
+	margin: 0;
+	padding-top: 16px;
+	color: #292929;
+	font: 700 20px/28px var(--font-body, "Manrope", sans-serif);
+}
+
+.vpc-policy-body > h3 {
+	margin: 0;
+	padding-top: 8px;
+	color: #292929;
+	font: 700 18px/26px var(--font-body, "Manrope", sans-serif);
+}
+
+.vpc-policy-body > ul {
+	margin: 0;
+	padding-left: 28px;
+	color: #292929;
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.vpc-policy-body > ul li {
+	margin: 0;
+	padding: 0;
+}
+
+.vpc-policy-process-step {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+	width: 100%;
+}
+
+.vpc-policy-process-step__badge {
+	display: flex;
+	flex: 0 0 32px;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	background: #1a77ba;
+	color: #f8f8f8;
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.vpc-policy-process-step__content {
+	display: flex;
+	flex: 1;
+	min-width: 0;
+	flex-direction: column;
+	gap: 4px;
+	color: #292929;
+}
+
+.vpc-policy-process-step__title {
+	margin: 0;
+	font: 700 18px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.vpc-policy-process-step__description,
+.vpc-policy-process-step__description p {
+	margin: 0;
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.vpc-policy-body a {
+	color: #1a77ba;
+	text-decoration: underline;
+	text-underline-offset: 2px;
+}
+
+.vpc-policy-lead {
+	display: flex;
+	align-items: stretch;
+	gap: 16px;
+	width: 100%;
+}
+
+.vpc-policy-lead__bar {
+	width: 4px;
+	flex: 0 0 4px;
+	background: #1a77ba;
+}
+
+.vpc-policy-lead p {
+	margin: 0;
+	color: #292929;
+	font: 600 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.vpc-policy-updated {
+	margin: 32px 0 0;
+	color: #292929;
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+@media (min-width: 768px) {
+	.vpc-policy-tabs__inner {
+		padding: 0 32px;
+	}
+
+	.vpc-policy-tab {
+		flex-basis: 25%;
+		min-height: 80px;
+		padding: 16px;
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	.vpc-policy-content__inner {
+		padding: 64px 32px 80px;
+	}
+
+	.vpc-policy-title {
+		margin-bottom: 32px;
+		font-size: 40px;
+		line-height: 52px;
+	}
+
+	.vpc-policy-body > p,
+	.vpc-policy-body > .wp-block-paragraph,
+	.vpc-policy-lead p,
+	.vpc-policy-updated {
+		font-size: 18px;
+		line-height: 28px;
+	}
+
+	.vpc-policy-body > h2,
+	.vpc-policy-body > .wp-block-heading {
+		font-size: 22px;
+		line-height: 30px;
+		padding-top: 20px;
+	}
+
+	.vpc-policy-body > h3 {
+		font-size: 19px;
+		line-height: 25px;
+	}
+
+	.vpc-policy-body > ul,
+	.vpc-policy-process-step__description,
+	.vpc-policy-process-step__description p {
+		font-size: 18px;
+		line-height: 28px;
+	}
+
+	.vpc-policy-process-step__title {
+		font-size: 19px;
+		line-height: 25px;
+	}
+}
+
+@media (min-width: 1280px) {
+	.vpc-policy-tabs__inner {
+		min-height: 96px;
+		padding: 0 80px;
+	}
+
+	.vpc-policy-tab {
+		min-height: 96px;
+		padding: 16px 24px;
+		font-size: 20px;
+		line-height: 28px;
+	}
+
+	.vpc-policy-content__inner {
+		padding: 96px 80px;
+	}
+
+	.vpc-policy-title {
+		margin-bottom: 32px;
+		font-size: 48px;
+		line-height: 64px;
+	}
+
+	.vpc-policy-body > p,
+	.vpc-policy-body > .wp-block-paragraph,
+	.vpc-policy-lead p {
+		font-size: 20px;
+		line-height: 30px;
+	}
+
+	.vpc-policy-body > h2,
+	.vpc-policy-body > .wp-block-heading {
+		padding-top: 24px;
+		font-size: 24px;
+		line-height: 31px;
+	}
+
+	.vpc-policy-body > h3 {
+		font-size: 20px;
+		line-height: 26px;
+	}
+
+	.vpc-policy-body > ul,
+	.vpc-policy-process-step__description,
+	.vpc-policy-process-step__description p {
+		font-size: 20px;
+		line-height: 30px;
+	}
+
+	.vpc-policy-process-step__badge {
+		flex-basis: 40px;
+		width: 40px;
+		height: 40px;
+		font-size: 20px;
+		line-height: 28px;
+	}
+
+	.vpc-policy-process-step {
+		gap: 16px;
+	}
+
+	.vpc-policy-process-step__title {
+		font-size: 20px;
+		line-height: 26px;
+	}
+
+	.vpc-policy-updated {
+		font-size: 20px;
+		line-height: 28px;
+	}
+}

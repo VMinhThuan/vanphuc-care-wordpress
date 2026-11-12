@@ -61,7 +61,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 	     2. CONTACT CONTENT SECTION (FORM & LOCATION INFO)
 	     ========================================================================= -->
 	<section class="vpc-section bg-surface-background-default py-10 sm:py-12 lg:py-16 xl:py-24">
-		<div class="vpc-home-container max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="vpc-home-container max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-20">
 			<div class="grid grid-cols-1 xl:grid-cols-[minmax(0,658px)_minmax(0,550px)] gap-8 xl:gap-[72px] items-start">
 				
 				<!-- LEFT COLUMN: Consultation Form (7 columns on Desktop) -->

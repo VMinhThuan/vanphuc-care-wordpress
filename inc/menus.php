@@ -119,6 +119,12 @@ add_filter( 'nav_menu_css_class', 'vanphuccare_knowledge_menu_class', 10, 2 );
 function vanphuccare_service_dropdown_items() {
 	return array(
 		array(
+			'slug'   => 'khoa-hoc-truc-tuyen',
+			'title'  => 'Khóa học trực tuyến',
+			'url'    => 'https://edu.vanphuccare.vn',
+			'target' => '_blank',
+		),
+		array(
 			'slug'  => 'tu-van-nuoi-con',
 			'title' => 'Tư vấn nuôi con',
 			'url'   => home_url( '/dich-vu/dich-vu-tu-van-nuoi-con-easy-truc-tuyen/' ),
@@ -171,11 +177,13 @@ function vanphuccare_service_dropdown_markup( $dropdown_id ) {
 	foreach ( $items as $item ) {
 		$is_active = vanphuccare_is_active_service_dropdown_item( $item['slug'] );
 		$classes   = 'vpc-service-dropdown-link' . ( $is_active ? ' is-active' : '' );
+		$target    = ! empty( $item['target'] ) ? ' target="' . esc_attr( $item['target'] ) . '" rel="noopener noreferrer"' : '';
 		$markup   .= sprintf(
-			'<a class="%1$s" href="%2$s"%3$s><span>%4$s</span><svg class="vpc-service-dropdown-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" /></svg></a>',
+			'<a class="%1$s" href="%2$s"%3$s%4$s><span>%5$s</span><svg class="vpc-service-dropdown-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" /></svg></a>',
 			esc_attr( $classes ),
 			esc_url( $item['url'] ),
 			$is_active ? ' aria-current="page"' : '',
+			$target,
 			esc_html( $item['title'] )
 		);
 	}
