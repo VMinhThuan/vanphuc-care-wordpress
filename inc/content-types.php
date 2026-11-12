@@ -254,24 +254,26 @@ function vpc_save_content_meta( $post_id ) {
 add_action( 'save_post', 'vpc_save_content_meta' );
 
 /**
- * Renders custom term meta fields for the 'kien-thuc' category edit screen.
+ * Renders custom term meta fields for the 'kien-thuc' category and its subcategories.
  *
- * Provides Content editors with 4 curated slots for featured articles (Hero + 3 sub cards).
+ * For the main 'kien-thuc' category: provides 4 curated slots (Hero + 3 sub cards).
+ * For knowledge sub-categories (Mang thai, EASY, Ăn dặm...): provides 2 to 5 pinned slots.
  *
  * @param WP_Term $term Current taxonomy term object.
  * @return void
  */
 function vpc_category_featured_fields( $term ) {
-	if ( ! ( $term instanceof WP_Term ) || 'kien-thuc' !== $term->slug ) {
+	if ( ! ( $term instanceof WP_Term ) || ! function_exists( 'vpc_is_knowledge_category' ) || ! vpc_is_knowledge_category( $term ) ) {
 		return;
 	}
 
-	$saved_slots = get_term_meta( $term->term_id, 'vpc_featured_post_ids', true );
+	$is_parent_kt = ( 'kien-thuc' === $term->slug );
+	$saved_slots  = get_term_meta( $term->term_id, 'vpc_featured_post_ids', true );
 	if ( ! is_array( $saved_slots ) ) {
 		$saved_slots = array();
 	}
 
-	// Fetch up to 100 published posts in category 'kien-thuc' for selection.
+	// Fetch up to 100 published posts in this category context for selection.
 	$knowledge_posts = get_posts( array(
 		'post_type'      => 'post',
 		'post_status'    => 'publish',
@@ -281,25 +283,59 @@ function vpc_category_featured_fields( $term ) {
 		'order'          => 'DESC',
 	) );
 
-	// Slot definitions matching Figma layout.
-	$slots = array(
-		1 => array(
-			'label' => __( 'Vị trí 1 (Hero lớn)', 'vanphuccare' ),
-			'desc'  => __( 'Hiển thị thẻ bài viết lớn nhất ở hàng trên cùng của mục Bài viết nổi bật.', 'vanphuccare' ),
-		),
-		2 => array(
-			'label' => __( 'Vị trí 2', 'vanphuccare' ),
-			'desc'  => __( 'Thẻ nhỏ bên trái ở hàng 3 bài bên dưới.', 'vanphuccare' ),
-		),
-		3 => array(
-			'label' => __( 'Vị trí 3', 'vanphuccare' ),
-			'desc'  => __( 'Thẻ nhỏ ở giữa ở hàng 3 bài bên dưới.', 'vanphuccare' ),
-		),
-		4 => array(
-			'label' => __( 'Vị trí 4', 'vanphuccare' ),
-			'desc'  => __( 'Thẻ nhỏ bên phải ở hàng 3 bài bên dưới.', 'vanphuccare' ),
-		),
-	);
+	if ( $is_parent_kt ) {
+		// Slot definitions matching Figma layout for main Knowledge page.
+		$slots = array(
+			1 => array(
+				'label' => __( 'Vị trí 1 (Hero lớn)', 'vanphuccare' ),
+				'desc'  => __( 'Hiển thị thẻ bài viết lớn nhất ở hàng trên cùng của mục Bài viết nổi bật.', 'vanphuccare' ),
+			),
+			2 => array(
+				'label' => __( 'Vị trí 2', 'vanphuccare' ),
+				'desc'  => __( 'Thẻ nhỏ bên trái ở hàng 3 bài bên dưới.', 'vanphuccare' ),
+			),
+			3 => array(
+				'label' => __( 'Vị trí 3', 'vanphuccare' ),
+				'desc'  => __( 'Thẻ nhỏ ở giữa ở hàng 3 bài bên dưới.', 'vanphuccare' ),
+			),
+			4 => array(
+				'label' => __( 'Vị trí 4', 'vanphuccare' ),
+				'desc'  => __( 'Thẻ nhỏ bên phải ở hàng 3 bài bên dưới.', 'vanphuccare' ),
+			),
+		);
+		$banner_title = __( '⭐ Cấu hình 4 bài viết nổi bật trang chủ Kiến thức (Knowledge Featured Articles)', 'vanphuccare' );
+		$banner_desc  = __( 'Chủ động chọn chính xác bài viết xuất hiện tại 4 vị trí Hero trang Kiến thức. Vị trí nào để trống sẽ tự động lấy bài mới nhất trong chuyên mục.', 'vanphuccare' );
+		$empty_label  = __( '-- Tự động lấy bài mới nhất --', 'vanphuccare' );
+	} else {
+		// Sub-categories: 2 to 5 pinned slots matching client requirement.
+		$slots = array(
+			1 => array(
+				'label' => __( 'Vị trí ghim 1 (Ưu tiên cao nhất)', 'vanphuccare' ),
+				'desc'  => __( 'Bài viết đứng đầu tiên trong danh sách chuyên mục.', 'vanphuccare' ),
+			),
+			2 => array(
+				'label' => __( 'Vị trí ghim 2', 'vanphuccare' ),
+				'desc'  => __( 'Bài viết đứng thứ hai trong danh sách chuyên mục.', 'vanphuccare' ),
+			),
+			3 => array(
+				'label' => __( 'Vị trí ghim 3 (Tùy chọn)', 'vanphuccare' ),
+				'desc'  => __( 'Bài viết đứng thứ ba. Để trống nếu chỉ ghim 2 bài.', 'vanphuccare' ),
+			),
+			4 => array(
+				'label' => __( 'Vị trí ghim 4 (Tùy chọn)', 'vanphuccare' ),
+				'desc'  => __( 'Bài viết đứng thứ tư. Để trống nếu chỉ ghim 2-3 bài.', 'vanphuccare' ),
+			),
+			5 => array(
+				'label' => __( 'Vị trí ghim 5 (Tùy chọn)', 'vanphuccare' ),
+				'desc'  => __( 'Bài viết đứng thứ năm. Để trống nếu không dùng.', 'vanphuccare' ),
+			),
+		);
+		/* translators: %s: Category name */
+		$banner_title = sprintf( __( '📌 Cấu hình bài viết ghim nổi bật chuyên mục: %s (Pinned Posts 2-5 bài)', 'vanphuccare' ), esc_html( $term->name ) );
+		/* translators: %s: Category name */
+		$banner_desc  = sprintf( __( 'Chọn từ 2 đến 5 bài viết để ghim lên đầu danh sách bài viết của chuyên mục "%s". Các bài ghim sẽ luôn đứng ở vị trí đầu tiên trên Trang 1, các bài viết mới hơn sẽ xuất hiện nối tiếp ngay phía dưới. Vị trí nào để trống sẽ không ghim.', 'vanphuccare' ), esc_html( $term->name ) );
+		$empty_label  = __( '-- Không ghim (để trống) --', 'vanphuccare' );
+	}
 
 	wp_nonce_field( 'vpc_save_category_featured', 'vpc_category_featured_nonce' );
 	?>
@@ -307,10 +343,10 @@ function vpc_category_featured_fields( $term ) {
 		<th scope="row" colspan="2" style="padding-top: 24px; padding-bottom: 8px;">
 			<div style="background: #eef6fb; border-left: 4px solid #1a77ba; padding: 12px 16px; border-radius: 4px;">
 				<h3 style="margin: 0 0 6px 0; color: #1a77ba; font-size: 15px; font-weight: 700;">
-					⭐ <?php esc_html_e( 'Cấu hình 4 bài viết nổi bật (Knowledge Featured Articles)', 'vanphuccare' ); ?>
+					<?php echo esc_html( $banner_title ); ?>
 				</h3>
 				<p style="margin: 0; color: #444; font-size: 13px;">
-					<?php esc_html_e( 'Chủ động chọn chính xác bài viết xuất hiện tại 4 vị trí Hero trang Kiến thức. Vị trí nào để trống sẽ tự động lấy bài mới nhất trong chuyên mục.', 'vanphuccare' ); ?>
+					<?php echo esc_html( $banner_desc ); ?>
 				</p>
 			</div>
 		</th>
@@ -339,7 +375,7 @@ function vpc_category_featured_fields( $term ) {
 			<td>
 				<div style="display: flex; gap: 10px; align-items: center; max-width: 680px; flex-wrap: wrap;">
 					<select id="<?php echo esc_attr( $field_name ); ?>" name="<?php echo esc_attr( $field_name ); ?>" style="flex: 1 1 360px; min-width: 280px;" onchange="var inp = document.getElementById('<?php echo esc_attr( $custom_name ); ?>'); if (inp) { inp.value = this.value > 0 ? this.value : ''; }">
-						<option value="0"><?php esc_html_e( '-- Tự động lấy bài mới nhất --', 'vanphuccare' ); ?></option>
+						<option value="0"><?php echo esc_html( $empty_label ); ?></option>
 						<?php foreach ( $options_posts as $p ) : ?>
 							<option value="<?php echo esc_attr( $p->ID ); ?>" <?php selected( $selected_id, $p->ID ); ?>>
 								[#<?php echo esc_html( $p->ID ); ?>] <?php echo esc_html( wp_trim_words( $p->post_title, 14, '...' ) ); ?> (<?php echo esc_html( get_the_date( 'd/m/Y', $p ) ); ?>)
@@ -360,11 +396,11 @@ function vpc_category_featured_fields( $term ) {
 add_action( 'category_edit_form_fields', 'vpc_category_featured_fields', 10, 1 );
 
 /**
- * Saves and validates custom term meta fields for the 'kien-thuc' category.
+ * Saves and validates custom term meta fields for knowledge categories.
  *
  * Enforces server-side validation:
  * 1. Post must exist and be in 'publish' status.
- * 2. Post must belong to category 'kien-thuc' or any of its descendant subcategories.
+ * 2. Post must belong to knowledge hierarchy.
  * 3. Prevents duplicate posts across slots.
  *
  * @param int $term_id Current term ID.
@@ -380,14 +416,17 @@ function vpc_save_category_featured_fields( $term_id ) {
 	}
 
 	$term = get_term( $term_id, 'category' );
-	if ( ! ( $term instanceof WP_Term ) || 'kien-thuc' !== $term->slug ) {
+	if ( ! ( $term instanceof WP_Term ) || ! function_exists( 'vpc_is_knowledge_category' ) || ! vpc_is_knowledge_category( $term ) ) {
 		return;
 	}
+
+	$is_parent_kt = ( 'kien-thuc' === $term->slug );
+	$max_slots    = $is_parent_kt ? 4 : 5;
 
 	$featured_ids = array();
 	$used_ids     = array();
 
-	for ( $i = 1; $i <= 4; $i++ ) {
+	for ( $i = 1; $i <= $max_slots; $i++ ) {
 		$select_key = 'vpc_featured_slot_' . $i;
 		$custom_key = 'vpc_featured_custom_id_' . $i;
 
@@ -411,7 +450,7 @@ function vpc_save_category_featured_fields( $term_id ) {
 				$featured_ids[ $i ] = $val;
 				$used_ids[]         = $val;
 			} else {
-				// Reset invalid or duplicate slot to 0 (auto-fallback).
+				// Reset invalid or duplicate slot to 0.
 				$featured_ids[ $i ] = 0;
 			}
 		} else {

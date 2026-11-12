@@ -332,6 +332,91 @@ function vanphuccare_is_knowledge_post( $post_obj = null ) {
 }
 
 /**
+ * Checks whether a given term is the 'kien-thuc' category or one of its descendant subcategories.
+ *
+ * @param WP_Term|int|string|null $term Term object, ID, or slug.
+ * @return bool True if term belongs to knowledge hierarchy.
+ */
+function vpc_is_knowledge_category( $term = null ) {
+	if ( empty( $term ) ) {
+		return false;
+	}
+
+	$term_obj = null;
+	if ( $term instanceof WP_Term ) {
+		$term_obj = $term;
+	} elseif ( is_numeric( $term ) ) {
+		$term_obj = get_term( (int) $term, 'category' );
+	} elseif ( is_string( $term ) ) {
+		$term_obj = get_category_by_slug( $term );
+	}
+
+	if ( ! ( $term_obj instanceof WP_Term ) ) {
+		return false;
+	}
+
+	$slugs = function_exists( 'vpc_get_knowledge_category_slugs' )
+		? vpc_get_knowledge_category_slugs()
+		: array( 'kien-thuc' );
+
+	if ( in_array( $term_obj->slug, $slugs, true ) ) {
+		return true;
+	}
+
+	$kt_parent = get_category_by_slug( 'kien-thuc' );
+	if ( $kt_parent instanceof WP_Term && cat_is_ancestor_of( $kt_parent->term_id, $term_obj->term_id ) ) {
+		return true;
+	}
+
+	return false;
+}
+
+/**
+ * Normalizes a WP_Post object into structured article data for knowledge cards.
+ *
+ * @param WP_Post|int|null $post_obj Post object or ID.
+ * @param string           $default_image Fallback image URL.
+ * @param int              $excerpt_words Number of words to trim excerpt.
+ * @param string           $custom_category_name Optional category name override.
+ * @return array<string, mixed> Structured article data.
+ */
+function vpc_format_knowledge_card( $post_obj, $default_image = '', $excerpt_words = 32, $custom_category_name = '' ) {
+	$post = get_post( $post_obj );
+	if ( ! $post ) {
+		return array();
+	}
+
+	if ( ! empty( $custom_category_name ) ) {
+		$category_name = $custom_category_name;
+	} else {
+		$primary_term  = function_exists( 'vanphuccare_get_primary_category' )
+			? vanphuccare_get_primary_category( $post )
+			: null;
+		$category_name = $primary_term ? $primary_term->name : __( 'Cẩm nang cho mẹ', 'vanphuccare' );
+	}
+
+	$image_url = '';
+	if ( has_post_thumbnail( $post ) ) {
+		$image_url = get_the_post_thumbnail_url( $post, 'large' );
+	} elseif ( $default_image ) {
+		$image_url = $default_image;
+	} else {
+		$image_url = get_template_directory_uri() . '/assets/images/knowledge/featured-pump.png';
+	}
+
+	return array(
+		'id'       => $post->ID,
+		'title'    => get_the_title( $post ),
+		'excerpt'  => wp_trim_words( get_the_excerpt( $post ), $excerpt_words, '...' ),
+		'url'      => get_permalink( $post ),
+		'image'    => $image_url,
+		'category' => $category_name,
+		'author'   => get_the_author_meta( 'display_name', (int) $post->post_author ) ?: 'Vạn Phúc Care',
+		'date'     => get_the_date( 'd/m/Y', $post ),
+	);
+}
+
+/**
  * Returns canonical definitions of knowledge sub-categories.
  *
  * Single Source of Truth for icons, labels, descriptions, and alias slugs.

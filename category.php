@@ -125,39 +125,60 @@ $main_title     = $is_all_archive ? __( 'Tất cả bài viết', 'vanphuccare' 
 					<?php echo esc_html( $main_title ); ?>
 				</h2>
 
-				<?php if ( have_posts() ) : ?>
+				<?php
+				$current_page    = max( 1, (int) get_query_var( 'paged' ) );
+				$pinned_post_ids = array();
+				$pinned_posts    = array();
+
+				// On Page 1, resolve curated pinned posts (2 to 5 posts) from Term Meta.
+				if ( 1 === $current_page && $current_id > 0 ) {
+					$saved_pinned = get_term_meta( $current_id, 'vpc_featured_post_ids', true );
+					if ( is_array( $saved_pinned ) ) {
+						foreach ( $saved_pinned as $slot_id ) {
+							$slot_id = absint( $slot_id );
+							if ( $slot_id > 0 && ! in_array( $slot_id, $pinned_post_ids, true ) ) {
+								$p_obj = get_post( $slot_id );
+								if ( $p_obj instanceof WP_Post && 'publish' === $p_obj->post_status ) {
+									$pinned_post_ids[] = $slot_id;
+									$pinned_posts[]    = $p_obj;
+								}
+							}
+						}
+					}
+				}
+
+				$has_any_posts = have_posts() || ! empty( $pinned_posts );
+				?>
+
+				<?php if ( $has_any_posts ) : ?>
 					<div class="vpc-knowledge-article-stack">
 						<?php
-						while ( have_posts() ) : the_post();
-							$categories_list = get_the_category();
+						$card_context_name = ( ! $is_all_archive && ! empty( $current_name ) ) ? $current_name : '';
 
-							// If browsing a specific sub-category (e.g. Mang thai), the card label matches the active category context (matching Production behavior).
-							// If browsing 'Tất cả', pick the most specific child category (excluding the parent 'Kiến thức').
-							if ( ! $is_all_archive && ! empty( $current_name ) ) {
-								$cat_display = $current_name;
-							} else {
-								$primary_term = function_exists( 'vanphuccare_get_primary_category' )
-									? vanphuccare_get_primary_category( get_the_ID() )
-									: null;
-								$cat_display  = $primary_term ? $primary_term->name : __( 'Cẩm nang cho mẹ', 'vanphuccare' );
+						// 1. Render Pinned Posts (Top 1 -> Top N) on Page 1 (Clean Figma style, no extra badges).
+						foreach ( $pinned_posts as $pinned_post ) {
+							$article_data = function_exists( 'vpc_format_knowledge_card' )
+								? vpc_format_knowledge_card( $pinned_post, $asset( 'mother-baby.jpeg' ), 32, $card_context_name )
+								: array();
+
+							if ( ! empty( $article_data ) ) {
+								get_template_part( 'template-parts/knowledge/card-horizontal', null, array( 'article' => $article_data ) );
+							}
+						}
+
+						// 2. Render Chronological Feed (Newest first), strictly skipping pinned posts to prevent duplicates.
+						while ( have_posts() ) : the_post();
+							if ( in_array( get_the_ID(), $pinned_post_ids, true ) ) {
+								continue;
 							}
 
-							$thumb_url = has_post_thumbnail()
-								? get_the_post_thumbnail_url( get_the_ID(), 'large' )
-								: $asset( 'mother-baby.jpeg' );
+							$article_data = function_exists( 'vpc_format_knowledge_card' )
+								? vpc_format_knowledge_card( get_post(), $asset( 'mother-baby.jpeg' ), 32, $card_context_name )
+								: array();
 
-							$article_data = array(
-								'id'       => get_the_ID(),
-								'title'    => get_the_title(),
-								'excerpt'  => wp_trim_words( get_the_excerpt(), 32, '...' ),
-								'url'      => get_permalink(),
-								'image'    => $thumb_url,
-								'category' => $cat_display,
-								'author'   => get_the_author_meta( 'display_name', (int) get_post()->post_author ) ?: 'Vạn Phúc Care',
-								'date'     => get_the_date( 'd/m/Y' ),
-							);
-
-							get_template_part( 'template-parts/knowledge/card-horizontal', null, array( 'article' => $article_data ) );
+							if ( ! empty( $article_data ) ) {
+								get_template_part( 'template-parts/knowledge/card-horizontal', null, array( 'article' => $article_data ) );
+							}
 						endwhile;
 						?>
 					</div>

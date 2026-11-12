@@ -52,6 +52,7 @@ function vpc_handle_consultation_submission() {
 	$address           = isset( $_POST['address'] ) ? sanitize_text_field( wp_unslash( $_POST['address'] ) ) : '';
 	$question  = isset( $_POST['question'] ) ? sanitize_textarea_field( wp_unslash( $_POST['question'] ) ) : ( isset( $_POST['customer_note'] ) ? sanitize_textarea_field( wp_unslash( $_POST['customer_note'] ) ) : ( isset( $_POST['note'] ) ? sanitize_textarea_field( wp_unslash( $_POST['note'] ) ) : '' ) );
 	$captcha_token     = isset( $_POST['captcha_token'] ) ? sanitize_text_field( wp_unslash( $_POST['captcha_token'] ) ) : ( isset( $_POST['cf-turnstile-response'] ) ? sanitize_text_field( wp_unslash( $_POST['cf-turnstile-response'] ) ) : ( isset( $_POST['captchaToken'] ) ? sanitize_text_field( wp_unslash( $_POST['captchaToken'] ) ) : '' ) );
+	$client_submission_id = isset( $_POST['submission_id'] ) ? sanitize_text_field( wp_unslash( $_POST['submission_id'] ) ) : ( isset( $_POST['idempotency_key'] ) ? sanitize_text_field( wp_unslash( $_POST['idempotency_key'] ) ) : '' );
 
 	if ( empty( $full_name ) || empty( $phone ) ) {
 		wp_send_json_error( array(
@@ -151,13 +152,18 @@ function vpc_handle_consultation_submission() {
 		$payload['captchaToken'] = $captcha_token;
 	}
 
-	$uuid = function_exists( 'wp_generate_uuid4' ) ? wp_generate_uuid4() : sprintf( '%04x%04x-%04x-4%03x-%04x-%04x%04x%04x', mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0x0fff ), mt_rand( 0x8000, 0xbfff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ) );
+	$uuid_v4_regex = '/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i';
+	if ( ! empty( $client_submission_id ) && preg_match( $uuid_v4_regex, $client_submission_id ) ) {
+		$submission_id = strtolower( $client_submission_id );
+	} else {
+		$submission_id = function_exists( 'wp_generate_uuid4' ) ? wp_generate_uuid4() : sprintf( '%04x%04x-%04x-4%03x-%04x-%04x%04x%04x', mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0x0fff ), mt_rand( 0, 0x8000, 0xbfff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ) );
+	}
 	$origin = function_exists( 'untrailingslashit' ) ? untrailingslashit( home_url() ) : rtrim( home_url(), '/' );
 
 	$default_headers = array(
 		'Content-Type'    => 'application/json',
 		'Accept'          => 'application/json',
-		'Idempotency-Key' => $uuid,
+		'Idempotency-Key' => $submission_id,
 		'Origin'          => $origin,
 	);
 
@@ -169,20 +175,22 @@ function vpc_handle_consultation_submission() {
 
 	$response_code = wp_remote_retrieve_response_code( $response );
 	$response_body = wp_remote_retrieve_body( $response );
-	$decoded_res   = json_decode( $response_body, true );
+	$decoded_res   = is_string( $response_body ) ? json_decode( $response_body, true ) : null;
 
-	if ( is_wp_error( $response ) || $response_code < 200 || $response_code >= 300 ) {
+	$lead_id  = ( isset( $decoded_res['data']['leadId'] ) && is_string( $decoded_res['data']['leadId'] ) ) ? trim( $decoded_res['data']['leadId'] ) : '';
+	$event_id = ( isset( $decoded_res['data']['eventId'] ) && is_string( $decoded_res['data']['eventId'] ) ) ? trim( $decoded_res['data']['eventId'] ) : '';
+	$is_business_success = ( is_array( $decoded_res ) && ! empty( $decoded_res['status'] ) && true === $decoded_res['status'] && ! empty( $lead_id ) );
+
+	if ( is_wp_error( $response ) || $response_code < 200 || $response_code >= 300 || ! $is_business_success ) {
 		error_log( 'VPC consultation lead API delivery failed. HTTP: ' . $response_code ); // No personally identifiable data in logs.
-		$error_message = $decoded_res['message'] ?? ( $decoded_res['error']['message'] ?? 'Chưa thể gửi thông tin đến bộ phận tư vấn. Vui lòng thử lại hoặc gọi hotline.' );
+		$error_message = ( is_array( $decoded_res ) && ! empty( $decoded_res['message'] ) ) ? $decoded_res['message'] : ( ( is_array( $decoded_res ) && ! empty( $decoded_res['error']['message'] ) ) ? $decoded_res['error']['message'] : 'Chưa thể gửi thông tin đến bộ phận tư vấn. Vui lòng thử lại hoặc gọi hotline.' );
+		$error_code    = ( is_array( $decoded_res ) && ! empty( $decoded_res['error']['code'] ) ) ? $decoded_res['error']['code'] : ( ( $response_code < 200 || $response_code >= 300 ) ? 'API_DELIVERY_FAILED' : 'BUSINESS_REJECTED' );
 		wp_send_json_error( array(
 			'message' => $error_message,
-			'code'    => $decoded_res['error']['code'] ?? 'API_DELIVERY_FAILED',
+			'code'    => $error_code,
 		), ( $response_code >= 400 && $response_code < 600 ) ? $response_code : 502 );
 	}
 	set_transient( $rate_key, 1, MINUTE_IN_SECONDS );
-
-	$lead_id  = $decoded_res['data']['leadId'] ?? '';
-	$event_id = $decoded_res['data']['eventId'] ?? '';
 
 	wp_send_json_success( array(
 		'message' => 'Cảm ơn Ba/Mẹ đã gửi thông tin. Đội ngũ chuyên gia y tế của Vạn Phúc Care sẽ liên hệ tư vấn chi tiết trong thời gian sớm nhất.',

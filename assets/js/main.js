@@ -552,8 +552,23 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	});
 
+	function generateUUIDv4() {
+		if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+			return crypto.randomUUID();
+		}
+		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+			const r = (Math.random() * 16) | 0;
+			const v = c === 'x' ? r : (r & 0x3) | 0x8;
+			return v.toString(16);
+		});
+	}
+
 	// Consultation Form AJAX Submission
 	function handleFormSubmission(form) {
+		if (!form.dataset.vpcSubmissionId) {
+			form.dataset.vpcSubmissionId = generateUUIDv4();
+		}
+
 		const status = document.createElement('p');
 		status.className = 'hidden mt-3 text-sm font-medium';
 		status.setAttribute('role', 'status');
@@ -592,10 +607,16 @@ document.addEventListener('DOMContentLoaded', function () {
 			if (window.vpcData && window.vpcData.nonce) {
 				formData.set('nonce', window.vpcData.nonce);
 			}
+			if (!form.dataset.vpcSubmissionId) {
+				form.dataset.vpcSubmissionId = generateUUIDv4();
+			}
+			formData.append('submission_id', form.dataset.vpcSubmissionId);
 
 			function onSubmissionSuccess(msg, leadData) {
 				try { sessionStorage.removeItem('vpcConsultationRetry'); } catch (ignore) {}
 				form.reset();
+				// Renew submissionId for any future separate submission from this form
+				form.dataset.vpcSubmissionId = generateUUIDv4();
 				// Reset custom select label if exists
 				const labelSpan = form.querySelector('[data-select-label]');
 				if (labelSpan) {
