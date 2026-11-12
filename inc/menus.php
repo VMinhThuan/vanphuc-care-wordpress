@@ -17,8 +17,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 function vanphuccare_register_menus() {
 	register_nav_menus(
 		array(
-			'primary' => esc_html__( 'Primary Menu', 'vanphuccare' ),
-			'footer'  => esc_html__( 'Footer Menu', 'vanphuccare' ),
+			'primary'          => esc_html__( 'Primary Menu (Thanh điều hướng chính)', 'vanphuccare' ),
+			'footer_services'  => esc_html__( 'Footer - Cột Dịch vụ', 'vanphuccare' ),
+			'footer_knowledge' => esc_html__( 'Footer - Cột Kiến thức', 'vanphuccare' ),
+			'footer_news'      => esc_html__( 'Footer - Cột Tin tức & Sự kiện', 'vanphuccare' ),
+			'footer_legal'     => esc_html__( 'Footer - Liên kết Chân trang (Pháp lý)', 'vanphuccare' ),
+			'footer'           => esc_html__( 'Footer Menu (Kế thừa)', 'vanphuccare' ),
 		)
 	);
 }
@@ -207,7 +211,12 @@ function vanphuccare_is_service_menu_item( $item ) {
 	$menu_title = isset( $item->title ) ? trim( wp_strip_all_tags( $item->title ) ) : '';
 	$menu_url   = isset( $item->url ) ? (string) $item->url : '';
 
-	return 'Dịch vụ' === $menu_title || false !== strpos( $menu_url, '/dich-vu' );
+	if ( 'Dịch vụ' === $menu_title ) {
+		return true;
+	}
+
+	$path = trim( (string) wp_parse_url( $menu_url, PHP_URL_PATH ), '/' );
+	return 'dich-vu' === $path;
 }
 
 /**
@@ -221,7 +230,10 @@ function vanphuccare_is_service_menu_item( $item ) {
  * @return string
  */
 function vanphuccare_service_menu_start_el( $item_output, $item, $depth, $args ) {
-	if ( 0 !== (int) $depth || ! vanphuccare_is_service_menu_item( $item ) ) {
+	$theme_location = isset( $args->theme_location ) ? (string) $args->theme_location : '';
+
+	// Ensure the chevron toggle and dropdown are strictly applied ONLY to the primary header menu.
+	if ( ! in_array( $theme_location, array( 'primary', '' ), true ) || 0 !== (int) $depth || ! vanphuccare_is_service_menu_item( $item ) ) {
 		return $item_output;
 	}
 
@@ -251,11 +263,17 @@ add_filter( 'walker_nav_menu_start_el', 'vanphuccare_service_menu_start_el', 10,
 /**
  * Marks the Dịch vụ parent item active on every page in the service group.
  *
- * @param array   $classes Menu classes.
- * @param WP_Post $item    Menu item.
+ * @param array    $classes Menu classes.
+ * @param WP_Post  $item    Menu item.
+ * @param stdClass $args    wp_nav_menu args.
  * @return array
  */
-function vanphuccare_service_menu_group_class( $classes, $item ) {
+function vanphuccare_service_menu_group_class( $classes, $item, $args = null ) {
+	$theme_location = ( isset( $args ) && is_object( $args ) && isset( $args->theme_location ) ) ? (string) $args->theme_location : '';
+	if ( ! in_array( $theme_location, array( 'primary', '' ), true ) ) {
+		return $classes;
+	}
+
 	if ( vanphuccare_is_service_group_page() && vanphuccare_is_service_menu_item( $item ) ) {
 		$classes[] = 'current-menu-item';
 	}
@@ -266,7 +284,7 @@ function vanphuccare_service_menu_group_class( $classes, $item ) {
 
 	return array_unique( $classes );
 }
-add_filter( 'nav_menu_css_class', 'vanphuccare_service_menu_group_class', 10, 2 );
+add_filter( 'nav_menu_css_class', 'vanphuccare_service_menu_group_class', 10, 3 );
 
 /**
  * Adds the active state to an assigned menu's Ở cữ item.
@@ -420,3 +438,92 @@ function vanphuccare_mobile_menu_fallback() {
 	}
 	echo '</ul>';
 }
+
+/**
+ * Filters CSS classes for footer menu items to maintain identical Tailwind styling.
+ *
+ * @param array    $classes Array of the CSS classes that are applied to the menu item's `<li>` element.
+ * @param WP_Post  $item    The current menu item.
+ * @param stdClass $args    An object of wp_nav_menu() arguments.
+ * @return array
+ */
+function vanphuccare_footer_nav_menu_css_class( $classes, $item, $args ) {
+	$location = isset( $args->theme_location ) ? (string) $args->theme_location : '';
+
+	if ( in_array( $location, array( 'footer_services', 'footer_knowledge', 'footer_news', 'footer' ), true ) ) {
+		$classes[] = 'h-6';
+		$classes[] = 'flex';
+		$classes[] = 'items-center';
+
+		if ( 'footer_news' === $location ) {
+			$title = isset( $item->title ) ? trim( wp_strip_all_tags( $item->title ) ) : '';
+			if ( 'Mẹ và bé' === $title ) {
+				$classes[] = 'footer-news-mother-baby';
+			}
+		}
+	} elseif ( 'footer_legal' === $location ) {
+		$url   = isset( $item->url ) ? (string) $item->url : '';
+		$title = isset( $item->title ) ? trim( wp_strip_all_tags( $item->title ) ) : '';
+
+		if ( false !== strpos( $url, 'dieu-khoan' ) || false !== strpos( $title, 'Điều khoản' ) ) {
+			$classes[] = 'vpc-footer-legal-terms';
+			$classes[] = 'order-1';
+			$classes[] = 'xl:order-none';
+		} elseif ( false !== strpos( $url, 'chinh-sach' ) || false !== strpos( $title, 'Chính sách' ) || false !== strpos( $title, 'Bảo mật' ) ) {
+			$classes[] = 'vpc-footer-legal-privacy';
+			$classes[] = 'order-2';
+			$classes[] = 'xl:order-none';
+		} elseif ( false !== strpos( $url, 'tuyen-dung' ) || false !== strpos( $title, 'Tuyển dụng' ) ) {
+			$classes[] = 'vpc-footer-legal-careers';
+			$classes[] = 'order-3';
+			$classes[] = 'xl:order-none';
+		} elseif ( false !== strpos( $url, 'lien-he' ) || false !== strpos( $title, 'Liên hệ' ) ) {
+			$classes[] = 'vpc-footer-legal-contact';
+			$classes[] = 'order-4';
+			$classes[] = 'xl:order-none';
+		}
+	}
+
+	return array_unique( $classes );
+}
+add_filter( 'nav_menu_css_class', 'vanphuccare_footer_nav_menu_css_class', 10, 3 );
+
+/**
+ * Adds hover and transition classes to links in footer menus.
+ *
+ * @param array    $atts Link attributes.
+ * @param WP_Post  $item Menu item.
+ * @param stdClass $args wp_nav_menu arguments.
+ * @return array
+ */
+function vanphuccare_footer_nav_menu_link_attributes( $atts, $item, $args ) {
+	$location = isset( $args->theme_location ) ? (string) $args->theme_location : '';
+
+	if ( in_array( $location, array( 'footer_services', 'footer_knowledge', 'footer_news', 'footer', 'footer_legal' ), true ) ) {
+		$existing_class = isset( $atts['class'] ) ? trim( $atts['class'] ) : '';
+		$atts['class']   = $existing_class ? $existing_class . ' hover:text-text-body-muted transition-colors' : 'hover:text-text-body-muted transition-colors';
+	}
+
+	return $atts;
+}
+add_filter( 'nav_menu_link_attributes', 'vanphuccare_footer_nav_menu_link_attributes', 10, 3 );
+
+/**
+ * Normalizes title for footer news items to support Figma desktop/mobile label switching.
+ *
+ * @param string   $title The menu item's title.
+ * @param WP_Post  $item  The current menu item.
+ * @param stdClass $args  An object of wp_nav_menu() arguments.
+ * @return string
+ */
+function vanphuccare_footer_news_menu_title( $title, $item, $args ) {
+	if ( isset( $args->theme_location ) && 'footer_news' === $args->theme_location ) {
+		$clean_title = trim( wp_strip_all_tags( $title ) );
+		if ( 'Tin tức & sự kiện' === $clean_title || 'Tin mới & sự kiện nổi bật' === $clean_title ) {
+			return '<span class="footer-news-label-desktop">Tin tức & sự kiện</span><span class="footer-news-label-mobile">Tin mới & sự kiện nổi bật</span>';
+		}
+	}
+	return $title;
+}
+add_filter( 'nav_menu_item_title', 'vanphuccare_footer_news_menu_title', 10, 3 );
+

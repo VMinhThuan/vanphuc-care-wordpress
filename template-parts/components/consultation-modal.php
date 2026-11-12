@@ -192,6 +192,9 @@ $gestational_age_options = vpc_get_gestational_age_options();
 				?>
 			</div>
 
+			<!-- Cloudflare Turnstile CAPTCHA -->
+			<?php get_template_part( 'template-parts/components/turnstile' ); ?>
+
 			<!-- Row 5: Submit Button (40px mobile, 48px desktop) -->
 			<div>
 				<?php

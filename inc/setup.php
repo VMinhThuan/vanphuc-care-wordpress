@@ -89,6 +89,85 @@ function vanphuccare_customize_contact_settings( $wp_customize ) {
 		'description' => 'URL Instagram của Vạn Phúc Care.',
 	) );
 
+	// Facebook URL
+	$wp_customize->add_setting( 'vpc_facebook_url', array(
+		'default'           => 'https://facebook.com/vanphuccare',
+		'sanitize_callback' => 'esc_url_raw',
+	) );
+	$wp_customize->add_control( 'vpc_facebook_url', array(
+		'label'       => 'Facebook URL',
+		'section'     => 'vpc_contact_settings',
+		'type'        => 'url',
+		'description' => 'URL fanpage Facebook của Vạn Phúc Care.',
+	) );
+
+	// TikTok URL
+	$wp_customize->add_setting( 'vpc_tiktok_url', array(
+		'default'           => 'https://tiktok.com/@vanphuccare',
+		'sanitize_callback' => 'esc_url_raw',
+	) );
+	$wp_customize->add_control( 'vpc_tiktok_url', array(
+		'label'       => 'TikTok URL',
+		'section'     => 'vpc_contact_settings',
+		'type'        => 'url',
+		'description' => 'URL kênh TikTok của Vạn Phúc Care.',
+	) );
+
+	// Hotline tư vấn
+	$wp_customize->add_setting( 'vpc_hotline_tu_van', array(
+		'default'           => '(024) 6329 6698',
+		'sanitize_callback' => 'sanitize_text_field',
+	) );
+	$wp_customize->add_control( 'vpc_hotline_tu_van', array(
+		'label'       => 'Hotline tư vấn',
+		'section'     => 'vpc_contact_settings',
+		'type'        => 'text',
+	) );
+
+	// Hotline hỗ trợ
+	$wp_customize->add_setting( 'vpc_hotline_ho_tro', array(
+		'default'           => '037 624 6673',
+		'sanitize_callback' => 'sanitize_text_field',
+	) );
+	$wp_customize->add_control( 'vpc_hotline_ho_tro', array(
+		'label'       => 'Hotline hỗ trợ',
+		'section'     => 'vpc_contact_settings',
+		'type'        => 'text',
+	) );
+
+	// Email CSKH
+	$wp_customize->add_setting( 'vpc_email_cskh', array(
+		'default'           => 'cskh@vanphuccare.vn',
+		'sanitize_callback' => 'sanitize_email',
+	) );
+	$wp_customize->add_control( 'vpc_email_cskh', array(
+		'label'       => 'Email CSKH',
+		'section'     => 'vpc_contact_settings',
+		'type'        => 'email',
+	) );
+
+	// Email liên hệ
+	$wp_customize->add_setting( 'vpc_email_info', array(
+		'default'           => 'info@vanphuccare.vn',
+		'sanitize_callback' => 'sanitize_email',
+	) );
+	$wp_customize->add_control( 'vpc_email_info', array(
+		'label'       => 'Email liên hệ',
+		'section'     => 'vpc_contact_settings',
+		'type'        => 'email',
+	) );
+
+	// Địa chỉ công ty
+	$wp_customize->add_setting( 'vpc_company_address', array(
+		'default'           => '35B/399 Âu Cơ, phường Tây Hồ, TP. Hà Nội',
+		'sanitize_callback' => 'sanitize_text_field',
+	) );
+	$wp_customize->add_control( 'vpc_company_address', array(
+		'label'       => 'Địa chỉ công ty (Trung tâm ở cữ)',
+		'section'     => 'vpc_contact_settings',
+		'type'        => 'text',
+	) );
+
 	$wp_customize->add_setting( 'vpc_consultation_api_endpoint', array(
 		'sanitize_callback' => 'vpc_sanitize_consultation_api_endpoint',
 	) );
@@ -97,6 +176,17 @@ function vanphuccare_customize_contact_settings( $wp_customize ) {
 		'section'     => 'vpc_contact_settings',
 		'type'        => 'url',
 		'description' => 'Bắt buộc dùng HTTPS. Theme chỉ chuyển lead đến endpoint này; không lưu lead vào WordPress hoặc thay thế bằng email.',
+	) );
+
+	$wp_customize->add_setting( 'vpc_turnstile_site_key', array(
+		'default'           => '0x4AAAAAAFfV0g-yO07UT7yb',
+		'sanitize_callback' => 'sanitize_text_field',
+	) );
+	$wp_customize->add_control( 'vpc_turnstile_site_key', array(
+		'label'       => 'Cloudflare Turnstile Site Key',
+		'section'     => 'vpc_contact_settings',
+		'type'        => 'text',
+		'description' => 'Khóa công khai Cloudflare Turnstile để xác minh chống spam bot.',
 	) );
 }
 add_action( 'customize_register', 'vanphuccare_customize_contact_settings' );

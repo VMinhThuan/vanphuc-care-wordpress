@@ -91,6 +91,8 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						       class="vpc-consultation-control">
 					</div>
 
+					<?php get_template_part( 'template-parts/components/turnstile' ); ?>
+
 					<div class="vpc-consultation-submit">
 						<button type="submit" class="vpc-button">
 							Gửi yêu cầu tư vấn

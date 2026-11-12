@@ -166,6 +166,8 @@ $gestational_age_options = vpc_get_gestational_age_options();
 								          class="w-full min-h-[58px] sm:min-h-[64px] px-3 sm:px-4 py-3 rounded-xl border border-border-disabled-default bg-surface-background-default text-text-body-default placeholder:text-text-disabled-light font-body font-medium text-base focus:border-border-primary-default focus:ring-1 focus:ring-border-primary-default focus:outline-none transition-all resize-none leading-relaxed"></textarea>
 							</div>
 
+							<?php get_template_part( 'template-parts/components/turnstile' ); ?>
+
 							<!-- Submit Button: Pill button matching Figma -->
 							<div class="pt-0">
 								<button type="submit" class="vpc-button w-full xl:w-auto px-6 h-10 sm:h-12 bg-surface-button-primary-default hover:bg-surface-button-primary-hover active:bg-surface-button-primary-pressed text-text-inverse-default rounded-full flex items-center justify-center transition-all cursor-pointer font-body font-medium text-base">

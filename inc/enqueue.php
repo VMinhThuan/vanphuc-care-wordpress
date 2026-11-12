@@ -247,16 +247,27 @@ function vanphuccare_enqueue_assets() {
 		vanphuccare_enqueue_theme_script( 'vanphuccare-milk', 'assets/js/milk.js', array(), true );
 	}
 
+	// Enqueue Cloudflare Turnstile API.
+	wp_enqueue_script( 'cloudflare-turnstile', 'https://challenges.cloudflare.com/turnstile/v0/api.js', array(), null, true );
+
 	wp_localize_script(
 		'vanphuccare-main',
 		'vpcData',
 		array(
-			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-			'nonce'   => wp_create_nonce( 'vpc_consultation_nonce' ),
+			'ajaxUrl'          => admin_url( 'admin-ajax.php' ),
+			'nonce'            => wp_create_nonce( 'vpc_consultation_nonce' ),
+			'turnstileSiteKey' => defined( 'VPC_TURNSTILE_SITE_KEY' ) ? VPC_TURNSTILE_SITE_KEY : get_theme_mod( 'vpc_turnstile_site_key', '0x4AAAAAAFfV0g-yO07UT7yb' ),
 		)
 	);
 }
 add_action( 'wp_enqueue_scripts', 'vanphuccare_enqueue_assets' );
+
+add_filter( 'script_loader_tag', function ( $tag, $handle, $src ) {
+	if ( 'cloudflare-turnstile' === $handle ) {
+		return sprintf( '<script src="%s" async defer></script>' . "\n", esc_url( $src ) );
+	}
+	return $tag;
+}, 10, 3 );
 
 /**
  * Preloads only the primary homepage hero image so the first viewport can

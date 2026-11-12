@@ -1,4 +1,4 @@
-/**
+ /**
  * Shared mobile footer layout.
  *
  * The Figma mobile footer is one vertical flow shared by every page. The
@@ -10,6 +10,34 @@
 	display: none;
 }
 
+/* Legal menu list styling when rendered via wp_nav_menu() */
+.site-footer ul.vpc-footer-legal {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.site-footer ul.vpc-footer-legal li {
+	display: inline-flex;
+	align-items: center;
+}
+
+.site-footer ul.vpc-footer-legal li + li::before {
+	content: "|";
+	margin-right: 0.75rem;
+	color: #525252;
+	user-select: none;
+}
+
+@media (max-width: 1279px) {
+	.site-footer ul.vpc-footer-legal li {
+		display: flex;
+	}
+
+	.site-footer ul.vpc-footer-legal li + li::before {
+		display: none;
+	}
+}
 @media (max-width: 767px) {
 	.site-footer .footer-news-label-desktop {
 		display: none;

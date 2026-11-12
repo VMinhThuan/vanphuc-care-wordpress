@@ -10,10 +10,9 @@ $icons_dir  = get_template_directory_uri() . '/assets/icons';
 $size       = $args['size'] ?? 'md'; // sm: 28px, md: 36px, lg: 44px
 $class      = $args['class'] ?? '';
 $show_label = ! empty( $args['show_label'] );
-$instagram_url = get_theme_mod( 'vpc_instagram_url', '' );
-if ( empty( $instagram_url ) ) {
-	$instagram_url = 'https://www.instagram.com/vanphuccare?utm_source=ig_web_button_share_sheet&exln=ZDNlZDc0MzIxNw==';
-}
+$instagram_url = get_theme_mod( 'vpc_instagram_url', 'https://www.instagram.com/vanphuccare?utm_source=ig_web_button_share_sheet&exln=ZDNlZDc0MzIxNw==' );
+$facebook_url  = get_theme_mod( 'vpc_facebook_url', 'https://facebook.com/vanphuccare' );
+$tiktok_url    = get_theme_mod( 'vpc_tiktok_url', 'https://tiktok.com/@vanphuccare' );
 
 $dim_classes = array(
 	'sm' => 'w-7 h-7 min-w-7 min-h-7',
@@ -43,13 +42,13 @@ $channels = array(
 	),
 	array(
 		'name'  => 'Facebook',
-		'url'   => 'https://facebook.com/vanphuccare',
+		'url'   => $facebook_url,
 		'file'  => 'facebook.svg',
 		'color' => '#1877F2',
 	),
 	array(
 		'name'  => 'TikTok',
-		'url'   => 'https://tiktok.com/@vanphuccare',
+		'url'   => $tiktok_url,
 		'file'  => 'tiktok.svg',
 		'color' => '#000000',
 	),

@@ -579,6 +579,9 @@ document.addEventListener('DOMContentLoaded', function () {
 			status.textContent = message;
 			status.classList.remove('hidden', 'text-text-success-default', 'text-text-error-default');
 			status.classList.add(isError ? 'text-text-error-default' : 'text-text-success-default');
+			if (isError && typeof window !== 'undefined' && window.turnstile && typeof window.turnstile.reset === 'function') {
+				try { window.turnstile.reset(); } catch (ignore) {}
+			}
 		}
 
 		form.addEventListener('submit', function (e) {
@@ -617,6 +620,10 @@ document.addEventListener('DOMContentLoaded', function () {
 				form.reset();
 				// Renew submissionId for any future separate submission from this form
 				form.dataset.vpcSubmissionId = generateUUIDv4();
+				// Reset Turnstile captcha widget if active
+				if (typeof window !== 'undefined' && window.turnstile && typeof window.turnstile.reset === 'function') {
+					try { window.turnstile.reset(); } catch (ignore) {}
+				}
 				// Reset custom select label if exists
 				const labelSpan = form.querySelector('[data-select-label]');
 				if (labelSpan) {

@@ -16,11 +16,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$theme_uri     = get_template_directory_uri();
-$instagram_url = get_theme_mod( 'vpc_instagram_url', '' );
-if ( empty( $instagram_url ) ) {
-	$instagram_url = 'https://www.instagram.com/vanphuccare?utm_source=ig_web_button_share_sheet&exln=ZDNlZDc0MzIxNw==';
-}
+$theme_uri       = get_template_directory_uri();
+$instagram_url   = get_theme_mod( 'vpc_instagram_url', 'https://www.instagram.com/vanphuccare?utm_source=ig_web_button_share_sheet&exln=ZDNlZDc0MzIxNw==' );
+$facebook_url    = get_theme_mod( 'vpc_facebook_url', 'https://facebook.com/vanphuccare' );
+$tiktok_url      = get_theme_mod( 'vpc_tiktok_url', 'https://tiktok.com/@vanphuccare' );
+$hotline_tu_van  = get_theme_mod( 'vpc_hotline_tu_van', '(024) 6329 6698' );
+$hotline_ho_tro  = get_theme_mod( 'vpc_hotline_ho_tro', '037 624 6673' );
+$email_cskh      = get_theme_mod( 'vpc_email_cskh', 'cskh@vanphuccare.vn' );
+$email_info      = get_theme_mod( 'vpc_email_info', 'info@vanphuccare.vn' );
+$company_address = get_theme_mod( 'vpc_company_address', '35B/399 Âu Cơ, phường Tây Hồ, TP. Hà Nội' );
 ?>
 </main><!-- #primary -->
 
@@ -69,19 +73,19 @@ if ( empty( $instagram_url ) ) {
 					
 					<ul class="space-y-3 xl:space-y-5 text-base font-medium text-text-body-default leading-6 xl:leading-relaxed">
 						<li>
-							<span>Trung tâm ở cữ: 35B/399 Âu Cơ, phường Tây Hồ, TP. Hà Nội</span>
+							<span>Trung tâm ở cữ: <?php echo esc_html( $company_address ); ?></span>
 						</li>
 						<li>
-							<span>Hotline tư vấn: <a href="tel:02463296698" class="hover:text-text-body-muted transition-colors">(024) 6329 6698</a></span>
+							<span>Hotline tư vấn: <a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $hotline_tu_van ) ); ?>" class="hover:text-text-body-muted transition-colors"><?php echo esc_html( $hotline_tu_van ); ?></a></span>
 						</li>
 						<li>
-							<span>Hotline hỗ trợ: <a href="tel:0376246673" class="hover:text-text-body-muted transition-colors">037 624 6673</a></span>
+							<span>Hotline hỗ trợ: <a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $hotline_ho_tro ) ); ?>" class="hover:text-text-body-muted transition-colors"><?php echo esc_html( $hotline_ho_tro ); ?></a></span>
 						</li>
 						<li>
-							<span>Email CSKH: <a href="mailto:cskh@vanphuccare.vn" class="hover:text-text-body-muted transition-colors">cskh@vanphuccare.vn</a></span>
+							<span>Email CSKH: <a href="mailto:<?php echo esc_attr( $email_cskh ); ?>" class="hover:text-text-body-muted transition-colors"><?php echo esc_html( $email_cskh ); ?></a></span>
 						</li>
 						<li>
-							<span>Email liên hệ: <a href="mailto:info@vanphuccare.vn" class="hover:text-text-body-muted transition-colors">info@vanphuccare.vn</a></span>
+							<span>Email liên hệ: <a href="mailto:<?php echo esc_attr( $email_info ); ?>" class="hover:text-text-body-muted transition-colors"><?php echo esc_html( $email_info ); ?></a></span>
 						</li>
 					</ul>
 				</div>
@@ -90,42 +94,98 @@ if ( empty( $instagram_url ) ) {
 			<!-- Column 2: DỊCH VỤ CỦA CHÚNG TÔI -->
 			<div class="vpc-footer-about-services hidden md:flex w-full sm:w-auto flex-col space-y-2 xl:space-y-3">
 				<h3 class="font-body text-base font-bold text-text-body-default uppercase xl:pb-1">
-					DỊCH VỤ CỦA CHÚNG TÔI
+					<?php esc_html_e( 'Dịch vụ của chúng tôi', 'vanphuccare' ); ?>
 				</h3>
-				<ul class="space-y-2 text-base font-medium text-text-body-default">
-					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/trung-tam-o-cu/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Trung tâm ở cữ</a></li>
-					<li class="h-6 flex items-center"><a href="https://edu.vanphuccare.vn" target="_blank" rel="noopener noreferrer" class="hover:text-text-body-muted transition-colors">Khóa học trực tuyến</a></li>
-					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/bao-mau-tai-nha/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Bảo mẫu tại nhà</a></li>
-					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/lop-hoc-tien-san/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Lớp học tiền sản</a></li>
-					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/dich-vu-tu-van-nuoi-con-easy-truc-tuyen/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Tư vấn nuôi con EASY</a></li>
-					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/tam-tre-so-sinh/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Tắm trẻ sơ sinh</a></li>
-					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/thong-tac-tia-sua/' ) ); ?>" class="hover:text-text-body-muted transition-colors"<?php echo vanphuccare_is_thong_tac_page() ? ' aria-current="page"' : ''; ?>>Thông tắc tia sữa</a></li>
-				</ul>
+				<?php
+				$services_location = has_nav_menu( 'footer_services' ) ? 'footer_services' : ( has_nav_menu( 'footer' ) ? 'footer' : '' );
+				if ( $services_location ) :
+					wp_nav_menu(
+						array(
+							'theme_location' => $services_location,
+							'container'      => false,
+							'menu_class'     => 'space-y-2 text-base font-medium text-text-body-default',
+							'items_wrap'     => '<ul class="%2$s">%3$s</ul>',
+							'depth'          => 1,
+							'fallback_cb'    => false,
+						)
+					);
+				else :
+				?>
+					<ul class="space-y-2 text-base font-medium text-text-body-default">
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/trung-tam-o-cu/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Trung tâm ở cữ</a></li>
+						<li class="h-6 flex items-center"><a href="https://edu.vanphuccare.vn" target="_blank" rel="noopener noreferrer" class="hover:text-text-body-muted transition-colors">Khóa học trực tuyến</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/bao-mau-tai-nha/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Bảo mẫu tại nhà</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/lop-hoc-tien-san/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Lớp học tiền sản</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/dich-vu-tu-van-nuoi-con-easy-truc-tuyen/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Tư vấn nuôi con EASY</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/tam-tre-so-sinh/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Tắm trẻ sơ sinh</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/thong-tac-tia-sua/' ) ); ?>" class="hover:text-text-body-muted transition-colors"<?php echo vanphuccare_is_thong_tac_page() ? ' aria-current="page"' : ''; ?>>Thông tắc tia sữa</a></li>
+					</ul>
+				<?php endif; ?>
 			</div>
 
 			<!-- Column 3: KIẾN THỨC -->
 			<div class="footer-link-column w-full sm:w-auto flex flex-col space-y-2 xl:space-y-3">
 				<h3 class="font-body text-sm md:text-base font-bold text-text-body-default uppercase xl:pb-1">
-					KIẾN THỨC
+					<?php esc_html_e( 'Kiến thức', 'vanphuccare' ); ?>
 				</h3>
-				<ul class="space-y-2 text-sm md:text-base font-medium text-text-body-default">
-					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#khoa-hoc-truc-tuyen' ) ); ?>" class="hover:text-text-body-muted transition-colors">Phương pháp EASY</a></li>
-					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#kien-thuc-nuoi-con' ) ); ?>" class="hover:text-text-body-muted transition-colors">Cẩm nang làm mẹ</a></li>
-					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#kien-thuc-nuoi-con' ) ); ?>" class="hover:text-text-body-muted transition-colors">Hội chứng biếng ăn</a></li>
-					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#kien-thuc-nuoi-con' ) ); ?>" class="hover:text-text-body-muted transition-colors">Ăn dặm toàn tập</a></li>
-					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#kien-thuc-nuoi-con' ) ); ?>" class="hover:text-text-body-muted transition-colors">Mang thai</a></li>
-				</ul>
+				<?php
+				if ( has_nav_menu( 'footer_knowledge' ) ) :
+					wp_nav_menu(
+						array(
+							'theme_location' => 'footer_knowledge',
+							'container'      => false,
+							'menu_class'     => 'space-y-2 text-sm md:text-base font-medium text-text-body-default',
+							'items_wrap'     => '<ul class="%2$s">%3$s</ul>',
+							'depth'          => 1,
+							'fallback_cb'    => false,
+						)
+					);
+				else :
+					$easy_cat      = get_category_by_slug( 'phuong-phap-easy' ) ?: get_category_by_slug( 'easy' );
+					$easy_url      = $easy_cat ? get_category_link( $easy_cat ) : home_url( '/#khoa-hoc-truc-tuyen' );
+					$cam_nang_cat  = get_category_by_slug( 'cam-nang-cho-me' ) ?: get_category_by_slug( 'cam-nang' );
+					$cam_nang_url  = $cam_nang_cat ? get_category_link( $cam_nang_cat ) : home_url( '/#kien-thuc-nuoi-con' );
+					$bieng_an_cat  = get_category_by_slug( 'hoi-chung-bieng-an' ) ?: get_category_by_slug( 'bieng-an' );
+					$bieng_an_url  = $bieng_an_cat ? get_category_link( $bieng_an_cat ) : home_url( '/#kien-thuc-nuoi-con' );
+					$an_dam_cat    = get_category_by_slug( 'an-dam' );
+					$an_dam_url    = $an_dam_cat ? get_category_link( $an_dam_cat ) : home_url( '/#kien-thuc-nuoi-con' );
+					$mang_thai_cat = get_category_by_slug( 'mang-thai' );
+					$mang_thai_url = $mang_thai_cat ? get_category_link( $mang_thai_cat ) : home_url( '/#kien-thuc-nuoi-con' );
+				?>
+					<ul class="space-y-2 text-sm md:text-base font-medium text-text-body-default">
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( $easy_url ); ?>" class="hover:text-text-body-muted transition-colors">Phương pháp EASY</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( $cam_nang_url ); ?>" class="hover:text-text-body-muted transition-colors">Cẩm nang làm mẹ</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( $bieng_an_url ); ?>" class="hover:text-text-body-muted transition-colors">Hội chứng biếng ăn</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( $an_dam_url ); ?>" class="hover:text-text-body-muted transition-colors">Ăn dặm toàn tập</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( $mang_thai_url ); ?>" class="hover:text-text-body-muted transition-colors">Mang thai</a></li>
+					</ul>
+				<?php endif; ?>
 			</div>
 
 			<!-- Column 4: TIN TỨC & SỰ KIỆN -->
 			<div class="footer-link-column w-full sm:w-auto flex flex-col space-y-2 xl:space-y-3">
 				<h3 class="font-body text-sm md:text-base font-bold text-text-body-default uppercase xl:pb-1">
-					TIN TỨC & SỰ KIỆN
+					<?php esc_html_e( 'Tin tức & sự kiện', 'vanphuccare' ); ?>
 				</h3>
-				<ul class="space-y-2 text-sm md:text-base font-medium text-text-body-default">
-					<li class="footer-news-mother-baby h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#kien-thuc-nuoi-con' ) ); ?>" class="hover:text-text-body-muted transition-colors">Mẹ và bé</a></li>
-					<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#kien-thuc-nuoi-con' ) ); ?>" class="hover:text-text-body-muted transition-colors"><span class="footer-news-label-desktop">Tin tức & sự kiện</span><span class="footer-news-label-mobile">Tin mới & sự kiện nổi bật</span></a></li>
-				</ul>
+				<?php
+				if ( has_nav_menu( 'footer_news' ) ) :
+					wp_nav_menu(
+						array(
+							'theme_location' => 'footer_news',
+							'container'      => false,
+							'menu_class'     => 'space-y-2 text-sm md:text-base font-medium text-text-body-default',
+							'items_wrap'     => '<ul class="%2$s">%3$s</ul>',
+							'depth'          => 1,
+							'fallback_cb'    => false,
+						)
+					);
+				else :
+				?>
+					<ul class="space-y-2 text-sm md:text-base font-medium text-text-body-default">
+						<li class="footer-news-mother-baby h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#kien-thuc-nuoi-con' ) ); ?>" class="hover:text-text-body-muted transition-colors">Mẹ và bé</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#kien-thuc-nuoi-con' ) ); ?>" class="hover:text-text-body-muted transition-colors"><span class="footer-news-label-desktop">Tin tức & sự kiện</span><span class="footer-news-label-mobile">Tin mới & sự kiện nổi bật</span></a></li>
+					</ul>
+				<?php endif; ?>
 			</div>
 
 		</div>
@@ -135,7 +195,7 @@ if ( empty( $instagram_url ) ) {
 			<!-- Social icon slots are 52x44 on mobile; the artwork itself stays 40px. -->
 			<div class="flex items-center gap-4">
 				<!-- Facebook -->
-				<a href="https://facebook.com/vanphuccare" target="_blank" rel="noopener noreferrer" 
+				<a href="<?php echo esc_url( $facebook_url ); ?>" target="_blank" rel="noopener noreferrer" 
 				   class="w-8 h-8 xl:w-12 xl:h-12 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center"
 				   aria-label="Facebook">
 					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/facebook.svg' ); ?>" alt="Facebook" class="w-8 h-8 xl:w-full xl:h-full object-contain">
@@ -147,7 +207,7 @@ if ( empty( $instagram_url ) ) {
 				</a>
 
 				<!-- TikTok -->
-				<a href="https://tiktok.com/@vanphuccare" target="_blank" rel="noopener noreferrer" 
+				<a href="<?php echo esc_url( $tiktok_url ); ?>" target="_blank" rel="noopener noreferrer" 
 				   class="w-8 h-8 xl:w-12 xl:h-12 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center"
 				   aria-label="TikTok">
 					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/tiktok.svg' ); ?>" alt="TikTok" class="w-8 h-8 xl:w-full xl:h-full object-contain">
@@ -182,15 +242,30 @@ if ( empty( $instagram_url ) ) {
 		</div>
 
 		<!-- Bottom Row: divider and navigation links on mobile; inline links on desktop. -->
-		<div class="vpc-footer-legal mt-8 border-t border-border-divider-default pt-8 flex flex-col xl:flex-row items-start xl:items-center justify-start gap-1 md:gap-2 xl:gap-3 text-sm md:text-base font-medium text-text-body-default xl:mt-0 xl:border-t-0 xl:pt-6">
-			<a href="<?php echo esc_url( home_url( '/dieu-khoan-su-dung' ) ); ?>" class="vpc-footer-legal-terms order-1 xl:order-none hover:text-text-body-muted transition-colors">Điều khoản sử dụng</a>
-			<span class="hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
-			<a href="<?php echo esc_url( home_url( '/chinh-sach-bao-mat' ) ); ?>" class="vpc-footer-legal-privacy order-2 xl:order-none hover:text-text-body-muted transition-colors">Chính sách bảo mật</a>
-			<span class="hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
-			<a href="<?php echo esc_url( home_url( '/tuyen-dung' ) ); ?>" class="vpc-footer-legal-careers order-3 xl:order-none hover:text-text-body-muted transition-colors">Tuyển dụng</a>
-			<span class="hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
-			<a href="<?php echo esc_url( home_url( '/lien-he' ) ); ?>" class="vpc-footer-legal-contact order-4 xl:order-none hover:text-text-body-muted transition-colors">Liên hệ</a>
-		</div>
+		<?php
+		if ( has_nav_menu( 'footer_legal' ) ) :
+			wp_nav_menu(
+				array(
+					'theme_location' => 'footer_legal',
+					'container'      => false,
+					'menu_class'     => 'vpc-footer-legal mt-8 border-t border-border-divider-default pt-8 flex flex-col xl:flex-row items-start xl:items-center justify-start gap-1 md:gap-2 xl:gap-3 text-sm md:text-base font-medium text-text-body-default xl:mt-0 xl:border-t-0 xl:pt-6',
+					'items_wrap'     => '<ul class="%2$s">%3$s</ul>',
+					'depth'          => 1,
+					'fallback_cb'    => false,
+				)
+			);
+		else :
+		?>
+			<div class="vpc-footer-legal mt-8 border-t border-border-divider-default pt-8 flex flex-col xl:flex-row items-start xl:items-center justify-start gap-1 md:gap-2 xl:gap-3 text-sm md:text-base font-medium text-text-body-default xl:mt-0 xl:border-t-0 xl:pt-6">
+				<a href="<?php echo esc_url( home_url( '/dieu-khoan-su-dung' ) ); ?>" class="vpc-footer-legal-terms order-1 xl:order-none hover:text-text-body-muted transition-colors">Điều khoản sử dụng</a>
+				<span class="hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
+				<a href="<?php echo esc_url( home_url( '/chinh-sach-bao-mat' ) ); ?>" class="vpc-footer-legal-privacy order-2 xl:order-none hover:text-text-body-muted transition-colors">Chính sách bảo mật</a>
+				<span class="hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
+				<a href="<?php echo esc_url( home_url( '/tuyen-dung' ) ); ?>" class="vpc-footer-legal-careers order-3 xl:order-none hover:text-text-body-muted transition-colors">Tuyển dụng</a>
+				<span class="hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
+				<a href="<?php echo esc_url( home_url( '/lien-he' ) ); ?>" class="vpc-footer-legal-contact order-4 xl:order-none hover:text-text-body-muted transition-colors">Liên hệ</a>
+			</div>
+		<?php endif; ?>
 
 	</div>
 </footer>

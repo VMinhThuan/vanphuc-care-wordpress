@@ -114,6 +114,7 @@ $map_url   = 'https://www.google.com/maps/place/V%E1%BA%A1n+Ph%C3%BAc+Care/@21.0
 					<label for="prenatal-note">Ghi chú</label>
 					<textarea id="prenatal-note" name="question" rows="2" placeholder="Cho chúng tôi biết thêm về nhu cầu của bạn!"></textarea>
 				</div>
+				<?php get_template_part( 'template-parts/components/turnstile' ); ?>
 				<button class="prenatal-button prenatal-button--primary" type="submit">Gửi yêu cầu tư vấn</button>
 			</form>
 		</div>

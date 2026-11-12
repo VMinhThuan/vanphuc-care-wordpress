@@ -60,6 +60,8 @@ $milk_packages = array(
 					<input type="text" name="customer_note" placeholder="Cho chúng tôi biết thêm về nhu cầu của bạn!" class="vpc-consultation-control">
 				</div>
 
+				<?php get_template_part( 'template-parts/components/turnstile' ); ?>
+
 				<div class="vpc-consultation-submit"><button type="submit" class="vpc-button">Gửi yêu cầu tư vấn</button></div>
 			</form>
 		</div>
