@@ -7,7 +7,7 @@
 	--recruitment-muted: #525252;
 	background: #f8f8f8;
 	color: var(--recruitment-ink);
-	padding-bottom: 96px;
+	padding-bottom: 0;
 }
 
 .vpc-recruitment-page h1,
@@ -55,6 +55,11 @@
 	height: 24px;
 }
 
+.vpc-recruitment-badge__mobile,
+.vpc-recruitment-search__mobile {
+	display: none;
+}
+
 .vpc-recruitment-hero h1 {
 	display: flex;
 	flex-direction: column;
@@ -95,10 +100,16 @@
 	box-shadow: 0 8px 24px rgba(26, 119, 186, 0.1);
 }
 
-.vpc-recruitment-search > img {
+.vpc-recruitment-search__icon {
 	width: 24px;
 	height: 24px;
 	flex: 0 0 24px;
+}
+
+.vpc-recruitment-search__icon img {
+	display: block;
+	width: 24px;
+	height: 24px;
 }
 
 .vpc-recruitment-search input {
@@ -456,52 +467,6 @@
 	object-position: center;
 }
 
-.vpc-recruitment-cta {
-	min-height: 224px;
-	padding: 48px 80px;
-	background: #f8f8f8;
-}
-
-.vpc-recruitment-cta__banner {
-	max-width: 1280px;
-	min-height: 128px;
-	margin: 0 auto;
-	padding: 32px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 24px;
-	border-radius: 16px;
-	background: var(--recruitment-blue);
-	color: #f8f8f8;
-}
-
-.vpc-recruitment-cta__banner h2 {
-	font-family: var(--font-heading), serif;
-	font-size: 24px;
-	line-height: 32px;
-	font-weight: 400;
-}
-
-.vpc-recruitment-cta__banner p {
-	margin-top: 8px;
-	font-size: 16px;
-	line-height: 24px;
-	font-weight: 500;
-}
-
-.vpc-recruitment-cta__banner a {
-	flex: 0 0 auto;
-	padding: 12px 24px;
-	border-radius: 999px;
-	background: #fff;
-	color: var(--recruitment-blue);
-	font-size: 16px;
-	line-height: 24px;
-	font-weight: 500;
-	text-decoration: underline;
-}
-
 @media (max-width: 1279px) {
 	.vpc-recruitment-hero {
 		min-height: 0;
@@ -529,8 +494,7 @@
 	}
 
 	.vpc-recruitment-jobs,
-	.vpc-recruitment-process,
-	.vpc-recruitment-cta {
+	.vpc-recruitment-process {
 		padding-right: 24px;
 		padding-left: 24px;
 	}
@@ -578,51 +542,157 @@
 }
 
 @media (max-width: 767px) {
+	.vpc-recruitment-page {
+		padding-bottom: 0;
+	}
+
 	.vpc-recruitment-hero {
-		padding-right: 16px;
-		padding-left: 16px;
+		position: relative;
+		height: 419px;
+		padding: 0 20px;
+		display: block;
+		background: linear-gradient(180deg, #f8f8f8 0%, #fde6e6 125.06%);
+	}
+
+	.vpc-recruitment-hero__copy {
+		display: contents;
+	}
+
+	.vpc-recruitment-badge {
+		position: absolute;
+		top: 32px;
+		left: 50%;
+		transform: translateX(-50%);
+		gap: 8px;
+		padding: 4px 12px;
+		background: var(--recruitment-pink-light);
+	}
+
+	.vpc-recruitment-badge__desktop,
+	.vpc-recruitment-search__desktop {
+		display: none;
+	}
+
+	.vpc-recruitment-badge__mobile,
+	.vpc-recruitment-search__mobile {
+		display: inline;
+	}
+
+	.vpc-recruitment-hero h1 {
+		position: absolute;
+		top: 82px;
+		left: 20px;
+		width: 226px;
+		font-size: 30px;
+		line-height: 36px;
+		white-space: normal;
 	}
 
 	.vpc-recruitment-hero__copy > p {
+		position: absolute;
+		top: 242px;
+		left: 20px;
+		width: 350px;
+		max-width: calc(100% - 40px);
+		font-size: 15px;
+		line-height: 22px;
+	}
+
+	.vpc-recruitment-search {
+		position: absolute;
+		top: 324px;
+		left: 20px;
+		width: calc(100% - 40px);
+		height: 59px;
+		gap: 10px;
+		padding: 6px 6px 6px 16px;
+		border-radius: 28px;
+		box-shadow: 0 6px 18px rgba(26, 119, 186, 0.1);
+	}
+
+	.vpc-recruitment-search__icon {
+		width: 24px;
+		height: 22px;
+		flex-basis: 24px;
+	}
+
+	.vpc-recruitment-search__icon img {
+		width: 24px;
+		height: 22px;
+	}
+
+	.vpc-recruitment-search input {
 		font-size: 16px;
 		line-height: 24px;
 	}
 
-	.vpc-recruitment-search {
-		height: 56px;
-		padding-left: 16px;
-	}
-
 	.vpc-recruitment-search button {
-		height: 42px;
-		padding: 0 16px;
-		font-size: 14px;
+		width: 66px;
+		height: 44px;
+		padding: 0 20px;
+		font-size: 15px;
+		line-height: 24px;
 	}
 
 	.vpc-recruitment-hero__visual {
-		transform: scale(0.72);
-		margin: -46px 0 -70px;
+		position: absolute;
+		top: 98px;
+		left: 250px;
+		width: 120px;
+		height: 112px;
+		margin: 0;
+		transform: none;
+	}
+
+	.vpc-recruitment-hero__blob {
+		top: 8px;
+		left: 8px;
+		width: 104px;
+		height: 104px;
+	}
+
+	.vpc-recruitment-hero__accent,
+	.vpc-recruitment-chip {
+		display: none;
+	}
+
+	.vpc-recruitment-hero__mascot {
+		top: 4px;
+		left: 8px;
+		width: 104px;
+		height: 104px;
+	}
+
+	.vpc-recruitment-hero__copy > p {
+		font-size: 15px;
+		line-height: 22px;
 	}
 
 	.vpc-recruitment-jobs,
-	.vpc-recruitment-process,
-	.vpc-recruitment-cta {
-		padding-right: 16px;
-		padding-left: 16px;
+	.vpc-recruitment-process {
+		padding-right: 20px;
+		padding-left: 20px;
+	}
+
+	.vpc-recruitment-jobs {
+		height: 1268px;
+		min-height: 1268px;
+		padding-top: 40px;
+		padding-bottom: 40px;
 	}
 
 	.vpc-recruitment-jobs h2 {
-		font-size: 32px;
-		line-height: 40px;
+		font-size: 28px;
+		line-height: 36px;
 	}
 
 	.vpc-recruitment-categories {
-		gap: 12px;
+		gap: 24px;
 	}
 
 	.vpc-recruitment-categories button {
-		width: auto;
-		flex: 1 1 0;
+		width: 163px;
+		flex: 0 0 163px;
 	}
 
 	.vpc-recruitment-job-grid {
@@ -632,46 +702,59 @@
 
 	.vpc-recruitment-job-card,
 	.vpc-recruitment-job-card:nth-last-child(-n + 2) {
-		min-height: 152px;
+		min-height: 160px;
 	}
 
 	.vpc-recruitment-job-card__footer {
-		align-items: flex-start;
-		flex-direction: column;
-		gap: 8px;
+		align-items: flex-end;
+		flex-direction: row;
+		gap: 20px;
 	}
 
 	.vpc-recruitment-process {
-		padding-top: 64px;
-		padding-bottom: 64px;
+		height: 1152px;
+		min-height: 1152px;
+		padding-top: 40px;
+		padding-bottom: 40px;
+		gap: 24px;
+		justify-content: flex-start;
+		background: linear-gradient(68.72deg, #fde6e6 4.17%, #f8f8f8 43.27%);
+	}
+
+	.vpc-recruitment-process__intro {
+		text-align: left;
 	}
 
 	.vpc-recruitment-process__intro h2 {
 		font-size: 32px;
-		line-height: 40px;
+		line-height: 36px;
+	}
+
+	.vpc-recruitment-process__intro p {
+		text-align: center;
 	}
 
 	.vpc-recruitment-process__steps {
+		gap: 24px;
 		flex-direction: column;
+		justify-content: flex-start;
 	}
 
 	.vpc-recruitment-step {
-		width: min(100%, 300px);
-		min-height: 0;
+		width: 350px;
+		height: 196px;
+		min-height: 196px;
+		gap: 12px;
+	}
+
+	.vpc-recruitment-step__marker {
+		width: 100px;
+		height: 100px;
+		flex: 0 0 100px;
 	}
 
 	.vpc-recruitment-team {
-		height: 320px;
+		display: none;
 	}
 
-	.vpc-recruitment-cta {
-		padding-top: 32px;
-		padding-bottom: 32px;
-	}
-
-	.vpc-recruitment-cta__banner {
-		padding: 24px;
-		align-items: flex-start;
-		flex-direction: column;
-	}
 }

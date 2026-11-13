@@ -17,6 +17,11 @@ $policy_page_keys = array(
 );
 $current_page_slug = is_page() ? get_post_field( 'post_name', get_queried_object_id() ) : '';
 
+if ( 'tin-tuyen-dung' === $current_page_slug ) {
+	include get_template_directory() . '/page-tin-tuyen-dung.php';
+	return;
+}
+
 if ( isset( $policy_page_keys[ $current_page_slug ] ) ) {
 	get_template_part(
 		'template-parts/policy-page',

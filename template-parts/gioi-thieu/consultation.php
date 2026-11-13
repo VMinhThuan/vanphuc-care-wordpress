@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</div>
 				<div class="about-consultation-field" data-node-id="2315:21361">
 					<label for="about-consultation-phone"><span aria-hidden="true">*</span> Số điện thoại</label>
-					<input id="about-consultation-phone" type="tel" placeholder="0345678***" autocomplete="tel">
+					<input id="about-consultation-phone" type="tel" placeholder="0345678***" inputmode="numeric" maxlength="10" autocomplete="tel">
 				</div>
 			</div>
 

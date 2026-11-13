@@ -6,16 +6,16 @@
  */
 
 get_header();
-?>
-<main id="primary" class="site-main min-h-[60vh] py-10">
-	<?php
-	if ( have_posts() ) {
-		while ( have_posts() ) {
-			the_post();
+
+if ( have_posts() ) {
+	while ( have_posts() ) {
+		the_post();
+		if ( in_category( 'tuyen-dung' ) || 'tin-tuyen-dung' === get_post_field( 'post_name', get_the_ID() ) ) {
+			get_template_part( 'template-parts/recruitment/detail' );
+		} else {
 			get_template_part( 'template-parts/content/content', get_post_type() );
 		}
 	}
-	?>
-</main>
-<?php
+}
+
 get_footer();

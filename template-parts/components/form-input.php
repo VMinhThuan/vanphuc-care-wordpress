@@ -126,6 +126,11 @@ $input_classes = trim( "{$base_input_classes} {$box_shape_classes} {$state_input
 				<?php echo $required ? 'required' : ''; ?>
 				<?php echo $is_disabled ? 'disabled' : ''; ?>
 				<?php echo $has_error ? 'aria-invalid="true"' : ''; ?>
+				<?php if ( 'tel' === $type ) : ?>
+					inputmode="numeric"
+					maxlength="10"
+					autocomplete="tel"
+				<?php endif; ?>
 			/>
 		<?php endif; ?>
 	</div>

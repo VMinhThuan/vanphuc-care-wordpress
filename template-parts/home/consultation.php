@@ -45,6 +45,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 								<span class="text-text-error-default">*</span> Số điện thoại
 							</label>
 							<input type="tel" name="customer_phone" required placeholder="0345678***"
+							       inputmode="numeric" maxlength="10" autocomplete="tel"
 							       class="vpc-consultation-control">
 						</div>
 					</div>

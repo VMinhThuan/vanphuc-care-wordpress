@@ -37,7 +37,7 @@ $bao_mau_packages = array(
 					</div>
 					<div class="vpc-consultation-field">
 						<label><span class="text-text-error-default">*</span> Số điện thoại</label>
-						<input type="tel" name="customer_phone" required placeholder="0345678***" class="vpc-consultation-control">
+						<input type="tel" name="customer_phone" required placeholder="0345678***" inputmode="numeric" maxlength="10" autocomplete="tel" class="vpc-consultation-control">
 					</div>
 				</div>
 

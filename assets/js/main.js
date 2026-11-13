@@ -425,8 +425,12 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 
 			const modalPhone = modal.querySelector('input[name="phone"], input[name="customer_phone"]');
-			if (modalPhone && srcPhone && !modalPhone.value) {
-				modalPhone.value = srcPhone;
+			if (modalPhone) {
+				setupPhoneInputBehavior(modalPhone);
+				if (srcPhone && !modalPhone.value) {
+					modalPhone.value = srcPhone;
+					modalPhone.dispatchEvent(new Event('input', { bubbles: true }));
+				}
 			}
 
 			const modalEmail = modal.querySelector('input[name="email"]');
@@ -579,6 +583,70 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 	}
 
+	function setupPhoneInputBehavior(input) {
+		if (!input || input.dataset.vpcPhoneBound) return;
+		input.dataset.vpcPhoneBound = 'true';
+		input.setAttribute('inputmode', 'numeric');
+		input.setAttribute('maxlength', '10');
+
+		function sanitize(raw) {
+			if (!raw) return '';
+			let val = raw.replace(/[\s().-]/g, '');
+			if (val.startsWith('+84')) {
+				val = '0' + val.slice(3);
+			} else if (val.startsWith('84') && (val.length === 11 || val.length === 12)) {
+				val = '0' + val.slice(2);
+			}
+			return val.replace(/\D/g, '').slice(0, 10);
+		}
+
+		input.addEventListener('input', function () {
+			const current = this.value;
+			const formatted = sanitize(current);
+			if (current !== formatted) {
+				this.value = formatted;
+			}
+			// Xóa cờ lỗi HTML5 Constraint Validation ngay khi người dùng gõ/sửa
+			this.setCustomValidity('');
+		});
+
+		input.addEventListener('keydown', function (e) {
+			// Cho phép các phím điều hướng hệ thống và phím tắt thông dụng
+			if (
+				e.key === 'Backspace' ||
+				e.key === 'Delete' ||
+				e.key === 'Tab' ||
+				e.key === 'Escape' ||
+				e.key === 'Enter' ||
+				e.key === 'ArrowLeft' ||
+				e.key === 'ArrowRight' ||
+				e.key === 'ArrowUp' ||
+				e.key === 'ArrowDown' ||
+				e.key === 'Home' ||
+				e.key === 'End' ||
+				e.ctrlKey ||
+				e.metaKey
+			) {
+				return;
+			}
+			// Chặn triệt để mọi phím không phải chữ số 0-9
+			if (!/^\d$/.test(e.key)) {
+				e.preventDefault();
+			}
+		});
+
+		input.addEventListener('paste', function () {
+			const self = this;
+			setTimeout(function () {
+				const formatted = sanitize(self.value);
+				if (self.value !== formatted) {
+					self.value = formatted;
+				}
+				self.setCustomValidity('');
+			}, 0);
+		});
+	}
+
 	// Consultation Form AJAX Submission
 	function handleFormSubmission(form) {
 		if (!form.dataset.vpcSubmissionId) {
@@ -600,11 +668,23 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 		}
 
+		const phoneField = form.querySelector('input[name="phone"], input[name="customer_phone"], input[type="tel"]');
+		if (phoneField) {
+			setupPhoneInputBehavior(phoneField);
+		}
+
 		form.addEventListener('submit', function (e) {
 			e.preventDefault();
-			const phoneField = form.querySelector('input[name="phone"], input[name="customer_phone"]');
 			if (phoneField) {
-				const normalizedPhone = phoneField.value.replace(/[\s().-]/g, '').replace(/^\+84/, '0').replace(/^84(?=\d{9}$)/, '0');
+				let normalizedPhone = phoneField.value.trim().replace(/[\s().-]/g, '');
+				if (normalizedPhone.startsWith('+84')) {
+					normalizedPhone = '0' + normalizedPhone.slice(3);
+				} else if (normalizedPhone.startsWith('84') && (normalizedPhone.length === 11 || normalizedPhone.length === 12)) {
+					normalizedPhone = '0' + normalizedPhone.slice(2);
+				}
+				normalizedPhone = normalizedPhone.replace(/\D/g, '').slice(0, 10);
+				phoneField.value = normalizedPhone;
+
 				if (!/^0[35789]\d{8}$/.test(normalizedPhone)) {
 					phoneField.setCustomValidity('Vui lòng nhập số điện thoại di động Việt Nam gồm 10 chữ số.');
 					phoneField.reportValidity();
@@ -726,6 +806,11 @@ document.addEventListener('DOMContentLoaded', function () {
 			f.dataset.vpcBound = 'true';
 			handleFormSubmission(f);
 		}
+	});
+
+	// Attach phone input constraints and validation clearing to all telephone fields on the page
+	document.querySelectorAll('input[type="tel"], input[name="phone"], input[name="customer_phone"]').forEach(function (input) {
+		setupPhoneInputBehavior(input);
 	});
 
 	// Hero Banner Slider

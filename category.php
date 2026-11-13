@@ -126,19 +126,31 @@ $main_title     = $is_all_archive ? __( 'Tất cả bài viết', 'vanphuccare' 
 				</h2>
 
 				<?php
-				$current_page    = max( 1, (int) get_query_var( 'paged' ) );
+				$per_page         = 8;
+				$current_page     = max( 1, (int) get_query_var( 'paged' ) );
+				$effective_cat_id = $current_id;
+				if ( $is_all_archive && ! $effective_cat_id ) {
+					$kt_term = get_category_by_slug( 'kien-thuc' );
+					if ( $kt_term instanceof WP_Term ) {
+						$effective_cat_id = (int) $kt_term->term_id;
+					}
+				}
+
+				// 1. Resolve and validate curated pinned posts (0 to 5 posts) for this category across ALL pages.
 				$pinned_post_ids = array();
 				$pinned_posts    = array();
-
-				// On Page 1, resolve curated pinned posts (2 to 5 posts) from Term Meta.
-				if ( 1 === $current_page && $current_id > 0 ) {
-					$saved_pinned = get_term_meta( $current_id, 'vpc_featured_post_ids', true );
+				if ( $effective_cat_id > 0 ) {
+					$saved_pinned = get_term_meta( $effective_cat_id, 'vpc_featured_post_ids', true );
 					if ( is_array( $saved_pinned ) ) {
 						foreach ( $saved_pinned as $slot_id ) {
 							$slot_id = absint( $slot_id );
 							if ( $slot_id > 0 && ! in_array( $slot_id, $pinned_post_ids, true ) ) {
 								$p_obj = get_post( $slot_id );
-								if ( $p_obj instanceof WP_Post && 'publish' === $p_obj->post_status ) {
+								$is_valid_pinned = function_exists( 'vpc_post_in_category_tree' )
+									? vpc_post_in_category_tree( $p_obj, $effective_cat_id )
+									: ( ( $p_obj instanceof WP_Post ) && 'publish' === $p_obj->post_status );
+
+								if ( $is_valid_pinned ) {
 									$pinned_post_ids[] = $slot_id;
 									$pinned_posts[]    = $p_obj;
 								}
@@ -146,82 +158,133 @@ $main_title     = $is_all_archive ? __( 'Tất cả bài viết', 'vanphuccare' 
 						}
 					}
 				}
+				$pinned_count = count( $pinned_posts );
 
-				$has_any_posts = have_posts() || ! empty( $pinned_posts );
+				// 2. Calculate pagination limits and mathematical offsets.
+				// On Page 1, we show P pinned posts + up to (8 - P) regular posts = exactly 8 posts.
+				// On Page 2+, we show 8 regular posts starting after the regular posts already consumed on Page 1.
+				$page_1_regular_needed = max( 0, $per_page - $pinned_count );
+				if ( 1 === $current_page ) {
+					$regular_limit  = $page_1_regular_needed;
+					$regular_offset = 0;
+				} else {
+					$regular_limit  = $per_page;
+					$regular_offset = $page_1_regular_needed + ( $current_page - 2 ) * $per_page;
+				}
+
+				// 3. Query regular chronological posts with pinned IDs strictly excluded.
+				$regular_posts       = array();
+				$regular_total_count = 0;
+
+				$regular_query_args = array(
+					'post_type'           => 'post',
+					'post_status'         => 'publish',
+					'posts_per_page'      => $regular_limit > 0 ? $regular_limit : 1,
+					'offset'              => $regular_offset,
+					'orderby'             => 'date',
+					'order'               => 'DESC',
+					'ignore_sticky_posts' => true,
+					'no_found_rows'       => false,
+				);
+
+				if ( ! empty( $pinned_post_ids ) ) {
+					$regular_query_args['post__not_in'] = $pinned_post_ids;
+				}
+
+				if ( $is_all_archive ) {
+					$kt_term = get_category_by_slug( 'kien-thuc' );
+					if ( $kt_term instanceof WP_Term ) {
+						$regular_query_args['cat'] = (int) $kt_term->term_id;
+					}
+				} elseif ( $current_id > 0 ) {
+					$regular_query_args['cat'] = $current_id;
+				}
+
+				$regular_query       = new WP_Query( $regular_query_args );
+				$regular_total_count = (int) $regular_query->found_posts;
+
+				if ( $regular_limit > 0 ) {
+					$regular_posts = $regular_query->posts;
+				}
+
+				// 4. Calculate accurate total pages across both pinned and regular pools.
+				$total_items = $pinned_count + $regular_total_count;
+				if ( $total_items <= $per_page ) {
+					$total_pages = 1;
+				} else {
+					$remaining_after_page_1 = max( 0, $total_items - $per_page );
+					$total_pages            = 1 + (int) ceil( $remaining_after_page_1 / $per_page );
+				}
+
+				// Synchronize global $wp_query max_num_pages so all core/plugin hooks stay aligned.
+				global $wp_query;
+				if ( $wp_query instanceof WP_Query ) {
+					$wp_query->max_num_pages = $total_pages;
+				}
+
+				// 5. Build combined display posts list for current page.
+				if ( 1 === $current_page ) {
+					$display_posts = array_merge( $pinned_posts, $regular_posts );
+				} else {
+					$display_posts = $regular_posts;
+				}
 				?>
 
-				<?php if ( $has_any_posts ) : ?>
+				<?php if ( ! empty( $display_posts ) ) : ?>
 					<div class="vpc-knowledge-article-stack">
 						<?php
 						$card_context_name = ( ! $is_all_archive && ! empty( $current_name ) ) ? $current_name : '';
 
-						// 1. Render Pinned Posts (Top 1 -> Top N) on Page 1 (Clean Figma style, no extra badges).
-						foreach ( $pinned_posts as $pinned_post ) {
+						foreach ( $display_posts as $article_post ) {
 							$article_data = function_exists( 'vpc_format_knowledge_card' )
-								? vpc_format_knowledge_card( $pinned_post, $asset( 'mother-baby.jpeg' ), 32, $card_context_name )
+								? vpc_format_knowledge_card( $article_post, $asset( 'mother-baby.jpeg' ), 32, $card_context_name )
 								: array();
 
 							if ( ! empty( $article_data ) ) {
 								get_template_part( 'template-parts/knowledge/card-horizontal', null, array( 'article' => $article_data ) );
 							}
 						}
-
-						// 2. Render Chronological Feed (Newest first), strictly skipping pinned posts to prevent duplicates.
-						while ( have_posts() ) : the_post();
-							if ( in_array( get_the_ID(), $pinned_post_ids, true ) ) {
-								continue;
-							}
-
-							$article_data = function_exists( 'vpc_format_knowledge_card' )
-								? vpc_format_knowledge_card( get_post(), $asset( 'mother-baby.jpeg' ), 32, $card_context_name )
-								: array();
-
-							if ( ! empty( $article_data ) ) {
-								get_template_part( 'template-parts/knowledge/card-horizontal', null, array( 'article' => $article_data ) );
-							}
-						endwhile;
 						?>
 					</div>
 
 					<!-- WordPress Numeric Pagination matching Figma < 1 2 3 4 5 > -->
-					<div class="vpc-knowledge-pagination-wrap">
-						<?php
-						global $wp_query;
-						$current_page = max( 1, (int) get_query_var( 'paged' ) );
-						$total_pages  = max( 1, (int) $wp_query->max_num_pages );
-						$page_links   = paginate_links( array(
-							'base'      => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
-							'format'    => '?paged=%#%',
-							'current'   => $current_page,
-							'total'     => $total_pages,
-							'mid_size'  => 2,
-							'end_size'  => 1,
-							'prev_next' => false,
-							'type'      => 'array',
-						) );
-						?>
-						<?php if ( $page_links ) : ?>
-							<nav class="pagination" aria-label="<?php esc_attr_e( 'Phân trang bài viết', 'vanphuccare' ); ?>">
-								<div class="nav-links">
-									<?php if ( $current_page > 1 ) : ?>
-										<a class="page-numbers prev" href="<?php echo esc_url( get_pagenum_link( $current_page - 1 ) ); ?>" aria-label="<?php esc_attr_e( 'Trang trước', 'vanphuccare' ); ?>"><img src="<?php echo $asset( 'chevron-prev.svg' ); ?>" alt="" width="24" height="24" aria-hidden="true"></a>
-									<?php else : ?>
-										<span class="page-numbers prev is-disabled" aria-disabled="true"><img src="<?php echo $asset( 'chevron-prev.svg' ); ?>" alt="" width="24" height="24" aria-hidden="true"><span class="screen-reader-text"><?php esc_html_e( 'Trang trước', 'vanphuccare' ); ?></span></span>
-									<?php endif; ?>
+					<?php if ( $total_pages > 1 ) : ?>
+						<div class="vpc-knowledge-pagination-wrap">
+							<?php
+							$page_links = paginate_links( array(
+								'base'      => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
+								'format'    => '?paged=%#%',
+								'current'   => $current_page,
+								'total'     => $total_pages,
+								'mid_size'  => 2,
+								'end_size'  => 1,
+								'prev_next' => false,
+								'type'      => 'array',
+							) );
+							?>
+							<?php if ( $page_links ) : ?>
+								<nav class="pagination" aria-label="<?php esc_attr_e( 'Phân trang bài viết', 'vanphuccare' ); ?>">
+									<div class="nav-links">
+										<?php if ( $current_page > 1 ) : ?>
+											<a class="page-numbers prev" href="<?php echo esc_url( get_pagenum_link( $current_page - 1 ) ); ?>" aria-label="<?php esc_attr_e( 'Trang trước', 'vanphuccare' ); ?>"><img src="<?php echo $asset( 'chevron-prev.svg' ); ?>" alt="" width="24" height="24" aria-hidden="true"></a>
+										<?php else : ?>
+											<span class="page-numbers prev is-disabled" aria-disabled="true"><img src="<?php echo $asset( 'chevron-prev.svg' ); ?>" alt="" width="24" height="24" aria-hidden="true"><span class="screen-reader-text"><?php esc_html_e( 'Trang trước', 'vanphuccare' ); ?></span></span>
+										<?php endif; ?>
 
-									<?php foreach ( $page_links as $page_link ) : ?>
-										<?php echo wp_kses_post( $page_link ); ?>
-									<?php endforeach; ?>
+										<?php foreach ( $page_links as $page_link ) : ?>
+											<?php echo wp_kses_post( $page_link ); ?>
+										<?php endforeach; ?>
 
-									<?php if ( $current_page < $total_pages ) : ?>
-										<a class="page-numbers next" href="<?php echo esc_url( get_pagenum_link( $current_page + 1 ) ); ?>" aria-label="<?php esc_attr_e( 'Trang sau', 'vanphuccare' ); ?>"><img src="<?php echo $asset( 'chevron-next.svg' ); ?>" alt="" width="24" height="24" aria-hidden="true"></a>
-									<?php else : ?>
-										<span class="page-numbers next is-disabled" aria-disabled="true"><img src="<?php echo $asset( 'chevron-next.svg' ); ?>" alt="" width="24" height="24" aria-hidden="true"><span class="screen-reader-text"><?php esc_html_e( 'Trang sau', 'vanphuccare' ); ?></span></span>
-									<?php endif; ?>
-								</div>
-							</nav>
-						<?php endif; ?>
-					</div>
+										<?php if ( $current_page < $total_pages ) : ?>
+											<a class="page-numbers next" href="<?php echo esc_url( get_pagenum_link( $current_page + 1 ) ); ?>" aria-label="<?php esc_attr_e( 'Trang sau', 'vanphuccare' ); ?>"><img src="<?php echo $asset( 'chevron-next.svg' ); ?>" alt="" width="24" height="24" aria-hidden="true"></a>
+										<?php else : ?>
+											<span class="page-numbers next is-disabled" aria-disabled="true"><img src="<?php echo $asset( 'chevron-next.svg' ); ?>" alt="" width="24" height="24" aria-hidden="true"><span class="screen-reader-text"><?php esc_html_e( 'Trang sau', 'vanphuccare' ); ?></span></span>
+										<?php endif; ?>
+									</div>
+								</nav>
+							<?php endif; ?>
+						</div>
+					<?php endif; ?>
 				<?php else : ?>
 					<div class="vpc-knowledge-empty">
 						<p><?php esc_html_e( 'Hiện chưa có bài viết nào trong chuyên mục này. Mời bạn quay lại sau!', 'vanphuccare' ); ?></p>

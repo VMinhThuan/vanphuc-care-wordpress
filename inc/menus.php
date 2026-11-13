@@ -113,13 +113,40 @@ function vanphuccare_recruitment_menu_link_attributes( $atts, $item, $args ) {
 	$theme_location = isset( $args->theme_location ) ? (string) $args->theme_location : '';
 	$title          = isset( $item->title ) ? trim( wp_strip_all_tags( $item->title ) ) : '';
 
-	if ( 'footer_legal' === $theme_location && 'Tuyển dụng' === $title ) {
+	if ( in_array( $theme_location, array( 'footer_legal', 'footer' ), true ) && ( 'Tuyển dụng' === $title || false !== strpos( (string) ( $item->url ?? '' ), '/tuyen-dung/tin-tuyen-dung' ) ) ) {
 		$atts['href'] = home_url( '/tuyen-dung/' );
 	}
 
 	return $atts;
 }
 add_filter( 'nav_menu_link_attributes', 'vanphuccare_recruitment_menu_link_attributes', 10, 3 );
+
+/**
+ * Normalizes the recruitment menu item before WordPress renders it.
+ *
+ * This also covers menus whose saved item URL is still the old detail/category
+ * route, so the recruitment link always opens the Figma landing page even when
+ * the WordPress menu is assigned to a different footer location.
+ *
+ * @param array    $items Menu items.
+ * @param stdClass $args  Menu arguments.
+ * @return array
+ */
+function vanphuccare_normalize_recruitment_footer_menu_items( $items, $args ) {
+	$recruitment_url = home_url( '/tuyen-dung/' );
+
+	foreach ( $items as $item ) {
+		$title = isset( $item->title ) ? trim( wp_strip_all_tags( $item->title ) ) : '';
+		$url   = isset( $item->url ) ? (string) $item->url : '';
+
+		if ( 'Tuyển dụng' === $title || false !== strpos( $url, '/tuyen-dung/tin-tuyen-dung' ) ) {
+			$item->url = $recruitment_url;
+		}
+	}
+
+	return $items;
+}
+add_filter( 'wp_nav_menu_objects', 'vanphuccare_normalize_recruitment_footer_menu_items', 10, 2 );
 
 /**
  * Adds the active class to assigned Kiến thức menu items.

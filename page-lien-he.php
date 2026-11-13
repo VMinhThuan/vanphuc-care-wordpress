@@ -114,6 +114,9 @@ $gestational_age_options = vpc_get_gestational_age_options();
 									       name="customer_phone" 
 									       required 
 									       placeholder="0345678***"
+									       inputmode="numeric"
+									       maxlength="10"
+									       autocomplete="tel"
 									       class="w-full h-12 px-3 sm:px-4 rounded-xl border border-border-disabled-default bg-surface-background-default text-text-body-default placeholder:text-text-disabled-light font-body font-medium text-base focus:border-border-primary-default focus:ring-1 focus:ring-border-primary-default focus:outline-none transition-all">
 								</div>
 							</div>

@@ -146,7 +146,8 @@ function vanphuccare_enqueue_assets() {
 	$is_services_page = is_page( 'dich-vu' ) || is_page_template( 'page-dich-vu.php' ) || is_post_type_archive( 'vpc_service' ) || is_singular( 'vpc_service' );
 	$is_knowledge_page = is_page( 'kien-thuc' ) || is_page_template( 'page-kien-thuc.php' ) || is_category() || is_tag() || is_search() || ! empty( get_query_var( 'vpc_is_all' ) );
 	$is_news_page      = function_exists( 'vanphuccare_is_news_page' ) && vanphuccare_is_news_page();
-	$is_recruitment_page = is_page( 'tuyen-dung' ) || is_page_template( 'page-tuyen-dung.php' );
+	$is_recruitment_page = function_exists( 'vanphuccare_is_recruitment_page' ) && vanphuccare_is_recruitment_page();
+	$is_recruitment_detail_page = is_page( 'tin-tuyen-dung' ) || is_page_template( 'page-tin-tuyen-dung.php' ) || ( is_singular( 'post' ) && ( in_category( 'tuyen-dung' ) || 'tin-tuyen-dung' === get_post_field( 'post_name', get_queried_object_id() ) ) );
 	$is_policy_page    = is_page( 'dieu-khoan-su-dung' )
 		|| is_page( 'chinh-sach-bao-mat' )
 		|| is_page( 'chinh-sach-bien-tap-va-chinh-sua' )
@@ -218,6 +219,11 @@ function vanphuccare_enqueue_assets() {
 		vanphuccare_enqueue_theme_style( 'vanphuccare-recruitment', 'assets/css/recruitment.css', array( 'vanphuccare-tailwind' ) );
 	}
 
+	if ( $is_recruitment_detail_page ) {
+		vanphuccare_enqueue_theme_style( 'vanphuccare-recruitment-detail', 'assets/css/recruitment-detail.css', array( 'vanphuccare-tailwind' ) );
+		vanphuccare_enqueue_theme_style( 'vanphuccare-recruitment-application', 'assets/css/recruitment-application.css', array( 'vanphuccare-recruitment-detail' ) );
+	}
+
 	if ( $is_policy_page ) {
 		vanphuccare_enqueue_theme_style( 'vanphuccare-policy', 'assets/css/policy.css', array( 'vanphuccare-tailwind' ) );
 	}
@@ -259,6 +265,11 @@ function vanphuccare_enqueue_assets() {
 
 	if ( $is_recruitment_page ) {
 		vanphuccare_enqueue_theme_script( 'vanphuccare-recruitment', 'assets/js/recruitment.js', array(), true );
+	}
+
+	if ( $is_recruitment_detail_page ) {
+		vanphuccare_enqueue_theme_script( 'vanphuccare-recruitment-detail', 'assets/js/recruitment-detail.js', array(), true );
+		vanphuccare_enqueue_theme_script( 'vanphuccare-recruitment-application', 'assets/js/recruitment-application.js', array( 'vanphuccare-recruitment-detail' ), true );
 	}
 
 	// Enqueue Cloudflare Turnstile API.

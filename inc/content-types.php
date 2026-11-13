@@ -357,11 +357,16 @@ function vpc_category_featured_fields( $term ) {
 		$custom_name = 'vpc_featured_custom_id_' . $slot_num;
 		$selected_id = isset( $saved_slots[ $slot_num ] ) ? absint( $saved_slots[ $slot_num ] ) : 0;
 
-		// Ensure currently selected post is in the dropdown even if older than 100 posts.
+		// Ensure currently selected post is in the dropdown even if older than 100 posts,
+		// but only if it legitimately belongs to this category hierarchy.
 		$options_posts = $knowledge_posts;
 		if ( $selected_id > 0 && ! in_array( $selected_id, wp_list_pluck( $options_posts, 'ID' ), true ) ) {
 			$custom_selected_post = get_post( $selected_id );
-			if ( $custom_selected_post ) {
+			$is_valid_category    = function_exists( 'vpc_post_in_category_tree' )
+				? vpc_post_in_category_tree( $custom_selected_post, $term->term_id )
+				: ( ( $custom_selected_post instanceof WP_Post ) && 'publish' === $custom_selected_post->post_status );
+
+			if ( $custom_selected_post && $is_valid_category ) {
 				array_unshift( $options_posts, $custom_selected_post );
 			}
 		}
@@ -438,13 +443,16 @@ function vpc_save_category_featured_fields( $term_id ) {
 			$val = absint( $_POST[ $select_key ] );
 		}
 
-		// Server-side validation: must be an existing, published Knowledge post and not duplicate.
+		// Server-side validation: must belong to current category hierarchy, be published, and not duplicate.
 		if ( $val > 0 ) {
 			$post_obj = get_post( $val );
-			$is_valid = ( $post_obj instanceof WP_Post )
-				&& 'publish' === $post_obj->post_status
-				&& ( function_exists( 'vanphuccare_is_knowledge_post' ) ? vanphuccare_is_knowledge_post( $post_obj ) : false )
-				&& ! in_array( $val, $used_ids, true );
+			$is_valid_cat = function_exists( 'vpc_post_in_category_tree' )
+				? vpc_post_in_category_tree( $post_obj, $term_id )
+				: ( ( $post_obj instanceof WP_Post )
+					&& 'publish' === $post_obj->post_status
+					&& ( function_exists( 'vanphuccare_is_knowledge_post' ) ? vanphuccare_is_knowledge_post( $post_obj ) : false ) );
+
+			$is_valid = $is_valid_cat && ! in_array( $val, $used_ids, true );
 
 			if ( $is_valid ) {
 				$featured_ids[ $i ] = $val;

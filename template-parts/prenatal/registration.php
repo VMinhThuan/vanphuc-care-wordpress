@@ -75,7 +75,7 @@ $map_url   = 'https://www.google.com/maps/place/V%E1%BA%A1n+Ph%C3%BAc+Care/@21.0
 					</div>
 					<div class="prenatal-form__field">
 						<label for="prenatal-phone"><em>*</em> Số điện thoại</label>
-						<input id="prenatal-phone" name="phone" required type="tel" placeholder="0345678***" />
+						<input id="prenatal-phone" name="phone" required type="tel" placeholder="0345678***" inputmode="numeric" maxlength="10" autocomplete="tel" />
 					</div>
 				</div>
 				<div class="prenatal-form__field">

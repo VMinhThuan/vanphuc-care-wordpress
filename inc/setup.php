@@ -73,9 +73,18 @@ add_filter( 'rank_math/frontend/title', 'vanphuccare_normalize_title_text' );
  * @return void
  */
 function vanphuccare_customize_contact_settings( $wp_customize ) {
+	if ( ! $wp_customize->get_panel( 'vpc_theme_settings_panel' ) ) {
+		$wp_customize->add_panel( 'vpc_theme_settings_panel', array(
+			'title'       => __( 'Cài đặt Vạn Phúc Care', 'vanphuccare' ),
+			'description' => __( 'Trung tâm quản lý các cấu hình giao diện và tính năng của Vạn Phúc Care.', 'vanphuccare' ),
+			'priority'    => 160,
+		) );
+	}
+
 	$wp_customize->add_section( 'vpc_contact_settings', array(
-		'title'    => 'Vạn Phúc Care – Liên hệ & lead',
-		'priority' => 160,
+		'title'    => __( 'Thông tin liên hệ & Lead', 'vanphuccare' ),
+		'panel'    => 'vpc_theme_settings_panel',
+		'priority' => 10,
 	) );
 
 	$wp_customize->add_setting( 'vpc_instagram_url', array(
@@ -192,6 +201,88 @@ function vanphuccare_customize_contact_settings( $wp_customize ) {
 add_action( 'customize_register', 'vanphuccare_customize_contact_settings' );
 
 /**
+ * Adds Customizer controls for Knowledge sidebar promotional banner.
+ *
+ * @param WP_Customize_Manager $wp_customize Customizer instance.
+ * @return void
+ */
+function vanphuccare_customize_knowledge_settings( $wp_customize ) {
+	if ( ! $wp_customize->get_panel( 'vpc_theme_settings_panel' ) ) {
+		$wp_customize->add_panel( 'vpc_theme_settings_panel', array(
+			'title'       => __( 'Cài đặt Vạn Phúc Care', 'vanphuccare' ),
+			'description' => __( 'Trung tâm quản lý các cấu hình giao diện và tính năng của Vạn Phúc Care.', 'vanphuccare' ),
+			'priority'    => 160,
+		) );
+	}
+
+	$wp_customize->add_section( 'vpc_knowledge_banner_settings', array(
+		'title'       => __( 'Banner quảng cáo Kiến thức', 'vanphuccare' ),
+		'description' => __( 'Quản lý banner quảng cáo hiển thị ở thanh bên (sidebar) trang Kiến thức và Tìm kiếm.', 'vanphuccare' ),
+		'panel'       => 'vpc_theme_settings_panel',
+		'priority'    => 20,
+	) );
+
+	// 1. Enable / Disable Banner
+	$wp_customize->add_setting( 'vpc_kb_banner_enable', array(
+		'default'           => true,
+		'sanitize_callback' => 'wp_validate_boolean',
+	) );
+	$wp_customize->add_control( 'vpc_kb_banner_enable', array(
+		'label'       => __( 'Hiển thị banner quảng cáo', 'vanphuccare' ),
+		'section'     => 'vpc_knowledge_banner_settings',
+		'type'        => 'checkbox',
+		'description' => __( 'Bỏ chọn nếu muốn ẩn banner quảng cáo ở thanh bên.', 'vanphuccare' ),
+	) );
+
+	// 2. Banner Image
+	$wp_customize->add_setting( 'vpc_kb_banner_image', array(
+		'default'           => '',
+		'sanitize_callback' => 'esc_url_raw',
+	) );
+	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'vpc_kb_banner_image', array(
+		'label'       => __( 'Hình ảnh banner', 'vanphuccare' ),
+		'section'     => 'vpc_knowledge_banner_settings',
+		'description' => __( 'Tải lên hoặc chọn ảnh từ Media Library. Khuyến nghị ảnh vuông bo góc tỉ lệ ~365x411px (PNG, JPG, WebP). Để trống sẽ sử dụng banner mặc định của theme.', 'vanphuccare' ),
+	) ) );
+
+	// 3. Banner Target URL
+	$wp_customize->add_setting( 'vpc_kb_banner_url', array(
+		'default'           => 'https://edu.vanphuccare.vn',
+		'sanitize_callback' => 'esc_url_raw',
+	) );
+	$wp_customize->add_control( 'vpc_kb_banner_url', array(
+		'label'       => __( 'Đường link khi click vào banner', 'vanphuccare' ),
+		'section'     => 'vpc_knowledge_banner_settings',
+		'type'        => 'url',
+		'description' => __( 'Ví dụ: https://edu.vanphuccare.vn hoặc link bài viết, dịch vụ.', 'vanphuccare' ),
+	) );
+
+	// 4. Banner Alt Text
+	$wp_customize->add_setting( 'vpc_kb_banner_alt', array(
+		'default'           => 'Bé ăn ngon - ngủ xuyên đêm',
+		'sanitize_callback' => 'sanitize_text_field',
+	) );
+	$wp_customize->add_control( 'vpc_kb_banner_alt', array(
+		'label'       => __( 'Văn bản thay thế (Alt text / SEO)', 'vanphuccare' ),
+		'section'     => 'vpc_knowledge_banner_settings',
+		'type'        => 'text',
+		'description' => __( 'Mô tả nội dung banner cho công cụ tìm kiếm và trình đọc màn hình.', 'vanphuccare' ),
+	) );
+
+	// 5. Open in New Tab
+	$wp_customize->add_setting( 'vpc_kb_banner_new_tab', array(
+		'default'           => true,
+		'sanitize_callback' => 'wp_validate_boolean',
+	) );
+	$wp_customize->add_control( 'vpc_kb_banner_new_tab', array(
+		'label'       => __( 'Mở liên kết trong tab mới (_blank)', 'vanphuccare' ),
+		'section'     => 'vpc_knowledge_banner_settings',
+		'type'        => 'checkbox',
+	) );
+}
+add_action( 'customize_register', 'vanphuccare_customize_knowledge_settings' );
+
+/**
  * 301 Redirects for external and deprecated legacy routes:
  * 1. Online courses: redirects direct requests for /khoa-hoc-truc-tuyen/ to https://edu.vanphuccare.vn.
  * 2. Deprecated legacy services (from old database) redirected safely to relevant Figma active services.
@@ -300,6 +391,111 @@ function vanphuccare_is_news_page() {
 		|| ! empty( get_query_var( 'vpc_is_news' ) )
 		|| 'tin-tuc-su-kien' === $request_path;
 }
+
+/**
+ * Identifies the recruitment hub in both the normal Page and clean-route variants.
+ *
+ * @return bool
+ */
+function vanphuccare_is_recruitment_page() {
+	$request_path = isset( $_SERVER['REQUEST_URI'] )
+		? trim( (string) wp_parse_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH ), '/' )
+		: '';
+
+	return is_page( 'tuyen-dung' )
+		|| is_page_template( 'page-tuyen-dung.php' )
+		|| ! empty( get_query_var( 'vpc_is_recruitment' ) )
+		|| 'tuyen-dung' === $request_path;
+}
+
+/**
+ * Keeps the recruitment hub on its clean landing URL.
+ *
+ * WordPress can otherwise guess the old child page (/tin-tuyen-dung/) as the
+ * canonical URL when the clean recruitment rewrite is handled without a
+ * matching Page record.
+ *
+ * @param string|false $redirect_url  Canonical redirect URL.
+ * @param string       $requested_url Original requested URL.
+ * @return string|false
+ */
+function vanphuccare_keep_recruitment_hub_url( $redirect_url, $requested_url ) {
+	$requested_path = trim( (string) wp_parse_url( $requested_url, PHP_URL_PATH ), '/' );
+
+	if ( 'tuyen-dung' === $requested_path ) {
+		return false;
+	}
+
+	return $redirect_url;
+}
+add_filter( 'redirect_canonical', 'vanphuccare_keep_recruitment_hub_url', 10, 2 );
+
+/**
+ * Adds the clean route for the recruitment hub when no WordPress Page exists.
+ *
+ * @return void
+ */
+function vanphuccare_recruitment_rewrite_rules() {
+	add_rewrite_rule(
+		'^tuyen-dung/?$',
+		'index.php?vpc_is_recruitment=1',
+		'top'
+	);
+}
+add_action( 'init', 'vanphuccare_recruitment_rewrite_rules' );
+
+/**
+ * Registers the recruitment route query variable.
+ *
+ * @param array<string> $vars Public query variables.
+ * @return array<string>
+ */
+function vanphuccare_recruitment_query_vars( $vars ) {
+	$vars[] = 'vpc_is_recruitment';
+	return $vars;
+}
+add_filter( 'query_vars', 'vanphuccare_recruitment_query_vars' );
+
+/**
+ * Makes /tuyen-dung/ work immediately even before rewrite rules are flushed.
+ *
+ * @param array<string, mixed> $query_vars Parsed request variables.
+ * @return array<string, mixed>
+ */
+function vanphuccare_recruitment_request_filter( $query_vars ) {
+	$request_path = isset( $_SERVER['REQUEST_URI'] )
+		? trim( (string) wp_parse_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH ), '/' )
+		: '';
+
+	if ( 'tuyen-dung' === $request_path ) {
+		$query_vars['vpc_is_recruitment'] = 1;
+		unset( $query_vars['name'], $query_vars['pagename'], $query_vars['category_name'], $query_vars['error'] );
+	}
+
+	return $query_vars;
+}
+add_filter( 'request', 'vanphuccare_recruitment_request_filter' );
+
+/**
+ * Uses the recruitment hub template for the clean route.
+ *
+ * @param string $template Current template path.
+ * @return string
+ */
+function vanphuccare_recruitment_template_include( $template ) {
+	if ( ! vanphuccare_is_recruitment_page() ) {
+		return $template;
+	}
+
+	global $wp_query;
+	if ( ! empty( get_query_var( 'vpc_is_recruitment' ) ) || ( isset( $_SERVER['REQUEST_URI'] ) && 'tuyen-dung' === trim( (string) wp_parse_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH ), '/' ) ) ) {
+		$wp_query->is_404 = false;
+		status_header( 200 );
+	}
+
+	return get_template_directory() . '/page-tuyen-dung.php';
+}
+add_filter( 'template_include', 'vanphuccare_recruitment_template_include' );
 
 /**
  * Adds a page-scoped body class for the Figma news hub refinements.

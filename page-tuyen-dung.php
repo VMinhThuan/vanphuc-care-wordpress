@@ -74,7 +74,8 @@ get_header();
 		<div class="vpc-recruitment-hero__copy">
 			<div class="vpc-recruitment-badge">
 				<img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">
-				<span>Trang Tin Tuyển Dụng</span>
+				<span class="vpc-recruitment-badge__desktop">Trang Tin Tuyển Dụng</span>
+				<span class="vpc-recruitment-badge__mobile">BỆ PHÓNG PHÁT TRIỂN</span>
 			</div>
 			<h1 id="recruitment-hero-title">
 				<span>Môi Trường Yêu Thương</span>
@@ -83,9 +84,9 @@ get_header();
 			<p>Tại Vạn Phúc Care, chúng tôi luôn đem lại cơ hội đào tạo và phát triển nghề nghiệp, đặc biệt dành cho điều dưỡng.</p>
 			<form class="vpc-recruitment-search" role="search">
 				<label class="screen-reader-text" for="recruitment-search">Tìm vị trí tuyển dụng</label>
-				<img src="<?php echo esc_url( $asset_uri . '/search.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">
+				<picture class="vpc-recruitment-search__icon"><source media="(max-width: 767px)" srcset="<?php echo esc_url( $asset_uri . '/search-mobile.svg' ); ?>"><img src="<?php echo esc_url( $asset_uri . '/search.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true"></picture>
 				<input id="recruitment-search" type="search" placeholder="Tìm vị trí tuyển dụng..." autocomplete="off">
-				<button type="submit">Tìm kiếm</button>
+				<button type="submit"><span class="vpc-recruitment-search__desktop">Tìm kiếm</span><span class="vpc-recruitment-search__mobile">Tìm</span></button>
 			</form>
 		</div>
 
@@ -150,13 +151,6 @@ get_header();
 
 	<section class="vpc-recruitment-team" aria-label="Đội ngũ Vạn Phúc Care">
 		<img src="<?php echo esc_url( $asset_uri . '/team.png' ); ?>" width="4096" height="2731" alt="Đội ngũ Vạn Phúc Care nhận chứng nhận chuyên môn" loading="lazy">
-	</section>
-
-	<section class="vpc-recruitment-cta" aria-labelledby="recruitment-cta-title">
-		<div class="vpc-recruitment-cta__banner">
-			<div><h2 id="recruitment-cta-title">Vì sao nên gia nhập Vạn Phúc Care?</h2><p>Tìm hiểu chế độ đãi ngộ và môi trường làm việc dành cho đội ngũ.</p></div>
-			<a href="<?php echo esc_url( home_url( '/gioi-thieu/' ) ); ?>">Xem chế độ đãi ngộ</a>
-		</div>
 	</section>
 </div>
 

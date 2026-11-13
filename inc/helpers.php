@@ -332,6 +332,57 @@ function vanphuccare_is_knowledge_post( $post_obj = null ) {
 }
 
 /**
+ * Checks whether a given post belongs to a specified category or any of its descendant subcategories.
+ *
+ * Ensures:
+ * 1. Post exists, is a standard 'post', and has 'publish' status.
+ * 2. Post has either the term itself or any of its children assigned.
+ *
+ * When $term_id is 'kien-thuc', this validates against the entire Knowledge tree.
+ * When $term_id is a subcategory (e.g. 'mang-thai'), this strictly validates against 'mang-thai' and its descendants.
+ *
+ * @param int|WP_Post|null $post Post object or ID.
+ * @param int|WP_Term|null $term_id Target category ID or WP_Term object.
+ * @return bool True if post is published and belongs to the term or its descendants.
+ */
+function vpc_post_in_category_tree( $post, $term_id ) {
+	if ( ! ( $post instanceof WP_Post ) ) {
+		$post = get_post( $post );
+	}
+
+	if (
+		! ( $post instanceof WP_Post ) ||
+		'post' !== $post->post_type ||
+		'publish' !== $post->post_status
+	) {
+		return false;
+	}
+
+	$target_id = 0;
+	if ( $term_id instanceof WP_Term ) {
+		$target_id = (int) $term_id->term_id;
+	} elseif ( is_numeric( $term_id ) ) {
+		$target_id = absint( $term_id );
+	}
+
+	if ( $target_id <= 0 ) {
+		return false;
+	}
+
+	$children = get_term_children( $target_id, 'category' );
+	if ( is_wp_error( $children ) || ! is_array( $children ) ) {
+		$children = array();
+	}
+
+	$allowed_ids = array_merge(
+		array( $target_id ),
+		array_map( 'intval', $children )
+	);
+
+	return has_category( $allowed_ids, $post );
+}
+
+/**
  * Checks whether a given term is the 'kien-thuc' category or one of its descendant subcategories.
  *
  * @param WP_Term|int|string|null $term Term object, ID, or slug.
