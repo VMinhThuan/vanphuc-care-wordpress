@@ -695,3 +695,59 @@ add_filter( 'rank_math/frontend/canonical', 'vanphuccare_knowledge_canonical_url
 
 
 
+
+/**
+ * Registers custom block patterns and categories for knowledge articles.
+ */
+function vanphuccare_register_knowledge_patterns() {
+	register_block_pattern_category(
+		'vanphuccare-knowledge',
+		array( 'label' => __( 'Kiến thức Vạn Phúc Care', 'vanphuccare' ) )
+	);
+
+	// Register the shipped files explicitly so new patterns appear after a theme deploy.
+	$headers = array(
+		'title'       => 'Title',
+		'slug'        => 'Slug',
+		'description' => 'Description',
+		'categories'  => 'Categories',
+		'postTypes'   => 'Post Types',
+	);
+	$registry = WP_Block_Patterns_Registry::get_instance();
+	foreach ( glob( get_template_directory() . '/patterns/*.php' ) ?: array() as $file ) {
+		$pattern = get_file_data( $file, $headers );
+		$slug    = $pattern['slug'];
+		if ( ! $slug || ! $pattern['title'] || $registry->is_registered( $slug ) ) {
+			continue;
+		}
+		unset( $pattern['slug'] );
+		$pattern['categories'] = wp_parse_list( $pattern['categories'] );
+		$pattern['postTypes']  = wp_parse_list( $pattern['postTypes'] );
+		$pattern['filePath']   = $file;
+		register_block_pattern( $slug, $pattern );
+	}
+}
+add_action( 'init', 'vanphuccare_register_knowledge_patterns' );
+
+/**
+ * Comparison table choices in the Gutenberg Styles panel.
+ */
+function vanphuccare_register_comparison_styles() {
+	foreach ( array( 2 => 'A', 3 => 'B', 4 => 'C' ) as $column => $label ) {
+		register_block_style( 'core/table', array(
+			'name'  => 'vpc-choice-' . $column,
+			'label' => sprintf( __( 'Khuyên dùng: %s', 'vanphuccare' ), $label ),
+		) );
+	}
+	foreach ( array( 1, 2, 3 ) as $row ) {
+		register_block_style( 'core/table', array(
+			'name'  => 'vpc-row-' . $row,
+			'label' => sprintf( __( 'Nhấn hàng tiêu chí %d', 'vanphuccare' ), $row ),
+		) );
+	}
+	register_block_style( 'core/table', array(
+		'name'  => 'vpc-criteria',
+		'label' => __( 'Nhấn hàng tiêu đề', 'vanphuccare' ),
+	) );
+}
+add_action( 'init', 'vanphuccare_register_comparison_styles' );

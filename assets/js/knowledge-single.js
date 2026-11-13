@@ -86,3 +86,47 @@
 	headings.forEach(heading => observer.observe(heading));
 	highlight();
 })();
+
+// Enhance optional blocks independently of the presence of article headings.
+(() => {
+	const body = document.querySelector('.vpc-reader__body');
+	if (!body) return;
+
+	body.querySelectorAll('.vpc-checklist').forEach(block => {
+		const list = block.querySelector('ul');
+		if (!list || !list.children.length) return;
+		const count = document.createElement('p');
+		count.className = 'vpc-checklist__count';
+		count.setAttribute('aria-live', 'polite');
+		list.before(count);
+		list.classList.add('vpc-checklist__items');
+		const boxes = Array.from(list.children, item => {
+			const label = document.createElement('label');
+			const box = document.createElement('input');
+			box.type = 'checkbox';
+			label.append(box, ...Array.from(item.childNodes));
+			item.append(label);
+			return box;
+		});
+		function updateCount() {
+			const checked = boxes.filter(box => box.checked).length;
+			count.textContent = 'Đã chuẩn bị ' + checked + '/' + boxes.length;
+		}
+		list.addEventListener('change', updateCount);
+		updateCount();
+	});
+
+	// Preserve Yoast's section IDs, formatted answers and structured data.
+	body.querySelectorAll('.schema-faq-section').forEach(section => {
+		const question = section.querySelector(':scope > .schema-faq-question');
+		const answer = section.querySelector(':scope > .schema-faq-answer');
+		if (!question || !answer) return;
+		const details = document.createElement('details');
+		const summary = document.createElement('summary');
+		question.before(details);
+		summary.append(question);
+		details.append(summary, answer);
+		section.classList.add('vpc-yoast-faq');
+		if (section.closest(':target') || section.querySelector(':target')) details.open = true;
+	});
+})();

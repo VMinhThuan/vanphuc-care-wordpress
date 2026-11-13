@@ -322,3 +322,20 @@ function vanphuccare_preload_homepage_hero() {
 	printf( "<link rel=\"preload\" as=\"image\" href=\"%s\" fetchpriority=\"high\">\n", esc_url( $hero_url ) );
 }
 add_action( 'wp_head', 'vanphuccare_preload_homepage_hero', 1 );
+
+/**
+ * Use the same editorial pattern styles on Knowledge articles and inside the post editor.
+ */
+function vanphuccare_enqueue_knowledge_pattern_styles() {
+	if ( is_admin() ) {
+		$screen = get_current_screen();
+		if ( ! $screen || 'post' !== $screen->post_type || ! $screen->is_block_editor() ) {
+			return;
+		}
+	} elseif ( ! is_singular( 'post' ) || ! vanphuccare_is_knowledge_post( get_queried_object_id() ) ) {
+		return;
+	}
+
+	vanphuccare_enqueue_theme_style( 'vanphuccare-article-patterns', 'assets/css/article-patterns.css' );
+}
+add_action( 'enqueue_block_assets', 'vanphuccare_enqueue_knowledge_pattern_styles' );

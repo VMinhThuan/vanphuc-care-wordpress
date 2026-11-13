@@ -1,0 +1,308 @@
+/**
+ * Editorial Patterns & Content Blocks - Vạn Phúc Care
+ * Shared by Knowledge reading template (.vpc-reader) and Gutenberg Block Editor.
+ *
+ * 1. Quick Review (.vpc-quick-review)
+ * 2. Callout Boxes (.vpc-callout: --tip, --note, --danger)
+ * 3. Pros & Cons Comparison (.vpc-pros-cons)
+ * 4. General Editorial Blocks (.vpc-expert-quote, .vpc-read-more, etc.)
+ * 5. Comparison Table Highlights (.is-style-vpc-choice-*)
+ * 6. Step-by-Step Guide (.vpc-steps)
+ * 7. FAQ Accordion (.vpc-article-faq, .vpc-yoast-faq)
+ * 8. Interactive Checklist (.vpc-checklist)
+ * 9. Responsive Styles
+ *
+ * @package VanPhucCare
+ */
+
+/* ==========================================================================
+   1. Quick Review Block (.vpc-quick-review)
+   ========================================================================== */
+.wp-block-group.vpc-quick-review {
+	padding: 24px;
+	border: 1px solid #a3c9e3;
+	border-radius: 16px;
+	background: #d1e4f1;
+	color: #171717;
+	font-family: var(--font-body, Manrope, sans-serif);
+	overflow-wrap: anywhere;
+}
+
+.vpc-quick-review .vpc-quick-review__title {
+	margin: 0;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	color: #1a77ba;
+	font-size: 24px;
+	line-height: 32px;
+	font-weight: 700;
+}
+
+.vpc-quick-review__title::before {
+	content: "";
+	width: 24px;
+	height: 24px;
+	flex: none;
+	background: #1a77ba;
+	-webkit-mask: url('../icons/sparkle.svg') center / contain no-repeat;
+	mask: url('../icons/sparkle.svg') center / contain no-repeat;
+}
+
+.wp-block-group.vpc-quick-review ul.wp-block-list {
+	list-style: none;
+	padding: 0;
+	margin: 16px 0 0;
+}
+
+.vpc-quick-review .wp-block-list > li {
+	position: relative;
+	padding-inline-start: 32px;
+	line-height: 24px;
+}
+
+.vpc-quick-review .wp-block-list > li + li { margin-top: 12px; }
+
+.vpc-quick-review .wp-block-list > li::before {
+	content: "";
+	position: absolute;
+	inset-inline-start: 5px;
+	top: 5px;
+	width: 9px;
+	height: 15px;
+	border: solid #1a77ba;
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg);
+}
+
+/* ==========================================================================
+   2. Callout Boxes (.vpc-callout: Tip, Note, Danger)
+   ========================================================================== */
+.wp-block-group.vpc-callout {
+	position: relative;
+	box-sizing: border-box;
+	padding: 20px 24px 20px 64px;
+	border: 1px solid var(--callout-border);
+	border-radius: 16px;
+	background: var(--callout-surface);
+	color: #171717;
+	font: 500 16px/1.5 var(--font-body, Manrope, sans-serif);
+	overflow-wrap: anywhere;
+}
+
+.vpc-callout--tip {
+	--callout-surface: #ccf1ff;
+	--callout-border: #77d2ff;
+	--callout-accent: #007bad;
+	--callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='M9 17c0-3-4-3.5-4-8a7 7 0 1 1 14 0c0 4.5-4 5-4 8zM9 20h6m-5 2h4'/%3E%3C/svg%3E");
+}
+
+.vpc-callout--note {
+	--callout-surface: #ffe5cc;
+	--callout-border: #ffa755;
+	--callout-accent: #a65000;
+	--callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linejoin='round' stroke-linecap='round'%3E%3Cpath d='m12 2 10 18H2zM12 8v5m0 3v.2'/%3E%3C/svg%3E");
+}
+
+.vpc-callout--danger {
+	--callout-surface: #ffcecf;
+	--callout-border: #ff8185;
+	--callout-accent: #ba222b;
+	--callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 6v7m0 4v.2'/%3E%3C/svg%3E");
+}
+
+.wp-block-group.vpc-callout::before {
+	content: "";
+	position: absolute;
+	top: 22px;
+	left: 24px;
+	width: 24px;
+	height: 24px;
+	background: var(--callout-accent);
+	-webkit-mask: var(--callout-icon) center / contain no-repeat;
+	mask: var(--callout-icon) center / contain no-repeat;
+}
+
+.vpc-callout p { margin-block: 8px 0; }
+.vpc-callout .vpc-callout__title { margin: 0; font-size: 20px; line-height: 1.3; font-weight: 600; }
+
+/* ==========================================================================
+   3. Pros & Cons Comparison (.vpc-pros-cons)
+   ========================================================================== */
+.wp-block-columns.vpc-pros-cons {
+	display: flex;
+	align-items: stretch;
+	gap: 24px;
+	margin-block: 24px;
+	color: #171717;
+	font: 500 16px/1.5 var(--font-body, Manrope, sans-serif);
+}
+
+.vpc-pros-cons > .wp-block-column {
+	min-width: 0;
+	flex: 1 1 0;
+	margin: 0;
+	padding: 24px;
+	border: 1px solid var(--comparison-border);
+	border-radius: 16px;
+	overflow-wrap: anywhere;
+}
+
+.vpc-pros-cons__pros {
+	--comparison-border: #78da70;
+	--comparison-icon: #247525;
+	--comparison-mark: "✓";
+	background: #d5f3d0;
+}
+
+.vpc-pros-cons__cons {
+	--comparison-border: #ff8185;
+	--comparison-icon: #b5202b;
+	--comparison-mark: "×";
+	background: #ffcecf;
+}
+
+.vpc-pros-cons .vpc-pros-cons__title {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin: 0;
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 1.3;
+}
+
+.vpc-pros-cons__title::before,
+.vpc-pros-cons .wp-block-list > li::before {
+	content: var(--comparison-mark);
+	content: var(--comparison-mark) / "";
+	color: var(--comparison-icon);
+	font-weight: 700;
+}
+
+.vpc-pros-cons__title::before {
+	display: inline-grid;
+	place-items: center;
+	flex: none;
+	width: 22px;
+	height: 22px;
+	border: 2px solid currentColor;
+	border-radius: 50%;
+	font-size: 16px;
+	line-height: 1;
+}
+
+.vpc-pros-cons .wp-block-column ul.wp-block-list {
+	margin: 16px 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.vpc-pros-cons .wp-block-list > li {
+	position: relative;
+	padding-inline-start: 32px;
+}
+
+.vpc-pros-cons .wp-block-list > li + li { margin-top: 12px; }
+
+.vpc-pros-cons .wp-block-list > li::before {
+	position: absolute;
+	inset-inline-start: 3px;
+}
+
+/* ==========================================================================
+   4. General Editorial Blocks (Shared Box Bases)
+   ========================================================================== */
+.vpc-expert-quote, .vpc-read-more, .vpc-references, .vpc-inline-consult, .vpc-checklist {
+	box-sizing: border-box;
+	padding: 24px;
+	border: 1px solid #dedede;
+	border-radius: 16px;
+	overflow-wrap: anywhere;
+}
+
+blockquote.vpc-expert-quote { margin-inline: 0; background: #fce7e7; border-color: #ffb4b5; }
+.vpc-expert-quote p { font: italic 20px/1.5 var(--font-heading, Georgia, serif); }
+.vpc-expert-quote cite { display: block; margin-top: 16px; font-style: normal; }
+.vpc-pattern-title { font-size: 20px; font-weight: 700; }
+.vpc-references { background: #f8f8f8; }
+.vpc-references li + li, .vpc-checklist li + li { margin-top: 8px; }
+.vpc-reader__body .vpc-references h2, .vpc-reader__body .vpc-article-faq h2 { margin: 0 0 16px; color: #1a77ba; }
+
+.vpc-inline-consult { background: #1a77ba; color: white; }
+.vpc-inline-consult .wp-block-buttons { margin-top: 16px; }
+.vpc-inline-consult .wp-block-button a { background: white; color: #155f95; }
+.vpc-read-more .vpc-pattern-title { color: #a44850; font-size: 15px; }
+.vpc-download .wp-block-file { padding: 16px; border: 1px solid #dedede; border-radius: 12px; }
+.vpc-article-video video { display: block; width: 100%; border-radius: 16px; }
+
+/* ==========================================================================
+   5. Step-by-Step Guide (.vpc-steps)
+   ========================================================================== */
+.vpc-steps ol.wp-block-list { padding: 0; list-style: none; counter-reset: vpc-step; }
+.vpc-steps ol.wp-block-list > li { position: relative; counter-increment: vpc-step; padding: 0 0 20px 48px; }
+.vpc-steps ol.wp-block-list > li:not(:last-child)::after {
+	content: ""; position: absolute; left: 15px; top: 32px; bottom: 0; border-left: 1px solid #c9d6df;
+}
+.vpc-steps ol.wp-block-list > li::before {
+	content: counter(vpc-step); position: absolute; inset: 0 auto auto 0; display: grid; place-items: center;
+	width: 32px; height: 32px; border-radius: 50%; background: #1a77ba; color: white; font-weight: 700;
+}
+
+/* ==========================================================================
+   6. FAQ Accordion (.vpc-article-faq, .vpc-yoast-faq)
+   ========================================================================== */
+.vpc-article-faq details, .vpc-reader__body .vpc-yoast-faq details {
+	padding: 16px 20px; border: 1px solid #dedede; border-radius: 10px; margin-block: 8px; background: white;
+}
+.vpc-article-faq summary, .vpc-yoast-faq summary { cursor: pointer; font-weight: 600; }
+.vpc-article-faq details[open] summary, .vpc-yoast-faq details[open] summary { color: #155f95; margin-bottom: 8px; }
+
+/* ==========================================================================
+   7. Comparison Table Highlights (.is-style-vpc-choice-*)
+   ========================================================================== */
+.wp-block-table:is(.is-style-vpc-choice-2,.is-style-vpc-choice-3,.is-style-vpc-choice-4,.is-style-vpc-criteria,.is-style-vpc-row-1,.is-style-vpc-row-2,.is-style-vpc-row-3) {
+	overflow-x: auto; max-width: 100%; border: 1px solid #dedede; border-radius: 12px;
+}
+.wp-block-table:is(.is-style-vpc-choice-2,.is-style-vpc-choice-3,.is-style-vpc-choice-4,.is-style-vpc-criteria,.is-style-vpc-row-1,.is-style-vpc-row-2,.is-style-vpc-row-3) table {
+	min-width: 540px; width: 100%; border-collapse: collapse;
+}
+.wp-block-table.is-style-vpc-choice-2 tr > :nth-child(2),
+.wp-block-table.is-style-vpc-choice-3 tr > :nth-child(3),
+.wp-block-table.is-style-vpc-choice-4 tr > :nth-child(4),
+.wp-block-table.is-style-vpc-row-1 tbody tr:nth-child(1) > *,
+.wp-block-table.is-style-vpc-row-2 tbody tr:nth-child(2) > *,
+.wp-block-table.is-style-vpc-row-3 tbody tr:nth-child(3) > *,
+.wp-block-table.is-style-vpc-criteria thead th { background: #d1e4f1; }
+.wp-block-table.is-style-vpc-choice-2 thead th:nth-child(2)::before,
+.wp-block-table.is-style-vpc-choice-3 thead th:nth-child(3)::before,
+.wp-block-table.is-style-vpc-choice-4 thead th:nth-child(4)::before {
+	content: "Khuyên dùng"; display: block; width: fit-content; margin: 0 auto 6px; padding: 2px 8px;
+	background: #1a77ba; color: white; border-radius: 999px; font-size: 12px;
+}
+
+/* ==========================================================================
+   8. Interactive Checklist (.vpc-checklist)
+   ========================================================================== */
+.vpc-checklist__count { font-size: 14px; color: #525252; }
+.vpc-checklist ul.vpc-checklist__items { list-style: none; padding: 0; }
+.vpc-checklist__items > li { border-bottom: 1px solid #dedede; padding-block: 8px; }
+.vpc-checklist__items label { cursor: pointer; }
+.vpc-checklist__items input { margin-right: 10px; accent-color: #1a77ba; }
+.vpc-checklist__items label:has(input:checked) { color: #525252; text-decoration: line-through; }
+
+/* ==========================================================================
+   9. Responsive Breakpoints
+   ========================================================================== */
+@media (max-width: 900px) {
+	.wp-block-group.vpc-quick-review { padding: 20px; }
+	.vpc-quick-review .vpc-quick-review__title { font-size: 20px; line-height: 26px; }
+}
+
+@media (max-width: 781px) {
+	.wp-block-group.vpc-callout { padding: 16px 16px 16px 52px; }
+	.wp-block-group.vpc-callout::before { top: 17px; left: 16px; }
+	.wp-block-columns.vpc-pros-cons { flex-direction: column; gap: 16px; }
+	.vpc-pros-cons > .wp-block-column { padding: 20px; }
+	.vpc-expert-quote, .vpc-read-more, .vpc-references, .vpc-inline-consult, .vpc-checklist { padding: 18px; }
+}
