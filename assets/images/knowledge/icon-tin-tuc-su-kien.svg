@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" fill="none" role="img" aria-label="Icon Tin tức và sự kiện">
+  <defs>
+    <mask id="calendar-cutouts" maskUnits="userSpaceOnUse" x="0" y="0" width="128" height="128">
+      <rect width="128" height="128" fill="white"/>
+      <!-- Khoảng hở quanh ghim lịch -->
+      <rect x="36" y="34" width="18" height="31" rx="9" fill="black"/>
+      <!-- Khoảng hở tròn quanh dấu sự kiện -->
+      <circle cx="100" cy="37" r="24" fill="black"/>
+    </mask>
+  </defs>
+  <!-- Thân tờ lịch -->
+  <rect x="16" y="43" width="96" height="73" rx="7" fill="#1979BD" mask="url(#calendar-cutouts)"/>
+  <!-- Ghim lịch -->
+  <rect x="42" y="18" width="7" height="40" rx="3.5" fill="#1979BD"/>
+  <!-- Chấm sự kiện -->
+  <circle cx="100" cy="37" r="17" fill="#1979BD"/>
+  <!-- Dấu xác nhận -->
+  <path d="M43 78L56 91L83 64" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

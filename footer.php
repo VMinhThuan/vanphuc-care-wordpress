@@ -28,7 +28,7 @@ $company_address = get_theme_mod( 'vpc_company_address', '35B/399 Âu Cơ, phư�
 ?>
 </main><!-- #primary -->
 
-<footer class="site-footer <?php echo ( is_page_template( 'page-gioi-thieu.php' ) || is_page( 'gioi-thieu' ) ) ? 'site-footer--about' : ''; ?> relative w-full overflow-hidden pt-8 pb-8 xl:py-6 text-text-body-default" style="--footer-background: linear-gradient(180deg, var(--color-neutral-100) 38.823%, var(--color-primary-100) 99.976%);">
+<footer class="site-footer <?php echo ( is_page_template( 'page-gioi-thieu.php' ) || is_page( 'gioi-thieu' ) ) ? 'site-footer--about' : ''; ?> relative w-full overflow-hidden pt-8 pb-8 xl:py-6 text-text-body-default" style="--footer-background: linear-gradient(180.203deg, var(--color-neutral-100) 22.153%, var(--color-primary-100) 122.96%);">
 	<!-- Decorative watermark: centered and intentionally wider than the mobile viewport, as in Figma. -->
 	<div class="pointer-events-none absolute bottom-0 left-1/2 z-0 w-[464px] -translate-x-1/2 select-none overflow-hidden sm:right-0 sm:left-auto sm:w-[380px] sm:translate-x-0 xl:w-[471px]" aria-hidden="true">
 		<?php $footer_watermark_url = vpc_image_url( 'footer-watermark.svg', 'full' ); ?>
@@ -63,7 +63,7 @@ $company_address = get_theme_mod( 'vpc_company_address', '35B/399 Âu Cơ, phư�
 				</div>
 				
 				<div class="flex flex-col space-y-3 xl:space-y-5">
-					<p class="text-base font-medium text-text-body-default">
+					<p class="text-base font-bold text-text-body-default">
 						Hành Trình Cùng Mẹ, Trải Đầy Yêu Thương
 					</p>
 					
@@ -183,7 +183,7 @@ $company_address = get_theme_mod( 'vpc_company_address', '35B/399 Âu Cơ, phư�
 				?>
 					<ul class="space-y-2 text-sm md:text-base font-medium text-text-body-default">
 						<li class="footer-news-mother-baby h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#kien-thuc-nuoi-con' ) ); ?>" class="hover:text-text-body-muted transition-colors">Mẹ và bé</a></li>
-						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#kien-thuc-nuoi-con' ) ); ?>" class="hover:text-text-body-muted transition-colors"><span class="footer-news-label-desktop">Tin tức & sự kiện</span><span class="footer-news-label-mobile">Tin mới & sự kiện nổi bật</span></a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/tin-tuc-su-kien/' ) ); ?>" class="hover:text-text-body-muted transition-colors"><span class="footer-news-label-desktop">Tin mới & sự kiện nổi bật</span><span class="footer-news-label-mobile">Tin mới & sự kiện nổi bật</span></a></li>
 					</ul>
 				<?php endif; ?>
 			</div>
@@ -193,40 +193,40 @@ $company_address = get_theme_mod( 'vpc_company_address', '35B/399 Âu Cơ, phư�
 		<!-- Row: 3 social icons sized to the footer design + 2 certification badges -->
 		<div class="vpc-footer-social pt-8 pb-0 sm:py-6 border-b-0 sm:border-b sm:border-border-divider-default flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 sm:gap-6">
 			<!-- Social icon slots are 52x44 on mobile; the artwork itself stays 40px. -->
-			<div class="flex items-center gap-4">
+			<div class="flex items-center gap-3">
 				<!-- Facebook -->
 				<a href="<?php echo esc_url( $facebook_url ); ?>" target="_blank" rel="noopener noreferrer" 
-				   class="w-8 h-8 xl:w-12 xl:h-12 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center"
+				   class="w-8 h-8 xl:w-16 xl:h-14 xl:px-2 xl:py-1 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center"
 				   aria-label="Facebook">
-					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/facebook.svg' ); ?>" alt="Facebook" class="w-8 h-8 xl:w-full xl:h-full object-contain">
+					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/facebook.svg' ); ?>" alt="Facebook" class="w-8 h-8 xl:w-12 xl:h-12 object-contain">
 				</a>
 
 				<!-- Instagram -->
-				<a href="<?php echo esc_url( $instagram_url ); ?>" target="_blank" rel="noopener noreferrer" class="w-8 h-8 xl:w-12 xl:h-12 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center" aria-label="Instagram">
-					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/instagram.svg' ); ?>" alt="Instagram" class="w-8 h-8 xl:w-full xl:h-full object-contain">
+				<a href="<?php echo esc_url( $instagram_url ); ?>" target="_blank" rel="noopener noreferrer" class="w-8 h-8 xl:w-16 xl:h-14 xl:px-2 xl:py-1 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center" aria-label="Instagram">
+					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/instagram.svg' ); ?>" alt="Instagram" class="w-8 h-8 xl:w-12 xl:h-12 object-contain">
 				</a>
 
 				<!-- TikTok -->
 				<a href="<?php echo esc_url( $tiktok_url ); ?>" target="_blank" rel="noopener noreferrer" 
-				   class="w-8 h-8 xl:w-12 xl:h-12 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center"
+				   class="w-8 h-8 xl:w-16 xl:h-14 xl:px-2 xl:py-1 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center"
 				   aria-label="TikTok">
-					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/tiktok.svg' ); ?>" alt="TikTok" class="w-8 h-8 xl:w-full xl:h-full object-contain">
+					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/tiktok.svg' ); ?>" alt="TikTok" class="w-8 h-8 xl:w-12 xl:h-12 object-contain">
 				</a>
 			</div>
 
 			<!-- Badges (DMCA + Bộ Công Thương) -->
-			<div class="flex items-center gap-3 xl:gap-3.5">
+			<div class="flex items-center gap-6">
 				<!-- DMCA.com Protection Status Badge: use the local Figma asset to preserve the designed colors. -->
 				<a href="https://www.dmca.com/Protection/Status.aspx?ID=c7a60f67-9696-479d-baf5-2f48a09327be" 
 				   title="DMCA.com Protection Status" 
 				   class="dmca-badge inline-flex items-center hover:opacity-90 transition-opacity" 
 				   target="_blank" 
 				   rel="noopener noreferrer">
-					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/dmca-protected.svg' ); ?>"
+					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/dmca.svg' ); ?>"
 					     alt="DMCA.com Protection Status" 
-					     width="180"
-					     height="39"
-					     class="w-[180px] h-[39px] object-contain block"
+					     width="120"
+					     height="55"
+					     class="w-[120px] h-[55px] object-contain block"
 					     loading="lazy">
 				</a>
 
@@ -258,11 +258,11 @@ $company_address = get_theme_mod( 'vpc_company_address', '35B/399 Âu Cơ, phư�
 		?>
 			<div class="vpc-footer-legal mt-8 border-t border-border-divider-default pt-8 flex flex-col xl:flex-row items-start xl:items-center justify-start gap-1 md:gap-2 xl:gap-3 text-sm md:text-base font-medium text-text-body-default xl:mt-0 xl:border-t-0 xl:pt-6">
 				<a href="<?php echo esc_url( home_url( '/dieu-khoan-su-dung' ) ); ?>" class="vpc-footer-legal-terms order-1 xl:order-none hover:text-text-body-muted transition-colors">Điều khoản sử dụng</a>
-				<span class="hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
+				<span class="vpc-footer-legal-divider hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
 				<a href="<?php echo esc_url( home_url( '/chinh-sach-bao-mat' ) ); ?>" class="vpc-footer-legal-privacy order-2 xl:order-none hover:text-text-body-muted transition-colors">Chính sách bảo mật</a>
-				<span class="hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
+				<span class="vpc-footer-legal-divider hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
 				<a href="<?php echo esc_url( home_url( '/tuyen-dung' ) ); ?>" class="vpc-footer-legal-careers order-3 xl:order-none hover:text-text-body-muted transition-colors">Tuyển dụng</a>
-				<span class="hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
+				<span class="vpc-footer-legal-divider hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
 				<a href="<?php echo esc_url( home_url( '/lien-he' ) ); ?>" class="vpc-footer-legal-contact order-4 xl:order-none hover:text-text-body-muted transition-colors">Liên hệ</a>
 			</div>
 		<?php endif; ?>

@@ -260,6 +260,84 @@ function vanphuccare_knowledge_rewrite_rules() {
 add_action( 'init', 'vanphuccare_knowledge_rewrite_rules' );
 
 /**
+ * Adds the clean route for the news and events hub.
+ *
+ * @return void
+ */
+function vanphuccare_news_rewrite_rules() {
+	add_rewrite_rule(
+		'^tin-tuc-su-kien/?$',
+		'index.php?vpc_is_news=1',
+		'top'
+	);
+}
+add_action( 'init', 'vanphuccare_news_rewrite_rules' );
+
+/**
+ * Registers the news hub query variable.
+ *
+ * @param array<string> $vars Public query variables.
+ * @return array<string>
+ */
+function vanphuccare_news_query_vars( $vars ) {
+	$vars[] = 'vpc_is_news';
+	return $vars;
+}
+add_filter( 'query_vars', 'vanphuccare_news_query_vars' );
+
+/**
+ * Identifies the news hub in both the normal Page and clean-route variants.
+ *
+ * @return bool
+ */
+function vanphuccare_is_news_page() {
+	$request_path = isset( $_SERVER['REQUEST_URI'] )
+		? trim( (string) wp_parse_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH ), '/' )
+		: '';
+
+	return is_page( 'tin-tuc-su-kien' )
+		|| is_page_template( 'page-tin-tuc-su-kien.php' )
+		|| ! empty( get_query_var( 'vpc_is_news' ) )
+		|| 'tin-tuc-su-kien' === $request_path;
+}
+
+/**
+ * Adds a page-scoped body class for the Figma news hub refinements.
+ *
+ * @param array<string> $classes Existing body classes.
+ * @return array<string>
+ */
+function vanphuccare_news_body_class( $classes ) {
+	if ( vanphuccare_is_news_page() ) {
+		$classes[] = 'vpc-news-page-shell';
+	}
+
+	return array_unique( $classes );
+}
+add_filter( 'body_class', 'vanphuccare_news_body_class' );
+
+/**
+ * Uses the news hub template for the clean route even before rewrite rules are flushed.
+ *
+ * @param string $template Current template path.
+ * @return string
+ */
+function vanphuccare_news_template_include( $template ) {
+	if ( ! vanphuccare_is_news_page() ) {
+		return $template;
+	}
+
+	global $wp_query;
+	if ( ! empty( get_query_var( 'vpc_is_news' ) ) || ( isset( $_SERVER['REQUEST_URI'] ) && 'tin-tuc-su-kien' === trim( (string) wp_parse_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH ), '/' ) ) ) {
+		$wp_query->is_404 = false;
+		status_header( 200 );
+	}
+
+	return get_template_directory() . '/page-tin-tuc-su-kien.php';
+}
+add_filter( 'template_include', 'vanphuccare_news_template_include' );
+
+/**
  * Registers custom query var for the clean all-articles knowledge route.
  *
  * @param array<string> $vars Public query variables.

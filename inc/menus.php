@@ -61,6 +61,7 @@ function vanphuccare_is_knowledge_group_page() {
 		|| is_page_template( 'page-kien-thuc.php' )
 		|| is_category()
 		|| is_tag()
+		|| is_search()
 		|| ! empty( get_query_var( 'vpc_is_all' ) );
 }
 

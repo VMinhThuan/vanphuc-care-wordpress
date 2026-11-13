@@ -48,9 +48,13 @@
 	}
 
 	.site-footer {
-		background: var(--footer-background) !important;
+		background: linear-gradient(180deg, #f8f8f8 38.823%, #d1e4f1 99.976%) !important;
 		padding-top: 32px !important;
 		padding-bottom: 32px !important;
+	}
+
+	.site-footer > [aria-hidden="true"] {
+		bottom: 1.17px;
 	}
 
 	.site-footer > .vpc-container {
@@ -122,6 +126,21 @@
 		gap: 8px;
 	}
 
+	/* Footer service items are plain links, never expandable menu items. */
+	.site-footer .vpc-footer-about-services li::before,
+	.site-footer .vpc-footer-about-services li::after,
+	.site-footer .vpc-footer-about-services a::before,
+	.site-footer .vpc-footer-about-services a::after,
+	.site-footer .vpc-footer-about-services a > svg {
+		display: none !important;
+		content: none !important;
+	}
+
+	.site-footer .vpc-footer-about-services a {
+		display: inline-flex;
+		align-items: center;
+	}
+
 	.site-footer .vpc-footer-about-services h3,
 	.site-footer .footer-link-column h3,
 	.site-footer .vpc-footer-about-services ul,
@@ -163,8 +182,8 @@
 	}
 
 	.site-footer .vpc-footer-social > div:first-child a img {
-		width: 40px;
-		height: 40px;
+		width: 36px;
+		height: 36px;
 	}
 
 	.site-footer .vpc-footer-social > div:last-child {

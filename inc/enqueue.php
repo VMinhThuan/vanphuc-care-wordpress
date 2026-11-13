@@ -144,7 +144,8 @@ function vanphuccare_enqueue_assets() {
 	$is_milk_page     = vanphuccare_is_thong_tac_page();
 	$is_prenatal_page = is_page_template( 'page-lop-hoc-tien-san.php' ) || is_page( 'lop-hoc-tien-san' ) || is_post_type_archive( 'vpc_prenatal_class' );
 	$is_services_page = is_page( 'dich-vu' ) || is_page_template( 'page-dich-vu.php' ) || is_post_type_archive( 'vpc_service' ) || is_singular( 'vpc_service' );
-	$is_knowledge_page = is_page( 'kien-thuc' ) || is_page_template( 'page-kien-thuc.php' ) || is_category() || is_tag() || ! empty( get_query_var( 'vpc_is_all' ) );
+	$is_knowledge_page = is_page( 'kien-thuc' ) || is_page_template( 'page-kien-thuc.php' ) || is_category() || is_tag() || is_search() || ! empty( get_query_var( 'vpc_is_all' ) );
+	$is_news_page      = function_exists( 'vanphuccare_is_news_page' ) && vanphuccare_is_news_page();
 	$is_policy_page    = is_page( 'dieu-khoan-su-dung' )
 		|| is_page( 'chinh-sach-bao-mat' )
 		|| is_page( 'chinh-sach-bien-tap-va-chinh-sua' )
@@ -206,6 +207,10 @@ function vanphuccare_enqueue_assets() {
 
 	if ( $is_knowledge_page ) {
 		vanphuccare_enqueue_theme_style( 'vanphuccare-knowledge', 'assets/css/knowledge.css', array( 'vanphuccare-tailwind' ) );
+	}
+
+	if ( $is_news_page ) {
+		vanphuccare_enqueue_theme_style( 'vanphuccare-news', 'assets/css/news.css', array( 'vanphuccare-tailwind' ) );
 	}
 
 	if ( $is_policy_page ) {

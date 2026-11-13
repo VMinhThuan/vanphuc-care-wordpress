@@ -310,7 +310,7 @@ function vpc_category_featured_fields( $term ) {
 		// Sub-categories: 2 to 5 pinned slots matching client requirement.
 		$slots = array(
 			1 => array(
-				'label' => __( 'Vị trí ghim 1 (Ưu tiên cao nhất)', 'vanphuccare' ),
+				'label' => __( 'Vị trí ghim 1', 'vanphuccare' ),
 				'desc'  => __( 'Bài viết đứng đầu tiên trong danh sách chuyên mục.', 'vanphuccare' ),
 			),
 			2 => array(
@@ -318,16 +318,16 @@ function vpc_category_featured_fields( $term ) {
 				'desc'  => __( 'Bài viết đứng thứ hai trong danh sách chuyên mục.', 'vanphuccare' ),
 			),
 			3 => array(
-				'label' => __( 'Vị trí ghim 3 (Tùy chọn)', 'vanphuccare' ),
-				'desc'  => __( 'Bài viết đứng thứ ba. Để trống nếu chỉ ghim 2 bài.', 'vanphuccare' ),
+				'label' => __( 'Vị trí ghim 3', 'vanphuccare' ),
+				'desc'  => __( 'Bài viết đứng thứ ba.', 'vanphuccare' ),
 			),
 			4 => array(
-				'label' => __( 'Vị trí ghim 4 (Tùy chọn)', 'vanphuccare' ),
-				'desc'  => __( 'Bài viết đứng thứ tư. Để trống nếu chỉ ghim 2-3 bài.', 'vanphuccare' ),
+				'label' => __( 'Vị trí ghim 4', 'vanphuccare' ),
+				'desc'  => __( 'Bài viết đứng thứ tư.', 'vanphuccare' ),
 			),
 			5 => array(
-				'label' => __( 'Vị trí ghim 5 (Tùy chọn)', 'vanphuccare' ),
-				'desc'  => __( 'Bài viết đứng thứ năm. Để trống nếu không dùng.', 'vanphuccare' ),
+				'label' => __( 'Vị trí ghim 5', 'vanphuccare' ),
+				'desc'  => __( 'Bài viết đứng thứ năm.', 'vanphuccare' ),
 			),
 		);
 		/* translators: %s: Category name */

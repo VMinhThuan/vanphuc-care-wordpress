@@ -8,6 +8,22 @@ document.addEventListener('DOMContentLoaded', function () {
 	const menuDrawer = document.getElementById('mobile-menu-drawer');
 	let lastMenuTrigger = null;
 
+	const newsSearchInput = document.querySelector('.vpc-news-search input[data-mobile-placeholder]');
+	if (newsSearchInput && window.matchMedia) {
+		const mobileNewsQuery = window.matchMedia('(max-width: 767px)');
+		const syncNewsPlaceholder = function () {
+			newsSearchInput.placeholder = mobileNewsQuery.matches
+				? newsSearchInput.dataset.mobilePlaceholder
+				: 'Tìm tin tức, sự kiện...';
+		};
+		syncNewsPlaceholder();
+		if (typeof mobileNewsQuery.addEventListener === 'function') {
+			mobileNewsQuery.addEventListener('change', syncNewsPlaceholder);
+		} else if (typeof mobileNewsQuery.addListener === 'function') {
+			mobileNewsQuery.addListener(syncNewsPlaceholder);
+		}
+	}
+
 	function toggleMenu(show) {
 		if (!menuDrawer) return;
 		const isCurrentlyHidden = menuDrawer.classList.contains('hidden');
