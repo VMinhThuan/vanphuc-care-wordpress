@@ -207,7 +207,13 @@ function vanphuccare_enqueue_assets() {
 		vanphuccare_enqueue_theme_style( 'vanphuccare-services', 'assets/css/services.css', array( 'vanphuccare-tailwind' ) );
 	}
 
-	if ( $is_knowledge_page ) {
+	$is_knowledge_single = is_singular( 'post' ) && ! $is_recruitment_detail_page && vanphuccare_is_knowledge_post( get_queried_object_id() );
+	if ( $is_knowledge_single ) {
+		vanphuccare_enqueue_theme_style( 'vanphuccare-article', 'assets/css/knowledge-single.css', array( 'vanphuccare-knowledge' ) );
+		vanphuccare_enqueue_theme_script( 'vanphuccare-article', 'assets/js/knowledge-single.js' );
+	}
+
+	if ( $is_knowledge_page || $is_knowledge_single ) {
 		vanphuccare_enqueue_theme_style( 'vanphuccare-knowledge', 'assets/css/knowledge.css', array( 'vanphuccare-tailwind' ) );
 	}
 
