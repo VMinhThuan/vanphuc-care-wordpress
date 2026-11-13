@@ -101,6 +101,27 @@ function vanphuccare_knowledge_menu_link_attributes( $atts, $item, $args ) {
 add_filter( 'nav_menu_link_attributes', 'vanphuccare_knowledge_menu_link_attributes', 10, 3 );
 
 /**
+ * Keeps the footer recruitment link canonical when an old custom menu URL is
+ * still assigned in WordPress admin.
+ *
+ * @param array   $atts Link attributes.
+ * @param WP_Post $item Menu item.
+ * @param object  $args Menu args.
+ * @return array
+ */
+function vanphuccare_recruitment_menu_link_attributes( $atts, $item, $args ) {
+	$theme_location = isset( $args->theme_location ) ? (string) $args->theme_location : '';
+	$title          = isset( $item->title ) ? trim( wp_strip_all_tags( $item->title ) ) : '';
+
+	if ( 'footer_legal' === $theme_location && 'Tuyển dụng' === $title ) {
+		$atts['href'] = home_url( '/tuyen-dung/' );
+	}
+
+	return $atts;
+}
+add_filter( 'nav_menu_link_attributes', 'vanphuccare_recruitment_menu_link_attributes', 10, 3 );
+
+/**
  * Adds the active class to assigned Kiến thức menu items.
  *
  * @param array   $classes Menu classes.

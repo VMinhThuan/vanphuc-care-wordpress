@@ -146,6 +146,7 @@ function vanphuccare_enqueue_assets() {
 	$is_services_page = is_page( 'dich-vu' ) || is_page_template( 'page-dich-vu.php' ) || is_post_type_archive( 'vpc_service' ) || is_singular( 'vpc_service' );
 	$is_knowledge_page = is_page( 'kien-thuc' ) || is_page_template( 'page-kien-thuc.php' ) || is_category() || is_tag() || is_search() || ! empty( get_query_var( 'vpc_is_all' ) );
 	$is_news_page      = function_exists( 'vanphuccare_is_news_page' ) && vanphuccare_is_news_page();
+	$is_recruitment_page = is_page( 'tuyen-dung' ) || is_page_template( 'page-tuyen-dung.php' );
 	$is_policy_page    = is_page( 'dieu-khoan-su-dung' )
 		|| is_page( 'chinh-sach-bao-mat' )
 		|| is_page( 'chinh-sach-bien-tap-va-chinh-sua' )
@@ -213,6 +214,10 @@ function vanphuccare_enqueue_assets() {
 		vanphuccare_enqueue_theme_style( 'vanphuccare-news', 'assets/css/news.css', array( 'vanphuccare-tailwind' ) );
 	}
 
+	if ( $is_recruitment_page ) {
+		vanphuccare_enqueue_theme_style( 'vanphuccare-recruitment', 'assets/css/recruitment.css', array( 'vanphuccare-tailwind' ) );
+	}
+
 	if ( $is_policy_page ) {
 		vanphuccare_enqueue_theme_style( 'vanphuccare-policy', 'assets/css/policy.css', array( 'vanphuccare-tailwind' ) );
 	}
@@ -250,6 +255,10 @@ function vanphuccare_enqueue_assets() {
 
 	if ( $is_milk_page ) {
 		vanphuccare_enqueue_theme_script( 'vanphuccare-milk', 'assets/js/milk.js', array(), true );
+	}
+
+	if ( $is_recruitment_page ) {
+		vanphuccare_enqueue_theme_script( 'vanphuccare-recruitment', 'assets/js/recruitment.js', array(), true );
 	}
 
 	// Enqueue Cloudflare Turnstile API.

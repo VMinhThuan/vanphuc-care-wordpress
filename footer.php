@@ -261,7 +261,7 @@ $company_address = get_theme_mod( 'vpc_company_address', '35B/399 Âu Cơ, phư�
 				<span class="vpc-footer-legal-divider hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
 				<a href="<?php echo esc_url( home_url( '/chinh-sach-bao-mat' ) ); ?>" class="vpc-footer-legal-privacy order-2 xl:order-none hover:text-text-body-muted transition-colors">Chính sách bảo mật</a>
 				<span class="vpc-footer-legal-divider hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
-				<a href="<?php echo esc_url( home_url( '/tuyen-dung' ) ); ?>" class="vpc-footer-legal-careers order-3 xl:order-none hover:text-text-body-muted transition-colors">Tuyển dụng</a>
+				<a href="<?php echo esc_url( home_url( '/tuyen-dung/' ) ); ?>" class="vpc-footer-legal-careers order-3 xl:order-none hover:text-text-body-muted transition-colors">Tuyển dụng</a>
 				<span class="vpc-footer-legal-divider hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
 				<a href="<?php echo esc_url( home_url( '/lien-he' ) ); ?>" class="vpc-footer-legal-contact order-4 xl:order-none hover:text-text-body-muted transition-colors">Liên hệ</a>
 			</div>
