@@ -68,23 +68,79 @@
 	}
 	positionToc();
 	mobile.addEventListener('change', positionToc);
-	toc.addEventListener('click', event => {
-		if (mobile.matches && event.target.closest('a')) toc.open = false;
-	});
 	let selected;
-	function highlight() {
-		let current = 0;
-		for (let i = 0; i < headings.length; i++) {
-			if (headings[i].getBoundingClientRect().top > 135) break;
-			current = i;
-		}
+	let anchorLink;
+	let frame = 0;
+
+	function selectLink(link) {
+		if (link === selected) return;
 		selected?.removeAttribute('aria-current');
-		selected = links[current];
+		selected = link;
 		selected.setAttribute('aria-current', 'location');
 	}
-	const observer = new IntersectionObserver(highlight, { rootMargin: '-125px 0px 0px' });
-	headings.forEach(heading => observer.observe(heading));
-	highlight();
+
+	function highlight() {
+		frame = 0;
+		if (anchorLink) {
+			selectLink(anchorLink);
+			return;
+		}
+		const scrollMargin = parseFloat(getComputedStyle(headings[0]).scrollMarginTop) || 0;
+		const scrollPadding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+		const readingLine = scrollMargin + scrollPadding + 1;
+		let current = 0;
+		for (let i = 0; i < headings.length; i++) {
+			if (headings[i].getBoundingClientRect().top > readingLine) break;
+			current = i;
+		}
+		selectLink(links[current]);
+	}
+
+	function queueHighlight() {
+		if (!frame) frame = requestAnimationFrame(highlight);
+	}
+
+	function syncFragment() {
+		let target;
+		try {
+			target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+		} catch {
+			// Malformed external fragment: use the current reading position.
+		}
+		const index = headings.indexOf(target);
+		anchorLink = links[index];
+		queueHighlight();
+	}
+
+	toc.addEventListener('click', event => {
+		const link = event.target.closest('a');
+		if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+		anchorLink = link;
+		selectLink(link);
+		if (mobile.matches) toc.open = false;
+	});
+
+	// Native fragment scrolling and lazy-loaded images may settle over several frames.
+	// Keep the requested section selected until the reader scrolls the document.
+	function resumeTracking(event) {
+		if (!anchorLink || toc.contains(event.target)) return;
+		anchorLink = undefined;
+		queueHighlight();
+	}
+	window.addEventListener('wheel', resumeTracking, { passive: true });
+	window.addEventListener('touchmove', resumeTracking, { passive: true });
+	document.addEventListener('pointerdown', event => {
+		if (event.target === document.documentElement || event.button === 1) resumeTracking(event);
+	});
+	document.addEventListener('keydown', event => {
+		if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(event.key)) {
+			resumeTracking(event);
+		}
+	});
+	window.addEventListener('scroll', queueHighlight, { passive: true });
+	window.addEventListener('resize', queueHighlight);
+	window.addEventListener('hashchange', syncFragment);
+	syncFragment();
 })();
 
 // Enhance optional blocks independently of the presence of article headings.

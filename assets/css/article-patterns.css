@@ -306,3 +306,26 @@ blockquote.vpc-expert-quote { margin-inline: 0; background: #fce7e7; border-colo
 	.vpc-pros-cons > .wp-block-column { padding: 20px; }
 	.vpc-expert-quote, .vpc-read-more, .vpc-references, .vpc-inline-consult, .vpc-checklist { padding: 18px; }
 }
+
+/* Inline recommendation, shared with the Gutenberg preview. */
+.vpc-related-link, .vpc-reader__body a.vpc-related-link {
+	display: grid;
+	grid-template-columns: minmax(80px, 120px) minmax(0, 1fr) 24px;
+	align-items: center;
+	gap: 16px;
+	padding: 16px;
+	border: 1px solid #dedede;
+	border-radius: 16px;
+	background: #fff;
+	color: #171717;
+	text-decoration: none;
+}
+.vpc-related-link__thumb { display: block; aspect-ratio: 10 / 7; border-radius: 12px; overflow: hidden; background: #a3c9e3; }
+.vpc-related-link__thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.vpc-related-link__copy { display: grid; gap: 4px; overflow-wrap: anywhere; font: 600 20px/1.3 var(--font-body, Manrope, sans-serif); }
+.vpc-related-link__label { color: #a44850; font-size: 14px; font-weight: 500; }
+.vpc-related-link__arrow { color: #1a77ba; font-size: 24px; }
+a.vpc-related-link:is(:hover, :focus-visible) { border-color: #1a77ba; }
+@media (max-width: 600px) {
+	.vpc-related-link, .vpc-reader__body a.vpc-related-link { grid-template-columns: minmax(64px, 34%) minmax(0, 1fr) 20px; gap: 12px; }
+}
