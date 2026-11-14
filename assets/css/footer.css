@@ -6,10 +6,6 @@
  * below the mobile breakpoint.
  */
 
-.site-footer .footer-news-label-mobile {
-	display: none;
-}
-
 /* Legal menu list styling when rendered via wp_nav_menu() */
 .site-footer ul.vpc-footer-legal {
 	list-style: none;
@@ -39,14 +35,6 @@
 	}
 }
 @media (max-width: 767px) {
-	.site-footer .footer-news-label-desktop {
-		display: none;
-	}
-
-	.site-footer .footer-news-label-mobile {
-		display: inline;
-	}
-
 	.site-footer {
 		background: linear-gradient(180deg, #f8f8f8 38.823%, #d1e4f1 99.976%) !important;
 		padding-top: 32px !important;
@@ -104,10 +92,6 @@
 
 	.site-footer .footer-logo {
 		margin-bottom: 12px;
-	}
-
-	.site-footer .footer-news-mother-baby {
-		display: none !important;
 	}
 
 	.site-footer .vpc-footer-company-name {

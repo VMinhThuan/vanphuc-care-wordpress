@@ -224,6 +224,15 @@ document.addEventListener('DOMContentLoaded', function () {
 					labelSpan.classList.add('text-text-body-default');
 				}
 
+				if (trigger) {
+					trigger.classList.remove('border-error-500', 'ring-1', 'ring-error-500');
+				}
+				const formEl = container.closest('form');
+				const statusEl = formEl ? formEl.querySelector('[role="status"]') : null;
+				if (statusEl) {
+					statusEl.classList.add('hidden');
+				}
+
 				// Update active styles
 				options.forEach(function (opt) {
 					opt.setAttribute('aria-selected', 'false');
@@ -675,6 +684,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		form.addEventListener('submit', function (e) {
 			e.preventDefault();
+
+			// 1. Kiểm tra các trường Custom Select bắt buộc (required)
+			const requiredCustomSelects = form.querySelectorAll('[data-custom-select] input[data-select-input][required]');
+			for (let i = 0; i < requiredCustomSelects.length; i++) {
+				const selectHidden = requiredCustomSelects[i];
+				if (!selectHidden.value || !selectHidden.value.trim()) {
+					const container = selectHidden.closest('[data-custom-select]');
+					const trigger = container ? container.querySelector('.vpc-select-trigger') : null;
+					const rawLabel = container ? container.querySelector('label')?.textContent : '';
+					const fieldName = rawLabel ? rawLabel.replace('*', '').trim() : 'trường này';
+
+					if (trigger) {
+						trigger.classList.add('border-error-500', 'ring-1', 'ring-error-500');
+						trigger.focus();
+					}
+					showStatus('Vui lòng chọn ' + fieldName + '!', true);
+					return;
+				}
+			}
+
+			// 2. Kiểm tra số điện thoại hợp lệ
 			if (phoneField) {
 				let normalizedPhone = phoneField.value.trim().replace(/[\s().-]/g, '');
 				if (normalizedPhone.startsWith('+84')) {
@@ -731,7 +761,9 @@ document.addEventListener('DOMContentLoaded', function () {
 				if (successMessage && msg) {
 					successMessage.textContent = msg;
 				}
-				showStatus(msg || 'Thông tin đã được gửi thành công.', false);
+				// Ẩn text thông báo dưới nút vì modal popup thành công đã hiển thị thông điệp này
+				status.textContent = '';
+				status.classList.add('hidden');
 
 				// Meta Pixel CAPI Deduplication Event Trigger
 				if (typeof window !== 'undefined' && window.fbq && leadData?.eventId) {

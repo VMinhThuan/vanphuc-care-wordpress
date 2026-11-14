@@ -73,7 +73,7 @@
 
 .vpc-bath__lead-card {
 	width: 658px;
-	min-height: 444px;
+	min-height: 0;
 	margin: 48px auto 0;
 	padding: 32px 24px;
 	display: flex;
@@ -163,7 +163,7 @@
 
 	.vpc-bath__lead-card {
 		width: 100%;
-		min-height: 554px;
+		min-height: 0;
 		margin-top: 24px;
 		padding: 24px;
 		border-radius: 16px;
@@ -187,7 +187,7 @@
 	}
 
 	.vpc-bath__lead-card {
-		min-height: 554px;
+		min-height: 0;
 		padding: 24px 16px;
 		border-radius: 24px;
 	}

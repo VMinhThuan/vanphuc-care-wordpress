@@ -1968,6 +1968,28 @@
 		display: none;
 	}
 
+	/* Keep the tags card below the article list on knowledge sub-category pages. */
+	.vpc-knowledge--subcategory .vpc-knowledge-widget--tags {
+		display: block;
+		order: 4;
+		width: 100%;
+		min-height: 0;
+		padding: 24px 32px 32px;
+		border-radius: 16px;
+	}
+
+	.vpc-knowledge--subcategory .vpc-knowledge-widget--tags .vpc-knowledge-tag-cloud {
+		width: 100%;
+		margin-top: 24px;
+		gap: 12px 16px;
+	}
+
+	.vpc-knowledge--subcategory .vpc-knowledge-widget--tags .vpc-knowledge-tag {
+		padding: 8px 20px;
+		font-size: 16px;
+		line-height: 24px;
+	}
+
 	.vpc-knowledge-widget--banner,
 	.vpc-knowledge-widget--hotline {
 		display: none;

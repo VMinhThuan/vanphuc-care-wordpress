@@ -431,6 +431,29 @@ function vanphuccare_keep_recruitment_hub_url( $redirect_url, $requested_url ) {
 add_filter( 'redirect_canonical', 'vanphuccare_keep_recruitment_hub_url', 10, 2 );
 
 /**
+ * Prevents WordPress redirect handlers from rewriting the clean hub route
+ * before the recruitment template is selected.
+ *
+ * @return void
+ */
+function vanphuccare_lock_recruitment_hub_request() {
+	if ( is_admin() || wp_doing_ajax() ) {
+		return;
+	}
+
+	$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+	$request_path = trim( (string) wp_parse_url( $request_uri, PHP_URL_PATH ), '/' );
+
+	if ( 'tuyen-dung' !== $request_path ) {
+		return;
+	}
+
+	remove_action( 'template_redirect', 'redirect_canonical' );
+	remove_action( 'template_redirect', 'wp_old_slug_redirect' );
+}
+add_action( 'template_redirect', 'vanphuccare_lock_recruitment_hub_request', 1 );
+
+/**
  * Adds the clean route for the recruitment hub when no WordPress Page exists.
  *
  * @return void

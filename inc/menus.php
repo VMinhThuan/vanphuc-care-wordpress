@@ -503,13 +503,6 @@ function vanphuccare_footer_nav_menu_css_class( $classes, $item, $args ) {
 		$classes[] = 'h-6';
 		$classes[] = 'flex';
 		$classes[] = 'items-center';
-
-		if ( 'footer_news' === $location ) {
-			$title = isset( $item->title ) ? trim( wp_strip_all_tags( $item->title ) ) : '';
-			if ( 'Mẹ và bé' === $title ) {
-				$classes[] = 'footer-news-mother-baby';
-			}
-		}
 	} elseif ( 'footer_legal' === $location ) {
 		$url   = isset( $item->url ) ? (string) $item->url : '';
 		$title = isset( $item->title ) ? trim( wp_strip_all_tags( $item->title ) ) : '';
@@ -551,6 +544,15 @@ function vanphuccare_footer_nav_menu_link_attributes( $atts, $item, $args ) {
 	if ( in_array( $location, array( 'footer_services', 'footer_knowledge', 'footer_news', 'footer', 'footer_legal' ), true ) ) {
 		$existing_class = isset( $atts['class'] ) ? trim( $atts['class'] ) : '';
 		$atts['class']   = $existing_class ? $existing_class . ' hover:text-text-body-muted transition-colors' : 'hover:text-text-body-muted transition-colors';
+
+		if ( 'footer_news' === $location ) {
+			$title = isset( $item->title ) ? trim( wp_strip_all_tags( $item->title ) ) : '';
+			if ( 'Mẹ và bé' === $title ) {
+				$atts['href'] = home_url( '/tin-tuc-su-kien/' );
+			} elseif ( 'Tin mới & sự kiện nổi bật' === $title ) {
+				$atts['href'] = home_url( '/tin-tuc-su-kien/' );
+			}
+		}
 	}
 
 	return $atts;
@@ -568,8 +570,11 @@ add_filter( 'nav_menu_link_attributes', 'vanphuccare_footer_nav_menu_link_attrib
 function vanphuccare_footer_news_menu_title( $title, $item, $args ) {
 	if ( isset( $args->theme_location ) && 'footer_news' === $args->theme_location ) {
 		$clean_title = trim( wp_strip_all_tags( $title ) );
-		if ( 'Tin tức & sự kiện' === $clean_title || 'Tin mới & sự kiện nổi bật' === $clean_title ) {
-			return '<span class="footer-news-label-desktop">Tin tức & sự kiện</span><span class="footer-news-label-mobile">Tin mới & sự kiện nổi bật</span>';
+		if ( 'Mẹ và bé' === $clean_title ) {
+			return 'Tin mới';
+		}
+		if ( 'Tin mới & sự kiện nổi bật' === $clean_title ) {
+			return 'Sự kiện nổi bật';
 		}
 	}
 	return $title;

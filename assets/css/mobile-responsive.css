@@ -322,4 +322,20 @@
 	.vpc-knowledge-widget--tags {
 		display: none !important;
 	}
+
+	/* Restore the tags card on mobile sub-category pages and keep it below the articles. */
+	.vpc-knowledge--subcategory .vpc-knowledge-widget--tags {
+		display: block !important;
+		order: 4;
+		width: 100%;
+		min-height: 0;
+		padding: 24px 32px 32px;
+		border-radius: 16px;
+	}
+
+	.vpc-knowledge--subcategory .vpc-knowledge-widget--tags .vpc-knowledge-tag-cloud {
+		width: 100%;
+		margin-top: 24px;
+		gap: 12px 16px;
+	}
 }

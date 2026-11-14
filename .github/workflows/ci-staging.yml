@@ -64,6 +64,9 @@ jobs:
             --exclude='node_modules/' \
             --exclude='deploy-package/' \
             --exclude='src/' \
+            --exclude='tests/' \
+            --exclude='tools/' \
+            --exclude='scratch/' \
             --exclude='.env*' \
             --exclude='*.zip' \
             --exclude='/package*.json' \

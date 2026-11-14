@@ -7,7 +7,8 @@
     "dev": "tailwindcss -i ./src/theme.css -o ./assets/css/theme.css --watch",
     "build": "tailwindcss -i ./src/theme.css -o ./assets/css/theme.css --minify",
     "media:export": "node tools/export-media-library.mjs",
-    "test": "npm run test:static-qa",
+    "test": "node --test tests/knowledge-regression.test.mjs",
+    "test:knowledge": "node --test tests/knowledge-regression.test.mjs",
     "test:static-qa": "node ./tests/static-qa.mjs"
   },
   "keywords": [],

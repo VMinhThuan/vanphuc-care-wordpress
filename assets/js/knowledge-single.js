@@ -274,7 +274,7 @@
 		if (section.closest(':target') || section.querySelector(':target')) details.open = true;
 	});
 	// Copy link button handler with tooltip toast and fallback
-	reader.querySelectorAll('.vpc-reader__share-btn--copy[data-copy-link]').forEach(button => {
+	document.querySelectorAll('.vpc-reader__share-btn--copy[data-copy-link]').forEach(button => {
 		button.addEventListener('click', async () => {
 			const url = button.getAttribute('data-copy-link') || window.location.href;
 			let success = false;

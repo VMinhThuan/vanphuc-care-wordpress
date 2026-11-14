@@ -162,10 +162,10 @@ $company_address = get_theme_mod( 'vpc_company_address', '35B/399 Âu Cơ, phư�
 				<?php endif; ?>
 			</div>
 
-			<!-- Column 4: TIN TỨC & SỰ KIỆN -->
+			<!-- Column 4: TIN TỨC & SỰ KIỆN MỚI NHẤT -->
 			<div class="footer-link-column w-full sm:w-auto flex flex-col space-y-2 xl:space-y-3">
 				<h3 class="font-body text-sm md:text-base font-bold text-text-body-default uppercase xl:pb-1">
-					<?php esc_html_e( 'Tin tức & sự kiện', 'vanphuccare' ); ?>
+					<?php esc_html_e( 'Tin tức & sự kiện mới nhất', 'vanphuccare' ); ?>
 				</h3>
 				<?php
 				if ( has_nav_menu( 'footer_news' ) ) :
@@ -182,8 +182,8 @@ $company_address = get_theme_mod( 'vpc_company_address', '35B/399 Âu Cơ, phư�
 				else :
 				?>
 					<ul class="space-y-2 text-sm md:text-base font-medium text-text-body-default">
-						<li class="footer-news-mother-baby h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/#kien-thuc-nuoi-con' ) ); ?>" class="hover:text-text-body-muted transition-colors">Mẹ và bé</a></li>
-						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/tin-tuc-su-kien/' ) ); ?>" class="hover:text-text-body-muted transition-colors"><span class="footer-news-label-desktop">Tin mới & sự kiện nổi bật</span><span class="footer-news-label-mobile">Tin mới & sự kiện nổi bật</span></a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/tin-tuc-su-kien/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Tin mới</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/tin-tuc-su-kien/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Sự kiện nổi bật</a></li>
 					</ul>
 				<?php endif; ?>
 			</div>
