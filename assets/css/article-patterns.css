@@ -55,15 +55,17 @@
 	margin: 16px 0 0;
 }
 
-.vpc-quick-review .wp-block-list > li {
+.vpc-quick-review .wp-block-list>li {
 	position: relative;
 	padding-inline-start: 32px;
 	line-height: 24px;
 }
 
-.vpc-quick-review .wp-block-list > li + li { margin-top: 12px; }
+.vpc-quick-review .wp-block-list>li+li {
+	margin-top: 12px;
+}
 
-.vpc-quick-review .wp-block-list > li::before {
+.vpc-quick-review .wp-block-list>li::before {
 	content: "";
 	position: absolute;
 	inset-inline-start: 5px;
@@ -123,8 +125,16 @@
 	mask: var(--callout-icon) center / contain no-repeat;
 }
 
-.vpc-callout p { margin-block: 8px 0; }
-.vpc-callout .vpc-callout__title { margin: 0; font-size: 20px; line-height: 1.3; font-weight: 600; }
+.vpc-callout p {
+	margin-block: 8px 0;
+}
+
+.vpc-callout .vpc-callout__title {
+	margin: 0;
+	font-size: 20px;
+	line-height: 1.3;
+	font-weight: 600;
+}
 
 /* ==========================================================================
    3. Pros & Cons Comparison (.vpc-pros-cons)
@@ -138,7 +148,7 @@
 	font: 500 16px/1.5 var(--font-body, Manrope, sans-serif);
 }
 
-.vpc-pros-cons > .wp-block-column {
+.vpc-pros-cons>.wp-block-column {
 	min-width: 0;
 	flex: 1 1 0;
 	margin: 0;
@@ -173,7 +183,7 @@
 }
 
 .vpc-pros-cons__title::before,
-.vpc-pros-cons .wp-block-list > li::before {
+.vpc-pros-cons .wp-block-list>li::before {
 	content: var(--comparison-mark);
 	content: var(--comparison-mark) / "";
 	color: var(--comparison-icon);
@@ -198,14 +208,16 @@
 	list-style: none;
 }
 
-.vpc-pros-cons .wp-block-list > li {
+.vpc-pros-cons .wp-block-list>li {
 	position: relative;
 	padding-inline-start: 32px;
 }
 
-.vpc-pros-cons .wp-block-list > li + li { margin-top: 12px; }
+.vpc-pros-cons .wp-block-list>li+li {
+	margin-top: 12px;
+}
 
-.vpc-pros-cons .wp-block-list > li::before {
+.vpc-pros-cons .wp-block-list>li::before {
 	position: absolute;
 	inset-inline-start: 3px;
 }
@@ -213,7 +225,11 @@
 /* ==========================================================================
    4. General Editorial Blocks (Shared Box Bases)
    ========================================================================== */
-.vpc-expert-quote, .vpc-read-more, .vpc-references, .vpc-inline-consult, .vpc-checklist {
+
+.vpc-expert-quote,
+.vpc-read-more,
+.vpc-references,
+.vpc-checklist {
 	box-sizing: border-box;
 	padding: 24px;
 	border: 1px solid #dedede;
@@ -221,111 +237,764 @@
 	overflow-wrap: anywhere;
 }
 
-blockquote.vpc-expert-quote { margin-inline: 0; background: #fce7e7; border-color: #ffb4b5; }
-.vpc-expert-quote p { font: italic 20px/1.5 var(--font-heading, Georgia, serif); }
-.vpc-expert-quote cite { display: block; margin-top: 16px; font-style: normal; }
-.vpc-pattern-title { font-size: 20px; font-weight: 700; }
-.vpc-references { background: #f8f8f8; }
-.vpc-references li + li, .vpc-checklist li + li { margin-top: 8px; }
-.vpc-reader__body .vpc-references h2, .vpc-reader__body .vpc-article-faq h2 { margin: 0 0 16px; color: #1a77ba; }
+blockquote.vpc-expert-quote {
+	margin-inline: 0;
+	background: #fce7e7;
+	border-color: #ffb4b5;
+}
 
-.vpc-inline-consult { background: #1a77ba; color: white; }
-.vpc-inline-consult .wp-block-buttons { margin-top: 16px; }
-.vpc-inline-consult .wp-block-button a { background: white; color: #155f95; }
-.vpc-read-more .vpc-pattern-title { color: #a44850; font-size: 15px; }
-.vpc-download .wp-block-file { padding: 16px; border: 1px solid #dedede; border-radius: 12px; }
-.vpc-article-video video { display: block; width: 100%; border-radius: 16px; }
+.vpc-expert-quote p {
+	font: italic 20px/1.5 var(--font-heading, Georgia, serif);
+}
+
+.vpc-expert-quote cite {
+	display: block;
+	margin-top: 16px;
+	font-style: normal;
+}
+
+.vpc-pattern-title {
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.vpc-references {
+	background: #f8f8f8;
+	font-family: var(--font-body, Manrope, sans-serif);
+}
+.vpc-references h2,
+.vpc-reader__body .vpc-references h2 {
+	margin: 0 0 16px;
+	color: #1a77ba;
+	font: 700 22px/1.4 var(--font-body, Manrope, sans-serif);
+}
+.vpc-references ol,
+.vpc-reader__body .vpc-references ol,
+.editor-styles-wrapper .vpc-references ol {
+	margin: 0;
+	padding: 0 !important;
+	padding-left: 0 !important;
+	list-style: none !important;
+	list-style-type: none !important;
+	counter-reset: vpc-source;
+}
+.vpc-references ol > li,
+.vpc-reader__body .vpc-references ol > li,
+.editor-styles-wrapper .vpc-references ol > li {
+	margin: 0;
+	padding: 0;
+	list-style: none !important;
+	list-style-type: none !important;
+	counter-increment: vpc-source;
+}
+.vpc-references ol > li + li { margin-top: 12px; }
+.vpc-references ol:not(.vpc-references__list) > li { position: relative; padding-left: 32px; }
+.vpc-references ol:not(.vpc-references__list) > li::before {
+	content: "[" counter(vpc-source) "]";
+	position: absolute;
+	left: 0;
+	color: #1a77ba;
+}
+.vpc-references .vpc-references__row {
+	display: grid;
+	grid-template-columns: max-content minmax(0, 1fr) 20px;
+	align-items: start;
+	gap: 12px;
+	color: #292929;
+	font: 400 16px/1.5 var(--font-body, Manrope, sans-serif);
+	text-decoration: none;
+}
+.vpc-references__number { color: #1a77ba; }
+.vpc-references a.vpc-references__row .vpc-references__number,
+.vpc-references__row--linked .vpc-references__number { text-decoration: underline; text-underline-offset: 2px; }
+.vpc-references__text { min-width: 0; overflow-wrap: anywhere; }
+.vpc-references .vpc-references__text a { color: inherit; text-decoration: none; }
+.vpc-references .vpc-references__text a:hover { text-decoration: underline; }
+.vpc-references__external {
+	display: block;
+	width: 18px;
+	height: 18px;
+	margin-top: 3px;
+	background: #1a77ba;
+	mask: url('../icons/external-link.svg') center / contain no-repeat;
+	-webkit-mask: url('../icons/external-link.svg') center / contain no-repeat;
+}
+.vpc-references__external.is-unlinked { opacity: .3; }
+.vpc-references .vpc-references__toggle {
+	display: inline-flex;
+	align-items: center;
+	gap: 12px;
+	margin-top: 16px;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	color: #1a77ba;
+	font: 400 16px/1.5 var(--font-body, Manrope, sans-serif);
+	text-decoration: underline;
+	text-underline-offset: 2px;
+	cursor: pointer;
+}
+.vpc-references__toggle > span {
+	width: 8px;
+	height: 8px;
+	border-right: 2px solid currentColor;
+	border-bottom: 2px solid currentColor;
+	transform: translateY(-2px) rotate(45deg);
+}
+.vpc-references__toggle[aria-expanded="true"] > span { transform: translateY(2px) rotate(225deg); }
+.vpc-references :is(a, button):focus-visible { outline: 2px solid #1a77ba; outline-offset: 4px; }
+.vpc-references a.vpc-references__row:hover .vpc-references__text { text-decoration: underline; }
+.vpc-references li[hidden] { display: none !important; }
+.vpc-references textarea.block-editor-plain-text {
+	min-height: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+}
+.vpc-references__edit { margin: 8px 0 16px 32px; }
+@media (max-width: 480px) {
+	.vpc-references .vpc-references__row { gap: 8px; font-size: 14px; }
+	.vpc-references h2, .vpc-reader__body .vpc-references h2 { font-size: 20px; }
+}
+
+.vpc-references li+li,
+.vpc-checklist li+li {
+	margin-top: 8px;
+}
+
+.vpc-reader__body .vpc-references h2,
+.vpc-reader__body .vpc-article-faq h2 {
+	margin: 0 0 16px;
+	color: #1a77ba;
+}
+
+
+/* Inline consultation cards. A classic theme can wrap a Group's saved children. */
+.wp-block-group:is(.vpc-inline-consult, .is-style-vpc-cta-blue, .is-style-vpc-cta-pink) {
+	--cta-bg: #1a77ba;
+	--cta-text: #fff;
+	--cta-button-bg: #fff;
+	--cta-button-text: #1a77ba;
+	box-sizing: border-box;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	align-content: center;
+	align-items: center;
+	gap: 8px 24px;
+	min-height: 128px;
+	margin-block: 24px;
+	padding: 24px 32px;
+	border: 0;
+	border-radius: 16px;
+	background: var(--cta-bg);
+	color: var(--cta-text);
+	overflow-wrap: anywhere;
+}
+.wp-block-group:is(.vpc-inline-consult--pink, .is-style-vpc-cta-pink):not(.is-style-vpc-cta-blue) {
+	--cta-bg: #fde6e6;
+	--cta-text: #262626;
+	--cta-button-bg: #1a77ba;
+	--cta-button-text: #fff;
+	min-height: 112px;
+}
+
+/* Expose the same grid children for nested and pre-existing flat patterns. */
+:is(.vpc-inline-consult, .is-style-vpc-cta-blue, .is-style-vpc-cta-pink) > .wp-block-group__inner-container,
+.vpc-inline-consult__text, .vpc-inline-consult__text > .wp-block-group__inner-container { display: contents; }
+
+:is(.vpc-inline-consult, .is-style-vpc-cta-blue, .is-style-vpc-cta-pink) p {
+	grid-column: 1;
+	margin: 0;
+	color: inherit;
+	font: 500 16px/24px var(--font-body, Manrope, sans-serif);
+}
+:is(.vpc-inline-consult, .is-style-vpc-cta-blue, .is-style-vpc-cta-pink) :is(.vpc-pattern-title, .vpc-inline-consult__title) {
+	font: 400 24px/32px var(--font-heading, Fraunces, Georgia, serif);
+}
+:is(.vpc-inline-consult, .is-style-vpc-cta-blue, .is-style-vpc-cta-pink) .wp-block-buttons {
+	grid-column: 2;
+	grid-row: 1 / span 2;
+	justify-self: end;
+	margin: 0;
+}
+:is(.vpc-inline-consult, .is-style-vpc-cta-blue, .is-style-vpc-cta-pink) .wp-block-button .wp-block-button__link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	min-height: 48px;
+	padding: 10px 24px;
+	border: 0;
+	border-radius: 999px;
+	background: var(--cta-button-bg);
+	color: var(--cta-button-text);
+	font: 500 16px/24px var(--font-body, Manrope, sans-serif);
+	text-align: center;
+	text-decoration: none;
+}
+:is(.vpc-inline-consult, .is-style-vpc-cta-blue, .is-style-vpc-cta-pink) .wp-block-button__link:focus-visible {
+	outline: 2px solid currentColor;
+	outline-offset: -5px;
+}
+@media (max-width: 768px) {
+	.wp-block-group:is(.vpc-inline-consult, .is-style-vpc-cta-blue, .is-style-vpc-cta-pink) {
+		padding: 20px;
+		gap: 8px 16px;
+	}
+	:is(.vpc-inline-consult, .is-style-vpc-cta-blue, .is-style-vpc-cta-pink) :is(.vpc-pattern-title, .vpc-inline-consult__title) {
+		font: 700 20px/26px var(--font-body, Manrope, sans-serif);
+	}
+	.wp-block-group:is(.vpc-inline-consult, .is-style-vpc-cta-blue):not(.vpc-inline-consult--pink, .is-style-vpc-cta-pink),
+	.wp-block-group.is-style-vpc-cta-blue { grid-template-columns: minmax(0, 1fr); }
+	:is(.vpc-inline-consult, .is-style-vpc-cta-blue):not(.vpc-inline-consult--pink, .is-style-vpc-cta-pink) .wp-block-buttons,
+	.is-style-vpc-cta-blue .wp-block-buttons { grid-area: auto / 1; justify-self: stretch; margin-top: 8px; }
+	:is(.vpc-inline-consult, .is-style-vpc-cta-blue):not(.vpc-inline-consult--pink, .is-style-vpc-cta-pink) .wp-block-button,
+	:is(.vpc-inline-consult, .is-style-vpc-cta-blue):not(.vpc-inline-consult--pink, .is-style-vpc-cta-pink) .wp-block-button__link,
+	.is-style-vpc-cta-blue .wp-block-button, .is-style-vpc-cta-blue .wp-block-button__link { width: 100%; }
+}
+
+.vpc-read-more .vpc-pattern-title {
+	color: #a44850;
+	font-size: 15px;
+}
+
+.vpc-download .wp-block-file {
+	padding: 16px;
+	border: 1px solid #dedede;
+	border-radius: 12px;
+}
+
+/* File card: keep typography and layout identical in the editor and article. */
+.vpc-file-card {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	padding: 18px;
+	border: 1px solid #dedede;
+	border-radius: 16px;
+	background: #fff;
+	color: #292929;
+	font-family: var(--font-body, Manrope, sans-serif);
+	box-sizing: border-box;
+}
+.vpc-file-card__badge {
+	display: grid;
+	place-items: center;
+	flex: 0 0 50px;
+	width: 50px;
+	height: 50px;
+	border-radius: 12px;
+	background: #fde6e6;
+	color: #d85b65;
+	font-size: 10px;
+	line-height: 1.2;
+	overflow-wrap: anywhere;
+}
+.vpc-file-card__copy { flex: 1; min-width: 0; }
+.vpc-file-card__name {
+	display: block;
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 1.5;
+	overflow-wrap: anywhere;
+}
+.vpc-file-card__meta {
+	display: block;
+	margin-top: 2px;
+	color: #555;
+	font-size: 13px;
+	line-height: 1.5;
+}
+.vpc-file-card .vpc-file-card__button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	flex: none;
+	min-height: 44px;
+	padding: 10px 22px;
+	border: 0;
+	border-radius: 999px;
+	background: #1a77ba;
+	color: #fff;
+	font: 500 14px/24px var(--font-body, Manrope, sans-serif);
+	text-decoration: none;
+	white-space: nowrap;
+	box-sizing: border-box;
+}
+.vpc-file-card__button svg { flex: none; }
+.vpc-file-card a.vpc-file-card__button:hover { background: #12639e; color: #fff; text-decoration: none; }
+.vpc-file-card a:focus-visible { outline: 2px solid #12639e; outline-offset: 3px; }
+.vpc-file-card__controls { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+@media (max-width: 480px) {
+	.vpc-file-card { flex-wrap: wrap; padding: 14px; gap: 12px; }
+	.vpc-file-card__copy { flex-basis: calc(100% - 62px); }
+	.vpc-file-card__name { font-size: 16px; }
+	.vpc-file-card .vpc-file-card__button { margin-left: auto; }
+}
+
+.vpc-article-video video {
+	display: block;
+	width: 100%;
+	border-radius: 16px;
+}
 
 /* ==========================================================================
    5. Step-by-Step Guide (.vpc-steps)
    ========================================================================== */
-.vpc-steps ol.wp-block-list { padding: 0; list-style: none; counter-reset: vpc-step; }
-.vpc-steps ol.wp-block-list > li { position: relative; counter-increment: vpc-step; padding: 0 0 20px 48px; }
-.vpc-steps ol.wp-block-list > li:not(:last-child)::after {
-	content: ""; position: absolute; left: 15px; top: 32px; bottom: 0; border-left: 1px solid #c9d6df;
+.vpc-steps ol.wp-block-list {
+	padding: 0;
+	list-style: none;
+	counter-reset: vpc-step;
 }
-.vpc-steps ol.wp-block-list > li::before {
-	content: counter(vpc-step); position: absolute; inset: 0 auto auto 0; display: grid; place-items: center;
-	width: 32px; height: 32px; border-radius: 50%; background: #1a77ba; color: white; font-weight: 700;
+
+.vpc-steps ol.wp-block-list>li {
+	position: relative;
+	counter-increment: vpc-step;
+	padding: 0 0 20px 48px;
+}
+
+.vpc-steps ol.wp-block-list>li:not(:last-child)::after {
+	content: "";
+	position: absolute;
+	left: 15px;
+	top: 32px;
+	bottom: 0;
+	border-left: 1px solid #c9d6df;
+}
+
+.vpc-steps ol.wp-block-list>li::before {
+	content: counter(vpc-step);
+	position: absolute;
+	inset: 0 auto auto 0;
+	display: grid;
+	place-items: center;
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	background: #1a77ba;
+	color: white;
+	font-weight: 700;
 }
 
 /* ==========================================================================
    6. FAQ Accordion (.vpc-article-faq, .vpc-yoast-faq)
    ========================================================================== */
-.vpc-article-faq details, .vpc-reader__body .vpc-yoast-faq details {
-	padding: 16px 20px; border: 1px solid #dedede; border-radius: 10px; margin-block: 8px; background: white;
-}
-.vpc-article-faq summary, .vpc-yoast-faq summary { cursor: pointer; font-weight: 600; }
-.vpc-article-faq details[open] summary, .vpc-yoast-faq details[open] summary { color: #155f95; margin-bottom: 8px; }
-
-/* ==========================================================================
-   7. Comparison Table Highlights (.is-style-vpc-choice-*)
-   ========================================================================== */
-.wp-block-table:is(.is-style-vpc-choice-2,.is-style-vpc-choice-3,.is-style-vpc-choice-4,.is-style-vpc-criteria,.is-style-vpc-row-1,.is-style-vpc-row-2,.is-style-vpc-row-3) {
-	overflow-x: auto; max-width: 100%; border: 1px solid #dedede; border-radius: 12px;
-}
-.wp-block-table:is(.is-style-vpc-choice-2,.is-style-vpc-choice-3,.is-style-vpc-choice-4,.is-style-vpc-criteria,.is-style-vpc-row-1,.is-style-vpc-row-2,.is-style-vpc-row-3) table {
-	min-width: 540px; width: 100%; border-collapse: collapse;
-}
-.wp-block-table.is-style-vpc-choice-2 tr > :nth-child(2),
-.wp-block-table.is-style-vpc-choice-3 tr > :nth-child(3),
-.wp-block-table.is-style-vpc-choice-4 tr > :nth-child(4),
-.wp-block-table.is-style-vpc-row-1 tbody tr:nth-child(1) > *,
-.wp-block-table.is-style-vpc-row-2 tbody tr:nth-child(2) > *,
-.wp-block-table.is-style-vpc-row-3 tbody tr:nth-child(3) > *,
-.wp-block-table.is-style-vpc-criteria thead th { background: #d1e4f1; }
-.wp-block-table.is-style-vpc-choice-2 thead th:nth-child(2)::before,
-.wp-block-table.is-style-vpc-choice-3 thead th:nth-child(3)::before,
-.wp-block-table.is-style-vpc-choice-4 thead th:nth-child(4)::before {
-	content: "Khuyên dùng"; display: block; width: fit-content; margin: 0 auto 6px; padding: 2px 8px;
-	background: #1a77ba; color: white; border-radius: 999px; font-size: 12px;
+.vpc-article-faq h2.wp-block-heading,
+.vpc-reader__body .vpc-article-faq h2 {
+	margin: 0 0 16px;
+	color: #1a77ba;
+	font: 700 24px/1.35 var(--font-heading, Fraunces, Georgia, serif);
 }
 
-/* ==========================================================================
-   8. Interactive Checklist (.vpc-checklist)
-   ========================================================================== */
-.vpc-checklist__count { font-size: 14px; color: #525252; }
-.vpc-checklist ul.vpc-checklist__items { list-style: none; padding: 0; }
-.vpc-checklist__items > li { border-bottom: 1px solid #dedede; padding-block: 8px; }
-.vpc-checklist__items label { cursor: pointer; }
-.vpc-checklist__items input { margin-right: 10px; accent-color: #1a77ba; }
-.vpc-checklist__items label:has(input:checked) { color: #525252; text-decoration: line-through; }
-
-/* ==========================================================================
-   9. Responsive Breakpoints
-   ========================================================================== */
-@media (max-width: 900px) {
-	.wp-block-group.vpc-quick-review { padding: 20px; }
-	.vpc-quick-review .vpc-quick-review__title { font-size: 20px; line-height: 26px; }
-}
-
-@media (max-width: 781px) {
-	.wp-block-group.vpc-callout { padding: 16px 16px 16px 52px; }
-	.wp-block-group.vpc-callout::before { top: 17px; left: 16px; }
-	.wp-block-columns.vpc-pros-cons { flex-direction: column; gap: 16px; }
-	.vpc-pros-cons > .wp-block-column { padding: 20px; }
-	.vpc-expert-quote, .vpc-read-more, .vpc-references, .vpc-inline-consult, .vpc-checklist { padding: 18px; }
-}
-
-/* Inline recommendation, shared with the Gutenberg preview. */
-.vpc-related-link, .vpc-reader__body a.vpc-related-link {
-	display: grid;
-	grid-template-columns: minmax(80px, 120px) minmax(0, 1fr) 24px;
-	align-items: center;
-	gap: 16px;
-	padding: 16px;
+.vpc-article-faq__list,
+.vpc-article-faq:not(:has(.vpc-article-faq__list)) {
 	border: 1px solid #dedede;
 	border-radius: 16px;
-	background: #fff;
+	background: #ffffff;
+	overflow: hidden;
+	margin-block: 16px;
+}
+
+.vpc-article-faq details,
+.vpc-reader__body .vpc-yoast-faq details {
+	margin: 0;
+	padding: 20px 24px;
+	border: 0;
+	border-bottom: 1px solid #eef2f5;
+	border-radius: 0;
+	background: transparent;
+	transition: background 0.2s ease;
+}
+
+.vpc-article-faq details:last-child,
+.vpc-reader__body .vpc-yoast-faq details:last-child {
+	border-bottom: 0;
+}
+
+.vpc-article-faq summary,
+.vpc-yoast-faq summary {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	list-style: none;
+	cursor: pointer;
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 1.4;
 	color: #171717;
-	text-decoration: none;
+	transition: color 0.15s ease;
 }
-.vpc-related-link__thumb { display: block; aspect-ratio: 10 / 7; border-radius: 12px; overflow: hidden; background: #a3c9e3; }
-.vpc-related-link__thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.vpc-related-link__copy { display: grid; gap: 4px; overflow-wrap: anywhere; font: 600 20px/1.3 var(--font-body, Manrope, sans-serif); }
-.vpc-related-link__label { color: #a44850; font-size: 14px; font-weight: 500; }
-.vpc-related-link__arrow { color: #1a77ba; font-size: 24px; }
-a.vpc-related-link:is(:hover, :focus-visible) { border-color: #1a77ba; }
-@media (max-width: 600px) {
-	.vpc-related-link, .vpc-reader__body a.vpc-related-link { grid-template-columns: minmax(64px, 34%) minmax(0, 1fr) 20px; gap: 12px; }
-}
+
+	/* Hide native browser disclosure triangles */
+	.vpc-article-faq summary::-webkit-details-marker,
+	.vpc-yoast-faq summary::-webkit-details-marker,
+	.vpc-article-faq summary::marker,
+	.vpc-yoast-faq summary::marker {
+		display: none;
+		content: "";
+	}
+
+	/* Right toggle icon: + when closed, − when open */
+	.vpc-article-faq summary::after,
+	.vpc-yoast-faq summary::after {
+		content: "+";
+		flex: none;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 24px;
+		height: 24px;
+		font-size: 26px;
+		font-weight: 400;
+		line-height: 1;
+		color: #1a77ba;
+		margin-inline-start: auto;
+		transition: color 0.2s ease;
+	}
+
+	.vpc-article-faq details[open]>summary,
+	.vpc-yoast-faq details[open]>summary {
+		color: #1a77ba;
+		margin-bottom: 12px;
+	}
+
+	.vpc-article-faq details[open]>summary::after,
+	.vpc-yoast-faq details[open]>summary::after {
+		content: "−";
+		font-size: 26px;
+	}
+
+	/* Answer body */
+	.vpc-article-faq details p,
+	.vpc-yoast-faq details p,
+	.vpc-yoast-faq .schema-faq-answer {
+		margin: 0;
+		color: #525252;
+		font-size: 16px;
+		line-height: 1.6;
+	}
+
+	.vpc-article-faq details p+p,
+	.vpc-yoast-faq details p+p {
+		margin-top: 8px;
+	}
+
+	/* ==========================================================================
+   7. Comparison Table Highlights (.is-style-vpc-choice-*)
+   ========================================================================== */
+	.wp-block-table:is(.is-style-vpc-data-table, .is-style-vpc-choice-2, .is-style-vpc-choice-3, .is-style-vpc-choice-4, .is-style-vpc-criteria, .is-style-vpc-row-1, .is-style-vpc-row-2, .is-style-vpc-row-3) {
+		overflow-x: auto;
+		max-width: 100%;
+		border: 1px solid #dedede;
+		border-radius: 12px;
+	}
+
+	.wp-block-table:is(.is-style-vpc-data-table, .is-style-vpc-choice-2, .is-style-vpc-choice-3, .is-style-vpc-choice-4, .is-style-vpc-criteria, .is-style-vpc-row-1, .is-style-vpc-row-2, .is-style-vpc-row-3) table {
+		min-width: 540px;
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	.wp-block-table.is-style-vpc-choice-2 tr> :nth-child(2),
+	.wp-block-table.is-style-vpc-choice-3 tr> :nth-child(3),
+	.wp-block-table.is-style-vpc-choice-4 tr> :nth-child(4),
+	.wp-block-table.is-style-vpc-row-1 tbody tr:nth-child(1)>*,
+	.wp-block-table.is-style-vpc-row-2 tbody tr:nth-child(2)>*,
+	.wp-block-table.is-style-vpc-row-3 tbody tr:nth-child(3)>*,
+	.wp-block-table.is-style-vpc-criteria thead th {
+		background: #d1e4f1;
+	}
+
+	.wp-block-table.is-style-vpc-choice-2 thead th:nth-child(2)::before,
+	.wp-block-table.is-style-vpc-choice-3 thead th:nth-child(3)::before,
+	.wp-block-table.is-style-vpc-choice-4 thead th:nth-child(4)::before {
+		content: "Khuyên dùng";
+		display: block;
+		width: fit-content;
+		margin: 0 auto 6px;
+		padding: 2px 8px;
+		background: #1a77ba;
+		color: white;
+		border-radius: 999px;
+		font-size: 12px;
+	}
+
+	/* ==========================================================================
+   8. Interactive Checklist (.vpc-checklist)
+   ========================================================================== */
+	.vpc-checklist {
+		background: #fff;
+		color: #171717;
+		font-family: var(--font-body, Manrope, sans-serif);
+	}
+
+	.vpc-kit__header,
+	.vpc-checklist .vpc-kit__items>li,
+	.vpc-kit__items label {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+
+	.vpc-kit__header {
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 4px 16px;
+	}
+
+	.vpc-checklist .vpc-pattern-title {
+		flex: 1 1 170px;
+		margin: 0;
+		font: 700 24px/1.3 var(--font-body, Manrope, sans-serif);
+		color: #1a77ba;
+	}
+
+	.vpc-checklist .vpc-checklist__count {
+		margin: 0;
+		color: #525252;
+		font-size: 14px;
+	}
+
+	.vpc-checklist ul.vpc-kit__items {
+		margin: 12px 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.vpc-checklist .vpc-kit__items>li {
+		margin: 0;
+		min-height: 56px;
+		padding: 10px 0;
+		box-sizing: border-box;
+	}
+
+	.vpc-kit__items>li+li {
+		border-top: 1px solid #e1e1e1;
+	}
+
+	.vpc-kit__items label {
+		flex: 1;
+		min-width: 0;
+		cursor: pointer;
+	}
+
+	.vpc-kit__items input[type="checkbox"] {
+		appearance: none;
+		flex: none;
+		width: 24px;
+		height: 24px;
+		margin: 0;
+		border: 1px solid #ccc;
+		border-radius: 7px;
+		background: white;
+		cursor: pointer;
+		display: grid;
+		place-items: center;
+	}
+
+	.vpc-kit__items input[type="checkbox"]:checked {
+		background: #1a77ba;
+		border-color: #1a77ba;
+	}
+
+	.vpc-kit__items input[type="checkbox"]:checked::before {
+		content: "";
+		width: 7px;
+		height: 13px;
+		border: solid white;
+		border-width: 0 2px 2px 0;
+		transform: translateY(-1px) rotate(45deg);
+		margin: 0;
+		box-sizing: border-box;
+	}
+
+	.vpc-kit__items input:focus-visible {
+		outline: 2px solid #155f95;
+		outline-offset: 2px;
+	}
+
+	.vpc-kit__items input:checked+.vpc-kit__name {
+		color: #767676;
+	}
+
+	.vpc-kit__name {
+		min-width: 0;
+		flex: 1;
+		overflow-wrap: anywhere;
+		font: inherit;
+	}
+
+	.vpc-kit__qty {
+		flex: 0 1 auto;
+		max-width: 40%;
+		margin-inline-start: auto;
+		padding: 3px 12px;
+		border-radius: 999px;
+		background: #d1e4f1;
+		color: #155f95;
+		font-size: 12px;
+		overflow-wrap: anywhere;
+	}
+
+	.vpc-checklist .vpc-kit__qty input {
+		width: auto;
+		max-width: 100%;
+		font: inherit;
+		color: inherit;
+		background: none;
+		border: 0;
+		padding: 0;
+	}
+
+	.vpc-checklist textarea.block-editor-plain-text {
+		width: auto;
+		min-width: 0;
+		padding: 0;
+		border: 0;
+		background: transparent;
+	}
+
+	.vpc-checklist .components-button {
+		flex-shrink: 0;
+	}
+
+	/* ==========================================================================
+   9. Responsive Breakpoints
+   ========================================================================== */
+	@media (max-width: 900px) {
+		.wp-block-group.vpc-quick-review {
+			padding: 20px;
+		}
+
+		.vpc-quick-review .vpc-quick-review__title {
+			font-size: 20px;
+			line-height: 26px;
+		}
+	}
+
+	@media (max-width: 781px) {
+		.wp-block-group.vpc-callout {
+			padding: 16px 16px 16px 52px;
+		}
+
+		.wp-block-group.vpc-callout::before {
+			top: 17px;
+			left: 16px;
+		}
+
+		.wp-block-columns.vpc-pros-cons {
+			flex-direction: column;
+			gap: 16px;
+		}
+
+		.vpc-pros-cons>.wp-block-column {
+			padding: 20px;
+		}
+
+		.vpc-expert-quote,
+		.vpc-read-more,
+		.vpc-references,
+		.vpc-checklist {
+			padding: 18px;
+		}
+	}
+
+	/* Inline recommendation, shared with the Gutenberg preview. */
+	.vpc-related-link,
+	.vpc-reader__body a.vpc-related-link {
+		display: grid;
+		grid-template-columns: minmax(80px, 120px) minmax(0, 1fr) 24px;
+		align-items: center;
+		gap: 16px;
+		padding: 16px;
+		border: 1px solid #dedede;
+		border-radius: 16px;
+		background: #fff;
+		color: #171717;
+		text-decoration: none;
+	}
+
+	.vpc-related-link__thumb {
+		display: block;
+		aspect-ratio: 10 / 7;
+		border-radius: 12px;
+		overflow: hidden;
+		background: #a3c9e3;
+	}
+
+	.vpc-related-link__thumb img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.vpc-related-link__copy {
+		display: grid;
+		gap: 4px;
+		overflow-wrap: anywhere;
+		font: 600 20px/1.3 var(--font-body, Manrope, sans-serif);
+	}
+
+	.vpc-related-link__label {
+		color: #a44850;
+		font-size: 14px;
+		font-weight: 500;
+	}
+
+	.vpc-related-link__arrow {
+		color: #1a77ba;
+		font-size: 24px;
+	}
+
+	a.vpc-related-link:is(:hover, :focus-visible) {
+		border-color: #1a77ba;
+	}
+
+	@media (max-width: 600px) {
+
+		.vpc-related-link,
+		.vpc-reader__body a.vpc-related-link {
+			grid-template-columns: minmax(64px, 34%) minmax(0, 1fr) 20px;
+			gap: 12px;
+		}
+	}
+
+	.wp-block-table.is-style-vpc-data-table :is(th, td) {
+		padding: 16px 20px;
+		border: 0;
+		text-align: start;
+		vertical-align: middle;
+		line-height: 1.5;
+	}
+
+	.wp-block-table.is-style-vpc-data-table thead {
+		border: 0;
+	}
+
+	.wp-block-table.is-style-vpc-data-table th {
+		background: #d1e4f1;
+		color: #155f95;
+		font-weight: 600;
+	}
+
+	.wp-block-table.is-style-vpc-data-table tbody tr {
+		background: #fff;
+	}
+
+	.wp-block-table.is-style-vpc-data-table tbody tr:nth-child(even) {
+		background: #f8f8f8;
+	}
+
+	.wp-block-table.is-style-vpc-data-table tbody td {
+		border-top: 1px solid #e6e6e6;
+	}
+
+	.wp-block-table.is-style-vpc-data-table tbody td:first-child {
+		font-weight: 600;
+	}

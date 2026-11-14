@@ -733,6 +733,10 @@ add_action( 'init', 'vanphuccare_register_knowledge_patterns' );
  * Comparison table choices in the Gutenberg Styles panel.
  */
 function vanphuccare_register_comparison_styles() {
+	register_block_style( 'core/table', array(
+		'name'  => 'vpc-data-table',
+		'label' => __( 'Bảng dữ liệu', 'vanphuccare' ),
+	) );
 	foreach ( array( 2 => 'A', 3 => 'B', 4 => 'C' ) as $column => $label ) {
 		register_block_style( 'core/table', array(
 			'name'  => 'vpc-choice-' . $column,
@@ -748,6 +752,14 @@ function vanphuccare_register_comparison_styles() {
 	register_block_style( 'core/table', array(
 		'name'  => 'vpc-criteria',
 		'label' => __( 'Nhấn hàng tiêu đề', 'vanphuccare' ),
+	) );
+	register_block_style( 'core/group', array(
+		'name'  => 'vpc-cta-blue',
+		'label' => __( 'Tư vấn Xanh', 'vanphuccare' ),
+	) );
+	register_block_style( 'core/group', array(
+		'name'  => 'vpc-cta-pink',
+		'label' => __( 'Tư vấn Hồng', 'vanphuccare' ),
 	) );
 }
 add_action( 'init', 'vanphuccare_register_comparison_styles' );

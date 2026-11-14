@@ -58,6 +58,20 @@ $is_all_archive = ( 'kien-thuc' === $current_slug || ! empty( get_query_var( 'vp
 $display_name   = 'mang-thai' === $current_slug ? __( 'Mang Thai', 'vanphuccare' ) : $current_name;
 $hero_title     = $is_all_archive ? __( 'Tất Cả Kiến Thức', 'vanphuccare' ) : $display_name;
 $main_title     = $is_all_archive ? __( 'Tất cả bài viết', 'vanphuccare' ) : sprintf( __( 'Bài viết %s', 'vanphuccare' ), $current_name );
+
+$hero_badge = __( 'Chuẩn y khoa', 'vanphuccare' );
+$hero_photo = 'mang-thai-photo-2.png';
+foreach ( $categories as $cat_pill ) {
+	if ( ! empty( $cat_pill['active'] ) ) {
+		if ( ! empty( $cat_pill['badge'] ) ) {
+			$hero_badge = $cat_pill['badge'];
+		}
+		if ( ! empty( $cat_pill['photo'] ) ) {
+			$hero_photo = $cat_pill['photo'];
+		}
+		break;
+	}
+}
 ?>
 
 <div class="vpc-knowledge vpc-knowledge--subcategory">
@@ -87,11 +101,11 @@ $main_title     = $is_all_archive ? __( 'Tất cả bài viết', 'vanphuccare' 
 			<div class="vpc-knowledge-subcat-hero__visual" aria-hidden="true">
 				<img class="vpc-knowledge-subcat-hero__blob" src="<?php echo $asset( 'mang-thai-blob.svg' ); ?>" alt="" width="300" height="300">
 				<div class="vpc-knowledge-subcat-hero__photo">
-					<img src="<?php echo $asset( 'mang-thai-photo-2.png' ); ?>" alt="" width="230" height="301">
+					<img src="<?php echo $asset( $hero_photo ); ?>" alt="<?php echo esc_attr( $hero_title ); ?>" width="230" height="301">
 				</div>
 				<img class="vpc-knowledge-subcat-hero__sticker" src="<?php echo $asset( 'mang-thai-sticker.svg' ); ?>" alt="" width="130" height="130">
 				<img class="vpc-knowledge-subcat-hero__mascot" src="<?php echo $asset( 'hero-mascot.png' ); ?>" alt="" width="114" height="114">
-				<span class="vpc-knowledge-subcat-hero__badge"><img src="<?php echo $asset( 'mang-thai-dot.svg' ); ?>" alt="" width="10" height="10"><span><?php esc_html_e( 'Thai kỳ khoẻ mạnh', 'vanphuccare' ); ?></span></span>
+				<span class="vpc-knowledge-subcat-hero__badge"><img src="<?php echo $asset( 'mang-thai-dot.svg' ); ?>" alt="" width="10" height="10"><span><?php echo esc_html( $hero_badge ); ?></span></span>
 				<img class="vpc-knowledge-subcat-hero__heart" src="<?php echo $asset( 'mang-thai-heart.svg' ); ?>" alt="" width="26" height="26">
 				<img class="vpc-knowledge-subcat-hero__heart-small" src="<?php echo $asset( 'mang-thai-heart-small.svg' ); ?>" alt="" width="16" height="16">
 				<img class="vpc-knowledge-subcat-hero__sparkle" src="<?php echo $asset( 'mang-thai-sparkle.svg' ); ?>" alt="" width="20" height="20">

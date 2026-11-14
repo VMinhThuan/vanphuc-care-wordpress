@@ -23,3 +23,6 @@ require_once get_template_directory() . '/inc/menus.php';
 require_once get_template_directory() . '/inc/ajax.php';
 
 require_once get_template_directory() . '/inc/read-more.php';
+require_once get_template_directory() . '/inc/checklist.php';
+require_once get_template_directory() . '/inc/download.php';
+require_once get_template_directory() . '/inc/references.php';

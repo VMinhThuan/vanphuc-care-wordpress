@@ -55,7 +55,52 @@ foreach ( $blocks as $block ) {
 				<?php if ( '' !== $excerpt ) : ?><p class="vpc-reader__lead"><?php echo esc_html( $excerpt ); ?></p><?php endif; ?>
 				<div class="vpc-reader__body"><?php the_content(); ?></div>
 				<?php wp_link_pages(); ?>
-				<?php the_tags( '<p class="vpc-reader__tags">Tags: ', ' · ', '</p>' ); ?>
+				<?php
+				$post_tags = get_the_tags( $article_id );
+				$has_tags  = ! empty( $post_tags ) && ! is_wp_error( $post_tags );
+				$share_url = get_permalink( $article_id );
+				?>
+				<div class="vpc-reader__footer-bar">
+					<?php if ( $has_tags ) : ?>
+						<div class="vpc-reader__tags">
+							<span class="vpc-reader__tags-label">Tags:</span>
+							<div class="vpc-reader__tag-list">
+								<?php foreach ( $post_tags as $tag ) : ?>
+									<a href="<?php echo esc_url( get_tag_link( $tag->term_id ) ); ?>" class="vpc-reader__tag-pill">
+										<?php echo esc_html( $tag->name ); ?>
+									</a>
+								<?php endforeach; ?>
+							</div>
+						</div>
+					<?php endif; ?>
+
+					<div class="vpc-reader__share" aria-label="Chia sẻ bài viết">
+						<span class="vpc-reader__share-label">Chia sẻ:</span>
+						<div class="vpc-reader__share-buttons">
+							<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo rawurlencode( $share_url ); ?>"
+							   target="_blank"
+							   rel="noopener noreferrer"
+							   class="vpc-reader__share-btn vpc-reader__share-btn--facebook"
+							   aria-label="Chia sẻ lên Facebook">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/icons/facebook.svg' ); ?>" width="36" height="36" alt="" aria-hidden="true">
+							</a>
+							<a href="https://zalo.me/share?url=<?php echo rawurlencode( $share_url ); ?>"
+							   target="_blank"
+							   rel="noopener noreferrer"
+							   class="vpc-reader__share-btn vpc-reader__share-btn--zalo"
+							   aria-label="Chia sẻ qua Zalo">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/icons/zalo.svg' ); ?>" width="22" height="22" alt="" aria-hidden="true">
+							</a>
+							<button type="button"
+							        class="vpc-reader__share-btn vpc-reader__share-btn--copy"
+							        data-copy-link="<?php echo esc_url( $share_url ); ?>"
+							        aria-label="Sao chép liên kết">
+								<img src="<?php echo esc_url( get_template_directory_uri() . '/assets/icons/copy-link.svg' ); ?>" width="18" height="18" alt="" aria-hidden="true">
+								<span class="vpc-reader__share-tooltip" role="status" aria-live="polite">Đã sao chép!</span>
+							</button>
+						</div>
+					</div>
+				</div>
 			</article>
 			<aside class="vpc-reader__rail" aria-label="Thông tin bài viết">
 				<details class="vpc-reader__toc" hidden>

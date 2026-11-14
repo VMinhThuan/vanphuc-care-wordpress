@@ -9,6 +9,4 @@
  * @package VanPhucCare
  */
 ?>
-<!-- wp:group {"className":"vpc-download"} -->
-<div class="wp-block-group vpc-download"><!-- wp:file /--></div>
-<!-- /wp:group -->
+<!-- wp:vanphuccare/download /-->

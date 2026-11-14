@@ -148,20 +148,108 @@
 	const body = document.querySelector('.vpc-reader__body');
 	if (!body) return;
 
+	body.querySelectorAll('.vpc-references').forEach((block, blockIndex) => {
+		const list = block.querySelector('ol');
+		if (!list || block.querySelector('.vpc-references__toggle')) return;
+		const rows = Array.from(list.children);
+		if (!list.classList.contains('vpc-references__list')) {
+			// Enhance old core/list markup in place; preserve formatted text and every link.
+			rows.forEach((row, index) => {
+				const text = document.createElement('div');
+				text.className = 'vpc-references__text';
+				text.append(...Array.from(row.childNodes));
+				const original = text.querySelector('a[href]');
+				const url = original?.getAttribute('href') || '';
+				const linked = /^https?:\/\//i.test(url);
+				const number = document.createElement(linked ? 'a' : 'span');
+				number.className = 'vpc-references__number';
+				number.textContent = '[' + (index + 1) + ']';
+				const wrapper = document.createElement('div');
+				wrapper.className = 'vpc-references__row';
+				wrapper.append(number, text);
+				if (linked) {
+					number.href = url;
+					number.target = '_blank';
+					number.rel = 'noopener noreferrer';
+					number.setAttribute('aria-label', 'Nguồn ' + (index + 1) + ': ' + text.textContent + ' (mở trong tab mới)');
+					const external = number.cloneNode(false);
+					external.className = 'vpc-references__external';
+					wrapper.append(external);
+				}
+				row.append(wrapper);
+			});
+			list.classList.add('vpc-references__list');
+			list.setAttribute('role', 'list');
+		}
+		if (rows.length <= 4) return;
+		if (!list.id) {
+			let id = 'vpc-sources-' + blockIndex;
+			while (document.getElementById(id)) id += '-list';
+			list.id = id;
+		}
+		const toggle = document.createElement('button');
+		toggle.type = 'button';
+		toggle.className = 'vpc-references__toggle';
+		toggle.setAttribute('aria-controls', list.id);
+		function setExpanded(expanded) {
+			rows.slice(4).forEach(row => { row.hidden = !expanded; });
+			toggle.setAttribute('aria-expanded', String(expanded));
+			toggle.textContent = expanded ? 'Thu gọn' : 'Xem thêm ' + (rows.length - 4) + ' nguồn';
+			const chevron = document.createElement('span');
+			chevron.setAttribute('aria-hidden', 'true');
+			toggle.append(chevron);
+		}
+		function revealFragment() {
+			let id;
+			try { id = decodeURIComponent(location.hash.slice(1)); } catch { return; }
+			const target = id && document.getElementById(id);
+			if (target && rows.slice(4).some(row => row === target || row.contains(target))) setExpanded(true);
+		}
+		toggle.addEventListener('click', () => setExpanded(toggle.getAttribute('aria-expanded') !== 'true'));
+		list.after(toggle);
+		setExpanded(false);
+		revealFragment();
+		window.addEventListener('hashchange', revealFragment);
+	});
+
 	body.querySelectorAll('.vpc-checklist').forEach(block => {
 		const list = block.querySelector('ul');
 		if (!list || !list.children.length) return;
 		const count = document.createElement('p');
 		count.className = 'vpc-checklist__count';
 		count.setAttribute('aria-live', 'polite');
-		list.before(count);
-		list.classList.add('vpc-checklist__items');
+		let header = block.querySelector('.vpc-kit__header');
+		if (!header) {
+			header = document.createElement('div');
+			header.className = 'vpc-kit__header';
+			const title = block.querySelector('.vpc-pattern-title');
+			list.before(header);
+			if (title) header.append(title);
+		}
+		header.append(count);
+		list.classList.add('vpc-kit__items');
 		const boxes = Array.from(list.children, item => {
 			const label = document.createElement('label');
 			const box = document.createElement('input');
 			box.type = 'checkbox';
-			label.append(box, ...Array.from(item.childNodes));
-			item.append(label);
+			let name = item.querySelector(':scope > .vpc-kit__name');
+			if (!name) {
+				// Previously saved core/list rows use "Name · quantity".
+				name = document.createElement('span');
+				name.className = 'vpc-kit__name';
+				const last = item.lastChild;
+				const match = last?.nodeType === Node.TEXT_NODE && last.textContent.match(/\s+·\s+([^·]+)$/u);
+				if (match) last.textContent = last.textContent.slice(0, match.index);
+				name.append(...Array.from(item.childNodes));
+				if (match) {
+					const quantity = document.createElement('span');
+					quantity.className = 'vpc-kit__qty';
+					quantity.textContent = '× ' + match[1].trim();
+					item.append(quantity);
+				}
+			}
+			label.append(box, name);
+			item.prepend(label);
 			return box;
 		});
 		function updateCount() {
@@ -184,5 +272,48 @@
 		details.append(summary, answer);
 		section.classList.add('vpc-yoast-faq');
 		if (section.closest(':target') || section.querySelector(':target')) details.open = true;
+	});
+	// Copy link button handler with tooltip toast and fallback
+	reader.querySelectorAll('.vpc-reader__share-btn--copy[data-copy-link]').forEach(button => {
+		button.addEventListener('click', async () => {
+			const url = button.getAttribute('data-copy-link') || window.location.href;
+			let success = false;
+
+			if (navigator.clipboard && window.isSecureContext) {
+				try {
+					await navigator.clipboard.writeText(url);
+					success = true;
+				} catch {
+					// Fallback below
+				}
+			}
+
+			if (!success) {
+				try {
+					const textarea = document.createElement('textarea');
+					textarea.value = url;
+					textarea.setAttribute('readonly', '');
+					textarea.style.position = 'fixed';
+					textarea.style.left = '-9999px';
+					textarea.style.top = '0';
+					document.body.appendChild(textarea);
+					textarea.select();
+					success = document.execCommand('copy');
+					document.body.removeChild(textarea);
+				} catch {
+					success = false;
+				}
+			}
+
+			if (success) {
+				button.classList.add('is-copied');
+				button.setAttribute('aria-label', 'Đã sao chép liên kết');
+				window.clearTimeout(button._copiedTimer);
+				button._copiedTimer = window.setTimeout(() => {
+					button.classList.remove('is-copied');
+					button.setAttribute('aria-label', 'Sao chép liên kết');
+				}, 2000);
+			}
+		});
 	});
 })();
