@@ -469,3 +469,174 @@ function vpc_save_category_featured_fields( $term_id ) {
 	update_term_meta( $term_id, 'vpc_featured_post_ids', $featured_ids );
 }
 add_action( 'edited_category', 'vpc_save_category_featured_fields', 10, 1 );
+
+/**
+ * Registers the Medical Reviewer meta box for posts (placed in the right sidebar).
+ *
+ * @return void
+ */
+function vpc_add_reviewer_meta_box() {
+	add_meta_box(
+		'vpc_post_reviewer_meta',
+		'Kiểm duyệt nội dung y khoa',
+		'vpc_render_reviewer_meta_box',
+		'post',
+		'side',
+		'high'
+	);
+}
+add_action( 'add_meta_boxes', 'vpc_add_reviewer_meta_box' );
+
+/**
+ * Enqueues WordPress media uploader scripts for the reviewer avatar picker.
+ *
+ * @param string $hook Current admin page hook.
+ * @return void
+ */
+function vpc_admin_reviewer_scripts( $hook ) {
+	if ( 'post.php' === $hook || 'post-new.php' === $hook ) {
+		wp_enqueue_media();
+	}
+}
+add_action( 'admin_enqueue_scripts', 'vpc_admin_reviewer_scripts' );
+
+/**
+ * Renders the Medical Reviewer meta box in the WordPress post editor sidebar.
+ *
+ * @param WP_Post $post Current post object.
+ * @return void
+ */
+function vpc_render_reviewer_meta_box( $post ) {
+	wp_nonce_field( 'vpc_save_reviewer_meta', 'vpc_reviewer_meta_nonce' );
+
+	$reviewer_name   = get_post_meta( $post->ID, 'vpc_reviewer_name', true );
+	$reviewer_title  = get_post_meta( $post->ID, 'vpc_reviewer_title', true );
+	$reviewer_avatar = get_post_meta( $post->ID, 'vpc_reviewer_avatar', true );
+	$reviewer_url    = get_post_meta( $post->ID, 'vpc_reviewer_url', true );
+	?>
+	<div class="vpc-reviewer-fields" style="font-size:13px;">
+		<p style="margin:0 0 10px;color:#666;line-height:1.4;">
+			Nhập Bác sĩ / Cố vấn kiểm định bài viết. Nếu để trống <em>Họ và tên</em>, thẻ sẽ tự động ẩn đi.
+		</p>
+		<p style="margin:0 0 10px;">
+			<label for="vpc_reviewer_name" style="font-weight:600;display:block;margin-bottom:3px;">Họ và tên người kiểm duyệt:</label>
+			<input type="text" id="vpc_reviewer_name" name="vpc_reviewer_name" value="<?php echo esc_attr( $reviewer_name ); ?>" style="width:100%;box-sizing:border-box;" placeholder="Ví dụ: BS. Nguyễn Văn A" />
+		</p>
+		<p style="margin:0 0 10px;">
+			<label for="vpc_reviewer_title" style="font-weight:600;display:block;margin-bottom:3px;">Chức danh · Đơn vị công tác:</label>
+			<input type="text" id="vpc_reviewer_title" name="vpc_reviewer_title" value="<?php echo esc_attr( $reviewer_title ); ?>" style="width:100%;box-sizing:border-box;" placeholder="Ví dụ: Bác sĩ CKI Nhi khoa" />
+		</p>
+		<div style="margin:0 0 10px;">
+			<label style="font-weight:600;display:block;margin-bottom:3px;">Ảnh đại diện:</label>
+			<div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+				<img id="vpc_reviewer_avatar_preview" src="<?php echo esc_url( $reviewer_avatar ); ?>" style="width:48px;height:48px;border-radius:50%;object-fit:cover;border:1px solid #ddd;<?php echo empty( $reviewer_avatar ) ? 'display:none;' : ''; ?>" alt="Preview" />
+				<input type="hidden" id="vpc_reviewer_avatar" name="vpc_reviewer_avatar" value="<?php echo esc_attr( $reviewer_avatar ); ?>" />
+				<button type="button" class="button button-secondary" id="vpc_reviewer_upload_btn"><?php echo empty( $reviewer_avatar ) ? 'Chọn ảnh' : 'Đổi ảnh'; ?></button>
+				<button type="button" class="button button-link-delete" id="vpc_reviewer_remove_btn" style="<?php echo empty( $reviewer_avatar ) ? 'display:none;' : ''; ?>">Xóa</button>
+			</div>
+			<span style="font-size:11px;color:#888;">Để trống sẽ dùng avatar mặc định chuẩn Figma.</span>
+		</div>
+		<p style="margin:0 0 6px;">
+			<label for="vpc_reviewer_url" style="font-weight:600;display:block;margin-bottom:3px;">Link thông tin (URL):</label>
+			<input type="url" id="vpc_reviewer_url" name="vpc_reviewer_url" value="<?php echo esc_attr( $reviewer_url ); ?>" style="width:100%;box-sizing:border-box;" placeholder="https://... (mặc định: Giới thiệu)" />
+		</p>
+	</div>
+	<script>
+	jQuery(document).ready(function($){
+		$('#vpc_reviewer_upload_btn').on('click', function(e){
+			e.preventDefault();
+			var frame = wp.media({
+				title: 'Chọn ảnh đại diện người kiểm duyệt',
+				button: { text: 'Sử dụng ảnh này' },
+				multiple: false
+			});
+			frame.on('select', function(){
+				var attachment = frame.state().get('selection').first().toJSON();
+				$('#vpc_reviewer_avatar').val(attachment.url);
+				$('#vpc_reviewer_avatar_preview').attr('src', attachment.url).show();
+				$('#vpc_reviewer_upload_btn').text('Đổi ảnh');
+				$('#vpc_reviewer_remove_btn').show();
+			});
+			frame.open();
+		});
+		$('#vpc_reviewer_remove_btn').on('click', function(e){
+			e.preventDefault();
+			$('#vpc_reviewer_avatar').val('');
+			$('#vpc_reviewer_avatar_preview').hide();
+			$('#vpc_reviewer_upload_btn').text('Chọn ảnh');
+			$(this).hide();
+		});
+	});
+	</script>
+	<?php
+}
+
+/**
+ * Saves Medical Reviewer meta fields securely on post save.
+ *
+ * @param int $post_id Saved post ID.
+ * @return void
+ */
+function vpc_save_reviewer_meta_box( $post_id ) {
+	if ( ! isset( $_POST['vpc_reviewer_meta_nonce'] ) || ! wp_verify_nonce( $_POST['vpc_reviewer_meta_nonce'], 'vpc_save_reviewer_meta' ) ) {
+		return;
+	}
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return;
+	}
+	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
+
+	$fields = array(
+		'vpc_reviewer_name'   => 'sanitize_text_field',
+		'vpc_reviewer_title'  => 'sanitize_text_field',
+		'vpc_reviewer_avatar' => 'esc_url_raw',
+		'vpc_reviewer_url'    => 'esc_url_raw',
+	);
+
+	foreach ( $fields as $field => $sanitizer ) {
+		if ( isset( $_POST[ $field ] ) ) {
+			$val = call_user_func( $sanitizer, wp_unslash( $_POST[ $field ] ) );
+			if ( '' !== $val ) {
+				update_post_meta( $post_id, $field, $val );
+			} else {
+				delete_post_meta( $post_id, $field );
+			}
+		}
+	}
+}
+add_action( 'save_post_post', 'vpc_save_reviewer_meta_box' );
+
+/**
+ * Registers Reviewer post meta for REST API and Gutenberg compatibility.
+ *
+ * @return void
+ */
+function vpc_register_reviewer_post_meta() {
+	$fields = array(
+		'vpc_reviewer_name'   => 'string',
+		'vpc_reviewer_title'  => 'string',
+		'vpc_reviewer_avatar' => 'string',
+		'vpc_reviewer_url'    => 'string',
+	);
+
+	foreach ( $fields as $key => $type ) {
+		register_post_meta(
+			'post',
+			$key,
+			array(
+				'show_in_rest'      => true,
+				'single'            => true,
+				'type'              => $type,
+				'sanitize_callback' => in_array( $key, array( 'vpc_reviewer_avatar', 'vpc_reviewer_url' ), true ) ? 'esc_url_raw' : 'sanitize_text_field',
+				'auth_callback'     => function() {
+					return current_user_can( 'edit_posts' );
+				},
+			)
+		);
+	}
+}
+add_action( 'init', 'vpc_register_reviewer_post_meta' );
+
+

@@ -410,6 +410,243 @@
 				transform: translateX(-50%) translateY(0);
 			}
 
+			/* Author Card */
+			.vpc-reader__author-card {
+				background: #ffffff;
+				border: 1px solid #ededed;
+				border-radius: 16px;
+				padding: 24px;
+				display: flex;
+				align-items: flex-start;
+				gap: 20px;
+				margin-top: 24px;
+				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+			}
+
+			.vpc-reader__author-avatar {
+				width: 80px;
+				height: 80px;
+				border-radius: 50%;
+				overflow: hidden;
+				flex-shrink: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: #bae6fd;
+			}
+
+			.vpc-reader__author-avatar img,
+			.vpc-reader__author-avatar .vpc-reader__author-img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				display: block;
+				border-radius: 50%;
+			}
+
+			.vpc-reader__author-placeholder {
+				width: 100%;
+				height: 100%;
+				display: block;
+			}
+
+			.vpc-reader__author-info {
+				flex: 1 1 auto;
+				min-width: 0;
+			}
+
+			.vpc-reader__author-badge {
+				display: inline-block;
+				padding: 3px 12px;
+				border-radius: 9999px;
+				background: #fee2e2;
+				color: #e02424;
+				font-size: 13px;
+				font-weight: 500;
+				line-height: 20px;
+				margin-bottom: 6px;
+			}
+
+			.vpc-reader__author-name {
+				font-family: var(--font-heading, Fraunces, Georgia, serif);
+				font-size: 24px;
+				font-weight: 600;
+				line-height: 1.3;
+				color: #171717;
+				margin: 0 0 4px;
+			}
+
+			.vpc-reader__author-title {
+				font-size: 14px;
+				font-weight: 400;
+				line-height: 20px;
+				color: #737373;
+				margin: 0 0 12px;
+			}
+
+			.vpc-reader__author-link {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				font-size: 15px;
+				font-weight: 500;
+				line-height: 22px;
+				color: #1a77ba;
+				text-decoration: none;
+				transition: color .15s ease, gap .15s ease;
+			}
+
+			.vpc-reader__author-link:hover {
+				color: #0e5a8f;
+				gap: 12px;
+				text-decoration: underline;
+			}
+
+			.vpc-reader__author-link svg {
+				flex-shrink: 0;
+				transition: transform .15s ease;
+			}
+
+			.vpc-reader__author-link:hover svg {
+				transform: translateX(3px);
+			}
+
+			/* Reviewer Card */
+			.vpc-reader__reviewer-card {
+				background: #ffffff;
+				border: 1px solid #ededed;
+				border-radius: 16px;
+				padding: 24px;
+				display: flex;
+				align-items: flex-start;
+				gap: 20px;
+				margin-top: 16px;
+				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+			}
+
+			.vpc-reader__reviewer-avatar {
+				width: 80px;
+				height: 80px;
+				border-radius: 50%;
+				overflow: hidden;
+				flex-shrink: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: #bae6fd;
+			}
+
+			.vpc-reader__reviewer-avatar img,
+			.vpc-reader__reviewer-avatar .vpc-reader__reviewer-img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				display: block;
+				border-radius: 50%;
+			}
+
+			.vpc-reader__reviewer-placeholder {
+				width: 100%;
+				height: 100%;
+				display: block;
+			}
+
+			.vpc-reader__reviewer-info {
+				flex: 1 1 auto;
+				min-width: 0;
+			}
+
+			.vpc-reader__reviewer-badge {
+				display: inline-flex;
+				align-items: center;
+				gap: 6px;
+				padding: 3px 12px;
+				border-radius: 9999px;
+				background: #def7ec;
+				color: #059669;
+				font-size: 13px;
+				font-weight: 600;
+				line-height: 20px;
+				margin-bottom: 6px;
+			}
+
+			.vpc-reader__reviewer-badge svg {
+				flex-shrink: 0;
+			}
+
+			.vpc-reader__reviewer-name {
+				font-family: var(--font-heading, Fraunces, Georgia, serif);
+				font-size: 24px;
+				font-weight: 600;
+				line-height: 1.3;
+				color: #171717;
+				margin: 0 0 4px;
+			}
+
+			.vpc-reader__reviewer-title {
+				font-size: 14px;
+				font-weight: 400;
+				line-height: 20px;
+				color: #737373;
+				margin: 0 0 12px;
+			}
+
+			.vpc-reader__reviewer-link {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				font-size: 15px;
+				font-weight: 500;
+				line-height: 22px;
+				color: #1a77ba;
+				text-decoration: none;
+				transition: color .15s ease, gap .15s ease;
+			}
+
+			.vpc-reader__reviewer-link:hover {
+				color: #0e5a8f;
+				gap: 12px;
+				text-decoration: underline;
+			}
+
+			.vpc-reader__reviewer-link svg {
+				flex-shrink: 0;
+				transition: transform .15s ease;
+			}
+
+			.vpc-reader__reviewer-link:hover svg {
+				transform: translateX(3px);
+			}
+
+			/* Medical Disclaimer Box */
+			.vpc-reader__disclaimer {
+				background: #fafafa;
+				border: 1px solid #ededed;
+				border-radius: 12px;
+				padding: 16px 20px;
+				display: flex;
+				align-items: center;
+				gap: 14px;
+				margin-top: 24px;
+			}
+
+			.vpc-reader__disclaimer-icon {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-shrink: 0;
+				width: 24px;
+				height: 24px;
+			}
+
+			.vpc-reader__disclaimer-text {
+				font-size: 14px;
+				font-weight: 400;
+				line-height: 22px;
+				color: #525252;
+				margin: 0;
+			}
+
 			.vpc-reader__related {
 				margin-top: 32px;
 			}
@@ -485,5 +722,64 @@
 					justify-content: center;
 					width: 100%;
 					margin: 0 auto !important;
+				}
+
+				.vpc-reader__author-card {
+					padding: 20px;
+					gap: 16px;
+					margin-top: 20px;
+				}
+
+				.vpc-reader__author-avatar {
+					width: 64px;
+					height: 64px;
+				}
+
+				.vpc-reader__author-name {
+					font-size: 20px;
+				}
+
+				.vpc-reader__author-title {
+					font-size: 14px;
+					margin-bottom: 10px;
+				}
+
+				.vpc-reader__author-link {
+					font-size: 14px;
+				}
+
+				.vpc-reader__reviewer-card {
+					padding: 20px;
+					gap: 16px;
+					margin-top: 16px;
+				}
+
+				.vpc-reader__reviewer-avatar {
+					width: 64px;
+					height: 64px;
+				}
+
+				.vpc-reader__reviewer-name {
+					font-size: 20px;
+				}
+
+				.vpc-reader__reviewer-title {
+					font-size: 14px;
+					margin-bottom: 10px;
+				}
+
+				.vpc-reader__reviewer-link {
+					font-size: 14px;
+				}
+
+				.vpc-reader__disclaimer {
+					padding: 14px 16px;
+					gap: 12px;
+					margin-top: 20px;
+				}
+
+				.vpc-reader__disclaimer-text {
+					font-size: 13px;
+					line-height: 20px;
 				}
 			}

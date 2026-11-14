@@ -624,3 +624,65 @@ function vpc_get_knowledge_category_pills( $current_slug = '', $current_id = 0 )
 	return $pills;
 }
 
+/**
+ * Adds custom profile field (Chức danh / Nghề nghiệp) to WordPress user profile.
+ *
+ * @param WP_User $user Current user object.
+ * @return void
+ */
+function vpc_add_user_profile_fields( $user ) {
+	$job_title = get_user_meta( $user->ID, 'vpc_job_title', true );
+	?>
+	<h3>Thông tin chuyên môn (Vạn Phúc Care)</h3>
+	<table class="form-table" role="presentation">
+		<tr>
+			<th><label for="vpc_job_title">Chức danh / Nghề nghiệp</label></th>
+			<td>
+				<input type="text" name="vpc_job_title" id="vpc_job_title" value="<?php echo esc_attr( $job_title ); ?>" class="regular-text" placeholder="Ví dụ: Bác sĩ CKI Nhi khoa, Điều dưỡng trưởng..." />
+				<p class="description">Chức danh này sẽ hiển thị bên dưới tên tác giả trong thẻ Tác giả ở chân bài viết.</p>
+			</td>
+		</tr>
+	</table>
+	<?php
+}
+add_action( 'show_user_profile', 'vpc_add_user_profile_fields' );
+add_action( 'edit_user_profile', 'vpc_add_user_profile_fields' );
+
+/**
+ * Saves custom user profile fields.
+ *
+ * @param int $user_id User ID.
+ * @return void
+ */
+function vpc_save_user_profile_fields( $user_id ) {
+	if ( ! current_user_can( 'edit_user', $user_id ) ) {
+		return;
+	}
+	if ( isset( $_POST['vpc_job_title'] ) ) {
+		update_user_meta( $user_id, 'vpc_job_title', sanitize_text_field( wp_unslash( $_POST['vpc_job_title'] ) ) );
+	}
+}
+add_action( 'personal_options_update', 'vpc_save_user_profile_fields' );
+add_action( 'edit_user_profile_update', 'vpc_save_user_profile_fields' );
+
+/**
+ * Returns author avatar HTML or clean SVG silhouette placeholder matching Figma.
+ *
+ * @param int $author_id Author user ID.
+ * @param int $size Avatar size in pixels.
+ * @return string HTML avatar markup.
+ */
+function vpc_get_author_avatar_html( $author_id, $size = 80 ) {
+	$avatar = get_avatar( $author_id, $size, '', '', array( 'class' => 'vpc-reader__author-img' ) );
+	if ( $avatar && ! str_contains( $avatar, 'mystery' ) && ! str_contains( $avatar, 'blank' ) && ! str_contains( $avatar, 'mysteryman' ) ) {
+		return $avatar;
+	}
+
+	return '<svg class="vpc-reader__author-placeholder" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+		<circle cx="40" cy="40" r="40" fill="#BAE6FD"/>
+		<path d="M40 40C45.5228 40 50 35.5228 50 30C50 24.4772 45.5228 20 40 20C34.4772 20 30 24.4772 30 30C30 35.5228 34.4772 40 40 40Z" stroke="#0284C7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+		<path d="M22 62C22 52.0589 30.0589 44 40 44C49.9411 44 58 52.0589 58 62" stroke="#0284C7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+	</svg>';
+}
+
+

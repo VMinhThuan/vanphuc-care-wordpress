@@ -101,6 +101,89 @@ foreach ( $blocks as $block ) {
 						</div>
 					</div>
 				</div>
+
+				<?php
+				// Author Card.
+				$author_id    = (int) get_the_author_meta( 'ID' );
+				$author_name  = get_the_author();
+				$author_title = get_the_author_meta( 'vpc_job_title', $author_id );
+				if ( empty( $author_title ) ) {
+					$author_desc  = get_the_author_meta( 'description', $author_id );
+					$author_title = ! empty( $author_desc ) ? wp_trim_words( $author_desc, 12 ) : __( 'Tác giả chuyên mục Kiến thức', 'vanphuccare' );
+				}
+				$author_url = get_author_posts_url( $author_id );
+				?>
+				<section class="vpc-reader__author-card" aria-label="<?php esc_attr_e( 'Thông tin tác giả', 'vanphuccare' ); ?>">
+					<div class="vpc-reader__author-avatar">
+						<?php echo vpc_get_author_avatar_html( $author_id, 80 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					</div>
+					<div class="vpc-reader__author-info">
+						<span class="vpc-reader__author-badge"><?php esc_html_e( 'Tác giả', 'vanphuccare' ); ?></span>
+						<h3 class="vpc-reader__author-name"><?php echo esc_html( $author_name ); ?></h3>
+						<p class="vpc-reader__author-title"><?php echo esc_html( $author_title ); ?></p>
+						<a href="<?php echo esc_url( $author_url ); ?>" class="vpc-reader__author-link">
+							<?php esc_html_e( 'Xem các bài viết của tác giả', 'vanphuccare' ); ?>
+							<svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+								<path d="M4.16675 10H15.8334M15.8334 10L10.8334 5M15.8334 10L10.8334 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						</a>
+					</div>
+				</section>
+
+				<?php
+				// Reviewer Card (Người kiểm duyệt nội dung).
+				$reviewer_name   = get_post_meta( $article_id, 'vpc_reviewer_name', true );
+				$reviewer_title  = get_post_meta( $article_id, 'vpc_reviewer_title', true );
+				$reviewer_avatar = get_post_meta( $article_id, 'vpc_reviewer_avatar', true );
+				$reviewer_url    = get_post_meta( $article_id, 'vpc_reviewer_url', true ) ?: home_url( '/gioi-thieu/' );
+
+				if ( ! empty( $reviewer_name ) ) :
+				?>
+				<section class="vpc-reader__reviewer-card" aria-label="<?php esc_attr_e( 'Thông tin người kiểm duyệt', 'vanphuccare' ); ?>">
+					<div class="vpc-reader__reviewer-avatar">
+						<?php if ( ! empty( $reviewer_avatar ) ) : ?>
+							<img src="<?php echo esc_url( $reviewer_avatar ); ?>" alt="<?php echo esc_attr( $reviewer_name ); ?>" class="vpc-reader__reviewer-img" width="80" height="80" loading="lazy">
+						<?php else : ?>
+							<svg class="vpc-reader__reviewer-placeholder" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+								<circle cx="40" cy="40" r="40" fill="#BAE6FD"/>
+								<path d="M40 40C45.5228 40 50 35.5228 50 30C50 24.4772 45.5228 20 40 20C34.4772 20 30 24.4772 30 30C30 35.5228 34.4772 40 40 40Z" stroke="#0284C7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M22 62C22 52.0589 30.0589 44 40 44C49.9411 44 58 52.0589 58 62" stroke="#0284C7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						<?php endif; ?>
+					</div>
+					<div class="vpc-reader__reviewer-info">
+						<span class="vpc-reader__reviewer-badge">
+							<svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+								<circle cx="8" cy="8" r="8" fill="currentColor" fill-opacity="0.2"/>
+								<path d="M4.5 8L7 10.5L11.5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+							<?php esc_html_e( 'Kiểm duyệt nội dung', 'vanphuccare' ); ?>
+						</span>
+						<h3 class="vpc-reader__reviewer-name"><?php echo esc_html( $reviewer_name ); ?></h3>
+						<?php if ( ! empty( $reviewer_title ) ) : ?>
+							<p class="vpc-reader__reviewer-title"><?php echo esc_html( $reviewer_title ); ?></p>
+						<?php endif; ?>
+						<a href="<?php echo esc_url( $reviewer_url ); ?>" class="vpc-reader__reviewer-link">
+							<?php esc_html_e( 'Thông tin người kiểm duyệt', 'vanphuccare' ); ?>
+							<svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+								<path d="M4.16675 10H15.8334M15.8334 10L10.8334 5M15.8334 10L10.8334 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						</a>
+					</div>
+				</section>
+				<?php endif; ?>
+
+				<div class="vpc-reader__disclaimer" role="note" aria-label="<?php esc_attr_e( 'Cảnh báo y khoa', 'vanphuccare' ); ?>">
+					<span class="vpc-reader__disclaimer-icon" aria-hidden="true">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<circle cx="12" cy="12" r="10" stroke="#00B7FF" stroke-width="2"/>
+							<path d="M12 16V11M12 8H12.01" stroke="#00B7FF" stroke-width="2" stroke-linecap="round"/>
+						</svg>
+					</span>
+					<p class="vpc-reader__disclaimer-text">
+						<?php esc_html_e( 'Thông tin trong bài không thay thế chẩn đoán y khoa, tư vấn hay điều trị của cơ sở khám chữa bệnh. Cha mẹ cần liên hệ cơ sở y tế khi có dấu hiệu bất thường.', 'vanphuccare' ); ?>
+					</p>
+				</div>
 			</article>
 			<aside class="vpc-reader__rail" aria-label="Thông tin bài viết">
 				<details class="vpc-reader__toc" hidden>
