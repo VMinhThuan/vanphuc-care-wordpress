@@ -543,14 +543,14 @@ function vanphuccare_footer_nav_menu_link_attributes( $atts, $item, $args ) {
 
 	if ( in_array( $location, array( 'footer_services', 'footer_knowledge', 'footer_news', 'footer', 'footer_legal' ), true ) ) {
 		$existing_class = isset( $atts['class'] ) ? trim( $atts['class'] ) : '';
-		$atts['class']   = $existing_class ? $existing_class . ' hover:text-text-body-muted transition-colors' : 'hover:text-text-body-muted transition-colors';
+		$atts['class']   = $existing_class ? $existing_class . ' hover:text-primary-500 transition-colors' : 'hover:text-primary-500 transition-colors';
 
 		if ( 'footer_news' === $location ) {
 			$title = isset( $item->title ) ? trim( wp_strip_all_tags( $item->title ) ) : '';
-			if ( 'Mẹ và bé' === $title ) {
-				$atts['href'] = home_url( '/tin-tuc-su-kien/' );
-			} elseif ( 'Tin mới & sự kiện nổi bật' === $title ) {
-				$atts['href'] = home_url( '/tin-tuc-su-kien/' );
+			if ( 'Mẹ và bé' === $title || 'Tin mới' === $title ) {
+				$atts['href'] = home_url( '/tin-tuc/tin-moi/' );
+			} elseif ( 'Tin mới & sự kiện nổi bật' === $title || 'Sự kiện nổi bật' === $title || 'Tin tức & Sự kiện' === $title ) {
+				$atts['href'] = home_url( '/tin-tuc/su-kien-noi-bat/' );
 			}
 		}
 	}

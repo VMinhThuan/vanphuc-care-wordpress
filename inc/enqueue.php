@@ -144,8 +144,8 @@ function vanphuccare_enqueue_assets() {
 	$is_milk_page     = vanphuccare_is_thong_tac_page();
 	$is_prenatal_page = is_page_template( 'page-lop-hoc-tien-san.php' ) || is_page( 'lop-hoc-tien-san' ) || is_post_type_archive( 'vpc_prenatal_class' );
 	$is_services_page = is_page( 'dich-vu' ) || is_page_template( 'page-dich-vu.php' ) || is_post_type_archive( 'vpc_service' ) || is_singular( 'vpc_service' );
-	$is_knowledge_page = is_page( 'kien-thuc' ) || is_page_template( 'page-kien-thuc.php' ) || is_category() || is_tag() || is_search() || ! empty( get_query_var( 'vpc_is_all' ) );
 	$is_news_page      = function_exists( 'vanphuccare_is_news_page' ) && vanphuccare_is_news_page();
+	$is_knowledge_page = ! $is_news_page && ( is_page( 'kien-thuc' ) || is_page_template( 'page-kien-thuc.php' ) || is_category() || is_tag() || is_search() || ! empty( get_query_var( 'vpc_is_all' ) ) );
 	$is_recruitment_page = function_exists( 'vanphuccare_is_recruitment_page' ) && vanphuccare_is_recruitment_page();
 	$is_recruitment_detail_page = is_page( 'tin-tuyen-dung' ) || is_page_template( 'page-tin-tuyen-dung.php' ) || ( is_singular( 'post' ) && ( in_category( 'tuyen-dung' ) || 'tin-tuyen-dung' === get_post_field( 'post_name', get_queried_object_id() ) ) );
 	$is_policy_page    = is_page( 'dieu-khoan-su-dung' )

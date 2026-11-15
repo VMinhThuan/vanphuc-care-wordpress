@@ -16,6 +16,30 @@ $asset    = static function ( $name ) use ( $news_uri ) {
 	return esc_url( $news_uri . '/' . $name );
 };
 
+$queried_term = get_queried_object();
+if ( $queried_term instanceof WP_Term && 'category' === $queried_term->taxonomy ) {
+	$news_category = $queried_term;
+} else {
+	$news_category = get_category_by_slug( 'tin-moi' )
+		?: get_category_by_slug( 'su-kien-noi-bat' )
+		?: get_category_by_slug( 'tin-tuc' )
+		?: get_category_by_slug( 'tin-tuc-su-kien-moi-nhat' );
+}
+$news_category_id = $news_category instanceof WP_Term ? (int) $news_category->term_id : 0;
+$news_title       = $news_category instanceof WP_Term ? $news_category->name : 'Tin tức & Sự kiện';
+$news_description = $news_category instanceof WP_Term
+	? trim( wp_kses_post( term_description( $news_category_id, 'category' ) ) )
+	: '';
+
+if ( empty( $news_description ) ) {
+	$cat_slug = $news_category instanceof WP_Term ? $news_category->slug : '';
+	if ( 'tin-moi' === $cat_slug ) {
+		$news_description = 'Theo dõi dòng chảy tin tức sức khỏe mẹ và bé mỗi ngày với các góc nhìn chuẩn xác, khoa học từ chuyên gia đầu ngành.';
+	} elseif ( 'su-kien-noi-bat' === $cat_slug ) {
+		$news_description = 'Tin tức và sự kiện là nơi cập nhật liên tục những hoạt động mới nhất, hội thảo và dấu ấn của đại gia đình Vạn Phúc Care.';
+	}
+}
+
 $fallback_articles = array(
 	array(
 		'category' => 'Mẹ và bé',
@@ -86,6 +110,12 @@ $query_args = array(
 	'order'               => 'DESC',
 );
 
+if ( $news_category_id ) {
+	$query_args['cat'] = $news_category_id;
+} else {
+	$query_args['post__in'] = array( 0 );
+}
+
 $query    = new WP_Query( $query_args );
 $articles = array();
 
@@ -111,7 +141,7 @@ foreach ( $fallback_articles as $index => $fallback ) {
 			$fallback,
 			array(
 				'id'     => 0,
-				'url'    => home_url( '/tin-tuc-su-kien/' ),
+				'url'    => home_url( '/tin-tuc/' ),
 				'author' => 'Content VPC',
 			)
 		);
@@ -153,12 +183,14 @@ $render_card = static function ( $article, $index ) use ( $asset ) {
 				<nav class="vpc-news-breadcrumb" aria-label="Breadcrumb">
 					<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Trang chủ</a>
 					<span class="vpc-news-breadcrumb__separator" aria-hidden="true">›</span>
-					<a href="<?php echo esc_url( home_url( '/tin-tuc-su-kien/' ) ); ?>">Tin tức</a>
+					<a href="<?php echo esc_url( home_url( '/tin-tuc/' ) ); ?>">Tin tức</a>
 					<span class="vpc-news-breadcrumb__separator" aria-hidden="true">›</span>
-					<span class="vpc-news-breadcrumb__current">Tin mới</span>
+					<span class="vpc-news-breadcrumb__current"><?php echo esc_html( $news_title ); ?></span>
 				</nav>
-				<h1 id="vpc-news-title">Tin Mới</h1>
-				<p>Góc tư vấn cho phụ huynh cùng hoạt động, sự kiện và cơ hội nghề nghiệp mới nhất tại Vạn Phúc Care.</p>
+				<h1 id="vpc-news-title"><?php echo esc_html( $news_title ); ?></h1>
+				<div class="vpc-news-hero__description">
+					<?php echo $news_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Sanitized with wp_kses_post above. ?>
+				</div>
 			</div>
 			<div class="vpc-news-hero__visual" aria-hidden="true">
 				<img class="vpc-news-hero__blob" src="<?php echo $asset( 'mang-thai-blob.svg' ); ?>" alt="" width="300" height="300">

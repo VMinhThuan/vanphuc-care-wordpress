@@ -32,7 +32,23 @@ $is_knowledge = ! empty( get_query_var( 'vpc_is_all' ) )
 	|| $is_child_of_kt;
 
 if ( ! $is_knowledge ) {
-	// Delegate to standard generic archive template for non-knowledge categories (e.g. tin-tuc, tuyen-dung).
+	if ( 'tin-tuc' === $current_slug ) {
+		require get_template_directory() . '/page-tin-tuc.php';
+		return;
+	}
+
+	$news_parent_term = get_category_by_slug( 'tin-tuc' );
+	$is_child_of_news = false;
+	if ( $news_parent_term instanceof WP_Term && $current_id ) {
+		$is_child_of_news = cat_is_ancestor_of( $news_parent_term->term_id, $current_id );
+	}
+	$news_sub_slugs = array( 'tin-moi', 'su-kien-noi-bat', 'tin-tuc-su-kien' );
+	if ( $is_child_of_news || in_array( $current_slug, $news_sub_slugs, true ) ) {
+		require get_template_directory() . '/page-tin-tuc-su-kien.php';
+		return;
+	}
+
+	// Delegate to standard generic archive template for non-knowledge categories (e.g. tuyen-dung).
 	require get_template_directory() . '/archive.php';
 	return;
 }

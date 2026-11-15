@@ -2664,6 +2664,10 @@
       gap: 20px;
     }
 
+    .vpc-consultation-form__identity {
+      grid-template-columns: 1fr;
+    }
+
     .vpc-consultation-field,
     .vpc-consultation-stage {
       gap: 8px;

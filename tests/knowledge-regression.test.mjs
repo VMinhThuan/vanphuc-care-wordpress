@@ -203,4 +203,68 @@ describe('Knowledge Editorial Regression Tests', () => {
       assert.ok(code.includes("'' !== $target->post_password"), 'Must skip password-protected posts');
     });
   });
+
+  describe('7. News Hub Routing & Subcategory Layout Alignment', () => {
+    test('page-tin-tuc.php exists and renders Hub Landing with links to subcategories', () => {
+      const filePath = path.join(rootDir, 'page-tin-tuc.php');
+      assert.ok(fs.existsSync(filePath), 'page-tin-tuc.php must exist');
+      const code = fs.readFileSync(filePath, 'utf8');
+      assert.ok(code.includes('Template Name: Trang chủ Tin tức'), 'Must have template declaration');
+      assert.ok(code.includes('/tin-tuc/su-kien-noi-bat/'), 'Must link to su-kien-noi-bat subcategory');
+      assert.ok(code.includes('/tin-tuc/tin-moi/'), 'Must link to tin-moi subcategory');
+      assert.ok(code.includes('get_header'), 'Must call get_header');
+      assert.ok(code.includes('get_footer'), 'Must call get_footer');
+    });
+
+    test('category-tin-tuc.php bridges root news category archive to page-tin-tuc.php', () => {
+      const filePath = path.join(rootDir, 'category-tin-tuc.php');
+      assert.ok(fs.existsSync(filePath), 'category-tin-tuc.php must exist');
+      const code = fs.readFileSync(filePath, 'utf8');
+      assert.ok(code.includes("require get_template_directory() . '/page-tin-tuc.php'"), 'Must require page-tin-tuc.php');
+    });
+
+    test('category.php routes root tin-tuc to page-tin-tuc.php and subcategories to page-tin-tuc-su-kien.php', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'category.php'), 'utf8');
+      assert.ok(code.includes("'tin-tuc' === $current_slug"), 'Must check for root tin-tuc');
+      assert.ok(code.includes("require get_template_directory() . '/page-tin-tuc.php'"), 'Must route tin-tuc to page-tin-tuc.php');
+      assert.ok(code.includes("array( 'tin-moi', 'su-kien-noi-bat'"), 'Must recognize tin-moi and su-kien-noi-bat sub-slugs');
+      assert.ok(code.includes("require get_template_directory() . '/page-tin-tuc-su-kien.php'"), 'Must route subcategories to page-tin-tuc-su-kien.php');
+    });
+
+    test('page-tin-tuc-su-kien.php dynamically resolves current category and formats breadcrumb', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'page-tin-tuc-su-kien.php'), 'utf8');
+      assert.ok(code.includes('get_queried_object()'), 'Must check get_queried_object for dynamic subcategory');
+      assert.ok(code.includes('tin-moi'), 'Must handle tin-moi');
+      assert.ok(code.includes('su-kien-noi-bat'), 'Must handle su-kien-noi-bat');
+      assert.ok(code.includes('<a href="<?php echo esc_url( home_url( \'/tin-tuc/\' ) ); ?>">Tin tức</a>'), 'Breadcrumb must link to /tin-tuc/ with label Tin tức');
+    });
+
+    test('inc/setup.php template_include resolves /tin-tuc/ to page-tin-tuc.php', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'inc/setup.php'), 'utf8');
+      assert.ok(code.includes("function vanphuccare_news_template_include"), 'Must declare news template include filter');
+      assert.ok(code.includes("return get_template_directory() . '/page-tin-tuc.php';"), 'Must return page-tin-tuc.php');
+    });
+
+    test('footer.php links Tin mới and Sự kiện nổi bật to clean subcategory URLs', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'footer.php'), 'utf8');
+      assert.ok(code.includes('/tin-tuc/tin-moi/'), 'Must link Tin mới to /tin-tuc/tin-moi/');
+      assert.ok(code.includes('/tin-tuc/su-kien-noi-bat/'), 'Must link Sự kiện nổi bật to /tin-tuc/su-kien-noi-bat/');
+    });
+
+    test('inc/menus.php maps footer menu items to clean subcategory URLs', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'inc/menus.php'), 'utf8');
+      assert.ok(code.includes("home_url( '/tin-tuc/tin-moi/' )"), 'Must set href to /tin-tuc/tin-moi/');
+      assert.ok(code.includes("home_url( '/tin-tuc/su-kien-noi-bat/' )"), 'Must set href to /tin-tuc/su-kien-noi-bat/');
+    });
+
+    test('inc/setup.php is_news_page detects subcategories and inc/enqueue.php loads news.css', () => {
+      const setupCode = fs.readFileSync(path.join(rootDir, 'inc/setup.php'), 'utf8');
+      assert.ok(setupCode.includes("0 === strpos( $request_path, 'tin-tuc/' )"), 'Must detect subcategory paths like tin-tuc/tin-moi');
+      assert.ok(setupCode.includes("'tin-moi', 'su-kien-noi-bat'"), 'Must match subcategory slugs');
+
+      const enqueueCode = fs.readFileSync(path.join(rootDir, 'inc/enqueue.php'), 'utf8');
+      assert.ok(enqueueCode.includes("vanphuccare_enqueue_theme_style( 'vanphuccare-news', 'assets/css/news.css'"), 'Must enqueue news.css');
+      assert.ok(enqueueCode.includes("! $is_news_page"), 'Must prevent knowledge.css from overriding news.css');
+    });
+  });
 });

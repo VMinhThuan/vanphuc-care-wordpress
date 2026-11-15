@@ -62,6 +62,11 @@ if ( ! function_exists( 'vpc_format_knowledge_card' ) ) {
 $kt_cat         = get_category_by_slug( 'kien-thuc' );
 $featured_posts = array();
 $category_posts = array();
+$knowledge_description = '';
+
+if ( $kt_cat instanceof WP_Term ) {
+	$knowledge_description = trim( wp_kses_post( term_description( $kt_cat->term_id, 'category' ) ) );
+}
 
 if ( $kt_cat instanceof WP_Term ) {
 	$kt_cat_id = (int) $kt_cat->term_id;
@@ -224,7 +229,9 @@ $view_all_url = home_url( '/kien-thuc/tat-ca/' );
 				<span><?php esc_html_e( 'KIẾN THỨC', 'vanphuccare' ); ?></span>
 			</div>
 			<h1 id="knowledge-title"><span><?php esc_html_e( 'Kinh Nghiệm Thực Chiến', 'vanphuccare' ); ?></span><em><?php esc_html_e( 'Để Sẵn Sàng Làm Mẹ', 'vanphuccare' ); ?></em></h1>
-			<p><?php esc_html_e( 'Trang tổng hợp bài viết, kiến thức chăm sóc mẹ và bé. Được biên tập dựa trên kinh nghiệm thực chiến, dưới góc nhìn điều dưỡng sản nhi. Trực quan, dễ đọc, dễ hiểu, có thể thực hành ngay.', 'vanphuccare' ); ?></p>
+			<div class="vpc-knowledge-hero__description">
+				<?php echo $knowledge_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Sanitized with wp_kses_post above. ?>
+			</div>
 			<form class="vpc-knowledge-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 				<img src="<?php echo $asset( 'search.svg' ); ?>" alt="" width="24" height="24" aria-hidden="true">
 				<label class="screen-reader-text" for="knowledge-search-input"><?php esc_html_e( 'Tìm bài viết', 'vanphuccare' ); ?></label>

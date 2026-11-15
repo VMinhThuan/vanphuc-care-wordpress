@@ -321,7 +321,13 @@ function vanphuccare_redirect_legacy_and_external_routes() {
 		exit;
 	}
 
-	// 5. Redirect legacy production pagination /kien-thuc/page/{n}/ -> /kien-thuc/tat-ca/page/{n}/
+	// 5. Redirect the old news hub URL to the canonical /tin-tuc/ route.
+	if ( 'tin-tuc-su-kien' === $path ) {
+		wp_safe_redirect( home_url( '/tin-tuc/' ), 301 );
+		exit;
+	}
+
+	// 6. Redirect legacy production pagination /kien-thuc/page/{n}/ -> /kien-thuc/tat-ca/page/{n}/
 	if ( preg_match( '#^kien-thuc/page/([0-9]+)$#', $path, $matches ) ) {
 		wp_safe_redirect( home_url( '/kien-thuc/tat-ca/page/' . $matches[1] . '/' ), 301 );
 		exit;
@@ -357,8 +363,13 @@ add_action( 'init', 'vanphuccare_knowledge_rewrite_rules' );
  */
 function vanphuccare_news_rewrite_rules() {
 	add_rewrite_rule(
+		'^tin-tuc/?$',
+		'index.php?category_name=tin-tuc&vpc_is_news=1',
+		'top'
+	);
+	add_rewrite_rule(
 		'^tin-tuc-su-kien/?$',
-		'index.php?vpc_is_news=1',
+		'index.php?category_name=tin-tuc&vpc_is_news=1',
 		'top'
 	);
 }
@@ -386,10 +397,30 @@ function vanphuccare_is_news_page() {
 		? trim( (string) wp_parse_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH ), '/' )
 		: '';
 
-	return is_page( 'tin-tuc-su-kien' )
+	if ( is_page( 'tin-tuc' )
+		|| is_page( 'tin-tuc-su-kien' )
+		|| is_page_template( 'page-tin-tuc.php' )
 		|| is_page_template( 'page-tin-tuc-su-kien.php' )
 		|| ! empty( get_query_var( 'vpc_is_news' ) )
-		|| 'tin-tuc-su-kien' === $request_path;
+		|| in_array( $request_path, array( 'tin-tuc', 'tin-tuc-su-kien' ), true )
+		|| 0 === strpos( $request_path, 'tin-tuc/' ) ) {
+		return true;
+	}
+
+	if ( is_category() ) {
+		$cat = get_queried_object();
+		if ( $cat instanceof WP_Term ) {
+			if ( in_array( $cat->slug, array( 'tin-tuc', 'tin-moi', 'su-kien-noi-bat', 'tin-tuc-su-kien', 'me-va-be' ), true ) ) {
+				return true;
+			}
+			$news_parent = get_category_by_slug( 'tin-tuc' );
+			if ( $news_parent instanceof WP_Term && cat_is_ancestor_of( $news_parent->term_id, $cat->term_id ) ) {
+				return true;
+			}
+		}
+	}
+
+	return false;
 }
 
 /**
@@ -531,6 +562,17 @@ function vanphuccare_news_body_class( $classes ) {
 		$classes[] = 'vpc-news-page-shell';
 	}
 
+	$request_path = isset( $_SERVER['REQUEST_URI'] )
+		? trim( (string) wp_parse_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH ), '/' )
+		: '';
+
+	if ( is_page( 'tin-tuc' )
+		|| is_page( 'tin-tuc-su-kien' )
+		|| ! empty( get_query_var( 'vpc_is_news' ) )
+		|| in_array( $request_path, array( 'tin-tuc', 'tin-tuc-su-kien' ), true ) ) {
+		$classes[] = 'vpc-news-hub-shell';
+	}
+
 	return array_unique( $classes );
 }
 add_filter( 'body_class', 'vanphuccare_news_body_class' );
@@ -542,17 +584,33 @@ add_filter( 'body_class', 'vanphuccare_news_body_class' );
  * @return string
  */
 function vanphuccare_news_template_include( $template ) {
-	if ( ! vanphuccare_is_news_page() ) {
+	$request_path = isset( $_SERVER['REQUEST_URI'] )
+		? trim( (string) wp_parse_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH ), '/' )
+		: '';
+
+	// Do NOT override subcategories (e.g. tin-tuc/tin-moi, tin-tuc/su-kien-noi-bat).
+	// Let category.php route them to page-tin-tuc-su-kien.php!
+	if ( 0 === strpos( $request_path, 'tin-tuc/' ) ) {
+		return $template;
+	}
+
+	$is_root_news = is_page( 'tin-tuc' )
+		|| is_page( 'tin-tuc-su-kien' )
+		|| ! empty( get_query_var( 'vpc_is_news' ) )
+		|| in_array( $request_path, array( 'tin-tuc', 'tin-tuc-su-kien' ), true )
+		|| ( is_category( 'tin-tuc' ) && ! is_category( array( 'tin-moi', 'su-kien-noi-bat' ) ) );
+
+	if ( ! $is_root_news ) {
 		return $template;
 	}
 
 	global $wp_query;
-	if ( ! empty( get_query_var( 'vpc_is_news' ) ) || ( isset( $_SERVER['REQUEST_URI'] ) && 'tin-tuc-su-kien' === trim( (string) wp_parse_url( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH ), '/' ) ) ) {
+	if ( ! empty( get_query_var( 'vpc_is_news' ) ) || in_array( $request_path, array( 'tin-tuc', 'tin-tuc-su-kien' ), true ) ) {
 		$wp_query->is_404 = false;
 		status_header( 200 );
 	}
 
-	return get_template_directory() . '/page-tin-tuc-su-kien.php';
+	return get_template_directory() . '/page-tin-tuc.php';
 }
 add_filter( 'template_include', 'vanphuccare_news_template_include' );
 

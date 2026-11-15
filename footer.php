@@ -76,16 +76,16 @@ $company_address = get_theme_mod( 'vpc_company_address', '35B/399 Âu Cơ, phư�
 							<span>Trung tâm ở cữ: <?php echo esc_html( $company_address ); ?></span>
 						</li>
 						<li>
-							<span>Hotline tư vấn: <a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $hotline_tu_van ) ); ?>" class="hover:text-text-body-muted transition-colors"><?php echo esc_html( $hotline_tu_van ); ?></a></span>
+							<span>Hotline tư vấn: <a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $hotline_tu_van ) ); ?>" class="hover:text-primary-500 transition-colors"><?php echo esc_html( $hotline_tu_van ); ?></a></span>
 						</li>
 						<li>
-							<span>Hotline hỗ trợ: <a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $hotline_ho_tro ) ); ?>" class="hover:text-text-body-muted transition-colors"><?php echo esc_html( $hotline_ho_tro ); ?></a></span>
+							<span>Hotline hỗ trợ: <a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $hotline_ho_tro ) ); ?>" class="hover:text-primary-500 transition-colors"><?php echo esc_html( $hotline_ho_tro ); ?></a></span>
 						</li>
 						<li>
-							<span>Email CSKH: <a href="mailto:<?php echo esc_attr( $email_cskh ); ?>" class="hover:text-text-body-muted transition-colors"><?php echo esc_html( $email_cskh ); ?></a></span>
+							<span>Email CSKH: <a href="mailto:<?php echo esc_attr( $email_cskh ); ?>" class="hover:text-primary-500 transition-colors"><?php echo esc_html( $email_cskh ); ?></a></span>
 						</li>
 						<li>
-							<span>Email liên hệ: <a href="mailto:<?php echo esc_attr( $email_info ); ?>" class="hover:text-text-body-muted transition-colors"><?php echo esc_html( $email_info ); ?></a></span>
+							<span>Email liên hệ: <a href="mailto:<?php echo esc_attr( $email_info ); ?>" class="hover:text-primary-500 transition-colors"><?php echo esc_html( $email_info ); ?></a></span>
 						</li>
 					</ul>
 				</div>
@@ -94,7 +94,9 @@ $company_address = get_theme_mod( 'vpc_company_address', '35B/399 Âu Cơ, phư�
 			<!-- Column 2: DỊCH VỤ CỦA CHÚNG TÔI -->
 			<div class="vpc-footer-about-services hidden md:flex w-full sm:w-auto flex-col space-y-2 xl:space-y-3">
 				<h3 class="font-body text-base font-bold text-text-body-default uppercase xl:pb-1">
-					<?php esc_html_e( 'Dịch vụ của chúng tôi', 'vanphuccare' ); ?>
+					<a href="<?php echo esc_url( home_url( '/dich-vu/' ) ); ?>" class="hover:text-primary-500 transition-colors">
+						<?php esc_html_e( 'Dịch vụ của chúng tôi', 'vanphuccare' ); ?>
+					</a>
 				</h3>
 				<?php
 				$services_location = has_nav_menu( 'footer_services' ) ? 'footer_services' : ( has_nav_menu( 'footer' ) ? 'footer' : '' );
@@ -112,13 +114,13 @@ $company_address = get_theme_mod( 'vpc_company_address', '35B/399 Âu Cơ, phư�
 				else :
 				?>
 					<ul class="space-y-2 text-base font-medium text-text-body-default">
-						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/trung-tam-o-cu/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Trung tâm ở cữ</a></li>
-						<li class="h-6 flex items-center"><a href="https://edu.vanphuccare.vn" target="_blank" rel="noopener noreferrer" class="hover:text-text-body-muted transition-colors">Khóa học trực tuyến</a></li>
-						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/bao-mau-tai-nha/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Bảo mẫu tại nhà</a></li>
-						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/lop-hoc-tien-san/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Lớp học tiền sản</a></li>
-						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/dich-vu-tu-van-nuoi-con-easy-truc-tuyen/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Tư vấn nuôi con EASY</a></li>
-						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/tam-tre-so-sinh/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Tắm trẻ sơ sinh</a></li>
-						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/thong-tac-tia-sua/' ) ); ?>" class="hover:text-text-body-muted transition-colors"<?php echo vanphuccare_is_thong_tac_page() ? ' aria-current="page"' : ''; ?>>Thông tắc tia sữa</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/trung-tam-o-cu/' ) ); ?>" class="hover:text-primary-500 transition-colors">Trung tâm ở cữ</a></li>
+						<li class="h-6 flex items-center"><a href="https://edu.vanphuccare.vn" target="_blank" rel="noopener noreferrer" class="hover:text-primary-500 transition-colors">Khóa học trực tuyến</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/bao-mau-tai-nha/' ) ); ?>" class="hover:text-primary-500 transition-colors">Bảo mẫu tại nhà</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/lop-hoc-tien-san/' ) ); ?>" class="hover:text-primary-500 transition-colors">Lớp học tiền sản</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/dich-vu-tu-van-nuoi-con-easy-truc-tuyen/' ) ); ?>" class="hover:text-primary-500 transition-colors">Tư vấn nuôi con EASY</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/tam-tre-so-sinh/' ) ); ?>" class="hover:text-primary-500 transition-colors">Tắm trẻ sơ sinh</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/dich-vu/thong-tac-tia-sua/' ) ); ?>" class="hover:text-primary-500 transition-colors"<?php echo vanphuccare_is_thong_tac_page() ? ' aria-current="page"' : ''; ?>>Thông tắc tia sữa</a></li>
 					</ul>
 				<?php endif; ?>
 			</div>
@@ -126,7 +128,9 @@ $company_address = get_theme_mod( 'vpc_company_address', '35B/399 Âu Cơ, phư�
 			<!-- Column 3: KIẾN THỨC -->
 			<div class="footer-link-column w-full sm:w-auto flex flex-col space-y-2 xl:space-y-3">
 				<h3 class="font-body text-sm md:text-base font-bold text-text-body-default uppercase xl:pb-1">
-					<?php esc_html_e( 'Kiến thức', 'vanphuccare' ); ?>
+					<a href="<?php echo esc_url( home_url( '/kien-thuc/' ) ); ?>" class="hover:text-primary-500 transition-colors">
+						<?php esc_html_e( 'Kiến thức', 'vanphuccare' ); ?>
+					</a>
 				</h3>
 				<?php
 				if ( has_nav_menu( 'footer_knowledge' ) ) :
@@ -153,11 +157,11 @@ $company_address = get_theme_mod( 'vpc_company_address', '35B/399 Âu Cơ, phư�
 					$mang_thai_url = $mang_thai_cat ? get_category_link( $mang_thai_cat ) : home_url( '/#kien-thuc-nuoi-con' );
 				?>
 					<ul class="space-y-2 text-sm md:text-base font-medium text-text-body-default">
-						<li class="h-6 flex items-center"><a href="<?php echo esc_url( $easy_url ); ?>" class="hover:text-text-body-muted transition-colors">Phương pháp EASY</a></li>
-						<li class="h-6 flex items-center"><a href="<?php echo esc_url( $cam_nang_url ); ?>" class="hover:text-text-body-muted transition-colors">Cẩm nang làm mẹ</a></li>
-						<li class="h-6 flex items-center"><a href="<?php echo esc_url( $bieng_an_url ); ?>" class="hover:text-text-body-muted transition-colors">Hội chứng biếng ăn</a></li>
-						<li class="h-6 flex items-center"><a href="<?php echo esc_url( $an_dam_url ); ?>" class="hover:text-text-body-muted transition-colors">Ăn dặm toàn tập</a></li>
-						<li class="h-6 flex items-center"><a href="<?php echo esc_url( $mang_thai_url ); ?>" class="hover:text-text-body-muted transition-colors">Mang thai</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( $easy_url ); ?>" class="hover:text-primary-500 transition-colors">Phương pháp EASY</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( $cam_nang_url ); ?>" class="hover:text-primary-500 transition-colors">Cẩm nang làm mẹ</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( $bieng_an_url ); ?>" class="hover:text-primary-500 transition-colors">Hội chứng biếng ăn</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( $an_dam_url ); ?>" class="hover:text-primary-500 transition-colors">Ăn dặm toàn tập</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( $mang_thai_url ); ?>" class="hover:text-primary-500 transition-colors">Mang thai</a></li>
 					</ul>
 				<?php endif; ?>
 			</div>
@@ -165,7 +169,9 @@ $company_address = get_theme_mod( 'vpc_company_address', '35B/399 Âu Cơ, phư�
 			<!-- Column 4: TIN TỨC & SỰ KIỆN MỚI NHẤT -->
 			<div class="footer-link-column w-full sm:w-auto flex flex-col space-y-2 xl:space-y-3">
 				<h3 class="font-body text-sm md:text-base font-bold text-text-body-default uppercase xl:pb-1">
-					<?php esc_html_e( 'Tin tức & sự kiện mới nhất', 'vanphuccare' ); ?>
+					<a href="<?php echo esc_url( home_url( '/tin-tuc/' ) ); ?>" class="hover:text-primary-500 transition-colors">
+						<?php esc_html_e( 'Tin tức & sự kiện mới nhất', 'vanphuccare' ); ?>
+					</a>
 				</h3>
 				<?php
 				if ( has_nav_menu( 'footer_news' ) ) :
@@ -182,8 +188,8 @@ $company_address = get_theme_mod( 'vpc_company_address', '35B/399 Âu Cơ, phư�
 				else :
 				?>
 					<ul class="space-y-2 text-sm md:text-base font-medium text-text-body-default">
-						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/tin-tuc-su-kien/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Tin mới</a></li>
-						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/tin-tuc-su-kien/' ) ); ?>" class="hover:text-text-body-muted transition-colors">Sự kiện nổi bật</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/tin-tuc/tin-moi/' ) ); ?>" class="hover:text-primary-500 transition-colors">Tin mới</a></li>
+						<li class="h-6 flex items-center"><a href="<?php echo esc_url( home_url( '/tin-tuc/su-kien-noi-bat/' ) ); ?>" class="hover:text-primary-500 transition-colors">Sự kiện nổi bật</a></li>
 					</ul>
 				<?php endif; ?>
 			</div>
@@ -257,13 +263,13 @@ $company_address = get_theme_mod( 'vpc_company_address', '35B/399 Âu Cơ, phư�
 		else :
 		?>
 			<div class="vpc-footer-legal mt-8 border-t border-border-divider-default pt-8 flex flex-col xl:flex-row items-start xl:items-center justify-start gap-1 md:gap-2 xl:gap-3 text-sm md:text-base font-medium text-text-body-default xl:mt-0 xl:border-t-0 xl:pt-6">
-				<a href="<?php echo esc_url( home_url( '/dieu-khoan-su-dung' ) ); ?>" class="vpc-footer-legal-terms order-1 xl:order-none hover:text-text-body-muted transition-colors">Điều khoản sử dụng</a>
+				<a href="<?php echo esc_url( home_url( '/dieu-khoan-su-dung' ) ); ?>" class="vpc-footer-legal-terms order-1 xl:order-none hover:text-primary-500 transition-colors">Điều khoản sử dụng</a>
 				<span class="vpc-footer-legal-divider hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
-				<a href="<?php echo esc_url( home_url( '/chinh-sach-bao-mat' ) ); ?>" class="vpc-footer-legal-privacy order-2 xl:order-none hover:text-text-body-muted transition-colors">Chính sách bảo mật</a>
+				<a href="<?php echo esc_url( home_url( '/chinh-sach-bao-mat' ) ); ?>" class="vpc-footer-legal-privacy order-2 xl:order-none hover:text-primary-500 transition-colors">Chính sách bảo mật</a>
 				<span class="vpc-footer-legal-divider hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
-				<a href="<?php echo esc_url( home_url( '/tuyen-dung/' ) ); ?>" class="vpc-footer-legal-careers order-3 xl:order-none hover:text-text-body-muted transition-colors">Tuyển dụng</a>
+				<a href="<?php echo esc_url( home_url( '/tuyen-dung/' ) ); ?>" class="vpc-footer-legal-careers order-3 xl:order-none hover:text-primary-500 transition-colors">Tuyển dụng</a>
 				<span class="vpc-footer-legal-divider hidden xl:inline text-neutral-600 select-none" aria-hidden="true">|</span>
-				<a href="<?php echo esc_url( home_url( '/lien-he' ) ); ?>" class="vpc-footer-legal-contact order-4 xl:order-none hover:text-text-body-muted transition-colors">Liên hệ</a>
+				<a href="<?php echo esc_url( home_url( '/lien-he' ) ); ?>" class="vpc-footer-legal-contact order-4 xl:order-none hover:text-primary-500 transition-colors">Liên hệ</a>
 			</div>
 		<?php endif; ?>
 
