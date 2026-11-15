@@ -151,6 +151,9 @@ jobs:
                 "$HOME/theme-backups/vanphuccare-$(date -u +%Y%m%d-%H%M%S).tgz" \
                 -C "$dir" .
 
+              # Keep only the 5 most recent backups, prune older archives to prevent disk exhaustion
+              (ls -t "$HOME/theme-backups"/vanphuccare-*.tgz 2>/dev/null | tail -n +6 | xargs -r rm -f) || true
+
               echo "PREVIOUS_THEME_BACKED_UP"
             else
               echo "FIRST_DEPLOY_NO_BACKUP_NEEDED"
