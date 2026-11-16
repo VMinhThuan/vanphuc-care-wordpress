@@ -477,6 +477,101 @@ function vpc_is_knowledge_category( $term = null ) {
 }
 
 /**
+ * Returns supported category slugs for the News section.
+ *
+ * @return array<int, string>
+ */
+function vpc_get_news_category_slugs() {
+	return array(
+		'tin-tuc',
+		'tin-moi',
+		'su-kien-noi-bat',
+		'tin-tuc-su-kien',
+		'tin-tuc-su-kien-moi-nhat',
+	);
+}
+
+/**
+ * Checks whether a given term is the 'tin-tuc' category or one of its descendant subcategories.
+ *
+ * @param WP_Term|int|string|null $term Term object, ID, or slug.
+ * @return bool True if term belongs to news hierarchy.
+ */
+function vpc_is_news_category( $term = null ) {
+	if ( empty( $term ) ) {
+		return false;
+	}
+
+	$term_obj = null;
+	if ( $term instanceof WP_Term ) {
+		$term_obj = $term;
+	} elseif ( is_numeric( $term ) ) {
+		$term_obj = get_term( (int) $term, 'category' );
+	} elseif ( is_string( $term ) ) {
+		$term_obj = get_category_by_slug( $term );
+	}
+
+	if ( ! ( $term_obj instanceof WP_Term ) ) {
+		return false;
+	}
+
+	$slugs = vpc_get_news_category_slugs();
+	if ( in_array( $term_obj->slug, $slugs, true ) ) {
+		return true;
+	}
+
+	$news_parent = get_category_by_slug( 'tin-tuc' );
+	if ( $news_parent instanceof WP_Term && cat_is_ancestor_of( $news_parent->term_id, $term_obj->term_id ) ) {
+		return true;
+	}
+
+	return false;
+}
+
+/**
+ * Checks whether a post belongs to the News category hierarchy (parent 'tin-tuc' or any descendant/alias).
+ *
+ * @param int|WP_Post|null $post_obj Post object or ID.
+ * @return bool
+ */
+function vpc_is_news_post( $post_obj = null ) {
+	$allowed_ids = array();
+
+	$news_cat = get_category_by_slug( 'tin-tuc' );
+	if ( $news_cat instanceof WP_Term ) {
+		$allowed_ids[] = (int) $news_cat->term_id;
+		$child_ids     = get_term_children( (int) $news_cat->term_id, 'category' );
+		if ( ! is_wp_error( $child_ids ) && ! empty( $child_ids ) ) {
+			$allowed_ids = array_merge( $allowed_ids, array_map( 'intval', $child_ids ) );
+		}
+	}
+
+	foreach ( vpc_get_news_category_slugs() as $slug ) {
+		$sub = get_category_by_slug( $slug );
+		if ( $sub instanceof WP_Term ) {
+			$allowed_ids[] = (int) $sub->term_id;
+		}
+	}
+
+	$allowed_ids = array_values( array_unique( $allowed_ids ) );
+	if ( empty( $allowed_ids ) ) {
+		return false;
+	}
+
+	return has_category( $allowed_ids, $post_obj );
+}
+
+/**
+ * Checks whether a post belongs to either Knowledge or News editorial hierarchies.
+ *
+ * @param int|WP_Post|null $post_obj Post object or ID.
+ * @return bool
+ */
+function vpc_is_editorial_post( $post_obj = null ) {
+	return vanphuccare_is_knowledge_post( $post_obj ) || vpc_is_news_post( $post_obj );
+}
+
+/**
  * Normalizes a WP_Post object into structured article data for knowledge cards.
  *
  * @param WP_Post|int|null $post_obj Post object or ID.
@@ -494,10 +589,16 @@ function vpc_format_knowledge_card( $post_obj, $default_image = '', $excerpt_wor
 	if ( ! empty( $custom_category_name ) ) {
 		$category_name = $custom_category_name;
 	} else {
-		$primary_term  = function_exists( 'vanphuccare_get_primary_category' )
+		$primary_term = function_exists( 'vanphuccare_get_primary_category' )
 			? vanphuccare_get_primary_category( $post )
 			: null;
-		$category_name = $primary_term ? $primary_term->name : __( 'Cẩm nang cho mẹ', 'vanphuccare' );
+		if ( $primary_term ) {
+			$category_name = $primary_term->name;
+		} elseif ( function_exists( 'vpc_is_news_post' ) && vpc_is_news_post( $post ) ) {
+			$category_name = __( 'Tin tức', 'vanphuccare' );
+		} else {
+			$category_name = __( 'Kiến thức', 'vanphuccare' );
+		}
 	}
 
 	$image_url = '';

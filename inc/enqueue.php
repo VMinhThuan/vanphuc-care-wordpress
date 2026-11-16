@@ -207,17 +207,19 @@ function vanphuccare_enqueue_assets() {
 		vanphuccare_enqueue_theme_style( 'vanphuccare-services', 'assets/css/services.css', array( 'vanphuccare-tailwind' ) );
 	}
 
-	$is_knowledge_single = is_singular( 'post' ) && ! $is_recruitment_detail_page && vanphuccare_is_knowledge_post( get_queried_object_id() );
-	if ( $is_knowledge_single ) {
+	$is_editorial_single = is_singular( 'post' ) && ! $is_recruitment_detail_page;
+	$is_news_single      = $is_editorial_single && function_exists( 'vpc_is_news_post' ) && vpc_is_news_post( get_queried_object_id() );
+
+	if ( $is_editorial_single ) {
 		vanphuccare_enqueue_theme_style( 'vanphuccare-article', 'assets/css/knowledge-single.css', array( 'vanphuccare-knowledge' ) );
 		vanphuccare_enqueue_theme_script( 'vanphuccare-article', 'assets/js/knowledge-single.js' );
 	}
 
-	if ( $is_knowledge_page || $is_knowledge_single ) {
+	if ( $is_knowledge_page || $is_editorial_single ) {
 		vanphuccare_enqueue_theme_style( 'vanphuccare-knowledge', 'assets/css/knowledge.css', array( 'vanphuccare-tailwind' ) );
 	}
 
-	if ( $is_news_page ) {
+	if ( $is_news_page || $is_news_single ) {
 		vanphuccare_enqueue_theme_style( 'vanphuccare-news', 'assets/css/news.css', array( 'vanphuccare-tailwind' ) );
 	}
 
@@ -324,7 +326,7 @@ function vanphuccare_preload_homepage_hero() {
 add_action( 'wp_head', 'vanphuccare_preload_homepage_hero', 1 );
 
 /**
- * Use the same editorial pattern styles on Knowledge articles and inside the post editor.
+ * Use the same editorial pattern styles on articles and inside the post editor.
  */
 function vanphuccare_enqueue_knowledge_pattern_styles() {
 	if ( is_admin() ) {
@@ -332,7 +334,7 @@ function vanphuccare_enqueue_knowledge_pattern_styles() {
 		if ( ! $screen || 'post' !== $screen->post_type || ! $screen->is_block_editor() ) {
 			return;
 		}
-	} elseif ( ! is_singular( 'post' ) || ! vanphuccare_is_knowledge_post( get_queried_object_id() ) ) {
+	} elseif ( ! is_singular( 'post' ) ) {
 		return;
 	}
 

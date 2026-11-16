@@ -266,6 +266,39 @@ describe('Knowledge Editorial Regression Tests', () => {
       assert.ok(enqueueCode.includes("vanphuccare_enqueue_theme_style( 'vanphuccare-news', 'assets/css/news.css'"), 'Must enqueue news.css');
       assert.ok(enqueueCode.includes("! $is_news_page"), 'Must prevent knowledge.css from overriding news.css');
     });
+
+    test('single.php routes News and editorial posts to template-parts/knowledge/single with section context', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'single.php'), 'utf8');
+      assert.ok(code.includes('vpc_is_news_post'), 'Must check for news post in single routing');
+      assert.ok(code.includes("'section' => $section"), 'Must pass section context to template part');
+      assert.ok(code.includes("get_template_part( 'template-parts/knowledge/single'"), 'Must route editorial posts to shared article template');
+    });
+
+    test('inc/helpers.php declares vpc_is_news_post and vpc_is_editorial_post', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'inc/helpers.php'), 'utf8');
+      assert.ok(code.includes('function vpc_is_news_post('), 'Must define vpc_is_news_post');
+      assert.ok(code.includes('function vpc_is_news_category('), 'Must define vpc_is_news_category');
+      assert.ok(code.includes('function vpc_is_editorial_post('), 'Must define vpc_is_editorial_post');
+    });
+
+    test('inc/enqueue.php and inc/download.php enable assets and download block universally for editorial posts', () => {
+      const enqueueCode = fs.readFileSync(path.join(rootDir, 'inc/enqueue.php'), 'utf8');
+      assert.ok(enqueueCode.includes('$is_editorial_single'), 'Must check editorial single in enqueue');
+      assert.ok(enqueueCode.includes("! is_singular( 'post' )"), 'Must allow pattern styles on all single posts');
+
+      const downloadCode = fs.readFileSync(path.join(rootDir, 'inc/download.php'), 'utf8');
+      assert.ok(downloadCode.includes("! is_singular( 'post' )"), 'Must enable download block on single posts');
+    });
+
+    test('template-parts/knowledge/single.php provides dynamic breadcrumbs, related posts, and conditional disclaimer', () => {
+      const singleCode = fs.readFileSync(path.join(rootDir, 'template-parts/knowledge/single.php'), 'utf8');
+      assert.ok(singleCode.includes('$is_news'), 'Must detect news context in single template');
+      assert.ok(singleCode.includes('$section_url'), 'Must have dynamic section URL in breadcrumbs');
+      assert.ok(singleCode.includes('$section_label'), 'Must have dynamic section label in breadcrumbs');
+      assert.ok(singleCode.includes('$show_disclaimer'), 'Must conditionally render medical disclaimer');
+      assert.ok(singleCode.includes('Ban biên tập Vạn Phúc Care'), 'Must provide neutral author title fallback');
+      assert.ok(singleCode.includes('$related_cat_id'), 'Must query related posts dynamically based on category');
+    });
   });
 
   describe('8. Recruitment 2-Level Architecture Alignment', () => {

@@ -82,7 +82,7 @@ function vanphuccare_register_download_media_field() {
 add_action( 'rest_api_init', 'vanphuccare_register_download_media_field' );
 
 function vanphuccare_render_legacy_download( $content, $block ) {
-	if ( ! is_singular( 'post' ) || ! vanphuccare_is_knowledge_post( get_queried_object_id() ) ) {
+	if ( ! is_singular( 'post' ) ) {
 		return $content;
 	}
 	$classes = preg_split( '/\s+/', $block['attrs']['className'] ?? '' );

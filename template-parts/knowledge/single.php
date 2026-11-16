@@ -1,17 +1,44 @@
 <?php
 /**
- * Reading layout for articles in the Knowledge category tree.
+ * Universal reading layout for editorial posts (Knowledge, News, and standard posts).
  *
  * @package VanPhucCare
  */
 
 $article_id = get_the_ID();
+$section    = $args['section'] ?? '';
 $category   = vanphuccare_get_primary_category();
 $protected  = post_password_required();
 $raw_body   = $protected ? '' : get_the_content();
 $cover_id   = get_post_thumbnail_id();
 $excerpt    = $protected ? '' : trim( (string) get_post_field( 'post_excerpt', $article_id ) );
 $words      = preg_split( '/\s+/u', wp_strip_all_tags( strip_shortcodes( $raw_body ) ), -1, PREG_SPLIT_NO_EMPTY );
+
+// Determine section context for breadcrumb and links
+$is_news = ( 'news' === $section )
+	|| ( function_exists( 'vpc_is_news_category' ) && vpc_is_news_category( $category ) )
+	|| ( function_exists( 'vpc_is_news_post' ) && vpc_is_news_post( $article_id ) );
+
+if ( $is_news ) {
+	$section_url   = home_url( '/tin-tuc/' );
+	$section_label = __( 'Tin tức', 'vanphuccare' );
+	$section_slug  = 'tin-tuc';
+} elseif ( ! $category || ( function_exists( 'vpc_is_knowledge_category' ) && vpc_is_knowledge_category( $category ) ) ) {
+	$section_url   = home_url( '/kien-thuc/' );
+	$section_label = __( 'Kiến thức', 'vanphuccare' );
+	$section_slug  = 'kien-thuc';
+} else {
+	if ( $category->parent ) {
+		$top_term      = get_term( (int) $category->parent, 'category' );
+		$section_url   = ( $top_term instanceof WP_Term ) ? get_category_link( $top_term ) : get_category_link( $category );
+		$section_label = ( $top_term instanceof WP_Term ) ? $top_term->name : $category->name;
+		$section_slug  = ( $top_term instanceof WP_Term ) ? $top_term->slug : $category->slug;
+	} else {
+		$section_url   = get_category_link( $category );
+		$section_label = $category->name;
+		$section_slug  = $category->slug;
+	}
+}
 
 // An opening Gutenberg image can already serve as the cover, including its caption.
 $blocks = parse_blocks( $raw_body );
@@ -33,8 +60,8 @@ foreach ( $blocks as $block ) {
 	<div class="vpc-reader__wrap">
 		<nav class="vpc-reader__crumbs" aria-label="Đường dẫn">
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Trang chủ</a>
-			<a href="<?php echo esc_url( home_url( '/kien-thuc/' ) ); ?>">Kiến thức</a>
-			<?php if ( $category && 'kien-thuc' !== $category->slug ) : ?>
+			<a href="<?php echo esc_url( $section_url ); ?>"><?php echo esc_html( $section_label ); ?></a>
+			<?php if ( $category && $category->slug !== $section_slug ) : ?>
 				<a href="<?php echo esc_url( get_category_link( $category ) ); ?>"><?php echo esc_html( $category->name ); ?></a>
 			<?php endif; ?>
 			<span aria-current="page"><?php the_title(); ?></span>
@@ -109,7 +136,7 @@ foreach ( $blocks as $block ) {
 				$author_title = get_the_author_meta( 'vpc_job_title', $author_id );
 				if ( empty( $author_title ) ) {
 					$author_desc  = get_the_author_meta( 'description', $author_id );
-					$author_title = ! empty( $author_desc ) ? wp_trim_words( $author_desc, 12 ) : __( 'Tác giả chuyên mục Kiến thức', 'vanphuccare' );
+					$author_title = ! empty( $author_desc ) ? wp_trim_words( $author_desc, 12 ) : __( 'Ban biên tập Vạn Phúc Care', 'vanphuccare' );
 				}
 				$author_url = get_author_posts_url( $author_id );
 				?>
@@ -173,6 +200,10 @@ foreach ( $blocks as $block ) {
 				</section>
 				<?php endif; ?>
 
+				<?php
+				$show_disclaimer = ! empty( $reviewer_name ) || ( function_exists( 'vpc_is_knowledge_category' ) && vpc_is_knowledge_category( $category ) );
+				if ( $show_disclaimer ) :
+				?>
 				<div class="vpc-reader__disclaimer" role="note" aria-label="<?php esc_attr_e( 'Cảnh báo y khoa', 'vanphuccare' ); ?>">
 					<span class="vpc-reader__disclaimer-icon" aria-hidden="true">
 						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -184,6 +215,7 @@ foreach ( $blocks as $block ) {
 						<?php esc_html_e( 'Thông tin trong bài không thay thế chẩn đoán y khoa, tư vấn hay điều trị của cơ sở khám chữa bệnh. Cha mẹ cần liên hệ cơ sở y tế khi có dấu hiệu bất thường.', 'vanphuccare' ); ?>
 					</p>
 				</div>
+				<?php endif; ?>
 			</article>
 			<aside class="vpc-reader__rail" aria-label="Thông tin bài viết">
 				<details class="vpc-reader__toc" hidden>
@@ -195,8 +227,11 @@ foreach ( $blocks as $block ) {
 		</div>
 		<?php
 		$related_cat_id = 0;
-		if ( $category instanceof WP_Term && vpc_is_knowledge_category( $category ) ) {
+		if ( $category instanceof WP_Term ) {
 			$related_cat_id = (int) $category->term_id;
+		} elseif ( $is_news ) {
+			$news_fallback  = get_category_by_slug( 'tin-tuc' );
+			$related_cat_id = ( $news_fallback instanceof WP_Term ) ? (int) $news_fallback->term_id : 0;
 		} else {
 			$kt_fallback    = get_category_by_slug( 'kien-thuc' );
 			$related_cat_id = ( $kt_fallback instanceof WP_Term ) ? (int) $kt_fallback->term_id : 0;

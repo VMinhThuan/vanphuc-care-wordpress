@@ -784,7 +784,7 @@ add_filter( 'rank_math/frontend/canonical', 'vanphuccare_knowledge_canonical_url
 function vanphuccare_register_knowledge_patterns() {
 	register_block_pattern_category(
 		'vanphuccare-knowledge',
-		array( 'label' => __( 'Kiến thức Vạn Phúc Care', 'vanphuccare' ) )
+		array( 'label' => __( 'Khối nội dung bài viết — Vạn Phúc Care', 'vanphuccare' ) )
 	);
 
 	// Register the shipped files explicitly so new patterns appear after a theme deploy.
