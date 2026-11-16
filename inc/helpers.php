@@ -623,6 +623,34 @@ function vpc_format_knowledge_card( $post_obj, $default_image = '', $excerpt_wor
 }
 
 /**
+ * Safely highlights occurrences of a search keyword in plain text using <mark class="vpc-search-highlight">.
+ *
+ * Preserves original case and escapes HTML to prevent XSS.
+ *
+ * @param string $text Raw text string.
+ * @param string $keyword Search keyword.
+ * @return string Safe HTML with highlighted terms.
+ */
+function vpc_highlight_search_keyword( $text, $keyword ) {
+	$escaped_text = esc_html( $text );
+	$keyword      = trim( (string) $keyword );
+	if ( '' === $keyword ) {
+		return $escaped_text;
+	}
+
+	$pattern     = '/' . preg_quote( esc_html( $keyword ), '/' ) . '/iu';
+	$highlighted = preg_replace_callback(
+		$pattern,
+		static function ( $matches ) {
+			return '<mark class="vpc-search-highlight">' . $matches[0] . '</mark>';
+		},
+		$escaped_text
+	);
+
+	return is_string( $highlighted ) ? $highlighted : $escaped_text;
+}
+
+/**
  * Returns canonical definitions of knowledge sub-categories.
  *
  * Single Source of Truth for icons, labels, descriptions, and alias slugs.

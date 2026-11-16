@@ -257,6 +257,23 @@
 	line-height: 24px;
 }
 
+.vpc-recruitment-detail__callout.is-closed {
+	border-color: #cbd5e1;
+	background: #f1f5f9;
+}
+
+.vpc-recruitment-detail__callout.is-closed h2 {
+	color: #475569;
+}
+
+.vpc-recruitment-detail__status-badge {
+	display: inline-block;
+	font-size: 15px;
+	font-weight: 600;
+	margin-left: 6px;
+	color: #ef4444;
+}
+
 .vpc-recruitment-detail__cta {
 	display: flex;
 	gap: 24px;
@@ -382,6 +399,10 @@
 	gap: 16px;
 	align-items: center;
 	justify-content: space-between;
+}
+
+.vpc-recruitment-detail__tags-share > .vpc-recruitment-detail__share:only-child {
+	margin-left: auto;
 }
 
 .vpc-recruitment-detail__tags,

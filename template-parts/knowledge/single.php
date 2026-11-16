@@ -14,10 +14,18 @@ $cover_id   = get_post_thumbnail_id();
 $excerpt    = $protected ? '' : trim( (string) get_post_field( 'post_excerpt', $article_id ) );
 $words      = preg_split( '/\s+/u', wp_strip_all_tags( strip_shortcodes( $raw_body ) ), -1, PREG_SPLIT_NO_EMPTY );
 
-// Determine section context for breadcrumb and links
-$is_news = ( 'news' === $section )
-	|| ( function_exists( 'vpc_is_news_category' ) && vpc_is_news_category( $category ) )
-	|| ( function_exists( 'vpc_is_news_post' ) && vpc_is_news_post( $article_id ) );
+// Determine section context: Primary Category takes precedence over secondary categories
+if ( function_exists( 'vpc_is_news_category' ) && vpc_is_news_category( $category ) ) {
+	$is_news = true;
+} elseif ( function_exists( 'vpc_is_knowledge_category' ) && vpc_is_knowledge_category( $category ) ) {
+	$is_news = false;
+} elseif ( ! empty( $section ) ) {
+	$is_news = ( 'news' === $section );
+} elseif ( function_exists( 'vpc_is_news_post' ) && vpc_is_news_post( $article_id ) ) {
+	$is_news = true;
+} else {
+	$is_news = false;
+}
 
 if ( $is_news ) {
 	$section_url   = home_url( '/tin-tuc/' );

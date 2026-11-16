@@ -26,31 +26,84 @@ $meta    = function_exists( 'vpc_get_recruitment_meta' )
 	: array(
 		'updated'  => '17/07/2025',
 		'deadline' => '21/08/2025',
+		'status'   => 'Đang tuyển',
 		'location' => 'Tây Hồ - Hà Nội',
 		'type'     => 'Toàn thời gian (T2 - T7)',
 		'salary'   => 'Thỏa thuận theo năng lực',
 		'quantity' => '02 - 05 nhân sự',
 	);
 
-$updated  = $meta['updated'];
-$deadline = $meta['deadline'];
-$content  = (string) get_the_content();
-$has_body = '' !== trim( wp_strip_all_tags( $content ) );
+$updated   = $meta['updated'];
+$deadline  = $meta['deadline'];
+$status    = $meta['status'] ?? 'Đang tuyển';
+$is_closed = 'Đã đóng' === $status;
 
-$related_jobs = array(
-	array(
-		'title' => 'Vị trí chuyên viên tuyển dụng – Bộ phận HCNS',
-		'image' => $detail_uri . '/related-1.png',
-	),
-	array(
-		'title' => 'Vị trí Media Planer – Bộ phận Marketing',
-		'image' => $detail_uri . '/hotline.jpg',
-	),
-	array(
-		'title' => 'Vị trí nhân sự bộ phận Điều Dưỡng – Trung tâm Ở cữ',
-		'image' => $detail_uri . '/related-2.jpg',
-	),
-);
+$content   = (string) get_the_content();
+$has_body  = '' !== trim( wp_strip_all_tags( $content ) );
+$excerpt   = trim( (string) get_post_field( 'post_excerpt', $post_id ) );
+
+$hotline_display = (string) get_theme_mod( 'vpc_hotline_ho_tro', '037 624 6673' );
+$hotline_tel     = preg_replace( '/[^0-9+]/', '', $hotline_display ) ?: '0376246673';
+
+// Dynamic related jobs query
+$related_posts = get_posts( array(
+	'category_name'       => 'tuyen-dung',
+	'post__not_in'        => array( $post_id ),
+	'posts_per_page'      => 3,
+	'post_status'         => 'publish',
+	'ignore_sticky_posts' => true,
+) );
+
+$related_jobs = array();
+if ( ! empty( $related_posts ) ) {
+	foreach ( $related_posts as $rel_post ) {
+		$rel_id    = $rel_post->ID;
+		$rel_meta  = function_exists( 'vpc_get_recruitment_meta' ) ? vpc_get_recruitment_meta( $rel_id ) : array();
+		$rel_image = has_post_thumbnail( $rel_id )
+			? get_the_post_thumbnail_url( $rel_id, 'medium_large' )
+			: ( $detail_uri . '/related-1.png' );
+		$rel_excerpt = trim( (string) get_post_field( 'post_excerpt', $rel_id ) );
+		if ( empty( $rel_excerpt ) ) {
+			$rel_excerpt = wp_trim_words( wp_strip_all_tags( $rel_post->post_content ), 20, '...' );
+		}
+		if ( empty( $rel_excerpt ) ) {
+			$rel_excerpt = 'Thông tin tuyển dụng vị trí ' . get_the_title( $rel_post ) . ' tại Vạn Phúc Care.';
+		}
+
+		$related_jobs[] = array(
+			'title'    => get_the_title( $rel_post ),
+			'url'      => get_permalink( $rel_id ),
+			'image'    => $rel_image,
+			'excerpt'  => $rel_excerpt,
+			'deadline' => $rel_meta['deadline'] ?? 'Đang cập nhật',
+		);
+	}
+} else {
+	// Fallback mock jobs for preview environments with single post
+	$related_jobs = array(
+		array(
+			'title'    => 'Vị trí chuyên viên tuyển dụng – Bộ phận HCNS',
+			'url'      => home_url( '/tuyen-dung/' ),
+			'image'    => $detail_uri . '/related-1.png',
+			'excerpt'  => 'Tuyển dụng chuyên viên tuyển dụng nhân sự, phụ trách thu hút và phỏng vấn nhân tài.',
+			'deadline' => 'Đang tuyển',
+		),
+		array(
+			'title'    => 'Vị trí Media Planner – Bộ phận Marketing',
+			'url'      => home_url( '/tuyen-dung/' ),
+			'image'    => $detail_uri . '/hotline.jpg',
+			'excerpt'  => 'Tuyển dụng nhân sự truyền thông và lập kế hoạch media cho các chiến dịch sức khỏe mẹ và bé.',
+			'deadline' => 'Đang tuyển',
+		),
+		array(
+			'title'    => 'Vị trí nhân sự bộ phận Điều Dưỡng – Trung tâm Ở cữ',
+			'url'      => home_url( '/tuyen-dung/' ),
+			'image'    => $detail_uri . '/related-2.jpg',
+			'excerpt'  => 'Tuyển dụng ứng viên vị trí điều dưỡng viên, làm nhiệm vụ chăm sóc trẻ sơ sinh từ 0 đến 12 tháng tuổi.',
+			'deadline' => 'Đang tuyển',
+		),
+	);
+}
 
 $quick_rows = array(
 	'Địa điểm làm việc' => $meta['location'],
@@ -59,6 +112,9 @@ $quick_rows = array(
 	'Số lượng tuyển'    => $meta['quantity'],
 	'Hạn nộp hồ sơ'     => $deadline,
 );
+if ( $is_closed ) {
+	$quick_rows['Trạng thái'] = 'Đã dừng nhận hồ sơ';
+}
 ?>
 
 <div class="vpc-recruitment-detail" data-figma-node="3387:48947">
@@ -86,15 +142,34 @@ $quick_rows = array(
 					<p class="vpc-recruitment-detail__meta">Cập nhật: <?php echo esc_html( $updated ); ?> <span aria-hidden="true">·</span> <strong>Hạn nộp: <?php echo esc_html( $deadline ); ?></strong></p>
 				</header>
 
-				<div class="vpc-recruitment-detail__lead">
-					<span aria-hidden="true"></span>
-					<p>Vạn Phúc Care đang tìm kiếm Điều dưỡng viên và Nữ hộ sinh tận tâm, có chuyên môn để đồng hành cùng mẹ và bé tại Trung tâm Ở cữ. Ứng viên được đào tạo kỹ năng nghiệp vụ căn bản, cấp chứng nhận bồi dưỡng nghiệp vụ và làm việc trong môi trường chuyên nghiệp, nhân văn.</p>
-				</div>
+				<?php if ( ! empty( $excerpt ) ) : ?>
+					<div class="vpc-recruitment-detail__lead">
+						<span aria-hidden="true"></span>
+						<p><?php echo esc_html( $excerpt ); ?></p>
+					</div>
+				<?php elseif ( ! $has_body ) : ?>
+					<div class="vpc-recruitment-detail__lead">
+						<span aria-hidden="true"></span>
+						<p>Vạn Phúc Care đang tìm kiếm nhân sự tận tâm, có chuyên môn để đồng hành cùng mẹ và bé. Ứng viên được làm việc trong môi trường chuyên nghiệp, nhân văn và có cơ hội thăng tiến lâu dài.</p>
+					</div>
+				<?php endif; ?>
 
-				<figure class="vpc-recruitment-detail__article-image">
-					<img src="<?php echo esc_url( $detail_uri . '/article-main.png' ); ?>" width="800" height="450" alt="Điều dưỡng và nữ hộ sinh tại Trung tâm Ở cữ" fetchpriority="high">
-					<figcaption>Chú thích ảnh</figcaption>
-				</figure>
+				<?php if ( has_post_thumbnail( $post_id ) ) : ?>
+					<figure class="vpc-recruitment-detail__article-image">
+						<?php echo get_the_post_thumbnail( $post_id, 'large', array( 'width' => 800, 'height' => 450, 'alt' => esc_attr( $title ), 'fetchpriority' => 'high' ) ); ?>
+						<?php
+						$caption = get_the_post_thumbnail_caption( $post_id );
+						if ( ! empty( $caption ) ) :
+						?>
+							<figcaption><?php echo esc_html( $caption ); ?></figcaption>
+						<?php endif; ?>
+					</figure>
+				<?php elseif ( ! $has_body ) : ?>
+					<figure class="vpc-recruitment-detail__article-image">
+						<img src="<?php echo esc_url( $detail_uri . '/article-main.png' ); ?>" width="800" height="450" alt="<?php echo esc_attr( $title ); ?>" fetchpriority="high">
+						<figcaption>Đội ngũ Vạn Phúc Care</figcaption>
+					</figure>
+				<?php endif; ?>
 
 				<section class="vpc-recruitment-detail__apply-card vpc-recruitment-detail__apply-card--mobile" aria-labelledby="recruitment-mobile-apply-title">
 					<h2 id="recruitment-mobile-apply-title">Ứng tuyển nhanh</h2>
@@ -148,31 +223,39 @@ $quick_rows = array(
 					</div>
 				<?php endif; ?>
 
-				<div class="vpc-recruitment-detail__callout">
+				<div class="vpc-recruitment-detail__callout<?php echo $is_closed ? ' is-closed' : ''; ?>">
 					<img src="<?php echo esc_url( $detail_uri . '/info.svg' ); ?>" width="28" height="28" alt="" aria-hidden="true">
-					<div><h2>Hạn nộp hồ sơ: <?php echo esc_html( $deadline ); ?></h2><p>Ứng viên gửi hồ sơ trước hạn hoặc liên hệ hotline 037 624 6673 để được hướng dẫn.</p></div>
+					<div>
+						<h2>Hạn nộp hồ sơ: <?php echo esc_html( $deadline ); ?><?php echo $is_closed ? ' <span class="vpc-recruitment-detail__status-badge">(Đã dừng nhận hồ sơ)</span>' : ''; ?></h2>
+						<?php if ( $is_closed ) : ?>
+							<p>Vị trí này hiện đã dừng nhận hồ sơ hoặc đủ chỉ tiêu đợt tuyển dụng. Ứng viên có thể tham khảo các vị trí khác bên dưới hoặc liên hệ hotline <?php echo esc_html( $hotline_display ); ?> để được hỗ trợ.</p>
+						<?php else : ?>
+							<p>Ứng viên gửi hồ sơ trước hạn hoặc liên hệ hotline <?php echo esc_html( $hotline_display ); ?> để được hướng dẫn.</p>
+						<?php endif; ?>
+					</div>
 				</div>
 
 				<div class="vpc-recruitment-detail__cta" id="recruitment-apply">
-					<div><h2>Sẵn sàng gia nhập Vạn Phúc Care?</h2><p>Gửi hồ sơ ngay hôm nay, đội ngũ sẽ liên hệ lịch phỏng vấn với bạn.</p></div>
+					<div>
+						<h2>Sẵn sàng gia nhập Vạn Phúc Care?</h2>
+						<p><?php echo $is_closed ? 'Gửi hồ sơ dự tuyển cho các đợt tiếp theo, đội ngũ nhân sự sẽ lưu thông tin và liên hệ khi có vị trí phù hợp.' : 'Gửi hồ sơ ngay hôm nay, đội ngũ sẽ liên hệ lịch phỏng vấn với bạn.'; ?></p>
+					</div>
 					<button type="button" data-recruitment-open="apply">Ứng tuyển ngay</button>
 				</div>
 
-				<section class="vpc-recruitment-detail__faq" aria-labelledby="recruitment-faq-title">
-					<h2 id="recruitment-faq-title">Câu hỏi thường gặp</h2>
-					<div class="vpc-recruitment-detail__accordion">
-						<details open>
-							<summary>Quy trình ứng tuyển gồm những bước nào?<img src="<?php echo esc_url( $detail_uri . '/chevron-up.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true"></summary>
-							<p>[Cần client cung cấp: các bước nhận hồ sơ, phỏng vấn và nhận việc.]</p>
-						</details>
-						<details><summary>Lịch phỏng vấn được thông báo như thế nào?<img src="<?php echo esc_url( $detail_uri . '/chevron-down.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true"></summary></details>
-						<details><summary>Chưa có kinh nghiệm có thể ứng tuyển không?<img src="<?php echo esc_url( $detail_uri . '/chevron-down.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true"></summary></details>
-						<details><summary>Hồ sơ cần chuẩn bị những gì?<img src="<?php echo esc_url( $detail_uri . '/chevron-down.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true"></summary></details>
-					</div>
-				</section>
-
+				<?php
+				$post_tags = get_the_tags( $post_id );
+				$has_tags  = ! empty( $post_tags ) && ! is_wp_error( $post_tags );
+				?>
 				<div class="vpc-recruitment-detail__tags-share">
-					<div class="vpc-recruitment-detail__tags"><span>Tags:</span><a href="#tag-dieu-duong">Điều dưỡng</a><a href="#tag-nu-ho-sinh">Nữ hộ sinh</a><a href="#tag-o-cu">Trung tâm ở cữ</a></div>
+					<?php if ( $has_tags ) : ?>
+						<div class="vpc-recruitment-detail__tags">
+							<span>Tags:</span>
+							<?php foreach ( $post_tags as $tag ) : ?>
+								<a href="<?php echo esc_url( get_tag_link( $tag->term_id ) ); ?>"><?php echo esc_html( $tag->name ); ?></a>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
 					<div class="vpc-recruitment-detail__share" aria-label="Chia sẻ bài viết">
 						<span>Chia sẻ:</span>
 						<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo rawurlencode( $detail_url ); ?>" target="_blank" rel="noopener noreferrer" aria-label="Chia sẻ Facebook"><img src="<?php echo esc_url( $detail_uri . '/facebook.svg' ); ?>" width="20" height="20" alt=""></a>
@@ -195,9 +278,12 @@ $quick_rows = array(
 
 				<section class="vpc-recruitment-detail__hotline-card">
 					<img class="vpc-recruitment-detail__hotline-image" src="<?php echo esc_url( $detail_uri . '/hotline.jpg' ); ?>" width="4096" height="2731" alt="Đội ngũ Vạn Phúc Care" loading="lazy">
-					<div class="vpc-recruitment-detail__hotline-heading"><img src="<?php echo esc_url( $detail_uri . '/hotline.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true"><div><span>Hotline</span><strong>037 624 6673</strong></div></div>
+					<div class="vpc-recruitment-detail__hotline-heading">
+						<img src="<?php echo esc_url( $detail_uri . '/hotline.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">
+						<div><span>Hotline</span><strong><?php echo esc_html( $hotline_display ); ?></strong></div>
+					</div>
 					<p>Liên hệ ngay để được giải đáp về vị trí tuyển dụng</p>
-					<a class="vpc-recruitment-detail__primary-button" href="tel:0376246673">Liên hệ ngay</a>
+					<a class="vpc-recruitment-detail__primary-button" href="tel:<?php echo esc_attr( $hotline_tel ); ?>">Liên hệ ngay</a>
 				</section>
 			</aside>
 		</div>
@@ -207,8 +293,15 @@ $quick_rows = array(
 			<div class="vpc-recruitment-detail__related-grid">
 				<?php foreach ( $related_jobs as $job ) : ?>
 					<article class="vpc-recruitment-detail__related-card">
-						<a class="vpc-recruitment-detail__related-image" href="<?php echo esc_url( $detail_url ); ?>"><img src="<?php echo esc_url( $job['image'] ); ?>" width="404" height="219" alt="" loading="lazy"></a>
-						<div><a class="vpc-recruitment-detail__related-category" href="<?php echo esc_url( home_url( '/tuyen-dung/' ) ); ?>">Tuyển dụng</a><h3><a href="<?php echo esc_url( $detail_url ); ?>"><?php echo esc_html( $job['title'] ); ?></a></h3><p>Tuyển dụng ứng viên vị trí điều dưỡng viên, làm nhiệm vụ chăm sóc trẻ sơ sinh từ 0 đến 12 tháng tuổi.</p><span>Hạn nộp: 31/07/2024</span></div>
+						<a class="vpc-recruitment-detail__related-image" href="<?php echo esc_url( $job['url'] ); ?>">
+							<img src="<?php echo esc_url( $job['image'] ); ?>" width="404" height="219" alt="<?php echo esc_attr( $job['title'] ); ?>" loading="lazy">
+						</a>
+						<div>
+							<a class="vpc-recruitment-detail__related-category" href="<?php echo esc_url( home_url( '/tuyen-dung/' ) ); ?>">Tuyển dụng</a>
+							<h3><a href="<?php echo esc_url( $job['url'] ); ?>"><?php echo esc_html( $job['title'] ); ?></a></h3>
+							<p><?php echo esc_html( $job['excerpt'] ); ?></p>
+							<span>Hạn nộp: <?php echo esc_html( $job['deadline'] ); ?></span>
+						</div>
 					</article>
 				<?php endforeach; ?>
 			</div>

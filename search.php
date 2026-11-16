@@ -2,11 +2,12 @@
 /**
  * Search results template for Vạn Phúc Care.
  *
- * Fully unified with Sub-Category knowledge page design:
- * - Sub-Category Hero (identical gradient colors, typography, and visual mascot)
- * - Category navigation pills
- * - 2-column layout (Articles column + Knowledge sidebar)
- * - Horizontal article cards with numeric pagination
+ * Follows Figma Search Results reference layout:
+ * - Streamlined Search Hero (breadcrumbs, H1, centered/left search pill input)
+ * - Heading: "Kết quả cho \"{keyword}\""
+ * - Main articles stack with search term highlighting and numeric pagination
+ * - Empty state with icon badge, maternal copy, suggested topics, and CTA button
+ * - Clean sidebar with "Từ khóa gợi ý" and "Hotline tư vấn"
  *
  * @package VanPhucCare
  */
@@ -22,109 +23,46 @@ $asset = static function ( $name ) use ( $knowledge_uri ) {
 	return esc_url( $knowledge_uri . '/' . $name );
 };
 
-// Category pills resolved dynamically from Single Source of Truth (DRY & 404 safe).
-$categories = function_exists( 'vpc_get_knowledge_category_pills' )
-	? vpc_get_knowledge_category_pills( '', 0 )
-	: array();
-
 global $wp_query;
 $search_query  = get_search_query();
 $total_results = (int) $wp_query->found_posts;
 ?>
 
 <div class="vpc-knowledge vpc-knowledge--subcategory vpc-knowledge--search">
-	<!-- 1. Sub-Category Hero Header (Identical colors, typography, and visual layout) -->
-	<section class="vpc-knowledge-subcat-hero">
-		<div class="vpc-knowledge-container vpc-knowledge-subcat-hero__inner">
-			<div class="vpc-knowledge-subcat-hero__copy">
-				<nav class="vpc-knowledge-breadcrumbs" aria-label="<?php esc_attr_e( 'Đường dẫn trang', 'vanphuccare' ); ?>">
-					<div class="vpc-knowledge-breadcrumbs__desktop">
-						<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Trang chủ', 'vanphuccare' ); ?></a>
-						<span class="vpc-knowledge-breadcrumbs__sep" aria-hidden="true"><img src="<?php echo $asset( 'chevron-right.svg' ); ?>" alt="" width="16" height="16"></span>
-						<a href="<?php echo esc_url( home_url( '/kien-thuc/' ) ); ?>"><?php esc_html_e( 'Kiến thức', 'vanphuccare' ); ?></a>
-						<span class="vpc-knowledge-breadcrumbs__sep" aria-hidden="true"><img src="<?php echo $asset( 'chevron-right.svg' ); ?>" alt="" width="16" height="16"></span>
-						<span class="vpc-knowledge-breadcrumbs__current"><?php printf( esc_html__( 'Tìm kiếm: "%s"', 'vanphuccare' ), esc_html( $search_query ) ); ?></span>
-					</div>
-					<a class="vpc-knowledge-breadcrumbs__mobile" href="<?php echo esc_url( home_url( '/kien-thuc/' ) ); ?>"><span aria-hidden="true">‹</span> <?php esc_html_e( 'Kiến thức', 'vanphuccare' ); ?></a>
-				</nav>
-
-				<h1><?php printf( esc_html__( 'Tìm kiếm: "%s"', 'vanphuccare' ), esc_html( $search_query ) ); ?></h1>
-
-				<div class="vpc-knowledge-subcat-hero__desc vpc-knowledge-subcat-hero__desc--desktop">
-					<p>
-						<?php
-						if ( $total_results > 0 ) {
-							printf(
-								/* translators: %d: number of articles found. */
-								esc_html( _n( 'Tìm thấy %d bài viết phù hợp với từ khóa tìm kiếm của bạn trong kho kiến thức.', 'Tìm thấy %d bài viết phù hợp với từ khóa tìm kiếm của bạn trong kho kiến thức.', $total_results, 'vanphuccare' ) ),
-								$total_results
-							);
-						} else {
-							esc_html_e( 'Không tìm thấy bài viết nào phù hợp với từ khóa của bạn. Vui lòng thử lại với từ khóa khác hoặc khám phá các chuyên mục bên dưới.', 'vanphuccare' );
-						}
-						?>
-					</p>
+	<!-- 1. Dedicated Search Hero Header (Figma specification) -->
+	<section class="vpc-knowledge-search-hero">
+		<div class="vpc-knowledge-container vpc-knowledge-search-hero__inner">
+			<nav class="vpc-knowledge-breadcrumbs" aria-label="<?php esc_attr_e( 'Đường dẫn trang', 'vanphuccare' ); ?>">
+				<div class="vpc-knowledge-breadcrumbs__desktop">
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Trang chủ', 'vanphuccare' ); ?></a>
+					<span class="vpc-knowledge-breadcrumbs__sep" aria-hidden="true"><img src="<?php echo $asset( 'chevron-right.svg' ); ?>" alt="" width="16" height="16"></span>
+					<a href="<?php echo esc_url( home_url( '/kien-thuc/' ) ); ?>"><?php esc_html_e( 'Kiến thức', 'vanphuccare' ); ?></a>
+					<span class="vpc-knowledge-breadcrumbs__sep" aria-hidden="true"><img src="<?php echo $asset( 'chevron-right.svg' ); ?>" alt="" width="16" height="16"></span>
+					<span class="vpc-knowledge-breadcrumbs__current"><?php esc_html_e( 'Kết quả tìm kiếm', 'vanphuccare' ); ?></span>
 				</div>
+				<a class="vpc-knowledge-breadcrumbs__mobile" href="<?php echo esc_url( home_url( '/kien-thuc/' ) ); ?>"><span aria-hidden="true">‹</span> <?php esc_html_e( 'Kiến thức', 'vanphuccare' ); ?></a>
+			</nav>
 
-				<div class="vpc-knowledge-subcat-hero__desc vpc-knowledge-subcat-hero__desc--mobile">
-					<p>
-						<?php
-						if ( $total_results > 0 ) {
-							printf(
-								/* translators: %d: number of articles found. */
-								esc_html( _n( 'Tìm thấy %d bài viết phù hợp.', 'Tìm thấy %d bài viết phù hợp.', $total_results, 'vanphuccare' ) ),
-								$total_results
-							);
-						} else {
-							esc_html_e( 'Không tìm thấy bài viết phù hợp.', 'vanphuccare' );
-						}
-						?>
-					</p>
-				</div>
-			</div>
+			<h1 class="vpc-knowledge-search-hero__title"><?php esc_html_e( 'Kết quả tìm kiếm', 'vanphuccare' ); ?></h1>
 
-			<!-- Sub-Category Visual (Mascot & Decorative elements matching sub-category hero) -->
-			<div class="vpc-knowledge-subcat-hero__visual" aria-hidden="true">
-				<img class="vpc-knowledge-subcat-hero__blob" src="<?php echo $asset( 'mang-thai-blob.svg' ); ?>" alt="" width="300" height="300">
-				<div class="vpc-knowledge-subcat-hero__photo">
-					<img src="<?php echo $asset( 'mang-thai-photo-2.png' ); ?>" alt="" width="230" height="301">
-				</div>
-				<img class="vpc-knowledge-subcat-hero__sticker" src="<?php echo $asset( 'mang-thai-sticker.svg' ); ?>" alt="" width="130" height="130">
-				<img class="vpc-knowledge-subcat-hero__mascot" src="<?php echo $asset( 'hero-mascot.png' ); ?>" alt="" width="114" height="114">
-				<span class="vpc-knowledge-subcat-hero__badge"><img src="<?php echo $asset( 'mang-thai-dot.svg' ); ?>" alt="" width="10" height="10"><span><?php esc_html_e( 'Tra cứu kiến thức', 'vanphuccare' ); ?></span></span>
-				<img class="vpc-knowledge-subcat-hero__heart" src="<?php echo $asset( 'mang-thai-heart.svg' ); ?>" alt="" width="26" height="26">
-				<img class="vpc-knowledge-subcat-hero__heart-small" src="<?php echo $asset( 'mang-thai-heart-small.svg' ); ?>" alt="" width="16" height="16">
-				<img class="vpc-knowledge-subcat-hero__sparkle" src="<?php echo $asset( 'mang-thai-sparkle.svg' ); ?>" alt="" width="20" height="20">
-				<img class="vpc-knowledge-subcat-hero__dot-blue" src="<?php echo $asset( 'mang-thai-dot-blue.svg' ); ?>" alt="" width="8" height="8">
-				<img class="vpc-knowledge-subcat-hero__dot-pink" src="<?php echo $asset( 'mang-thai-dot-pink.svg' ); ?>" alt="" width="8" height="8">
+			<div class="vpc-knowledge-search-hero__form-wrap">
+				<form class="vpc-knowledge-sidebar-search vpc-knowledge-search-hero__form" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+					<img src="<?php echo $asset( 'search.svg' ); ?>" alt="" width="20" height="20" aria-hidden="true">
+					<label class="screen-reader-text" for="hero-search-input"><?php esc_html_e( 'Tìm bài viết', 'vanphuccare' ); ?></label>
+					<input id="hero-search-input" type="search" name="s" placeholder="<?php esc_attr_e( 'Tìm bài viết...', 'vanphuccare' ); ?>" value="<?php echo esc_attr( $search_query ); ?>">
+					<button type="submit"><?php esc_html_e( 'Tìm', 'vanphuccare' ); ?></button>
+				</form>
 			</div>
 		</div>
 	</section>
 
-	<!-- 2. Category Pills Navigation -->
-	<?php if ( ! empty( $categories ) ) : ?>
-		<section class="vpc-knowledge-subcat-pills-wrap">
-			<div class="vpc-knowledge-container">
-				<div class="vpc-knowledge-category-list" role="list">
-					<?php foreach ( $categories as $category ) : ?>
-						<a class="vpc-knowledge-category<?php echo ! empty( $category['active'] ) ? ' is-active' : ''; ?>" href="<?php echo esc_url( $category['url'] ); ?>" role="listitem">
-							<span class="vpc-knowledge-category__icon"><img src="<?php echo $asset( $category['icon'] ); ?>" alt="" width="24" height="24" aria-hidden="true"></span>
-							<span><?php echo esc_html( $category['label'] ); ?></span>
-							<small><?php echo esc_html( $category['description'] ); ?></small>
-						</a>
-					<?php endforeach; ?>
-				</div>
-			</div>
-		</section>
-	<?php endif; ?>
-
-	<!-- 3. Main 2-Column Content Layout (Articles + Sidebar) -->
-	<section class="vpc-knowledge-content vpc-knowledge-content--subcat">
+	<!-- 2. Main 2-Column Content Layout (Articles + Search Sidebar) -->
+	<section class="vpc-knowledge-content vpc-knowledge-content--subcat vpc-knowledge-content--search">
 		<div class="vpc-knowledge-container vpc-knowledge-layout">
 			<!-- Main Left Column -->
 			<main class="vpc-knowledge-main" id="primary">
-				<h2 class="vpc-knowledge-main__title">
-					<?php printf( esc_html__( 'Kết quả tìm kiếm (%d)', 'vanphuccare' ), $total_results ); ?>
+				<h2 class="vpc-knowledge-main__title vpc-knowledge-search__results-title">
+					<?php printf( esc_html__( 'Kết quả cho "%s"', 'vanphuccare' ), esc_html( $search_query ) ); ?>
 				</h2>
 
 				<?php if ( have_posts() ) : ?>
@@ -136,6 +74,10 @@ $total_results = (int) $wp_query->found_posts;
 								: array();
 
 							if ( ! empty( $article_data ) ) {
+								if ( function_exists( 'vpc_highlight_search_keyword' ) && '' !== $search_query ) {
+									$article_data['title_html']   = vpc_highlight_search_keyword( $article_data['title'], $search_query );
+									$article_data['excerpt_html'] = vpc_highlight_search_keyword( $article_data['excerpt'], $search_query );
+								}
 								get_template_part( 'template-parts/knowledge/card-horizontal', null, array( 'article' => $article_data ) );
 							}
 						endwhile;
@@ -182,26 +124,40 @@ $total_results = (int) $wp_query->found_posts;
 						<?php endif; ?>
 					</div>
 				<?php else : ?>
-					<!-- Empty State -->
-					<div class="vpc-knowledge-empty py-16 px-6 text-center bg-white rounded-2xl border border-neutral-100 shadow-sm">
-						<div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-50 text-primary-500 mb-4">
-							<svg class="w-8 h-8 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>
+					<!-- Empty State (Matching Figma: Icon Circle + Title + Gentle message + Category Pills + CTA) -->
+					<div class="vpc-knowledge-search-empty">
+						<div class="vpc-knowledge-search-empty__icon-wrap" aria-hidden="true">
+							<img src="<?php echo $asset( 'search.svg' ); ?>" alt="" width="24" height="24">
 						</div>
-						<h3 class="text-xl font-bold text-neutral-800 mb-2 font-heading">
-							<?php esc_html_e( 'Không tìm thấy kết quả phù hợp', 'vanphuccare' ); ?>
+						<h3 class="vpc-knowledge-search-empty__title">
+							<?php esc_html_e( 'Không tìm thấy bài viết phù hợp', 'vanphuccare' ); ?>
 						</h3>
-						<p class="text-base text-text-body-muted max-w-md mx-auto mb-6">
-							<?php printf( esc_html__( 'Rất tiếc, chúng tôi không tìm thấy bài viết nào khớp với từ khóa "%s". Bạn hãy thử kiểm tra lại chính tả hoặc tìm kiếm từ khóa khác.', 'vanphuccare' ), esc_html( $search_query ) ); ?>
+						<p class="vpc-knowledge-search-empty__desc">
+							<?php esc_html_e( 'Mẹ thử kiểm tra lại chính tả, dùng từ khóa ngắn hơn hoặc chọn một chủ đề phổ biến bên dưới nhé.', 'vanphuccare' ); ?>
 						</p>
-						<a href="<?php echo esc_url( home_url( '/kien-thuc/' ) ); ?>" class="inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary-600 text-white font-medium text-sm hover:bg-primary-700 transition-colors shadow-sm">
-							<?php esc_html_e( 'Xem tất cả kiến thức', 'vanphuccare' ); ?>
+						<div class="vpc-knowledge-search-empty__tags" role="list">
+							<?php
+							$empty_topics = array(
+								array( 'label' => 'Ăn dặm', 'url' => home_url( '/category/an-dam/' ) ),
+								array( 'label' => 'Phương pháp EASY', 'url' => home_url( '/category/phuong-phap-easy/' ) ),
+								array( 'label' => 'Thai giáo', 'url' => home_url( '/category/mang-thai/' ) ),
+								array( 'label' => 'Biếng ăn', 'url' => home_url( '/category/hoi-chung-bieng-an/' ) ),
+							);
+							foreach ( $empty_topics as $topic ) : ?>
+								<a class="vpc-knowledge-search-empty__tag" href="<?php echo esc_url( $topic['url'] ); ?>" role="listitem">
+									<?php echo esc_html( $topic['label'] ); ?>
+								</a>
+							<?php endforeach; ?>
+						</div>
+						<a class="vpc-knowledge-search-empty__cta" href="<?php echo esc_url( home_url( '/kien-thuc/' ) ); ?>">
+							<?php esc_html_e( 'Xem tất cả bài viết', 'vanphuccare' ); ?>
 						</a>
 					</div>
 				<?php endif; ?>
 			</main>
 
-			<!-- Right Sidebar Column -->
-			<?php get_template_part( 'template-parts/knowledge/sidebar' ); ?>
+			<!-- Right Sidebar Column (Automatically optimized for search: Suggested Keywords + Hotline) -->
+			<?php get_template_part( 'template-parts/knowledge/sidebar', null, array( 'context' => 'search' ) ); ?>
 		</div>
 	</section>
 </div>

@@ -667,6 +667,7 @@
 		width: 226px;
 		font-size: 30px;
 		line-height: 36px;
+		letter-spacing: normal;
 		white-space: normal;
 	}
 
@@ -757,7 +758,7 @@
 	}
 
 	.vpc-recruitment-jobs {
-		height: 1268px;
+		height: auto;
 		min-height: 1268px;
 		padding-top: 40px;
 		padding-bottom: 40px;
@@ -773,8 +774,9 @@
 	}
 
 	.vpc-recruitment-categories button {
-		width: 163px;
-		flex: 0 0 163px;
+		width: min(163px, calc((100% - 24px) / 2));
+		flex: 0 1 min(163px, calc((100% - 24px) / 2));
+		min-width: 0;
 	}
 
 	.vpc-recruitment-job-grid {
@@ -785,6 +787,7 @@
 	.vpc-recruitment-job-card,
 	.vpc-recruitment-job-card:nth-last-child(-n + 2) {
 		min-height: 160px;
+		height: auto;
 	}
 
 	.vpc-recruitment-job-card__footer {
@@ -794,7 +797,7 @@
 	}
 
 	.vpc-recruitment-process {
-		height: 668px;
+		height: auto;
 		min-height: 668px;
 		padding-top: 40px;
 		padding-bottom: 40px;
@@ -805,7 +808,8 @@
 
 	.vpc-recruitment-process__intro {
 		width: 100%;
-		height: 120px;
+		height: auto;
+		min-height: 120px;
 		text-align: left;
 	}
 
@@ -824,7 +828,8 @@
 	.vpc-recruitment-process__steps {
 		position: relative;
 		width: 100%;
-		height: 444px;
+		height: auto;
+		min-height: 444px;
 		gap: 28px;
 		flex-direction: column;
 		justify-content: flex-start;
@@ -842,7 +847,8 @@
 		top: 72px;
 		left: 15px;
 		width: 2px;
-		height: 290px;
+		bottom: 82px;
+		height: auto;
 		background: #f8b4b5;
 	}
 
@@ -850,7 +856,7 @@
 		position: relative;
 		z-index: 1;
 		width: 100%;
-		height: 90px;
+		height: auto;
 		min-height: 90px;
 		flex-direction: row;
 		align-items: flex-start;
@@ -895,4 +901,60 @@
 		height: 256px;
 	}
 
+}
+
+@media (max-width: 359px) {
+	.vpc-recruitment-hero {
+		height: 444px;
+	}
+
+	.vpc-recruitment-hero h1 {
+		width: calc(100% - 145px);
+		font-size: 26px;
+		line-height: 31px;
+	}
+
+	.vpc-recruitment-hero__visual {
+		left: auto;
+		right: 20px;
+	}
+
+	.vpc-recruitment-hero__copy > p {
+		top: 220px;
+		width: calc(100% - 40px);
+		font-size: 14px;
+		line-height: 20px;
+	}
+
+	.vpc-recruitment-search {
+		top: 350px;
+	}
+
+	.vpc-recruitment-search input {
+		font-size: 14px;
+	}
+
+	.vpc-recruitment-job-card__footer {
+		align-items: stretch;
+		flex-direction: column;
+		gap: 8px;
+	}
+
+	.vpc-recruitment-job-card__detail {
+		align-self: flex-end;
+	}
+
+	.vpc-recruitment-process__intro h2 {
+		font-size: 28px;
+	}
+
+	.vpc-recruitment-step__text h3 {
+		font-size: 18px;
+		line-height: 26px;
+	}
+
+	.vpc-recruitment-step__text p {
+		font-size: 14px;
+		line-height: 20px;
+	}
 }

@@ -410,7 +410,10 @@ function vanphuccare_is_news_page() {
 	if ( is_category() ) {
 		$cat = get_queried_object();
 		if ( $cat instanceof WP_Term ) {
-			if ( in_array( $cat->slug, array( 'tin-tuc', 'tin-moi', 'su-kien-noi-bat', 'tin-tuc-su-kien', 'me-va-be' ), true ) ) {
+			$news_slugs = function_exists( 'vpc_get_news_category_slugs' )
+				? vpc_get_news_category_slugs()
+				: array( 'tin-tuc', 'tin-moi', 'su-kien-noi-bat', 'tin-tuc-su-kien' );
+			if ( in_array( $cat->slug, $news_slugs, true ) ) {
 				return true;
 			}
 			$news_parent = get_category_by_slug( 'tin-tuc' );
@@ -723,6 +726,11 @@ add_action( 'parse_request', 'vanphuccare_knowledge_parse_request' );
 function vanphuccare_knowledge_pre_get_posts( $query ) {
 	if ( is_admin() || ! $query->is_main_query() ) {
 		return;
+	}
+
+	if ( $query->is_search() ) {
+		$query->set( 'post_type', 'post' );
+		$query->set( 'post_status', 'publish' );
 	}
 
 	$knowledge_category_slugs = function_exists( 'vpc_get_knowledge_category_slugs' )

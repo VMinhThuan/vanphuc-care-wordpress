@@ -471,6 +471,66 @@ function vpc_save_category_featured_fields( $term_id ) {
 add_action( 'edited_category', 'vpc_save_category_featured_fields', 10, 1 );
 
 /**
+ * Gets all category term IDs related to recruitment (parent 'tuyen-dung' and all child categories).
+ *
+ * @return int[]
+ */
+function vpc_get_recruitment_category_ids() {
+	static $category_ids = null;
+	if ( null !== $category_ids ) {
+		return $category_ids;
+	}
+
+	$category_ids = array();
+	$slugs        = array( 'tuyen-dung', 'tin-tuyen-dung' );
+
+	foreach ( $slugs as $slug ) {
+		$term = get_category_by_slug( $slug );
+		if ( $term instanceof WP_Term ) {
+			$category_ids[] = (int) $term->term_id;
+			$children       = get_term_children( (int) $term->term_id, 'category' );
+			if ( ! is_wp_error( $children ) && ! empty( $children ) ) {
+				$category_ids = array_merge( $category_ids, array_map( 'intval', $children ) );
+			}
+		}
+	}
+
+	if ( empty( $category_ids ) ) {
+		$by_name = get_term_by( 'name', 'Tuyển dụng', 'category' );
+		if ( $by_name instanceof WP_Term ) {
+			$category_ids[] = (int) $by_name->term_id;
+		}
+	}
+
+	$category_ids = array_values( array_unique( array_filter( $category_ids ) ) );
+	return $category_ids;
+}
+
+/**
+ * Determines whether a given post is a recruitment post based on category or slug.
+ *
+ * @param int|WP_Post|null $post Optional. Post ID or post object.
+ * @return bool
+ */
+function vpc_is_recruitment_post( $post = null ) {
+	$post = get_post( $post );
+	if ( ! $post ) {
+		return false;
+	}
+
+	if ( 'tin-tuyen-dung' === $post->post_name ) {
+		return true;
+	}
+
+	$recruitment_ids = vpc_get_recruitment_category_ids();
+	if ( ! empty( $recruitment_ids ) && has_category( $recruitment_ids, $post ) ) {
+		return true;
+	}
+
+	return in_category( 'tuyen-dung', $post );
+}
+
+/**
  * Registers the Medical Reviewer meta box for posts (placed in the right sidebar).
  *
  * @return void
@@ -482,7 +542,7 @@ function vpc_add_reviewer_meta_box() {
 		'vpc_render_reviewer_meta_box',
 		'post',
 		'side',
-		'high'
+		'low'
 	);
 }
 add_action( 'add_meta_boxes', 'vpc_add_reviewer_meta_box' );
@@ -513,7 +573,14 @@ function vpc_render_reviewer_meta_box( $post ) {
 	$reviewer_title  = get_post_meta( $post->ID, 'vpc_reviewer_title', true );
 	$reviewer_avatar = get_post_meta( $post->ID, 'vpc_reviewer_avatar', true );
 	$reviewer_url    = get_post_meta( $post->ID, 'vpc_reviewer_url', true );
+
+	$is_recruitment_post = vpc_is_recruitment_post( $post );
 	?>
+	<?php if ( $is_recruitment_post ) : ?>
+		<style id="vpc-reviewer-meta-box-init-style">
+			#vpc_post_reviewer_meta { display: none !important; }
+		</style>
+	<?php endif; ?>
 	<div class="vpc-reviewer-fields" style="font-size:13px;">
 		<p style="margin:0 0 10px;color:#666;line-height:1.4;">
 			Nhập Bác sĩ / Cố vấn kiểm định bài viết. Nếu để trống <em>Họ và tên</em>, thẻ sẽ tự động ẩn đi.
@@ -585,6 +652,11 @@ function vpc_save_reviewer_meta_box( $post_id ) {
 		return;
 	}
 	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
+
+	// Do not save medical reviewer meta on recruitment posts.
+	if ( function_exists( 'vpc_is_recruitment_post' ) && vpc_is_recruitment_post( $post_id ) ) {
 		return;
 	}
 
@@ -767,7 +839,7 @@ function vpc_add_recruitment_meta_box() {
 		'vpc_render_recruitment_meta_box',
 		'post',
 		'normal',
-		'high'
+		'low'
 	);
 }
 add_action( 'add_meta_boxes', 'vpc_add_recruitment_meta_box' );
@@ -785,7 +857,15 @@ function vpc_render_recruitment_meta_box( $post ) {
 	$current_status   = get_post_meta( $post->ID, 'vpc_recruitment_status', true ) ?: 'auto';
 	$saved_deadline   = get_post_meta( $post->ID, 'vpc_recruitment_deadline', true );
 	$display_deadline = '' !== $saved_deadline ? $saved_deadline : ( 'Đang cập nhật' !== $meta['deadline'] ? $meta['deadline'] : '' );
+
+	$recruitment_ids     = vpc_get_recruitment_category_ids();
+	$is_recruitment_post = vpc_is_recruitment_post( $post );
 	?>
+	<?php if ( ! $is_recruitment_post ) : ?>
+		<style id="vpc-recruitment-meta-box-init-style">
+			#vpc_post_recruitment_meta { display: none !important; }
+		</style>
+	<?php endif; ?>
 	<div class="vpc-recruitment-fields" style="font-size:13px;line-height:1.5;">
 		<p style="margin:0 0 12px;color:#666;">
 			Các thông tin này hiển thị trên thẻ tuyển dụng và thanh <strong>Ứng tuyển nhanh</strong>. (Áp dụng cho bài viết thuộc chuyên mục Tuyển dụng).
@@ -837,6 +917,127 @@ function vpc_render_recruitment_meta_box( $post ) {
 			</tbody>
 		</table>
 	</div>
+	<script id="vpc-recruitment-meta-box-toggle-script">
+	(function() {
+		var recruitmentBoxId   = 'vpc_post_recruitment_meta';
+		var reviewerBoxId      = 'vpc_post_reviewer_meta';
+		var recruitmentStyleId = 'vpc-recruitment-meta-box-init-style';
+		var reviewerStyleId    = 'vpc-reviewer-meta-box-init-style';
+		var recruitmentIds     = <?php echo wp_json_encode( $recruitment_ids ); ?>;
+
+		function updateVisibility(isRecruitment) {
+			var recBox       = document.getElementById(recruitmentBoxId);
+			var revBox       = document.getElementById(reviewerBoxId);
+			var recInitStyle = document.getElementById(recruitmentStyleId);
+			var revInitStyle = document.getElementById(reviewerStyleId);
+
+			if (isRecruitment) {
+				// 1. Recruitment Post: SHOW recruitment box, HIDE reviewer box
+				if (recInitStyle && recInitStyle.parentNode) {
+					recInitStyle.parentNode.removeChild(recInitStyle);
+				}
+				if (recBox) {
+					recBox.style.removeProperty('display');
+					recBox.style.display = '';
+				}
+
+				if (revBox) {
+					revBox.style.setProperty('display', 'none', 'important');
+				}
+				if (!revInitStyle) {
+					var s = document.createElement('style');
+					s.id = reviewerStyleId;
+					s.textContent = '#' + reviewerBoxId + ' { display: none !important; }';
+					document.head.appendChild(s);
+				}
+			} else {
+				// 2. Editorial / Medical Post: SHOW reviewer box, HIDE recruitment box
+				if (revInitStyle && revInitStyle.parentNode) {
+					revInitStyle.parentNode.removeChild(revInitStyle);
+				}
+				if (revBox) {
+					revBox.style.removeProperty('display');
+					revBox.style.display = '';
+				}
+
+				if (recBox) {
+					recBox.style.setProperty('display', 'none', 'important');
+				}
+				if (!recInitStyle) {
+					var s2 = document.createElement('style');
+					s2.id = recruitmentStyleId;
+					s2.textContent = '#' + recruitmentBoxId + ' { display: none !important; }';
+					document.head.appendChild(s2);
+				}
+			}
+		}
+
+		// Auto-reposition below Yoast SEO if Yoast meta box is present
+		function placeBelowYoast() {
+			var yoastBox = document.getElementById('wpseo_meta') || document.querySelector('.postbox[id*="wpseo"]');
+			var recBox   = document.getElementById(recruitmentBoxId);
+			var revBox   = document.getElementById(reviewerBoxId);
+
+			if (yoastBox && yoastBox.parentNode) {
+				var parent = yoastBox.parentNode;
+				if (recBox && recBox.parentNode === parent) {
+					if (recBox.compareDocumentPosition(yoastBox) & Node.DOCUMENT_POSITION_FOLLOWING) {
+						parent.insertBefore(recBox, yoastBox.nextSibling);
+					}
+				}
+				if (revBox && revBox.parentNode === parent) {
+					if (revBox.compareDocumentPosition(yoastBox) & Node.DOCUMENT_POSITION_FOLLOWING) {
+						parent.insertBefore(revBox, yoastBox.nextSibling);
+					}
+				}
+			}
+		}
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', placeBelowYoast);
+		} else {
+			placeBelowYoast();
+		}
+		setTimeout(placeBelowYoast, 500);
+		setTimeout(placeBelowYoast, 1500);
+
+		// Gutenberg Block Editor subscription (watches categories changes in real time)
+		if (window.wp && wp.data && typeof wp.data.subscribe === 'function' && typeof wp.data.select === 'function') {
+			var lastCategories = null;
+			wp.data.subscribe(function() {
+				var editor = wp.data.select('core/editor');
+				if (!editor) return;
+				var categories = editor.getEditedPostAttribute('categories');
+				if (!Array.isArray(categories) || categories === lastCategories) return;
+				lastCategories = categories;
+
+				var matches = categories.some(function(id) {
+					return recruitmentIds.indexOf(Number(id)) !== -1;
+				});
+				updateVisibility(matches);
+			});
+		}
+
+		// Classic Editor / Quick Edit category checklist change listener
+		document.addEventListener('change', function(event) {
+			var target = event.target;
+			if (!target || target.type !== 'checkbox') return;
+			var checklist = target.closest('#categorychecklist, #categorychecklist-pop');
+			if (!checklist) return;
+
+			var checkedBoxes = checklist.querySelectorAll('input[type="checkbox"]:checked');
+			var matches = false;
+			for (var i = 0; i < checkedBoxes.length; i++) {
+				var val = parseInt(checkedBoxes[i].value, 10);
+				if (recruitmentIds.indexOf(val) !== -1) {
+					matches = true;
+					break;
+				}
+			}
+			updateVisibility(matches);
+		});
+	})();
+	</script>
 	<?php
 }
 
@@ -854,6 +1055,29 @@ function vpc_save_recruitment_meta_box( $post_id ) {
 		return;
 	}
 	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
+
+	// Only save recruitment meta if the post belongs to the recruitment category,
+	// preventing postmeta pollution on regular News or Knowledge articles.
+	$is_recruitment  = false;
+	$recruitment_ids = vpc_get_recruitment_category_ids();
+
+	if ( isset( $_POST['post_category'] ) && is_array( $_POST['post_category'] ) ) {
+		$posted_cats = array_map( 'intval', $_POST['post_category'] );
+		foreach ( $recruitment_ids as $r_id ) {
+			if ( in_array( $r_id, $posted_cats, true ) ) {
+				$is_recruitment = true;
+				break;
+			}
+		}
+	}
+
+	if ( ! $is_recruitment ) {
+		$is_recruitment = vpc_is_recruitment_post( $post_id );
+	}
+
+	if ( ! $is_recruitment ) {
 		return;
 	}
 

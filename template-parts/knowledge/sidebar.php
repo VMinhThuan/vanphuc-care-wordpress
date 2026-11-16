@@ -39,63 +39,67 @@ $popular_tags = get_tags( array(
 	'order'   => 'DESC',
 ) );
 if ( empty( $popular_tags ) ) {
-	$fallback_tag_names = array( 'Thai giáo', 'Nuôi con EASY', 'Kiến thức thường gặp', 'Thai kỳ', 'Dinh dưỡng' );
+	$fallback_tag_names = array( 'Thai giáo', 'Nuôi con EASY', 'Kiến thức thường gặp', 'Thai kỳ', 'Dinh dưỡng', 'Ăn dặm' );
 }
 
+$is_search_page = is_search() || 'search' === ( $args['context'] ?? '' );
 ?>
 
 <aside class="vpc-knowledge-sidebar" aria-label="<?php esc_attr_e( 'Thanh bên kiến thức', 'vanphuccare' ); ?>">
-	<!-- 1. Search Widget -->
-	<div class="vpc-knowledge-widget vpc-knowledge-widget--search">
-		<form class="vpc-knowledge-sidebar-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-			<img src="<?php echo $asset( 'search.svg' ); ?>" alt="" width="20" height="20" aria-hidden="true">
-			<label class="screen-reader-text" for="sidebar-search-input"><?php esc_html_e( 'Tìm bài viết', 'vanphuccare' ); ?></label>
-			<input id="sidebar-search-input" type="search" name="s" placeholder="<?php esc_attr_e( 'Tìm bài viết...', 'vanphuccare' ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>">
-			<?php if ( $kt_cat instanceof WP_Term ) : ?>
-				<input type="hidden" name="cat" value="<?php echo esc_attr( $kt_cat->term_id ); ?>">
-			<?php endif; ?>
-			<button type="submit"><?php esc_html_e( 'Tìm', 'vanphuccare' ); ?></button>
-		</form>
-	</div>
-
-	<!-- 2. Featured Posts Widget -->
-	<div class="vpc-knowledge-widget vpc-knowledge-widget--featured">
-		<h3 class="vpc-knowledge-widget__title"><span class="vpc-knowledge-widget__title-desktop"><?php esc_html_e( 'Bài viết nổi bật', 'vanphuccare' ); ?></span><span class="vpc-knowledge-widget__title-mobile"><?php esc_html_e( 'Bài nổi bật', 'vanphuccare' ); ?></span></h3>
-		<div class="vpc-knowledge-sidebar-featured-list">
-			<?php if ( $sidebar_featured->have_posts() ) : ?>
-				<?php while ( $sidebar_featured->have_posts() ) : $sidebar_featured->the_post(); ?>
-					<?php
-					$thumb_url = has_post_thumbnail()
-						? get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' )
-						: $asset( 'ultrasound.png' );
-					?>
-					<a class="vpc-knowledge-sidebar-post" href="<?php the_permalink(); ?>">
-						<div class="vpc-knowledge-sidebar-post__thumb">
-							<img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" width="72" height="72" loading="lazy">
-						</div>
-						<div class="vpc-knowledge-sidebar-post__info">
-							<time datetime="<?php echo esc_attr( get_the_date( 'Y-m-d' ) ); ?>"><?php echo esc_html( get_the_date( 'd/m/Y' ) ); ?></time>
-							<h4><?php echo esc_html( wp_trim_words( get_the_title(), 12, '...' ) ); ?></h4>
-						</div>
-					</a>
-				<?php endwhile; wp_reset_postdata(); ?>
-			<?php else : ?>
-				<p class="text-sm text-neutral-400"><?php esc_html_e( 'Đang cập nhật bài viết...', 'vanphuccare' ); ?></p>
-			<?php endif; ?>
+	<?php if ( ! $is_search_page ) : ?>
+		<!-- 1. Search Widget -->
+		<div class="vpc-knowledge-widget vpc-knowledge-widget--search">
+			<form class="vpc-knowledge-sidebar-search" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+				<img src="<?php echo $asset( 'search.svg' ); ?>" alt="" width="20" height="20" aria-hidden="true">
+				<label class="screen-reader-text" for="sidebar-search-input"><?php esc_html_e( 'Tìm bài viết', 'vanphuccare' ); ?></label>
+				<input id="sidebar-search-input" type="search" name="s" placeholder="<?php esc_attr_e( 'Tìm bài viết...', 'vanphuccare' ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>">
+				<?php if ( $kt_cat instanceof WP_Term ) : ?>
+					<input type="hidden" name="cat" value="<?php echo esc_attr( $kt_cat->term_id ); ?>">
+				<?php endif; ?>
+				<button type="submit"><?php esc_html_e( 'Tìm', 'vanphuccare' ); ?></button>
+			</form>
 		</div>
-	</div>
 
-	<!-- 3. Tags Widget -->
+		<!-- 2. Featured Posts Widget -->
+		<div class="vpc-knowledge-widget vpc-knowledge-widget--featured">
+			<h3 class="vpc-knowledge-widget__title"><span class="vpc-knowledge-widget__title-desktop"><?php esc_html_e( 'Bài viết nổi bật', 'vanphuccare' ); ?></span><span class="vpc-knowledge-widget__title-mobile"><?php esc_html_e( 'Bài nổi bật', 'vanphuccare' ); ?></span></h3>
+			<div class="vpc-knowledge-sidebar-featured-list">
+				<?php if ( $sidebar_featured->have_posts() ) : ?>
+					<?php while ( $sidebar_featured->have_posts() ) : $sidebar_featured->the_post(); ?>
+						<?php
+						$thumb_url = has_post_thumbnail()
+							? get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' )
+							: $asset( 'ultrasound.png' );
+						?>
+						<a class="vpc-knowledge-sidebar-post" href="<?php the_permalink(); ?>">
+							<div class="vpc-knowledge-sidebar-post__thumb">
+								<img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" width="72" height="72" loading="lazy">
+							</div>
+							<div class="vpc-knowledge-sidebar-post__info">
+								<time datetime="<?php echo esc_attr( get_the_date( 'Y-m-d' ) ); ?>"><?php echo esc_html( get_the_date( 'd/m/Y' ) ); ?></time>
+								<h4><?php echo esc_html( wp_trim_words( get_the_title(), 12, '...' ) ); ?></h4>
+							</div>
+						</a>
+					<?php endwhile; wp_reset_postdata(); ?>
+				<?php else : ?>
+					<p class="text-sm text-neutral-400"><?php esc_html_e( 'Đang cập nhật bài viết...', 'vanphuccare' ); ?></p>
+				<?php endif; ?>
+			</div>
+		</div>
+	<?php endif; ?>
+
+	<!-- 3. Tags / Suggested Keywords Widget -->
 	<div class="vpc-knowledge-widget vpc-knowledge-widget--tags">
-		<h3 class="vpc-knowledge-widget__title"><?php esc_html_e( 'Tags', 'vanphuccare' ); ?></h3>
+		<h3 class="vpc-knowledge-widget__title"><?php echo $is_search_page ? esc_html__( 'Từ khóa gợi ý', 'vanphuccare' ) : esc_html__( 'Tags', 'vanphuccare' ); ?></h3>
 		<div class="vpc-knowledge-tag-cloud">
 			<?php if ( ! empty( $popular_tags ) && ! is_wp_error( $popular_tags ) ) : ?>
 				<?php foreach ( $popular_tags as $tag ) : ?>
-					<a class="vpc-knowledge-tag" href="<?php echo esc_url( get_tag_link( $tag->term_id ) ); ?>"><?php echo esc_html( $tag->name ); ?></a>
+					<?php $tag_url = $is_search_page ? home_url( '/?s=' . rawurlencode( $tag->name ) ) : get_tag_link( $tag->term_id ); ?>
+					<a class="vpc-knowledge-tag" href="<?php echo esc_url( $tag_url ); ?>"><?php echo esc_html( $tag->name ); ?></a>
 				<?php endforeach; ?>
 			<?php elseif ( ! empty( $fallback_tag_names ) ) : ?>
 				<?php foreach ( $fallback_tag_names as $tag_name ) : ?>
-					<span class="vpc-knowledge-tag"><?php echo esc_html( $tag_name ); ?></span>
+					<a class="vpc-knowledge-tag" href="<?php echo esc_url( home_url( '/?s=' . rawurlencode( $tag_name ) ) ); ?>"><?php echo esc_html( $tag_name ); ?></a>
 				<?php endforeach; ?>
 			<?php endif; ?>
 		</div>

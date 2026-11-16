@@ -35,7 +35,7 @@ if ( $event_cat_id > 0 ) {
 $event_query = new WP_Query( $event_args );
 
 // Query latest articles for "Tin mới"
-$news_cat    = get_category_by_slug( 'tin-moi' ) ?: get_category_by_slug( 'me-va-be' );
+$news_cat    = get_category_by_slug( 'tin-moi' );
 $news_cat_id = $news_cat instanceof WP_Term ? (int) $news_cat->term_id : 0;
 $news_args   = array(
 	'post_type'           => 'post',
@@ -161,7 +161,7 @@ $render_hub_card = static function ( $post, $badge = '', $variant = 'standard' )
 			<div class="vpc-hub-section__header"><h2 id="heading-tin-moi">Tin mới</h2></div>
 			<div class="vpc-hub-mobile-categories" aria-label="Danh mục tin mới">
 				<a class="is-active" href="<?php echo esc_url( home_url( '/tin-tuc/' ) ); ?>"><span class="vpc-hub-mobile-categories__icon"><img src="<?php echo $asset( 'category-6.svg' ); ?>" alt="" width="20" height="20"></span><span>Tất cả</span></a>
-				<a href="<?php echo esc_url( home_url( '/tin-tuc/tin-moi/' ) ); ?>"><span class="vpc-hub-mobile-categories__icon"><img src="<?php echo $asset( 'icon-me-va-be.svg' ); ?>" alt="" width="20" height="20"></span><span>Mẹ và bé</span></a>
+				<a href="<?php echo esc_url( home_url( '/tin-tuc/tin-moi/' ) ); ?>"><span class="vpc-hub-mobile-categories__icon"><img src="<?php echo $asset( 'icon-me-va-be.svg' ); ?>" alt="" width="20" height="20"></span><span>Tin mới</span></a>
 				<a href="<?php echo esc_url( home_url( '/tin-tuc/su-kien-noi-bat/' ) ); ?>"><span class="vpc-hub-mobile-categories__icon"><img src="<?php echo $asset( 'icon-tin-tuc-su-kien.svg' ); ?>" alt="" width="20" height="20"></span><span>Tin tức &amp; sự kiện</span></a>
 			</div>
 			<?php if ( ! empty( $news_query->posts ) ) : ?>

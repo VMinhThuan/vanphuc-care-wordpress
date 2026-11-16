@@ -261,15 +261,17 @@ describe('Knowledge Editorial Regression Tests', () => {
       const setupCode = fs.readFileSync(path.join(rootDir, 'inc/setup.php'), 'utf8');
       assert.ok(setupCode.includes("0 === strpos( $request_path, 'tin-tuc/' )"), 'Must detect subcategory paths like tin-tuc/tin-moi');
       assert.ok(setupCode.includes("'tin-moi', 'su-kien-noi-bat'"), 'Must match subcategory slugs');
+      assert.ok(!setupCode.includes("'me-va-be'"), 'Must NOT contain ghost slug me-va-be in inc/setup.php');
 
       const enqueueCode = fs.readFileSync(path.join(rootDir, 'inc/enqueue.php'), 'utf8');
       assert.ok(enqueueCode.includes("vanphuccare_enqueue_theme_style( 'vanphuccare-news', 'assets/css/news.css'"), 'Must enqueue news.css');
       assert.ok(enqueueCode.includes("! $is_news_page"), 'Must prevent knowledge.css from overriding news.css');
     });
 
-    test('single.php routes News and editorial posts to template-parts/knowledge/single with section context', () => {
+    test('single.php routes News and editorial posts to template-parts/knowledge/single with section context prioritizing Primary Category', () => {
       const code = fs.readFileSync(path.join(rootDir, 'single.php'), 'utf8');
       assert.ok(code.includes('vpc_is_news_post'), 'Must check for news post in single routing');
+      assert.ok(code.includes('is_knowledge_cat'), 'Must check knowledge category before fallback');
       assert.ok(code.includes("'section' => $section"), 'Must pass section context to template part');
       assert.ok(code.includes("get_template_part( 'template-parts/knowledge/single'"), 'Must route editorial posts to shared article template');
     });
@@ -284,15 +286,33 @@ describe('Knowledge Editorial Regression Tests', () => {
     test('inc/enqueue.php and inc/download.php enable assets and download block universally for editorial posts', () => {
       const enqueueCode = fs.readFileSync(path.join(rootDir, 'inc/enqueue.php'), 'utf8');
       assert.ok(enqueueCode.includes('$is_editorial_single'), 'Must check editorial single in enqueue');
+      assert.ok(enqueueCode.includes('$is_primary_news'), 'Must prioritize primary news category');
       assert.ok(enqueueCode.includes("! is_singular( 'post' )"), 'Must allow pattern styles on all single posts');
 
       const downloadCode = fs.readFileSync(path.join(rootDir, 'inc/download.php'), 'utf8');
       assert.ok(downloadCode.includes("! is_singular( 'post' )"), 'Must enable download block on single posts');
     });
 
-    test('template-parts/knowledge/single.php provides dynamic breadcrumbs, related posts, and conditional disclaimer', () => {
+    test('assets/css/knowledge.css sets excerpt line clamp to 3 lines for both standard and horizontal cards', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'assets/css/knowledge.css'), 'utf8');
+      assert.ok(code.includes('.vpc-knowledge-card p'), 'Must have styles for .vpc-knowledge-card p');
+      assert.ok(code.includes('.vpc-knowledge-card--horizontal p'), 'Must have styles for .vpc-knowledge-card--horizontal p');
+      assert.ok(!code.includes('.vpc-knowledge-card--horizontal p {\n\tfont: 500 16px/24px var(--font-body, "Manrope", sans-serif);\n\t-webkit-line-clamp: 2;'), 'Must not clamp horizontal card excerpt to 2 lines');
+    });
+
+    test('assets/css/knowledge.css styles sidebar search pill and button with balanced vertical and right padding matching Figma', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'assets/css/knowledge.css'), 'utf8');
+      assert.ok(code.includes('background: #ffffff;'), 'Sidebar search container must have white background');
+      assert.ok(code.includes('border: 1px solid #a3c9e3;'), 'Sidebar search container must have #a3c9e3 border');
+      assert.ok(code.includes('border-radius: 9999px;'), 'Sidebar search must be pill shaped');
+      assert.ok(code.includes('padding: 4px 5px 4px 16px;'), 'Sidebar search container must have 4px top/bottom and 5px right padding');
+      assert.ok(code.includes('height: 38px;'), 'Sidebar search button must fit inside container with vertical padding');
+    });
+
+    test('template-parts/knowledge/single.php prioritizes Primary Category over post categories and provides dynamic context', () => {
       const singleCode = fs.readFileSync(path.join(rootDir, 'template-parts/knowledge/single.php'), 'utf8');
-      assert.ok(singleCode.includes('$is_news'), 'Must detect news context in single template');
+      assert.ok(singleCode.includes('vpc_is_news_category( $category )'), 'Must prioritize primary news category');
+      assert.ok(singleCode.includes('vpc_is_knowledge_category( $category )'), 'Must prioritize primary knowledge category');
       assert.ok(singleCode.includes('$section_url'), 'Must have dynamic section URL in breadcrumbs');
       assert.ok(singleCode.includes('$section_label'), 'Must have dynamic section label in breadcrumbs');
       assert.ok(singleCode.includes('$show_disclaimer'), 'Must conditionally render medical disclaimer');
@@ -320,10 +340,14 @@ describe('Knowledge Editorial Regression Tests', () => {
       assert.ok(code.includes("empty( $jobs )"), 'Must have fallback mock jobs for zero-post environments');
     });
 
-    test('template-parts/recruitment/detail.php provides 2-level breadcrumb without redundant child category', () => {
+    test('template-parts/recruitment/detail.php dynamicizes content, removes static FAQ, and supports dynamic tags and related jobs', () => {
       const code = fs.readFileSync(path.join(rootDir, 'template-parts/recruitment/detail.php'), 'utf8');
-      assert.ok(code.includes("home_url( '/tuyen-dung/' )"), 'Must link breadcrumb to /tuyen-dung/');
-      assert.ok(!code.includes('<span>Tin tuyển dụng</span>'), 'Must NOT have redundant Tin tuyển dụng middle breadcrumb');
+      assert.ok(!code.includes('[Cần client cung cấp'), 'Must NOT contain client placeholder draft text');
+      assert.ok(!code.includes('vpc-recruitment-detail__faq'), 'Must remove hardcoded static FAQ from detail template');
+      assert.ok(code.includes('get_the_tags'), 'Must use get_the_tags for dynamic tags');
+      assert.ok(code.includes('category_name'), 'Must query related jobs dynamically');
+      assert.ok(code.includes('$is_closed'), 'Must handle closed status in recruitment callout');
+      assert.ok(code.includes('vpc_hotline_ho_tro'), 'Must resolve hotline from Customizer');
     });
 
     test('inc/setup.php recognizes category tuyen-dung as recruitment page', () => {
@@ -339,13 +363,76 @@ describe('Knowledge Editorial Regression Tests', () => {
       assert.ok(code.includes('vpc_get_recruitment_meta'), 'Must export vpc_get_recruitment_meta helper');
     });
 
-    test('inc/content-types.php registers recruitment meta box with full fields', () => {
+    test('inc/content-types.php registers recruitment meta box with full fields and category-isolated visibility', () => {
       const code = fs.readFileSync(path.join(rootDir, 'inc/content-types.php'), 'utf8');
       assert.ok(code.includes('vpc_add_recruitment_meta_box'), 'Must register recruitment meta box');
       assert.ok(code.includes('vpc_render_recruitment_meta_box'), 'Must render recruitment meta box');
       assert.ok(code.includes('vpc_save_recruitment_meta_box'), 'Must save recruitment meta box');
       assert.ok(code.includes('vpc_recruitment_status'), 'Must have status field');
       assert.ok(code.includes('vpc_recruitment_location'), 'Must have location field');
+      assert.ok(code.includes('vpc_get_recruitment_category_ids'), 'Must export recruitment category IDs helper');
+      assert.ok(code.includes('vpc_is_recruitment_post'), 'Must export vpc_is_recruitment_post helper');
+      assert.ok(code.includes('vpc-recruitment-meta-box-init-style'), 'Must include initial hide style for non-recruitment posts');
+      assert.ok(code.includes('vpc-reviewer-meta-box-init-style'), 'Must include initial hide style for recruitment posts on reviewer metabox');
+      assert.ok(code.includes('wp.data.subscribe'), 'Must include Gutenberg reactive subscriber');
+      assert.ok(code.includes('categorychecklist'), 'Must include Classic editor checkbox listener');
+    });
+
+    test('inc/content-types.php excludes medical reviewer meta box from recruitment posts', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'inc/content-types.php'), 'utf8');
+      assert.ok(code.includes('vpc_post_reviewer_meta'), 'Must reference reviewer meta box ID');
+      assert.ok(code.includes('vpc-reviewer-meta-box-init-style'), 'Must have reviewer hide style');
+      assert.ok(code.includes('vpc_is_recruitment_post( $post_id )'), 'Must guard reviewer meta save against recruitment posts');
+    });
+  });
+
+  describe('9. Knowledge Search Results Alignment (Figma Spec)', () => {
+    test('search.php implements streamlined hero, results title, search keyword highlighting, and empty state', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'search.php'), 'utf8');
+      assert.ok(code.includes('vpc-knowledge-search-hero'), 'Must use dedicated search hero container');
+      assert.ok(code.includes('vpc-knowledge-search-hero__form'), 'Must include hero search form');
+      assert.ok(!code.includes('vpc-knowledge-subcat-hero__visual'), 'Must not render mascot/stickers on search hero');
+      assert.ok(!code.includes('vpc-knowledge-subcat-pills-wrap'), 'Must not render category pill tabs on search hero');
+      assert.ok(code.includes('Kết quả cho "%s"'), 'Must render results heading matching Figma');
+      assert.ok(code.includes('vpc_highlight_search_keyword'), 'Must highlight search keyword in title and excerpt');
+      assert.ok(code.includes('vpc-knowledge-search-empty'), 'Must render Figma empty state card');
+      assert.ok(code.includes('Không tìm thấy bài viết phù hợp'), 'Must render exact Figma empty state heading');
+      assert.ok(code.includes('Mẹ thử kiểm tra lại chính tả'), 'Must render maternal guidance text in empty state');
+      assert.ok(code.includes('vpc-knowledge-search-empty__tags'), 'Must render suggested topic pills in empty state');
+      assert.ok(code.includes('Xem tất cả bài viết'), 'Must render exact Figma CTA button in empty state');
+    });
+
+    test('template-parts/knowledge/sidebar.php adapts to search context by hiding search form and featuring suggested keywords', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'template-parts/knowledge/sidebar.php'), 'utf8');
+      assert.ok(code.includes('$is_search_page'), 'Must detect search page context in sidebar');
+      assert.ok(code.includes("! $is_search_page"), 'Must conditionally hide search widget and featured posts on search page');
+      assert.ok(code.includes('Từ khóa gợi ý'), 'Must display "Từ khóa gợi ý" on search page');
+    });
+
+    test('template-parts/knowledge/contact-cards.php hides promo banner on search page', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'template-parts/knowledge/contact-cards.php'), 'utf8');
+      assert.ok(code.includes('! is_search()'), 'Must hide promo banner on search results page');
+    });
+
+    test('inc/helpers.php declares vpc_highlight_search_keyword helper', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'inc/helpers.php'), 'utf8');
+      assert.ok(code.includes('function vpc_highlight_search_keyword('), 'Must declare vpc_highlight_search_keyword');
+      assert.ok(code.includes('vpc-search-highlight'), 'Must use vpc-search-highlight CSS class');
+    });
+
+    test('inc/setup.php scopes search query to published posts', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'inc/setup.php'), 'utf8');
+      assert.ok(code.includes('$query->is_search()'), 'Must check is_search in pre_get_posts');
+      assert.ok(code.includes("'post_type', 'post'"), 'Must scope search to post type');
+      assert.ok(code.includes("'post_status', 'publish'"), 'Must scope search to publish status');
+    });
+
+    test('assets/css/knowledge.css contains dedicated search hero, empty state, and keyword highlight styles', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'assets/css/knowledge.css'), 'utf8');
+      assert.ok(code.includes('.vpc-knowledge-search-hero'), 'Must style .vpc-knowledge-search-hero');
+      assert.ok(code.includes('mark.vpc-search-highlight'), 'Must style mark.vpc-search-highlight');
+      assert.ok(code.includes('.vpc-knowledge-search-empty'), 'Must style .vpc-knowledge-search-empty');
+      assert.ok(code.includes('.vpc-knowledge--search .vpc-knowledge-widget--tags'), 'Must style suggested keywords widget');
     });
   });
 });

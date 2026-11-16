@@ -20,15 +20,18 @@ $services    = vpc_get_consultation_services();
 $gestational_age_options = vpc_get_gestational_age_options();
 
 $current_service = '';
-if ( is_page_template( 'page-bao-mau-tai-nha.php' ) || is_page( 'bao-mau-tai-nha' ) ) {
+// Keep the modal aligned with the page-specific consultation form. The page
+// helpers also cover routes where WordPress does not expose the template name
+// consistently (for example, a page using a custom permalink).
+if ( function_exists( 'vanphuccare_is_bao_mau_page' ) && vanphuccare_is_bao_mau_page() ) {
 	$current_service = 'bao-mau-tai-nha';
-} elseif ( is_page_template( 'page-trung-tam-o-cu.php' ) || is_page( 'trung-tam-o-cu' ) ) {
+} elseif ( function_exists( 'vanphuccare_is_o_cu_page' ) && vanphuccare_is_o_cu_page() ) {
 	$current_service = 'trung-tam-o-cu';
-} elseif ( is_page_template( 'page-tam-tre-so-sinh.php' ) || is_page( 'tam-tre-so-sinh' ) ) {
+} elseif ( function_exists( 'vanphuccare_is_tam_be_page' ) && vanphuccare_is_tam_be_page() ) {
 	$current_service = 'tam-be-tai-nha';
-} elseif ( is_page_template( 'page-thong-tac-tia-sua.php' ) || is_page( 'thong-tac-tia-sua' ) ) {
+} elseif ( function_exists( 'vanphuccare_is_thong_tac_page' ) && vanphuccare_is_thong_tac_page() ) {
 	$current_service = 'thong-tac-tia-sua';
-} elseif ( is_page_template( 'page-dich-vu-tu-van-nuoi-con-easy-truc-tuyen.php' ) || is_page( 'dich-vu-tu-van-nuoi-con-easy-truc-tuyen' ) ) {
+} elseif ( function_exists( 'vanphuccare_is_easy_page' ) && vanphuccare_is_easy_page() ) {
 	$current_service = 'tu-van-nuoi-con-easy';
 }
 ?>

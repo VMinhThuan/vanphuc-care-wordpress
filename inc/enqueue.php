@@ -147,7 +147,7 @@ function vanphuccare_enqueue_assets() {
 	$is_news_page      = function_exists( 'vanphuccare_is_news_page' ) && vanphuccare_is_news_page();
 	$is_knowledge_page = ! $is_news_page && ( is_page( 'kien-thuc' ) || is_page_template( 'page-kien-thuc.php' ) || is_category() || is_tag() || is_search() || ! empty( get_query_var( 'vpc_is_all' ) ) );
 	$is_recruitment_page = function_exists( 'vanphuccare_is_recruitment_page' ) && vanphuccare_is_recruitment_page();
-	$is_recruitment_detail_page = is_page( 'tin-tuyen-dung' ) || is_page_template( 'page-tin-tuyen-dung.php' ) || ( is_singular( 'post' ) && ( in_category( 'tuyen-dung' ) || 'tin-tuyen-dung' === get_post_field( 'post_name', get_queried_object_id() ) ) );
+	$is_recruitment_detail_page = is_page( 'tin-tuyen-dung' ) || is_page_template( 'page-tin-tuyen-dung.php' ) || ( is_singular( 'post' ) && ( ( function_exists( 'vpc_is_recruitment_post' ) && vpc_is_recruitment_post( get_queried_object_id() ) ) || in_category( 'tuyen-dung' ) || 'tin-tuyen-dung' === get_post_field( 'post_name', get_queried_object_id() ) ) );
 	$is_policy_page    = is_page( 'dieu-khoan-su-dung' )
 		|| is_page( 'chinh-sach-bao-mat' )
 		|| is_page( 'chinh-sach-bien-tap-va-chinh-sua' )
@@ -208,7 +208,17 @@ function vanphuccare_enqueue_assets() {
 	}
 
 	$is_editorial_single = is_singular( 'post' ) && ! $is_recruitment_detail_page;
-	$is_news_single      = $is_editorial_single && function_exists( 'vpc_is_news_post' ) && vpc_is_news_post( get_queried_object_id() );
+	$primary_cat         = $is_editorial_single && function_exists( 'vanphuccare_get_primary_category' ) ? vanphuccare_get_primary_category( get_queried_object_id() ) : null;
+	$is_primary_news     = function_exists( 'vpc_is_news_category' ) && vpc_is_news_category( $primary_cat );
+	$is_primary_kb       = function_exists( 'vpc_is_knowledge_category' ) && vpc_is_knowledge_category( $primary_cat );
+
+	if ( $is_primary_news ) {
+		$is_news_single = true;
+	} elseif ( $is_primary_kb ) {
+		$is_news_single = false;
+	} else {
+		$is_news_single = $is_editorial_single && function_exists( 'vpc_is_news_post' ) && vpc_is_news_post( get_queried_object_id() );
+	}
 
 	if ( $is_editorial_single ) {
 		vanphuccare_enqueue_theme_style( 'vanphuccare-article', 'assets/css/knowledge-single.css', array( 'vanphuccare-knowledge' ) );

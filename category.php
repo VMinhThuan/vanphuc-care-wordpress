@@ -42,7 +42,9 @@ if ( ! $is_knowledge ) {
 	if ( $news_parent_term instanceof WP_Term && $current_id ) {
 		$is_child_of_news = cat_is_ancestor_of( $news_parent_term->term_id, $current_id );
 	}
-	$news_sub_slugs = array( 'tin-moi', 'su-kien-noi-bat', 'tin-tuc-su-kien' );
+	$news_sub_slugs = function_exists( 'vpc_get_news_category_slugs' )
+		? array_values( array_diff( vpc_get_news_category_slugs(), array( 'tin-tuc' ) ) )
+		: array( 'tin-moi', 'su-kien-noi-bat', 'tin-tuc-su-kien' );
 	if ( $is_child_of_news || in_array( $current_slug, $news_sub_slugs, true ) ) {
 		require get_template_directory() . '/page-tin-tuc-su-kien.php';
 		return;

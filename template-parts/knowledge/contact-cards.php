@@ -39,7 +39,7 @@ if ( empty( $hotline_tel ) ) {
 }
 ?>
 <!-- 4. Promo Banner Widget -->
-<?php if ( $banner_enabled ) : ?>
+<?php if ( $banner_enabled && ! is_search() ) : ?>
 	<div class="vpc-knowledge-widget vpc-knowledge-widget--banner">
 		<a class="vpc-knowledge-banner-card" href="<?php echo esc_url( $banner_url ); ?>"<?php echo $banner_new_tab ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>>
 			<img src="<?php echo esc_url( $banner_image ); ?>" alt="<?php echo esc_attr( $banner_alt ); ?>" width="365" height="411" loading="lazy">
