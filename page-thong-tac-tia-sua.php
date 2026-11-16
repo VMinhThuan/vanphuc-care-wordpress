@@ -48,7 +48,7 @@ $other_services = array(
 	<div class="vpc-bath vpc-milk__shared-lower-sections">
 		<?php
 		get_template_part( 'template-parts/sections/feedback', null, array(
-			'items'        => $feedback,
+			'items'        => vpc_get_real_feedback_items(),
 			'image_prefix' => 'easy',
 		) );
 

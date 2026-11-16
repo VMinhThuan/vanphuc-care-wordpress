@@ -13,6 +13,7 @@ $about_uri     = trailingslashit( get_template_directory_uri() ) . 'assets/image
 $badge_icon    = $about_uri . '/badge-star.svg';
 $avatars_uri   = trailingslashit( get_template_directory_uri() ) . 'assets/images/avatars';
 $feedback_uri  = trailingslashit( get_template_directory_uri() ) . 'assets/images/bao-mau';
+$avatar_map    = function_exists( 'vpc_get_feedback_avatar_map' ) ? vpc_get_feedback_avatar_map() : array();
 
 $about_feedback = array(
 	array( 'name' => 'Mẹ bé Kami', 'image' => 'customer_1.webp', 'copy' => 'Mình thực sự thấy quyết định chọn ở cữ ở Vạn Phúc Care là sáng suốt nhất trong hành trình đi đẻ. Phòng hạng có view hồ Tây, rộng rãi, sang trọng và đầy đủ tiện nghi. Trọn vẹn 30 ngày ở cữ rất nhẹ nhàng, 2 mẹ con được chăm sóc sức khỏe chu đáo mỗi ngày và nhàn nhất là không bị áp lực đêm hôm chăm con. Bé Kami trộm vía về nhà vẫn ăn ngoan ngủ ngon. Cảm ơn Vạn Phúc Care và đội ngũ điều dưỡng đã mang đến cho gia đình trải nghiệm ở cữ tuyệt vời!' ),
@@ -25,6 +26,7 @@ $about_feedback = array(
 	array( 'name' => 'Mẹ Nghé Ọ', 'image' => 'ava-5.webp', 'copy' => 'Sau sinh cơ thể mình rất mệt mỏi, muốn chăm con thật tốt nhưng sức khoẻ không cho phép. Lúc này mình được chị gái giới thiệu về Vạn Phúc Care và mình đã đăng ký Gói chăm sóc bé tại nhà trong 6 tháng. Cô Ánh điều dưỡng chăm sóc bé nhà mình rất tốt, con ăn ngon ngủ kỹ, sức khỏe tốt. Con được rèn ngủ theo EASY nên rất ngoan.' ),
 	array( 'name' => 'Bà ngoại Bé Dâu', 'image' => 'ava-8.webp', 'copy' => 'Cảm ơn cô Huyên, cảm ơn Vạn Phúc Care đã dành cho Dâu những trải nghiệm đầu đời thú vị. Cô chăm sóc bé nhẹ nhàng khéo léo, cẩn thận. Hướng dẫn tận tình gia đình cách vệ sinh cá nhân cho cháu, vệ sinh vết mổ, cắt chỉ cho con gái cô. Đây là địa chỉ chăm sóc mẹ bé đáng tin cậy.' ),
 );
+$about_feedback = function_exists( 'vpc_get_real_feedback_items' ) ? vpc_get_real_feedback_items() : $about_feedback;
 ?>
 <section id="feedback" class="about-section about-feedback" data-figma-node="3207:38663" aria-labelledby="about-feedback-title">
 	<div class="about-feedback__heading">
@@ -50,7 +52,13 @@ $about_feedback = array(
 							<article class="about-feedback-card" data-node-id="<?php echo esc_attr( '3207:386' . ( 71 + $feedback_index ) ); ?>">
 								<img class="about-feedback-card__quote" src="<?php echo esc_url( $feedback_uri . '/quotation.svg' ); ?>" width="23.5" height="15.5" alt="" aria-hidden="true">
 								<div class="about-feedback-card__author">
-									<img src="<?php echo esc_url( $avatars_uri . '/' . $feedback['image'] ); ?>" width="40" height="40" alt="" loading="lazy" decoding="async">
+									<?php
+									$feedback_image = ltrim( (string) $feedback['image'], '/' );
+									$avatar_url    = 0 === strpos( $feedback_image, 'Avatar-feedback/' )
+										? vpc_image_url( $feedback_image, 'thumbnail' )
+										: ( isset( $avatar_map[ $feedback['name'] ] ) ? vpc_image_url( $avatar_map[ $feedback['name'] ], 'thumbnail' ) : $avatars_uri . '/' . $feedback_image );
+									?>
+									<img src="<?php echo esc_url( $avatar_url ); ?>" width="40" height="40" alt="" loading="lazy" decoding="async">
 									<div>
 										<strong><?php echo esc_html( $feedback['name'] ); ?></strong>
 										<span class="about-feedback-card__stars" role="img" aria-label="5 trên 5 sao">

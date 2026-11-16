@@ -57,12 +57,15 @@ function vanphuccare_is_service_group_page() {
  * @return bool
  */
 function vanphuccare_is_knowledge_group_page() {
-	return is_page( 'kien-thuc' )
+	$is_news_page = function_exists( 'vanphuccare_is_news_page' ) && vanphuccare_is_news_page();
+
+	return ! $is_news_page
+		&& ( is_page( 'kien-thuc' )
 		|| is_page_template( 'page-kien-thuc.php' )
 		|| is_category()
 		|| is_tag()
 		|| is_search()
-		|| ! empty( get_query_var( 'vpc_is_all' ) );
+		|| ! empty( get_query_var( 'vpc_is_all' ) ) );
 }
 
 /**
@@ -94,6 +97,15 @@ function vanphuccare_knowledge_menu_link_attributes( $atts, $item, $args ) {
 		&& in_array( $theme_location, array( 'primary', '' ), true )
 		&& vanphuccare_is_knowledge_menu_item( $item ) ) {
 		$atts['href'] = home_url( '/kien-thuc/' );
+
+		// News pages share the category/archive query context with the
+		// knowledge hub. Remove any saved active-link utility class so the
+		// Kiến thức item does not remain blue on Tin tức/Tin mới/Sự kiện.
+		if ( function_exists( 'vanphuccare_is_news_page' ) && vanphuccare_is_news_page() && ! empty( $atts['class'] ) ) {
+			$classes = preg_split( '/\s+/', trim( (string) $atts['class'] ) );
+			$classes = array_diff( $classes, array( 'text-text-nav-active', 'text-primary-500' ) );
+			$atts['class'] = implode( ' ', array_filter( $classes ) );
+		}
 	}
 
 	return $atts;
@@ -156,7 +168,26 @@ add_filter( 'wp_nav_menu_objects', 'vanphuccare_normalize_recruitment_footer_men
  * @return array
  */
 function vanphuccare_knowledge_menu_class( $classes, $item ) {
-	if ( vanphuccare_is_knowledge_group_page() && vanphuccare_is_knowledge_menu_item( $item ) ) {
+	if ( ! vanphuccare_is_knowledge_menu_item( $item ) ) {
+		return array_unique( $classes );
+	}
+
+	if ( function_exists( 'vanphuccare_is_news_page' ) && vanphuccare_is_news_page() ) {
+		// WordPress can infer the /kien-thuc/ menu item as current while
+		// rendering a news category because both are category archives.
+		// News routes must not visually activate the Kiến thức navigation item.
+		$classes = array_diff(
+			$classes,
+			array(
+				'current-menu-item',
+				'current_page_item',
+				'current-menu-ancestor',
+				'current-menu-parent',
+				'current_page_parent',
+				'current_page_ancestor',
+			)
+		);
+	} elseif ( vanphuccare_is_knowledge_group_page() ) {
 		$classes[] = 'current-menu-item';
 	}
 

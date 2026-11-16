@@ -474,6 +474,36 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 		}
 
+		// Pre-select service_package in modal if provided via triggerBtn data-package
+		const targetPackage = triggerBtn ? (triggerBtn.getAttribute('data-package') || triggerBtn.dataset.package) : '';
+		if (targetPackage) {
+			const targetPkgOption = modal.querySelector(`.vpc-select-option[data-value="${targetPackage}"]`);
+			if (targetPkgOption) {
+				targetPkgOption.click();
+			} else {
+				const pkgSelect = modal.querySelector('select[name="service_package"], select[name="package"]');
+				if (pkgSelect) {
+					pkgSelect.value = targetPackage;
+					pkgSelect.dispatchEvent(new Event('change', { bubbles: true }));
+				}
+			}
+		}
+
+		// Pre-select room_tier in modal if provided via triggerBtn data-room
+		const targetRoom = triggerBtn ? (triggerBtn.getAttribute('data-room') || triggerBtn.dataset.room) : '';
+		if (targetRoom) {
+			const targetRoomOption = modal.querySelector(`.vpc-select-option[data-value="${targetRoom}"]`);
+			if (targetRoomOption) {
+				targetRoomOption.click();
+			} else {
+				const roomSelect = modal.querySelector('select[name="room_tier"], select[name="room"]');
+				if (roomSelect) {
+					roomSelect.value = targetRoom;
+					roomSelect.dispatchEvent(new Event('change', { bubbles: true }));
+				}
+			}
+		}
+
 		modal.classList.remove('hidden');
 		modal.classList.add('flex');
 		// Trigger transition
@@ -729,7 +759,10 @@ document.addEventListener('DOMContentLoaded', function () {
 				submitBtn.disabled = true;
 				submitBtn.innerHTML = '<span class="inline-flex items-center gap-2"><svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-neutral-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Đang gửi...</span>';
 			}
-			showStatus('Đang gửi thông tin…', false);
+			if (status) {
+				status.textContent = '';
+				status.classList.add('hidden');
+			}
 
 			const formData = new FormData(form);
 			formData.append('action', 'vpc_submit_consultation');
@@ -750,13 +783,23 @@ document.addEventListener('DOMContentLoaded', function () {
 				if (typeof window !== 'undefined' && window.turnstile && typeof window.turnstile.reset === 'function') {
 					try { window.turnstile.reset(); } catch (ignore) {}
 				}
-				// Reset custom select label if exists
-				const labelSpan = form.querySelector('[data-select-label]');
-				if (labelSpan) {
-					labelSpan.textContent = 'Chọn dịch vụ';
-					labelSpan.classList.add('text-neutral-500');
-					labelSpan.classList.remove('text-text-body-default');
-				}
+				// Reset custom select labels if exist
+				form.querySelectorAll('[data-custom-select]').forEach(function (container) {
+					const input = container.querySelector('[data-select-input]');
+					const labelSpan = container.querySelector('[data-select-label]');
+					if (input && input.name === 'service') {
+						if (labelSpan) {
+							labelSpan.textContent = 'Chọn dịch vụ';
+							labelSpan.classList.add('text-neutral-500');
+							labelSpan.classList.remove('text-text-body-default');
+						}
+					} else {
+						const defaultOption = container.querySelector('.vpc-select-option');
+						if (defaultOption) {
+							defaultOption.click();
+						}
+					}
+				});
 				const successMessage = document.getElementById('vpc-success-modal-message');
 				if (successMessage && msg) {
 					successMessage.textContent = msg;

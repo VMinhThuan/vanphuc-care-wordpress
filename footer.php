@@ -202,19 +202,19 @@ $company_address = get_theme_mod( 'vpc_company_address', '35B/399 Âu Cơ, phư�
 			<div class="flex items-center gap-3">
 				<!-- Facebook -->
 				<a href="<?php echo esc_url( $facebook_url ); ?>" target="_blank" rel="noopener noreferrer" 
-				   class="w-8 h-8 xl:w-16 xl:h-14 xl:px-2 xl:py-1 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center"
+				   class="w-8 h-8 xl:w-16 xl:h-14 xl:px-2 xl:py-1 shrink-0 rounded-full overflow-hidden flex items-center justify-center"
 				   aria-label="Facebook">
 					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/facebook.svg' ); ?>" alt="Facebook" class="w-8 h-8 xl:w-12 xl:h-12 object-contain">
 				</a>
 
 				<!-- Instagram -->
-				<a href="<?php echo esc_url( $instagram_url ); ?>" target="_blank" rel="noopener noreferrer" class="w-8 h-8 xl:w-16 xl:h-14 xl:px-2 xl:py-1 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center" aria-label="Instagram">
+				<a href="<?php echo esc_url( $instagram_url ); ?>" target="_blank" rel="noopener noreferrer" class="w-8 h-8 xl:w-16 xl:h-14 xl:px-2 xl:py-1 shrink-0 rounded-full overflow-hidden flex items-center justify-center" aria-label="Instagram">
 					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/instagram.svg' ); ?>" alt="Instagram" class="w-8 h-8 xl:w-12 xl:h-12 object-contain">
 				</a>
 
 				<!-- TikTok -->
 				<a href="<?php echo esc_url( $tiktok_url ); ?>" target="_blank" rel="noopener noreferrer" 
-				   class="w-8 h-8 xl:w-16 xl:h-14 xl:px-2 xl:py-1 shrink-0 rounded-full overflow-hidden hover:scale-105 shadow-sm transition-transform flex items-center justify-center"
+				   class="w-8 h-8 xl:w-16 xl:h-14 xl:px-2 xl:py-1 shrink-0 rounded-full overflow-hidden flex items-center justify-center"
 				   aria-label="TikTok">
 					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/tiktok.svg' ); ?>" alt="TikTok" class="w-8 h-8 xl:w-12 xl:h-12 object-contain">
 				</a>

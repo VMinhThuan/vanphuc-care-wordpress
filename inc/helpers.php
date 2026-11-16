@@ -33,6 +33,60 @@ function vpc_get_consultation_services() {
 }
 
 /**
+ * Returns the shared customer feedback avatar mapping.
+ *
+ * @return array<string, string>
+ */
+function vpc_get_feedback_avatar_map() {
+	return array(
+		'Mẹ bé Kami'             => 'Avatar-feedback/Me-be-Kami.png',
+		'Mẹ bé Mandu'            => 'Avatar-feedback/Me-be-Mandu.jpg',
+		'Mẹ Bé Cát'              => 'Avatar-feedback/Me-be-Cat.jpg',
+		'Nguyễn Thị Ngọc Trân'   => 'Avatar-feedback/dd841f642ae3352ac94256b09e46c8c6b12453c2.jpg',
+		'Mẹ Sấm Chớp'            => 'Avatar-feedback/Me-Sam-Chop.jpg',
+		'Mẹ Cafe'                => 'Avatar-feedback/Me-Cafe.jpg',
+		'Mẹ Nghé Ọ'              => 'Avatar-feedback/Me-Nghe-O.jpg',
+		'Bà ngoại Bé Dâu'        => 'Avatar-feedback/Ba-Ngoai-Be-Dau.jpg',
+	);
+}
+
+/**
+ * Returns the real customer reviews used by the shared feedback sections.
+ *
+ * @return array<int, array<string, string>>
+ */
+function vpc_get_real_feedback_items() {
+	$avatars = array(
+		'Avatar-feedback/Ba-Ngoai-Be-Dau.jpg',
+		'Avatar-feedback/dd841f642ae3352ac94256b09e46c8c6b12453c2.jpg',
+		'Avatar-feedback/Me-be-Cat.jpg',
+		'Avatar-feedback/Me-be-Kami.png',
+		'Avatar-feedback/Me-be-Mandu.jpg',
+		'Avatar-feedback/Me-Cafe.jpg',
+		'Avatar-feedback/Me-Nghe-O.jpg',
+		'Avatar-feedback/Me-Sam-Chop.jpg',
+	);
+
+	$reviews = array(
+		array( 'name' => 'Tiến Nguyễn', 'copy' => 'Mình book cô 3 tháng đầu 24/24, sau chuyển sang cô làm ca ngày thôi, cả 2 cô đều ok, có cho đổi cô nếu k ưng, chăm sóc nhiệt tình, bé sau nếu có cơ hội sẽ book tiếp 🕊️💡🌈' ),
+		array( 'name' => 'Quang Phưowce', 'copy' => 'Có điều kiện thì nên thuê bảo mẫu chuyên nghiệp cho yên tâm, mình thuê 24/24 đến 8 tháng, đổi 2 cô nhưng đều làm tốt 🍕📌🎉' ),
+		array( 'name' => 'Trí Nguyễn', 'copy' => 'Bé nhà mình hay khóc đêm, cô bảo mẫu kiên nhẫn dỗ và luyện ngủ cho bé, mình thật sự biết ơn, cô còn giúp mình hướng dẫn vài mẹo trấn an bé rất hữu ích. Lúc mới trải nghiệm công ty đổi người chăm, mình hơi lo nhưng cô rất tốt nên theo cô luôn.' ),
+		array( 'name' => 'dung nguyen', 'copy' => 'Mình có book 1 bên trước đấy mà toàn bán sản phẩm, bên này ok hơn, bảo mẫu làm đúng việc không up sale 🌙🕹️🕹️' ),
+		array( 'name' => 'Thơ Trần', 'copy' => 'Mình đăng ký có 2 tháng thôi nhưng bảo mẫu vẫn làm rất nhiệt tình 🧩🎯🌈' ),
+		array( 'name' => 'Vũ Thái Anh', 'copy' => 'Bé rất thích cô Trang, cô Trang rèn easy cho bé nhà mình đâu vào đấy, giờ con ăn dặm rồi nên mình cho đi lớp chứ vẫn rất thích bảo mẫu bên này, sau để nữa sẽ quay lại ạ 🎵🎵🍕' ),
+		array( 'name' => 'Bảo Phan', 'copy' => 'Bảo mẫu chăm chỉ nhanh nhẹn, sẽ gia hạn thêm hợp đồng 🎯🔥📖' ),
+		array( 'name' => 'Quân Phan', 'copy' => 'Cô bảo mẫu nhanh nhẹn, chủ động hỏi thói quen của bé trước khi bắt đầu chăm. Lần đầu mình thuê dịch vụ thế này nhưng tư vấn giải thích rõ, kèm theo hợp đồng nữa. Trộm vía bé nhà mình cũng hợp tác với cô ngay từ buổi đầu 🐶📌' ),
+	);
+
+	foreach ( $reviews as $index => &$review ) {
+		$review['image'] = $avatars[ $index ];
+	}
+	unset( $review );
+
+	return $reviews;
+}
+
+/**
  * Returns the single source of truth for gestational age options (Tuần 24 đến Tuần 40).
  *
  * @return array<string, string>

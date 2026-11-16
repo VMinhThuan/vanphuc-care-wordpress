@@ -14,50 +14,83 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $asset_uri = get_template_directory_uri() . '/assets/images/recruitment';
 
-$jobs = array(
+$jobs = array();
+$recruitment_posts = function_exists( 'get_posts' ) ? get_posts(
 	array(
-		'title'    => 'Tuyển Dụng Điều Dưỡng | Nữ Hộ Sinh Làm Việc Tại Trung Tâm Ở Cữ',
-		'updated'  => '28/09/2026',
-		'deadline' => '31/10/2026',
-		'href'     => home_url( '/tuyen-dung/tin-tuyen-dung/' ),
-		'status'   => 'Đang tuyển',
-	),
-	array(
-		'title'    => 'Tuyển Dụng Chuyên Viên Phát Triển Cộng Đồng (FB Group)',
-		'updated'  => '23/09/2026',
-		'deadline' => '11/10/2026',
-		'href'     => home_url( '/tuyen-dung/tin-tuyen-dung/' ),
-		'status'   => 'Đang tuyển',
-	),
-	array(
-		'title'    => 'Tuyển Dụng Chuyên Viên Sáng Tạo Nội Dung (Tiktok Content Creator)',
-		'updated'  => '23/09/2026',
-		'deadline' => '11/10/2026',
-		'href'     => home_url( '/tuyen-dung/tin-tuyen-dung/' ),
-		'status'   => 'Đang tuyển',
-	),
-	array(
-		'title'    => 'Thông báo mở ứng tuyển công việc bảo mẫu',
-		'updated'  => '26/11/2025',
-		'deadline' => '31/12/2025',
-		'href'     => home_url( '/tuyen-dung/tin-tuyen-dung/' ),
-		'status'   => 'Đã đóng',
-	),
-	array(
-		'title'    => 'Thông tin tuyển dụng Điều Dưỡng 2025',
-		'updated'  => '04/10/2025',
-		'deadline' => '28/10/2025',
-		'href'     => home_url( '/tuyen-dung/tin-tuyen-dung/' ),
-		'status'   => 'Đã đóng',
-	),
-	array(
-		'title'    => 'Tuyển dụng Designer 2D – nhân viên thiết kế đồ họa',
-		'updated'  => '03/03/2025',
-		'deadline' => '15/03/2025',
-		'href'     => home_url( '/tuyen-dung/tin-tuyen-dung/' ),
-		'status'   => 'Đã đóng',
-	),
-);
+		'category_name'       => 'tuyen-dung',
+		'posts_per_page'      => -1,
+		'post_status'         => 'publish',
+		'ignore_sticky_posts' => true,
+	)
+) : array();
+
+if ( ! empty( $recruitment_posts ) ) {
+	foreach ( $recruitment_posts as $recruitment_post ) {
+		$post_id = $recruitment_post->ID;
+		$meta    = function_exists( 'vpc_get_recruitment_meta' )
+			? vpc_get_recruitment_meta( $post_id )
+			: array(
+				'updated'  => get_the_date( 'd/m/Y', $post_id ),
+				'deadline' => 'Đang cập nhật',
+				'status'   => 'Đang tuyển',
+			);
+
+		$jobs[] = array(
+			'title'    => get_the_title( $post_id ),
+			'updated'  => $meta['updated'],
+			'deadline' => $meta['deadline'],
+			'href'     => get_permalink( $post_id ),
+			'status'   => $meta['status'],
+		);
+	}
+}
+
+if ( empty( $jobs ) ) {
+	$jobs = array(
+		array(
+			'title'    => 'Tuyển Dụng Điều Dưỡng | Nữ Hộ Sinh Làm Việc Tại Trung Tâm Ở Cữ',
+			'updated'  => '28/09/2026',
+			'deadline' => '31/10/2026',
+			'href'     => home_url( '/tuyen-dung/' ),
+			'status'   => 'Đang tuyển',
+		),
+		array(
+			'title'    => 'Tuyển Dụng Chuyên Viên Phát Triển Cộng Đồng (FB Group)',
+			'updated'  => '23/09/2026',
+			'deadline' => '11/10/2026',
+			'href'     => home_url( '/tuyen-dung/' ),
+			'status'   => 'Đang tuyển',
+		),
+		array(
+			'title'    => 'Tuyển Dụng Chuyên Viên Sáng Tạo Nội Dung (Tiktok Content Creator)',
+			'updated'  => '23/09/2026',
+			'deadline' => '11/10/2026',
+			'href'     => home_url( '/tuyen-dung/' ),
+			'status'   => 'Đang tuyển',
+		),
+		array(
+			'title'    => 'Thông báo mở ứng tuyển công việc bảo mẫu',
+			'updated'  => '26/11/2025',
+			'deadline' => '31/12/2025',
+			'href'     => home_url( '/tuyen-dung/' ),
+			'status'   => 'Đã đóng',
+		),
+		array(
+			'title'    => 'Thông tin tuyển dụng Điều Dưỡng 2025',
+			'updated'  => '04/10/2025',
+			'deadline' => '28/10/2025',
+			'href'     => home_url( '/tuyen-dung/' ),
+			'status'   => 'Đã đóng',
+		),
+		array(
+			'title'    => 'Tuyển dụng Designer 2D – nhân viên thiết kế đồ họa',
+			'updated'  => '03/03/2025',
+			'deadline' => '15/03/2025',
+			'href'     => home_url( '/tuyen-dung/' ),
+			'status'   => 'Đã đóng',
+		),
+	);
+}
 
 $steps = array(
 	array( 'number' => '01', 'title' => 'Ứng tuyển', 'copy' => 'Ứng tuyển và nhận được nhiều hơn cả một cơ hội việc làm', 'icon' => 'process-signup.svg' ),
@@ -71,32 +104,37 @@ get_header();
 
 <div class="vpc-recruitment-page" data-figma-node="3481:27647">
 	<section class="vpc-recruitment-hero" aria-labelledby="recruitment-hero-title">
-		<div class="vpc-recruitment-hero__copy">
-			<div class="vpc-recruitment-badge">
-				<img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">
-				<span class="vpc-recruitment-badge__desktop">Trang Tin Tuyển Dụng</span>
-				<span class="vpc-recruitment-badge__mobile">BỆ PHÓNG PHÁT TRIỂN</span>
+		<div class="vpc-recruitment-hero__inner">
+			<div class="vpc-recruitment-hero__copy">
+				<div class="vpc-recruitment-badge">
+					<img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">
+					<span class="vpc-recruitment-badge__desktop">Trang Tin Tuyển Dụng</span>
+					<span class="vpc-recruitment-badge__mobile">Trang Tin Tuyển Dụng</span>
+				</div>
+				<h1 id="recruitment-hero-title">
+					<span>Môi Trường Yêu Thương</span>
+					<strong>Sự Nghiệp Thăng Tiến</strong>
+				</h1>
+				<p>
+					<span class="vpc-recruitment-copy__desktop">Tại Vạn Phúc Care, chúng tôi luôn đem lại cơ hội đào tạo và phát triển nghề nghiệp, đặc biệt dành cho điều dưỡng.</span>
+					<span class="vpc-recruitment-copy__mobile">Trân trọng nhau bằng sự tử tế, môi trường làm việc hạnh phúc, chú trọng đào tạo và phát triển bản thân. Chào mừng bạn mới gia nhập.</span>
+				</p>
+				<form class="vpc-recruitment-search" role="search">
+					<label class="screen-reader-text" for="recruitment-search">Tìm vị trí tuyển dụng</label>
+					<picture class="vpc-recruitment-search__icon"><source media="(max-width: 767px)" srcset="<?php echo esc_url( $asset_uri . '/search-mobile.svg' ); ?>"><img src="<?php echo esc_url( $asset_uri . '/search.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true"></picture>
+					<input id="recruitment-search" type="search" placeholder="Tìm vị trí tuyển dụng..." autocomplete="off">
+					<button type="submit"><span class="vpc-recruitment-search__desktop">Tìm kiếm</span><span class="vpc-recruitment-search__mobile">Tìm</span></button>
+				</form>
 			</div>
-			<h1 id="recruitment-hero-title">
-				<span>Môi Trường Yêu Thương</span>
-				<strong>Sự Nghiệp Thăng Tiến</strong>
-			</h1>
-			<p>Tại Vạn Phúc Care, chúng tôi luôn đem lại cơ hội đào tạo và phát triển nghề nghiệp, đặc biệt dành cho điều dưỡng.</p>
-			<form class="vpc-recruitment-search" role="search">
-				<label class="screen-reader-text" for="recruitment-search">Tìm vị trí tuyển dụng</label>
-				<picture class="vpc-recruitment-search__icon"><source media="(max-width: 767px)" srcset="<?php echo esc_url( $asset_uri . '/search-mobile.svg' ); ?>"><img src="<?php echo esc_url( $asset_uri . '/search.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true"></picture>
-				<input id="recruitment-search" type="search" placeholder="Tìm vị trí tuyển dụng..." autocomplete="off">
-				<button type="submit"><span class="vpc-recruitment-search__desktop">Tìm kiếm</span><span class="vpc-recruitment-search__mobile">Tìm</span></button>
-			</form>
-		</div>
 
-		<div class="vpc-recruitment-hero__visual" aria-hidden="true">
-			<span class="vpc-recruitment-hero__blob"></span>
-			<span class="vpc-recruitment-hero__accent"></span>
-			<img class="vpc-recruitment-hero__mascot" src="<?php echo esc_url( $asset_uri . '/mascot.png' ); ?>" width="500" height="500" alt="">
-			<span class="vpc-recruitment-chip vpc-recruitment-chip--nurse">Điều dưỡng</span>
-			<span class="vpc-recruitment-chip vpc-recruitment-chip--midwife">Nữ hộ sinh</span>
-			<span class="vpc-recruitment-chip vpc-recruitment-chip--technician">Kỹ thuật viên</span>
+			<div class="vpc-recruitment-hero__visual" aria-hidden="true">
+				<span class="vpc-recruitment-hero__blob"></span>
+				<img class="vpc-recruitment-hero__accent" src="<?php echo esc_url( $asset_uri . '/blob-accent.svg' ); ?>" width="116" height="116" alt="">
+				<img class="vpc-recruitment-hero__mascot" src="<?php echo esc_url( $asset_uri . '/mascot.png' ); ?>" width="500" height="500" alt="">
+				<span class="vpc-recruitment-chip vpc-recruitment-chip--nurse">Điều dưỡng</span>
+				<span class="vpc-recruitment-chip vpc-recruitment-chip--midwife">Nữ hộ sinh</span>
+				<span class="vpc-recruitment-chip vpc-recruitment-chip--technician">Kỹ thuật viên</span>
+			</div>
 		</div>
 	</section>
 
@@ -129,6 +167,9 @@ get_header();
 						</div>
 					</article>
 				<?php endforeach; ?>
+				<p class="vpc-recruitment-empty-message" data-recruitment-empty style="display:none;padding:32px 16px;text-align:center;color:#6b7280;grid-column:1/-1;">
+					Hiện tại không có vị trí nào phù hợp.
+				</p>
 			</div>
 		</div>
 	</section>
@@ -136,7 +177,10 @@ get_header();
 	<section class="vpc-recruitment-process" aria-labelledby="recruitment-process-title">
 		<div class="vpc-recruitment-process__intro">
 			<h2 id="recruitment-process-title">Quy Trình Tuyển Dụng</h2>
-			<p>Tại Vạn Phúc Care, chúng tôi tin rằng những con người tâm huyết chính là cốt lõi của dịch vụ; vì vậy, quy trình tuyển dụng của chúng tôi được thiết kế khắt khe nhằm tìm kiếm những trái tim tận tâm và đôi bàn tay chuyên nghiệp nhất.</p>
+			<p>
+				<span class="vpc-recruitment-copy__desktop">Tại Vạn Phúc Care, chúng tôi tin rằng những con người tâm huyết chính là cốt lõi của dịch vụ; vì vậy, quy trình tuyển dụng của chúng tôi được thiết kế khắt khe nhằm tìm kiếm những trái tim tận tâm và đôi bàn tay chuyên nghiệp nhất.</span>
+				<span class="vpc-recruitment-copy__mobile">Quy trình tuyển dụng của Vạn Phúc Care được thiết kế kỹ lưỡng để tìm ra những người tận tâm và chuyên nghiệp nhất.</span>
+			</p>
 		</div>
 		<div class="vpc-recruitment-process__steps">
 			<?php foreach ( $steps as $index => $step ) : ?>

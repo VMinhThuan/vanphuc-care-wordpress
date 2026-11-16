@@ -27,6 +27,15 @@ if ( $queried_term instanceof WP_Term && 'category' === $queried_term->taxonomy 
 }
 $news_category_id = $news_category instanceof WP_Term ? (int) $news_category->term_id : 0;
 $news_title       = $news_category instanceof WP_Term ? $news_category->name : 'Tin tức & Sự kiện';
+$news_heading     = $news_title;
+$is_latest_news   = $news_category instanceof WP_Term && 'tin-moi' === sanitize_title( $news_category->slug );
+$is_featured_event = $news_category instanceof WP_Term && 'su-kien-noi-bat' === sanitize_title( $news_category->slug );
+$is_news_category_page = $is_latest_news || $is_featured_event;
+
+if ( $is_latest_news ) {
+	$news_heading = 'Tin Mới';
+}
+
 $news_description = $news_category instanceof WP_Term
 	? trim( wp_kses_post( term_description( $news_category_id, 'category' ) ) )
 	: '';
@@ -34,7 +43,7 @@ $news_description = $news_category instanceof WP_Term
 if ( empty( $news_description ) ) {
 	$cat_slug = $news_category instanceof WP_Term ? $news_category->slug : '';
 	if ( 'tin-moi' === $cat_slug ) {
-		$news_description = 'Theo dõi dòng chảy tin tức sức khỏe mẹ và bé mỗi ngày với các góc nhìn chuẩn xác, khoa học từ chuyên gia đầu ngành.';
+		$news_description = 'Góc tư vấn cho phụ huynh cùng hoạt động, sự kiện và cơ hội nghề nghiệp mới nhất tại Vạn Phúc Care.';
 	} elseif ( 'su-kien-noi-bat' === $cat_slug ) {
 		$news_description = 'Tin tức và sự kiện là nơi cập nhật liên tục những hoạt động mới nhất, hội thảo và dấu ấn của đại gia đình Vạn Phúc Care.';
 	}
@@ -126,11 +135,17 @@ foreach ( $fallback_articles as $index => $fallback ) {
 		$categories = get_the_category( $post->ID );
 		$category   = ! empty( $categories ) ? $categories[0]->name : $fallback['category'];
 
+		$excerpt_source = preg_replace(
+			'/\s*(?:\[\s*(?:…|\.\.\.)\s*\]|…|\.\.\.)\s*$/u',
+			'',
+			wp_strip_all_tags( get_the_excerpt( $post ) )
+		);
+
 		$articles[] = array(
 			'id'       => $post->ID,
 			'category' => $category,
 			'title'    => get_the_title( $post ),
-			'excerpt'  => wp_trim_words( get_the_excerpt( $post ), 31, '...' ),
+			'excerpt'  => wp_trim_words( (string) $excerpt_source, 55, '' ),
 			'image'    => has_post_thumbnail( $post ) ? get_the_post_thumbnail_url( $post, 'large' ) : $fallback['image'],
 			'url'      => get_permalink( $post ),
 			'author'   => get_the_author_meta( 'display_name', (int) $post->post_author ) ?: 'Content VPC',
@@ -176,7 +191,7 @@ $render_card = static function ( $article, $index ) use ( $asset ) {
 };
 ?>
 
-<div class="vpc-news-page">
+<div class="vpc-news-page<?php echo $is_news_category_page ? ' vpc-news-page--category' : ''; ?><?php echo $is_latest_news ? ' vpc-news-page--tin-moi' : ''; ?>">
 	<section class="vpc-news-hero" aria-labelledby="vpc-news-title">
 		<div class="vpc-container vpc-news-hero__inner">
 			<div class="vpc-news-hero__copy">
@@ -187,7 +202,7 @@ $render_card = static function ( $article, $index ) use ( $asset ) {
 					<span class="vpc-news-breadcrumb__separator" aria-hidden="true">›</span>
 					<span class="vpc-news-breadcrumb__current"><?php echo esc_html( $news_title ); ?></span>
 				</nav>
-				<h1 id="vpc-news-title"><?php echo esc_html( $news_title ); ?></h1>
+				<h1 id="vpc-news-title"><?php echo esc_html( $news_heading ); ?></h1>
 				<div class="vpc-news-hero__description">
 					<?php echo $news_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Sanitized with wp_kses_post above. ?>
 				</div>
@@ -198,7 +213,7 @@ $render_card = static function ( $article, $index ) use ( $asset ) {
 					<img src="<?php echo $asset( 'mang-thai-photo-2.png' ); ?>" alt="" width="230" height="301">
 				</div>
 				<img class="vpc-news-hero__sticker" src="<?php echo $asset( 'mang-thai-sticker.svg' ); ?>" alt="" width="130" height="130">
-				<img class="vpc-news-hero__mascot" src="<?php echo $asset( 'hero-mascot.png' ); ?>" alt="" width="114" height="114">
+				<img class="vpc-news-hero__mascot" src="<?php echo $asset( '21941b00-c6ab-4b41-b5e5-7f06439e556c.svg' ); ?>" alt="" width="114" height="114">
 				<img class="vpc-news-hero__heart" src="<?php echo $asset( 'mang-thai-heart.svg' ); ?>" alt="" width="34" height="34">
 				<img class="vpc-news-hero__heart-small" src="<?php echo $asset( 'mang-thai-heart-small.svg' ); ?>" alt="" width="18" height="18">
 				<img class="vpc-news-hero__sparkle" src="<?php echo $asset( 'mang-thai-sparkle.svg' ); ?>" alt="" width="22" height="22">
@@ -292,11 +307,16 @@ $render_card = static function ( $article, $index ) use ( $asset ) {
 
 					<div class="vpc-news-hotline">
 						<div class="vpc-news-hotline__image">
-							<img src="<?php echo $asset( 'nurse-baby.jpeg' ); ?>" alt="Điều dưỡng chăm sóc em bé" loading="lazy" width="365" height="168">
+							<img src="<?php echo $asset( 'nurse-baby.jpeg' ); ?>" alt="Điều dưỡng chăm sóc em bé" loading="lazy" width="365" height="200">
 						</div>
 						<div class="vpc-news-hotline__body">
-							<span class="vpc-news-hotline__eyebrow"><img src="<?php echo $asset( 'mang-thai-hotline-icon.svg' ); ?>" alt="" width="24" height="24"> Hotline Vạn Phúc Care</span>
-							<a href="tel:0376246673" class="vpc-news-hotline__phone">037 624 6673</a>
+							<div class="vpc-news-hotline__contact">
+								<img src="<?php echo $asset( 'mang-thai-hotline-icon.svg' ); ?>" alt="" width="24" height="24">
+								<div>
+									<span>Hotline</span>
+									<a href="tel:0376246673" class="vpc-news-hotline__phone">037 624 6673</a>
+								</div>
+							</div>
 							<p>Liên hệ ngay để được tư vấn trực tiếp cùng các cô Điều dưỡng của Vạn Phúc Care ba mẹ nhé!</p>
 							<button type="button" data-open-modal>Đăng Ký Tư Vấn</button>
 						</div>

@@ -639,4 +639,283 @@ function vpc_register_reviewer_post_meta() {
 }
 add_action( 'init', 'vpc_register_reviewer_post_meta' );
 
+/**
+ * Normalizes and formats recruitment deadline string (e.g. 20261031 -> 31/10/2026).
+ *
+ * @param mixed $raw Raw date string or int.
+ * @return array{formatted: string, timestamp: int|null}
+ */
+function vpc_format_recruitment_deadline( $raw ) {
+	if ( empty( $raw ) ) {
+		return array(
+			'formatted' => 'Đang cập nhật',
+			'timestamp' => null,
+		);
+	}
+
+	$cleaned = trim( (string) $raw );
+
+	// Case 1: YYYYMMDD (e.g. 20261031 from legacy ACF submit_deadline).
+	if ( preg_match( '/^(\d{4})(\d{2})(\d{2})$/', $cleaned, $matches ) ) {
+		$year  = (int) $matches[1];
+		$month = (int) $matches[2];
+		$day   = (int) $matches[3];
+		if ( checkdate( $month, $day, $year ) ) {
+			return array(
+				'formatted' => sprintf( '%02d/%02d/%04d', $day, $month, $year ),
+				'timestamp' => (int) mktime( 23, 59, 59, $month, $day, $year ),
+			);
+		}
+	}
+
+	// Case 2: DD/MM/YYYY (e.g. 31/10/2026).
+	if ( preg_match( '/^(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{4})$/', $cleaned, $matches ) ) {
+		$day   = (int) $matches[1];
+		$month = (int) $matches[2];
+		$year  = (int) $matches[3];
+		if ( checkdate( $month, $day, $year ) ) {
+			return array(
+				'formatted' => sprintf( '%02d/%02d/%04d', $day, $month, $year ),
+				'timestamp' => (int) mktime( 23, 59, 59, $month, $day, $year ),
+			);
+		}
+	}
+
+	// Case 3: YYYY-MM-DD.
+	if ( preg_match( '/^(\d{4})[\/\-\.](\d{1,2})[\/\-\.](\d{1,2})$/', $cleaned, $matches ) ) {
+		$year  = (int) $matches[1];
+		$month = (int) $matches[2];
+		$day   = (int) $matches[3];
+		if ( checkdate( $month, $day, $year ) ) {
+			return array(
+				'formatted' => sprintf( '%02d/%02d/%04d', $day, $month, $year ),
+				'timestamp' => (int) mktime( 23, 59, 59, $month, $day, $year ),
+			);
+		}
+	}
+
+	return array(
+		'formatted' => $cleaned,
+		'timestamp' => null,
+	);
+}
+
+/**
+ * Retrieves normalized recruitment meta for a post with backward compatibility.
+ *
+ * @param int $post_id Post ID.
+ * @return array<string, string>
+ */
+function vpc_get_recruitment_meta( $post_id ) {
+	$updated = get_post_meta( $post_id, 'vpc_recruitment_updated', true ) ?: get_the_date( 'd/m/Y', $post_id );
+
+	// Deadline: Priority 1 = vpc_recruitment_deadline, Priority 2 = legacy submit_deadline.
+	$deadline_raw = get_post_meta( $post_id, 'vpc_recruitment_deadline', true );
+	if ( '' === $deadline_raw || false === $deadline_raw ) {
+		$legacy = get_post_meta( $post_id, 'submit_deadline', true );
+		if ( ! empty( $legacy ) ) {
+			$deadline_raw = $legacy;
+		}
+	}
+
+	$parsed_deadline = vpc_format_recruitment_deadline( $deadline_raw );
+	$deadline        = $parsed_deadline['formatted'];
+
+	// Status determination.
+	$status_setting = get_post_meta( $post_id, 'vpc_recruitment_status', true );
+	if ( 'Đang tuyển' === $status_setting || 'open' === $status_setting ) {
+		$status = 'Đang tuyển';
+	} elseif ( 'Đã đóng' === $status_setting || 'closed' === $status_setting ) {
+		$status = 'Đã đóng';
+	} else {
+		// Auto mode: So sánh chuẩn xác với hạn nộp.
+		if ( null !== $parsed_deadline['timestamp'] ) {
+			// Nếu hạn nộp đã qua so với thời điểm hiện tại thì tự động đóng tuyển.
+			$status = ( $parsed_deadline['timestamp'] >= time() ) ? 'Đang tuyển' : 'Đã đóng';
+		} else {
+			// Nếu chưa có hạn nộp, các bài đăng từ những năm trước (2024, 2025) mặc định đóng.
+			$post_year = (int) get_the_date( 'Y', $post_id );
+			$status    = ( $post_year > 0 && $post_year < 2026 ) ? 'Đã đóng' : 'Đang tuyển';
+		}
+	}
+
+	$location = get_post_meta( $post_id, 'vpc_recruitment_location', true ) ?: 'Tây Hồ - Hà Nội';
+	$type     = get_post_meta( $post_id, 'vpc_recruitment_type', true ) ?: 'Toàn thời gian (T2 - T7)';
+	$salary   = get_post_meta( $post_id, 'vpc_recruitment_salary', true ) ?: 'Thỏa thuận theo năng lực';
+	$quantity = get_post_meta( $post_id, 'vpc_recruitment_quantity', true ) ?: '02 - 05 nhân sự';
+
+	return array(
+		'updated'  => $updated,
+		'deadline' => $deadline,
+		'status'   => $status,
+		'location' => $location,
+		'type'     => $type,
+		'salary'   => $salary,
+		'quantity' => $quantity,
+	);
+}
+
+/**
+ * Registers Recruitment Meta Box for Posts in WordPress Admin.
+ *
+ * @return void
+ */
+function vpc_add_recruitment_meta_box() {
+	add_meta_box(
+		'vpc_post_recruitment_meta',
+		'Thông tin tuyển dụng (Hạn nộp & Vị trí)',
+		'vpc_render_recruitment_meta_box',
+		'post',
+		'normal',
+		'high'
+	);
+}
+add_action( 'add_meta_boxes', 'vpc_add_recruitment_meta_box' );
+
+/**
+ * Renders the Recruitment Meta Box in the WordPress post editor.
+ *
+ * @param WP_Post $post Current post object.
+ * @return void
+ */
+function vpc_render_recruitment_meta_box( $post ) {
+	wp_nonce_field( 'vpc_save_recruitment_meta', 'vpc_recruitment_meta_nonce' );
+
+	$meta             = vpc_get_recruitment_meta( $post->ID );
+	$current_status   = get_post_meta( $post->ID, 'vpc_recruitment_status', true ) ?: 'auto';
+	$saved_deadline   = get_post_meta( $post->ID, 'vpc_recruitment_deadline', true );
+	$display_deadline = '' !== $saved_deadline ? $saved_deadline : ( 'Đang cập nhật' !== $meta['deadline'] ? $meta['deadline'] : '' );
+	?>
+	<div class="vpc-recruitment-fields" style="font-size:13px;line-height:1.5;">
+		<p style="margin:0 0 12px;color:#666;">
+			Các thông tin này hiển thị trên thẻ tuyển dụng và thanh <strong>Ứng tuyển nhanh</strong>. (Áp dụng cho bài viết thuộc chuyên mục Tuyển dụng).
+		</p>
+		<table class="form-table" role="presentation" style="margin-top:0;">
+			<tbody>
+				<tr>
+					<th scope="row"><label for="vpc_recruitment_deadline">Hạn nộp hồ sơ</label></th>
+					<td>
+						<input class="regular-text" type="text" id="vpc_recruitment_deadline" name="vpc_recruitment_deadline" value="<?php echo esc_attr( $display_deadline ); ?>" placeholder="Ví dụ: 31/10/2026">
+						<p class="description">Định dạng khuyến nghị: <code>DD/MM/YYYY</code> (ví dụ: <code>31/10/2026</code>).</p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="vpc_recruitment_status">Trạng thái tuyển dụng</label></th>
+					<td>
+						<select id="vpc_recruitment_status" name="vpc_recruitment_status">
+							<option value="auto" <?php selected( $current_status, 'auto' ); ?>>Tự động (Theo đợt tuyển &amp; hạn nộp - Khuyên dùng)</option>
+							<option value="Đang tuyển" <?php selected( $current_status, 'Đang tuyển' ); ?>>Đang tuyển (Luôn hiển thị ở tab Đang tuyển)</option>
+							<option value="Đã đóng" <?php selected( $current_status, 'Đã đóng' ); ?>>Đã đóng (Ẩn khỏi tab Đang tuyển)</option>
+						</select>
+						<p class="description">Quyết định hiển thị trên bộ lọc tab "Tất cả" và "Đang tuyển".</p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="vpc_recruitment_location">Địa điểm làm việc</label></th>
+					<td>
+						<input class="large-text" type="text" id="vpc_recruitment_location" name="vpc_recruitment_location" value="<?php echo esc_attr( get_post_meta( $post->ID, 'vpc_recruitment_location', true ) ); ?>" placeholder="Ví dụ: Tây Hồ - Hà Nội">
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="vpc_recruitment_type">Hình thức làm việc</label></th>
+					<td>
+						<input class="large-text" type="text" id="vpc_recruitment_type" name="vpc_recruitment_type" value="<?php echo esc_attr( get_post_meta( $post->ID, 'vpc_recruitment_type', true ) ); ?>" placeholder="Ví dụ: Toàn thời gian (T2 - T7)">
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="vpc_recruitment_salary">Mức thu nhập</label></th>
+					<td>
+						<input class="large-text" type="text" id="vpc_recruitment_salary" name="vpc_recruitment_salary" value="<?php echo esc_attr( get_post_meta( $post->ID, 'vpc_recruitment_salary', true ) ); ?>" placeholder="Ví dụ: 12.000.000đ - 18.000.000đ hoặc Thỏa thuận">
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="vpc_recruitment_quantity">Số lượng tuyển</label></th>
+					<td>
+						<input class="regular-text" type="text" id="vpc_recruitment_quantity" name="vpc_recruitment_quantity" value="<?php echo esc_attr( get_post_meta( $post->ID, 'vpc_recruitment_quantity', true ) ); ?>" placeholder="Ví dụ: 03 người">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<?php
+}
+
+/**
+ * Saves Recruitment Meta Box data securely.
+ *
+ * @param int $post_id Current post ID.
+ * @return void
+ */
+function vpc_save_recruitment_meta_box( $post_id ) {
+	if ( ! isset( $_POST['vpc_recruitment_meta_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['vpc_recruitment_meta_nonce'] ) ), 'vpc_save_recruitment_meta' ) ) {
+		return;
+	}
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return;
+	}
+	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
+
+	$text_fields = array(
+		'vpc_recruitment_deadline',
+		'vpc_recruitment_location',
+		'vpc_recruitment_type',
+		'vpc_recruitment_salary',
+		'vpc_recruitment_quantity',
+	);
+
+	foreach ( $text_fields as $field ) {
+		if ( isset( $_POST[ $field ] ) ) {
+			$val = sanitize_text_field( wp_unslash( $_POST[ $field ] ) );
+			if ( '' !== $val ) {
+				update_post_meta( $post_id, $field, $val );
+			} else {
+				delete_post_meta( $post_id, $field );
+			}
+		}
+	}
+
+	if ( isset( $_POST['vpc_recruitment_status'] ) ) {
+		$status = sanitize_text_field( wp_unslash( $_POST['vpc_recruitment_status'] ) );
+		if ( in_array( $status, array( 'auto', 'Đang tuyển', 'Đã đóng' ), true ) ) {
+			update_post_meta( $post_id, 'vpc_recruitment_status', $status );
+		}
+	}
+}
+add_action( 'save_post_post', 'vpc_save_recruitment_meta_box' );
+
+/**
+ * Registers Recruitment post meta for REST API and Gutenberg compatibility.
+ *
+ * @return void
+ */
+function vpc_register_recruitment_post_meta() {
+	$fields = array(
+		'vpc_recruitment_deadline' => 'string',
+		'vpc_recruitment_status'   => 'string',
+		'vpc_recruitment_location' => 'string',
+		'vpc_recruitment_type'     => 'string',
+		'vpc_recruitment_salary'   => 'string',
+		'vpc_recruitment_quantity' => 'string',
+	);
+
+	foreach ( $fields as $key => $type ) {
+		register_post_meta(
+			'post',
+			$key,
+			array(
+				'show_in_rest'      => true,
+				'single'            => true,
+				'type'              => $type,
+				'sanitize_callback' => 'sanitize_text_field',
+				'auth_callback'     => function() {
+					return current_user_can( 'edit_posts' );
+				},
+			)
+		);
+	}
+}
+add_action( 'init', 'vpc_register_recruitment_post_meta' );
+
 

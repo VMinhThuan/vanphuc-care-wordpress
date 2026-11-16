@@ -3,7 +3,10 @@
 .vpc-milk *, .vpc-milk *::before, .vpc-milk *::after { box-sizing:border-box; }
 .vpc-milk img { display:block; max-width:100%; }
 .vpc-milk a { color:inherit; }
-.vpc-milk__container { width:min(1280px,calc(100% - 40px)); margin-inline:auto; }
+.vpc-milk__container { width:calc(100% - 40px); max-width:none; margin-inline:auto; }
+@media (min-width:1280px) {
+	.vpc-milk__container { width:min(1400px,calc(100% - 160px)); }
+}
 .vpc-milk h1,.vpc-milk h2,.vpc-milk h3,.vpc-milk h4,.vpc-milk p,.vpc-milk ul { margin:0; }
 .vpc-milk ul { padding:0; list-style:none; }
 .vpc-milk__badge { display:inline-flex; align-items:center; justify-content:center; gap:8px; width:max-content; min-height:42px; padding:8px 16px; border:1px solid var(--milk-pink); border-radius:999px; color:#155f95; background:var(--milk-pink-soft); font:500 16px/24px var(--font-body,"Manrope",sans-serif); white-space:nowrap; }
@@ -46,6 +49,9 @@
 .vpc-milk__process-image span { position:absolute; top:-1px; right:-1px; width:65px; height:65px; display:flex; align-items:center; justify-content:center; border-radius:50%; color:#fff; background:var(--milk-blue); font:500 20px/28px var(--font-body,"Manrope",sans-serif); }
 .vpc-milk__process-card h3 { color:var(--milk-blue); font:500 24px/32px var(--font-body,"Manrope",sans-serif); }
 .vpc-milk__process-card p { color:var(--milk-muted); font:500 16px/24px var(--font-body,"Manrope",sans-serif); }
+@media (min-width:1280px) {
+	.vpc-milk__process-card h3 { white-space:nowrap; }
+}
 
 .vpc-milk__packages { height:784px; padding:96px 0; background-color:#fde6e6; background-image:none; }
 .vpc-milk__packages .vpc-milk__section-heading { max-width:869px; margin-inline:auto; }
@@ -62,6 +68,7 @@
 .vpc-milk__package-card li { display:flex; gap:8px; align-items:center; font:500 16px/24px var(--font-body,"Manrope",sans-serif); }
 .vpc-milk__package-card li img { width:24px; height:24px; flex:0 0 24px; align-self:center; }
 .vpc-milk__package-button { min-height:48px; margin-top:auto; align-self:center; padding:12px 24px; border:0; border-radius:999px; color:#fff; background:var(--milk-blue); font:500 16px/24px var(--font-body,"Manrope",sans-serif); cursor:pointer; }
+.vpc-milk__package-button--secondary { border:1px solid var(--milk-pink); color:var(--milk-pink); background:#fff; }
 .vpc-milk__featured { position:absolute; top:-19px; left:50%; transform:translateX(-50%); padding:8px 16px; border-radius:999px; color:#fff; background:var(--milk-pink); font:500 16px/24px var(--font-body,"Manrope",sans-serif); white-space:nowrap; }
 
 .vpc-milk__faq { height:1042px; padding:96px 0; background:linear-gradient(130deg,#f8f8f8 20%,#d1e4f1 131%); }
@@ -110,7 +117,7 @@
 .vpc-milk__services-arrow--next { right:0; }
 
 @media (max-width:1279px) {
-	.vpc-milk__container { width:min(100% - 40px,900px); }
+	.vpc-milk__container { width:calc(100% - 40px); max-width:none; }
 	.vpc-milk__badge { min-height:34px; padding:4px 12px; font-size:12px; line-height:18px; }
 	.vpc-milk__section-heading h2,.vpc-milk__split-copy h2,.vpc-milk__hero h1,.vpc-milk__lead h2 { font-size:32px; line-height:36px; text-align:center; }
 	.vpc-milk__section-heading p,.vpc-milk__split-copy>p { font-size:16px; line-height:24px; text-align:center; }

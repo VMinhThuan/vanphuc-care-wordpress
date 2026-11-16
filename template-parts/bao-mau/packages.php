@@ -39,7 +39,7 @@ $package_benefits = array(
 						<li><?php echo 2 === $package_index ? '24/24' : '10 - 12 tiếng/ ngày'; ?></li>
 						<?php foreach ( $package_benefits as $benefit ) : ?><li><?php echo esc_html( $benefit ); ?></li><?php endforeach; ?>
 					</ul>
-					<button type="button" class="vpc-bao-mau__button vpc-bao-mau__button--primary" <?php echo $button_attrs; ?>>Tư vấn gói này</button>
+					<button type="button" class="vpc-bao-mau__button vpc-bao-mau__button--primary" <?php echo $button_attrs; ?> data-package="<?php echo esc_attr( $package['name'] ); ?>">Tư vấn gói này</button>
 				</article>
 			<?php endforeach; ?>
 		</div>

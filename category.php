@@ -48,7 +48,21 @@ if ( ! $is_knowledge ) {
 		return;
 	}
 
-	// Delegate to standard generic archive template for non-knowledge categories (e.g. tuyen-dung).
+	// 2-Level Recruitment Architecture: Root category renders Recruitment Hub.
+	if ( 'tuyen-dung' === $current_slug ) {
+		require get_template_directory() . '/page-tuyen-dung.php';
+		return;
+	}
+
+	// Any legacy child category of recruitment (e.g. tin-tuyen-dung) redirects 301 to recruitment hub.
+	$recruitment_parent_term = get_category_by_slug( 'tuyen-dung' );
+	if ( ( $recruitment_parent_term instanceof WP_Term && $current_id && cat_is_ancestor_of( $recruitment_parent_term->term_id, $current_id ) )
+		|| 'tin-tuyen-dung' === $current_slug ) {
+		wp_safe_redirect( home_url( '/tuyen-dung/' ), 301 );
+		exit;
+	}
+
+	// Delegate to standard generic archive template for other non-knowledge categories.
 	require get_template_directory() . '/archive.php';
 	return;
 }

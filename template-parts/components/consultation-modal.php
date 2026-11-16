@@ -2,42 +2,9 @@
 /**
  * Component: Consultation Modal Dialog (Popup Đăng ký nhận tư vấn)
  * Fully conforms to VPC Design System (Figma Board 9: Consultation Modal).
- *
- * Quy chuẩn thiết kế VPC Consultation Modal:
- * - Backdrop:
- *   + Nền tối mờ: rgba(41, 41, 41, 0.6) / bg-[#292929]/60 với backdrop-blur-sm
- *   + Animation fade in/out mượt mà
- * - Dialog Container (Modal Card):
- *   + Kích thước: max-w-[560px] (chiều rộng ~560px trên desktop, full-width trừ lề trên mobile)
- *   + Bo góc: 24px (rounded-[24px])
- *   + Nền: #FAFAFA, padding desktop 32px
- *   + Shadow: shadow-2xl / shadow-xl
- *   + Viền: không viền hoặc viền 1px #EBEBEB
- * - Header:
- *   + Nút Close (X): kích thước 15x15px stroke 1.5, màu #292929, hover xoay nhẹ / đổi màu primary-500
- *   + Tiêu đề: Font Fraunces, 28/32, font-medium, màu #155F95 (Primary 700 / Brand Blue)
- *   + Mô tả phụ: Font Manrope, 16/24, font-medium, màu #525252 (Neutral 700)
- * - Form Fields (Kế thừa trọn vẹn quy chuẩn Input/Select VPC):
- *   + Hàng 1 (2 cột): Họ và tên (*), Số điện thoại (*) -> placeholder "Nguyễn Như Linh", "0345678***"
- *   + Hàng 2: Dịch vụ quan tâm (*) -> Select dropdown trigger 50px, bo góc 12px, placeholder "Chọn dịch vụ"
- *   + Hàng 3: Giai đoạn thai kỳ (*) -> 3 lựa chọn dạng pill
- *   + Hàng 4: Tuần thai (*) -> Select dropdown trigger 50px, placeholder "Chọn giai đoạn"
- *   + Hàng 5: Ghi chú -> Input placeholder "Cho chúng tôi biết thêm về nhu cầu của bạn!"
- *   + Hàng 6: Nút Submit "Gửi yêu cầu tư vấn" -> chiều cao 48px, bo góc 24px, bg #1A77BA (Primary 500), text trắng
- * - Trợ năng & Phím tắt:
- *   + Hỗ trợ phím Escape để đóng modal
- *   + Click backdrop ngoài modal để đóng
- *   + Trap focus cơ bản, aria-modal="true", role="dialog"
+ * Dynamically renders specialized form fields when on dedicated service pages.
  *
  * @package VanPhucCare
- *
- * Usage:
- * get_template_part('template-parts/components/consultation-modal', null, [
- *   'modal_id'    => 'consultation-modal',
- *   'title'       => 'Đăng ký tư vấn',
- *   'subtitle'    => 'Để lại thông tin, Vạn Phúc Care sẽ liên hệ tư vấn cho Ba/Mẹ trong thời gian sớm nhất.',
- *   'action_url'  => '',
- * ]);
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -51,6 +18,19 @@ $action_url  = $args['action_url'] ?? '';
 $extra_class = $args['class'] ?? '';
 $services    = vpc_get_consultation_services();
 $gestational_age_options = vpc_get_gestational_age_options();
+
+$current_service = '';
+if ( is_page_template( 'page-bao-mau-tai-nha.php' ) || is_page( 'bao-mau-tai-nha' ) ) {
+	$current_service = 'bao-mau-tai-nha';
+} elseif ( is_page_template( 'page-trung-tam-o-cu.php' ) || is_page( 'trung-tam-o-cu' ) ) {
+	$current_service = 'trung-tam-o-cu';
+} elseif ( is_page_template( 'page-tam-tre-so-sinh.php' ) || is_page( 'tam-tre-so-sinh' ) ) {
+	$current_service = 'tam-be-tai-nha';
+} elseif ( is_page_template( 'page-thong-tac-tia-sua.php' ) || is_page( 'thong-tac-tia-sua' ) ) {
+	$current_service = 'thong-tac-tia-sua';
+} elseif ( is_page_template( 'page-dich-vu-tu-van-nuoi-con-easy-truc-tuyen.php' ) || is_page( 'dich-vu-tu-van-nuoi-con-easy-truc-tuyen' ) ) {
+	$current_service = 'tu-van-nuoi-con-easy';
+}
 ?>
 
 <!-- Consultation Modal Backdrop & Container -->
@@ -64,7 +44,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 >
 	<!-- Modal Card (Max-width 560px, Radius 24px, BG bg-surface-background-default, Figma 1:1) -->
 	<div
-		class="vpc-modal-card relative w-full max-w-[560px] sm:min-h-[668px] bg-surface-background-default rounded-[24px] shadow-2xl p-5 sm:p-8 transition-transform duration-300 transform scale-95 select-text"
+		class="vpc-modal-card relative w-full max-w-[560px] <?php echo ! empty( $current_service ) ? 'min-h-auto' : 'sm:min-h-[668px]'; ?> bg-surface-background-default rounded-[24px] shadow-2xl p-5 sm:p-8 transition-transform duration-300 transform scale-95 select-text"
 		data-modal-card
 	>
 		<!-- Close Button (X icon 1:1 Figma) -->
@@ -95,118 +75,160 @@ $gestational_age_options = vpc_get_gestational_age_options();
 		</div>
 
 		<!-- Form Content -->
-		<form method="post" action="<?php echo esc_url( $action_url ); ?>" class="space-y-5">
-			<?php wp_nonce_field( 'vpc_consultation_nonce', 'vpc_consultation_nonce' ); ?>
-			<input type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
-
-			<!-- Row 1: Họ tên + Số điện thoại (2 columns) -->
-			<div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+		<?php if ( 'bao-mau-tai-nha' === $current_service ) : ?>
+			<form id="vpc-modal-consultation-form" class="vpc-consultation-form" method="post" action="<?php echo esc_url( $action_url ); ?>">
 				<?php
-				get_template_part( 'template-parts/components/form-input', null, [
-					'id'          => $modal_id . '-fullname',
-					'name'        => 'full_name',
-					'label'       => 'Họ và tên',
-					'type'        => 'text',
-					'placeholder' => 'Nguyễn Như Linh',
-					'required'    => true,
-				] );
+				get_template_part( 'template-parts/bao-mau/form-fields', null, array(
+					'prefix' => 'modal-bao-mau',
+				) );
 				?>
-
+			</form>
+		<?php elseif ( 'trung-tam-o-cu' === $current_service ) : ?>
+			<form id="vpc-modal-consultation-form" class="vpc-consultation-form" method="post" action="<?php echo esc_url( $action_url ); ?>">
 				<?php
-				get_template_part( 'template-parts/components/form-input', null, [
-					'id'          => $modal_id . '-phone',
-					'name'        => 'phone',
-					'label'       => 'Số điện thoại',
-					'type'        => 'tel',
-					'placeholder' => '0345678***',
-					'required'    => true,
-				] );
+				get_template_part( 'template-parts/o-cu/form-fields', null, array(
+					'prefix' => 'modal-ocu',
+				) );
 				?>
-			</div>
-
-			<div>
+			</form>
+		<?php elseif ( 'tam-be-tai-nha' === $current_service ) : ?>
+			<form id="vpc-modal-consultation-form" class="vpc-consultation-form" method="post" action="<?php echo esc_url( $action_url ); ?>">
 				<?php
-				get_template_part( 'template-parts/components/form-input', null, [
-					'id'          => $modal_id . '-email',
-					'name'        => 'email',
-					'label'       => 'Email',
-					'type'        => 'email',
-					'placeholder' => 'email@example.com',
-					'required'    => true,
-				] );
+				get_template_part( 'template-parts/bath/form-fields', null, array(
+					'prefix' => 'modal-bath',
+				) );
 				?>
-			</div>
-
-			<!-- Row 2: Dịch vụ quan tâm (Custom Select Dropdown Figma Board 8/9) -->
-			<div>
+			</form>
+		<?php elseif ( 'thong-tac-tia-sua' === $current_service ) : ?>
+			<form id="vpc-modal-consultation-form" class="vpc-consultation-form" method="post" action="<?php echo esc_url( $action_url ); ?>">
 				<?php
-				get_template_part( 'template-parts/components/custom-select', null, [
-					'id'          => $modal_id . '-service',
-					'name'        => 'service',
-					'label'       => 'Dịch vụ quan tâm',
-					'placeholder' => 'Chọn dịch vụ',
-					'required'    => true,
-					'options'     => $services,
-				] );
+				get_template_part( 'template-parts/milk/form-fields', null, array(
+					'prefix' => 'modal-milk',
+				) );
 				?>
-			</div>
+			</form>
+		<?php elseif ( 'tu-van-nuoi-con-easy' === $current_service ) : ?>
+			<form id="vpc-modal-consultation-form" class="vpc-consultation-form" method="post" action="<?php echo esc_url( $action_url ); ?>">
+				<?php
+				get_template_part( 'template-parts/easy/form-fields', null, array(
+					'prefix' => 'modal-easy',
+				) );
+				?>
+			</form>
+		<?php else : ?>
+			<form method="post" action="<?php echo esc_url( $action_url ); ?>" class="space-y-5">
+				<?php wp_nonce_field( 'vpc_consultation_nonce', 'vpc_consultation_nonce' ); ?>
+				<input type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
 
-			<!-- Row 3: Giai đoạn thai kỳ (cập nhật theo comment Figma) -->
-			<fieldset class="vpc-consultation-field vpc-consultation-stage border-0 p-0 m-0">
-				<legend class="block text-base sm:text-xl leading-7 font-medium text-text-body-default select-none">
-					<span class="text-error-500 font-bold mr-0.5">*</span> Giai đoạn thai kỳ
-				</legend>
-				<div class="vpc-consultation-stage__options flex flex-wrap items-center" role="radiogroup" aria-label="Giai đoạn thai kỳ">
-					<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="dang-mang-thai" checked required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 h-10 font-body text-sm font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đang mang thai</span></label>
-					<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="chuan-bi-mang-thai" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 h-10 font-body text-sm font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Chuẩn bị mang thai</span></label>
-					<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="da-sinh-be" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 h-10 font-body text-sm font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đã sinh bé</span></label>
+				<!-- Row 1: Họ tên + Số điện thoại (2 columns) -->
+				<div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+					<?php
+					get_template_part( 'template-parts/components/form-input', null, [
+						'id'          => $modal_id . '-fullname',
+						'name'        => 'full_name',
+						'label'       => 'Họ và tên',
+						'type'        => 'text',
+						'placeholder' => 'Nguyễn Như Linh',
+						'required'    => true,
+					] );
+					?>
+
+					<?php
+					get_template_part( 'template-parts/components/form-input', null, [
+						'id'          => $modal_id . '-phone',
+						'name'        => 'phone',
+						'label'       => 'Số điện thoại',
+						'type'        => 'tel',
+						'placeholder' => '0345678***',
+						'required'    => true,
+					] );
+					?>
 				</div>
-			</fieldset>
 
-			<!-- Row 4: Tuần thai; placeholder mới theo Figma là "Chọn giai đoạn". -->
-			<div>
-				<?php
-				get_template_part( 'template-parts/components/form-input', null, [
-					'id'          => $modal_id . '-gestational-age',
-					'name'        => 'gestational_age',
-					'label'       => 'Tuần thai',
-					'type'        => 'select',
-					'placeholder' => 'Chọn giai đoạn',
-					'required'    => true,
-					'options'     => $gestational_age_options,
-				] );
-				?>
-			</div>
+				<div>
+					<?php
+					get_template_part( 'template-parts/components/form-input', null, [
+						'id'          => $modal_id . '-email',
+						'name'        => 'email',
+						'label'       => 'Email',
+						'type'        => 'email',
+						'placeholder' => 'email@example.com',
+						'required'    => true,
+					] );
+					?>
+				</div>
 
-			<!-- Row 4: Ghi chú -->
-			<div>
-				<?php
-				get_template_part( 'template-parts/components/form-input', null, [
-					'id'          => $modal_id . '-question',
-					'name'        => 'question',
-					'label'       => 'Ghi chú',
-					'type'        => 'text',
-					'placeholder' => 'Cho chúng tôi biết thêm về nhu cầu của bạn!',
-					'required'    => false,
-				] );
-				?>
-			</div>
+				<!-- Row 2: Dịch vụ quan tâm (Custom Select Dropdown Figma Board 8/9) -->
+				<div>
+					<?php
+					get_template_part( 'template-parts/components/custom-select', null, [
+						'id'          => $modal_id . '-service',
+						'name'        => 'service',
+						'label'       => 'Dịch vụ quan tâm',
+						'placeholder' => 'Chọn dịch vụ',
+						'required'    => true,
+						'options'     => $services,
+					] );
+					?>
+				</div>
 
-			<!-- Cloudflare Turnstile CAPTCHA -->
-			<?php get_template_part( 'template-parts/components/turnstile' ); ?>
+				<!-- Row 3: Giai đoạn thai kỳ (cập nhật theo comment Figma) -->
+				<fieldset class="vpc-consultation-field vpc-consultation-stage border-0 p-0 m-0">
+					<legend class="block text-base sm:text-xl leading-7 font-medium text-text-body-default select-none">
+						<span class="text-error-500 font-bold mr-0.5">*</span> Giai đoạn thai kỳ
+					</legend>
+					<div class="vpc-consultation-stage__options flex flex-wrap items-center" role="radiogroup" aria-label="Giai đoạn thai kỳ">
+						<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="dang-mang-thai" checked required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 h-10 font-body text-sm font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đang mang thai</span></label>
+						<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="chuan-bi-mang-thai" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 h-10 font-body text-sm font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Chuẩn bị mang thai</span></label>
+						<label class="cursor-pointer shrink-0"><input class="peer sr-only" type="radio" name="pregnancy_stage" value="da-sinh-be" required><span class="inline-flex items-center justify-center rounded-full border border-border-primary-default bg-transparent px-4 h-10 font-body text-sm font-medium text-text-body-default cursor-pointer whitespace-nowrap transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-border-focus-default peer-checked:border-border-primary-default peer-checked:bg-surface-button-primary-default peer-checked:text-text-inverse-default">Đã sinh bé</span></label>
+					</div>
+				</fieldset>
 
-			<!-- Row 5: Submit Button (40px mobile, 48px desktop) -->
-			<div>
-				<?php
-				get_template_part( 'template-parts/components/button', null, [
-					'text'    => 'Gửi yêu cầu tư vấn',
-					'variant' => 'primary',
-					'size'    => 'body',
-					'type'    => 'submit',
-					'class'   => 'w-full justify-center',
-				] );
-				?>
-			</div>
-		</form>
+				<!-- Row 4: Tuần thai; placeholder mới theo Figma là "Chọn giai đoạn". -->
+				<div>
+					<?php
+					get_template_part( 'template-parts/components/form-input', null, [
+						'id'          => $modal_id . '-gestational-age',
+						'name'        => 'gestational_age',
+						'label'       => 'Tuần thai',
+						'type'        => 'select',
+						'placeholder' => 'Chọn giai đoạn',
+						'required'    => true,
+						'options'     => $gestational_age_options,
+					] );
+					?>
+				</div>
+
+				<!-- Row 4: Ghi chú -->
+				<div>
+					<?php
+					get_template_part( 'template-parts/components/form-input', null, [
+						'id'          => $modal_id . '-question',
+						'name'        => 'question',
+						'label'       => 'Ghi chú',
+						'type'        => 'text',
+						'placeholder' => 'Cho chúng tôi biết thêm về nhu cầu của bạn!',
+						'required'    => false,
+					] );
+					?>
+				</div>
+
+				<!-- Cloudflare Turnstile CAPTCHA -->
+				<?php get_template_part( 'template-parts/components/turnstile' ); ?>
+
+				<!-- Row 5: Submit Button (40px mobile, 48px desktop) -->
+				<div>
+					<?php
+					get_template_part( 'template-parts/components/button', null, [
+						'text'    => 'Gửi yêu cầu tư vấn',
+						'variant' => 'primary',
+						'size'    => 'body',
+						'type'    => 'submit',
+						'class'   => 'w-full justify-center',
+					] );
+					?>
+				</div>
+			</form>
+		<?php endif; ?>
 	</div>
 </div>

@@ -169,6 +169,11 @@
 		level.textContent = data.level;
 		title.textContent = data.title;
 		description.textContent = data.description;
+		var ctaButton = modal.querySelector('[data-open-modal]');
+		if (ctaButton) {
+			ctaButton.setAttribute('data-room', data.title);
+			ctaButton.setAttribute('data-package', data.title);
+		}
 		var tabLabels = data.tabs || [];
 		variantContainer.hidden = !tabLabels.length;
 		variants.forEach(function (variant, index) {

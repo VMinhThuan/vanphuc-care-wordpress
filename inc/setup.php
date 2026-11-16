@@ -435,6 +435,7 @@ function vanphuccare_is_recruitment_page() {
 
 	return is_page( 'tuyen-dung' )
 		|| is_page_template( 'page-tuyen-dung.php' )
+		|| is_category( 'tuyen-dung' )
 		|| ! empty( get_query_var( 'vpc_is_recruitment' ) )
 		|| 'tuyen-dung' === $request_path;
 }

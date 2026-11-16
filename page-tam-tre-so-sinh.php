@@ -44,7 +44,7 @@ $other_services = array(
 	get_template_part( 'template-parts/bath/packages' );
 	get_template_part( 'template-parts/bath/faq' );
 	get_template_part( 'template-parts/sections/feedback', null, array(
-		'items'        => $feedback,
+		'items'        => vpc_get_real_feedback_items(),
 		'image_prefix' => 'easy',
 	) );
 	get_template_part( 'template-parts/bath/consultation' );

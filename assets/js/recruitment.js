@@ -10,18 +10,28 @@
 	var searchInput = page.querySelector( '#recruitment-search' );
 	var cards = Array.prototype.slice.call( page.querySelectorAll( '[data-recruitment-card]' ) );
 	var filterButtons = Array.prototype.slice.call( page.querySelectorAll( '[data-recruitment-filter]' ) );
+	var emptyMessage = page.querySelector( '[data-recruitment-empty]' );
 	var activeFilter = 'all';
 
 	function applyFilters() {
 		var query = ( searchInput ? searchInput.value : '' ).trim().toLowerCase();
+		var visibleCount = 0;
 
 		cards.forEach( function ( card ) {
 			var title = ( card.getAttribute( 'data-title' ) || '' ).toLowerCase();
 			var status = card.getAttribute( 'data-status' ) || '';
 			var matchesFilter = activeFilter === 'all' || status === activeFilter;
 			var matchesSearch = ! query || title.indexOf( query ) !== -1;
-			card.hidden = ! ( matchesFilter && matchesSearch );
+			var isVisible = matchesFilter && matchesSearch;
+			card.hidden = ! isVisible;
+			if ( isVisible ) {
+				visibleCount++;
+			}
 		} );
+
+		if ( emptyMessage ) {
+			emptyMessage.style.display = visibleCount === 0 ? 'block' : 'none';
+		}
 	}
 
 	filterButtons.forEach( function ( button ) {

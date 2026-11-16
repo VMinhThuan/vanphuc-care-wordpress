@@ -43,7 +43,7 @@ $packages = array(
 							<li><img src="<?php echo esc_url( $shared_uri . '/check-badge.svg' ); ?>" width="24" height="24" alt="">Quà tặng: Khóa học các bệnh lý thường gặp ở trẻ sơ sinh</li>
 						<?php endif; ?>
 					</ul>
-					<button type="button" class="vpc-bath__package-button" <?php echo $button_attrs; ?>>Tư vấn gói này</button>
+					<button type="button" class="vpc-bath__package-button" <?php echo $button_attrs; ?> data-package="<?php echo esc_attr( $package['name'] ); ?>">Tư vấn gói này</button>
 				</article>
 			<?php endforeach; ?>
 		</div>

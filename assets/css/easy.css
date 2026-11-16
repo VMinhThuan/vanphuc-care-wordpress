@@ -69,7 +69,7 @@
 
 .vpc-easy__choices { height: 1134px; padding: 96px 0; background: linear-gradient(215deg, #f8f8f8 64%, #d1e4f1 102%); }
 .vpc-easy__choice-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 600px)); gap: 24px; justify-content: center; margin-top: 24px; }
-.vpc-easy__choice-card { min-height: 716px; padding: 24px 16px; display: flex; flex-direction: column; gap: 20px; border: 1px solid var(--easy-border); border-radius: 24px; background: #fff; box-shadow: 0 1px 5px #00000026; }
+.vpc-easy__choice-card { min-height: 716px; padding: 16px; display: flex; flex-direction: column; gap: 20px; border: 1px solid var(--easy-border); border-radius: 24px; background: #fff; box-shadow: 0 1px 5px #00000026; }
 .vpc-easy__choice-image { width: 100%; height: 366px; border-radius: 12px; object-fit: cover; }
 .vpc-easy__choice-card:first-child .vpc-easy__choice-image { object-position: center 23%; }
 .vpc-easy__choice-card:nth-child(2) .vpc-easy__choice-image { object-position: center 42%; }
@@ -188,7 +188,7 @@
 	.vpc-easy__icon-list { width: 100%; gap: 16px; text-align: left; }
 	.vpc-easy__choices { height: 1946px; padding: 40px 0; }
 	.vpc-easy__choice-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 24px; }
-	.vpc-easy__choice-card { min-height: 788px; padding: 24px 16px; }
+	.vpc-easy__choice-card { min-height: 788px; padding: 16px; }
 	.vpc-easy__choice-image { height: 366px; }
 	.vpc-easy__health { height: 918px; padding: 40px 0; }
 	.vpc-easy__health .vpc-easy__split-copy { gap: 24px; }

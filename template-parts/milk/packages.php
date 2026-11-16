@@ -44,7 +44,7 @@ $packages = array(
 							<?php endforeach; ?>
 						</ul>
 					</div>
-					<button type="button" class="vpc-milk__package-button" <?php echo $button_attrs; ?>>Tư vấn gói này</button>
+					<button type="button" class="vpc-milk__package-button<?php echo $package['featured'] ? '' : ' vpc-milk__package-button--secondary'; ?>" <?php echo $button_attrs; ?> data-package="<?php echo esc_attr( $package['name'] ); ?>">Tư vấn gói này</button>
 				</article>
 			<?php endforeach; ?>
 		</div>

@@ -56,7 +56,21 @@ $render_hub_card = static function ( $post, $badge = '', $variant = 'standard' )
 	}
 	$url        = get_permalink( $post );
 	$title      = get_the_title( $post );
-	$excerpt    = wp_trim_words( get_the_excerpt( $post ), 22, '...' );
+	$excerpt_source = preg_replace(
+		'/\s*(?:\[\s*(?:…|\.\.\.)\s*\]|…|\.\.\.)\s*$/u',
+		'',
+		wp_strip_all_tags( get_the_excerpt( $post ) )
+	);
+	$content_source = preg_replace(
+		'/\s*(?:\[\s*(?:…|\.\.\.)\s*\]|…|\.\.\.)\s*$/u',
+		'',
+		wp_strip_all_tags( strip_shortcodes( get_the_content( '', false, $post ) ) )
+	);
+	$excerpt_words = preg_split( '/\s+/u', trim( (string) $excerpt_source ), -1, PREG_SPLIT_NO_EMPTY );
+	if ( count( $excerpt_words ) < 31 && strlen( trim( (string) $content_source ) ) > strlen( trim( (string) $excerpt_source ) ) ) {
+		$excerpt_source = $content_source;
+	}
+	$excerpt = wp_trim_words( (string) $excerpt_source, 45, '' );
 	$date       = get_the_date( 'd/m/Y', $post );
 	$author     = get_the_author_meta( 'display_name', (int) $post->post_author ) ?: 'Content VPC';
 	$thumb      = has_post_thumbnail( $post ) ? get_the_post_thumbnail_url( $post, 'medium_large' ) : $asset( 'news-nurse-baby.jpeg' );
@@ -135,7 +149,7 @@ $render_hub_card = static function ( $post, $badge = '', $variant = 'standard' )
 						<?php $render_hub_card( $post, 'Sự kiện nổi bật', 'standard' ); ?>
 					<?php endforeach; ?>
 				</div>
-				<a class="vpc-hub-more" href="<?php echo esc_url( home_url( '/tin-tuc/su-kien-noi-bat/' ) ); ?>">Xem thêm</a>
+				<a class="vpc-hub-more" href="<?php echo esc_url( home_url( '/tin-tuc/su-kien-noi-bat/' ) ); ?>">Xem tất cả</a>
 			<?php else : ?>
 				<p class="vpc-hub-empty">Đang cập nhật các sự kiện nổi bật mới nhất...</p>
 			<?php endif; ?>
@@ -157,7 +171,7 @@ $render_hub_card = static function ( $post, $badge = '', $variant = 'standard' )
 						<?php $render_hub_card( $post, 'Tin mới', 'standard' ); ?>
 					<?php endforeach; ?>
 				</div>
-				<a class="vpc-hub-more" href="<?php echo esc_url( home_url( '/tin-tuc/tin-moi/' ) ); ?>">Xem thêm</a>
+				<a class="vpc-hub-more" href="<?php echo esc_url( home_url( '/tin-tuc/tin-moi/' ) ); ?>">Xem tất cả</a>
 			<?php else : ?>
 				<p class="vpc-hub-empty">Đang cập nhật các tin tức mới nhất...</p>
 			<?php endif; ?>

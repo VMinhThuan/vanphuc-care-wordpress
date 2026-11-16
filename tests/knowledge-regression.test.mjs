@@ -267,4 +267,52 @@ describe('Knowledge Editorial Regression Tests', () => {
       assert.ok(enqueueCode.includes("! $is_news_page"), 'Must prevent knowledge.css from overriding news.css');
     });
   });
+
+  describe('8. Recruitment 2-Level Architecture Alignment', () => {
+    test('category.php routes root tuyen-dung to page-tuyen-dung.php', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'category.php'), 'utf8');
+      assert.ok(code.includes("'tuyen-dung' === $current_slug"), 'Must check for root tuyen-dung');
+      assert.ok(code.includes("require get_template_directory() . '/page-tuyen-dung.php'"), 'Must require page-tuyen-dung.php');
+    });
+
+    test('category.php redirects legacy child categories of tuyen-dung to /tuyen-dung/', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'category.php'), 'utf8');
+      assert.ok(code.includes("wp_safe_redirect( home_url( '/tuyen-dung/' ), 301 )"), 'Must redirect child categories 301 to hub');
+    });
+
+    test('page-tuyen-dung.php queries dynamic recruitment posts and resolves permalinks', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'page-tuyen-dung.php'), 'utf8');
+      assert.ok(code.includes("'category_name'       => 'tuyen-dung'"), 'Must query category tuyen-dung');
+      assert.ok(code.includes("get_permalink( $post_id )"), 'Must use dynamic post permalink for job cards');
+      assert.ok(code.includes("empty( $jobs )"), 'Must have fallback mock jobs for zero-post environments');
+    });
+
+    test('template-parts/recruitment/detail.php provides 2-level breadcrumb without redundant child category', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'template-parts/recruitment/detail.php'), 'utf8');
+      assert.ok(code.includes("home_url( '/tuyen-dung/' )"), 'Must link breadcrumb to /tuyen-dung/');
+      assert.ok(!code.includes('<span>Tin tuyển dụng</span>'), 'Must NOT have redundant Tin tuyển dụng middle breadcrumb');
+    });
+
+    test('inc/setup.php recognizes category tuyen-dung as recruitment page', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'inc/setup.php'), 'utf8');
+      assert.ok(code.includes("is_category( 'tuyen-dung' )"), 'Must include is_category( tuyen-dung ) in is_recruitment_page check');
+    });
+
+    test('inc/content-types.php formats legacy submit_deadline YYYYMMDD and provides vpc_get_recruitment_meta', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'inc/content-types.php'), 'utf8');
+      assert.ok(code.includes('vpc_format_recruitment_deadline'), 'Must have deadline formatter');
+      assert.ok(code.includes('submit_deadline'), 'Must check legacy submit_deadline key');
+      assert.ok(code.includes('vpc_recruitment_deadline'), 'Must check new vpc_recruitment_deadline key');
+      assert.ok(code.includes('vpc_get_recruitment_meta'), 'Must export vpc_get_recruitment_meta helper');
+    });
+
+    test('inc/content-types.php registers recruitment meta box with full fields', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'inc/content-types.php'), 'utf8');
+      assert.ok(code.includes('vpc_add_recruitment_meta_box'), 'Must register recruitment meta box');
+      assert.ok(code.includes('vpc_render_recruitment_meta_box'), 'Must render recruitment meta box');
+      assert.ok(code.includes('vpc_save_recruitment_meta_box'), 'Must save recruitment meta box');
+      assert.ok(code.includes('vpc_recruitment_status'), 'Must have status field');
+      assert.ok(code.includes('vpc_recruitment_location'), 'Must have location field');
+    });
+  });
 });

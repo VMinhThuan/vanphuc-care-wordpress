@@ -37,7 +37,7 @@ $prenatal_image  = static function ( $filename, $size = 'full' ) {
 			<h3>Sẵn sàng cùng nhau đón bé?</h3>
 			<p>Để lại thông tin để được tư vấn buổi học phù hợp với gia đình.</p>
 		</div>
-		<a class="prenatal-button prenatal-button--primary prenatal-button--large" href="#prenatal-registration">Tư vấn lớp học</a>
+		<a class="prenatal-button prenatal-button--primary" href="#prenatal-registration">Tư vấn lớp học</a>
 	</div>
 </section>
 

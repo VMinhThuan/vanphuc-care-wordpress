@@ -1,3 +1,10 @@
+.vpc-recruitment-page,
+.vpc-recruitment-page *,
+.vpc-recruitment-page *::before,
+.vpc-recruitment-page *::after {
+	box-sizing: border-box;
+}
+
 .vpc-recruitment-page {
 	--recruitment-blue: #1a77ba;
 	--recruitment-blue-light: #d1e4f1;
@@ -5,6 +12,8 @@
 	--recruitment-pink-light: #fde6e6;
 	--recruitment-ink: #292929;
 	--recruitment-muted: #525252;
+	--recruitment-shell-width: 1560px;
+	--recruitment-shell-gutter: 80px;
 	background: #f8f8f8;
 	color: var(--recruitment-ink);
 	padding-bottom: 0;
@@ -19,12 +28,20 @@
 
 .vpc-recruitment-hero {
 	min-height: 418px;
-	padding: 40px 80px 48px;
+	display: flex;
+	justify-content: center;
+	background: linear-gradient(180deg, #f8f8f8 22%, #fde6e6 125%);
+}
+
+.vpc-recruitment-hero__inner {
+	width: 100%;
+	max-width: var(--recruitment-shell-width);
+	min-height: 418px;
+	padding: 40px var(--recruitment-shell-gutter) 48px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	gap: 64px;
-	background: linear-gradient(180deg, #f8f8f8 22%, #fde6e6 125%);
 }
 
 .vpc-recruitment-hero__copy {
@@ -56,7 +73,8 @@
 }
 
 .vpc-recruitment-badge__mobile,
-.vpc-recruitment-search__mobile {
+.vpc-recruitment-search__mobile,
+.vpc-recruitment-copy__mobile {
 	display: none;
 }
 
@@ -150,7 +168,6 @@
 .vpc-recruitment-hero__accent {
 	position: absolute;
 	display: block;
-	border-radius: 50%;
 }
 
 .vpc-recruitment-hero__blob {
@@ -158,15 +175,16 @@
 	left: 50px;
 	width: 340px;
 	height: 340px;
+	border-radius: 50%;
 	background: var(--recruitment-blue-light);
 }
 
 .vpc-recruitment-hero__accent {
-	top: 251px;
-	left: 279px;
-	width: 116px;
-	height: 116px;
-	background: var(--recruitment-pink-light);
+	top: 251.6px;
+	left: 278.8px;
+	width: 115.6px;
+	height: 115.6px;
+	pointer-events: none;
 }
 
 .vpc-recruitment-hero__mascot {
@@ -204,7 +222,7 @@
 }
 
 .vpc-recruitment-jobs__inner {
-	max-width: 1280px;
+	max-width: calc(var(--recruitment-shell-width) - (var(--recruitment-shell-gutter) * 2));
 	margin: 0 auto;
 }
 
@@ -367,7 +385,7 @@
 	align-items: center;
 	justify-content: center;
 	gap: 80px;
-	background: linear-gradient(21deg, #fde6e6 4%, #f8f8f8 44%);
+	background: linear-gradient(21.123661deg, #d1e4f1 4.1719%, #f8f8f8 43.272%);
 }
 
 .vpc-recruitment-process__intro {
@@ -393,7 +411,7 @@
 
 .vpc-recruitment-process__steps {
 	width: 100%;
-	max-width: 1280px;
+	max-width: calc(var(--recruitment-shell-width) - (var(--recruitment-shell-gutter) * 2));
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -411,10 +429,11 @@
 }
 
 .vpc-recruitment-step__marker {
-	width: 56px;
-	height: 56px;
+	width: 100px;
+	height: 100px;
 	display: flex;
 	flex-direction: column;
+	gap: 8px;
 	align-items: center;
 	justify-content: center;
 	border-radius: 50%;
@@ -455,6 +474,8 @@
 
 .vpc-recruitment-team {
 	width: 100%;
+	max-width: var(--recruitment-shell-width);
+	margin-inline: auto;
 	height: 673px;
 	overflow: hidden;
 }
@@ -469,6 +490,10 @@
 
 @media (max-width: 1279px) {
 	.vpc-recruitment-hero {
+		min-height: 0;
+	}
+
+	.vpc-recruitment-hero__inner {
 		min-height: 0;
 		padding: 48px 24px 40px;
 		flex-direction: column;
@@ -526,18 +551,61 @@
 		line-height: 52px;
 	}
 
+	.vpc-recruitment-team {
+		height: min(56vw, 520px);
+	}
+}
+
+/* Keep all recruitment steps on one row while the desktop canvas gets
+ * narrower than the full Figma layout. */
+@media (min-width: 1280px) and (max-width: 1439px) {
 	.vpc-recruitment-process__steps {
-		flex-wrap: wrap;
-		justify-content: center;
-		gap: 24px;
+		gap: 8px;
+	}
+
+	.vpc-recruitment-step {
+		width: auto;
+		flex: 1 1 0;
+		min-width: 0;
 	}
 
 	.vpc-recruitment-process__arrow {
-		display: none;
+		width: 52px;
+		flex: 0 1 52px;
 	}
 
-	.vpc-recruitment-team {
-		height: min(56vw, 520px);
+	.vpc-recruitment-step__text p {
+		font-size: 14px;
+		line-height: 22px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+	.vpc-recruitment-process__steps {
+		gap: 8px;
+		align-items: flex-start;
+	}
+
+	.vpc-recruitment-step {
+		width: auto;
+		flex: 1 1 0;
+		min-width: 0;
+	}
+
+	.vpc-recruitment-process__arrow {
+		width: clamp(28px, 4vw, 48px);
+		flex: 0 1 clamp(28px, 4vw, 48px);
+		margin-top: 46px;
+	}
+
+	.vpc-recruitment-step__marker {
+		width: clamp(72px, 8vw, 100px);
+		height: clamp(72px, 8vw, 100px);
+	}
+
+	.vpc-recruitment-step__text p {
+		font-size: clamp(13px, 1.25vw, 16px);
+		line-height: 22px;
 	}
 }
 
@@ -549,9 +617,15 @@
 	.vpc-recruitment-hero {
 		position: relative;
 		height: 419px;
+		background: linear-gradient(180deg, #f8f8f8 0%, #fde6e6 125.06%);
+	}
+
+	.vpc-recruitment-hero__inner {
+		position: relative;
+		height: 100%;
+		min-height: 0;
 		padding: 0 20px;
 		display: block;
-		background: linear-gradient(180deg, #f8f8f8 0%, #fde6e6 125.06%);
 	}
 
 	.vpc-recruitment-hero__copy {
@@ -562,10 +636,14 @@
 		position: absolute;
 		top: 32px;
 		left: 50%;
+		width: 183px;
+		height: 34px;
 		transform: translateX(-50%);
+		justify-content: center;
 		gap: 8px;
-		padding: 4px 12px;
+		padding: 4px 8px;
 		background: var(--recruitment-pink-light);
+		white-space: nowrap;
 	}
 
 	.vpc-recruitment-badge__desktop,
@@ -576,6 +654,10 @@
 	.vpc-recruitment-badge__mobile,
 	.vpc-recruitment-search__mobile {
 		display: inline;
+	}
+
+	.vpc-recruitment-badge__mobile {
+		color: var(--recruitment-blue);
 	}
 
 	.vpc-recruitment-hero h1 {
@@ -712,16 +794,18 @@
 	}
 
 	.vpc-recruitment-process {
-		height: 1152px;
-		min-height: 1152px;
+		height: 668px;
+		min-height: 668px;
 		padding-top: 40px;
 		padding-bottom: 40px;
 		gap: 24px;
 		justify-content: flex-start;
-		background: linear-gradient(68.72deg, #fde6e6 4.17%, #f8f8f8 43.27%);
+		background: linear-gradient(56.113313568634155deg, #d1e4f1 4.1719%, #f8f8f8 43.272%);
 	}
 
 	.vpc-recruitment-process__intro {
+		width: 100%;
+		height: 120px;
 		text-align: left;
 	}
 
@@ -731,30 +815,84 @@
 	}
 
 	.vpc-recruitment-process__intro p {
+		margin-top: 0;
+		font-size: 16px;
+		line-height: 24px;
 		text-align: center;
 	}
 
 	.vpc-recruitment-process__steps {
-		gap: 24px;
+		position: relative;
+		width: 100%;
+		height: 444px;
+		gap: 28px;
 		flex-direction: column;
 		justify-content: flex-start;
+		align-items: stretch;
+	}
+
+	.vpc-recruitment-process__arrow {
+		display: none;
+	}
+
+	.vpc-recruitment-process__steps::before {
+		content: "";
+		position: absolute;
+		z-index: 0;
+		top: 72px;
+		left: 15px;
+		width: 2px;
+		height: 290px;
+		background: #f8b4b5;
 	}
 
 	.vpc-recruitment-step {
-		width: 350px;
-		height: 196px;
-		min-height: 196px;
-		gap: 12px;
+		position: relative;
+		z-index: 1;
+		width: 100%;
+		height: 90px;
+		min-height: 90px;
+		flex-direction: row;
+		align-items: flex-start;
+		gap: 16px;
+		text-align: left;
 	}
 
 	.vpc-recruitment-step__marker {
-		width: 100px;
-		height: 100px;
-		flex: 0 0 100px;
+		width: 72px;
+		height: 72px;
+		flex: 0 0 72px;
+	}
+
+	.vpc-recruitment-step__text {
+		width: auto;
+		min-width: 0;
+		padding-top: 6px;
+		text-align: left;
+	}
+
+	.vpc-recruitment-step__text h3 {
+		font-size: 20px;
+		line-height: 28px;
+	}
+
+	.vpc-recruitment-step__text p {
+		margin-top: 0;
+		font-size: 16px;
+		line-height: 24px;
+	}
+
+	.vpc-recruitment-copy__desktop {
+		display: none;
+	}
+
+	.vpc-recruitment-copy__mobile {
+		display: inline;
 	}
 
 	.vpc-recruitment-team {
-		display: none;
+		display: block;
+		height: 256px;
 	}
 
 }

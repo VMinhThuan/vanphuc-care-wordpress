@@ -20,8 +20,20 @@ if ( empty( $title ) || 'tin tuyển dụng' === strtolower( trim( $title ) ) ) 
 	$title = 'Tuyển dụng Điều dưỡng, Nữ hộ sinh làm việc tại Trung tâm Ở cữ';
 }
 
-$updated  = get_post_meta( get_the_ID(), 'vpc_recruitment_updated', true ) ?: '17/07/2025';
-$deadline = get_post_meta( get_the_ID(), 'vpc_recruitment_deadline', true ) ?: '21/08/2025';
+$post_id = get_the_ID();
+$meta    = function_exists( 'vpc_get_recruitment_meta' )
+	? vpc_get_recruitment_meta( $post_id )
+	: array(
+		'updated'  => '17/07/2025',
+		'deadline' => '21/08/2025',
+		'location' => 'Tây Hồ - Hà Nội',
+		'type'     => 'Toàn thời gian (T2 - T7)',
+		'salary'   => 'Thỏa thuận theo năng lực',
+		'quantity' => '02 - 05 nhân sự',
+	);
+
+$updated  = $meta['updated'];
+$deadline = $meta['deadline'];
 $content  = (string) get_the_content();
 $has_body = '' !== trim( wp_strip_all_tags( $content ) );
 
@@ -41,10 +53,10 @@ $related_jobs = array(
 );
 
 $quick_rows = array(
-	'Địa điểm làm việc' => '[Cần client cung cấp]',
-	'Hình thức'         => '[Cần client cung cấp]',
-	'Thu nhập'          => '[Cần client cung cấp]',
-	'Số lượng tuyển'    => '[Cần client cung cấp]',
+	'Địa điểm làm việc' => $meta['location'],
+	'Hình thức'         => $meta['type'],
+	'Thu nhập'          => $meta['salary'],
+	'Số lượng tuyển'    => $meta['quantity'],
 	'Hạn nộp hồ sơ'     => $deadline,
 );
 ?>
@@ -57,16 +69,12 @@ $quick_rows = array(
 				<img src="<?php echo esc_url( $detail_uri . '/chevron-right.svg' ); ?>" width="16" height="16" alt="" aria-hidden="true">
 				<a href="<?php echo esc_url( home_url( '/tuyen-dung/' ) ); ?>">Tuyển dụng</a>
 				<img src="<?php echo esc_url( $detail_uri . '/chevron-right.svg' ); ?>" width="16" height="16" alt="" aria-hidden="true">
-				<span>Tin tuyển dụng</span>
-				<img src="<?php echo esc_url( $detail_uri . '/chevron-right.svg' ); ?>" width="16" height="16" alt="" aria-hidden="true">
 				<strong><?php echo esc_html( $title ); ?></strong>
 			</div>
 			<div class="vpc-recruitment-detail__breadcrumb-mobile">
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">Trang chủ</a>
 				<img src="<?php echo esc_url( $detail_uri . '/chevron-right.svg' ); ?>" width="16" height="16" alt="" aria-hidden="true">
 				<a href="<?php echo esc_url( home_url( '/tuyen-dung/' ) ); ?>">Tuyển dụng</a>
-				<img src="<?php echo esc_url( $detail_uri . '/chevron-right.svg' ); ?>" width="16" height="16" alt="" aria-hidden="true">
-				<span>Tin tuyển dụng</span>
 			</div>
 		</nav>
 

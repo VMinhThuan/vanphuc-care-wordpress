@@ -39,14 +39,22 @@ $default_items = array(
 	),
 );
 
-$items        = isset( $args['items'] ) && is_array( $args['items'] ) && ! empty( $args['items'] ) ? $args['items'] : $default_items;
+$items        = isset( $args['items'] ) && is_array( $args['items'] ) && ! empty( $args['items'] ) ? $args['items'] : ( function_exists( 'vpc_get_real_feedback_items' ) ? vpc_get_real_feedback_items() : $default_items );
 $image_prefix = isset( $args['image_prefix'] ) ? trim( (string) $args['image_prefix'], '/' ) : '';
+$avatar_map   = function_exists( 'vpc_get_feedback_avatar_map' ) ? vpc_get_feedback_avatar_map() : array();
 $badge        = isset( $args['badge'] ) ? (string) $args['badge'] : 'FEEDBACK';
 $description  = isset( $args['description'] ) && is_array( $args['description'] ) ? $args['description'] : array(
 	'Trong hành trình cùng mẹ trải đầy yêu thương, Vạn Phúc Care đã nhận được sự tin yêu của hàng ngàn mẹ bỉm.',
 	'Chúng tôi cam kết đồng hành cùng Mẹ và Bé trong 2 năm đầu đời.',
 );
-$image_url    = static function ( $path ) use ( $image_prefix ) {
+$image_url    = static function ( $path, $name = '' ) use ( $image_prefix, $avatar_map ) {
+	if ( isset( $avatar_map[ $name ] ) ) {
+		$path        = $avatar_map[ $name ];
+		$image_prefix = '';
+	}
+	if ( 0 === strpos( ltrim( (string) $path, '/' ), 'Avatar-feedback/' ) ) {
+		$image_prefix = '';
+	}
 	$path = ( $image_prefix ? $image_prefix . '/' : '' ) . ltrim( (string) $path, '/' );
 	return function_exists( 'vpc_image_url' ) ? vpc_image_url( $path, 'thumbnail' ) : '';
 };
@@ -80,7 +88,7 @@ $row_two = array_merge( array_reverse( $items ), array_reverse( $items ) );
 			<div class="overflow-hidden w-full py-2 xl:py-9">
 				<div class="<?php echo esc_attr( $row['animation'] ); ?> flex gap-5 w-max">
 					<?php foreach ( $row['items'] as $item ) : ?>
-						<?php $avatar_url = $image_url( $item['image'] ); ?>
+						<?php $avatar_url = $image_url( $item['image'], $item['name'] ?? '' ); ?>
 						<article class="w-[290px] sm:w-[349px] shrink-0 bg-surface-card-default rounded-xl p-6 sm:px-8 sm:py-6 sm:min-h-[269px] border border-neutral-100 flex flex-col justify-between">
 							<div>
 								<div class="flex items-start justify-between gap-3">

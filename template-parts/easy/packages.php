@@ -35,7 +35,7 @@ $button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="tu-van-n
 						<li><img src="<?php echo esc_url( $asset_uri . '/check-badge.svg' ); ?>" width="24" height="24" alt=""><?php echo esc_html( $benefit ); ?></li>
 					<?php endforeach; ?>
 				</ul>
-				<button type="button" class="vpc-easy__package-button" <?php echo $button_attrs; ?>>Tư vấn gói này</button>
+				<button type="button" class="vpc-easy__package-button" <?php echo $button_attrs; ?> data-package="Gói tư vấn trực tuyến">Tư vấn gói này</button>
 			</article>
 			<article class="vpc-easy__package-card is-featured">
 				<span class="vpc-easy__featured">★ Được lựa chọn nhiều</span>
@@ -54,7 +54,7 @@ $button_attrs = 'data-open-modal="vpc-consultation-modal" data-service="tu-van-n
 						<li><img src="<?php echo esc_url( $asset_uri . '/check-badge.svg' ); ?>" width="24" height="24" alt=""><?php echo esc_html( $benefit ); ?></li>
 					<?php endforeach; ?>
 				</ul>
-				<button type="button" class="vpc-easy__package-button" <?php echo $button_attrs; ?>>Tư vấn gói này</button>
+				<button type="button" class="vpc-easy__package-button" <?php echo $button_attrs; ?> data-package="Gói tư vấn trực tiếp">Tư vấn gói này</button>
 			</article>
 		</div>
 	</div>

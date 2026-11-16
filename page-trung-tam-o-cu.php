@@ -36,7 +36,7 @@ $feedback = array(
 	get_template_part( 'template-parts/o-cu/team' );
 	get_template_part( 'template-parts/o-cu/faq' );
 	get_template_part( 'template-parts/sections/feedback', null, array(
-		'items'        => $feedback,
+		'items'        => vpc_get_real_feedback_items(),
 		'image_prefix' => 'bao-mau',
 		'badge'        => 'Khách hàng',
 		'description'  => array( 'Trong hành trình cùng mẹ trải đầy yêu thương, Trung tâm ở cữ Vạn Phúc Care đã nhận được sự tin yêu của hàng ngàn Mẹ bỉm.' ),
