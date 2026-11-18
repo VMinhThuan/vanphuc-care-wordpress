@@ -1,14 +1,14 @@
 /* Tư vấn nuôi con EASY — scoped to the standalone Figma page. */
 .vpc-easy {
-	--easy-blue: #1a77ba;
-	--easy-blue-dark: #155f95;
-	--easy-pink: #f48283;
-	--easy-pink-soft: #fde6e6;
-	--easy-ink: #292929;
-	--easy-muted: #525252;
-	--easy-border: #cecece;
-	--easy-light-blue: #d1e4f1;
-	--easy-gray: #f8f8f8;
+	--easy-blue: var(--color-primary-500, #1a77ba);
+	--easy-blue-dark: var(--color-primary-600, #155f95);
+	--easy-pink: var(--color-secondary-500, #f48283);
+	--easy-pink-soft: var(--color-secondary-100, #fde6e6);
+	--easy-ink: var(--color-neutral-900, #292929);
+	--easy-muted: var(--color-neutral-800, #525252);
+	--easy-border: var(--color-neutral-500, #cecece);
+	--easy-light-blue: var(--color-primary-100, #d1e4f1);
+	--easy-gray: var(--color-neutral-100, #f8f8f8);
 	color: var(--easy-ink);
 	font-family: var(--font-body, "Manrope", sans-serif);
 	overflow: hidden;

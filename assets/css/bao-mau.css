@@ -1,13 +1,13 @@
 /* Bảo mẫu tại nhà — Figma 3126:39926 / 3126:40060 */
 .vpc-bao-mau {
-	--bm-blue: #1a77ba;
-	--bm-blue-dark: #155f95;
-	--bm-pink: #f48283;
-	--bm-pink-light: #fde6e6;
-	--bm-ink: #292929;
-	--bm-muted: #525252;
-	--bm-bg: #f8f8f8;
-	--bm-border: #cecece;
+	--bm-blue: var(--color-primary-500, #1a77ba);
+	--bm-blue-dark: var(--color-primary-600, #155f95);
+	--bm-pink: var(--color-secondary-500, #f48283);
+	--bm-pink-light: var(--color-secondary-100, #fde6e6);
+	--bm-ink: var(--color-neutral-900, #292929);
+	--bm-muted: var(--color-neutral-800, #525252);
+	--bm-bg: var(--color-neutral-100, #f8f8f8);
+	--bm-border: var(--color-neutral-500, #cecece);
 	--bm-shell-width: 1560px;
 	--bm-shell-gutter: 80px;
 	background: var(--bm-bg);

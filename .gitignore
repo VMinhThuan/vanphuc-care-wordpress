@@ -35,6 +35,8 @@ assets/images/test_*_preview.png
 # CI/CD generated deployment artifacts
 version.php
 deploy-package/
+assets/asset-manifest.json
+assets/css/*.built.css
 
 # Designer handoff reference files
 *theme*.css

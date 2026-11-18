@@ -125,6 +125,33 @@
 				max-width: 100%;
 			}
 
+			.vpc-tiktok-embed {
+				display: flex;
+				justify-content: center;
+				margin: 28px auto;
+				max-width: 100%;
+			}
+
+			.vpc-tiktok-embed iframe {
+				width: 325px;
+				max-width: 100%;
+				height: 578px;
+				border-radius: 12px;
+				border: none;
+				box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+			}
+
+			@media (max-width: 480px) {
+				.vpc-tiktok-embed {
+					margin: 20px auto;
+				}
+				.vpc-tiktok-embed iframe {
+					width: 100%;
+					max-width: 325px;
+					height: min(578px, 85vh);
+				}
+			}
+
 			.vpc-reader__body .wp-block-table,
 			.vpc-reader__body>table {
 				display: block;
@@ -684,9 +711,9 @@
 				}
 
 				.vpc-reader__article h1 {
-					font-size: 32px;
+					font-size: 28px;
 					line-height: 36px;
-					font-weight: 600;
+					font-weight: 400;
 				}
 
 				.vpc-reader__meta {

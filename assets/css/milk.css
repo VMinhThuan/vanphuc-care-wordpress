@@ -1,5 +1,16 @@
 /* Thông tắc tia sữa — scoped to the standalone Figma page. */
-.vpc-milk { --milk-blue:#1a77ba; --milk-pink:#f48283; --milk-pink-soft:#fde6e6; --milk-ink:#292929; --milk-muted:#525252; --milk-border:#cecece; --milk-gray:#f8f8f8; color:var(--milk-ink); font-family:var(--font-body,"Manrope",sans-serif); overflow:hidden; }
+.vpc-milk {
+	--milk-blue: var(--color-primary-500, #1a77ba);
+	--milk-pink: var(--color-secondary-500, #f48283);
+	--milk-pink-soft: var(--color-secondary-100, #fde6e6);
+	--milk-ink: var(--color-neutral-900, #292929);
+	--milk-muted: var(--color-neutral-800, #525252);
+	--milk-border: var(--color-neutral-500, #cecece);
+	--milk-gray: var(--color-neutral-100, #f8f8f8);
+	color: var(--milk-ink);
+	font-family: var(--font-body, "Manrope", sans-serif);
+	overflow: hidden;
+}
 .vpc-milk *, .vpc-milk *::before, .vpc-milk *::after { box-sizing:border-box; }
 .vpc-milk img { display:block; max-width:100%; }
 .vpc-milk a { color:inherit; }

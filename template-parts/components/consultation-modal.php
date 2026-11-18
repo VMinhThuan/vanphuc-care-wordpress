@@ -177,7 +177,7 @@ if ( function_exists( 'vanphuccare_is_bao_mau_page' ) && vanphuccare_is_bao_mau_
 
 				<!-- Row 3: Giai đoạn thai kỳ (cập nhật theo comment Figma) -->
 				<fieldset class="vpc-consultation-field vpc-consultation-stage border-0 p-0 m-0">
-					<legend class="block text-base sm:text-xl leading-7 font-medium text-text-body-default select-none">
+					<legend class="block text-base sm:text-xl leading-7 font-medium text-text-body-default mb-3 select-none">
 						<span class="text-error-500 font-bold mr-0.5">*</span> Giai đoạn thai kỳ
 					</legend>
 					<div class="vpc-consultation-stage__options flex flex-wrap items-center" role="radiogroup" aria-label="Giai đoạn thai kỳ">

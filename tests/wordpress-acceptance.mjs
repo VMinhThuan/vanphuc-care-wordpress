@@ -1,4 +1,13 @@
-import { chromium } from 'playwright';
+// Optional Playwright loader
+let chromium;
+try {
+  const pw = await import('playwright');
+  chromium = pw.chromium;
+} catch {
+  console.log('ℹ️ [OPTIONAL] Playwright is not installed (optional devDependency). Skipping acceptance test.');
+  console.log('   Run "npm test" to execute the core regression test suite (74 tests).');
+  process.exit(0);
+}
 
 const WP_URL = 'http://127.0.0.1:8088';
 

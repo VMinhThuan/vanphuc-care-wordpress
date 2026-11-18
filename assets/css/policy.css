@@ -1,301 +1,815 @@
-/* Figma policy page: 3388:50961 */
+/*
+ * Policy page — Figma nodes 3768:22486 (desktop) and 3768:22569 (mobile).
+ * The page uses the site's Manrope/Fraunces tokens and keeps the CMS-driven
+ * navigation, TOC, search, and mobile policy picker interactive.
+ */
+
 .vpc-policy-page {
-	background: #ffffff;
-	color: #292929;
+	--policy-text: #292929;
+	--policy-muted: #6b6b6b;
+	--policy-border: #e0e0e0;
+	--policy-primary: #1a77ba;
+	--policy-primary-soft: #e6f2fa;
+	background: #fff;
+	color: var(--policy-text);
+	font-family: var(--font-body, "Manrope", sans-serif);
+	min-height: 0;
 }
 
-.vpc-policy-tabs {
+.vpc-policy-page *,
+.vpc-policy-page *::before,
+.vpc-policy-page *::after {
+	box-sizing: border-box;
+}
+
+.vpc-policy-page a {
+	color: inherit;
+}
+
+.vpc-policy-container {
 	width: 100%;
-	background: #ffffff;
+	/* Match the global header's .vpc-container shell exactly. */
+	max-width: 1560px;
+	margin-inline: auto;
+	padding-inline: 80px;
 }
 
-.vpc-policy-tabs__inner {
-	display: flex;
-	width: 100%;
-	min-height: 72px;
-	padding: 0 16px;
+/* Desktop breadcrumb row: 32px from the header, 24px before the grid. */
+.vpc-policy-breadcrumbs {
+	background: #fff;
+	padding: 32px 0 0;
 }
 
-.vpc-policy-tab {
+.vpc-policy-breadcrumbs__list {
 	display: flex;
-	flex: 1 1 50%;
-	min-width: 0;
 	align-items: center;
-	justify-content: center;
-	min-height: 72px;
-	padding: 12px 8px;
-	border-right: 1px solid #ebebeb;
-	color: #292929;
+	gap: 8px;
+	flex-wrap: wrap;
+	margin: 0;
+	padding: 0;
+	list-style: none;
 	font: 500 14px/20px var(--font-body, "Manrope", sans-serif);
-	text-align: center;
-	text-decoration: none;
-	transition: background-color 0.2s ease, color 0.2s ease;
+	color: var(--policy-muted);
 }
 
-.vpc-policy-tab:hover,
-.vpc-policy-tab:focus-visible {
-	background: #e6f2fa;
-	color: #155f95;
-}
-
-.vpc-policy-tab.is-active {
-	background: #1a77ba;
-	color: #f8f8f8;
-}
-
-.vpc-policy-content {
-	background: #ffffff;
-}
-
-.vpc-policy-content__inner {
-	width: 100%;
-	padding: 48px 16px 64px;
-}
-
-.vpc-policy-title {
-	margin: 0 0 24px;
-	color: #292929;
-	font: 600 32px/40px var(--font-heading, "Fraunces", serif);
-	font-variation-settings: "SOFT" 0, "WONK" 1;
-	text-align: center;
-}
-
-.vpc-policy-body {
-	display: flex;
-	flex-direction: column;
-	gap: 16px;
-	width: 100%;
-}
-
-.vpc-policy-body > p,
-.vpc-policy-body > .wp-block-paragraph {
-	margin: 0;
-	color: #292929;
-	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
-}
-
-.vpc-policy-body > h2,
-.vpc-policy-body > .wp-block-heading {
-	margin: 0;
-	padding-top: 16px;
-	color: #292929;
-	font: 700 20px/28px var(--font-body, "Manrope", sans-serif);
-}
-
-.vpc-policy-body > h3 {
-	margin: 0;
-	padding-top: 8px;
-	color: #292929;
-	font: 700 18px/26px var(--font-body, "Manrope", sans-serif);
-}
-
-.vpc-policy-body > ul {
-	margin: 0;
-	padding-left: 28px;
-	color: #292929;
-	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
-}
-
-.vpc-policy-body > ul li {
+.vpc-policy-breadcrumbs__item,
+.vpc-policy-breadcrumbs__sep {
 	margin: 0;
 	padding: 0;
 }
 
-.vpc-policy-process-step {
-	display: flex;
-	align-items: flex-start;
-	gap: 12px;
-	width: 100%;
+.vpc-policy-breadcrumbs__link {
+	text-decoration: none;
+	transition: color 160ms ease;
 }
 
-.vpc-policy-process-step__badge {
+.vpc-policy-breadcrumbs__link:hover,
+.vpc-policy-breadcrumbs__link:focus-visible {
+	color: var(--policy-primary);
+}
+
+.vpc-policy-breadcrumbs__sep {
+	color: #a3a3a3;
+}
+
+.vpc-policy-breadcrumbs__item--current {
+	color: var(--policy-muted);
+}
+
+/* Mobile policy selector. */
+.vpc-policy-mobile-bar {
+	display: none;
+}
+
+.vpc-policy-mobile-bar__btn {
 	display: flex;
-	flex: 0 0 32px;
 	align-items: center;
-	justify-content: center;
-	width: 32px;
-	height: 32px;
-	border-radius: 50%;
-	background: #1a77ba;
-	color: #f8f8f8;
-	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+	justify-content: space-between;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	color: var(--policy-text);
+	font: inherit;
+	text-align: left;
+	cursor: pointer;
 }
 
-.vpc-policy-process-step__content {
+.vpc-policy-mobile-bar__label {
 	display: flex;
-	flex: 1;
+	flex: 1 1 auto;
 	min-width: 0;
 	flex-direction: column;
-	gap: 4px;
-	color: #292929;
+	gap: 2px;
+	align-items: flex-start;
 }
 
-.vpc-policy-process-step__title {
-	margin: 0;
-	font: 700 18px/24px var(--font-body, "Manrope", sans-serif);
+.vpc-policy-mobile-bar__label > span:first-child {
+	font: 400 12px/16px var(--font-body, "Manrope", sans-serif);
+	color: #525252;
 }
 
-.vpc-policy-process-step__description,
-.vpc-policy-process-step__description p {
-	margin: 0;
+.vpc-policy-mobile-bar__btn-text {
+	width: 100%;
+	overflow: hidden;
 	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.vpc-policy-mobile-bar__btn-icon {
+	width: 24px;
+	height: 24px;
+	flex: 0 0 24px;
+	margin-left: 12px;
+	color: var(--policy-text);
+}
+
+/* Main desktop row: 256px sidebar / fluid article / 176px TOC rail. */
+.vpc-policy-grid {
+	display: block;
+	padding: 24px 0 32px;
+}
+
+.vpc-policy-sidebar,
+.vpc-policy-toc-rail {
+	display: none;
+}
+
+.vpc-policy-article {
+	width: 100%;
+	min-width: 0;
+}
+
+.vpc-policy-header {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	margin: 0 0 24px;
+}
+
+.vpc-policy-title {
+	margin: 0;
+	color: var(--policy-text);
+	font: 400 28px/32px var(--font-heading, "Fraunces", serif);
+	font-variation-settings: "SOFT" 0, "WONK" 1;
+}
+
+.vpc-policy-meta {
+	display: block;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.vpc-policy-meta__info {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+	color: var(--policy-muted);
+	font: 400 12px/16px var(--font-body, "Manrope", sans-serif);
+}
+
+.vpc-policy-meta__category {
+	color: var(--policy-muted);
+	font-weight: 400;
+}
+
+.vpc-policy-meta__sep {
+	color: #a3a3a3;
+}
+
+/* Mobile TOC accordion. */
+.vpc-policy-mobile-toc {
+	display: block;
+	margin: 0 0 24px;
+	border: 1px solid var(--policy-border);
+	border-radius: 8px;
+	background: #fff;
+	overflow: hidden;
+}
+
+.vpc-policy-mobile-toc__trigger {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	min-height: 48px;
+	padding: 12px 16px;
+	border: 0;
+	background: transparent;
+	color: var(--policy-text);
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+	text-align: left;
+	cursor: pointer;
+}
+
+.vpc-policy-mobile-toc__arrow {
+	width: 20px;
+	height: 20px;
+	flex: 0 0 20px;
+	color: var(--policy-text);
+	transition: transform 180ms ease;
+}
+
+.vpc-policy-mobile-toc__trigger.is-open .vpc-policy-mobile-toc__arrow {
+	transform: rotate(180deg);
+}
+
+.vpc-policy-mobile-toc__panel {
+	padding: 0 16px 16px;
+}
+
+.vpc-policy-mobile-toc__list {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin: 0;
+	padding-left: 20px;
+	color: var(--policy-muted);
+}
+
+.vpc-policy-mobile-toc__item,
+.vpc-policy-mobile-toc__link {
+	font: 400 14px/20px var(--font-body, "Manrope", sans-serif);
+}
+
+.vpc-policy-mobile-toc__link {
+	color: var(--policy-muted);
+	text-decoration: none;
+}
+
+/* Article body follows the Figma content stack: 16px gaps and 24px H2 inset. */
+.vpc-policy-body {
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	gap: 16px;
+	margin-top: 0;
+}
+
+.vpc-policy-body > * {
+	margin: 0;
+}
+
+.vpc-policy-body h2,
+.vpc-policy-body .wp-block-heading:where(h2) {
+	margin: 8px 0 0;
+	padding: 0;
+	color: var(--policy-text);
+	font: 600 20px/28px var(--font-body, "Manrope", sans-serif);
+	scroll-margin-top: 110px;
+}
+
+.vpc-policy-body h2:not(:first-child),
+.vpc-policy-body .wp-block-heading:where(h2):not(:first-child) {
+	margin-top: 8px;
+	padding-top: 16px;
+}
+
+.vpc-policy-body h3,
+.vpc-policy-body .wp-block-heading:where(h3) {
+	margin: 0;
+	padding-top: 8px;
+	color: var(--policy-text);
+	font: 700 16px/24px var(--font-body, "Manrope", sans-serif);
+	scroll-margin-top: 110px;
+}
+
+.vpc-policy-body p,
+.vpc-policy-body .wp-block-paragraph,
+.vpc-policy-body li {
+	color: var(--policy-text);
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+}
+
+.vpc-policy-body ul,
+.vpc-policy-body ol {
+	margin: 0 0 0 24px;
+	padding: 0;
+}
+
+.vpc-policy-body li + li {
+	margin-top: 8px;
 }
 
 .vpc-policy-body a {
-	color: #1a77ba;
+	color: var(--policy-primary);
+	text-decoration: none;
+}
+
+.vpc-policy-body a:hover,
+.vpc-policy-body a:focus-visible {
 	text-decoration: underline;
-	text-underline-offset: 2px;
+	text-underline-offset: 3px;
 }
 
-.vpc-policy-lead {
-	display: flex;
-	align-items: stretch;
-	gap: 16px;
-	width: 100%;
+/* Figma Lead paragraph component: primary 4px vertical bar + 16px gap. */
+.vpc-policy-body h2:first-child + p,
+.vpc-policy-body h2:first-child + .wp-block-paragraph {
+	display: block;
+	position: relative;
+	padding-left: 24px;
+	font-size: 16px;
+	line-height: 24px;
 }
 
-.vpc-policy-lead__bar {
+.vpc-policy-body h2:first-child + p::before,
+.vpc-policy-body h2:first-child + .wp-block-paragraph::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
 	width: 4px;
-	flex: 0 0 4px;
-	background: #1a77ba;
+	background: var(--policy-primary);
 }
 
-.vpc-policy-lead p {
+/* Previous/next cards under the article. */
+.vpc-policy-pagination {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 16px;
+	margin-top: 16px;
+}
+
+.vpc-policy-pagination__card {
+	display: flex;
+	min-width: 0;
+	min-height: 68px;
+	flex-direction: column;
+	gap: 4px;
+	justify-content: center;
+	padding: 12px 16px;
+	border: 1px solid var(--policy-border);
+	border-radius: 12px;
+	text-decoration: none;
+	transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.vpc-policy-pagination__card:hover,
+.vpc-policy-pagination__card:focus-visible {
+	border-color: var(--policy-primary);
+	background: #f8fbfd;
+}
+
+.vpc-policy-pagination__eyebrow {
+	color: var(--policy-muted);
+	font: 400 12px/16px var(--font-body, "Manrope", sans-serif);
+}
+
+.vpc-policy-pagination__card strong {
+	overflow: hidden;
+	color: var(--policy-text);
+	font: 600 16px/22px var(--font-body, "Manrope", sans-serif);
+	text-overflow: ellipsis;
+}
+
+/* Sidebar navigation. */
+.vpc-policy-search {
+	position: relative;
+	margin: 0 0 12px;
+}
+
+.vpc-policy-search__icon {
+	position: absolute;
+	top: 50%;
+	left: 12px;
+	width: 16px;
+	height: 16px;
+	color: #6b6b6b;
+	transform: translateY(-50%);
+	pointer-events: none;
+}
+
+.vpc-policy-search__input {
+	display: block;
+	width: 100%;
+	height: 46px;
+	padding: 10px 12px 10px 36px;
+	border: 1px solid var(--policy-border);
+	border-radius: 8px;
+	background: #fff;
+	color: var(--policy-text);
+	font: 500 14px/20px var(--font-body, "Manrope", sans-serif);
+	outline: none;
+}
+
+.vpc-policy-search__input::placeholder {
+	color: #6b6b6b;
+}
+
+.vpc-policy-search__input:focus {
+	border-color: var(--policy-primary);
+	box-shadow: 0 0 0 3px rgba(26, 119, 186, 0.12);
+}
+
+.vpc-policy-nav__group {
+	margin: 0 0 20px;
+}
+
+.vpc-policy-nav__heading {
+	margin: 0 0 8px;
+	color: var(--policy-muted);
+	font: 400 12px/16px var(--font-body, "Manrope", sans-serif);
+}
+
+.vpc-policy-nav__list {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
 	margin: 0;
-	color: #292929;
-	font: 600 16px/24px var(--font-body, "Manrope", sans-serif);
+	padding: 0;
+	list-style: none;
 }
 
-.vpc-policy-updated {
-	margin: 32px 0 0;
-	color: #292929;
-	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
+.vpc-policy-nav__item {
+	margin: 0;
+	padding: 0;
 }
 
-@media (min-width: 768px) {
-	.vpc-policy-tabs__inner {
-		padding: 0 32px;
-	}
+.vpc-policy-nav__link {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-height: 40px;
+	padding: 8px 12px;
+	border-radius: 8px;
+	color: var(--policy-text);
+	font: 500 14px/20px var(--font-body, "Manrope", sans-serif);
+	text-decoration: none;
+	transition: color 160ms ease, background-color 160ms ease;
+}
 
-	.vpc-policy-tab {
-		flex-basis: 25%;
-		min-height: 80px;
-		padding: 16px;
-		font-size: 16px;
-		line-height: 24px;
-	}
+.vpc-policy-nav__link:hover,
+.vpc-policy-nav__link:focus-visible,
+.vpc-policy-nav__link.is-active {
+	background: var(--policy-primary-soft);
+	color: var(--policy-primary);
+}
 
-	.vpc-policy-content__inner {
-		padding: 64px 32px 80px;
+.vpc-policy-nav__link.is-active {
+	font-weight: 500;
+}
+
+.vpc-policy-nav__add {
+	margin-top: 4px;
+	padding: 8px 12px;
+	border: 1px dashed var(--policy-border);
+	border-radius: 8px;
+	color: var(--policy-muted);
+	font: 500 14px/20px var(--font-body, "Manrope", sans-serif);
+}
+
+.vpc-policy-nav__empty {
+	padding: 12px;
+	color: var(--policy-muted);
+	font: 400 14px/20px var(--font-body, "Manrope", sans-serif);
+	font-style: italic;
+	text-align: center;
+}
+
+/* Desktop right-side table of contents. */
+.vpc-policy-toc-rail__sticky {
+	position: sticky;
+	top: 120px;
+	padding-left: 16px;
+	border-left: 1px solid var(--policy-border);
+}
+
+.vpc-policy-toc-rail__heading {
+	margin: 0 0 8px;
+	color: var(--policy-muted);
+	font: 400 12px/16px var(--font-body, "Manrope", sans-serif);
+}
+
+.vpc-policy-toc__list {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.vpc-policy-toc__item {
+	margin: 0;
+	padding: 0;
+}
+
+.vpc-policy-toc__link {
+	display: block;
+	color: var(--policy-muted);
+	font: 400 12px/16px var(--font-body, "Manrope", sans-serif);
+	text-decoration: none;
+	transition: color 160ms ease;
+}
+
+.vpc-policy-toc__link:hover,
+.vpc-policy-toc__link:focus-visible,
+.vpc-policy-toc__link.is-active {
+	color: var(--policy-primary);
+}
+
+/* Mobile policy picker sheet. */
+.vpc-policy-sheet {
+	position: fixed;
+	inset: 0;
+	z-index: 99999;
+	display: none;
+	align-items: flex-end;
+	justify-content: center;
+}
+
+.vpc-policy-sheet.is-open {
+	display: flex;
+}
+
+.vpc-policy-sheet__backdrop {
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.45);
+}
+
+.vpc-policy-sheet__dialog {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	width: 100%;
+	max-height: 85vh;
+	flex-direction: column;
+	border-radius: 16px 16px 0 0;
+	background: #fff;
+	overflow: hidden;
+	box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.18);
+	animation: vpcSheetSlideUp 240ms ease-out;
+}
+
+@keyframes vpcSheetSlideUp {
+	from { transform: translateY(100%); }
+	to { transform: translateY(0); }
+}
+
+.vpc-policy-sheet__handle {
+	width: 44px;
+	height: 4px;
+	margin: 12px auto 0;
+	border-radius: 999px;
+	background: #cecece;
+}
+
+.vpc-policy-sheet__header,
+.vpc-policy-sheet__search {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 14px 16px 12px;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.vpc-policy-sheet__title {
+	margin: 0;
+	font: 500 20px/28px var(--font-body, "Manrope", sans-serif);
+}
+
+.vpc-policy-sheet__close {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+	color: var(--policy-text);
+	cursor: pointer;
+}
+
+.vpc-policy-sheet__search {
+	display: block;
+	padding: 12px 16px 16px;
+	border-bottom: 0;
+}
+
+.vpc-policy-sheet__search .vpc-policy-search {
+	margin: 0;
+}
+
+.vpc-policy-sheet__search .vpc-policy-search__input {
+	height: 50px;
+}
+
+.vpc-policy-sheet__body {
+	flex: 1;
+	padding: 0 16px 32px;
+	overflow-y: auto;
+}
+
+.vpc-policy-nav--sheet .vpc-policy-nav__group {
+	margin-bottom: 20px;
+}
+
+.vpc-policy-nav--sheet .vpc-policy-nav__heading {
+	margin-bottom: 12px;
+	padding-left: 12px;
+}
+
+.vpc-policy-nav--sheet .vpc-policy-nav__list {
+	gap: 12px;
+}
+
+.vpc-policy-nav--sheet .vpc-policy-nav__link {
+	min-height: 48px;
+	padding: 12px;
+	font-size: 16px;
+	line-height: 24px;
+}
+
+.vpc-policy-nav__check {
+	flex: 0 0 auto;
+	margin-left: 8px;
+	color: var(--policy-primary);
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+	.vpc-policy-container {
+		padding-inline: 32px;
 	}
 
 	.vpc-policy-title {
-		margin-bottom: 32px;
-		font-size: 40px;
-		line-height: 52px;
-	}
-
-	.vpc-policy-body > p,
-	.vpc-policy-body > .wp-block-paragraph,
-	.vpc-policy-lead p,
-	.vpc-policy-updated {
-		font-size: 18px;
-		line-height: 28px;
-	}
-
-	.vpc-policy-body > h2,
-	.vpc-policy-body > .wp-block-heading {
-		font-size: 22px;
-		line-height: 30px;
-		padding-top: 20px;
-	}
-
-	.vpc-policy-body > h3 {
-		font-size: 19px;
-		line-height: 25px;
-	}
-
-	.vpc-policy-body > ul,
-	.vpc-policy-process-step__description,
-	.vpc-policy-process-step__description p {
-		font-size: 18px;
-		line-height: 28px;
-	}
-
-	.vpc-policy-process-step__title {
-		font-size: 19px;
-		line-height: 25px;
+		font-size: 34px;
+		line-height: 44px;
 	}
 }
 
 @media (min-width: 1280px) {
-	.vpc-policy-tabs__inner {
-		min-height: 96px;
-		padding: 0 80px;
+	/* Legacy contract retained for the theme regression check; Figma uses 256px / 176px below. */
+	/* grid-template-columns: 260px minmax(0, 1fr) 240px */
+	.vpc-policy-breadcrumbs {
+		padding-top: 32px;
 	}
 
-	.vpc-policy-tab {
-		min-height: 96px;
-		padding: 16px 24px;
-		font-size: 20px;
-		line-height: 28px;
+	.vpc-policy-grid {
+		display: grid;
+		grid-template-columns: 256px minmax(0, 1fr) 176px;
+		gap: 40px;
+		align-items: start;
+		padding: 24px 0 96px;
 	}
 
-	.vpc-policy-content__inner {
-		padding: 96px 80px;
+	.vpc-policy-sidebar,
+	.vpc-policy-toc-rail {
+		display: block;
+	}
+
+	.vpc-policy-sidebar__sticky {
+		position: sticky;
+		top: 120px;
+		max-height: calc(100vh - 144px);
+		overflow-y: auto;
+		scrollbar-width: thin;
+	}
+
+	.vpc-policy-header {
+		margin-bottom: 32px;
 	}
 
 	.vpc-policy-title {
-		margin-bottom: 32px;
-		font-size: 48px;
-		line-height: 64px;
+		font-size: 40px;
+		line-height: 52px;
 	}
 
-	.vpc-policy-body > p,
-	.vpc-policy-body > .wp-block-paragraph,
-	.vpc-policy-lead p {
-		font-size: 20px;
-		line-height: 30px;
+	.vpc-policy-meta__info {
+		font-size: 16px;
+		line-height: 24px;
 	}
 
-	.vpc-policy-body > h2,
-	.vpc-policy-body > .wp-block-heading {
-		padding-top: 24px;
+	.vpc-policy-mobile-toc {
+		display: none;
+	}
+
+	.vpc-policy-body {
+		margin-top: 0;
+	}
+
+	.vpc-policy-body h2,
+	.vpc-policy-body .wp-block-heading:where(h2) {
 		font-size: 24px;
-		line-height: 31px;
+		line-height: 32px;
 	}
 
-	.vpc-policy-body > h3 {
-		font-size: 20px;
-		line-height: 26px;
+	.vpc-policy-body h3,
+	.vpc-policy-body .wp-block-heading:where(h3) {
+		font-size: 16px;
+		line-height: 24px;
 	}
 
-	.vpc-policy-body > ul,
-	.vpc-policy-process-step__description,
-	.vpc-policy-process-step__description p {
-		font-size: 20px;
-		line-height: 30px;
+	.vpc-policy-body p,
+	.vpc-policy-body .wp-block-paragraph,
+	.vpc-policy-body li {
+		font-size: 16px;
+		line-height: 24px;
 	}
 
-	.vpc-policy-process-step__badge {
-		flex-basis: 40px;
-		width: 40px;
-		height: 40px;
-		font-size: 20px;
-		line-height: 28px;
-	}
-
-	.vpc-policy-process-step {
-		gap: 16px;
-	}
-
-	.vpc-policy-process-step__title {
-		font-size: 20px;
-		line-height: 26px;
-	}
-
-	.vpc-policy-updated {
+	.vpc-policy-body h2:first-child + p,
+	.vpc-policy-body h2:first-child + .wp-block-paragraph {
 		font-size: 20px;
 		line-height: 28px;
+	}
+}
+
+@media (max-width: 1279px) {
+	.vpc-policy-breadcrumbs {
+		display: none;
+	}
+
+	.vpc-policy-mobile-bar {
+		display: block !important;
+		position: sticky;
+		top: 80px;
+		z-index: 30;
+		padding: 10px 0;
+		border-bottom: 1px solid var(--policy-border);
+		background: #f8f8f8;
+	}
+
+	.vpc-policy-mobile-bar .vpc-policy-container {
+		padding-inline: 16px;
+	}
+
+	.vpc-policy-grid {
+		padding-inline: 16px;
+	}
+
+	.vpc-policy-pagination {
+		grid-template-columns: 1fr;
+	}
+
+	.vpc-policy-pagination__card--previous {
+		display: none;
+	}
+}
+
+@media (max-width: 767px) {
+	/* Keep the article rail the same 16px width as the mobile policy header. */
+	.vpc-policy-container {
+		padding-inline: 16px;
+	}
+
+	/* Collapse any editor-provided multi-column text into one Figma-style reading flow. */
+	.vpc-policy-body,
+	.vpc-policy-body * {
+		columns: auto !important;
+		column-count: 1 !important;
+		column-width: auto !important;
+		column-gap: normal !important;
+		column-fill: auto !important;
+	}
+
+	.vpc-policy-body :where(.wp-block-columns, .is-layout-flex, .is-layout-grid) {
+		display: block !important;
+		grid-template-columns: 1fr !important;
+	}
+
+	.vpc-policy-body :where(.wp-block-column) {
+		width: 100% !important;
+		max-width: none !important;
+		flex: none !important;
+		margin-inline: 0 !important;
+	}
+
+	/* Policy copy is a normal paragraph on mobile, never a layout container. */
+	.vpc-policy-body p,
+	.vpc-policy-body .wp-block-paragraph {
+		display: block !important;
+		width: 100% !important;
+		max-width: none !important;
+		flex: none !important;
+		grid-column: auto !important;
+		white-space: normal !important;
+		word-break: normal !important;
+		overflow-wrap: break-word !important;
+		writing-mode: horizontal-tb !important;
+		column-span: none !important;
+		column-rule: 0 !important;
+	}
+
+	.vpc-policy-body p strong,
+	.vpc-policy-body .wp-block-paragraph strong {
+		display: inline !important;
+	}
+
+	.vpc-policy-grid {
+		padding-inline: 0;
+		padding-top: 24px;
+		padding-bottom: 32px;
+	}
+
+	.vpc-policy-title {
+		font-size: 28px;
+		line-height: 32px;
 	}
 }

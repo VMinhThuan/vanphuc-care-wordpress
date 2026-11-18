@@ -108,8 +108,8 @@ get_header();
 			<div class="vpc-recruitment-hero__copy">
 				<div class="vpc-recruitment-badge">
 					<img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">
-					<span class="vpc-recruitment-badge__desktop">Trang Tin Tuyển Dụng</span>
-					<span class="vpc-recruitment-badge__mobile">Trang Tin Tuyển Dụng</span>
+					<span class="vpc-recruitment-badge__desktop"><?php esc_html_e( 'TRANG TIN TUYỂN DỤNG', 'vanphuccare' ); ?></span>
+					<span class="vpc-recruitment-badge__mobile"><?php esc_html_e( 'TRANG TIN TUYỂN DỤNG', 'vanphuccare' ); ?></span>
 				</div>
 				<h1 id="recruitment-hero-title">
 					<span>Môi Trường Yêu Thương</span>

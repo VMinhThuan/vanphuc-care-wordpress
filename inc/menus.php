@@ -420,31 +420,155 @@ function vanphuccare_service_menu_class( $classes, $item ) {
 add_filter( 'nav_menu_css_class', 'vanphuccare_service_menu_class', 10, 2 );
 
 /**
- * Keeps navigation compliant with Figma design when a custom WordPress
- * menu has not yet been assigned to the primary theme location.
+ * Prevents the home link from looking active on the recruitment landing page.
+ *
+ * WordPress can mark a custom home menu item as current when the recruitment
+ * page is served through the clean route. The landing page is not the home
+ * page, so remove both the semantic and visual active classes in the primary
+ * navigation.
+ *
+ * @param array    $classes Menu classes.
+ * @param WP_Post  $item    Menu item.
+ * @param stdClass $args    Menu arguments.
+ * @return array
+ */
+function vanphuccare_recruitment_home_menu_class( $classes, $item, $args = null ) {
+	$theme_location = ( isset( $args ) && is_object( $args ) && isset( $args->theme_location ) ) ? (string) $args->theme_location : '';
+	$menu_title     = isset( $item->title ) ? trim( wp_strip_all_tags( $item->title ) ) : '';
+	$menu_url       = isset( $item->url ) ? (string) $item->url : '';
+	$is_home_item   = 'Trang chủ' === $menu_title || untrailingslashit( $menu_url ) === untrailingslashit( home_url( '/' ) );
+
+	if ( ! in_array( $theme_location, array( 'primary', '' ), true )
+		|| ! $is_home_item
+		|| ! function_exists( 'vanphuccare_is_recruitment_page' )
+		|| ! vanphuccare_is_recruitment_page() ) {
+		return array_unique( $classes );
+	}
+
+	return array_values(
+		array_diff(
+			$classes,
+			array(
+				'current-menu-item',
+				'current_page_item',
+				'current-menu-ancestor',
+				'current-menu-parent',
+				'current_page_parent',
+				'current_page_ancestor',
+			)
+		)
+	);
+}
+add_filter( 'nav_menu_css_class', 'vanphuccare_recruitment_home_menu_class', 10, 3 );
+
+/**
+ * Removes a saved active utility class from the primary home link on the
+ * recruitment landing page.
+ *
+ * @param array    $atts Link attributes.
+ * @param WP_Post  $item Menu item.
+ * @param stdClass $args Menu arguments.
+ * @return array
+ */
+function vanphuccare_recruitment_home_menu_link_attributes( $atts, $item, $args ) {
+	$theme_location = isset( $args->theme_location ) ? (string) $args->theme_location : '';
+	$menu_title     = isset( $item->title ) ? trim( wp_strip_all_tags( $item->title ) ) : '';
+	$menu_url       = isset( $item->url ) ? (string) $item->url : '';
+	$is_home_item   = 'Trang chủ' === $menu_title || untrailingslashit( $menu_url ) === untrailingslashit( home_url( '/' ) );
+
+	if ( in_array( $theme_location, array( 'primary', '' ), true )
+		&& $is_home_item
+		&& function_exists( 'vanphuccare_is_recruitment_page' )
+		&& vanphuccare_is_recruitment_page() ) {
+		if ( ! empty( $atts['class'] ) ) {
+			$classes       = preg_split( '/\s+/', trim( (string) $atts['class'] ) );
+			$classes       = array_diff( $classes, array( 'text-text-nav-active', 'text-primary-500' ) );
+			$atts['class'] = implode( ' ', array_filter( $classes ) );
+		}
+		unset( $atts['aria-current'] );
+	}
+
+	return $atts;
+}
+add_filter( 'nav_menu_link_attributes', 'vanphuccare_recruitment_home_menu_link_attributes', 10, 3 );
+
+/**
+ * Renders streamlined fallback navigation when a custom WordPress menu
+ * has not yet been assigned to the Primary theme location.
+ *
+ * Unified single-source-of-truth (DRY) serving both Desktop & Mobile contexts.
+ *
+ * @param bool $is_mobile Whether rendering the mobile drawer menu.
+ * @return void
+ */
+function vanphuccare_render_nav_fallback( $is_mobile = false ) {
+	$is_home      = ! ( function_exists( 'vanphuccare_is_recruitment_page' ) && vanphuccare_is_recruitment_page() ) && ( is_front_page() || is_home() );
+	$is_prenatal  = is_page( 'lop-hoc-tien-san' ) || is_page_template( 'page-lop-hoc-tien-san.php' );
+	$is_about     = is_page_template( 'page-gioi-thieu.php' ) || is_page( 'gioi-thieu' );
+	$is_o_cu      = vanphuccare_is_o_cu_page();
+	$is_bao_mau   = vanphuccare_is_bao_mau_page();
+	$is_service   = vanphuccare_is_service_group_page();
+	$is_knowledge = vanphuccare_is_knowledge_group_page();
+
+	$items = array(
+		array( 'url' => home_url( '/' ), 'title' => __( 'Trang chủ', 'vanphuccare' ), 'active' => $is_home ),
+		array( 'url' => home_url( '/gioi-thieu' ), 'title' => __( 'Giới thiệu', 'vanphuccare' ), 'active' => $is_about ),
+		array( 'url' => home_url( '/dich-vu/trung-tam-o-cu/' ), 'title' => __( 'Ở cữ', 'vanphuccare' ), 'active' => $is_o_cu ),
+		array( 'url' => home_url( '/dich-vu/bao-mau-tai-nha/' ), 'title' => __( 'Bảo mẫu', 'vanphuccare' ), 'active' => $is_bao_mau ),
+		array( 'url' => home_url( '/dich-vu/' ), 'title' => __( 'Dịch vụ', 'vanphuccare' ), 'active' => $is_service, 'is_service' => true ),
+		array( 'url' => home_url( '/dich-vu/lop-hoc-tien-san/' ), 'title' => __( 'Lớp học tiền sản', 'vanphuccare' ), 'active' => $is_prenatal ),
+		array( 'url' => home_url( '/kien-thuc/' ), 'title' => __( 'Kiến thức', 'vanphuccare' ), 'active' => $is_knowledge ),
+	);
+
+	$menu_class = $is_mobile ? 'vpc-mobile-nav' : 'vpc-nav-menu';
+	$chevron    = '<svg class="w-4 h-4 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>';
+
+	echo '<ul class="' . esc_attr( $menu_class ) . '">';
+	foreach ( $items as $item ) {
+		if ( ! empty( $item['is_service'] ) ) {
+			vanphuccare_primary_service_fallback_item( $item['active'], $is_mobile ? 'mobile' : 'desktop' );
+			continue;
+		}
+
+		$current = $item['active'] ? 'current-menu-item' : '';
+		if ( $is_mobile ) {
+			printf(
+				'<li class="%s"><a href="%s"><span>%s</span>%s</a></li>',
+				esc_attr( $current ),
+				esc_url( $item['url'] ),
+				esc_html( $item['title'] ),
+				$chevron
+			);
+		} else {
+			$link_class = $item['active'] ? 'text-text-nav-active' : 'text-text-nav-default hover:text-text-nav-hover';
+			printf(
+				'<li class="%s"><a href="%s" class="%s">%s</a></li>',
+				esc_attr( $current ),
+				esc_url( $item['url'] ),
+				esc_attr( $link_class ),
+				esc_html( $item['title'] )
+			);
+		}
+	}
+	echo '</ul>';
+}
+
+/**
+ * Desktop fallback callback.
  *
  * @return void
  */
 function vanphuccare_primary_menu_fallback() {
-	$is_home     = is_front_page() || is_home();
-	$is_prenatal = is_page( 'lop-hoc-tien-san' ) || is_page_template( 'page-lop-hoc-tien-san.php' );
-	$is_about    = is_page_template( 'page-gioi-thieu.php' ) || is_page( 'gioi-thieu' );
-	$is_o_cu     = vanphuccare_is_o_cu_page();
-	$is_bao_mau  = vanphuccare_is_bao_mau_page();
-	$is_service  = vanphuccare_is_service_group_page();
-	$is_knowledge = vanphuccare_is_knowledge_group_page();
-	$nav_active  = 'text-text-nav-active';
-	$nav_default = 'text-text-nav-default hover:text-text-nav-hover';
+	vanphuccare_render_nav_fallback( false );
+}
 
-	echo '<ul class="vpc-nav-menu">';
-	printf( '<li class="%s"><a href="%s" class="%s">%s</a></li>', $is_home ? 'current-menu-item' : '', esc_url( home_url( '/' ) ), $is_home ? $nav_active : $nav_default, esc_html__( 'Trang chủ', 'vanphuccare' ) );
-	printf( '<li class="%s"><a href="%s" class="%s">%s</a></li>', $is_about ? 'current-menu-item' : '', esc_url( home_url( '/gioi-thieu' ) ), $is_about ? $nav_active : $nav_default, esc_html__( 'Giới thiệu', 'vanphuccare' ) );
-	printf( '<li class="%s"><a href="%s" class="%s">%s</a></li>', $is_o_cu ? 'current-menu-item' : '', esc_url( home_url( '/dich-vu/trung-tam-o-cu/' ) ), $is_o_cu ? $nav_active : $nav_default, esc_html__( 'Ở cữ', 'vanphuccare' ) );
-	printf( '<li class="%s"><a href="%s" class="%s">%s</a></li>', $is_bao_mau ? 'current-menu-item' : '', esc_url( home_url( '/dich-vu/bao-mau-tai-nha/' ) ), $is_bao_mau ? $nav_active : $nav_default, esc_html__( 'Bảo mẫu', 'vanphuccare' ) );
-	vanphuccare_primary_service_fallback_item( $is_service, 'desktop' );
-	printf( '<li class="%s"><a href="%s" class="%s">%s</a></li>', $is_prenatal ? 'current-menu-item' : '', esc_url( home_url( '/dich-vu/lop-hoc-tien-san/' ) ), $is_prenatal ? $nav_active : $nav_default, esc_html__( 'Lớp học tiền sản', 'vanphuccare' ) );
-	printf( '<li class="%s"><a href="%s" class="%s">%s</a></li>', $is_knowledge ? 'current-menu-item' : '', esc_url( home_url( '/kien-thuc/' ) ), $is_knowledge ? $nav_active : $nav_default, esc_html__( 'Kiến thức', 'vanphuccare' ) );
-	echo '</ul>';
+/**
+ * Mobile fallback callback.
+ *
+ * @return void
+ */
+function vanphuccare_mobile_menu_fallback() {
+	vanphuccare_render_nav_fallback( true );
 }
 
 /**
@@ -455,8 +579,8 @@ function vanphuccare_primary_menu_fallback() {
  * @return void
  */
 function vanphuccare_primary_service_fallback_item( $is_active, $context ) {
-	$classes    = 'vpc-service-menu-item' . ( $is_active ? ' current-menu-item' : '' );
-	$link_class = $is_active ? 'text-text-nav-active' : 'text-text-nav-default hover:text-text-nav-hover';
+	$classes     = 'vpc-service-menu-item' . ( $is_active ? ' current-menu-item' : '' );
+	$link_class  = $is_active ? 'text-text-nav-active' : 'text-text-nav-default hover:text-text-nav-hover';
 	$dropdown_id = 'vpc-service-dropdown-' . sanitize_html_class( $context ) . '-fallback';
 
 	echo '<li class="' . esc_attr( $classes ) . '">';
@@ -473,50 +597,6 @@ function vanphuccare_primary_service_fallback_item( $is_active, $context ) {
 		esc_attr__( 'Mở menu dịch vụ', 'vanphuccare' )
 	);
 	echo '</div>' . vanphuccare_service_dropdown_markup( $dropdown_id ) . '</li>';
-}
-
-/**
- * Mobile counterpart to the primary navigation fallback.
- *
- * @return void
- */
-function vanphuccare_mobile_menu_fallback() {
-	$is_home     = is_front_page() || is_home();
-	$is_prenatal = is_page( 'lop-hoc-tien-san' ) || is_page_template( 'page-lop-hoc-tien-san.php' );
-	$is_about    = is_page_template( 'page-gioi-thieu.php' ) || is_page( 'gioi-thieu' );
-	$is_o_cu     = vanphuccare_is_o_cu_page();
-	$is_bao_mau  = vanphuccare_is_bao_mau_page();
-	$is_service  = vanphuccare_is_service_group_page();
-	$is_knowledge = vanphuccare_is_knowledge_group_page();
-	$chevron     = '<svg class="w-4 h-4 text-neutral-400 shrink-0 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>';
-
-	$items = array(
-		array( 'url' => home_url( '/' ), 'title' => 'Trang chủ', 'active' => $is_home ),
-		array( 'url' => home_url( '/gioi-thieu' ), 'title' => 'Giới thiệu', 'active' => $is_about ),
-		array( 'url' => home_url( '/dich-vu/trung-tam-o-cu/' ), 'title' => 'Ở cữ', 'active' => $is_o_cu ),
-		array( 'url' => home_url( '/dich-vu/bao-mau-tai-nha/' ), 'title' => 'Bảo mẫu', 'active' => $is_bao_mau ),
-		array( 'url' => home_url( '/dich-vu/' ), 'title' => 'Dịch vụ', 'active' => $is_service ),
-		array( 'url' => home_url( '/dich-vu/lop-hoc-tien-san/' ), 'title' => 'Lớp học tiền sản', 'active' => $is_prenatal ),
-		array( 'url' => home_url( '/kien-thuc/' ), 'title' => 'Kiến thức', 'active' => $is_knowledge ),
-	);
-
-	echo '<ul class="vpc-mobile-nav">';
-	foreach ( $items as $item ) {
-		if ( 'Dịch vụ' === $item['title'] ) {
-			vanphuccare_primary_service_fallback_item( $item['active'], 'mobile' );
-			continue;
-		}
-
-		$cls = $item['active'] ? 'current-menu-item' : '';
-		printf(
-			'<li class="%s"><a href="%s"><span>%s</span>%s</a></li>',
-			esc_attr( $cls ),
-			esc_url( $item['url'] ),
-			esc_html( $item['title'] ),
-			$chevron
-		);
-	}
-	echo '</ul>';
 }
 
 /**

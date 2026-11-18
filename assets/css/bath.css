@@ -1,14 +1,14 @@
 /* Tắm bé sơ sinh tại nhà — scoped to the standalone Figma page. */
 .vpc-bath {
-	--bath-blue: #1a77ba;
-	--bath-blue-dark: #155f95;
-	--bath-pink: #f48283;
-	--bath-pink-soft: #fde6e6;
-	--bath-ink: #292929;
-	--bath-muted: #525252;
-	--bath-border: #cecece;
-	--bath-light-blue: #d1e4f1;
-	--bath-gray: #f8f8f8;
+	--bath-blue: var(--color-primary-500, #1a77ba);
+	--bath-blue-dark: var(--color-primary-600, #155f95);
+	--bath-pink: var(--color-secondary-500, #f48283);
+	--bath-pink-soft: var(--color-secondary-100, #fde6e6);
+	--bath-ink: var(--color-neutral-900, #292929);
+	--bath-muted: var(--color-neutral-800, #525252);
+	--bath-border: var(--color-neutral-500, #cecece);
+	--bath-light-blue: var(--color-primary-100, #d1e4f1);
+	--bath-gray: var(--color-neutral-100, #f8f8f8);
 	color: var(--bath-ink);
 	font-family: var(--font-body, "Manrope", sans-serif);
 	overflow: hidden;

@@ -21,8 +21,13 @@
 .site-footer ul.vpc-footer-legal li + li::before {
 	content: "|";
 	margin-right: 0.75rem;
-	color: #525252;
+	color: var(--color-neutral-600, #a5a5a5);
 	user-select: none;
+}
+
+.site-footer .vpc-footer-legal-divider {
+	color: var(--color-neutral-600, #a5a5a5);
+	font-weight: 400;
 }
 
 @media (max-width: 1279px) {

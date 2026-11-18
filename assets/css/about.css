@@ -38,10 +38,6 @@
 	max-width: none;
 }
 
-/* These global site widgets are not part of either supplied Figma frame. */
-body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
-	display: none !important;
-}
 
 .vpc-about-page h1,
 .vpc-about-page h2,
@@ -1389,10 +1385,6 @@ body:has(.vpc-about-page) aside[aria-label="Kênh liên hệ nhanh"] {
 }
 
 @media (max-width: 767px) {
-	/* The Figma mobile frame has no fixed contact controls over the page. */
-	body:has(.vpc-about-page) #mobile-sticky-cta {
-		display: none !important;
-	}
 
 	.about-inner {
 		width: calc(100% - 40px);

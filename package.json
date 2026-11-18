@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "dev": "tailwindcss -i ./src/theme.css -o ./assets/css/theme.css --watch",
-    "build": "tailwindcss -i ./src/theme.css -o ./assets/css/theme.css --minify",
+    "build": "npm run build:tailwind && npm run build:assets",
+    "build:tailwind": "tailwindcss -i ./src/theme.css -o ./assets/css/theme.css --minify",
+    "build:assets": "node tools/build-assets.mjs",
     "media:export": "node tools/export-media-library.mjs",
-    "test": "node --test tests/knowledge-regression.test.mjs",
+    "test": "node --test tests/knowledge-regression.test.mjs tests/assets-regression.test.mjs",
     "test:knowledge": "node --test tests/knowledge-regression.test.mjs",
     "test:static-qa": "node ./tests/static-qa.mjs"
   },
@@ -16,7 +18,9 @@
   "license": "ISC",
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",
+    "lightningcss": "1.32.0",
     "playwright": "^1.57.0",
+    "postcss": "8.5.33",
     "tailwindcss": "^4.3.3"
   }
 }

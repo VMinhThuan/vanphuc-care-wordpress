@@ -15,6 +15,8 @@ This repository contains the source for the `vanphuccare` custom theme. It is a 
 
 ## Local development
 
+Build, cache assets và quy trình kiểm tra CSS: [docs/assets.md](docs/assets.md).
+
 Place this directory in `wp-content/themes/` of a local WordPress installation, then activate **VanPhucCare** from Appearance → Themes. Develop against a supported local WordPress environment; this repository does not include WordPress core or plugins.
 
 ## Installation

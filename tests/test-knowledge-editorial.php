@@ -107,6 +107,10 @@ function sanitize_text_field( $str ) {
 	return trim( strip_tags( (string) $str ) );
 }
 
+function wp_unslash( $value ) {
+	return is_array( $value ) ? array_map( 'wp_unslash', $value ) : stripslashes( (string) $value );
+}
+
 function current_user_can( $capability ) {
 	return true;
 }

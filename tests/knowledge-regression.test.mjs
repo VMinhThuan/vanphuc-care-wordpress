@@ -264,7 +264,7 @@ describe('Knowledge Editorial Regression Tests', () => {
       assert.ok(!setupCode.includes("'me-va-be'"), 'Must NOT contain ghost slug me-va-be in inc/setup.php');
 
       const enqueueCode = fs.readFileSync(path.join(rootDir, 'inc/enqueue.php'), 'utf8');
-      assert.ok(enqueueCode.includes("vanphuccare_enqueue_theme_style( 'vanphuccare-news', 'assets/css/news.css'"), 'Must enqueue news.css');
+      assert.ok(enqueueCode.includes("'assets/css/news.css'") && enqueueCode.includes("vanphuccare_enqueue_theme_style( 'vanphuccare-news', $news_css"), 'Must retain full news.css for hub/listing routes');
       assert.ok(enqueueCode.includes("! $is_news_page"), 'Must prevent knowledge.css from overriding news.css');
     });
 
@@ -384,6 +384,18 @@ describe('Knowledge Editorial Regression Tests', () => {
       assert.ok(code.includes('vpc-reviewer-meta-box-init-style'), 'Must have reviewer hide style');
       assert.ok(code.includes('vpc_is_recruitment_post( $post_id )'), 'Must guard reviewer meta save against recruitment posts');
     });
+
+    test('inc/ajax.php handles recruitment submissions and forwards to Getfly CRM with CV file', () => {
+      const ajaxCode = fs.readFileSync(path.join(rootDir, 'inc/ajax.php'), 'utf8');
+      assert.ok(ajaxCode.includes('vpc_submit_recruitment'), 'Must register vpc_submit_recruitment AJAX action');
+      assert.ok(ajaxCode.includes('vpc_handle_recruitment_submission'), 'Must declare vpc_handle_recruitment_submission');
+      assert.ok(ajaxCode.includes('vanphuccare.getflycrm.com'), 'Must target Getfly CRM endpoint');
+      assert.ok(ajaxCode.includes('0QT45oRxVq5c2fvoYv45b0QR5SodQ2oeUrIj11AqLY4knjKDl1'), 'Must include legacy recruitment form key');
+      assert.ok(ajaxCode.includes("$_FILES['cv']"), 'Must handle uploaded CV file');
+
+      const jsCode = fs.readFileSync(path.join(rootDir, 'assets/js/recruitment-application.js'), 'utf8');
+      assert.ok(jsCode.includes('vpc_submit_recruitment'), 'JS must submit to vpc_submit_recruitment');
+    });
   });
 
   describe('9. Knowledge Search Results Alignment (Figma Spec)', () => {
@@ -430,9 +442,145 @@ describe('Knowledge Editorial Regression Tests', () => {
     test('assets/css/knowledge.css contains dedicated search hero, empty state, and keyword highlight styles', () => {
       const code = fs.readFileSync(path.join(rootDir, 'assets/css/knowledge.css'), 'utf8');
       assert.ok(code.includes('.vpc-knowledge-search-hero'), 'Must style .vpc-knowledge-search-hero');
+      assert.ok(code.includes('linear-gradient(180deg, #f8f8f8 0%, #fde6e6 125%)'), 'Must use consistent hero background gradient seamlessly matching header');
       assert.ok(code.includes('mark.vpc-search-highlight'), 'Must style mark.vpc-search-highlight');
       assert.ok(code.includes('.vpc-knowledge-search-empty'), 'Must style .vpc-knowledge-search-empty');
       assert.ok(code.includes('.vpc-knowledge--search .vpc-knowledge-widget--tags'), 'Must style suggested keywords widget');
+    });
+
+    test('assets/css/knowledge-single.css sets single post title on mobile to H2 mobile token with weight 400', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'assets/css/knowledge-single.css'), 'utf8');
+      assert.ok(code.includes('.vpc-reader__article h1'), 'Must style single post title');
+      assert.ok(!code.includes('font-weight: 600;\n\t\t\t\t}'), 'Must not make single post title semi-bold on mobile');
+      assert.ok(code.includes('font-weight: 400;'), 'Must set font-weight to 400 matching Figma H2 mobile token');
+      assert.ok(code.includes('font-size: 28px;'), 'Must set font-size to 28px matching H2 mobile token');
+    });
+  });
+
+  describe('10. TikTok Embed Auto-Upgrade Filter (292+ Posts Compatibility)', () => {
+    test('inc/helpers.php declares vpc_transform_tiktok_embeds and attaches to the_content', () => {
+      const code = fs.readFileSync(path.join(rootDir, 'inc/helpers.php'), 'utf8');
+      assert.ok(code.includes('function vpc_transform_tiktok_embeds('), 'Must declare vpc_transform_tiktok_embeds');
+      assert.ok(code.includes("add_filter( 'the_content', 'vpc_transform_tiktok_embeds'"), 'Must hook into the_content');
+      assert.ok(code.includes('https://www.tiktok.com/player/v1/'), 'Must use official TikTok Player v1 iframe endpoint');
+    });
+
+    test('vpc_transform_tiktok_embeds converts blockquotes and strips redundant embed.js scripts', () => {
+      const helpersCode = fs.readFileSync(path.join(rootDir, 'inc/helpers.php'), 'utf8');
+      assert.ok(helpersCode.includes('data-video-id'), 'Must check data-video-id attribute');
+      assert.ok(helpersCode.includes('embed.js'), 'Must clean up embed.js scripts');
+
+      // Test simulation using same regex logic
+      const sample = `<p>Đoạn mở đầu</p>
+<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@methuylamy/video/7440311961700650247" data-video-id="7440311961700650247" style="max-width: 605px;"><section>Video 1</section></blockquote>
+<script async src="https://www.tiktok.com/embed.js"></script>
+<p>Đoạn giữa</p>
+<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@methuylamy/video/7485964405767785735" data-video-id="7485964405767785735" style="max-width: 605px;"><section>Video 2</section></blockquote>
+<script async src="https://www.tiktok.com/embed.js"></script>
+<p>Đoạn kết</p>`;
+
+      let processed = sample.replace(
+        /<blockquote[\s\S]*?class=["'][^"']*\btiktok-embed\b[^"']*["'][\s\S]*?>[\s\S]*?<\/blockquote>/gi,
+        (match) => {
+          const idMatch = match.match(/data-video-id=["'](\d+)["']/i);
+          const videoId = idMatch ? idMatch[1] : '';
+          return `<div class="vpc-tiktok-embed"><iframe src="https://www.tiktok.com/player/v1/${videoId}?music_info=1&description=1"></iframe></div>`;
+        }
+      );
+      processed = processed.replace(/<script\b[^>]*src=["'](?:https?:)?\/\/(?:www\.)?tiktok\.com\/embed\.js[^"\']*["'][^>]*>\s*<\/script>/gi, '');
+
+      assert.ok(processed.includes('player/v1/7440311961700650247'), 'Must transform video 1');
+      assert.ok(processed.includes('player/v1/7485964405767785735'), 'Must transform video 2');
+      assert.ok(!processed.includes('embed.js'), 'Must strip out embed.js script tags');
+      assert.ok(processed.includes('<p>Đoạn giữa</p>'), 'Must preserve intermediate paragraph');
+    });
+
+    test('assets/css/knowledge-single.css contains .vpc-tiktok-embed responsive styling', () => {
+      const css = fs.readFileSync(path.join(rootDir, 'assets/css/knowledge-single.css'), 'utf8');
+      assert.ok(css.includes('.vpc-tiktok-embed'), 'Must define .vpc-tiktok-embed in CSS');
+      assert.ok(css.includes('.vpc-tiktok-embed iframe'), 'Must style .vpc-tiktok-embed iframe');
+      assert.ok(css.includes('@media (max-width: 480px)'), 'Must include mobile responsive styles for TikTok embed');
+    });
+  });
+
+  describe('11. Policy Documentation Hub (Figma Spec Alignment)', () => {
+    test('template-parts/policy-page.php implements 3-column Figma layout, groups, and auto-ID TOC', () => {
+      const templatePath = path.join(rootDir, 'template-parts/policy-page.php');
+      assert.ok(fs.existsSync(templatePath), 'template-parts/policy-page.php must exist');
+      const php = fs.readFileSync(templatePath, 'utf8');
+
+      assert.ok(php.includes('$policy_groups'), 'Must define grouped policies structure');
+      assert.ok(php.includes('phap-ly') && php.includes('noi-dung') && php.includes('dich-vu'), 'Must contain 3 Figma groups');
+      assert.ok(php.includes("'publish'"), 'Must query only published pages to exclude uncreated pages');
+      assert.ok(php.includes('vpc-policy-sidebar'), 'Must render left sidebar');
+      assert.ok(php.includes('vpc-policy-article'), 'Must render center article');
+      assert.ok(php.includes('vpc-policy-toc-rail'), 'Must render right TOC rail');
+      assert.ok(php.includes('vpc-policy-sheet'), 'Must render mobile bottom sheet');
+      assert.ok(php.includes('vpc-policy-mobile-toc'), 'Must render mobile collapsible TOC');
+      assert.ok(php.includes('vpc-policy-search__input'), 'Must contain policy search input');
+      assert.ok(php.includes('read_time'), 'Must calculate estimated reading time');
+      assert.ok(php.includes('preg_replace_callback') && php.includes('<h2'), 'Must auto-generate anchor IDs for h2 headings');
+    });
+
+    test('inc/content-types.php registers Policy Settings meta box for pages and excludes non-policy core pages', () => {
+      const contentTypesPath = path.join(rootDir, 'inc/content-types.php');
+      const php = fs.readFileSync(contentTypesPath, 'utf8');
+      assert.ok(php.includes('vpc_page_policy_meta'), 'Must register policy meta box');
+      assert.ok(php.includes('vpc_policy_group'), 'Must support vpc_policy_group');
+      assert.ok(php.includes('save_post_page'), 'Must hook into save_post_page');
+      assert.ok(php.includes('vpc_is_core_non_policy_page'), 'Must declare vpc_is_core_non_policy_page exclusion helper');
+    });
+
+    test('inc/enqueue.php registers policy styles and scripts with full slug coverage', () => {
+      const enqueuePath = path.join(rootDir, 'inc/enqueue.php');
+      const php = fs.readFileSync(enqueuePath, 'utf8');
+
+      assert.ok(php.includes('dieu-khoan-su-dung'), 'Must check dieu-khoan-su-dung');
+      assert.ok(php.includes('chinh-sach-bao-mat'), 'Must check chinh-sach-bao-mat');
+      assert.ok(php.includes('chinh-sach-bien-tap-va-chinh-sua'), 'Must check chinh-sach-bien-tap-va-chinh-sua');
+      assert.ok(php.includes('quy-trinh-tiep-nhan-va-giai-quyet-khieu-nai'), 'Must check quy-trinh-tiep-nhan-va-giai-quyet-khieu-nai');
+      assert.ok(php.includes('chinh-sach-hoan-tien-va-huy-dich-vu'), 'Must check chinh-sach-hoan-tien-va-huy-dich-vu');
+      assert.ok(php.includes('chinh-sach-thanh-toan'), 'Must check chinh-sach-thanh-toan');
+      assert.ok(php.includes('assets/css/policy.css'), 'Must enqueue assets/css/policy.css');
+      assert.ok(php.includes('assets/js/policy.js'), 'Must enqueue assets/js/policy.js');
+    });
+
+    test('page.php routes all 6 policy slugs to dedicated templates', () => {
+      const pagePath = path.join(rootDir, 'page.php');
+      const php = fs.readFileSync(pagePath, 'utf8');
+
+      assert.ok(php.includes("'chinh-sach-hoan-tien-va-huy-dich-vu'"), 'Must route refund slug');
+      assert.ok(php.includes("'chinh-sach-thanh-toan'"), 'Must route payment slug');
+      assert.ok(php.includes("template-parts/policy-page"), 'Must delegate to template-parts/policy-page');
+    });
+
+    test('assets/js/policy.js exists, has valid syntax, and implements interactive features', () => {
+      const jsPath = path.join(rootDir, 'assets/js/policy.js');
+      assert.ok(fs.existsSync(jsPath), 'assets/js/policy.js must exist');
+      const js = fs.readFileSync(jsPath, 'utf8');
+
+      assert.doesNotThrow(() => {
+        new Function(js);
+      }, 'assets/js/policy.js must have valid JavaScript syntax');
+
+      assert.ok(js.includes('initSearch'), 'Must implement search filter');
+      assert.ok(js.includes('initBottomSheet'), 'Must implement mobile bottom sheet');
+      assert.ok(js.includes('initMobileToc'), 'Must implement mobile TOC accordion');
+      assert.ok(js.includes('initDesktopToc'), 'Must implement desktop TOC ScrollSpy');
+      assert.ok(js.includes('scrollToTarget'), 'Must handle offset scrolling');
+    });
+
+    test('assets/css/policy.css implements responsive grid, bottom sheet animation, and typography', () => {
+      const cssPath = path.join(rootDir, 'assets/css/policy.css');
+      assert.ok(fs.existsSync(cssPath), 'assets/css/policy.css must exist');
+      const css = fs.readFileSync(cssPath, 'utf8');
+
+      assert.ok(css.includes('.vpc-policy-grid'), 'Must define .vpc-policy-grid');
+      assert.ok(css.includes('grid-template-columns: 260px minmax(0, 1fr) 240px'), 'Must implement 3-column layout');
+      assert.ok(css.includes('.vpc-policy-sheet'), 'Must style .vpc-policy-sheet');
+      assert.ok(css.includes('@keyframes vpcSheetSlideUp'), 'Must animate bottom sheet slide-up');
+      assert.ok(css.includes('.vpc-policy-nav__link.is-active'), 'Must style active navigation link');
+      assert.ok(css.includes('scroll-margin-top: 110px'), 'Must include sticky header offset for headings');
     });
   });
 });

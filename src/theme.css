@@ -326,6 +326,8 @@
 @source "../**/*.php";
 @source "../*.php";
 @source "../*.html";
+@source not "../scratch";
+@source not "../tests";
 
 /* Prevent the unstyled desktop nav from flashing before this stylesheet loads. */
 #site-header {

@@ -82,6 +82,27 @@
 				const submit = form.querySelector('button[type="submit"]');
 				const status = form.querySelector('[data-recruitment-status]');
 				const originalText = submit ? submit.textContent : '';
+
+				const fileInput = form.querySelector('input[type="file"]');
+				if (fileInput && fileInput.files && fileInput.files[0]) {
+					const file = fileInput.files[0];
+					if (file.size > 5 * 1024 * 1024) {
+						if (status) {
+							status.hidden = false;
+							status.textContent = 'Kích thước tệp CV vượt quá giới hạn 5 MB.';
+						}
+						return;
+					}
+					const ext = file.name.split('.').pop().toLowerCase();
+					if (['pdf', 'doc', 'docx'].indexOf(ext) === -1) {
+						if (status) {
+							status.hidden = false;
+							status.textContent = 'Định dạng tệp không được hỗ trợ. Vui lòng chọn tệp PDF, DOC hoặc DOCX.';
+						}
+						return;
+					}
+				}
+
 				if (submit) {
 					submit.disabled = true;
 					submit.textContent = 'Đang gửi...';
@@ -92,7 +113,7 @@
 				}
 
 				const data = new FormData(form);
-				data.set('action', 'vpc_submit_consultation');
+				data.set('action', 'vpc_submit_recruitment');
 				if (window.vpcData && window.vpcData.nonce) data.set('nonce', window.vpcData.nonce);
 				data.set('submission_id', (window.crypto && window.crypto.randomUUID) ? window.crypto.randomUUID() : String(Date.now()));
 

@@ -9,20 +9,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+require_once __DIR__ . '/asset-manifest.php';
+
 /**
  * Resolves the cache-busting version for a theme asset.
  *
  * In development (WP_DEBUG = true), returns the specific asset's file modification timestamp
  * so local edits reflect immediately without manual cache flushing.
  *
- * In production/staging (WP_DEBUG = false), automatically resolves a single release version
- * across the entire theme (via Git commit hash or theme deployment timestamp) and caches it
- * in memory for the lifecycle of the request.
- *
- * This ensures:
- * 1. Zero manual work: Developer NEVER has to manually bump version numbers on deploy.
- * 2. Instant cache-busting: Browsers & CDNs automatically fetch fresh assets on every deploy.
- * 3. Zero I/O bottleneck: Only a single lightweight resolution per request, shared by all assets.
+ * Built JavaScript uses its content hash from the request-cached manifest.
+ * Assets absent from the manifest retain the existing release-version fallback.
+ * CSS output URLs and hashes are resolved by vanphuccare_enqueue_theme_style().
  *
  * @param string $full_path Absolute path to the asset file.
  * @return string Asset version.
@@ -31,6 +28,12 @@ function vanphuccare_get_asset_version( $full_path ) {
 	// Development mode: hot reload per file.
 	if ( defined( 'WP_DEBUG' ) && WP_DEBUG && file_exists( $full_path ) ) {
 		return (string) filemtime( $full_path );
+	}
+	// JS (including Gutenberg editor scripts) keeps its URL and uses a content hash.
+	$key = str_replace( '\\', '/', substr( $full_path, strlen( get_template_directory() ) + 1 ) );
+	$asset = vanphuccare_built_asset( $key );
+	if ( $asset && $asset['file'] === $key ) {
+		return $asset['version'];
 	}
 
 	static $release_version = null;
@@ -98,6 +101,11 @@ function vanphuccare_get_asset_version( $full_path ) {
  * @return bool Whether the style was enqueued.
  */
 function vanphuccare_enqueue_theme_style( $handle, $relative_path, $deps = array(), $media = 'all' ) {
+	$built = vanphuccare_built_asset( $relative_path );
+	if ( $built ) {
+		wp_enqueue_style( $handle, get_template_directory_uri() . '/' . $built['file'], $deps, $built['version'], $media );
+		return true;
+	}
 	$full_path = get_template_directory() . '/' . ltrim( $relative_path, '/' );
 	if ( ! file_exists( $full_path ) ) {
 		return false;
@@ -125,7 +133,13 @@ function vanphuccare_enqueue_theme_script( $handle, $relative_path, $deps = arra
 	}
 
 	$version = vanphuccare_get_asset_version( $full_path );
-	wp_enqueue_script( $handle, get_template_directory_uri() . '/' . ltrim( $relative_path, '/' ), $deps, $version, $in_footer );
+	// Core resolves dependency/inline-script compatibility (WordPress 6.3+).
+	// Editor scripts retain their existing synchronous WordPress dependencies.
+	$args = $in_footer;
+	if ( ! is_admin() && version_compare( $GLOBALS['wp_version'] ?? '0', '6.3', '>=' ) ) {
+		$args = array( 'in_footer' => $in_footer, 'strategy' => 'defer' );
+	}
+	wp_enqueue_script( $handle, get_template_directory_uri() . '/' . ltrim( $relative_path, '/' ), $deps, $version, $args );
 
 	return true;
 }
@@ -152,21 +166,35 @@ function vanphuccare_enqueue_assets() {
 		|| is_page( 'chinh-sach-bao-mat' )
 		|| is_page( 'chinh-sach-bien-tap-va-chinh-sua' )
 		|| is_page( 'quy-trinh-tiep-nhan-va-giai-quyet-khieu-nai' )
+		|| is_page( 'chinh-sach-hoan-tien-va-huy-dich-vu' )
+		|| is_page( 'chinh-sach-thanh-toan' )
+		|| ( is_page() && ! empty( get_post_meta( get_queried_object_id(), 'vpc_policy_group', true ) ) )
 		|| is_page_template( 'page-dieu-khoan-su-dung.php' )
 		|| is_page_template( 'page-chinh-sach-bao-mat.php' )
 		|| is_page_template( 'page-chinh-sach-bien-tap.php' )
 		|| is_page_template( 'page-quy-trinh-khieu-nai.php' );
 
-	// Enqueue Google Fonts: Fraunces (Heading) & Manrope (Body) - optimized weights, no italic.
-	wp_enqueue_style(
-		'vanphuccare-fonts',
-		'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Manrope:wght@400;500;600;700&display=swap',
-		array(),
-		null
-	);
+	vanphuccare_enqueue_local_fonts();
 
-	// Enqueue Tailwind CSS v4 Theme.
-	vanphuccare_enqueue_theme_style( 'vanphuccare-tailwind', 'assets/css/theme.css', array( 'vanphuccare-fonts' ) );
+	$optimized = vanphuccare_has_optimized_assets();
+	// Unknown/dynamic content retains the full theme. Page namespaces are split
+	// only for built-in routes and plain Gutenberg/HTML content.
+	$content = is_singular() ? (string) get_post_field( 'post_content', get_queried_object_id() ) : '';
+	$dynamic_content = preg_match( '~(?:\[[a-zA-Z][^\]]*\]|<!--\s*wp:(?:block|lazyblock)/?)~', $content );
+	$split_theme = $optimized && ! $dynamic_content;
+	vanphuccare_enqueue_theme_style( 'vanphuccare-tailwind', $split_theme ? 'assets/css/site-core.css' : 'assets/css/theme.css', array( 'vanphuccare-fonts' ) );
+	if ( $split_theme ) {
+		$page_css = array(
+			'prenatal' => $is_prenatal_page || str_contains( $content, 'prenatal-' ),
+			'contact' => is_page( 'lien-he' ) || is_page_template( 'page-lien-he.php' ) || str_contains( $content, 'vpc-contact-' ),
+			'policy' => $is_policy_page || preg_match( '/(?:policy-|related-box-|related-policies-)/', $content ),
+		);
+		foreach ( $page_css as $name => $needed ) {
+			if ( $needed ) {
+				vanphuccare_enqueue_theme_style( 'vanphuccare-page-' . $name, 'assets/css/page-' . $name . '.css', array( 'vanphuccare-tailwind' ) );
+			}
+		}
+	}
 
 	if ( $is_about_page ) {
 		vanphuccare_enqueue_theme_style( 'vanphuccare-about', 'assets/css/about.css', array( 'vanphuccare-tailwind' ) );
@@ -226,11 +254,13 @@ function vanphuccare_enqueue_assets() {
 	}
 
 	if ( $is_knowledge_page || $is_editorial_single ) {
-		vanphuccare_enqueue_theme_style( 'vanphuccare-knowledge', 'assets/css/knowledge.css', array( 'vanphuccare-tailwind' ) );
+		$knowledge_css = $optimized && $is_editorial_single && ! $dynamic_content && ! str_contains( $content, 'vpc-knowledge' ) ? 'assets/css/knowledge-components.css' : 'assets/css/knowledge.css';
+		vanphuccare_enqueue_theme_style( 'vanphuccare-knowledge', $knowledge_css, array( 'vanphuccare-tailwind' ) );
 	}
 
 	if ( $is_news_page || $is_news_single ) {
-		vanphuccare_enqueue_theme_style( 'vanphuccare-news', 'assets/css/news.css', array( 'vanphuccare-tailwind' ) );
+		$news_css = $optimized && $is_editorial_single && ! $dynamic_content && ! preg_match( '/vpc-(?:news|hub)-/', $content ) ? 'assets/css/news-shell.css' : 'assets/css/news.css';
+		vanphuccare_enqueue_theme_style( 'vanphuccare-news', $news_css, array( 'vanphuccare-tailwind' ) );
 	}
 
 	if ( $is_recruitment_page ) {
@@ -246,13 +276,22 @@ function vanphuccare_enqueue_assets() {
 		vanphuccare_enqueue_theme_style( 'vanphuccare-policy', 'assets/css/policy.css', array( 'vanphuccare-tailwind' ) );
 	}
 
-	/* Shared footer overrides must load after page-specific styles. */
+	/* Shared overrides stay after page CSS, with their original handles as aliases. */
+	if ( $optimized ) {
+		vanphuccare_enqueue_theme_style( 'vanphuccare-site-overrides', 'assets/css/site-overrides.css', array( 'vanphuccare-tailwind' ) );
+		foreach ( array( 'vanphuccare-footer', 'vanphuccare-mobile-responsive', 'vanphuccare-select-menu', 'vanphuccare-mobile-menu' ) as $handle ) {
+			wp_register_style( $handle, false, array( 'vanphuccare-site-overrides' ), null );
+			wp_enqueue_style( $handle );
+		}
+	} else {
+	/* Unbuilt/development fallback preserves the previous order. */
 	vanphuccare_enqueue_theme_style( 'vanphuccare-footer', 'assets/css/footer.css', array( 'vanphuccare-tailwind' ) );
 
 	/* Keep mobile pages content-driven after all page-specific CSS is loaded. */
 	vanphuccare_enqueue_theme_style( 'vanphuccare-mobile-responsive', 'assets/css/mobile-responsive.css', array( 'vanphuccare-footer' ) );
 	vanphuccare_enqueue_theme_style( 'vanphuccare-select-menu', 'assets/css/select-menu.css', array( 'vanphuccare-mobile-responsive' ) );
 	vanphuccare_enqueue_theme_style( 'vanphuccare-mobile-menu', 'assets/css/mobile-menu.css', array( 'vanphuccare-select-menu' ) );
+	}
 
 	// Enqueue main JavaScript.
 	vanphuccare_enqueue_theme_script( 'vanphuccare-main', 'assets/js/main.js', array(), true );
@@ -290,6 +329,10 @@ function vanphuccare_enqueue_assets() {
 		vanphuccare_enqueue_theme_script( 'vanphuccare-recruitment-application', 'assets/js/recruitment-application.js', array( 'vanphuccare-recruitment-detail' ), true );
 	}
 
+	if ( $is_policy_page ) {
+		vanphuccare_enqueue_theme_script( 'vanphuccare-policy', 'assets/js/policy.js', array(), true );
+	}
+
 	// Enqueue Cloudflare Turnstile API.
 	wp_enqueue_script( 'cloudflare-turnstile', 'https://challenges.cloudflare.com/turnstile/v0/api.js', array(), null, true );
 
@@ -304,6 +347,12 @@ function vanphuccare_enqueue_assets() {
 	);
 }
 add_action( 'wp_enqueue_scripts', 'vanphuccare_enqueue_assets' );
+
+/** Shared local font faces also load inside the Gutenberg content canvas. */
+function vanphuccare_enqueue_local_fonts() {
+	vanphuccare_enqueue_theme_style( 'vanphuccare-fonts', 'assets/css/fonts.css' );
+}
+add_action( 'enqueue_block_assets', 'vanphuccare_enqueue_local_fonts' );
 
 add_filter( 'script_loader_tag', function ( $tag, $handle, $src ) {
 	if ( 'cloudflare-turnstile' === $handle ) {
@@ -345,6 +394,8 @@ function vanphuccare_enqueue_knowledge_pattern_styles() {
 			return;
 		}
 	} elseif ( ! is_singular( 'post' ) ) {
+		return;
+	} elseif ( ! vanphuccare_content_uses_article_patterns( (string) get_post_field( 'post_content', get_queried_object_id() ) ) ) {
 		return;
 	}
 

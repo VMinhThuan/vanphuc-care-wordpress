@@ -24,6 +24,12 @@ function vpc_handle_consultation_submission() {
 		), 403 );
 	}
 
+	// Backward compatibility: If recruitment application is submitted to consultation endpoint, route to recruitment handler.
+	if ( isset( $_POST['recruitment_consent'] ) || ( isset( $_POST['question'] ) && false !== strpos( (string) $_POST['question'], 'Ứng tuyển' ) ) ) {
+		vpc_handle_recruitment_submission();
+		return;
+	}
+
 	// Honeypot field: real visitors never see or complete this field.
 	if ( ! empty( $_POST['website'] ) ) {
 		wp_send_json_error( array(
@@ -201,3 +207,201 @@ function vpc_handle_consultation_submission() {
 
 add_action( 'wp_ajax_vpc_submit_consultation', 'vpc_handle_consultation_submission' );
 add_action( 'wp_ajax_nopriv_vpc_submit_consultation', 'vpc_handle_consultation_submission' );
+
+/**
+ * Handles AJAX recruitment application submissions and synchronizes with Getfly CRM.
+ *
+ * @return void
+ */
+function vpc_handle_recruitment_submission() {
+	// Verify nonce
+	$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
+	if ( empty( $nonce ) || ! wp_verify_nonce( $nonce, 'vpc_consultation_nonce' ) ) {
+		wp_send_json_error( array(
+			'message' => 'Phiên làm việc đã hết hạn. Vui lòng tải lại trang và thử lại.',
+		), 403 );
+	}
+
+	// Honeypot field
+	if ( ! empty( $_POST['website'] ) ) {
+		wp_send_json_error( array(
+			'message' => 'Không thể gửi thông tin. Vui lòng thử lại.',
+		), 400 );
+	}
+
+	// Rate limiting: 1 submission per 20 seconds per IP
+	$remote_address = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+	$rate_key       = 'vpc_recruitment_' . md5( $remote_address );
+	if ( get_transient( $rate_key ) ) {
+		wp_send_json_error( array(
+			'message' => 'Bạn vừa gửi hồ sơ. Vui lòng chờ ít phút trước khi gửi lại.',
+		), 429 );
+	}
+
+	$full_name = isset( $_POST['full_name'] ) ? sanitize_text_field( wp_unslash( $_POST['full_name'] ) ) : '';
+	$phone     = isset( $_POST['phone'] ) ? sanitize_text_field( wp_unslash( $_POST['phone'] ) ) : '';
+	$email     = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+	$question  = isset( $_POST['question'] ) ? sanitize_textarea_field( wp_unslash( $_POST['question'] ) ) : 'Ứng tuyển trực tuyến';
+	$role      = isset( $_POST['recruitment_role'] ) ? sanitize_text_field( wp_unslash( $_POST['recruitment_role'] ) ) : '';
+
+	if ( empty( $full_name ) || empty( $phone ) ) {
+		wp_send_json_error( array(
+			'message' => 'Vui lòng nhập đầy đủ họ tên và số điện thoại liên hệ.',
+		), 400 );
+	}
+
+	$clean_phone = vpc_normalize_vietnamese_phone( $phone );
+	if ( empty( $clean_phone ) ) {
+		wp_send_json_error( array(
+			'message' => 'Vui lòng nhập số điện thoại di động Việt Nam gồm 10 chữ số.',
+		), 400 );
+	}
+
+	if ( ! empty( $email ) && ! is_email( $email ) ) {
+		wp_send_json_error( array(
+			'message' => 'Email không hợp lệ. Vui lòng kiểm tra lại.',
+		), 400 );
+	}
+
+	// Validate attached CV file if present
+	$has_file = ( isset( $_FILES['cv'] ) && ! empty( $_FILES['cv']['name'] ) && ! empty( $_FILES['cv']['tmp_name'] ) && is_uploaded_file( $_FILES['cv']['tmp_name'] ) );
+	$file_orig_name = '';
+	$file_mime      = '';
+
+	if ( $has_file ) {
+		if ( UPLOAD_ERR_OK !== $_FILES['cv']['error'] ) {
+			wp_send_json_error( array(
+				'message' => 'Có lỗi khi tải tệp CV. Vui lòng kiểm tra lại tệp tin.',
+			), 400 );
+		}
+
+		if ( $_FILES['cv']['size'] > 5 * 1024 * 1024 ) {
+			wp_send_json_error( array(
+				'message' => 'Kích thước tệp CV vượt quá giới hạn cho phép (tối đa 5 MB).',
+			), 400 );
+		}
+
+		$file_ext = strtolower( pathinfo( $_FILES['cv']['name'], PATHINFO_EXTENSION ) );
+		$allowed_exts = array( 'pdf', 'doc', 'docx' );
+		if ( ! in_array( $file_ext, $allowed_exts, true ) ) {
+			wp_send_json_error( array(
+				'message' => 'Định dạng tệp không được hỗ trợ. Vui lòng chọn tệp PDF, DOC hoặc DOCX.',
+			), 400 );
+		}
+
+		$file_orig_name = sanitize_file_name( $_FILES['cv']['name'] );
+		$file_mime      = ! empty( $_FILES['cv']['type'] ) ? sanitize_mime_type( $_FILES['cv']['type'] ) : 'application/pdf';
+	}
+
+	// Prepare Getfly CRM payload
+	$getfly_endpoint = apply_filters( 'vpc_getfly_recruitment_endpoint', 'https://vanphuccare.getflycrm.com/api/opp/regis' );
+	$getfly_key      = apply_filters( 'vpc_getfly_recruitment_key', '0QT45oRxVq5c2fvoYv45b0QR5SodQ2oeUrIj11AqLY4knjKDl1' );
+	$token_api       = apply_filters( 'vpc_getfly_token_api', 'l4Mg51cEF1' );
+	$referer         = ! empty( $_SERVER['HTTP_REFERER'] ) ? esc_url_raw( wp_unslash( $_SERVER['HTTP_REFERER'] ) ) : home_url( '/tuyen-dung/' );
+
+	$description = $question;
+	if ( ! empty( $role ) ) {
+		$role_labels = array(
+			'dieu-duong-ho-sinh' => 'Điều dưỡng / Hộ sinh',
+			'cham-soc-me-be'     => 'Chăm sóc mẹ và bé',
+			'khac'               => 'Khác',
+		);
+		$description .= ' · Nhóm nghề: ' . ( isset( $role_labels[ $role ] ) ? $role_labels[ $role ] : $role );
+	}
+
+	$data_form = array(
+		'user_id'              => '1',
+		'recipient'            => '',
+		'token_api'            => $token_api,
+		'opportunity_status'   => '49',
+		'opp_type_source'      => 'Website Tuyển dụng',
+		'opp_source_content'   => 'vanphuccare.vn',
+		'account_type'         => '11',
+		'key'                  => $getfly_key,
+		'opp_url_source'       => $referer,
+		'contact_name'         => $full_name,
+		'account_email'        => $email,
+		'account_phone'        => $clean_phone,
+		'account_description'  => $description,
+		'custom_fields'        => new stdClass(),
+		'utm_params'           => new stdClass(),
+	);
+
+	$response_code = 0;
+	$response_body = '';
+
+	if ( function_exists( 'curl_init' ) ) {
+		$ch = curl_init();
+		$post_fields = array(
+			'data_form' => wp_json_encode( $data_form ),
+		);
+		if ( $has_file ) {
+			$post_fields['userfile[]'] = new CURLFile( $_FILES['cv']['tmp_name'], $file_mime, $file_orig_name );
+		}
+		curl_setopt_array( $ch, array(
+			CURLOPT_URL            => $getfly_endpoint,
+			CURLOPT_POST           => true,
+			CURLOPT_POSTFIELDS     => $post_fields,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_TIMEOUT        => 25,
+			CURLOPT_SSL_VERIFYPEER => true,
+			CURLOPT_HTTPHEADER     => array(
+				'Origin: https://vanphuccare.getflycrm.com',
+				'Referer: https://vanphuccare.getflycrm.com/api/forms/viewform/?key=' . $getfly_key,
+			),
+		) );
+		$response_body = curl_exec( $ch );
+		$response_code = (int) curl_getinfo( $ch, CURLINFO_HTTP_CODE );
+		curl_close( $ch );
+	} else {
+		$boundary = wp_generate_password( 24, false );
+		$headers  = array(
+			'content-type' => 'multipart/form-data; boundary=' . $boundary,
+			'Origin'       => 'https://vanphuccare.getflycrm.com',
+			'Referer'      => 'https://vanphuccare.getflycrm.com/api/forms/viewform/?key=' . $getfly_key,
+		);
+		$body = "--{$boundary}\r\n";
+		$body .= "Content-Disposition: form-data; name=\"data_form\"\r\n\r\n";
+		$body .= wp_json_encode( $data_form ) . "\r\n";
+
+		if ( $has_file ) {
+			$file_contents = file_get_contents( $_FILES['cv']['tmp_name'] );
+			$body .= "--{$boundary}\r\n";
+			$body .= "Content-Disposition: form-data; name=\"userfile[]\"; filename=\"" . esc_attr( $file_orig_name ) . "\"\r\n";
+			$body .= "Content-Type: {$file_mime}\r\n\r\n";
+			$body .= $file_contents . "\r\n";
+		}
+		$body .= "--{$boundary}--\r\n";
+
+		$response = wp_remote_post( $getfly_endpoint, array(
+			'timeout' => 25,
+			'headers' => $headers,
+			'body'    => $body,
+		) );
+		$response_code = (int) wp_remote_retrieve_response_code( $response );
+		$response_body = wp_remote_retrieve_body( $response );
+	}
+
+	$decoded = is_string( $response_body ) ? json_decode( $response_body, true ) : null;
+	$is_success = ( 200 === $response_code && is_array( $decoded ) && ! empty( $decoded['status'] ) && true === $decoded['status'] );
+
+	if ( $is_success ) {
+		set_transient( $rate_key, 1, 20 );
+		wp_send_json_success( array(
+			'message' => 'Chúc mừng! Bạn đã ứng tuyển thành công. Bộ phận tuyển dụng sẽ liên hệ lại với bạn trong vòng 24h.',
+		) );
+	}
+
+	$error_msg = 'Chưa thể gửi hồ sơ đến hệ thống tuyển dụng. Vui lòng thử lại sau hoặc liên hệ hotline.';
+	if ( is_array( $decoded ) && ! empty( $decoded['message'] ) ) {
+		$error_msg = $decoded['message'];
+	} elseif ( is_array( $decoded ) && ! empty( $decoded['errors'] ) ) {
+		$error_msg = wp_strip_all_tags( $decoded['errors'] );
+	}
+
+	wp_send_json_error( array(
+		'message' => $error_msg,
+	), 400 );
+}
+add_action( 'wp_ajax_vpc_submit_recruitment', 'vpc_handle_recruitment_submission' );
+add_action( 'wp_ajax_nopriv_vpc_submit_recruitment', 'vpc_handle_recruitment_submission' );

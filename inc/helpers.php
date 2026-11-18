@@ -868,4 +868,70 @@ function vpc_get_author_avatar_html( $author_id, $size = 80 ) {
 	</svg>';
 }
 
+/**
+ * Automatically transforms legacy TikTok blockquote embeds into official TikTok player iframes.
+ *
+ * Resolves "Player authentication failed" errors and duplicate embed.js execution across all 292+ posts.
+ * Upgrades <blockquote class="tiktok-embed"> markup to the official responsive TikTok player iframe (player/v1).
+ *
+ * @param string $content Post content.
+ * @return string Processed content.
+ */
+function vpc_transform_tiktok_embeds( $content ) {
+	if ( is_admin() || empty( $content ) || ! is_string( $content ) ) {
+		return $content;
+	}
+
+	// Performance optimization: only run regex if "tiktok" appears in content.
+	if ( false === stripos( $content, 'tiktok' ) ) {
+		return $content;
+	}
+
+	// 1. Transform any legacy <blockquote class="...tiktok-embed...">...</blockquote>
+	$content = preg_replace_callback(
+		'/<blockquote[\s\S]*?class=["\'][^"\']*\btiktok-embed\b[^"\']*["\'][\s\S]*?>[\s\S]*?<\/blockquote>/i',
+		function( $matches ) {
+			$blockquote_tag = $matches[0];
+			$video_id       = '';
+
+			// Primary check: data-video-id="(\d+)"
+			if ( preg_match( '/data-video-id=["\'](\d+)["\']/i', $blockquote_tag, $id_match ) ) {
+				$video_id = $id_match[1];
+			} elseif ( preg_match( '/\b(?:cite|href)=["\']https?:\/\/(?:www\.)?tiktok\.com\/@[^\/]+\/video\/(\d+)/i', $blockquote_tag, $cite_match ) ) {
+				// Secondary check: cite="..." or href=".../video/(\d+)"
+				$video_id = $cite_match[1];
+			}
+
+			// If no valid numeric video ID could be extracted, keep original markup safe.
+			if ( empty( $video_id ) ) {
+				return $matches[0];
+			}
+
+			// Render responsive, centered TikTok player iframe.
+			return sprintf(
+				'<div class="vpc-tiktok-embed" style="display: flex; justify-content: center; margin: 24px auto; max-width: 100%%;">' .
+					'<iframe src="https://www.tiktok.com/player/v1/%s?music_info=1&description=1" ' .
+						'width="325" height="578" frameborder="0" ' .
+						'allow="accelerometer; autoplay; clipboard-write; encrypted-media; fullscreen; gyroscope; picture-in-picture; web-share" ' .
+						'allowfullscreen loading="lazy" ' .
+						'style="width: 325px; max-width: 100%%; height: 578px; border-radius: 12px; border: none; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);">' .
+					'</iframe>' .
+				'</div>',
+				esc_attr( $video_id )
+			);
+		},
+		$content
+	);
+
+	// 2. Remove redundant <script async src="https://www.tiktok.com/embed.js"></script> tags.
+	$content = preg_replace(
+		'/<script\b[^>]*src=["\'](?:https?:)?\/\/(?:www\.)?tiktok\.com\/embed\.js[^"\']*["\'][^>]*>\s*<\/script>/i',
+		'',
+		$content
+	);
+
+	return $content;
+}
+add_filter( 'the_content', 'vpc_transform_tiktok_embeds', 20 );
+
 

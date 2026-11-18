@@ -7,6 +7,7 @@
 
 .vpc-recruitment-page {
 	--recruitment-blue: #1a77ba;
+	--recruitment-blue-dark: #155f95;
 	--recruitment-blue-light: #d1e4f1;
 	--recruitment-pink: #f48283;
 	--recruitment-pink-light: #fde6e6;
@@ -55,21 +56,28 @@
 
 .vpc-recruitment-badge {
 	height: 34px;
+	min-height: 34px;
 	display: inline-flex;
 	align-items: center;
-	gap: 4px;
-	padding: 5px 12px 5px 4px;
+	justify-content: center;
+	gap: 8px;
+	padding: 4px 12px;
 	border: 1px solid var(--recruitment-pink);
 	border-radius: 999px;
-	color: var(--recruitment-pink);
+	color: var(--recruitment-blue-dark);
+	background: var(--recruitment-pink-light);
+	font-family: var(--font-body, "Manrope", sans-serif);
 	font-size: 12px;
 	line-height: 16px;
-	font-weight: 400;
+	font-weight: 500;
+	white-space: nowrap;
+	text-transform: uppercase;
 }
 
 .vpc-recruitment-badge img {
 	width: 24px;
 	height: 24px;
+	object-fit: contain;
 }
 
 .vpc-recruitment-badge__mobile,
@@ -216,8 +224,7 @@
 .vpc-recruitment-chip--technician { top: 300px; left: 270px; }
 
 .vpc-recruitment-jobs {
-	min-height: 756px;
-	padding: 96px 80px 0;
+	padding: 96px 80px 64px;
 	background: #f8f8f8;
 }
 
@@ -636,14 +643,20 @@
 		position: absolute;
 		top: 32px;
 		left: 50%;
-		width: 183px;
+		width: max-content;
+		max-width: calc(100% - 40px);
 		height: 34px;
+		min-height: 34px;
 		transform: translateX(-50%);
 		justify-content: center;
 		gap: 8px;
-		padding: 4px 8px;
+		padding: 4px 12px;
 		background: var(--recruitment-pink-light);
+		color: var(--recruitment-blue-dark);
+		border: 1px solid var(--recruitment-pink);
+		border-radius: 999px;
 		white-space: nowrap;
+		text-transform: uppercase;
 	}
 
 	.vpc-recruitment-badge__desktop,
@@ -657,7 +670,7 @@
 	}
 
 	.vpc-recruitment-badge__mobile {
-		color: var(--recruitment-blue);
+		color: var(--recruitment-blue-dark);
 	}
 
 	.vpc-recruitment-hero h1 {

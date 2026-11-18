@@ -135,8 +135,8 @@ $gestational_age_options = vpc_get_gestational_age_options();
 						?>
 
 							<!-- Giai đoạn thai kỳ -->
-							<fieldset class="flex flex-col gap-4 border-0 p-0 m-0">
-								<legend class="mb-0 font-body font-medium text-xl leading-7 text-text-body-default flex items-center gap-1">
+							<fieldset class="border-0 p-0 m-0">
+								<legend class="mb-3 font-body font-medium text-xl leading-7 text-text-body-default flex items-center gap-1 select-none">
 									<span class="text-text-error-default">*</span> Giai đoạn thai kỳ
 								</legend>
 								<div class="flex flex-wrap items-center gap-2 sm:gap-2.5 xl:gap-3" role="radiogroup" aria-label="Giai đoạn thai kỳ">

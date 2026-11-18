@@ -1142,4 +1142,198 @@ function vpc_register_recruitment_post_meta() {
 }
 add_action( 'init', 'vpc_register_recruitment_post_meta' );
 
+/**
+ * Checks whether a given post is a core non-policy page (e.g. Front page, Giới thiệu, Liên hệ, Services, Recruitment).
+ * Used to automatically hide the Policy Settings meta box on pages where it is not applicable.
+ *
+ * @param WP_Post|int|null $post Post object or ID.
+ * @return bool True if the page is a core non-policy page, false otherwise.
+ */
+function vpc_is_core_non_policy_page( $post = null ) {
+	$post = get_post( $post );
+	if ( ! $post || 'page' !== $post->post_type ) {
+		return false;
+	}
+
+	// Never exclude if the page already has an explicit policy group set
+	$existing_group = get_post_meta( $post->ID, 'vpc_policy_group', true );
+	if ( ! empty( $existing_group ) ) {
+		return false;
+	}
+
+	// Check if this page is set as the static Front Page
+	$front_page_id = (int) get_option( 'page_on_front' );
+	if ( $front_page_id > 0 && (int) $post->ID === $front_page_id ) {
+		return true;
+	}
+
+	$excluded_slugs = array(
+		'trang-chu',
+		'gioi-thieu',
+		'lien-he',
+		'lien-he-draft',
+		'tin-tuyen-dung',
+		'tuyen-dung',
+		'dich-vu',
+		'bao-mau-tai-nha',
+		'lop-hoc-tien-san',
+		'tam-tre-so-sinh',
+		'thong-tac-tia-sua',
+		'trung-tam-o-cu',
+		'dich-vu-tu-van-nuoi-con-easy-truc-tuyen',
+		'tu-van-nuoi-con-easy-truc-tuyen-1-1',
+		'khoa-hoc-truc-tuyen',
+		'tin-tuc',
+		'tin-tuc-su-kien',
+		'kien-thuc',
+		'trang-cam-on-danh-cho-khach-hang-ladipage',
+		'trang-cam-on-ung-vien-ladipage',
+	);
+
+	if ( in_array( $post->post_name, $excluded_slugs, true ) ) {
+		return true;
+	}
+
+	$excluded_templates = array(
+		'page-gioi-thieu.php',
+		'page-lien-he.php',
+		'page-dich-vu.php',
+		'page-bao-mau-tai-nha.php',
+		'page-lop-hoc-tien-san.php',
+		'page-tam-tre-so-sinh.php',
+		'page-thong-tac-tia-sua.php',
+		'page-trung-tam-o-cu.php',
+		'page-dich-vu-tu-van-nuoi-con-easy-truc-tuyen.php',
+		'page-tin-tuc.php',
+		'page-tin-tuyen-dung.php',
+		'page-tuyen-dung.php',
+	);
+
+	$current_template = get_post_meta( $post->ID, '_wp_page_template', true );
+	if ( ! empty( $current_template ) && in_array( $current_template, $excluded_templates, true ) ) {
+		return true;
+	}
+
+	return false;
+}
+
+/**
+ * Registers the Policy Settings meta box for pages (placed in the right sidebar).
+ * Allows admins to assign any Page to a Policy Group (Pháp lý, Nội dung, Dịch vụ).
+ *
+ * @param string  $post_type Current post type.
+ * @param WP_Post $post Current post object.
+ * @return void
+ */
+function vpc_add_policy_meta_box( $post_type = '', $post = null ) {
+	if ( $post instanceof WP_Post && vpc_is_core_non_policy_page( $post ) ) {
+		return;
+	}
+
+	add_meta_box(
+		'vpc_page_policy_meta',
+		'Cài đặt Chính sách (Policy Hub)',
+		'vpc_render_policy_meta_box',
+		'page',
+		'side',
+		'default'
+	);
+}
+add_action( 'add_meta_boxes', 'vpc_add_policy_meta_box', 10, 2 );
+
+/**
+ * Renders the Policy Settings meta box in the WordPress page editor.
+ *
+ * @param WP_Post $post Current post object.
+ * @return void
+ */
+function vpc_render_policy_meta_box( $post ) {
+	$is_excluded = vpc_is_core_non_policy_page( $post );
+	?>
+	<?php if ( $is_excluded ) : ?>
+		<style id="vpc-policy-meta-box-init-style">
+			#vpc_page_policy_meta { display: none !important; }
+		</style>
+		<?php
+		return;
+	endif;
+	?>
+	<?php
+	wp_nonce_field( 'vpc_save_policy_meta', 'vpc_policy_meta_nonce' );
+
+	$group = get_post_meta( $post->ID, 'vpc_policy_group', true );
+	$order = get_post_meta( $post->ID, 'vpc_policy_order', true );
+
+	// Auto-default for the 4 legacy known pages if not explicitly set yet
+	if ( empty( $group ) ) {
+		$slug = $post->post_name;
+		if ( 'dieu-khoan-su-dung' === $slug || 'chinh-sach-bao-mat' === $slug ) {
+			$group = 'phap-ly';
+		} elseif ( 'chinh-sach-bien-tap-va-chinh-sua' === $slug ) {
+			$group = 'noi-dung';
+		} elseif ( 'quy-trinh-tiep-nhan-va-giai-quyet-khieu-nai' === $slug ) {
+			$group = 'dich-vu';
+		}
+	}
+	?>
+	<div class="vpc-meta-field" style="margin-bottom: 12px;">
+		<label for="vpc_policy_group" style="display:block; font-weight:600; margin-bottom:4px;">Nhóm chính sách:</label>
+		<select id="vpc_policy_group" name="vpc_policy_group" style="width:100%;">
+			<option value="" <?php selected( $group, '' ); ?>>-- Không thuộc chính sách --</option>
+			<option value="phap-ly" <?php selected( $group, 'phap-ly' ); ?>>Pháp lý</option>
+			<option value="noi-dung" <?php selected( $group, 'noi-dung' ); ?>>Nội dung</option>
+			<option value="dich-vu" <?php selected( $group, 'dich-vu' ); ?>>Dịch vụ</option>
+		</select>
+		<p class="description" style="font-size:12px; color:#666; margin-top:4px;">
+			Chọn nhóm để trang này tự động xuất hiện trên Sidebar trang Chính sách.
+		</p>
+	</div>
+
+	<div class="vpc-meta-field">
+		<label for="vpc_policy_order" style="display:block; font-weight:600; margin-bottom:4px;">Thứ tự hiển thị (tùy chọn):</label>
+		<input type="number" id="vpc_policy_order" name="vpc_policy_order" value="<?php echo esc_attr( $order ); ?>" style="width:100%;" min="0" step="1" placeholder="1, 2, 3...">
+	</div>
+	<?php
+}
+
+/**
+ * Saves the Policy Settings meta box values when a page is saved.
+ *
+ * @param int $post_id Post ID.
+ * @return void
+ */
+function vpc_save_policy_meta_box( $post_id ) {
+	if ( ! isset( $_POST['vpc_policy_meta_nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['vpc_policy_meta_nonce'] ), 'vpc_save_policy_meta' ) ) {
+		return;
+	}
+
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return;
+	}
+
+	if ( ! current_user_can( 'edit_page', $post_id ) ) {
+		return;
+	}
+
+	if ( isset( $_POST['vpc_policy_group'] ) ) {
+		$group = sanitize_key( wp_unslash( $_POST['vpc_policy_group'] ) );
+		if ( in_array( $group, array( 'phap-ly', 'noi-dung', 'dich-vu' ), true ) ) {
+			update_post_meta( $post_id, 'vpc_policy_group', $group );
+		} else {
+			delete_post_meta( $post_id, 'vpc_policy_group' );
+		}
+	}
+
+	if ( isset( $_POST['vpc_policy_order'] ) ) {
+		$order = sanitize_text_field( wp_unslash( $_POST['vpc_policy_order'] ) );
+		if ( '' !== $order ) {
+			update_post_meta( $post_id, 'vpc_policy_order', intval( $order ) );
+		} else {
+			delete_post_meta( $post_id, 'vpc_policy_order' );
+		}
+	}
+}
+add_action( 'save_post_page', 'vpc_save_policy_meta_box' );
+
+
 

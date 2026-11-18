@@ -149,7 +149,7 @@ $render_hub_card = static function ( $post, $badge = '', $variant = 'standard' )
 						<?php $render_hub_card( $post, 'Sự kiện nổi bật', 'standard' ); ?>
 					<?php endforeach; ?>
 				</div>
-				<a class="vpc-hub-more" href="<?php echo esc_url( home_url( '/tin-tuc/su-kien-noi-bat/' ) ); ?>">Xem tất cả</a>
+				<a class="vpc-hub-more" href="<?php echo esc_url( home_url( '/tin-tuc/su-kien-noi-bat/' ) ); ?>"><?php esc_html_e( 'Xem tất cả', 'vanphuccare' ); ?></a>
 			<?php else : ?>
 				<p class="vpc-hub-empty">Đang cập nhật các sự kiện nổi bật mới nhất...</p>
 			<?php endif; ?>
@@ -171,7 +171,7 @@ $render_hub_card = static function ( $post, $badge = '', $variant = 'standard' )
 						<?php $render_hub_card( $post, 'Tin mới', 'standard' ); ?>
 					<?php endforeach; ?>
 				</div>
-				<a class="vpc-hub-more" href="<?php echo esc_url( home_url( '/tin-tuc/tin-moi/' ) ); ?>">Xem tất cả</a>
+				<a class="vpc-hub-more" href="<?php echo esc_url( home_url( '/tin-tuc/tin-moi/' ) ); ?>"><?php esc_html_e( 'Xem tất cả', 'vanphuccare' ); ?></a>
 			<?php else : ?>
 				<p class="vpc-hub-empty">Đang cập nhật các tin tức mới nhất...</p>
 			<?php endif; ?>
