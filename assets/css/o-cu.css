@@ -1,6 +1,7 @@
 /* Figma page 3123:33008 — Trung tâm Ở cữ */
 .vpc-o-cu {
 	--ocu-blue: var(--color-primary-500, #1a77ba);
+	--ocu-blue-dark: var(--color-primary-600, #155f95);
 	--ocu-pink: var(--color-secondary-500, #f48283);
 	--ocu-bg: var(--color-neutral-100, #f8f8f8);
 	--ocu-muted: var(--color-neutral-800, #525252);
@@ -37,26 +38,6 @@
 	gap: 24px;
 }
 
-.ocu-badge {
-	min-height: 42px;
-	padding: 8px 16px;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	gap: 8px;
-	border: 1px solid var(--ocu-pink);
-	border-radius: 999px;
-	background: #fde6e6;
-	color: var(--ocu-blue);
-	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
-	white-space: nowrap;
-}
-
-.ocu-badge img {
-	width: 24px;
-	height: 24px;
-	flex: 0 0 24px;
-}
 
 .ocu-hero__title,
 .ocu-section-heading h2,
@@ -585,17 +566,6 @@
 		gap: 24px;
 	}
 
-	.ocu-badge {
-		min-height: 34px;
-		padding: 4px 12px;
-		font-size: 12px;
-		line-height: 16px;
-	}
-
-	.ocu-badge img {
-		width: 24px;
-		height: 24px;
-	}
 
 	.ocu-hero__title,
 	.ocu-section-heading h2,
@@ -1280,15 +1250,6 @@ body.ocu-room-modal-open {
 	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
 }
 
-.ocu-experience .ocu-badge {
-	gap: 10px;
-}
-
-.ocu-experience .ocu-badge img {
-	width: 25.44px;
-	height: 25.36px;
-	flex-basis: 25.44px;
-}
 
 .ocu-experience ul {
 	display: flex;
@@ -1784,15 +1745,6 @@ body.ocu-room-modal-open {
 		text-align: center;
 	}
 
-	.vpc-o-cu .ocu-experience .ocu-badge {
-		gap: 8px;
-	}
-
-	.vpc-o-cu .ocu-experience .ocu-badge img {
-		width: 24px;
-		height: 24px;
-		flex-basis: 24px;
-	}
 
 	.vpc-o-cu .ocu-daily h2,
 	.vpc-o-cu .ocu-experience h2 {

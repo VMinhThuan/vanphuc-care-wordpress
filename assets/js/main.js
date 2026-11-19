@@ -2,11 +2,111 @@
  * Main JavaScript file for Vạn Phúc Care Theme.
  */
 document.addEventListener('DOMContentLoaded', function () {
+	// Messages are accepted only from the official origin AND the matching iframe.
+	const tiktokPlayers = Array.from(document.querySelectorAll('[data-vpc-tiktok]')).map(block => ({
+		frame: block.querySelector('iframe'), status: block.querySelector('.vpc-tiktok-status'),
+	})).filter(player => player.frame && player.status);
+	if (tiktokPlayers.length) window.addEventListener('message', function (event) {
+		if (event.origin !== 'https://www.tiktok.com') return;
+		const player = tiktokPlayers.find(item => item.frame.contentWindow === event.source);
+		const data = event.data;
+		if (!player || !data || typeof data !== 'object' || data['x-tiktok-player'] !== true) return;
+		if (data.type === 'onStateChange' && data.value === 1) {
+			player.status.hidden = true;
+			player.status.textContent = '';
+		} else if (data.type === 'onPlayerError' || (data.type === 'onError' && Number.isInteger(data.value))) {
+			const code = data.type === 'onPlayerError' ? data.value?.errorCode : data.value;
+			if (!Number.isInteger(code)) return;
+			player.status.textContent = code === 3002
+				? 'Video chưa thể tự phát. Bạn có thể bấm Play hoặc xem trực tiếp trên TikTok.'
+				: 'Video chưa phát được trong trang này. Bạn có thể thử lại trong khung video hoặc xem trực tiếp trên TikTok.';
+			player.status.hidden = false;
+		}
+	});
 	// Mobile menu drawer toggle
 	const menuToggle = document.getElementById('mobile-menu-toggle');
 	const menuClose = document.getElementById('mobile-menu-close');
 	const menuDrawer = document.getElementById('mobile-menu-drawer');
 	let lastMenuTrigger = null;
+
+	// Hide only the sticky bar; the fixed drawer is its sibling in WordPress.
+	const siteHeader = document.getElementById('site-header');
+	const floatingContact = document.getElementById('floating-contact');
+	const contactCta = document.getElementById('mobile-sticky-cta');
+	const contactFooter = document.querySelector('.site-footer');
+	if ((siteHeader || floatingContact) && window.matchMedia) {
+		const mobileHeaderQuery = window.matchMedia('(max-width: 1279px)');
+		let previousY = Math.max(0, window.scrollY);
+		let travel = 0;
+		let frame = 0;
+		let headerHeight = siteHeader ? siteHeader.offsetHeight : 80;
+		let scrollingDown = false;
+		const renderContact = function () {
+			if (!floatingContact) return;
+			const footer = contactFooter && contactFooter.getBoundingClientRect();
+			const focused = document.activeElement;
+			const keyboardFocus = floatingContact.contains(focused) && focused.matches(':focus-visible');
+			const blocked = document.body.classList.contains('overflow-hidden') || (menuDrawer && !menuDrawer.classList.contains('hidden'));
+			const footerVisible = footer && footer.top < window.innerHeight && footer.bottom > 0;
+			const hide = mobileHeaderQuery.matches && (blocked || (!keyboardFocus && (scrollingDown || footerVisible)));
+			floatingContact.classList.toggle('vpc-contact-hidden', !!hide);
+			floatingContact.inert = !!hide;
+			if (hide) floatingContact.setAttribute('aria-hidden', 'true');
+			else floatingContact.removeAttribute('aria-hidden');
+		};
+		const measureContact = function () {
+			if (floatingContact) floatingContact.style.setProperty('--vpc-contact-cta-height', (contactCta ? contactCta.offsetHeight : 0) + 'px');
+		};
+		const showHeader = function () {
+			if (siteHeader) siteHeader.classList.remove('vpc-header-hidden');
+			scrollingDown = false;
+			travel = 0;
+			previousY = Math.max(0, window.scrollY);
+			renderContact();
+		};
+		const updateHeader = function () {
+			frame = 0;
+			// Clamp Safari rubber-band scrolling at both document boundaries.
+			const maxY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+			const y = Math.min(maxY, Math.max(0, window.scrollY));
+			const delta = y - previousY;
+			previousY = y;
+			const focused = document.activeElement;
+			const keyboardFocus = siteHeader && siteHeader.contains(focused) && focused.matches(':focus-visible');
+			const drawerOpen = menuDrawer && !menuDrawer.classList.contains('hidden');
+			if (!mobileHeaderQuery.matches || y <= headerHeight || drawerOpen || keyboardFocus || document.body.classList.contains('overflow-hidden')) {
+				showHeader();
+				previousY = y;
+				return;
+			}
+			if (!delta) { renderContact(); return; }
+			travel = Math.sign(delta) === Math.sign(travel) ? travel + delta : delta;
+			if (Math.abs(travel) >= 12) {
+				scrollingDown = travel > 0;
+				if (siteHeader) siteHeader.classList.toggle('vpc-header-hidden', scrollingDown);
+				travel = 0;
+			}
+			renderContact();
+		};
+		const queueHeader = function () {
+			if (!frame) frame = window.requestAnimationFrame(updateHeader);
+		};
+		window.addEventListener('scroll', queueHeader, { passive: true });
+		window.addEventListener('resize', function () {
+			headerHeight = siteHeader ? siteHeader.offsetHeight : 80;
+			measureContact();
+			showHeader();
+		});
+		window.addEventListener('pageshow', showHeader);
+		if (siteHeader) siteHeader.addEventListener('focusin', showHeader);
+		if (floatingContact) floatingContact.addEventListener('focusin', showHeader);
+		// Opening/closing a menu or modal resets direction after scroll locking.
+		new MutationObserver(function () { showHeader(); }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+		if (menuDrawer) new MutationObserver(renderContact).observe(menuDrawer, { attributes: true, attributeFilter: ['class'] });
+		if (contactCta && window.ResizeObserver) new ResizeObserver(measureContact).observe(contactCta);
+		measureContact();
+		showHeader();
+	}
 
 	const newsSearchInput = document.querySelector('.vpc-news-search input[data-mobile-placeholder]');
 	if (newsSearchInput && window.matchMedia) {

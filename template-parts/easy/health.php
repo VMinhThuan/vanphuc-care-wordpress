@@ -14,7 +14,10 @@ $asset_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/ea
 <section class="vpc-easy__health" aria-labelledby="easy-health-title">
 	<div class="vpc-easy__container vpc-easy__split-grid">
 		<div class="vpc-easy__split-image">
-			<img src="<?php echo esc_url( $asset_uri . '/health-book.png' ); ?>" width="540" height="456" alt="Sổ sức khỏe điện tử" loading="lazy">
+			<picture>
+				<source srcset="<?php echo esc_url( $asset_uri . '/health-book.webp' ); ?>" type="image/webp">
+				<img src="<?php echo esc_url( $asset_uri . '/health-book.webp' ); ?>" width="540" height="456" alt="Sổ sức khỏe điện tử" loading="lazy">
+			</picture>
 		</div>
 		<div class="vpc-easy__split-copy">
 			<div class="vpc-easy__badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">SỔ SỨC KHỎE ĐIỆN TỬ</div>

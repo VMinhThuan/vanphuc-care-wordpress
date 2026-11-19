@@ -221,20 +221,21 @@ $company_address = get_theme_mod( 'vpc_company_address', '35B/399 Âu Cơ, phư�
 			</div>
 
 			<!-- Badges (DMCA + Bộ Công Thương) -->
-			<div class="flex items-center gap-6">
-				<!-- DMCA.com Protection Status Badge: use the local Figma asset to preserve the designed colors. -->
-				<a href="https://www.dmca.com/Protection/Status.aspx?ID=c7a60f67-9696-479d-baf5-2f48a09327be" 
+			<div class="flex items-center gap-4 sm:gap-6 flex-wrap sm:flex-nowrap">
+				<!-- DMCA.com Protection Status Badge -->
+				<a href="https://www.dmca.com/Protection/Status.aspx?ID=f66ae802-1c7b-41fb-a2e0-18b0a6a4b86c" 
 				   title="DMCA.com Protection Status" 
 				   class="dmca-badge inline-flex items-center hover:opacity-90 transition-opacity" 
 				   target="_blank" 
 				   rel="noopener noreferrer">
-					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/dmca.svg' ); ?>"
+					<img src="<?php echo esc_url( $theme_uri . '/assets/icons/dmca-badge.svg' ); ?>"
 					     alt="DMCA.com Protection Status" 
-					     width="120"
-					     height="55"
-					     class="w-[120px] h-[55px] object-contain block"
+					     width="204"
+					     height="48"
+					     class="h-[38px] sm:h-[48px] w-auto object-contain block"
 					     loading="lazy">
 				</a>
+				<script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js" defer></script>
 
 				<!-- Bộ Công Thương -->
 				<span class="inline-flex" aria-label="Đã Thông Báo Bộ Công Thương">
@@ -242,7 +243,7 @@ $company_address = get_theme_mod( 'vpc_company_address', '35B/399 Âu Cơ, phư�
 					     alt="Đã Thông Báo Bộ Công Thương" 
 					     width="145"
 					     height="55" 
-						     class="h-[55px] w-auto object-contain block">
+					     class="h-[46px] sm:h-[55px] w-auto object-contain block">
 				</span>
 			</div>
 		</div>

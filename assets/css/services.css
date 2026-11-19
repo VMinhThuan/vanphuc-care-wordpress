@@ -41,24 +41,6 @@
 	object-fit: cover;
 }
 
-.vpc-services-badge {
-	min-height: 42px;
-	padding: 8px 16px;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	gap: 8px;
-	border: 1px solid var(--services-pink);
-	border-radius: 999px;
-	background: var(--services-pink-soft);
-	color: var(--services-blue);
-	font-size: 16px;
-	font-weight: 500;
-	line-height: 24px;
-	white-space: nowrap;
-}
-
-.vpc-services-badge img { width: 24px; height: 24px; object-fit: contain; }
 
 .vpc-services-heading {
 	display: flex;
@@ -458,8 +440,6 @@
 	.vpc-services-container { width: 100%; padding-inline: 20px; }
 	.vpc-services-banner { height: 157px; }
 	.vpc-services-banner img { object-position: center; }
-	.vpc-services-badge { min-height: 34px; padding: 4px 12px; gap: 8px; font-size: 12px; line-height: 16px; }
-	.vpc-services-badge img { width: 24px; height: 24px; }
 	.vpc-services-heading { gap: 24px; }
 	.vpc-services-heading h1,
 	.vpc-services-heading h2 { font-size: 32px; line-height: 36px; text-align: center; }

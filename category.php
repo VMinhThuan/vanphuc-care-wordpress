@@ -33,7 +33,7 @@ $is_knowledge = ! empty( get_query_var( 'vpc_is_all' ) )
 
 if ( ! $is_knowledge ) {
 	if ( 'tin-tuc' === $current_slug ) {
-		require get_template_directory() . '/page-tin-tuc.php';
+		require get_template_directory() . '/category-tin-tuc.php';
 		return;
 	}
 
@@ -46,7 +46,7 @@ if ( ! $is_knowledge ) {
 		? array_values( array_diff( vpc_get_news_category_slugs(), array( 'tin-tuc' ) ) )
 		: array( 'tin-moi', 'su-kien-noi-bat', 'tin-tuc-su-kien' );
 	if ( $is_child_of_news || in_array( $current_slug, $news_sub_slugs, true ) ) {
-		require get_template_directory() . '/page-tin-tuc-su-kien.php';
+		require get_template_directory() . '/template-parts/news/archive-listing.php';
 		return;
 	}
 
@@ -92,7 +92,7 @@ $hero_title     = $is_all_archive ? __( 'Tất Cả Kiến Thức', 'vanphuccare
 $main_title     = $is_all_archive ? __( 'Tất cả bài viết', 'vanphuccare' ) : sprintf( __( 'Bài viết %s', 'vanphuccare' ), $current_name );
 
 $hero_badge = __( 'Chuẩn y khoa', 'vanphuccare' );
-$hero_photo = 'mang-thai-photo-2.png';
+$hero_photo = 'mang-thai-photo-2.webp';
 foreach ( $categories as $cat_pill ) {
 	if ( ! empty( $cat_pill['active'] ) ) {
 		if ( ! empty( $cat_pill['badge'] ) ) {
@@ -136,7 +136,7 @@ foreach ( $categories as $cat_pill ) {
 					<img src="<?php echo $asset( $hero_photo ); ?>" alt="<?php echo esc_attr( $hero_title ); ?>" width="230" height="301">
 				</div>
 				<img class="vpc-knowledge-subcat-hero__sticker" src="<?php echo $asset( 'mang-thai-sticker.svg' ); ?>" alt="" width="130" height="130">
-				<img class="vpc-knowledge-subcat-hero__mascot" src="<?php echo $asset( 'hero-mascot.png' ); ?>" alt="" width="114" height="114">
+				<img class="vpc-knowledge-subcat-hero__mascot" src="<?php echo $asset( 'hero-mascot.webp' ); ?>" alt="" width="114" height="114">
 				<span class="vpc-knowledge-subcat-hero__badge"><img src="<?php echo $asset( 'mang-thai-dot.svg' ); ?>" alt="" width="10" height="10"><span><?php echo esc_html( $hero_badge ); ?></span></span>
 				<img class="vpc-knowledge-subcat-hero__heart" src="<?php echo $asset( 'mang-thai-heart.svg' ); ?>" alt="" width="26" height="26">
 				<img class="vpc-knowledge-subcat-hero__heart-small" src="<?php echo $asset( 'mang-thai-heart-small.svg' ); ?>" alt="" width="16" height="16">
@@ -283,7 +283,7 @@ foreach ( $categories as $cat_pill ) {
 
 						foreach ( $display_posts as $article_post ) {
 							$article_data = function_exists( 'vpc_format_knowledge_card' )
-								? vpc_format_knowledge_card( $article_post, $asset( 'mother-baby.jpeg' ), 32, $card_context_name )
+								? vpc_format_knowledge_card( $article_post, $asset( 'mother-baby.webp' ), 32, $card_context_name )
 								: array();
 
 							if ( ! empty( $article_data ) ) {

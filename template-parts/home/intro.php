@@ -64,8 +64,8 @@ $theme_uri = get_template_directory_uri();
 			<!-- Content & Value Props matching Figma (Right on Desktop: order-2 lg:order-2) -->
 			<div class="intro-content lg:col-span-6 lg:flex lg:flex-col lg:space-y-5 lg:pl-4 lg:order-2">
 				<div class="intro-badge flex justify-center lg:justify-start">
-					<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-border-secondary-default text-text-link-hover bg-surface-badge-secondary font-body font-medium text-xs tracking-wider uppercase">
-						<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/sparkle-pink.svg' ); ?>" width="24" height="24" class="w-4 h-4 shrink-0" alt="" aria-hidden="true" />
+					<span class="inline-flex items-center gap-2 min-h-[42px] px-4 py-2 rounded-full border border-border-secondary-default text-text-link-hover bg-surface-badge-secondary font-body font-medium text-base leading-6 tracking-wider uppercase">
+						<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/sparkle-pink.svg' ); ?>" width="24" height="24" class="w-6 h-6 shrink-0" alt="" aria-hidden="true" />
 						VẠN PHÚC CARE
 					</span>
 				</div>
@@ -121,7 +121,7 @@ $theme_uri = get_template_directory_uri();
 
 				<div class="intro-action pt-2 w-full lg:w-auto flex justify-center lg:justify-start">
 					<a href="<?php echo esc_url( home_url( '/lien-he/' ) ); ?>" class="vpc-button w-full sm:w-auto h-10 xl:h-12 px-4 xl:px-6 rounded-full border border-border-secondary-default text-text-heading-secondary-default hover:bg-surface-badge-secondary/60 flex items-center justify-center transition-colors">
-						<span>Tìm Hiểu Thêm</span>
+						<span>Tìm hiểu thêm</span>
 					</a>
 				</div>
 			</div>

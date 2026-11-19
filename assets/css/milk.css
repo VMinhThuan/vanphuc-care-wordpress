@@ -20,8 +20,6 @@
 }
 .vpc-milk h1,.vpc-milk h2,.vpc-milk h3,.vpc-milk h4,.vpc-milk p,.vpc-milk ul { margin:0; }
 .vpc-milk ul { padding:0; list-style:none; }
-.vpc-milk__badge { display:inline-flex; align-items:center; justify-content:center; gap:8px; width:max-content; min-height:42px; padding:8px 16px; border:1px solid var(--milk-pink); border-radius:999px; color:#155f95; background:var(--milk-pink-soft); font:500 16px/24px var(--font-body,"Manrope",sans-serif); white-space:nowrap; }
-.vpc-milk__badge img { width:24px; height:24px; object-fit:contain; }
 .vpc-milk__button { display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:12px 24px; border:0; border-radius:999px; text-decoration:none; font:500 16px/24px var(--font-body,"Manrope",sans-serif); transition:transform .2s ease,opacity .2s ease; }
 .vpc-milk__button:hover { transform:translateY(-1px); opacity:.9; }
 .vpc-milk a.vpc-milk__button--primary { color:#fff; background:var(--milk-blue); }
@@ -129,7 +127,6 @@
 
 @media (max-width:1279px) {
 	.vpc-milk__container { width:calc(100% - 40px); max-width:none; }
-	.vpc-milk__badge { min-height:34px; padding:4px 12px; font-size:12px; line-height:18px; }
 	.vpc-milk__section-heading h2,.vpc-milk__split-copy h2,.vpc-milk__hero h1,.vpc-milk__lead h2 { font-size:32px; line-height:36px; text-align:center; }
 	.vpc-milk__section-heading p,.vpc-milk__split-copy>p { font-size:16px; line-height:24px; text-align:center; }
 	.vpc-milk__hero { height:767px; padding:40px 0; }

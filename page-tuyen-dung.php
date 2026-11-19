@@ -130,7 +130,7 @@ get_header();
 			<div class="vpc-recruitment-hero__visual" aria-hidden="true">
 				<span class="vpc-recruitment-hero__blob"></span>
 				<img class="vpc-recruitment-hero__accent" src="<?php echo esc_url( $asset_uri . '/blob-accent.svg' ); ?>" width="116" height="116" alt="">
-				<img class="vpc-recruitment-hero__mascot" src="<?php echo esc_url( $asset_uri . '/mascot.png' ); ?>" width="500" height="500" alt="">
+				<img class="vpc-recruitment-hero__mascot" src="<?php echo esc_url( $asset_uri . '/mascot.webp' ); ?>" width="500" height="500" alt="">
 				<span class="vpc-recruitment-chip vpc-recruitment-chip--nurse">Điều dưỡng</span>
 				<span class="vpc-recruitment-chip vpc-recruitment-chip--midwife">Nữ hộ sinh</span>
 				<span class="vpc-recruitment-chip vpc-recruitment-chip--technician">Kỹ thuật viên</span>
@@ -194,7 +194,10 @@ get_header();
 	</section>
 
 	<section class="vpc-recruitment-team" aria-label="Đội ngũ Vạn Phúc Care">
-		<img src="<?php echo esc_url( $asset_uri . '/team.png' ); ?>" width="4096" height="2731" alt="Đội ngũ Vạn Phúc Care nhận chứng nhận chuyên môn" loading="lazy">
+		<picture>
+			<source srcset="<?php echo esc_url( $asset_uri . '/team.webp' ); ?>" type="image/webp">
+			<img src="<?php echo esc_url( $asset_uri . '/team.webp' ); ?>" width="1920" height="1280" alt="Đội ngũ Vạn Phúc Care nhận chứng nhận chuyên môn" loading="lazy">
+		</picture>
 	</section>
 </div>
 

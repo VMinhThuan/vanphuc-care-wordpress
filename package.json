@@ -8,8 +8,12 @@
     "build": "npm run build:tailwind && npm run build:assets",
     "build:tailwind": "tailwindcss -i ./src/theme.css -o ./assets/css/theme.css --minify",
     "build:assets": "node tools/build-assets.mjs",
+    "images:optimize": "node tools/optimize-images.mjs",
+    "images:optimize:dry": "node tools/optimize-images.mjs --dry-run",
+    "images:clean": "node tools/cleanup-legacy-images.mjs",
+    "images:clean:dry": "node tools/cleanup-legacy-images.mjs --dry-run",
     "media:export": "node tools/export-media-library.mjs",
-    "test": "node --test tests/knowledge-regression.test.mjs tests/assets-regression.test.mjs",
+    "test": "node --test tests/knowledge-regression.test.mjs tests/assets-regression.test.mjs tests/tiktok-regression.test.mjs tests/video-player-regression.test.mjs",
     "test:knowledge": "node --test tests/knowledge-regression.test.mjs",
     "test:static-qa": "node ./tests/static-qa.mjs"
   },
@@ -21,6 +25,7 @@
     "lightningcss": "1.32.0",
     "playwright": "^1.57.0",
     "postcss": "8.5.33",
+    "sharp": "^0.33.5",
     "tailwindcss": "^4.3.3"
   }
 }

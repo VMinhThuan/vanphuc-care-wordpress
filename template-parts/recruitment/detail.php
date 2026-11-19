@@ -61,7 +61,7 @@ if ( ! empty( $related_posts ) ) {
 		$rel_meta  = function_exists( 'vpc_get_recruitment_meta' ) ? vpc_get_recruitment_meta( $rel_id ) : array();
 		$rel_image = has_post_thumbnail( $rel_id )
 			? get_the_post_thumbnail_url( $rel_id, 'medium_large' )
-			: ( $detail_uri . '/related-1.png' );
+			: ( $detail_uri . '/related-1.webp' );
 		$rel_excerpt = trim( (string) get_post_field( 'post_excerpt', $rel_id ) );
 		if ( empty( $rel_excerpt ) ) {
 			$rel_excerpt = wp_trim_words( wp_strip_all_tags( $rel_post->post_content ), 20, '...' );
@@ -84,21 +84,21 @@ if ( ! empty( $related_posts ) ) {
 		array(
 			'title'    => 'Vị trí chuyên viên tuyển dụng – Bộ phận HCNS',
 			'url'      => home_url( '/tuyen-dung/' ),
-			'image'    => $detail_uri . '/related-1.png',
+			'image'    => $detail_uri . '/related-1.webp',
 			'excerpt'  => 'Tuyển dụng chuyên viên tuyển dụng nhân sự, phụ trách thu hút và phỏng vấn nhân tài.',
 			'deadline' => 'Đang tuyển',
 		),
 		array(
 			'title'    => 'Vị trí Media Planner – Bộ phận Marketing',
 			'url'      => home_url( '/tuyen-dung/' ),
-			'image'    => $detail_uri . '/hotline.jpg',
+			'image'    => $detail_uri . '/hotline.webp',
 			'excerpt'  => 'Tuyển dụng nhân sự truyền thông và lập kế hoạch media cho các chiến dịch sức khỏe mẹ và bé.',
 			'deadline' => 'Đang tuyển',
 		),
 		array(
 			'title'    => 'Vị trí nhân sự bộ phận Điều Dưỡng – Trung tâm Ở cữ',
 			'url'      => home_url( '/tuyen-dung/' ),
-			'image'    => $detail_uri . '/related-2.jpg',
+			'image'    => $detail_uri . '/related-2.webp',
 			'excerpt'  => 'Tuyển dụng ứng viên vị trí điều dưỡng viên, làm nhiệm vụ chăm sóc trẻ sơ sinh từ 0 đến 12 tháng tuổi.',
 			'deadline' => 'Đang tuyển',
 		),
@@ -166,7 +166,7 @@ if ( $is_closed ) {
 					</figure>
 				<?php elseif ( ! $has_body ) : ?>
 					<figure class="vpc-recruitment-detail__article-image">
-						<img src="<?php echo esc_url( $detail_uri . '/article-main.png' ); ?>" width="800" height="450" alt="<?php echo esc_attr( $title ); ?>" fetchpriority="high">
+						<img src="<?php echo esc_url( $detail_uri . '/article-main.webp' ); ?>" width="800" height="450" alt="<?php echo esc_attr( $title ); ?>" fetchpriority="high">
 						<figcaption>Đội ngũ Vạn Phúc Care</figcaption>
 					</figure>
 				<?php endif; ?>
@@ -277,7 +277,7 @@ if ( $is_closed ) {
 				</section>
 
 				<section class="vpc-recruitment-detail__hotline-card">
-					<img class="vpc-recruitment-detail__hotline-image" src="<?php echo esc_url( $detail_uri . '/hotline.jpg' ); ?>" width="4096" height="2731" alt="Đội ngũ Vạn Phúc Care" loading="lazy">
+					<img class="vpc-recruitment-detail__hotline-image" src="<?php echo esc_url( $detail_uri . '/hotline.webp' ); ?>" width="4096" height="2731" alt="Đội ngũ Vạn Phúc Care" loading="lazy">
 					<div class="vpc-recruitment-detail__hotline-heading">
 						<img src="<?php echo esc_url( $detail_uri . '/hotline.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">
 						<div><span>Hotline</span><strong><?php echo esc_html( $hotline_display ); ?></strong></div>

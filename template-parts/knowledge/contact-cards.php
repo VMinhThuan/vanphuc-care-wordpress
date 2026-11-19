@@ -22,7 +22,7 @@ $banner_alt     = (string) get_theme_mod( 'vpc_kb_banner_alt', 'Bé ăn ngon - n
 $banner_new_tab = (bool) get_theme_mod( 'vpc_kb_banner_new_tab', true );
 
 if ( empty( $banner_image ) ) {
-	$banner_image = $asset( 'mang-thai-banner.png' );
+	$banner_image = $asset( 'mang-thai-banner.webp' );
 }
 if ( empty( $banner_url ) ) {
 	$banner_url = 'https://edu.vanphuccare.vn';
@@ -51,7 +51,7 @@ if ( empty( $hotline_tel ) ) {
 <div class="vpc-knowledge-widget vpc-knowledge-widget--hotline">
 	<div class="vpc-knowledge-hotline-card">
 		<div class="vpc-knowledge-hotline-image">
-			<img src="<?php echo $asset( 'mang-thai-hotline.png' ); ?>" alt="<?php esc_attr_e( 'Tư vấn Vạn Phúc Care', 'vanphuccare' ); ?>" width="341" height="200" loading="lazy">
+			<img src="<?php echo $asset( 'mang-thai-hotline.webp' ); ?>" alt="<?php esc_attr_e( 'Tư vấn Vạn Phúc Care', 'vanphuccare' ); ?>" width="341" height="200" loading="lazy">
 		</div>
 		<div class="vpc-knowledge-hotline-body">
 			<div class="vpc-knowledge-hotline-heading">

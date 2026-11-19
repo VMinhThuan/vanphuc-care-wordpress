@@ -52,9 +52,9 @@ $theme_uri = get_template_directory_uri();
 				<!-- Content -->
 				<div class="flex flex-col items-center lg:items-start text-center lg:text-left w-full order-2 gap-5 sm:gap-6">
 					<!-- Badge -->
-					<div class="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 bg-surface-badge-secondary border border-border-secondary-default rounded-full">
-						<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/sparkle-pink.svg' ); ?>" width="24" height="24" class="w-4 h-4 shrink-0" alt="" aria-hidden="true" />
-						<span class="font-body font-medium text-xs sm:text-sm text-text-link-hover tracking-wider uppercase">DỊCH VỤ BẢO MẪU</span>
+					<div class="inline-flex items-center justify-center gap-2 min-h-[42px] px-4 py-2 bg-surface-badge-secondary border border-border-secondary-default rounded-full">
+						<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/sparkle-pink.svg' ); ?>" width="24" height="24" class="w-6 h-6 shrink-0" alt="" aria-hidden="true" />
+						<span class="font-body font-medium text-base leading-6 text-text-link-hover tracking-wider uppercase">DỊCH VỤ BẢO MẪU</span>
 					</div>
 
 					<!-- Heading -->

@@ -13,9 +13,9 @@ $milk_uri   = trailingslashit( get_template_directory_uri() ) . 'assets/images/m
 $shared_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/easy';
 
 $processes = array(
-	array( 'image' => 'process-1.png', 'title' => 'Kiểm tra tổng quan', 'copy' => 'Kiểm tra, đánh giá, phân tích biểu hiện và triệu chứng tắc tia sữa mẹ đang gặp phải.' ),
-	array( 'image' => 'process-2.png', 'title' => 'Trao đổi phương án phù hợp', 'copy' => 'Trao đổi tình trạng tắc tia sữa hiện tại và đưa ra phương án trị liệu phù hợp nhất với thể trạng của mẹ.' ),
-	array( 'image' => 'process-3.png', 'title' => 'Tiến hành trị liệu', 'copy' => 'Tiến hành trị liệu theo đúng phác đồ và được chăm sóc hỗ trợ trong các ngày sau trị liệu.' ),
+	array( 'image' => 'process-1.webp', 'title' => 'Kiểm tra tổng quan', 'copy' => 'Kiểm tra, đánh giá, phân tích biểu hiện và triệu chứng tắc tia sữa mẹ đang gặp phải.' ),
+	array( 'image' => 'process-2.webp', 'title' => 'Trao đổi phương án phù hợp', 'copy' => 'Trao đổi tình trạng tắc tia sữa hiện tại và đưa ra phương án trị liệu phù hợp nhất với thể trạng của mẹ.' ),
+	array( 'image' => 'process-3.webp', 'title' => 'Tiến hành trị liệu', 'copy' => 'Tiến hành trị liệu theo đúng phác đồ và được chăm sóc hỗ trợ trong các ngày sau trị liệu.' ),
 );
 ?>
 <section class="vpc-milk__process" aria-labelledby="milk-process-title">

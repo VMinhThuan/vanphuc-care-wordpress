@@ -98,7 +98,7 @@ $gestational_age_options = vpc_get_gestational_age_options();
 		</div>
 
 		<!-- Row 3: Giai đoạn thai kỳ (cập nhật theo comment Figma) -->
-		<fieldset class="border-0 p-0 m-0">
+		<fieldset class="border-0 p-0 m-0 !mb-5">
 			<legend class="block text-base sm:text-xl leading-7 font-medium text-text-body-default mb-3 select-none">
 				<span class="text-error-500 font-bold mr-0.5">*</span> Giai đoạn thai kỳ
 			</legend>

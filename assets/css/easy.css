@@ -20,8 +20,6 @@
 .vpc-easy__container { width: min(1280px, calc(100% - 40px)); margin-inline: auto; }
 .vpc-easy h1, .vpc-easy h2, .vpc-easy h3, .vpc-easy h4, .vpc-easy p, .vpc-easy ul { margin: 0; }
 .vpc-easy ul { padding: 0; list-style: none; }
-.vpc-easy__badge { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: max-content; min-height: 42px; padding: 8px 16px; border: 1px solid var(--easy-pink); border-radius: 999px; color: var(--easy-blue-dark); background: var(--easy-pink-soft); font: 500 16px/24px var(--font-body, "Manrope", sans-serif); white-space: nowrap; }
-.vpc-easy__badge img { width: 24px; height: 24px; object-fit: contain; }
 .vpc-easy__button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 24px; border-radius: 999px; text-decoration: none; font: 500 16px/24px var(--font-body, "Manrope", sans-serif); transition: transform .2s ease, opacity .2s ease; }
 .vpc-easy__button:hover { transform: translateY(-1px); opacity: .9; }
 .vpc-easy a.vpc-easy__button--primary { border: 0; color: #fff; background: var(--easy-blue); }
@@ -164,8 +162,6 @@
 
 @media (max-width: 1279px) {
 	.vpc-easy__container { width: min(100% - 40px, 900px); }
-	.vpc-easy__badge { min-height: 34px; padding: 4px 12px; font-size: 12px; line-height: 18px; }
-	.vpc-easy__badge img { width: 24px; height: 24px; }
 	.vpc-easy__section-heading { gap: 24px; }
 	.vpc-easy__section-heading h2, .vpc-easy__split-copy h2, .vpc-easy__hero h1, .vpc-easy__lead h2 { font-size: 32px; line-height: 36px; text-align: center; }
 	.vpc-easy__section-heading p, .vpc-easy__split-copy > p { font-size: 16px; line-height: 24px; text-align: center; }

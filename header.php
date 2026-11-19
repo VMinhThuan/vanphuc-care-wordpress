@@ -81,6 +81,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 	</div>
 
+</header>
+	<!-- Keep the fixed drawer outside the animated header's containing block. -->
 	<!-- Mobile Drawer Menu: full mobile canvas matching the Figma artwork -->
 	<div id="mobile-menu-drawer" class="fixed inset-0 z-50 xl:hidden hidden bg-surface-background-default flex flex-col justify-between overflow-y-auto" role="dialog" aria-modal="true" aria-label="Mobile navigation" aria-hidden="true">
 		<div>
@@ -145,6 +147,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<span>Tư vấn miễn phí</span>
 		</button>
 	</div>
-</header>
 
 <main id="primary" class="site-main min-h-[60vh]">

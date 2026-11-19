@@ -65,11 +65,11 @@ $room_image_sets = array(
 	'suite'            => vpc_o_cu_get_room_image_set( 'Phòng Suite' ),
 );
 
-$standard_images       = ! empty( $room_image_sets['standard_balcony']['urls'] ) ? $room_image_sets['standard_balcony']['urls'] : array( $asset_uri . '/figma/room-standard.png' );
+$standard_images       = ! empty( $room_image_sets['standard_balcony']['urls'] ) ? $room_image_sets['standard_balcony']['urls'] : array( $asset_uri . '/figma/room-standard.webp' );
 $standard_cozy_images  = ! empty( $room_image_sets['standard_cozy']['urls'] ) ? $room_image_sets['standard_cozy']['urls'] : $standard_images;
-$deluxe_images         = ! empty( $room_image_sets['deluxe_premium']['urls'] ) ? $room_image_sets['deluxe_premium']['urls'] : array( $asset_uri . '/figma/room-deluxe.png' );
+$deluxe_images         = ! empty( $room_image_sets['deluxe_premium']['urls'] ) ? $room_image_sets['deluxe_premium']['urls'] : array( $asset_uri . '/figma/room-deluxe.webp' );
 $deluxe_classic_images = ! empty( $room_image_sets['deluxe_classic']['urls'] ) ? $room_image_sets['deluxe_classic']['urls'] : $deluxe_images;
-$suite_images          = ! empty( $room_image_sets['suite']['urls'] ) ? $room_image_sets['suite']['urls'] : array( $asset_uri . '/figma/room-suite.png' );
+$suite_images          = ! empty( $room_image_sets['suite']['urls'] ) ? $room_image_sets['suite']['urls'] : array( $asset_uri . '/figma/room-suite.webp' );
 
 $room_popup_details = array(
 	'standard' => array(
@@ -106,14 +106,14 @@ $room_popup_details = array(
 );
 
 $rooms = array(
-	'standard' => array( 'image' => $room_image_sets['standard_balcony']['paths'][0] ?? 'figma/room-standard.png', 'level' => 'Tiêu chuẩn', 'number' => '01', 'title' => 'Standard - 30m²', 'copy' => 'Gọn gàng và đầy đủ cho mẹ ưu tiên một hành trình hồi phục nhẹ nhàng.', 'items' => array( 'Chăm sóc mẹ và bé hằng ngày', 'Giường lớn và phòng dưỡng nhi', 'Ban công thoáng sáng' ), 'chips' => array( 'Điều dưỡng trực 24/7', 'Nuôi con bằng sữa mẹ', 'Smart TV · Wifi', 'Xe đưa đón 2 chiều' ) ),
-	'deluxe'   => array( 'image' => $room_image_sets['deluxe_premium']['paths'][0] ?? 'figma/room-deluxe.png', 'level' => 'Cao cấp', 'number' => '02', 'title' => 'Deluxe - 42m²', 'copy' => 'Rộng rãi để mẹ nghỉ ngơi thoải mái và gia đình đồng hành thân thiện.', 'items' => array( 'Phòng vệ sinh riêng', 'Khu tiếp khách thư thái', 'Chăm sóc mẹ và bé hằng ngày' ), 'chips' => array( 'Điều dưỡng trực 24/7', 'Nuôi con bằng sữa mẹ', 'Smart TV · Wifi', 'Xe đưa đón 2 chiều' ) ),
-	'suite'    => array( 'image' => $room_image_sets['suite']['paths'][0] ?? 'figma/room-suite.png', 'level' => 'Sang trọng', 'number' => '03', 'title' => 'Suite - 76m²', 'copy' => 'Như một căn hộ thu nhỏ, tách biệt các khoảng nghỉ, làm việc và sum vầy.', 'items' => array( 'Bếp & bàn làm việc riêng', 'Sofa, phòng nghỉ & ban công', 'Chăm sóc chuyên sâu mỗi ngày' ), 'chips' => array( 'Điều dưỡng trực 24/7', 'Nuôi con bằng sữa mẹ', 'Máy chiếu 4k', 'Xe đưa đón 2 chiều' ) ),
+	'standard' => array( 'image' => $room_image_sets['standard_balcony']['paths'][0] ?? 'figma/room-standard.webp', 'level' => 'Tiêu chuẩn', 'number' => '01', 'title' => 'Standard - 30m²', 'copy' => 'Gọn gàng và đầy đủ cho mẹ ưu tiên một hành trình hồi phục nhẹ nhàng.', 'items' => array( 'Chăm sóc mẹ và bé hằng ngày', 'Giường lớn và phòng dưỡng nhi', 'Ban công thoáng sáng' ), 'chips' => array( 'Điều dưỡng trực 24/7', 'Nuôi con bằng sữa mẹ', 'Smart TV · Wifi', 'Xe đưa đón 2 chiều' ) ),
+	'deluxe'   => array( 'image' => $room_image_sets['deluxe_premium']['paths'][0] ?? 'figma/room-deluxe.webp', 'level' => 'Cao cấp', 'number' => '02', 'title' => 'Deluxe - 42m²', 'copy' => 'Rộng rãi để mẹ nghỉ ngơi thoải mái và gia đình đồng hành thân thiện.', 'items' => array( 'Phòng vệ sinh riêng', 'Khu tiếp khách thư thái', 'Chăm sóc mẹ và bé hằng ngày' ), 'chips' => array( 'Điều dưỡng trực 24/7', 'Nuôi con bằng sữa mẹ', 'Smart TV · Wifi', 'Xe đưa đón 2 chiều' ) ),
+	'suite'    => array( 'image' => $room_image_sets['suite']['paths'][0] ?? 'figma/room-suite.webp', 'level' => 'Sang trọng', 'number' => '03', 'title' => 'Suite - 76m²', 'copy' => 'Như một căn hộ thu nhỏ, tách biệt các khoảng nghỉ, làm việc và sum vầy.', 'items' => array( 'Bếp & bàn làm việc riêng', 'Sofa, phòng nghỉ & ban công', 'Chăm sóc chuyên sâu mỗi ngày' ), 'chips' => array( 'Điều dưỡng trực 24/7', 'Nuôi con bằng sữa mẹ', 'Máy chiếu 4k', 'Xe đưa đón 2 chiều' ) ),
 );
 ?>
 <section id="ocu-rooms" class="ocu-spaces">
 	<div class="ocu-section-heading">
-		<span class="ocu-badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">Không gian cao cấp</span>
+		<span class="ocu-badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">KHÔNG GIAN CAO CẤP</span>
 		<h2><span class="ocu-heading--blue">Không Gian Nghỉ Dưỡng</span> <span class="ocu-heading--pink">Dành Cho Mẹ</span></h2>
 		<p>Không gian tĩnh dưỡng được thiết kế riêng cho mẹ sau sinh, với tiêu chuẩn tiện nghi và sự riêng tư cao nhất.</p>
 	</div>

@@ -14,8 +14,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 
-// Visible again after PO review.
-$show_prenatal_video = true;
+// Hidden by default until official video is produced.
+$show_prenatal_video = (bool) apply_filters( 'vpc_show_prenatal_video', get_theme_mod( 'vpc_prenatal_video_enable', false ) );
 
 get_template_part( 'template-parts/prenatal/hero' );
 get_template_part( 'template-parts/prenatal/intro' );
@@ -71,6 +71,48 @@ document.addEventListener('DOMContentLoaded', function () {
 				const radio = this.querySelector('input[type="radio"]');
 				if (radio) radio.checked = true;
 			});
+		});
+	}
+
+	// Interactive video player for prenatal class section
+	const videoPlayer = document.querySelector('.js-prenatal-video-player');
+	if (videoPlayer) {
+		videoPlayer.addEventListener('click', function () {
+			if (this.classList.contains('is-playing')) {
+				return;
+			}
+			const src = this.getAttribute('data-video-src');
+			const type = this.getAttribute('data-video-type');
+			if (!src) {
+				return;
+			}
+
+			this.classList.add('is-playing');
+			if (type === 'video') {
+				const video = document.createElement('video');
+				video.className = 'prenatal-video__media';
+				video.src = src;
+				video.controls = true;
+				video.autoplay = true;
+				video.playsInline = true;
+				video.setAttribute('preload', 'auto');
+				this.appendChild(video);
+				video.focus();
+				const playPromise = video.play();
+				if (playPromise && typeof playPromise.catch === 'function') {
+					playPromise.catch(function () {});
+				}
+			} else {
+				const iframe = document.createElement('iframe');
+				iframe.className = 'prenatal-video__media';
+				iframe.src = src;
+				iframe.setAttribute('title', 'Video lớp học tiền sản Vạn Phúc Care');
+				iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen');
+				iframe.setAttribute('allowfullscreen', 'true');
+				iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+				this.appendChild(iframe);
+				iframe.focus();
+			}
 		});
 	}
 });

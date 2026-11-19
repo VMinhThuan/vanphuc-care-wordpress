@@ -24,7 +24,7 @@ $shared_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/e
 			</ul>
 			<a class="vpc-bath__button vpc-bath__button--primary" href="#bath-packages">Xem gói dịch vụ</a>
 		</div>
-		<div class="vpc-bath__hero-image"><img src="<?php echo esc_url( $bath_uri . '/hero.jpg' ); ?>" width="600" height="649" alt="Tắm bé sơ sinh tại nhà" fetchpriority="high"></div>
+		<div class="vpc-bath__hero-image"><img src="<?php echo esc_url( $bath_uri . '/hero.webp' ); ?>" width="600" height="649" alt="Tắm bé sơ sinh tại nhà" fetchpriority="high"></div>
 	</div>
 </section>
 

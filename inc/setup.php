@@ -283,6 +283,89 @@ function vanphuccare_customize_knowledge_settings( $wp_customize ) {
 add_action( 'customize_register', 'vanphuccare_customize_knowledge_settings' );
 
 /**
+ * Adds Customizer controls for Landing Page & Service Videos (Prenatal, O Cu, etc.).
+ *
+ * @param WP_Customize_Manager $wp_customize Customizer instance.
+ * @return void
+ */
+function vanphuccare_customize_landing_video_settings( $wp_customize ) {
+	if ( ! $wp_customize->get_panel( 'vpc_theme_settings_panel' ) ) {
+		$wp_customize->add_panel( 'vpc_theme_settings_panel', array(
+			'title'       => __( 'Cài đặt Vạn Phúc Care', 'vanphuccare' ),
+			'description' => __( 'Trung tâm quản lý các cấu hình giao diện và tính năng của Vạn Phúc Care.', 'vanphuccare' ),
+			'priority'    => 160,
+		) );
+	}
+
+	$wp_customize->add_section( 'vpc_landing_video_settings', array(
+		'title'       => __( 'Video Landing Pages & Dịch vụ', 'vanphuccare' ),
+		'description' => __( 'Quản lý video hiển thị trên các trang dịch vụ (Lớp học tiền sản, Trung tâm ở cữ...).', 'vanphuccare' ),
+		'panel'       => 'vpc_theme_settings_panel',
+		'priority'    => 25,
+	) );
+
+	// 1. Enable / Disable Prenatal Video Section (Default false to hide when no video)
+	$wp_customize->add_setting( 'vpc_prenatal_video_enable', array(
+		'default'           => false,
+		'sanitize_callback' => 'wp_validate_boolean',
+	) );
+	$wp_customize->add_control( 'vpc_prenatal_video_enable', array(
+		'label'       => __( 'Hiển thị khối Video Lớp học tiền sản', 'vanphuccare' ),
+		'section'     => 'vpc_landing_video_settings',
+		'type'        => 'checkbox',
+		'description' => __( 'Tích chọn để hiển thị khối video trên trang Lớp học tiền sản. Bỏ chọn để ẩn tạm thời khi chưa có video.', 'vanphuccare' ),
+	) );
+
+	// 2. Prenatal Video URL
+	$wp_customize->add_setting( 'vpc_prenatal_video_url', array(
+		'default'           => '',
+		'sanitize_callback' => 'vpc_sanitize_video_url',
+	) );
+	$wp_customize->add_control( 'vpc_prenatal_video_url', array(
+		'label'       => __( 'URL Video Lớp học tiền sản', 'vanphuccare' ),
+		'section'     => 'vpc_landing_video_settings',
+		'type'        => 'text',
+		'description' => __( 'Dán link Cloudflare Stream (UID 32 ký tự hoặc URL iframe videodelivery.net), link file MP4 trực tiếp (Cloudflare R2), YouTube hoặc Vimeo. Để trống sẽ dùng ảnh bìa tĩnh và cuộn tới form đăng ký.', 'vanphuccare' ),
+	) );
+
+	// 3. O Cu Hero Video URL
+	$wp_customize->add_setting( 'vpc_o_cu_hero_video_url', array(
+		'default'           => '',
+		'sanitize_callback' => 'vpc_sanitize_video_url',
+	) );
+	$wp_customize->add_control( 'vpc_o_cu_hero_video_url', array(
+		'label'       => __( 'URL Video Trung tâm ở cữ (Hero Banner)', 'vanphuccare' ),
+		'section'     => 'vpc_landing_video_settings',
+		'type'        => 'text',
+		'description' => __( 'Link video MP4 (Cloudflare R2 hoặc Media Library) hiển thị tại banner đầu trang Ở cữ. Để trống sẽ dùng ảnh hero tĩnh.', 'vanphuccare' ),
+	) );
+
+	// 4. Bao Mau Hero Video URL
+	$wp_customize->add_setting( 'vpc_bao_mau_hero_video_url', array(
+		'default'           => '',
+		'sanitize_callback' => 'vpc_sanitize_video_url',
+	) );
+	$wp_customize->add_control( 'vpc_bao_mau_hero_video_url', array(
+		'label'       => __( 'URL Video Dịch vụ bảo mẫu tại nhà (Header)', 'vanphuccare' ),
+		'section'     => 'vpc_landing_video_settings',
+		'type'        => 'text',
+		'description' => __( 'Dán link Cloudflare Stream (UID hoặc iframe videodelivery.net), link file MP4 trực tiếp (Thư viện Media hoặc R2), YouTube hoặc Vimeo. Để trống sẽ dùng ảnh bìa mặc định.', 'vanphuccare' ),
+	) );
+
+	// 5. Bao Mau Hero Video Poster Image
+	$wp_customize->add_setting( 'vpc_bao_mau_hero_video_poster', array(
+		'default'           => '',
+		'sanitize_callback' => 'esc_url_raw',
+	) );
+	$wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'vpc_bao_mau_hero_video_poster', array(
+		'label'       => __( 'Ảnh bìa (Poster) Video Bảo mẫu', 'vanphuccare' ),
+		'section'     => 'vpc_landing_video_settings',
+		'description' => __( 'Tải lên ảnh bìa xem trước cho video bảo mẫu. Để trống sẽ dùng ảnh mặc định của trang.', 'vanphuccare' ),
+	) ) );
+}
+add_action( 'customize_register', 'vanphuccare_customize_landing_video_settings' );
+
+/**
  * 301 Redirects for external and deprecated legacy routes:
  * 1. Online courses: redirects direct requests for /khoa-hoc-truc-tuyen/ to https://edu.vanphuccare.vn.
  * 2. Deprecated legacy services (from old database) redirected safely to relevant Figma active services.
@@ -614,7 +697,7 @@ function vanphuccare_news_template_include( $template ) {
 		status_header( 200 );
 	}
 
-	return get_template_directory() . '/page-tin-tuc.php';
+	return get_template_directory() . '/category-tin-tuc.php';
 }
 add_filter( 'template_include', 'vanphuccare_news_template_include' );
 

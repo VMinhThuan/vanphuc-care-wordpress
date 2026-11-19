@@ -56,28 +56,6 @@
 	margin: 0 auto;
 }
 
-.about-badge {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	gap: 8px;
-	min-height: 42px;
-	padding: 8px 16px;
-	border: 1px solid var(--about-pink);
-	border-radius: 999px;
-	background: var(--about-pink-soft);
-	color: var(--about-blue-dark);
-	font-size: 16px;
-	font-weight: 500;
-	line-height: 24px;
-	white-space: nowrap;
-}
-
-.about-badge img {
-	width: 24px;
-	height: 24px;
-	object-fit: contain;
-}
 
 .about-heading {
 	font-family: 'Fraunces', serif;
@@ -1390,18 +1368,6 @@
 		width: calc(100% - 40px);
 	}
 
-	.about-badge {
-		min-height: 34px;
-		padding: 4px 12px;
-		font-size: 12px;
-		font-weight: 400;
-		line-height: 16px;
-	}
-
-	.about-badge img {
-		width: 24px;
-		height: 24px;
-	}
 
 	.about-heading {
 		font-size: 32px;

@@ -19,8 +19,8 @@ Khi Attachment ID được resolve trên WordPress, URL được tạo bằng `w
 | Trang / Section | File hiện tại | Media URL đúng | Attachment ID | Nguyên nhân lỗi | Trạng thái |
 | --- | --- | --- | --- | --- | --- |
 | Trang chủ / Hero slide 1-3 | `front-page.php:29-60` | Runtime: `wp_get_attachment_image_url(ID, 'full')`, basenames `hero-banner.png`, `hero-banner-2.jpg`, `hero-banner-3.JPG` | Resolve khi chạy staging; chưa thể đọc API | Hard-code theme asset, không qua Media Library | Đã sửa resolver; cần xác nhận staging |
-| Trang chủ / Giới thiệu | `front-page.php:131` | Runtime, basename `Trang chủ/hero-section-image.jpg` | Resolve khi chạy staging; chưa thể đọc API | Hard-code theme asset | Đã sửa resolver |
-| Trang chủ / Trung tâm ở cữ | `front-page.php:268` | Runtime, basename `Trang chủ/trung-tam-o-cu.JPG` | Resolve khi chạy staging; chưa thể đọc API | Hard-code theme asset | Đã sửa resolver |
+| Trang chủ / Giới thiệu | `front-page.php:131` | Runtime, basename `home/hero-section-image.jpg` | Resolve khi chạy staging; chưa thể đọc API | Hard-code theme asset | Đã sửa resolver |
+| Trang chủ / Trung tâm ở cữ | `front-page.php:268` | Runtime, basename `home/trung-tam-o-cu.JPG` | Resolve khi chạy staging; chưa thể đọc API | Hard-code theme asset | Đã sửa resolver |
 | Trang chủ / Bảo mẫu | `front-page.php:371,383` | Runtime, basenames `ba-mau-tai-nha-2.jpg`, `bao-mau-tai-nha-1.jpg` | Resolve khi chạy staging; chưa thể đọc API | Hard-code theme asset | Đã sửa resolver |
 | Trang chủ / Lớp học tiền sản | `front-page.php:471,483` | Runtime, basenames `lop-hoc-tien-san-1.jpg`, `lop-hoc-tien-san-2.jpg` | Resolve khi chạy staging; chưa thể đọc API | Hard-code theme asset | Đã sửa resolver |
 | Trang chủ / Vì sao chọn VPC | `front-page.php:770-778` | Runtime, basenames `vi-sao-chon-VPC.webp/.jpg` | Resolve khi chạy staging; chưa thể đọc API | Hard-code `source/src` | Đã sửa resolver |
@@ -43,18 +43,18 @@ Audit ban đầu có **49 call sites logic**: 48 references có filename cố đ
 
 | Filename/path đang tìm | Số lần gọi | Vị trí sử dụng |
 | --- | ---: | --- |
-| `Trang chủ/hero-banner.png` | 1 | `front-page.php:31` — Hero 1 |
-| `Trang chủ/hero-banner-2.jpg` | 1 | `front-page.php:40` — Hero 2 |
-| `Trang chủ/hero-banner-3.JPG` | 1 | `front-page.php:46` — Hero 3; kiểm tra `.JPG`/`.jpg` |
-| `Trang chủ/hero-section-image.jpg` | 1 | `front-page.php:131` |
-| `Trang chủ/trung-tam-o-cu.JPG` | 1 | `front-page.php:268` |
-| `Trang chủ/ba-mau-tai-nha-2.jpg` | 1 | `front-page.php:371` |
-| `Trang chủ/bao-mau-tai-nha-1.jpg` | 1 | `front-page.php:383` |
-| `Trang chủ/lop-hoc-tien-san-1.jpg` | 1 | `front-page.php:471` |
-| `Trang chủ/lop-hoc-tien-san-2.jpg` | 1 | `front-page.php:483` |
-| `Trang chủ/vi-sao-chon-VPC.webp` | 1 | `front-page.php:770` — `<source>` |
-| `Trang chủ/vi-sao-chon-VPC.jpg` | 1 | `front-page.php:771` — `<img>` |
-| `Trang chủ/Bai-bao-noi-bat.jpg` | 1 | `front-page.php:1466` |
+| `home/hero-banner.png` | 1 | `front-page.php:31` — Hero 1 |
+| `home/hero-banner-2.jpg` | 1 | `front-page.php:40` — Hero 2 |
+| `home/hero-banner-3.JPG` | 1 | `front-page.php:46` — Hero 3; kiểm tra `.JPG`/`.jpg` |
+| `home/hero-section-image.jpg` | 1 | `front-page.php:131` |
+| `home/trung-tam-o-cu.JPG` | 1 | `front-page.php:268` |
+| `home/ba-mau-tai-nha-2.jpg` | 1 | `front-page.php:371` |
+| `home/bao-mau-tai-nha-1.jpg` | 1 | `front-page.php:383` |
+| `home/lop-hoc-tien-san-1.jpg` | 1 | `front-page.php:471` |
+| `home/lop-hoc-tien-san-2.jpg` | 1 | `front-page.php:483` |
+| `home/vi-sao-chon-VPC.webp` | 1 | `front-page.php:770` — `<source>` |
+| `home/vi-sao-chon-VPC.jpg` | 1 | `front-page.php:771` — `<img>` |
+| `home/Bai-bao-noi-bat.jpg` | 1 | `front-page.php:1466` |
 | `press_event_2.jpg` | 1 | `front-page.php:1497` |
 | `press_event_3.jpg` | 1 | `front-page.php:1526` |
 | `blog_post_ultrasound.jpg` | 1 | `front-page.php:1700` — Media Library-only image khi post thiếu Featured Image; rỗng thì không render |
@@ -69,7 +69,7 @@ Audit ban đầu có **49 call sites logic**: 48 references có filename cố đ
 | `footer-watermark.svg` | 1 | `footer.php:30` |
 | `contact-center-figma.jpg` | 1 | `page-lien-he.php:205` |
 | `hero_bg.jpg` | 4 | Policy templates: `page-chinh-sach-bao-mat.php:25`, `page-chinh-sach-bien-tap.php:25`, `page-dieu-khoan-su-dung.php:21`, `page-quy-trinh-khieu-nai.php:25` |
-| `Trang chủ/success-consultation-modal.svg` | 1 | `template-parts/components/success-modal.php:24` |
+| `home/success-consultation-modal.svg` | 1 | `template-parts/components/success-modal.php:24` |
 | `icons/newborn-care.svg` | 1 | `front-page.php:424` |
 | `lop-hoc-tien-san/*` | dynamic | `page-lop-hoc-tien-san.php:18`; includes hero, intro, video, teacher and 4 service photos; inspect each basename in source lines 44-523 |
 

@@ -20,9 +20,9 @@ $theme_uri = get_template_directory_uri();
 			<!-- Section Header -->
 			<div class="text-center max-w-3xl mx-auto mb-8 sm:mb-14">
 				<!-- Badge -->
-				<div class="inline-flex items-center justify-center gap-2 px-3.5 py-1 bg-surface-badge-secondary border border-border-secondary-default rounded-full mb-3 shadow-xs">
-					<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/sparkle-pink.svg' ); ?>" width="24" height="24" class="w-4 h-4 shrink-0" alt="" aria-hidden="true" />
-					<span class="font-body font-medium text-xs sm:text-sm tracking-wider uppercase text-text-link-hover">BÀI BÁO NỔI BẬT</span>
+				<div class="inline-flex items-center justify-center gap-2 min-h-[42px] px-4 py-2 bg-surface-badge-secondary border border-border-secondary-default rounded-full mb-3 shadow-xs">
+					<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/sparkle-pink.svg' ); ?>" width="24" height="24" class="w-6 h-6 shrink-0" alt="" aria-hidden="true" />
+					<span class="font-body font-medium text-base leading-6 tracking-wider uppercase text-text-link-hover">BÀI BÁO NỔI BẬT</span>
 				</div>
 
 				<!-- Title -->

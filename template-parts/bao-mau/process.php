@@ -12,12 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 $asset_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/bao-mau';
 
 $processes = array(
-	array( 'image' => 'process-1.png', 'title' => 'Kiểm tra toàn trạng', 'copy' => 'Vệ sinh phòng, kiểm tra tổng quan sức khỏe của bé. Trường hợp phát hiện vấn đề bất thường, điều dưỡng viên sẽ trao đổi lại với mẹ.' ),
-	array( 'image' => 'process-2.png', 'title' => 'Tập vận động', 'copy' => 'Bé được tập vận động vào mỗi buổi sáng trong ngày theo bài tập phù hợp với thể trạng.' ),
-	array( 'image' => 'process-3.png', 'title' => 'Tắm & Massage', 'copy' => 'Trẻ được massage body theo chuẩn IAIM giúp bé thư giãn, thoải mái. Vệ sinh vùng da nhạy cảm và tắm rửa sạch sẽ.' ),
-	array( 'image' => 'process-4.png', 'title' => 'Kiểm soát cữ bú', 'copy' => 'Từ cho ăn theo nhu cầu đến thiết lập cữ bú phù hợp với nhu cầu sinh lý riêng của từng bé.' ),
-	array( 'image' => 'process-5.png', 'title' => 'Thiết lập cữ ngủ', 'copy' => 'Bé sẽ được rèn nề nếp ngủ đúng giờ, hạn chế thức đêm giúp mẹ và gia đình đỡ mệt mỏi.' ),
-	array( 'image' => 'process-6.png', 'title' => 'Luyện tập kỹ năng cơ bản', 'copy' => 'Con được luyện tập các kỹ năng cơ bản đầu đời như: Lật, lẫy, ngồi, trườn, bò…. theo sự phát triển cá nhân của bé.' ),
+	array( 'image' => 'process-1.webp', 'title' => 'Kiểm tra toàn trạng', 'copy' => 'Vệ sinh phòng, kiểm tra tổng quan sức khỏe của bé. Trường hợp phát hiện vấn đề bất thường, điều dưỡng viên sẽ trao đổi lại với mẹ.' ),
+	array( 'image' => 'process-2.webp', 'title' => 'Tập vận động', 'copy' => 'Bé được tập vận động vào mỗi buổi sáng trong ngày theo bài tập phù hợp với thể trạng.' ),
+	array( 'image' => 'process-3.webp', 'title' => 'Tắm & Massage', 'copy' => 'Trẻ được massage body theo chuẩn IAIM giúp bé thư giãn, thoải mái. Vệ sinh vùng da nhạy cảm và tắm rửa sạch sẽ.' ),
+	array( 'image' => 'process-4.webp', 'title' => 'Kiểm soát cữ bú', 'copy' => 'Từ cho ăn theo nhu cầu đến thiết lập cữ bú phù hợp với nhu cầu sinh lý riêng của từng bé.' ),
+	array( 'image' => 'process-5.webp', 'title' => 'Thiết lập cữ ngủ', 'copy' => 'Bé sẽ được rèn nề nếp ngủ đúng giờ, hạn chế thức đêm giúp mẹ và gia đình đỡ mệt mỏi.' ),
+	array( 'image' => 'process-6.webp', 'title' => 'Luyện tập kỹ năng cơ bản', 'copy' => 'Con được luyện tập các kỹ năng cơ bản đầu đời như: Lật, lẫy, ngồi, trườn, bò…. theo sự phát triển cá nhân của bé.' ),
 );
 ?>
 <section class="vpc-bao-mau__process" aria-labelledby="bao-mau-process-title">

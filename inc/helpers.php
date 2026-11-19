@@ -39,14 +39,14 @@ function vpc_get_consultation_services() {
  */
 function vpc_get_feedback_avatar_map() {
 	return array(
-		'Mẹ bé Kami'             => 'Avatar-feedback/Me-be-Kami.png',
-		'Mẹ bé Mandu'            => 'Avatar-feedback/Me-be-Mandu.jpg',
-		'Mẹ Bé Cát'              => 'Avatar-feedback/Me-be-Cat.jpg',
-		'Nguyễn Thị Ngọc Trân'   => 'Avatar-feedback/dd841f642ae3352ac94256b09e46c8c6b12453c2.jpg',
-		'Mẹ Sấm Chớp'            => 'Avatar-feedback/Me-Sam-Chop.jpg',
-		'Mẹ Cafe'                => 'Avatar-feedback/Me-Cafe.jpg',
-		'Mẹ Nghé Ọ'              => 'Avatar-feedback/Me-Nghe-O.jpg',
-		'Bà ngoại Bé Dâu'        => 'Avatar-feedback/Ba-Ngoai-Be-Dau.jpg',
+		'Mẹ bé Kami'             => 'Avatar-feedback/Me-be-Kami.webp',
+		'Mẹ bé Mandu'            => 'Avatar-feedback/Me-be-Mandu.webp',
+		'Mẹ Bé Cát'              => 'Avatar-feedback/Me-be-Cat.webp',
+		'Nguyễn Thị Ngọc Trân'   => 'Avatar-feedback/dd841f642ae3352ac94256b09e46c8c6b12453c2.webp',
+		'Mẹ Sấm Chớp'            => 'Avatar-feedback/Me-Sam-Chop.webp',
+		'Mẹ Cafe'                => 'Avatar-feedback/Me-Cafe.webp',
+		'Mẹ Nghé Ọ'              => 'Avatar-feedback/Me-Nghe-O.webp',
+		'Bà ngoại Bé Dâu'        => 'Avatar-feedback/Ba-Ngoai-Be-Dau.webp',
 	);
 }
 
@@ -57,14 +57,14 @@ function vpc_get_feedback_avatar_map() {
  */
 function vpc_get_real_feedback_items() {
 	$avatars = array(
-		'Avatar-feedback/Ba-Ngoai-Be-Dau.jpg',
-		'Avatar-feedback/dd841f642ae3352ac94256b09e46c8c6b12453c2.jpg',
-		'Avatar-feedback/Me-be-Cat.jpg',
-		'Avatar-feedback/Me-be-Kami.png',
-		'Avatar-feedback/Me-be-Mandu.jpg',
-		'Avatar-feedback/Me-Cafe.jpg',
-		'Avatar-feedback/Me-Nghe-O.jpg',
-		'Avatar-feedback/Me-Sam-Chop.jpg',
+		'Avatar-feedback/Ba-Ngoai-Be-Dau.webp',
+		'Avatar-feedback/dd841f642ae3352ac94256b09e46c8c6b12453c2.webp',
+		'Avatar-feedback/Me-be-Cat.webp',
+		'Avatar-feedback/Me-be-Kami.webp',
+		'Avatar-feedback/Me-be-Mandu.webp',
+		'Avatar-feedback/Me-Cafe.webp',
+		'Avatar-feedback/Me-Nghe-O.webp',
+		'Avatar-feedback/Me-Sam-Chop.webp',
 	);
 
 	$reviews = array(
@@ -607,7 +607,7 @@ function vpc_format_knowledge_card( $post_obj, $default_image = '', $excerpt_wor
 	} elseif ( $default_image ) {
 		$image_url = $default_image;
 	} else {
-		$image_url = get_template_directory_uri() . '/assets/images/knowledge/featured-pump.png';
+		$image_url = get_template_directory_uri() . '/assets/images/knowledge/featured-pump.webp';
 	}
 
 	return array(
@@ -665,7 +665,7 @@ function vpc_get_knowledge_category_definitions() {
 			'label'       => __( 'Tất cả', 'vanphuccare' ),
 			'description' => __( 'Toàn bộ bài viết', 'vanphuccare' ),
 			'badge'       => __( 'Kiến thức - Chuẩn y khoa', 'vanphuccare' ),
-			'photo'       => 'mang-thai-photo-2.png',
+			'photo'       => 'mang-thai-photo-2.webp',
 			'icon'        => 'category-1.svg',
 		),
 		array(
@@ -674,7 +674,7 @@ function vpc_get_knowledge_category_definitions() {
 			'label'       => __( 'Mang thai', 'vanphuccare' ),
 			'description' => __( 'Thai kỳ từng tuần', 'vanphuccare' ),
 			'badge'       => __( 'Thai kỳ khoẻ mạnh', 'vanphuccare' ),
-			'photo'       => 'mang-thai-photo-2.png',
+			'photo'       => 'mang-thai-photo-2.webp',
 			'icon'        => 'category-2.svg',
 		),
 		array(
@@ -683,7 +683,7 @@ function vpc_get_knowledge_category_definitions() {
 			'label'       => __( 'Phương pháp EASY', 'vanphuccare' ),
 			'description' => __( 'Nuôi con khoa học', 'vanphuccare' ),
 			'badge'       => __( 'Nuôi con khoa học', 'vanphuccare' ),
-			'photo'       => 'phuong-phap-easy.png',
+			'photo'       => 'phuong-phap-easy.webp',
 			'icon'        => 'category-3.svg',
 		),
 		array(
@@ -692,7 +692,7 @@ function vpc_get_knowledge_category_definitions() {
 			'label'       => __( 'Ăn dặm', 'vanphuccare' ),
 			'description' => __( 'Ăn dặm vui khỏe', 'vanphuccare' ),
 			'badge'       => __( 'Ăn dặm vui khỏe', 'vanphuccare' ),
-			'photo'       => 'An-dam-toan-tap.jpg',
+			'photo'       => 'An-dam-toan-tap.webp',
 			'icon'        => 'category-4.svg',
 		),
 		array(
@@ -701,7 +701,7 @@ function vpc_get_knowledge_category_definitions() {
 			'label'       => __( 'Hội chứng biếng ăn', 'vanphuccare' ),
 			'description' => __( 'Bữa ăn nhẹ nhàng', 'vanphuccare' ),
 			'badge'       => __( 'Bữa ăn nhẹ nhàng', 'vanphuccare' ),
-			'photo'       => 'Hoi-chung-bieng-an.jpg',
+			'photo'       => 'Hoi-chung-bieng-an.webp',
 			'icon'        => 'category-5.svg',
 		),
 		array(
@@ -710,7 +710,7 @@ function vpc_get_knowledge_category_definitions() {
 			'label'       => __( 'Cẩm nang cho mẹ', 'vanphuccare' ),
 			'description' => __( 'Mẹ tự tin, bé hạnh phúc', 'vanphuccare' ),
 			'badge'       => __( 'Mẹ tự tin, bé hạnh phúc', 'vanphuccare' ),
-			'photo'       => 'Cam-nang-cho-me.JPG',
+			'photo'       => 'Cam-nang-cho-me.webp',
 			'icon'        => 'category-6.svg',
 		),
 	);
@@ -762,7 +762,7 @@ function vpc_get_knowledge_category_pills( $current_slug = '', $current_id = 0 )
 				'label'       => $cat_def['label'],
 				'description' => $cat_def['description'],
 				'badge'       => ! empty( $cat_def['badge'] ) ? $cat_def['badge'] : $cat_def['description'],
-				'photo'       => ! empty( $cat_def['photo'] ) ? $cat_def['photo'] : 'mang-thai-photo-2.png',
+				'photo'       => ! empty( $cat_def['photo'] ) ? $cat_def['photo'] : 'mang-thai-photo-2.webp',
 				'icon'        => $cat_def['icon'],
 				'url'         => $url,
 				'active'      => $active,
@@ -797,7 +797,7 @@ function vpc_get_knowledge_category_pills( $current_slug = '', $current_id = 0 )
 			'label'       => $cat_def['label'],
 			'description' => $cat_def['description'],
 			'badge'       => ! empty( $cat_def['badge'] ) ? $cat_def['badge'] : $cat_def['description'],
-			'photo'       => ! empty( $cat_def['photo'] ) ? $cat_def['photo'] : 'mang-thai-photo-2.png',
+			'photo'       => ! empty( $cat_def['photo'] ) ? $cat_def['photo'] : 'mang-thai-photo-2.webp',
 			'icon'        => $cat_def['icon'],
 			'url'         => $url,
 			'active'      => $active,
@@ -871,8 +871,8 @@ function vpc_get_author_avatar_html( $author_id, $size = 80 ) {
 /**
  * Automatically transforms legacy TikTok blockquote embeds into official TikTok player iframes.
  *
- * Resolves "Player authentication failed" errors and duplicate embed.js execution across all 292+ posts.
- * Upgrades <blockquote class="tiktok-embed"> markup to the official responsive TikTok player iframe (player/v1).
+ * Keeps creator/unsupported embeds on the official script and provides a video fallback.
+ * Playback availability still depends on TikTok and the visitor's connection.
  *
  * @param string $content Post content.
  * @return string Processed content.
@@ -889,17 +889,27 @@ function vpc_transform_tiktok_embeds( $content ) {
 
 	// 1. Transform any legacy <blockquote class="...tiktok-embed...">...</blockquote>
 	$content = preg_replace_callback(
-		'/<blockquote[\s\S]*?class=["\'][^"\']*\btiktok-embed\b[^"\']*["\'][\s\S]*?>[\s\S]*?<\/blockquote>/i',
+		'/<blockquote\b([^>]*)>([\s\S]*?)<\/blockquote>/i',
 		function( $matches ) {
 			$blockquote_tag = $matches[0];
 			$video_id       = '';
+			$attrs = $matches[1];
+			if ( ! preg_match( '/\bclass\s*=\s*(["\'])(.*?)\1/is', $attrs, $classes )
+				|| ! in_array( 'tiktok-embed', preg_split( '/\s+/', trim( $classes[2] ) ), true ) ) {
+				return $matches[0];
+			}
+			// Creator cards may contain video links but must remain creator cards.
+			if ( preg_match( '/\bdata-embed-type\s*=\s*["\']creator["\']|\bdata-unique-id\s*=/i', $attrs ) ) {
+				return $matches[0];
+			}
+			preg_match( '~https?://(?:www\.)?tiktok\.com/(@[a-zA-Z0-9._-]+/video/(\d+))(?=[?\s"\'<]|$)~i', $blockquote_tag, $original_url );
 
 			// Primary check: data-video-id="(\d+)"
-			if ( preg_match( '/data-video-id=["\'](\d+)["\']/i', $blockquote_tag, $id_match ) ) {
+			if ( preg_match( '/\bdata-video-id\s*=\s*["\'](\d+)["\']/i', $attrs, $id_match ) ) {
 				$video_id = $id_match[1];
-			} elseif ( preg_match( '/\b(?:cite|href)=["\']https?:\/\/(?:www\.)?tiktok\.com\/@[^\/]+\/video\/(\d+)/i', $blockquote_tag, $cite_match ) ) {
+			} elseif ( ! empty( $original_url ) ) {
 				// Secondary check: cite="..." or href=".../video/(\d+)"
-				$video_id = $cite_match[1];
+				$video_id = $original_url[2];
 			}
 
 			// If no valid numeric video ID could be extracted, keep original markup safe.
@@ -907,31 +917,139 @@ function vpc_transform_tiktok_embeds( $content ) {
 				return $matches[0];
 			}
 
-			// Render responsive, centered TikTok player iframe.
+			$watch_url = ! empty( $original_url ) && $original_url[2] === $video_id
+				? 'https://www.tiktok.com/' . $original_url[1]
+				: 'https://www.tiktok.com/player/v1/' . $video_id;
+			// Link remains available even if scripts, cookies or video delivery fail.
 			return sprintf(
-				'<div class="vpc-tiktok-embed" style="display: flex; justify-content: center; margin: 24px auto; max-width: 100%%;">' .
-					'<iframe src="https://www.tiktok.com/player/v1/%s?music_info=1&description=1" ' .
-						'width="325" height="578" frameborder="0" ' .
-						'allow="accelerometer; autoplay; clipboard-write; encrypted-media; fullscreen; gyroscope; picture-in-picture; web-share" ' .
-						'allowfullscreen loading="lazy" ' .
+				'<div class="vpc-tiktok-embed" data-vpc-tiktok style="display: flex; flex-direction: column; align-items: center; margin: 24px auto; max-width: 100%%;">' .
+					'<iframe src="https://www.tiktok.com/player/v1/%s?embed_from=oembed&music_info=1&description=1" ' .
+						'width="325" height="578" frameborder="0" title="Video TikTok" ' .
+						'allow="fullscreen; autoplay; encrypted-media; picture-in-picture" ' .
+						'allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin" ' .
 						'style="width: 325px; max-width: 100%%; height: 578px; border-radius: 12px; border: none; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);">' .
 					'</iframe>' .
+					'<p class="vpc-tiktok-status" role="status" aria-live="polite" hidden></p>' .
+					'<a class="vpc-tiktok-watch" href="%s" target="_blank" rel="noopener noreferrer">Xem video trên TikTok</a>' .
 				'</div>',
-				esc_attr( $video_id )
+				esc_attr( $video_id ),
+				esc_url( $watch_url )
 			);
 		},
 		$content
 	);
 
-	// 2. Remove redundant <script async src="https://www.tiktok.com/embed.js"></script> tags.
+	// Keep one loader after all remaining creator/unsupported embeds, never one per video.
 	$content = preg_replace(
-		'/<script\b[^>]*src=["\'](?:https?:)?\/\/(?:www\.)?tiktok\.com\/embed\.js[^"\']*["\'][^>]*>\s*<\/script>/i',
+		'/<script\b[^>]*\bsrc\s*=\s*["\'](?:https?:)?\/\/(?:www\.)?tiktok\.com\/embed\.js(?:\?[^"\']*)?["\'][^>]*>\s*<\/script>/i',
 		'',
 		$content
 	);
+	if ( preg_match( '/<blockquote\b[^>]*\bclass\s*=\s*["\'][^"\']*\btiktok-embed\b/i', $content ) ) {
+		$content .= '<script async src="https://www.tiktok.com/embed.js"></script>';
+	}
 
 	return $content;
 }
 add_filter( 'the_content', 'vpc_transform_tiktok_embeds', 20 );
+
+/**
+ * Sanitize video URL or UID for customizer and options.
+ *
+ * @param string $value Input video URL or Cloudflare Stream UID.
+ * @return string Sanitized URL or alphanumeric UID.
+ */
+function vpc_sanitize_video_url( $value ) {
+	$value = sanitize_text_field( $value );
+	if ( preg_match( '/^[a-f0-9]{32,64}$/i', $value ) ) {
+		return $value;
+	}
+	if ( 0 === strpos( $value, '/' ) ) {
+		return esc_url_raw( $value, array( 'http', 'https', null ) );
+	}
+	return esc_url_raw( $value );
+}
+
+/**
+ * Parse a video URL or ID into player embed details (Cloudflare Stream, YouTube, Vimeo, direct HTML5 video).
+ *
+ * @param string $raw_url URL, embed link or Cloudflare Stream UID.
+ * @return array{type: string, embed_url: string, original_url: string}|null
+ */
+function vpc_parse_video_embed( $raw_url ) {
+	$raw_url = trim( (string) $raw_url );
+	if ( '' === $raw_url ) {
+		return null;
+	}
+
+	$original_url = $raw_url;
+
+	// Normalize relative internal uploads or staging domain to current site home_url.
+	if ( 0 === strpos( $raw_url, '/' ) ) {
+		$raw_url = function_exists( 'home_url' ) ? home_url( $raw_url ) : $raw_url;
+	} elseif ( preg_match( '~https?://staging\.vanphuccare\.vn(/wp-content/uploads/.*)$~i', $raw_url, $staging_match ) ) {
+		$raw_url = function_exists( 'home_url' ) ? home_url( $staging_match[1] ) : $raw_url;
+	}
+
+	// 1. Direct Cloudflare Stream UID (32 or 64 hex characters).
+	if ( preg_match( '/^[a-f0-9]{32,64}$/i', $raw_url ) ) {
+		return array(
+			'type'         => 'iframe',
+			'embed_url'    => 'https://iframe.videodelivery.net/' . $raw_url . '?autoplay=true&preload=auto',
+			'original_url' => $raw_url,
+		);
+	}
+
+	// 2. Cloudflare Stream URL (videodelivery.net or *.cloudflarestream.com).
+	if ( preg_match( '~https?://(?:iframe\.videodelivery\.net|watch\.videodelivery\.net|customer-[a-z0-9]+\.cloudflarestream\.com)/([a-f0-9]{32,64})~i', $raw_url, $cf_matches ) ) {
+		$uid = $cf_matches[1];
+		return array(
+			'type'         => 'iframe',
+			'embed_url'    => 'https://iframe.videodelivery.net/' . $uid . '?autoplay=true&preload=auto',
+			'original_url' => $raw_url,
+		);
+	}
+
+	// 3. YouTube URL or Shorts.
+	if ( preg_match( '~(?:youtube\.com/(?:watch\?(?:.*&)?v=|embed/|v/|shorts/)|youtu\.be/)([a-zA-Z0-9_-]{11})~i', $raw_url, $yt_matches ) ) {
+		$yt_id = $yt_matches[1];
+		return array(
+			'type'         => 'iframe',
+			'embed_url'    => 'https://www.youtube-nocookie.com/embed/' . $yt_id . '?autoplay=1&rel=0&playsinline=1',
+			'original_url' => $raw_url,
+		);
+	}
+
+	// 4. Vimeo URL.
+	if ( preg_match( '~(?:vimeo\.com/(?:channels/(?:\w+/)?|groups/[^/]+/videos/|video/|))(\d+)~i', $raw_url, $vim_matches ) ) {
+		$vim_id = $vim_matches[1];
+		return array(
+			'type'         => 'iframe',
+			'embed_url'    => 'https://player.vimeo.com/video/' . $vim_id . '?autoplay=1&title=0&byline=0&portrait=0',
+			'original_url' => $raw_url,
+		);
+	}
+
+	// 5. Direct Video file (MP4, WebM, etc. from Cloudflare R2, S3 or WP Media).
+	if ( preg_match( '/\.(mp4|webm|ogv|mov)(?:\?.*)?$/i', $raw_url ) ) {
+		return array(
+			'type'         => 'video',
+			'embed_url'    => $raw_url,
+			'original_url' => $raw_url,
+		);
+	}
+
+	// 6. Generic HTTPS URL (fallback to iframe if already embeddable, or direct video).
+	if ( 0 === strpos( $raw_url, 'https://' ) || 0 === strpos( $raw_url, 'http://' ) ) {
+		return array(
+			'type'         => 'iframe',
+			'embed_url'    => $raw_url,
+			'original_url' => $raw_url,
+		);
+	}
+
+	return null;
+}
+
 
 

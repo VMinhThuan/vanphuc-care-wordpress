@@ -14,7 +14,7 @@ $shared_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/e
 ?>
 <section class="vpc-bath__challenges" aria-labelledby="bath-challenges-title">
 	<div class="vpc-bath__container vpc-bath__split-grid">
-		<div class="vpc-bath__split-image"><img src="<?php echo esc_url( $bath_uri . '/challenges.png' ); ?>" width="581" height="532" alt="Mẹ chăm sóc em bé sơ sinh" loading="lazy"></div>
+		<div class="vpc-bath__split-image"><img src="<?php echo esc_url( $bath_uri . '/challenges.webp' ); ?>" width="581" height="532" alt="Mẹ chăm sóc em bé sơ sinh" loading="lazy"></div>
 		<div class="vpc-bath__split-copy">
 			<div class="vpc-bath__badge"><img src="<?php echo esc_url( $shared_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">NỖI LO CỦA MẸ</div>
 			<h2 id="bath-challenges-title"><span>Những Điều Khó Khăn</span><em>Mẹ Thường Gặp</em></h2>

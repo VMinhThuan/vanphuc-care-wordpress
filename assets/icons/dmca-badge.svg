@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 204 48" width="204" height="48" fill="none" role="img" aria-label="DMCA.com Protection Status">
+  <!-- Outer dark container -->
+  <rect width="204" height="48" rx="4" fill="#221E1F"/>
+
+  <!-- Left white icon panel with rounded left corners -->
+  <path d="M4 0H48V48H4C1.79086 48 0 46.2091 0 44V4C0 1.79086 1.79086 0 4 0Z" fill="#FFFFFF"/>
+  <!-- Green vertical bar between lock and text -->
+  <rect x="36" y="0" width="12" height="48" fill="#8DC642"/>
+
+  <!-- Padlock graphic -->
+  <path d="M12 21V13.5C12 9.35786 15.3579 6 19.5 6C23.6421 6 27 9.35786 27 13.5V21" stroke="#8DC642" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <rect x="9.5" y="19.5" width="20" height="19" rx="2" fill="#FFFFFF" stroke="#8DC642" stroke-width="2.5"/>
+  <circle cx="19.5" cy="27" r="2.8" fill="#8DC642"/>
+  <path d="M18.2 27.5L17.2 33.5H21.8L20.8 27.5Z" fill="#8DC642"/>
+
+  <!-- Top and bottom subtle border lines -->
+  <line x1="48" y1="2" x2="200" y2="2" stroke="#595657" stroke-width="1.5"/>
+  <line x1="48" y1="46" x2="200" y2="46" stroke="#595657" stroke-width="1.5"/>
+
+  <!-- Official DMCA Typography -->
+  <text x="56" y="17" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="9" font-weight="700" letter-spacing="1.2">PROTECTED BY:</text>
+  <text x="56" y="38" fill="#FFFFFF" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="22" font-weight="900" letter-spacing="0.5">DMCA<tspan font-size="15" font-weight="700" letter-spacing="0">.com</tspan></text>
+</svg>

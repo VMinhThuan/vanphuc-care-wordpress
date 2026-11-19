@@ -69,7 +69,7 @@ $is_search_page = is_search() || 'search' === ( $args['context'] ?? '' );
 						<?php
 						$thumb_url = has_post_thumbnail()
 							? get_the_post_thumbnail_url( get_the_ID(), 'thumbnail' )
-							: $asset( 'ultrasound.png' );
+							: $asset( 'ultrasound.webp' );
 						?>
 						<a class="vpc-knowledge-sidebar-post" href="<?php the_permalink(); ?>">
 							<div class="vpc-knowledge-sidebar-post__thumb">

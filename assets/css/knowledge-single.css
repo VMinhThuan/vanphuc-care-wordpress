@@ -127,10 +127,43 @@
 
 			.vpc-tiktok-embed {
 				display: flex;
+				flex-direction: column;
+				align-items: center;
 				justify-content: center;
 				margin: 28px auto;
 				max-width: 100%;
 			}
+
+			.vpc-tiktok-watch {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				gap: 6px;
+				margin-top: 12px;
+				padding: 8px 18px;
+				font-size: 14px;
+				font-weight: 600;
+				color: #111827;
+				background-color: #f3f4f6;
+				border: 1px solid #e5e7eb;
+				border-radius: 9999px;
+				text-decoration: none;
+				transition: all 0.2s ease;
+			}
+			.vpc-tiktok-watch:hover {
+				background-color: #000;
+				color: #fff;
+				border-color: #000;
+			}
+			.vpc-tiktok-status {
+				max-width: 325px;
+				margin: 12px 0 0;
+				font-size: 14px;
+				line-height: 20px;
+				color: #525252;
+				text-align: center;
+			}
+			.vpc-tiktok-status[hidden] { display: none; }
 
 			.vpc-tiktok-embed iframe {
 				width: 325px;

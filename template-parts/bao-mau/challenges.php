@@ -14,7 +14,7 @@ $asset_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/ba
 <section class="vpc-bao-mau__intro vpc-bao-mau__intro--challenges">
 	<div class="vpc-bao-mau__container vpc-bao-mau__intro-grid">
 		<div class="vpc-bao-mau__intro-image-frame">
-			<img class="vpc-bao-mau__intro-image" src="<?php echo esc_url( $asset_uri . '/challenges.png' ); ?>" width="540" height="456" alt="Mẹ chăm sóc em bé sau sinh" loading="lazy">
+			<img class="vpc-bao-mau__intro-image" src="<?php echo esc_url( $asset_uri . '/challenges.webp' ); ?>" width="540" height="456" alt="Mẹ chăm sóc em bé sau sinh" loading="lazy">
 		</div>
 		<div class="vpc-bao-mau__intro-copy">
 			<div class="vpc-bao-mau__badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">KHÓ KHĂN</div>

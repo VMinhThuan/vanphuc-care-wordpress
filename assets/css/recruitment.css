@@ -55,20 +55,20 @@
 }
 
 .vpc-recruitment-badge {
-	height: 34px;
-	min-height: 34px;
+	height: 42px;
+	min-height: 42px;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	gap: 8px;
-	padding: 4px 12px;
+	padding: 8px 16px;
 	border: 1px solid var(--recruitment-pink);
 	border-radius: 999px;
 	color: var(--recruitment-blue-dark);
 	background: var(--recruitment-pink-light);
 	font-family: var(--font-body, "Manrope", sans-serif);
-	font-size: 12px;
-	line-height: 16px;
+	font-size: 16px;
+	line-height: 24px;
 	font-weight: 500;
 	white-space: nowrap;
 	text-transform: uppercase;
@@ -487,6 +487,7 @@
 	overflow: hidden;
 }
 
+.vpc-recruitment-team picture,
 .vpc-recruitment-team img {
 	width: 100%;
 	height: 100%;
@@ -645,16 +646,20 @@
 		left: 50%;
 		width: max-content;
 		max-width: calc(100% - 40px);
-		height: 34px;
-		min-height: 34px;
+		height: 42px;
+		min-height: 42px;
 		transform: translateX(-50%);
 		justify-content: center;
 		gap: 8px;
-		padding: 4px 12px;
+		padding: 8px 16px;
 		background: var(--recruitment-pink-light);
 		color: var(--recruitment-blue-dark);
 		border: 1px solid var(--recruitment-pink);
 		border-radius: 999px;
+		font-family: var(--font-body, "Manrope", sans-serif);
+		font-size: 16px;
+		line-height: 24px;
+		font-weight: 500;
 		white-space: nowrap;
 		text-transform: uppercase;
 	}

@@ -18,7 +18,7 @@ $mme_url   = $args['messenger_url'] ?? 'https://m.me/vanphuccare';
 ?>
 
 <!-- Floating Quick Contact Speed Dial: 48px desktop icons follow the supplied CSS Layers. -->
-<aside class="fixed bottom-24 xl:bottom-6 right-3 sm:right-4 z-40 flex flex-col items-end gap-2 sm:gap-2.5 pointer-events-none" aria-label="Kênh liên hệ nhanh">
+<aside id="floating-contact" class="fixed bottom-24 xl:bottom-6 right-3 sm:right-4 z-40 flex flex-col items-end gap-2 sm:gap-2.5 pointer-events-none" aria-label="Kênh liên hệ nhanh">
 	
 	<!-- Messenger Button -->
 	<a href="<?php echo esc_url( $mme_url ); ?>" target="_blank" rel="noopener noreferrer" 

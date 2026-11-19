@@ -1,6 +1,6 @@
 <?php
 /**
- * Category template for "Tin tức" (News Hub).
+ * Category template for "Tin tức" (News Hub Overview).
  *
  * Mapped to /tin-tuc/ root category archive via WordPress Template Hierarchy.
  *
@@ -11,4 +11,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-require get_template_directory() . '/page-tin-tuc.php';
+require get_template_directory() . '/template-parts/news/hub-overview.php';

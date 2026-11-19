@@ -9,13 +9,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$asset_uri       = trailingslashit( get_template_directory_uri() ) . 'assets/images/bao-mau';
-$health_book_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/easy/health-book.png';
+$asset_uri            = trailingslashit( get_template_directory_uri() ) . 'assets/images/bao-mau';
+$health_book_uri      = trailingslashit( get_template_directory_uri() ) . 'assets/images/easy/health-book.webp';
+$health_book_webp_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/easy/health-book.webp';
 ?>
 <section class="vpc-bao-mau__intro vpc-bao-mau__intro--health">
 	<div class="vpc-bao-mau__container vpc-bao-mau__intro-grid">
 		<div class="vpc-bao-mau__intro-image-frame vpc-bao-mau__intro-image-frame--health">
-			<img class="vpc-bao-mau__intro-image" src="<?php echo esc_url( $health_book_uri ); ?>" width="540" height="456" alt="Sổ sức khỏe điện tử cho trẻ sơ sinh" loading="lazy">
+			<picture>
+				<source srcset="<?php echo esc_url( $health_book_webp_uri ); ?>" type="image/webp">
+				<img class="vpc-bao-mau__intro-image" src="<?php echo esc_url( $health_book_uri ); ?>" width="540" height="456" alt="Sổ sức khỏe điện tử cho trẻ sơ sinh" loading="lazy">
+			</picture>
 		</div>
 		<div class="vpc-bao-mau__intro-copy">
 			<div class="vpc-bao-mau__badge"><img src="<?php echo esc_url( $asset_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">SỔ SỨC KHỎE ĐIỆN TỬ</div>

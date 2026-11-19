@@ -20,7 +20,7 @@ $asset_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/ea
 		</div>
 		<div class="vpc-easy__choice-grid">
 			<article class="vpc-easy__choice-card">
-				<img class="vpc-easy__choice-image" src="<?php echo esc_url( $asset_uri . '/online.jpg' ); ?>" width="568" height="366" alt="Tư vấn nuôi con EASY trực tuyến" loading="lazy">
+				<img class="vpc-easy__choice-image" src="<?php echo esc_url( $asset_uri . '/online.webp' ); ?>" width="568" height="366" alt="Tư vấn nuôi con EASY trực tuyến" loading="lazy">
 				<div class="vpc-easy__choice-title"><span>Linh hoạt mọi nơi</span><b>01</b></div>
 				<h3>Tư vấn trực tuyến</h3>
 				<p>Chuyên viên quan sát và hướng dẫn cha mẹ qua ứng dụng GG Meeting, kết hợp ứng dụng sổ sức khoẻ điện tử, ticketbox.</p>
@@ -33,7 +33,7 @@ $asset_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/ea
 				<a href="#easy-packages">Xem gói trực tuyến <img src="<?php echo esc_url( $asset_uri . '/chevron-right.svg' ); ?>" width="9" height="15" alt=""></a>
 			</article>
 			<article class="vpc-easy__choice-card">
-				<img class="vpc-easy__choice-image" src="<?php echo esc_url( $asset_uri . '/direct.jpg' ); ?>" width="568" height="366" alt="Tư vấn nuôi con EASY trực tiếp" loading="lazy">
+				<img class="vpc-easy__choice-image" src="<?php echo esc_url( $asset_uri . '/direct.webp' ); ?>" width="568" height="366" alt="Tư vấn nuôi con EASY trực tiếp" loading="lazy">
 				<div class="vpc-easy__choice-title"><span>Trực quan tại nhà</span><b>02</b></div>
 				<h3>Hướng dẫn trực tiếp</h3>
 				<p>Điều dưỡng sản nhi đến tận nhà, quan sát thói quen của bé và trực tiếp hướng dẫn cha mẹ thực hành</p>

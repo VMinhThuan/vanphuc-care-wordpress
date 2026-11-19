@@ -14,7 +14,7 @@ $shared_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/e
 <section class="vpc-milk__challenges" aria-labelledby="milk-challenges-title">
 	<div class="vpc-milk__container vpc-milk__split-grid">
 		<div class="vpc-milk__split-image">
-			<img src="<?php echo esc_url( $shared_uri . '/challenges.png' ); ?>" width="581" height="532" alt="Mẹ sau sinh chăm sóc em bé" loading="lazy">
+			<img src="<?php echo esc_url( $shared_uri . '/challenges.webp' ); ?>" width="581" height="532" alt="Mẹ sau sinh chăm sóc em bé" loading="lazy">
 		</div>
 		<div class="vpc-milk__split-copy">
 			<div class="vpc-milk__badge"><img src="<?php echo esc_url( $shared_uri . '/star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">BẰNG QUAN SÁT</div>

@@ -70,7 +70,7 @@ $total_results = (int) $wp_query->found_posts;
 						<?php
 						while ( have_posts() ) : the_post();
 							$article_data = function_exists( 'vpc_format_knowledge_card' )
-								? vpc_format_knowledge_card( get_post(), $asset( 'mother-baby.jpeg' ), 32 )
+								? vpc_format_knowledge_card( get_post(), $asset( 'mother-baby.webp' ), 32 )
 								: array();
 
 							if ( ! empty( $article_data ) ) {

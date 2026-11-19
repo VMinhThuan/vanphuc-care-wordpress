@@ -29,7 +29,7 @@ $about_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/ab
 		<div class="about-timeline__step about-timeline__step--2025"><strong>2025</strong><p>Liên tục tham gia các sự kiện hướng nghiệp dành cho điều dưỡng viên, nữ hộ sinh lớp nhân lực trẻ kế cận. Kết hợp và cộng tác với các trường đại học uy tín tại Hà Nội.</p></div>
 		<div class="about-timeline__step about-timeline__step--2026"><strong>2026- Nay</strong><p>Khai trương trung tâm ở cữ chuyên biệt, hiện đại tại Hà Nội. Hoàn thiện mảnh ghép quan trọng trong hệ thống chăm sóc mẹ và bé toàn diện tại Vạn Phúc Care.</p></div>
 		<div class="about-timeline__visual" data-node-id="3131:44962" aria-hidden="true">
-			<img src="<?php echo esc_url( $about_uri . '/timeline-nurse-baby.png' ); ?>" width="484" height="502" alt="" loading="lazy" decoding="async">
+			<img src="<?php echo esc_url( $about_uri . '/timeline-nurse-baby.webp' ); ?>" width="484" height="502" alt="" loading="lazy" decoding="async">
 		</div>
 	</div>
 </section>

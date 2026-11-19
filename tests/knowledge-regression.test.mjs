@@ -205,44 +205,65 @@ describe('Knowledge Editorial Regression Tests', () => {
   });
 
   describe('7. News Hub Routing & Subcategory Layout Alignment', () => {
-    test('page-tin-tuc.php exists and renders Hub Landing with links to subcategories', () => {
-      const filePath = path.join(rootDir, 'page-tin-tuc.php');
-      assert.ok(fs.existsSync(filePath), 'page-tin-tuc.php must exist');
-      const code = fs.readFileSync(filePath, 'utf8');
-      assert.ok(code.includes('Template Name: Trang chủ Tin tức'), 'Must have template declaration');
-      assert.ok(code.includes('/tin-tuc/su-kien-noi-bat/'), 'Must link to su-kien-noi-bat subcategory');
-      assert.ok(code.includes('/tin-tuc/tin-moi/'), 'Must link to tin-moi subcategory');
-      assert.ok(code.includes('get_header'), 'Must call get_header');
-      assert.ok(code.includes('get_footer'), 'Must call get_footer');
+    test('category-tin-tuc.php and hub-overview.php render Hub Landing with links to subcategories', () => {
+      const pagePath = path.join(rootDir, 'page-tin-tuc.php');
+      assert.ok(fs.existsSync(pagePath), 'page-tin-tuc.php must exist for admin custom page template declaration');
+      const pageCode = fs.readFileSync(pagePath, 'utf8');
+      assert.ok(pageCode.includes('Template Name: Trang chủ Tin tức'), 'Must have template declaration');
+
+      const hubPartPath = path.join(rootDir, 'template-parts/news/hub-overview.php');
+      assert.ok(fs.existsSync(hubPartPath), 'template-parts/news/hub-overview.php must exist');
+      const hubCode = fs.readFileSync(hubPartPath, 'utf8');
+      assert.ok(hubCode.includes('/tin-tuc/su-kien-noi-bat/'), 'Must link to su-kien-noi-bat subcategory');
+      assert.ok(hubCode.includes('/tin-tuc/tin-moi/'), 'Must link to tin-moi subcategory');
+      assert.ok(hubCode.includes('get_header'), 'Must call get_header');
+      assert.ok(hubCode.includes('get_footer'), 'Must call get_footer');
     });
 
-    test('category-tin-tuc.php bridges root news category archive to page-tin-tuc.php', () => {
+    test('category-tin-tuc.php routes root news category archive via hub-overview.php', () => {
       const filePath = path.join(rootDir, 'category-tin-tuc.php');
       assert.ok(fs.existsSync(filePath), 'category-tin-tuc.php must exist');
       const code = fs.readFileSync(filePath, 'utf8');
-      assert.ok(code.includes("require get_template_directory() . '/page-tin-tuc.php'"), 'Must require page-tin-tuc.php');
+      assert.ok(code.includes("template-parts/news/hub-overview.php"), 'Must require template-parts/news/hub-overview.php');
     });
 
-    test('category.php routes root tin-tuc to page-tin-tuc.php and subcategories to page-tin-tuc-su-kien.php', () => {
+    test('category-tin-moi.php and category-su-kien-noi-bat.php exist as standard subcategory templates', () => {
+      const tinMoiPath = path.join(rootDir, 'category-tin-moi.php');
+      assert.ok(fs.existsSync(tinMoiPath), 'category-tin-moi.php must exist');
+      const tinMoiCode = fs.readFileSync(tinMoiPath, 'utf8');
+      assert.ok(tinMoiCode.includes("template-parts/news/archive-listing.php"), 'Must require template-parts/news/archive-listing.php');
+
+      const suKienPath = path.join(rootDir, 'category-su-kien-noi-bat.php');
+      assert.ok(fs.existsSync(suKienPath), 'category-su-kien-noi-bat.php must exist');
+      const suKienCode = fs.readFileSync(suKienPath, 'utf8');
+      assert.ok(suKienCode.includes("template-parts/news/archive-listing.php"), 'Must require template-parts/news/archive-listing.php');
+    });
+
+    test('category.php routes root tin-tuc to category-tin-tuc.php and subcategories to archive-listing.php', () => {
       const code = fs.readFileSync(path.join(rootDir, 'category.php'), 'utf8');
       assert.ok(code.includes("'tin-tuc' === $current_slug"), 'Must check for root tin-tuc');
-      assert.ok(code.includes("require get_template_directory() . '/page-tin-tuc.php'"), 'Must route tin-tuc to page-tin-tuc.php');
+      assert.ok(code.includes("category-tin-tuc.php"), 'Must route tin-tuc to category-tin-tuc.php');
       assert.ok(code.includes("array( 'tin-moi', 'su-kien-noi-bat'"), 'Must recognize tin-moi and su-kien-noi-bat sub-slugs');
-      assert.ok(code.includes("require get_template_directory() . '/page-tin-tuc-su-kien.php'"), 'Must route subcategories to page-tin-tuc-su-kien.php');
+      assert.ok(code.includes("archive-listing.php"), 'Must route subcategories to archive-listing.php');
     });
 
-    test('page-tin-tuc-su-kien.php dynamically resolves current category and formats breadcrumb', () => {
-      const code = fs.readFileSync(path.join(rootDir, 'page-tin-tuc-su-kien.php'), 'utf8');
+    test('archive-listing.php and page-tin-tuc-su-kien.php dynamically resolve current category and format breadcrumb', () => {
+      const listingPath = path.join(rootDir, 'template-parts/news/archive-listing.php');
+      assert.ok(fs.existsSync(listingPath), 'archive-listing.php must exist');
+      const code = fs.readFileSync(listingPath, 'utf8');
       assert.ok(code.includes('get_queried_object()'), 'Must check get_queried_object for dynamic subcategory');
       assert.ok(code.includes('tin-moi'), 'Must handle tin-moi');
       assert.ok(code.includes('su-kien-noi-bat'), 'Must handle su-kien-noi-bat');
       assert.ok(code.includes('<a href="<?php echo esc_url( home_url( \'/tin-tuc/\' ) ); ?>">Tin tức</a>'), 'Breadcrumb must link to /tin-tuc/ with label Tin tức');
+
+      const legacyPath = path.join(rootDir, 'page-tin-tuc-su-kien.php');
+      assert.ok(fs.existsSync(legacyPath), 'page-tin-tuc-su-kien.php must exist for backward compatibility');
     });
 
-    test('inc/setup.php template_include resolves /tin-tuc/ to page-tin-tuc.php', () => {
+    test('inc/setup.php template_include resolves /tin-tuc/ to category-tin-tuc.php', () => {
       const code = fs.readFileSync(path.join(rootDir, 'inc/setup.php'), 'utf8');
       assert.ok(code.includes("function vanphuccare_news_template_include"), 'Must declare news template include filter');
-      assert.ok(code.includes("return get_template_directory() . '/page-tin-tuc.php';"), 'Must return page-tin-tuc.php');
+      assert.ok(code.includes("return get_template_directory() . '/category-tin-tuc.php';"), 'Must return category-tin-tuc.php');
     });
 
     test('footer.php links Tin mới and Sự kiện nổi bật to clean subcategory URLs', () => {

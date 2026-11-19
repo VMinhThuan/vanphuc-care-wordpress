@@ -65,9 +65,9 @@ $row_two = array_merge( array_reverse( $items ), array_reverse( $items ) );
 
 <section id="feedback" class="vpc-section bg-surface-background-default overflow-hidden relative" aria-labelledby="feedback-title">
 	<div class="vpc-home-container text-center mb-10 sm:mb-14">
-		<div class="inline-flex items-center justify-center gap-2 px-3.5 py-1 bg-surface-badge-secondary border border-border-secondary-default rounded-full mb-3 shadow-xs">
-			<img src="<?php echo esc_url( vpc_theme_asset_url( 'icons/sparkle-pink.svg' ) ); ?>" width="24" height="24" class="w-4 h-4 shrink-0" alt="" aria-hidden="true">
-			<span class="font-body font-medium text-xs sm:text-sm text-text-link-hover tracking-wider uppercase"><?php echo esc_html( $badge ); ?></span>
+		<div class="vpc-badge-brand mb-3 shadow-xs">
+			<img src="<?php echo esc_url( vpc_theme_asset_url( 'icons/sparkle-pink.svg' ) ); ?>" width="24" height="24" alt="" aria-hidden="true">
+			<span class="tracking-wider uppercase"><?php echo esc_html( $badge ); ?></span>
 		</div>
 		<h2 id="feedback-title" class="font-heading font-semibold text-h1-mobile xl:text-h1 text-center">
 			<span class="text-text-heading-primary-default">Cảm Nhận </span><br class="sm:hidden">

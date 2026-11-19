@@ -52,16 +52,18 @@
 
 .vpc-news-hub-root .vpc-hub-badge {
 	display: inline-flex;
-	height: 34px;
+	min-height: 42px;
+	height: 42px;
 	gap: 8px;
 	align-items: center;
-	padding: 4px 12px;
+	padding: 8px 16px;
 	border: 1px solid #f48283;
 	border-radius: 999px;
 	color: var(--hub-blue);
 	background: #fde6e6;
-	font: 400 12px/16px var(--font-body, "Manrope", sans-serif);
+	font: 500 16px/24px var(--font-body, "Manrope", sans-serif);
 	white-space: nowrap;
+	text-transform: uppercase;
 }
 
 .vpc-news-hub-root .vpc-hub-badge__icon {
@@ -1864,33 +1866,6 @@
 		margin-top: 72px;
 	}
 
-	body.vpc-news-page-shell .site-footer {
-		min-height: 720px;
-		padding-top: 96px !important;
-		padding-bottom: 96px !important;
-	}
-
-	body.vpc-news-page-shell .site-footer .vpc-footer-main {
-		padding-top: 0 !important;
-		padding-bottom: 0 !important;
-	}
-
-	body.vpc-news-page-shell .site-footer .vpc-footer-social {
-		padding-top: 24px !important;
-		padding-bottom: 24px !important;
-	}
-
-	body.vpc-news-page-shell .site-footer .vpc-footer-legal {
-		margin-top: 0 !important;
-		padding-top: 0 !important;
-		gap: 8px;
-	}
-
-	body.vpc-news-page-shell .site-footer .vpc-footer-legal>a {
-		display: inline-flex;
-		height: 32px;
-		align-items: center;
-	}
 
 }
 
@@ -2508,14 +2483,7 @@
 
 @media (max-width: 767px) {
 
-	/* The Figma mobile news screens use a normal-flow header. Keeping the
-	 * global sticky header here makes the first card appear glued underneath
-	 * it while scrolling. */
-	body.vpc-news-hub-shell #site-header,
-	body.vpc-news-page-shell #site-header {
-		position: relative !important;
-		top: auto !important;
-	}
+	/* Header visibility follows the shared mobile scroll-direction behavior. */
 
 	/* Let fixed-height mobile cards use the full body area so the author/date
 	 * row stays at the bottom instead of leaving an empty block underneath. */

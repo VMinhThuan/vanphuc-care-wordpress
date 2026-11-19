@@ -769,14 +769,31 @@
     overflow: hidden;
     position: relative;
     display: block;
+    border: none;
+    padding: 0;
+    margin: 0 auto;
     border-radius: 16px;
     background: var(--color-surface-background-primary);
+    cursor: pointer;
+    text-align: left;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+  }
+
+  .prenatal-video__frame:focus-visible {
+    outline: 3px solid var(--color-primary-500);
+    outline-offset: 4px;
   }
 
   .prenatal-video__frame>img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .prenatal-video__frame:hover>img {
+    transform: scale(1.02);
   }
 
   .prenatal-video__frame::before {
@@ -785,7 +802,13 @@
     inset: 0;
     z-index: 1;
     border-radius: inherit;
-    background: var(--color-surface-background-default);
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.1) 0%, rgba(15, 23, 42, 0.35) 100%);
+    transition: background 0.3s ease;
+    pointer-events: none;
+  }
+
+  .prenatal-video__frame:hover::before {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.2) 0%, rgba(15, 23, 42, 0.45) 100%);
   }
 
   .prenatal-play {
@@ -797,6 +820,16 @@
     width: 86px;
     height: 86px;
     transform: translate(-50%, -50%);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+  }
+
+  .prenatal-video__frame:hover .prenatal-play {
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+
+  .prenatal-video__frame:active .prenatal-play {
+    transform: translate(-50%, -50%) scale(0.95);
   }
 
   .prenatal-play__circle {
@@ -804,11 +837,29 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.2));
   }
 
   .prenatal-play__triangle {
     position: relative;
     transform: rotate(90deg);
+  }
+
+  .prenatal-video__media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: inherit;
+    z-index: 3;
+    background: #000;
+  }
+
+  .prenatal-video__frame.is-playing::before,
+  .prenatal-video__frame.is-playing .prenatal-play,
+  .prenatal-video__frame.is-playing>img {
+    display: none !important;
   }
 
   .prenatal-video h2 {
@@ -1528,17 +1579,17 @@
     }
 
     .prenatal-badge {
-      min-height: 34px;
-      padding: 4px 12px;
-      font-size: 12px;
-      line-height: 16px;
-      font-weight: 400;
+      min-height: 42px;
+      padding: 8px 16px;
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 500;
       gap: 8px;
     }
 
     .prenatal-badge span {
-      font-size: 12px;
-      line-height: 16px;
+      font-size: 16px;
+      line-height: 24px;
     }
 
     .prenatal-badge__icon {
@@ -2228,10 +2279,11 @@
     }
 
     .homepage-prenatal-badge {
-      min-height: 34px;
-      padding: 4px 12px;
-      font-size: 12px;
-      line-height: 18px;
+      min-height: 42px;
+      padding: 8px 16px;
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 500;
     }
 
     .homepage-prenatal-badge img {
@@ -2838,50 +2890,58 @@
     }
   }
 
-  /* Contact hero badge pill: 317x34px mobile, 416x42px desktop */
+  /* Global Canonical Badge Pill Component (Unified 16px) */
+  .vpc-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 42px;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    background-color: var(--color-surface-badge-secondary);
+    border: 1px solid var(--color-border-secondary-default);
+    color: var(--color-text-link-hover);
+    font-family: var(--font-body, "Manrope", sans-serif);
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  .vpc-badge img,
+  .vpc-badge svg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+
+  /* Contact hero badge pill (Unified 16px) */
   .vpc-contact-badge {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    height: 34px;
-    padding: 0 0.75rem;
+    min-height: 42px;
+    height: 42px;
+    padding: 0.5rem 1rem;
     border-radius: 9999px;
     background-color: var(--color-surface-badge-secondary);
     border: 1px solid var(--color-border-secondary-default);
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   }
 
-  @media (min-width: 1280px) {
-    .vpc-contact-badge {
-      height: 42px;
-      padding: 0 1rem;
-    }
-  }
-
   .vpc-contact-badge-text {
     font-family: var(--font-body);
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 500;
-    line-height: 16px;
+    line-height: 24px;
     letter-spacing: 0.025em;
     text-transform: uppercase;
     color: var(--color-text-link-hover);
     white-space: nowrap;
-  }
-
-  @media (min-width: 640px) {
-    .vpc-contact-badge-text {
-      font-size: 0.75rem;
-      letter-spacing: 0.05em;
-    }
-  }
-
-  @media (min-width: 1280px) {
-    .vpc-contact-badge-text {
-      font-size: 0.875rem;
-      letter-spacing: 0.05em;
-    }
   }
 
   /* Contact hero 2-line heading */
@@ -3990,3 +4050,49 @@
     }
   }
 }
+
+/* ==========================================================================
+   VPC Section Brand Badge - Universal Design System Component
+   Single Source of Truth across all service landing pages and sections.
+   ========================================================================== */
+.vpc-badge-brand,
+.ocu-badge,
+.vpc-bao-mau__badge,
+.vpc-bath__badge,
+.vpc-easy__badge,
+.vpc-milk__badge,
+.about-badge,
+.vpc-services-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: max-content;
+  min-height: 42px;
+  padding: 8px 16px;
+  border: 1px solid var(--color-secondary-500, #F48283);
+  border-radius: 999px;
+  background: var(--color-secondary-100, #FDE6E6);
+  color: var(--color-primary-600, #155F95);
+  font-family: var(--font-body, "Manrope", sans-serif);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.vpc-badge-brand img,
+.vpc-badge-brand svg,
+.ocu-badge img,
+.vpc-bao-mau__badge img,
+.vpc-bath__badge img,
+.vpc-easy__badge img,
+.vpc-milk__badge img,
+.about-badge img,
+.vpc-services-badge img {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  object-fit: contain;
+}
+

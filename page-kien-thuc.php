@@ -42,7 +42,7 @@ if ( ! function_exists( 'vpc_format_knowledge_card' ) ) {
 		} elseif ( $default_image ) {
 			$image_url = $default_image;
 		} else {
-			$image_url = get_template_directory_uri() . '/assets/images/knowledge/featured-pump.png';
+			$image_url = get_template_directory_uri() . '/assets/images/knowledge/featured-pump.webp';
 		}
 
 		return array(
@@ -186,15 +186,15 @@ if ( $kt_cat instanceof WP_Term ) {
 
 // Format articles into card data arrays.
 $sample_images = array(
-	$asset( 'featured-pump.png' ),
-	$asset( 'ultrasound.png' ),
-	$asset( 'nurse-baby.jpeg' ),
-	$asset( 'baby-bottle.jpeg' ),
-	$asset( 'baby-care.png' ),
-	$asset( 'mother-baby.jpeg' ),
-	$asset( 'newborn.jpeg' ),
-	$asset( 'consultation.jpeg' ),
-	$asset( 'training.jpeg' ),
+	$asset( 'featured-pump.webp' ),
+	$asset( 'ultrasound.webp' ),
+	$asset( 'nurse-baby.webp' ),
+	$asset( 'baby-bottle.webp' ),
+	$asset( 'baby-care.webp' ),
+	$asset( 'mother-baby.webp' ),
+	$asset( 'newborn.webp' ),
+	$asset( 'consultation.webp' ),
+	$asset( 'training.webp' ),
 );
 
 $featured_articles = array();
@@ -263,7 +263,7 @@ $view_all_url = home_url( '/kien-thuc/tat-ca/' );
 		<div class="vpc-knowledge-hero__visual" aria-hidden="true">
 			<img class="vpc-knowledge-hero__blob" src="<?php echo $asset( 'blob.svg' ); ?>" alt="" width="340" height="340">
 			<img class="vpc-knowledge-hero__accent" src="<?php echo $asset( 'blob-accent.svg' ); ?>" alt="" width="116" height="116">
-			<img class="vpc-knowledge-hero__mascot" src="<?php echo esc_url( $knowledge_uri . '/hero-mascot.png' ); ?>" alt="" width="290" height="290">
+			<img class="vpc-knowledge-hero__mascot" src="<?php echo esc_url( $knowledge_uri . '/hero-mascot.webp' ); ?>" alt="" width="290" height="290">
 			<span class="vpc-knowledge-chip vpc-knowledge-chip--left"><?php esc_html_e( 'Mang thai', 'vanphuccare' ); ?></span>
 			<span class="vpc-knowledge-chip vpc-knowledge-chip--top"><?php esc_html_e( 'Phương pháp EASY', 'vanphuccare' ); ?></span>
 			<span class="vpc-knowledge-chip vpc-knowledge-chip--bottom"><?php esc_html_e( 'Ăn dặm', 'vanphuccare' ); ?></span>

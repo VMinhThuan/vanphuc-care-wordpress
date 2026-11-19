@@ -21,9 +21,9 @@ $theme_uri = get_template_directory_uri();
 			<!-- Top Section Header -->
 			<div class="flex flex-col items-center text-center max-w-[860px] mx-auto gap-3">
 				<!-- Badge -->
-				<div class="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 bg-surface-badge-secondary border border-border-secondary-default rounded-full">
-					<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/sparkle-pink.svg' ); ?>" width="24" height="24" class="w-4 h-4 shrink-0" alt="" aria-hidden="true" />
-					<span class="font-body font-medium text-xs sm:text-sm text-text-link-hover tracking-wider uppercase">BẠN ĐỒNG HÀNH CỦA BA MẸ</span>
+				<div class="inline-flex items-center justify-center gap-2 min-h-[42px] px-4 py-2 bg-surface-badge-secondary border border-border-secondary-default rounded-full">
+					<img src="<?php echo esc_url( $theme_uri . '/assets/images/icons/sparkle-pink.svg' ); ?>" width="24" height="24" class="w-6 h-6 shrink-0" alt="" aria-hidden="true" />
+					<span class="font-body font-medium text-base leading-6 text-text-link-hover tracking-wider uppercase">BẠN ĐỒNG HÀNH CỦA BA MẸ</span>
 				</div>
 
 				<!-- Main Heading -->
@@ -43,7 +43,7 @@ $theme_uri = get_template_directory_uri();
 				<!-- Center Image (Mobile order: 1, Desktop order: 2) -->
 				<div class="w-full max-w-[350px] sm:max-w-[479px] shrink-0 mx-auto flex justify-center items-center order-1 lg:order-2">
 					<?php $why_vpc_webp_url = vpc_image_url( 'home/vi-sao-chon-VPC.webp', 'large' ); ?>
-					<?php $why_vpc_jpg_url = vpc_image_url( 'home/vi-sao-chon-VPC.jpg', 'large' ); ?>
+					<?php $why_vpc_jpg_url = vpc_image_url( 'home/vi-sao-chon-VPC.webp', 'large' ); ?>
 					<?php $why_vpc_image_url = $why_vpc_jpg_url ? $why_vpc_jpg_url : $why_vpc_webp_url; ?>
 					<?php if ( $why_vpc_image_url ) : ?>
 						<picture>

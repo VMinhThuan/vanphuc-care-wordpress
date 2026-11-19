@@ -28,7 +28,7 @@ $asset_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/ea
 				<div><img src="<?php echo esc_url( $asset_uri . '/service-signup.svg' ); ?>" width="24" height="24" alt=""><span>Theo dõi sát hành trình</span></div>
 			</div>
 		</div>
-		<div class="vpc-easy__hero-image"><img src="<?php echo esc_url( $asset_uri . '/hero.jpg' ); ?>" width="590" height="565" alt="Điều dưỡng hướng dẫn mẹ chăm sóc em bé" fetchpriority="high"></div>
+		<div class="vpc-easy__hero-image"><img src="<?php echo esc_url( $asset_uri . '/hero.webp' ); ?>" width="590" height="565" alt="Điều dưỡng hướng dẫn mẹ chăm sóc em bé" fetchpriority="high"></div>
 	</div>
 </section>
 

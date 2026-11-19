@@ -12,12 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 $shared_asset_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/bao-mau';
 
 $other_services = array(
-	array( 'image' => 'service-1.jpg', 'title' => 'Bảo mẫu tại nhà', 'href' => home_url( '/dich-vu/bao-mau-tai-nha/' ) ),
-	array( 'image' => 'service-2.jpg', 'title' => 'Khóa học trực tuyến', 'href' => 'https://edu.vanphuccare.vn' ),
-	array( 'image' => 'service-3.jpg', 'title' => 'Lớp học tiền sản', 'href' => home_url( '/dich-vu/lop-hoc-tien-san/' ) ),
-	array( 'image' => 'service-4.jpg', 'title' => 'Tư vấn nuôi con Easy', 'href' => home_url( '/dich-vu/dich-vu-tu-van-nuoi-con-easy-truc-tuyen/' ) ),
-	array( 'image' => 'service-5.jpg', 'title' => 'Tắm bé sơ sinh', 'href' => home_url( '/dich-vu/tam-tre-so-sinh/' ) ),
-	array( 'image' => 'service-6.jpg', 'title' => 'Thông tắc tia sữa', 'href' => home_url( '/dich-vu/thong-tac-tia-sua/' ) ),
+	array( 'image' => 'service-1.webp', 'title' => 'Bảo mẫu tại nhà', 'href' => home_url( '/dich-vu/bao-mau-tai-nha/' ) ),
+	array( 'image' => 'service-2.webp', 'title' => 'Khóa học trực tuyến', 'href' => 'https://edu.vanphuccare.vn' ),
+	array( 'image' => 'service-3.webp', 'title' => 'Lớp học tiền sản', 'href' => home_url( '/dich-vu/lop-hoc-tien-san/' ) ),
+	array( 'image' => 'service-4.webp', 'title' => 'Tư vấn nuôi con Easy', 'href' => home_url( '/dich-vu/dich-vu-tu-van-nuoi-con-easy-truc-tuyen/' ) ),
+	array( 'image' => 'service-5.webp', 'title' => 'Tắm bé sơ sinh', 'href' => home_url( '/dich-vu/tam-tre-so-sinh/' ) ),
+	array( 'image' => 'service-6.webp', 'title' => 'Thông tắc tia sữa', 'href' => home_url( '/dich-vu/thong-tac-tia-sua/' ) ),
 );
 ?>
 <section class="vpc-bao-mau__services ocu-shared-section" aria-labelledby="ocu-services-title">

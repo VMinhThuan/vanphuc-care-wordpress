@@ -15,16 +15,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 $asset_uri = get_template_directory_uri() . '/assets/images/services';
 
 $featured_services = array(
-	array( 'title' => 'Trung tâm ở cữ', 'tag' => 'Sau sinh', 'copy' => 'Không gian nghỉ dưỡng, chăm sóc trọn vẹn mẹ và bé sau sinh.', 'image' => 'featured-1.png', 'href' => home_url( '/dich-vu/trung-tam-o-cu/' ) ),
-	array( 'title' => 'Bảo mẫu tại nhà', 'tag' => 'Sau sinh', 'copy' => 'Người đồng hành chăm sóc mẹ và bé ngay tại nhà.', 'image' => 'featured-2.png', 'href' => home_url( '/dich-vu/bao-mau-tai-nha/' ) ),
-	array( 'title' => 'Lớp học tiền sản', 'tag' => 'Trước sinh', 'copy' => 'Chuẩn bị kiến thức và tâm thế cho hành trình trước sinh.', 'image' => 'featured-3.png', 'href' => home_url( '/dich-vu/lop-hoc-tien-san/' ) ),
-	array( 'title' => 'Khóa học trực tuyến', 'tag' => 'Mọi giai đoạn', 'copy' => 'Học kiến thức nuôi con mọi lúc, mọi nơi.', 'image' => 'featured-4.png', 'href' => 'https://edu.vanphuccare.vn', 'target' => '_blank' ),
+	array( 'title' => 'Trung tâm ở cữ', 'tag' => 'Sau sinh', 'copy' => 'Không gian nghỉ dưỡng, chăm sóc trọn vẹn mẹ và bé sau sinh.', 'image' => 'featured-1.webp', 'href' => home_url( '/dich-vu/trung-tam-o-cu/' ) ),
+	array( 'title' => 'Bảo mẫu tại nhà', 'tag' => 'Sau sinh', 'copy' => 'Người đồng hành chăm sóc mẹ và bé ngay tại nhà.', 'image' => 'featured-2.webp', 'href' => home_url( '/dich-vu/bao-mau-tai-nha/' ) ),
+	array( 'title' => 'Lớp học tiền sản', 'tag' => 'Trước sinh', 'copy' => 'Chuẩn bị kiến thức và tâm thế cho hành trình trước sinh.', 'image' => 'featured-3.webp', 'href' => home_url( '/dich-vu/lop-hoc-tien-san/' ) ),
+	array( 'title' => 'Khóa học trực tuyến', 'tag' => 'Mọi giai đoạn', 'copy' => 'Học kiến thức nuôi con mọi lúc, mọi nơi.', 'image' => 'featured-4.webp', 'href' => 'https://edu.vanphuccare.vn', 'target' => '_blank' ),
 );
 
 $other_services = array(
-	array( 'title' => 'Tư vấn nuôi con EASY', 'tag' => 'Nuôi con', 'copy' => '', 'image' => 'other-1.png', 'href' => home_url( '/dich-vu/dich-vu-tu-van-nuoi-con-easy-truc-tuyen/' ) ),
-	array( 'title' => 'Tắm bé sơ sinh', 'tag' => 'Sau sinh', 'copy' => '', 'image' => 'other-2.png', 'href' => home_url( '/dich-vu/tam-tre-so-sinh/' ) ),
-	array( 'title' => 'Thông tắc tia sữa', 'tag' => 'Sau sinh', 'copy' => '', 'image' => 'other-3.png', 'href' => home_url( '/dich-vu/thong-tac-tia-sua/' ) ),
+	array( 'title' => 'Tư vấn nuôi con EASY', 'tag' => 'Nuôi con', 'copy' => '', 'image' => 'other-1.webp', 'href' => home_url( '/dich-vu/dich-vu-tu-van-nuoi-con-easy-truc-tuyen/' ) ),
+	array( 'title' => 'Tắm bé sơ sinh', 'tag' => 'Sau sinh', 'copy' => '', 'image' => 'other-2.webp', 'href' => home_url( '/dich-vu/tam-tre-so-sinh/' ) ),
+	array( 'title' => 'Thông tắc tia sữa', 'tag' => 'Sau sinh', 'copy' => '', 'image' => 'other-3.webp', 'href' => home_url( '/dich-vu/thong-tac-tia-sua/' ) ),
 );
 
 $features = array(
@@ -47,7 +47,7 @@ get_header();
 
 <main class="vpc-services-page" data-figma-node="3126:39803" data-figma-mobile-node="3126:39866">
 	<section class="vpc-services-banner" aria-label="Dịch vụ Vạn Phúc Care">
-		<img src="<?php echo esc_url( vpc_theme_asset_url( 'services/banner.png' ) ); ?>" width="1440" height="581" alt="Chăm sóc bé yêu khoa học cùng Vạn Phúc Care" fetchpriority="high">
+		<img src="<?php echo esc_url( vpc_theme_asset_url( 'services/banner.webp' ) ); ?>" width="1440" height="581" alt="Chăm sóc bé yêu khoa học cùng Vạn Phúc Care" fetchpriority="high">
 	</section>
 
 	<section id="services-list" class="vpc-services-list" aria-labelledby="services-list-title">
@@ -117,7 +117,7 @@ get_header();
 
 	<section class="vpc-services-process" aria-labelledby="services-process-title">
 		<div class="vpc-services-container vpc-services-process__grid">
-			<div class="vpc-services-process__visual"><img src="<?php echo esc_url( vpc_theme_asset_url( 'services/process-visual.png' ) ); ?>" width="575" height="626" alt="Điều dưỡng tư vấn chăm sóc mẹ và bé" loading="lazy"></div>
+			<div class="vpc-services-process__visual"><img src="<?php echo esc_url( vpc_theme_asset_url( 'services/process-visual.webp' ) ); ?>" width="575" height="626" alt="Điều dưỡng tư vấn chăm sóc mẹ và bé" loading="lazy"></div>
 			<div class="vpc-services-process__content">
 				<div class="vpc-services-heading">
 						<span class="vpc-services-badge"><img src="<?php echo esc_url( $asset_uri . '/badge-star.svg' ); ?>" width="24" height="24" alt="" aria-hidden="true">QUY TRÌNH TIẾP NHẬN</span>

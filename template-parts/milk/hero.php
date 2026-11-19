@@ -25,7 +25,7 @@ $shared_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/e
 			<a class="vpc-milk__button vpc-milk__button--primary" href="#milk-packages">Xem gói dịch vụ</a>
 		</div>
 		<div class="vpc-milk__hero-image">
-			<img src="<?php echo esc_url( $milk_uri . '/hero.png' ); ?>" width="567" height="506" alt="Chuyên viên tư vấn thông tắc tia sữa" fetchpriority="high">
+			<img src="<?php echo esc_url( $milk_uri . '/hero.webp' ); ?>" width="567" height="506" alt="Chuyên viên tư vấn thông tắc tia sữa" fetchpriority="high">
 		</div>
 	</div>
 </section>

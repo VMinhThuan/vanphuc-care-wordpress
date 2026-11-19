@@ -12,10 +12,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 $asset_uri = trailingslashit( get_template_directory_uri() ) . 'assets/images/bao-mau';
 
 $team = array(
-	array( 'image' => 'team-1.png', 'name' => 'Cô Vương Thanh Thủy', 'role' => 'Điều dưỡng trưởng' ),
-	array( 'image' => 'team-2.png', 'name' => 'Cô Trần Thị Trang', 'role' => 'Điều dưỡng chăm bé' ),
-	array( 'image' => 'team-3.png', 'name' => 'Cô Đỗ Thị Duyên', 'role' => 'Điều dưỡng chăm bé' ),
-	array( 'image' => 'team-4.png', 'name' => 'Cô Tống Thị Nguyệt', 'role' => 'Điều dưỡng chăm bé' ),
+	array( 'image' => 'team-1.webp', 'name' => 'Cô Vương Thanh Thủy', 'role' => 'Điều dưỡng trưởng' ),
+	array( 'image' => 'team-2.webp', 'name' => 'Cô Trần Thị Trang', 'role' => 'Điều dưỡng chăm bé' ),
+	array( 'image' => 'team-3.webp', 'name' => 'Cô Đỗ Thị Duyên', 'role' => 'Điều dưỡng chăm bé' ),
+	array( 'image' => 'team-4.webp', 'name' => 'Cô Tống Thị Nguyệt', 'role' => 'Điều dưỡng chăm bé' ),
 );
 ?>
 <section class="vpc-bao-mau__team" aria-labelledby="bao-mau-team-title">
